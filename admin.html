@@ -10,7 +10,7 @@
   <div class="bg"></div>
   <header class="topbar">
     <a href="index.html" class="brand"><span>DJ</span><b>FOLSOE TV ADMIN</b></a>
-    <nav><a href="index.html">Website</a><a href="#liveAdmin">Live API</a><a href="#guideAdmin">TV Guide</a><a href="#requestAdmin">Requests</a><a href="#contentAdmin">Content</a></nav>
+    <nav><a href="index.html">Website</a><a href="#control">Kontrolcenter</a><a href="#programs">Programmer</a><a href="#top20Admin">Top 20</a><a href="#requestsAdmin">Ønsker</a><a href="#backup">Backup</a></nav>
   </header>
 
   <main>
@@ -23,35 +23,58 @@
     </section>
 
     <section class="adminUnlocked hidden" id="adminUnlocked">
-      <section id="liveAdmin" class="panel">
-        <div class="sectionHead"><span>LIVE API CENTER</span><h2>Live-data</h2></div>
+      <section id="control" class="panel">
+        <div class="sectionHead"><span>ADMIN DASHBOARD</span><h2>Kontrolcenter</h2></div>
         <div class="controlGrid">
           <div class="control"><label>Live status</label><select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></div>
           <div class="control"><label>Viewers</label><input id="viewerInput" type="number"></div>
           <div class="control"><label>Followers</label><input id="followersInput" type="number"></div>
-          <div class="control"><label>Subs Today</label><input id="subsInput" type="number"></div>
+          <div class="control"><label>Aktivt program</label><input id="activeShowInput" placeholder="Good Morning Twitch"></div>
         </div>
+        <div class="adminButtons"><button id="saveControl">Gem kontrolcenter</button><button id="openWebsite">Se website</button><button id="adminLogout">Lås admin</button></div>
       </section>
 
-      <section id="guideAdmin" class="panel">
-        <div class="sectionHead"><span>TV GUIDE ADMIN</span><h2>Programplan</h2></div>
-        <div id="adminSchedule"></div>
+      <section id="programs" class="panel">
+        <div class="sectionHead"><span>PROGRAM MANAGER</span><h2>Rediger programmer</h2></div>
+        <p class="note">Ret shows, dage og tider direkte her. Når du trykker gem, vises det på hjemmesiden.</p>
+        <div id="programEditor" class="programEditor"></div>
+        <div class="adminButtons"><button id="addProgram">Tilføj program</button><button id="savePrograms">Gem programmer</button></div>
       </section>
 
-      <section id="requestAdmin" class="panel">
-        <div class="sectionHead"><span>REQUEST ADMIN</span><h2>Sangønsker</h2></div>
+      <section id="top20Admin" class="panel">
+        <div class="sectionHead"><span>CHART MANAGER</span><h2>Ugens Top 20</h2></div>
+        <div id="top20Editor" class="top20Editor"></div>
+        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="clearTop20">Ryd Top 20</button></div>
+      </section>
+
+      <section id="showsAdmin" class="panel">
+        <div class="sectionHead"><span>STREAM FEED MANAGER</span><h2>Feed fra streamen</h2></div>
+        <div id="showsEditor" class="programEditor"></div>
+        <div class="adminButtons"><button id="addShow">Tilføj feed-kort</button><button id="saveShows">Gem feed</button></div>
+      </section>
+
+      <section id="newsAdmin" class="panel">
+        <div class="sectionHead"><span>NEWS MANAGER</span><h2>Nyheder</h2></div>
+        <div id="newsEditor" class="programEditor"></div>
+        <div class="adminButtons"><button id="addNews">Tilføj nyhed</button><button id="saveNews">Gem nyheder</button></div>
+      </section>
+
+      <section id="requestsAdmin" class="panel">
+        <div class="sectionHead"><span>REQUEST MANAGER</span><h2>Indkomne ønsker</h2></div>
         <div id="adminRequests"></div>
+        <div class="manualRequest">
+          <input id="manualName" placeholder="Navn">
+          <input id="manualSong" placeholder="Artist - Song">
+          <button id="addManualRequest">Gem ønske i CMS</button>
+        </div>
+        <div class="adminButtons"><button id="clearRequests">Ryd lokale ønsker</button></div>
       </section>
 
-      <section id="contentAdmin" class="panel">
-        <div class="sectionHead"><span>CONTENT ADMIN</span><h2>Shows, Top 20 og nyheder</h2></div>
-        <h3>Shows</h3><textarea id="showsEditor"></textarea>
-        <h3>Top 20</h3><textarea id="top20Editor"></textarea>
-        <h3>News</h3><textarea id="newsEditor"></textarea>
-        <button id="saveAdmin">Gem lokalt</button>
-        <button id="exportJson">Eksportér JSON</button>
-        <button id="adminLogout">Lås admin</button>
-        <small>På GitHub Pages gemmes ændringer lokalt i browseren. Eksportér JSON og upload senere for permanent website-data.</small>
+      <section id="backup" class="panel">
+        <div class="sectionHead"><span>JSON BACKUP</span><h2>Backup og upload-data</h2></div>
+        <p class="note">Ændringer gemmes lokalt i browseren og vises på hjemmesiden i samme browser. For permanent GitHub-opdatering: eksportér JSON, erstat <b>assets/data/site-data.json</b>, commit og push.</p>
+        <div class="adminButtons"><button id="exportJson">Eksportér site-data.json</button><button id="copyJson">Kopiér JSON</button><button id="resetLocal">Nulstil lokale ændringer</button></div>
+        <textarea id="jsonBackup" class="jsonBackup" readonly></textarea>
       </section>
     </section>
   </main>
