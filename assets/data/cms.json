@@ -208,7 +208,7 @@
     },
     {
       "id": "fredagsbar",
-      "day": "Hver første 1. i hver måned",
+      "day": "Hver første 1. fredag i hver måned",
       "time": "19:00",
       "duration": 210,
       "colorA": "#ffb000",
