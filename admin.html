@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE TV Admin</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <div class="bg"></div>
+  <header class="topbar">
+    <a href="index.html" class="brand"><span>DJ</span><b>FOLSOE TV ADMIN</b></a>
+    <nav><a href="index.html">Website</a><a href="#liveAdmin">Live API</a><a href="#guideAdmin">TV Guide</a><a href="#requestAdmin">Requests</a><a href="#contentAdmin">Content</a></nav>
+  </header>
+
+  <main>
+    <section class="panel adminLock" id="adminLocked">
+      <div class="sectionHead"><span>PROTECTED CONTROL CENTER</span><h2>Admin er låst</h2></div>
+      <p>Indtast adgangskode for at åbne admin.</p>
+      <input id="adminPassword" type="password" placeholder="Password">
+      <button id="adminLogin">Lås op</button>
+      <small id="adminMessage">Standard password: CHANGE-ME-V800</small>
+    </section>
+
+    <section class="adminUnlocked hidden" id="adminUnlocked">
+      <section id="liveAdmin" class="panel">
+        <div class="sectionHead"><span>LIVE API CENTER</span><h2>Live-data</h2></div>
+        <div class="controlGrid">
+          <div class="control"><label>Live status</label><select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></div>
+          <div class="control"><label>Viewers</label><input id="viewerInput" type="number"></div>
+          <div class="control"><label>Followers</label><input id="followersInput" type="number"></div>
+          <div class="control"><label>Subs Today</label><input id="subsInput" type="number"></div>
+        </div>
+      </section>
+
+      <section id="guideAdmin" class="panel">
+        <div class="sectionHead"><span>TV GUIDE ADMIN</span><h2>Programplan</h2></div>
+        <div id="adminSchedule"></div>
+      </section>
+
+      <section id="requestAdmin" class="panel">
+        <div class="sectionHead"><span>REQUEST ADMIN</span><h2>Sangønsker</h2></div>
+        <div id="adminRequests"></div>
+      </section>
+
+      <section id="contentAdmin" class="panel">
+        <div class="sectionHead"><span>CONTENT ADMIN</span><h2>Shows, Top 20 og nyheder</h2></div>
+        <h3>Shows</h3><textarea id="showsEditor"></textarea>
+        <h3>Top 20</h3><textarea id="top20Editor"></textarea>
+        <h3>News</h3><textarea id="newsEditor"></textarea>
+        <button id="saveAdmin">Gem lokalt</button>
+        <button id="exportJson">Eksportér JSON</button>
+        <button id="adminLogout">Lås admin</button>
+        <small>På GitHub Pages gemmes ændringer lokalt i browseren. Eksportér JSON og upload senere for permanent website-data.</small>
+      </section>
+    </section>
+  </main>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
