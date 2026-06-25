@@ -2,157 +2,162 @@
   "station": {
     "name": "DJ FOLSOE TV",
     "tagline": "Music Television From Denmark",
+    "domain": "folsoetv.dk",
     "twitch": "https://twitch.tv/djfolsoe",
-    "location": "Denmark",
-    "status": "OFFLINE",
-    "currentTheme": "morning"
+    "currentTheme": "morning",
+    "live": false,
+    "viewers": 0,
+    "followersGoal": 1000,
+    "followersCurrent": 870,
+    "subsToday": 0,
+    "bitsToday": 0
   },
   "themes": [
     {
       "id": "morning",
       "icon": "☀️",
       "title": "Good Morning Twitch",
-      "subtitle": "News, weather, culture and morning music",
+      "short": "Morning",
+      "subtitle": "Denmark, Europe, music, culture and weather.",
       "colorA": "#ffb000",
       "colorB": "#ffffff",
       "commands": [
         "!theme morning",
         "!morgen"
-      ],
-      "rss": "Denmark / Europe / Culture / Music"
+      ]
     },
     {
       "id": "summer",
       "icon": "🏖️",
       "title": "Summer 2026",
-      "subtitle": "Festival, house, EDM and beach vibes",
+      "short": "Summer",
+      "subtitle": "Festival, house, EDM and beach energy.",
       "colorA": "#ffe05f",
       "colorB": "#00d4ff",
       "commands": [
         "!theme summer",
         "!sommer"
-      ],
-      "rss": "Festival / Dance / House / EDM"
+      ]
     },
     {
       "id": "trance",
       "icon": "💜",
       "title": "Trance Live",
-      "subtitle": "Uplifting, progressive, Anjuna and Armin radar",
+      "short": "Trance",
+      "subtitle": "Uplifting, progressive, Anjuna, Armada and Armin radar.",
       "colorA": "#7b2fff",
       "colorB": "#00e5ff",
       "commands": [
         "!theme trance"
-      ],
-      "rss": "Trance / Progressive / Uplifting"
+      ]
     },
     {
       "id": "eurodance",
       "icon": "🪩",
       "title": "Eurodance",
-      "subtitle": "90s hooks, hands up and classic dance energy",
+      "short": "Eurodance",
+      "subtitle": "90s hooks, hands up, classic dance and nostalgia.",
       "colorA": "#00f0ff",
       "colorB": "#4d7dff",
       "commands": [
         "!theme eurodance"
-      ],
-      "rss": "90s / Dance / Classics"
+      ]
     },
     {
       "id": "retro",
       "icon": "📼",
       "title": "Retro Hits",
-      "subtitle": "70s, 80s, 90s and music memories",
+      "short": "Retro",
+      "subtitle": "70s, 80s, 90s, reissues and music memories.",
       "colorA": "#ff7a00",
       "colorB": "#ff2bd6",
       "commands": [
         "!theme retro"
-      ],
-      "rss": "Retro / 80s / 90s / Reissues"
+      ]
     },
     {
       "id": "popup",
       "icon": "⚡",
       "title": "Folsoe Popup",
-      "subtitle": "You choose. I play. Anything can happen.",
+      "short": "Popup",
+      "subtitle": "You choose. I play. The stream that surprises you.",
       "colorA": "#ff00ea",
       "colorB": "#00d4ff",
       "commands": [
         "!theme popup"
-      ],
-      "rss": "Music / DJ / Festival / New Singles"
+      ]
     },
     {
       "id": "dansk",
       "icon": "🇩🇰",
       "title": "Dansk Musik",
-      "subtitle": "Danish pop, classics, artists and singalong",
+      "short": "Dansk",
+      "subtitle": "Danish artists, local legends, classics and fællessang.",
       "colorA": "#c8102e",
       "colorB": "#ffffff",
       "commands": [
         "!theme dansk"
-      ],
-      "rss": "Danish Music / Artists / Festivals"
+      ]
     },
     {
       "id": "harddance",
       "icon": "⚡",
       "title": "Hard Dance",
-      "subtitle": "Bass pressure, high BPM and full power",
+      "short": "Hard",
+      "subtitle": "High BPM, bass pressure and festival energy.",
       "colorA": "#ff2f78",
       "colorB": "#ff8a00",
       "commands": [
         "!theme harddance"
-      ],
-      "rss": "Hardstyle / Bass / Festival"
+      ]
     },
     {
       "id": "letsdance",
       "icon": "🕺",
       "title": "Let's Dance",
-      "subtitle": "Disco, nu disco, funk, groove and house",
+      "short": "Disco",
+      "subtitle": "Disco, nu disco, funk, groove and happy feet.",
       "colorA": "#ff2bd6",
       "colorB": "#ffd166",
       "commands": [
         "!theme letsdance"
-      ],
-      "rss": "Disco / Funk / House"
+      ]
     },
     {
       "id": "chart",
       "icon": "🔟",
       "title": "Chart Countdown",
-      "subtitle": "Top 10, number ones and music history",
+      "short": "Chart",
+      "subtitle": "Top 10, number ones, hitlists and music history.",
       "colorA": "#ff284f",
       "colorB": "#00d4ff",
       "commands": [
         "!theme chart"
-      ],
-      "rss": "Charts / Top 10 / Hitlist"
+      ]
     },
     {
       "id": "weekend",
       "icon": "🎉",
       "title": "Weekend Vibes",
-      "subtitle": "Party, club, festival and request energy",
+      "short": "Weekend",
+      "subtitle": "Party, club, festival and request pressure.",
       "colorA": "#a855ff",
       "colorB": "#ffd166",
       "commands": [
         "!theme weekend"
-      ],
-      "rss": "Party / Festival / Club"
+      ]
     },
     {
       "id": "fredagsbar",
       "icon": "🍻",
       "title": "Fredagsbar",
-      "subtitle": "Friday bar, weekend starts and singalong chaos",
+      "short": "Fredag",
+      "subtitle": "Friday bar, singalong chaos and one more song.",
       "colorA": "#ffb000",
       "colorB": "#ff2f78",
       "commands": [
         "!theme fredagsbar"
-      ],
-      "rss": "Friday / Party / DJ / Club"
+      ]
     }
   ],
   "schedule": [
@@ -160,64 +165,71 @@
       "day": "Monday",
       "time": "20:00",
       "show": "Popup Music TV",
-      "theme": "popup"
+      "theme": "popup",
+      "description": "Viewer choice and surprise music flow."
     },
     {
       "day": "Tuesday",
       "time": "20:00",
       "show": "Trance Tuesday",
-      "theme": "trance"
+      "theme": "trance",
+      "description": "Uplifting and progressive journeys."
     },
     {
       "day": "Friday",
       "time": "20:00",
       "show": "Fredagsbar",
-      "theme": "fredagsbar"
+      "theme": "fredagsbar",
+      "description": "Weekend starts here."
     },
     {
       "day": "Saturday",
       "time": "21:00",
       "show": "Weekend Vibes",
-      "theme": "weekend"
+      "theme": "weekend",
+      "description": "Party, club and dancefloor energy."
     },
     {
       "day": "Sunday",
       "time": "19:00",
       "show": "Retro Hits / Dansk Musik",
-      "theme": "retro"
+      "theme": "retro",
+      "description": "Old school, Danish classics and nostalgia."
     }
   ],
   "commands": [
     {
       "cmd": "!ønske Artist - Song",
+      "lang": "DA",
       "desc": "Dansk sangønske"
     },
     {
       "cmd": "!request Artist - Song",
+      "lang": "EN",
       "desc": "English song request"
     },
     {
       "cmd": "!Wunsch Artist - Song",
+      "lang": "DE",
       "desc": "Deutsch Musikwunsch"
     },
     {
       "cmd": "!theme summer",
-      "desc": "Skift overlay til summer theme"
+      "lang": "ALL",
+      "desc": "Skift stream til Summer 2026"
     },
     {
       "cmd": "!theme trance",
-      "desc": "Skift overlay til trance theme"
+      "lang": "ALL",
+      "desc": "Skift stream til Trance Live"
     },
     {
       "cmd": "!theme retro",
-      "desc": "Skift overlay til retro theme"
-    },
-    {
-      "cmd": "!theme popup",
-      "desc": "Skift overlay til popup theme"
+      "lang": "ALL",
+      "desc": "Skift stream til Retro Hits"
     }
   ],
-  "news": {
+  "headlines": {
     "morning": [
       "DENMARK DESK · Culture, sport and music stories are being scanned",
       "GOOD MORNING TWITCH · Coffee, headlines and live music from Denmark",
@@ -231,47 +243,47 @@
     "trance": [
       "TRANCE NEWS · Uplifting, progressive and Anjuna radar is live",
       "PROGRESSIVE DESK · Armin, Armada and Anjuna signals scanning",
-      "TRANCE FAMILY · New releases and festival stories in focus"
+      "MELODY LOCK · Long builds and big emotional drops"
     ],
     "eurodance": [
       "EURODANCE NEWS · 90s dance, big hooks and classics radar",
       "HANDS UP RADAR · The dancefloor remembers everything",
-      "CLASSIC DANCE · Reissues, tours and retro pop stories in focus"
+      "BIG CHORUS ALERT · Rap verse, synths and maximum dance energy"
     ],
     "retro": [
       "RETRO NEWS · 70s, 80s, 90s and classic pop radar",
       "CLASSIC DESK · Anniversary, reissue and legacy artist stories",
-      "OLD SCHOOL RADAR · Classics that refuse to retire"
+      "MUSIC MEMORY · The past still knows how to dance"
     ],
     "popup": [
       "POPUP MUSIC NEWS · Anything can happen in the next headline",
       "SURPRISE DESK · New singles, DJ stories and festival signals",
-      "CHAT CONTROL · Requests can change the whole show direction"
+      "YOU CHOOSE · I play the direction live"
     ],
     "dansk": [
       "DANISH MUSIC NEWS · Artists, concerts and festival radar",
       "DANSK MUSIK · Local legends and fællessang energy",
-      "DENMARK DESK · Culture, music and Danish artist stories"
+      "DANISH SIGNAL · National chorus risk is high"
     ],
     "harddance": [
       "HARD DANCE NEWS · Hardstyle, bass and festival radar",
       "BASS PRESSURE · High BPM and rave signals incoming",
-      "RAVE NETWORK · Festival stories and harder releases"
+      "FULL POWER DESK · Kicks and speaker testing"
     ],
     "letsdance": [
       "DISCO NEWS · Nu disco, funk, groove and house radar",
       "GROOVE DESK · Shoulders are moving without permission",
-      "FUNK RADAR · Happy-feet music TV from Denmark"
+      "DANCEFLOOR SIGNAL · Glitter and groove are online"
     ],
     "chart": [
       "CHART NEWS · Top 10, number one and hitlist radar",
       "COUNTDOWN DESK · Singles, albums and chart movement",
-      "MUSIC HISTORY · Chart memories and number one pressure"
+      "HITLIST SIGNAL · What is climbing and what is falling"
     ],
     "weekend": [
       "WEEKEND NEWS · Party, festival, club and dance radar",
       "WEEKEND VIBES · Bangers, requests and chat energy",
-      "PARTY DESK · DJ news, live shows and dancefloor stories"
+      "ONE MORE SONG · Already approved by the broadcast department"
     ],
     "fredagsbar": [
       "FREDAGSBAR NEWS · Friday, party and club radar",
