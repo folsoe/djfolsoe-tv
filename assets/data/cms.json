@@ -1,5 +1,5 @@
 {
-  "version": "V601-FINAL",
+  "version": "V700.2",
   "station": {
     "name": "DJ FOLSOE TV",
     "domain": "folsoetv.dk",
@@ -315,6 +315,125 @@
       "title": "Lose This Feeling",
       "genre": "Trance / Dance",
       "status": "B-list"
+    },
+    {
+      "pos": 4,
+      "artist": "Peggy Gou",
+      "title": "(It Goes Like) Nanana",
+      "genre": "House / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 5,
+      "artist": "Tiësto",
+      "title": "Lay Low",
+      "genre": "EDM",
+      "status": "B-list"
+    },
+    {
+      "pos": 6,
+      "artist": "Purple Disco Machine",
+      "title": "Substitution",
+      "genre": "Nu Disco",
+      "status": "B-list"
+    },
+    {
+      "pos": 7,
+      "artist": "Swedish House Mafia",
+      "title": "Ray Of Solar",
+      "genre": "EDM",
+      "status": "C-list"
+    },
+    {
+      "pos": 8,
+      "artist": "Meduza",
+      "title": "Phone",
+      "genre": "Dance",
+      "status": "B-list"
+    },
+    {
+      "pos": 9,
+      "artist": "Joel Corry",
+      "title": "0800 Heaven",
+      "genre": "Dance Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 10,
+      "artist": "Kygo",
+      "title": "Whatever",
+      "genre": "Tropical Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 11,
+      "artist": "Topic",
+      "title": "Lucid Dream",
+      "genre": "Dance",
+      "status": "C-list"
+    },
+    {
+      "pos": 12,
+      "artist": "Robin Schulz",
+      "title": "I'll Be There",
+      "genre": "House Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 13,
+      "artist": "Above & Beyond",
+      "title": "Crazy Love",
+      "genre": "Trance",
+      "status": "Special"
+    },
+    {
+      "pos": 14,
+      "artist": "Ava Max",
+      "title": "My Oh My",
+      "genre": "Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 15,
+      "artist": "Becky Hill",
+      "title": "Disconnect",
+      "genre": "Dance Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 16,
+      "artist": "Lost Frequencies",
+      "title": "The Feeling",
+      "genre": "Dance",
+      "status": "C-list"
+    },
+    {
+      "pos": 17,
+      "artist": "Martin Garrix",
+      "title": "Carry You",
+      "genre": "EDM",
+      "status": "Special"
+    },
+    {
+      "pos": 18,
+      "artist": "Dua Lipa",
+      "title": "Houdini",
+      "genre": "Pop / Dance",
+      "status": "C-list"
+    },
+    {
+      "pos": 19,
+      "artist": "RAYE",
+      "title": "Prada",
+      "genre": "Dance Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 20,
+      "artist": "Scooter",
+      "title": "Nessaja",
+      "genre": "Hands Up Classic",
+      "status": "Wildcard"
     }
   ],
   "newsI18n": {
@@ -384,5 +503,6 @@
         "RETRO DESK · 80er, 90er und Klassiker, die nicht in Rente gehen"
       ]
     }
-  }
+  },
+  "requests": []
 }

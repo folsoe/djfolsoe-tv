@@ -1,1 +1,16 @@
-.adminStats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.adminStats article,.editorCard,.saveGrid label{background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:18px}.adminStats span{display:block;color:rgba(255,255,255,.55);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:900}.editorGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.editorCard input,.editorCard textarea,.editorCard select,#jsonOutput,.saveGrid input{width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);color:#fff;padding:12px;margin:6px 0}.editorCard textarea{height:86px}#jsonOutput{height:420px;color:#9ef7ff;background:#05070b}.adminBtn{height:46px;border:0;border-radius:14px;padding:0 16px;background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111;font-weight:1000;margin:8px 8px 8px 0;cursor:pointer}.adminBtn.alt{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.18)}.primarySave{box-shadow:0 0 24px rgba(0,229,255,.25)}.chartEditRow{display:grid;grid-template-columns:44px 1fr 1fr 120px;gap:8px;align-items:center;margin-bottom:8px}.requestItem button{float:right}.saveGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.saveGrid label{display:grid;gap:6px;color:#ffd166;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:1000}.saveActions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.statusBox{border-radius:16px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.14);padding:14px;color:#9ef7ff;font-weight:800}.statusBox.error{color:#ff8ea3}.statusBox.ok{color:#7dffb2}@media(max-width:900px){.adminStats,.editorGrid,.chartEditRow,.saveGrid{grid-template-columns:1fr}}
+
+
+/* V700.2 Admin Repair */
+.adminLangBar{display:flex;align-items:center;gap:8px;margin:0 0 16px 0;grid-column:1/-1}
+.adminLangBar button{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:8px 12px;font-weight:1000;cursor:pointer}
+.adminLangBar button.active{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111}
+.adminLangBar span{color:rgba(255,255,255,.65);font-weight:800}
+.chartEditRow{display:grid!important;grid-template-columns:60px 1.2fr 1.2fr .8fr .7fr 70px!important;gap:8px!important;align-items:center!important;margin-bottom:8px!important}
+.chartEditRow input{min-width:0}
+.chartEditRow button,.requestItem button{border:0;border-radius:10px;padding:8px;background:rgba(255,255,255,.12);color:#fff;font-weight:900;cursor:pointer}
+.chartHeader{color:#ffd166;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:1000;margin:12px 0}
+.manualRequestForm{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.manualRequestForm input{height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);color:#fff;padding:0 12px}
+.manualRequestForm button{grid-column:1/-1}
+.requestTools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+@media(max-width:900px){.chartEditRow,.manualRequestForm{grid-template-columns:1fr!important}}
