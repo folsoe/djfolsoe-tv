@@ -1,6 +1,70 @@
 let data;const $=id=>document.getElementById(id);const SALT='DJFOLSOE-V801', HASH='8f087b4bb4fa447d0f0269230d9076299bd60d355e8401ff4de936603c8f8f1b';
 async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
-async function boot(){const r=await fetch('assets/data/site-data.json');data=await r.json();mergeLocal();initLogin();renderAdmin();}
+async function boot(){
+  initBackendFields();
+  data = await loadInitialData();
+  mergeLocal();
+  initLogin();
+  renderAdmin();
+}
+function apiBase(){return (localStorage.getItem('djf_api_base')||window.DJF_API_BASE||'').replace(/\/$/,'');}
+function adminToken(){return localStorage.getItem(window.DJF_ADMIN_TOKEN_STORAGE_KEY||'djf_admin_token')||'';}
+function initBackendFields(){
+  setTimeout(()=>{
+    if($('apiBaseInput')) $('apiBaseInput').value=apiBase();
+    if($('adminTokenInput')) $('adminTokenInput').value=adminToken();
+  },300);
+}
+async function loadInitialData(){
+  const base=apiBase();
+  if(base){
+    try{
+      const r=await fetch(base+'/api/broadcast-core',{cache:'no-store'});
+      if(r.ok) return await r.json();
+    }catch(e){}
+  }
+  const r=await fetch('assets/data/site-data.json');
+  return await r.json();
+}
+async function loadFromBackend(){
+  const base=apiBase(); if(!base){setBackendStatus('Mangler API Base URL.');return;}
+  try{
+    const r=await fetch(base+'/api/broadcast-core',{cache:'no-store'});
+    if(!r.ok) throw new Error(await r.text());
+    data=await r.json();
+    localStorage.setItem('djf_site_data',JSON.stringify(data));
+    renderAdmin();
+    setBackendStatus('Data hentet fra backend.');
+  }catch(e){setBackendStatus('Backend fejl: '+e.message);}
+}
+async function saveToBackend(){
+  collectAll();
+  const base=apiBase(); const token=adminToken();
+  if(!base||!token){setBackendStatus('Mangler API Base URL eller Admin Token.');return;}
+  try{
+    const r=await fetch(base+'/api/broadcast-core',{method:'POST',headers:{'content-type':'application/json','x-admin-token':token},body:JSON.stringify(data)});
+    if(!r.ok) throw new Error(await r.text());
+    setBackendStatus('Data gemt i Cloudflare Worker backend.');
+  }catch(e){setBackendStatus('Backend save fejl: '+e.message);}
+}
+async function loadRequestsBackend(){
+  const base=apiBase(); if(!base){setBackendStatus('Mangler API Base URL.');return;}
+  try{
+    const r=await fetch(base+'/api/requests',{cache:'no-store'});
+    if(!r.ok) throw new Error(await r.text());
+    const reqs=await r.json();
+    localStorage.setItem('djf_requests',JSON.stringify(reqs));
+    renderRequests();
+    setBackendStatus('Requests hentet fra backend.');
+  }catch(e){setBackendStatus('Request backend fejl: '+e.message);}
+}
+function saveBackendConfig(){
+  if($('apiBaseInput')) localStorage.setItem('djf_api_base',$('apiBaseInput').value.trim());
+  if($('adminTokenInput')) localStorage.setItem(window.DJF_ADMIN_TOKEN_STORAGE_KEY||'djf_admin_token',$('adminTokenInput').value.trim());
+  window.DJF_API_BASE=apiBase();
+  setBackendStatus('Backend config gemt lokalt.');
+}
+function setBackendStatus(msg){const el=$('backendStatus'); if(el) el.textContent=msg;}
 function mergeLocal(){const saved=localStorage.getItem('djf_site_data');if(saved){try{data={...data,...JSON.parse(saved)}}catch(e){}}data.station=data.station||{};data.station.twitchLogin=data.station.twitchLogin||'djfolsoe';data.station.streamTitle=data.station.streamTitle||'';data.station.category=data.station.category||'';}
 function initLogin(){if(localStorage.getItem('djf_admin_unlocked')==='1')unlock();$('adminLogin').onclick=async()=>{const h=await sha256(SALT+$('adminPassword').value);if(h===HASH){localStorage.setItem('djf_admin_unlocked','1');unlock();}else $('adminMessage').textContent='Forkert password.'};$('adminPassword').onkeydown=e=>{if(e.key==='Enter')$('adminLogin').click()}}
 function unlock(){$('adminLocked').classList.add('hidden');$('adminUnlocked').classList.remove('hidden')}
@@ -12,44 +76,102 @@ function renderPrograms(){$('programEditor').innerHTML=data.schedule.map((p,i)=>
 function collectPrograms(){document.querySelectorAll('[data-program]').forEach(inp=>{const i=Number(inp.dataset.program);data.schedule[i][inp.dataset.field]=inp.value;});}
 function removeProgram(i){data.schedule.splice(i,1);renderPrograms();saveAll();}
 
+
 function ensureChart(){
   if(!data.top20Chart){
-    data.top20Chart={title:'FOLSOE TV Top 20',subtitle:'FOLSOE AIRPLAY HOT 20',week:'This Week',items:[]};
+    data.top20Chart={title:'FOLSOE TV Top 20',subtitle:'FOLSOE AIRPLAY HOT 20',week:'This Week',archive:[],items:[]};
+  }
+  if(!data.top20Chart.method){
+    data.top20Chart.method={danishAirplay:40,hitlistenDk:20,bbcRadio1Uk:15,spotifyGlobal:10,appleGlobal:5,billboardGlobal:5,folsoePickViewers:5};
   }
   if(!Array.isArray(data.top20Chart.items)) data.top20Chart.items=[];
   while(data.top20Chart.items.length<20){
     const i=data.top20Chart.items.length;
-    data.top20Chart.items.push({rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false});
+    data.top20Chart.items.push({rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false,weeks:1,peak:i+1,genre:'Dance',cover:'',spotify:'',youtube:'',apple:'',scores:{danishAirplay:0,hitlistenDk:0,bbcRadio1Uk:0,spotifyGlobal:0,appleGlobal:0,billboardGlobal:0,folsoePickViewers:0}});
   }
   data.top20Chart.items=data.top20Chart.items.slice(0,20);
-  data.top20Chart.items.forEach((x,i)=>{ if(!x.rank)x.rank=i+1; });
+  data.top20Chart.items.forEach((x,i)=>{
+    if(!x.rank)x.rank=i+1;
+    if(!x.scores)x.scores={danishAirplay:0,hitlistenDk:0,bbcRadio1Uk:0,spotifyGlobal:0,appleGlobal:0,billboardGlobal:0,folsoePickViewers:0};
+    if(!x.weeks)x.weeks=1;
+    if(!x.peak)x.peak=x.rank||i+1;
+    if(!x.genre)x.genre='Dance';
+  });
 }
 function renderTop20(){
   ensureChart();
   $('top20Editor').innerHTML=data.top20Chart.items.map((x,i)=>`
-    <div class="chartEditRow">
+    <div class="chartEditRow v806">
       <div class="rankCell"><label>Rank</label><input value="${x.rank||i+1}" data-chart="${i}" data-field="rank" type="number"></div>
       <div><label>Last</label><input value="${x.lastWeek||''}" data-chart="${i}" data-field="lastWeek"></div>
       <div><label>Artist</label><input value="${x.artist||''}" data-chart="${i}" data-field="artist"></div>
       <div><label>Title</label><input value="${x.title||''}" data-chart="${i}" data-field="title"></div>
       <div><label>Status</label><select data-chart="${i}" data-field="status"><option ${x.status==='NEW'?'selected':''}>NEW</option><option ${x.status==='UP'?'selected':''}>UP</option><option ${x.status==='DOWN'?'selected':''}>DOWN</option><option ${x.status==='SAME'?'selected':''}>SAME</option><option ${x.status==='RE'?'selected':''}>RE</option></select></div>
       <div><label>Points</label><input value="${x.points||0}" data-chart="${i}" data-field="points" type="number"></div>
+      <div><label>Weeks</label><input value="${x.weeks||1}" data-chart="${i}" data-field="weeks" type="number"></div>
+      <div><label>Peak</label><input value="${x.peak||x.rank||i+1}" data-chart="${i}" data-field="peak" type="number"></div>
+      <div><label>Genre</label><input value="${x.genre||''}" data-chart="${i}" data-field="genre"></div>
       <div><label>Pick</label><select data-chart="${i}" data-field="folsoePick"><option value="false" ${!x.folsoePick?'selected':''}>No</option><option value="true" ${x.folsoePick?'selected':''}>Yes</option></select></div>
+      <div><label>Airplay</label><input value="${x.scores?.danishAirplay||0}" data-chart="${i}" data-score="danishAirplay" type="number"></div>
+      <div><label>Hitlisten</label><input value="${x.scores?.hitlistenDk||0}" data-chart="${i}" data-score="hitlistenDk" type="number"></div>
+      <div><label>BBC/UK</label><input value="${x.scores?.bbcRadio1Uk||0}" data-chart="${i}" data-score="bbcRadio1Uk" type="number"></div>
+      <div><label>Spotify</label><input value="${x.scores?.spotifyGlobal||0}" data-chart="${i}" data-score="spotifyGlobal" type="number"></div>
+      <div><label>Apple</label><input value="${x.scores?.appleGlobal||0}" data-chart="${i}" data-score="appleGlobal" type="number"></div>
+      <div><label>Billboard</label><input value="${x.scores?.billboardGlobal||0}" data-chart="${i}" data-score="billboardGlobal" type="number"></div>
+      <div><label>FOLSOE</label><input value="${x.scores?.folsoePickViewers||0}" data-chart="${i}" data-score="folsoePickViewers" type="number"></div>
+      <div class="wide"><label>Cover URL</label><input value="${x.cover||''}" data-chart="${i}" data-field="cover"></div>
+      <div class="wide"><label>YouTube URL</label><input value="${x.youtube||''}" data-chart="${i}" data-field="youtube"></div>
     </div>`).join('');
 }
 function collectTop20(){
   ensureChart();
-  document.querySelectorAll('[data-chart]').forEach(inp=>{
+  document.querySelectorAll('[data-chart][data-field]').forEach(inp=>{
     const i=Number(inp.dataset.chart), f=inp.dataset.field;
     let v=inp.value;
-    if(f==='rank'||f==='points') v=Number(v||0);
+    if(['rank','points','weeks','peak'].includes(f)) v=Number(v||0);
     if(f==='folsoePick') v=v==='true';
     data.top20Chart.items[i][f]=v;
+  });
+  document.querySelectorAll('[data-chart][data-score]').forEach(inp=>{
+    const i=Number(inp.dataset.chart), f=inp.dataset.score;
+    data.top20Chart.items[i].scores=data.top20Chart.items[i].scores||{};
+    data.top20Chart.items[i].scores[f]=Number(inp.value||0);
   });
   data.top20Chart.items.sort((a,b)=>(Number(a.rank)||999)-(Number(b.rank)||999));
   data.top20=data.top20Chart.items.filter(x=>x.artist||x.title).map(x=>`${x.artist||''} - ${x.title||''}`.replace(/^ - /,'').replace(/ - $/,''));
 }
-function clearTop(i){ ensureChart(); data.top20Chart.items[i]={rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false}; renderTop20(); }
+function calculateChart(){
+  collectTop20();
+  const weights=data.top20Chart.method||{danishAirplay:40,hitlistenDk:20,bbcRadio1Uk:15,spotifyGlobal:10,appleGlobal:5,billboardGlobal:5,folsoePickViewers:5};
+  data.top20Chart.items.forEach(x=>{
+    const s=x.scores||{};
+    x.points=Math.round(Object.keys(weights).reduce((sum,k)=>sum+(Number(s[k]||0)*Number(weights[k]||0)),0));
+  });
+  data.top20Chart.items.sort((a,b)=>(b.points||0)-(a.points||0));
+  data.top20Chart.items.forEach((x,i)=>{
+    x.rank=i+1;
+    const lw=Number(x.lastWeek);
+    if(String(x.lastWeek).toUpperCase()==='NEW'||!x.lastWeek) x.status='NEW';
+    else if(!isNaN(lw)){
+      if(lw>x.rank) x.status='UP';
+      else if(lw<x.rank) x.status='DOWN';
+      else x.status='SAME';
+    }
+    x.weeks=String(x.status).toUpperCase()==='NEW'?1:Number(x.weeks||1)+1;
+    x.peak=Math.min(Number(x.peak||x.rank),x.rank);
+  });
+  saveAll();
+  renderTop20();
+}
+function archiveChart(){
+  ensureChart(); collectTop20();
+  const stamp=new Date().toISOString().slice(0,10);
+  data.top20Chart.archive=data.top20Chart.archive||[];
+  data.top20Chart.archive.unshift({week:data.top20Chart.week||stamp,date:stamp,items:JSON.parse(JSON.stringify(data.top20Chart.items))});
+  saveAll();
+  alert('Chart arkiveret for '+stamp);
+}
+function clearTop(i){ ensureChart(); data.top20Chart.items[i]={rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false,weeks:1,peak:i+1,genre:'Dance',cover:'',spotify:'',youtube:'',apple:'',scores:{}}; renderTop20(); }
 function renderShows(){$('showsEditor').innerHTML=(data.shows||[]).map((s,i)=>`<div class="showRow"><div><label>Titel</label><input value="${s.title||''}" data-show="${i}" data-field="title"></div><div><label>Type</label><input value="${s.type||''}" data-show="${i}" data-field="type"></div><div><label>Tekst</label><input value="${s.text||''}" data-show="${i}" data-field="text"></div><button onclick="removeShow(${i})">Slet</button></div>`).join('');}
 function collectShows(){document.querySelectorAll('[data-show]').forEach(inp=>{const i=Number(inp.dataset.show);data.shows[i][inp.dataset.field]=inp.value;});}
 function removeShow(i){data.shows.splice(i,1);renderShows();saveAll();}
@@ -135,8 +257,13 @@ $('saveControl').onclick=()=>{collectControl();saveAll();alert('Kontrolcenter ge
 $('addProgram').onclick=()=>{data.schedule.push({day:'New day',time:'20:00',show:'New show',description:'Description'});renderPrograms();saveAll();};
 $('savePrograms').onclick=()=>{collectPrograms();saveAll();alert('Programmer gemt.')};$('addShow').onclick=()=>{data.shows.push({title:'New show',type:'Show',text:'Description'});renderShows();saveAll();};
 $('saveShows').onclick=()=>{collectShows();saveAll();alert('Feed gemt.')};$('addNews').onclick=()=>{data.news.push({tag:'News',title:'New headline'});renderNews();saveAll();};
-$('saveNews').onclick=()=>{collectNews();saveAll();alert('Nyheder gemt.')};$('saveTop20').onclick=()=>{collectTop20();saveAll();renderTop20();alert('Top 20 gemt.')};if($('sortChart'))$('sortChart').onclick=()=>{collectTop20();data.top20Chart.items.sort((a,b)=>(b.points||0)-(a.points||0));data.top20Chart.items.forEach((x,i)=>x.rank=i+1);saveAll();renderTop20();};$('clearTop20').onclick=()=>{data.top20Chart={title:'FOLSOE TV Top 20',subtitle:'FOLSOE AIRPLAY HOT 20',week:'This Week',items:[]};renderTop20();saveAll();};
+$('saveNews').onclick=()=>{collectNews();saveAll();alert('Nyheder gemt.')};$('saveTop20').onclick=()=>{collectTop20();saveAll();renderTop20();alert('Top 20 gemt.')};if($('calculateChart'))$('calculateChart').onclick=()=>calculateChart();if($('sortChart'))$('sortChart').onclick=()=>{collectTop20();data.top20Chart.items.sort((a,b)=>(b.points||0)-(a.points||0));data.top20Chart.items.forEach((x,i)=>x.rank=i+1);saveAll();renderTop20();};if($('archiveChart'))$('archiveChart').onclick=()=>archiveChart();$('clearTop20').onclick=()=>{data.top20Chart={title:'FOLSOE TV Top 20',subtitle:'FOLSOE AIRPLAY HOT 20',week:'This Week',items:[]};renderTop20();saveAll();};
 $('addManualRequest').onclick=()=>{const arr=JSON.parse(localStorage.getItem('djf_requests')||'[]');arr.unshift({name:$('manualName').value||'Admin',song:$('manualSong').value||'',time:new Date().toISOString()});localStorage.setItem('djf_requests',JSON.stringify(arr));$('manualSong').value='';renderRequests();};
 $('clearRequests').onclick=()=>{localStorage.removeItem('djf_requests');renderRequests();};$('exportJson').onclick=()=>{collectAll();const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='site-data.json';a.click();};
-$('copyJson').onclick=()=>{collectAll();updateBackup();navigator.clipboard.writeText($('jsonBackup').value);alert('JSON kopieret.')};$('resetLocal').onclick=()=>{localStorage.removeItem('djf_site_data');location.reload();};$('adminLogout').onclick=()=>{localStorage.removeItem('djf_admin_unlocked');location.reload();};
+$('copyJson').onclick=()=>{collectAll();updateBackup();navigator.clipboard.writeText($('jsonBackup').value);alert('JSON kopieret.')};$('resetLocal').onclick=()=>{localStorage.removeItem('djf_site_data');location.reload();};
+if($('saveBackendConfig'))$('saveBackendConfig').onclick=()=>saveBackendConfig();
+if($('loadFromBackend'))$('loadFromBackend').onclick=()=>loadFromBackend();
+if($('saveToBackend'))$('saveToBackend').onclick=()=>saveToBackend();
+if($('loadRequestsBackend'))$('loadRequestsBackend').onclick=()=>loadRequestsBackend();
+$('adminLogout').onclick=()=>{localStorage.removeItem('djf_admin_unlocked');location.reload();};
 });

@@ -1,10 +1,56 @@
 let data, lang=localStorage.getItem('djf_lang')||'da', tick=0;
 const $=id=>document.getElementById(id);
 const T={da:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK",heroText:"DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.",watchLive:"Se live",requestSong:"Ønsk en sang",streamTitle:"Feed fra streamen",guideTitle:"Programplan",top20Title:"Top 20 fra stationen",newsTitle:"Nyheder",requestsTitle:"Ønsk en sang",requestsText:"Skriv dit musikønske her. Det gemmes lokalt i admin-demoen og kan senere kobles til rigtig backend.",yourName:"Dit navn",songRequest:"Sangønske",sendRequest:"Send ønske"},en:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV FROM DENMARK",heroText:"DJ FOLSOE TV is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community – presented as a modern Music TV channel from Denmark.",watchLive:"Watch Live",requestSong:"Request a song",streamTitle:"Stream feed",guideTitle:"TV Guide",top20Title:"Station Top 20",newsTitle:"News",requestsTitle:"Request a song",requestsText:"Write your music request here. It is saved locally in the admin demo and can later be connected to a real backend.",yourName:"Your name",songRequest:"Song request",sendRequest:"Send request"},de:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV AUS DÄNEMARK",heroText:"DJ FOLSOE TV ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",watchLive:"Live ansehen",requestSong:"Song wünschen",streamTitle:"Stream-Feed",guideTitle:"TV-Guide",top20Title:"Station Top 20",newsTitle:"Nachrichten",requestsTitle:"Song wünschen",requestsText:"Schreibe deinen Musikwunsch hier. Er wird lokal in der Admin-Demo gespeichert und kann später mit einem echten Backend verbunden werden.",yourName:"Dein Name",songRequest:"Musikwunsch",sendRequest:"Wunsch senden"}};
-async function boot(){const r=await fetch('assets/data/site-data.json');data=await r.json();mergeLocal();render();applyLang(lang);setInterval(ticker,3500)}
+async function boot(){
+  data = await loadBroadcastData();
+  mergeLocal();
+  render();
+  applyLang(lang);
+  setInterval(ticker,3500);
+  setInterval(refreshLiveFromApi,60000);
+}
+async function loadBroadcastData(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  if(base){
+    try{
+      const r=await fetch(base+'/api/broadcast-core',{cache:'no-store'});
+      if(r.ok) return await r.json();
+    }catch(e){}
+  }
+  const r=await fetch('assets/data/site-data.json');
+  return await r.json();
+}
+async function refreshLiveFromApi(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  if(!base) return;
+  try{
+    const r=await fetch(base+'/api/twitch-live',{cache:'no-store'});
+    if(!r.ok) return;
+    const live=await r.json();
+    data.station=data.station||{};
+    data.station.live=!!live.live;
+    data.station.viewers=live.viewers||0;
+    data.station.streamTitle=live.title||data.station.streamTitle||'';
+    render();
+  }catch(e){}
+}
 function mergeLocal(){const saved=localStorage.getItem('djf_site_data');if(saved){try{data={...data,...JSON.parse(saved)}}catch(e){}}}
-function render(){document.getElementById('publicStatus').textContent=data.station.live?'LIVE':'OFFLINE';document.getElementById('publicViewers').textContent=(data.station.viewers||0)+' viewers';const pt=document.getElementById('publicTitle');if(pt)pt.textContent=data.station.streamTitle||data.station.activeShow||'Twitch live data foundation ready';$('showFeed').innerHTML=data.shows.map(s=>`<article class="showCard"><b>${s.type}</b><h3>${s.title}</h3><p>${s.text}</p></article>`).join('');$('schedule').innerHTML=data.schedule.map(s=>`<article class="scheduleItem"><b>${s.day}</b><div><strong>${s.show}</strong><br><em>${s.description}</em></div><code>${s.time}</code></article>`).join('');const chart=(data.top20Chart&&data.top20Chart.items)?data.top20Chart.items:(data.top20||[]).map((s,i)=>({rank:i+1,lastWeek:'-',artist:(s.split(' - ')[0]||''),title:(s.split(' - ')[1]||s),status:'SAME',folsoePick:false}));
-$('topList').innerHTML=chart.map((x,i)=>`<div class="chartRow"><div class="chartRank">#${x.rank||i+1}</div><div class="chartLast">LW ${x.lastWeek||'-'}</div><div class="chartSong"><b>${x.title||''}</b><span>${x.artist||''}</span></div><div class="chartStatus ${x.status||'SAME'}">${x.status||'SAME'}</div><div class="chartPick ${x.folsoePick?'':'empty'}">${x.folsoePick?'FOLSOE PICK':''}</div></div>`).join('');$('newsGrid').innerHTML=data.news.map(n=>`<article class="newsItem"><b>${n.tag}</b><p>${n.title}</p></article>`).join('');}
+function render(){document.getElementById('publicStatus').textContent=data.station.live?'LIVE':'OFFLINE';document.getElementById('publicViewers').textContent=(data.station.viewers||0)+' viewers';const pt=document.getElementById('publicTitle');if(pt)pt.textContent=data.station.streamTitle||data.station.activeShow||'Twitch live data foundation ready';$('showFeed').innerHTML=data.shows.map(s=>`<article class="showCard"><b>${s.type}</b><h3>${s.title}</h3><p>${s.text}</p></article>`).join('');$('schedule').innerHTML=data.schedule.map(s=>`<article class="scheduleItem"><b>${s.day}</b><div><strong>${s.show}</strong><br><em>${s.description}</em></div><code>${s.time}</code></article>`).join('');const chart=(data.top20Chart&&data.top20Chart.items)?data.top20Chart.items:(data.top20||[]).map((s,i)=>({rank:i+1,lastWeek:'-',artist:(s.split(' - ')[0]||''),title:(s.split(' - ')[1]||s),status:'SAME',folsoePick:false,weeks:1,peak:i+1,points:0}));
+const top=chart[0]||{}, pick=chart.find(x=>x.folsoePick)||top;
+const climbers=chart.map(x=>({x,move:(Number(x.lastWeek)||x.rank)-(Number(x.rank)||x.rank)})).sort((a,b)=>b.move-a.move);
+const newEntries=chart.filter(x=>String(x.status).toUpperCase()==='NEW').length;
+if($('chartDashboard'))$('chartDashboard').innerHTML=`<div class="chartDashCard"><span>Number One</span><b>${top.artist||''} - ${top.title||''}</b></div><div class="chartDashCard"><span>Highest Climber</span><b>${climbers[0]?.x?.artist||''} +${Math.max(0,climbers[0]?.move||0)}</b></div><div class="chartDashCard"><span>New Entries</span><b>${newEntries}</b></div><div class="chartDashCard"><span>FOLSOE Pick</span><b>${pick.artist||''} - ${pick.title||''}</b></div>`;
+$('topList').innerHTML=chart.map((x,i)=>`<div class="chartRow v806"><div class="chartRank">#${x.rank||i+1}</div><div class="chartLast">LW ${x.lastWeek||'-'}</div><div class="chartSong"><b>${x.title||''}</b><span>${x.artist||''}</span><em class="chartMeta">${x.genre||''} · ${x.points||0} pts</em></div><div class="chartWeeks">${x.weeks||1} wks</div><div class="chartPeak">Peak #${x.peak||x.rank||i+1}</div><div class="chartStatus ${x.status||'SAME'}">${x.status||'SAME'}</div><div class="chartPick ${x.folsoePick?'':'empty'}">${x.folsoePick?'FOLSOE PICK':''}</div></div>`).join('');$('newsGrid').innerHTML=data.news.map(n=>`<article class="newsItem"><b>${n.tag}</b><p>${n.title}</p></article>`).join('');}
 function applyLang(l){lang=T[l]?l:'da';localStorage.setItem('djf_lang',lang);document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(T[lang][k])el.textContent=T[lang][k]});document.querySelectorAll('.langSwitch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));}
 function ticker(){const items=[...data.news.map(n=>n.title),...data.shows.map(s=>s.title),...data.top20.slice(0,5)];$('miniTicker').textContent=items[tick++%items.length];}
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.langSwitch button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));$('requestForm').onsubmit=e=>{e.preventDefault();const req={name:$('reqName').value||'Viewer',song:$('reqSong').value||'',time:new Date().toISOString()};const arr=JSON.parse(localStorage.getItem('djf_requests')||'[]');arr.unshift(req);localStorage.setItem('djf_requests',JSON.stringify(arr));$('requestMessage').textContent='Tak! Dit ønske er gemt.';$('reqSong').value='';};boot();});
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.langSwitch button').forEach(b=>b.onclick=()=>applyLang(b.dataset.lang));$('requestForm').onsubmit=async e=>{e.preventDefault();const req={name:$('reqName').value||'Viewer',song:$('reqSong').value||'',time:new Date().toISOString()};const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+if(base){
+  try{
+    const r=await fetch(base+'/api/requests',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(req)});
+    if(!r.ok) throw new Error('API error');
+    $('requestMessage').textContent='Tak! Dit ønske er sendt.';
+    $('reqSong').value='';
+    return;
+  }catch(e){}
+}
+const arr=JSON.parse(localStorage.getItem('djf_requests')||'[]');arr.unshift(req);localStorage.setItem('djf_requests',JSON.stringify(arr));$('requestMessage').textContent='Tak! Dit ønske er gemt lokalt.';$('reqSong').value='';};boot();});

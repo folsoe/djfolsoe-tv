@@ -51,8 +51,8 @@
           <div><b>15%</b><span>BBC Radio 1 / UK</span></div>
           <div><b>25%</b><span>Global + FOLSOE Pick</span></div>
         </div>
-        <div id="top20Editor" class="chartEditor"></div>
-        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="sortChart">Sortér efter points</button><button id="clearTop20">Ryd Top 20</button></div>
+        <div class="dataCorePanel"><b>Broadcast Data Core:</b> Top 20 gemmes nu i samme datamodel som hjemmeside, API, admin og fremtidigt overlay. Eksporter <code>site-data.json</code> for permanent GitHub-opdatering.</div><div class="scoreGrid"><div><b>40%</b>Airplay DK</div><div><b>20%</b>Hitlisten</div><div><b>15%</b>BBC/UK</div><div><b>10%</b>Spotify</div><div><b>5%</b>Apple</div><div><b>5%</b>Billboard</div><div><b>5%</b>FOLSOE</div></div><div id="top20Editor" class="chartEditor"></div>
+        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="calculateChart">Beregn score + movement</button><button id="sortChart">Sortér efter points</button><button id="archiveChart">Arkivér uge</button><button id="clearTop20">Ryd Top 20</button></div>
       </section>
 
       <section id="showsAdmin" class="panel">
@@ -79,13 +79,14 @@
       </section>
 
       <section id="backup" class="panel">
-        <div class="sectionHead"><span>JSON BACKUP</span><h2>Backup og upload-data</h2></div>
+        <div class="sectionHead"><span>V808 BACKEND</span><h2>Cloudflare Worker backend</h2></div><div class="controlGrid"><div class="control"><label>API Base URL</label><input id="apiBaseInput" placeholder="https://api.folsoetv.dk"></div><div class="control"><label>Admin Token</label><input id="adminTokenInput" type="password" placeholder="Cloudflare ADMIN_TOKEN"></div></div><div class="adminButtons"><button id="saveBackendConfig">Gem backend config</button><button id="loadFromBackend">Hent fra backend</button><button id="saveToBackend">Gem til backend</button><button id="loadRequestsBackend">Hent requests</button></div><div class="apiStatusLine" id="backendStatus">Backend ikke forbundet endnu.</div><hr style="border-color:rgba(255,255,255,.12);margin:22px 0"><div class="sectionHead"><span>JSON BACKUP</span><h2>Backup og upload-data</h2></div>
         <p class="note">Ændringer gemmes lokalt i browseren og vises på hjemmesiden i samme browser. For permanent GitHub-opdatering: eksportér JSON, erstat <b>assets/data/site-data.json</b>, commit og push.</p>
         <div class="adminButtons"><button id="exportJson">Eksportér site-data.json</button><button id="copyJson">Kopiér JSON</button><button id="resetLocal">Nulstil lokale ændringer</button></div>
         <textarea id="jsonBackup" class="jsonBackup" readonly></textarea>
       </section>
     </section>
   </main>
+  <script src="assets/js/config.js"></script>
   <script src="assets/js/admin.js"></script>
 </body>
 </html>
