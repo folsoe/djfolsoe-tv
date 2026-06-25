@@ -208,8 +208,8 @@
     },
     {
       "id": "fredagsbar",
-      "day": "Friday",
-      "time": "20:00",
+      "day": "Hver første 1. i hver måned",
+      "time": "19:00",
       "duration": 210,
       "colorA": "#ffb000",
       "colorB": "#ff2f78",
@@ -233,7 +233,10 @@
           "description": "Wochenendstart, Mitsingen, Banger und Chat-Energie.",
           "musicFocus": "Party, Pop, Dance, dänische Singalongs und Wünsche"
         }
-      }
+      },
+      "title": "Fredagsbar",
+      "description": "Weekendstart, Singalong, Bangers and chat energy",
+      "musicFocus": "Party, pop, dance, dansk, and request"
     },
     {
       "id": "chart-show",
