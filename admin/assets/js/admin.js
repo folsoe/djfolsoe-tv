@@ -8,7 +8,7 @@ async function boot(){
   DATA = await r.json();
   ensureDataShape();
   loadSettings();
-  renderDashboard();
+  renderDashboard(); renderControlCenterAdmin();
   renderPrograms();
   renderChart();
   renderRequests();
@@ -264,3 +264,26 @@ document.addEventListener("click", e => {
   if(e.target?.id === "buildJson") buildJson();
   if(e.target?.id === "copyJson") navigator.clipboard.writeText($("jsonOutput").value).then(()=>alert("JSON kopieret"));
 });
+
+function renderControlCenterAdmin(){
+  if(!$("controlCenterEditor")) return;
+  DATA.controlCenter = DATA.controlCenter || {systemStatus:{},broadcastMetrics:{}};
+  const s = DATA.controlCenter.systemStatus || {};
+  $("controlCenterEditor").innerHTML = Object.entries(s).map(([key,val]) => `
+    <div class="editorCard">
+      <h3>${val.label || key}</h3>
+      <label>Status
+        <select data-cc="${key}" data-k="status">
+          <option value="online" ${val.status==="online"?"selected":""}>online</option>
+          <option value="ready" ${val.status==="ready"?"selected":""}>ready</option>
+          <option value="placeholder" ${val.status==="placeholder"?"selected":""}>placeholder</option>
+          <option value="error" ${val.status==="error"?"selected":""}>error</option>
+        </select>
+      </label>
+      <label>Detail<input data-cc="${key}" data-k="detail" value="${esc(val.detail || "")}"></label>
+    </div>`).join("");
+  document.querySelectorAll("[data-cc]").forEach(el => el.addEventListener("input", e => {
+    DATA.controlCenter.systemStatus[e.target.dataset.cc][e.target.dataset.k] = e.target.value;
+    buildJson();
+  }));
+}

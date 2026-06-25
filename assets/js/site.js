@@ -10,11 +10,13 @@ async function boot(){
   setupLanguageButtons();
   translatePage();
   applyProgram(currentProgram.program, currentProgram.isLive);
+  renderControlCenter();
   renderPrograms();
   renderRequests();
   renderChart();
   renderNews();
   setupRequestForm();
+  setInterval(updateCountdown, 1000);
   setInterval(updateTicker, 3500);
 }
 
@@ -29,6 +31,7 @@ function setupLanguageButtons(){
       localStorage.setItem("djf_lang", LANG);
       translatePage();
       applyProgram(currentProgram.program, currentProgram.isLive);
+      renderControlCenter();
       renderPrograms();
       renderRequests();
       renderNews();
@@ -39,8 +42,8 @@ function setupLanguageButtons(){
 function translatePage(){
   document.documentElement.lang = LANG;
   document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = tr(el.dataset.i18n));
-  $("reqName").placeholder = tr("namePlaceholder");
-  $("reqSong").placeholder = tr("songPlaceholder");
+  if($("reqName")) $("reqName").placeholder = tr("namePlaceholder");
+  if($("reqSong")) $("reqSong").placeholder = tr("songPlaceholder");
   document.querySelectorAll("[data-lang]").forEach(btn => btn.classList.toggle("active", btn.dataset.lang === LANG));
 }
 
@@ -90,6 +93,39 @@ function applyProgram(p,isLive){
   $("nextType").textContent = ptxt(p,"type");
   $("nextFocus").textContent = ptxt(p,"musicFocus");
   $("nextDescription").textContent = ptxt(p,"description");
+  updateCountdown();
+}
+
+function updateCountdown(){
+  if(!$("countdownValue")) return;
+  const now = new Date();
+  const diff = Math.max(0, currentProgram.nextDate - now);
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  $("countdownValue").textContent = currentProgram.isLive ? "ON AIR" : `${d}d ${h}h ${m}m ${s}s`;
+}
+
+function renderControlCenter(){
+  if(!$("controlGrid")) return;
+  const statuses = DATA.controlCenter?.systemStatus || {};
+  const metrics = DATA.controlCenter?.broadcastMetrics || {};
+  const statusClass = s => s === "online" || s === "ready" ? "ok" : s === "placeholder" ? "pending" : "bad";
+  $("controlGrid").innerHTML = Object.values(statuses).map(x => `
+    <article class="controlStatus ${statusClass(x.status)}">
+      <span>${x.label}</span>
+      <b>${String(x.status).toUpperCase()}</b>
+      <p>${x.detail}</p>
+    </article>`).join("");
+  if($("metricsGrid")){
+    const followerLeft = Math.max(0, (metrics.followersGoal||1000) - (metrics.followers||0));
+    $("metricsGrid").innerHTML = `
+      <article><span>Followers</span><b>${metrics.followers || 0}</b><p>${followerLeft} to goal</p></article>
+      <article><span>Subs Today</span><b>${metrics.subsToday || 0}</b><p>Support engine</p></article>
+      <article><span>Bits Today</span><b>${metrics.bitsToday || 0}</b><p>Broadcast fuel</p></article>
+      <article><span>Requests Open</span><b>${(DATA.requests||[]).length}</b><p>Queue status</p></article>`;
+  }
 }
 
 function renderPrograms(){

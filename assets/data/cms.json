@@ -1,5 +1,5 @@
 {
-  "version": "V601-FINAL",
+  "version": "V710",
   "station": {
     "name": "DJ FOLSOE TV",
     "domain": "folsoetv.dk",
@@ -121,8 +121,8 @@
   "programs": [
     {
       "id": "good-morning",
-      "day": "Saturday",
-      "time": "07:00",
+      "day": "Monday",
+      "time": "09:00",
       "duration": 120,
       "colorA": "#ffb000",
       "colorB": "#ffffff",
@@ -146,15 +146,12 @@
           "description": "Nachrichten, Kaffee, Wetter, Musik und der beste Start in den Tag.",
           "musicFocus": "Pop, Feelgood, dänische Musik und Morgenklassiker"
         }
-      },
-      "title": "Good Morning Twitch",
-      "description": "Nyheder, Kaffe, vejr, musik, og den bedste start på dagen",
-      "musicFocus": "pop, feelgood, dansk og de største morgenklassikere."
+      }
     },
     {
       "id": "trance-tuesday",
       "day": "Tuesday",
-      "time": "18:30",
+      "time": "20:00",
       "duration": 180,
       "colorA": "#7b2fff",
       "colorB": "#00e5ff",
@@ -178,15 +175,12 @@
           "description": "Uplifting, Progressive und große melodische Trance-Momente.",
           "musicFocus": "Trance, Uplifting, Progressive, Anjuna und Armada"
         }
-      },
-      "title": "Trance Tuesday",
-      "description": "Uplifting, Progressive og store melodiske trance Moments",
-      "musicFocus": "Trance, uplifting, progressive"
+      }
     },
     {
       "id": "popup",
-      "day": "Når jeg har mulighed for det.",
-      "time": "",
+      "day": "Wednesday",
+      "time": "20:00",
       "duration": 150,
       "colorA": "#ff00ea",
       "colorB": "#00d4ff",
@@ -210,15 +204,12 @@
           "description": "Ein Überraschungsstream, bei dem der Chat die Richtung bestimmt.",
           "musicFocus": "Musikwünsche, Pop, Dance, Klassiker und Überraschungen"
         }
-      },
-      "title": "Folsoe Popup",
-      "description": "Når jeg har mulighed for det.\nEt overraskelsesstream, hvor chatten bestemmer formen og retningen.",
-      "musicFocus": "seerønsker, pop, dance, klassikere, og overraskelser "
+      }
     },
     {
       "id": "fredagsbar",
-      "day": "",
-      "time": "",
+      "day": "Friday",
+      "time": "20:00",
       "duration": 210,
       "colorA": "#ffb000",
       "colorB": "#ff2f78",
@@ -242,15 +233,12 @@
           "description": "Wochenendstart, Mitsingen, Banger und Chat-Energie.",
           "musicFocus": "Party, Pop, Dance, dänische Singalongs und Wünsche"
         }
-      },
-      "title": "Fredagsbar",
-      "description": "Hver første 1. fredag i hver måned \nWeekendstart, Singalong, Bangers and chat energy",
-      "musicFocus": "Party, pop, dance, dansk, and request"
+      }
     },
     {
       "id": "chart-show",
-      "day": "Thursday",
-      "time": "18:30",
+      "day": "Saturday",
+      "time": "20:00",
       "duration": 180,
       "colorA": "#ff284f",
       "colorB": "#00d4ff",
@@ -274,15 +262,12 @@
           "description": "Die wöchentliche DJ FOLSOE Top 20 mit EDM/Pop/Dance Tracks.",
           "musicFocus": "EDM, Pop, Dance, Charts und neue Musik"
         }
-      },
-      "title": "The Chart Show",
-      "description": "Ugens hitliste med de 20 største hits på folsoes playliste.",
-      "musicFocus": "EDM, Trance, Dance, Pop - ny musik"
+      }
     },
     {
       "id": "retro-hits",
       "day": "Sunday",
-      "time": "07:00",
+      "time": "19:00",
       "duration": 180,
       "colorA": "#ff7a00",
       "colorB": "#ff2bd6",
@@ -306,10 +291,7 @@
           "description": "70er, 80er, 90er und Old-School-Favoriten, die immer noch funktionieren.",
           "musicFocus": "Retro, 80er, 90er, Eurodance und Klassiker"
         }
-      },
-      "title": "Retro with Folsoe",
-      "description": "70s, 80s, 90s og alle de fede oldscool sange samlet på et sted.",
-      "musicFocus": "retro, 70s 80s, 90s, klassiske hits"
+      }
     }
   ],
   "chart": [
@@ -522,5 +504,59 @@
       ]
     }
   },
-  "requests": []
+  "requests": [],
+  "controlCenter": {
+    "systemStatus": {
+      "website": {
+        "label": "Website",
+        "status": "online",
+        "detail": "folsoetv.dk is loaded"
+      },
+      "github": {
+        "label": "GitHub Save",
+        "status": "ready",
+        "detail": "CMS can save to assets/data/cms.json"
+      },
+      "worker": {
+        "label": "Cloudflare Worker",
+        "status": "ready",
+        "detail": "GitHub Save Engine connected"
+      },
+      "twitch": {
+        "label": "Twitch Live",
+        "status": "placeholder",
+        "detail": "Ready for Twitch API layer"
+      },
+      "obs": {
+        "label": "OBS",
+        "status": "placeholder",
+        "detail": "OBS WebSocket integration pending"
+      },
+      "streamelements": {
+        "label": "StreamElements",
+        "status": "placeholder",
+        "detail": "Widget API integration pending"
+      },
+      "rss": {
+        "label": "RSS Newsroom",
+        "status": "placeholder",
+        "detail": "RSS worker integration pending"
+      }
+    },
+    "broadcastMetrics": {
+      "followers": 870,
+      "followersGoal": 1000,
+      "subsToday": 0,
+      "bitsToday": 0,
+      "raidsThisWeek": 0,
+      "requestsOpen": 0,
+      "chatActivity": "pending"
+    },
+    "overlay": {
+      "activeFooter": "program-news",
+      "activeWidget": "broadcast-bar",
+      "lastUpdate": "",
+      "status": "ready"
+    }
+  }
 }
