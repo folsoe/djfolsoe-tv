@@ -1,0 +1,388 @@
+{
+  "version": "V700.1",
+  "station": {
+    "name": "DJ FOLSOE TV",
+    "domain": "folsoetv.dk",
+    "twitchUrl": "https://twitch.tv/djfolsoe",
+    "live": false,
+    "viewers": 0,
+    "followers": 870,
+    "activeProgram": "chart-show",
+    "i18n": {
+      "da": {
+        "description": "DJ FOLSOE TV er en dansk music-TV og radio 2026 platform med live DJ-shows, requests, hitlister, fællesskab og broadcast grafik fra Danmark."
+      },
+      "en": {
+        "description": "DJ FOLSOE TV is a Danish music-TV and Radio 2026 platform with live DJ shows, requests, charts, community energy and broadcast graphics from Denmark."
+      },
+      "de": {
+        "description": "DJ FOLSOE TV ist eine dänische Music-TV- und Radio-2026-Plattform mit Live-DJ-Shows, Musikwünschen, Charts, Community und Broadcast-Grafik aus Dänemark."
+      }
+    }
+  },
+  "ui": {
+    "da": {
+      "navLive": "Live",
+      "navNext": "Næste show",
+      "navGuide": "Programplan",
+      "navRequest": "Request",
+      "navChart": "Hitliste",
+      "navNews": "Nyheder",
+      "navAdmin": "Admin",
+      "heroKicker": "BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK",
+      "watchLive": "Se live",
+      "requestSong": "Ønsk en sang",
+      "status": "Status",
+      "viewers": "Seere",
+      "nowNext": "Nu / næste",
+      "nextShow": "NÆSTE SHOW",
+      "fixedPrograms": "Faste programmer",
+      "dateTime": "Dato / tid",
+      "programType": "Programtype",
+      "musicFocus": "Musikfokus",
+      "requestCenter": "Ønsk en sang til et show",
+      "requestHelp": "Skriv dit ønske, vælg hvilket program det passer til, og hvornår du helst vil høre det.",
+      "namePlaceholder": "Dit Twitch-navn",
+      "songPlaceholder": "Artist - Sang",
+      "saveRequest": "Gem ønske",
+      "latestRequests": "Seneste ønsker",
+      "chartTitle": "Ugens Top 20 · EDM / Pop / Dance",
+      "newsTitle": "Programbaserede nyheder",
+      "offline": "OFFLINE",
+      "liveNow": "LIVE NU",
+      "next": "NÆSTE",
+      "noRequests": "Ingen ønsker endnu."
+    },
+    "en": {
+      "navLive": "Live",
+      "navNext": "Next show",
+      "navGuide": "Schedule",
+      "navRequest": "Request",
+      "navChart": "Chart",
+      "navNews": "News",
+      "navAdmin": "Admin",
+      "heroKicker": "BROADCAST CLOUD · RADIO 2026 · MUSIC TV FROM DENMARK",
+      "watchLive": "Watch live",
+      "requestSong": "Request a song",
+      "status": "Status",
+      "viewers": "Viewers",
+      "nowNext": "Now / next",
+      "nextShow": "NEXT SHOW",
+      "fixedPrograms": "Regular shows",
+      "dateTime": "Date / time",
+      "programType": "Program type",
+      "musicFocus": "Music focus",
+      "requestCenter": "Request a song for a show",
+      "requestHelp": "Write your request, choose the show it fits, and when you would like to hear it.",
+      "namePlaceholder": "Your Twitch name",
+      "songPlaceholder": "Artist - Song",
+      "saveRequest": "Save request",
+      "latestRequests": "Latest requests",
+      "chartTitle": "Weekly Top 20 · EDM / Pop / Dance",
+      "newsTitle": "Program-based news",
+      "offline": "OFFLINE",
+      "liveNow": "LIVE NOW",
+      "next": "NEXT",
+      "noRequests": "No requests yet."
+    },
+    "de": {
+      "navLive": "Live",
+      "navNext": "Nächste Show",
+      "navGuide": "Programmplan",
+      "navRequest": "Wunsch",
+      "navChart": "Hitliste",
+      "navNews": "News",
+      "navAdmin": "Admin",
+      "heroKicker": "BROADCAST CLOUD · RADIO 2026 · MUSIC TV AUS DÄNEMARK",
+      "watchLive": "Live ansehen",
+      "requestSong": "Song wünschen",
+      "status": "Status",
+      "viewers": "Zuschauer",
+      "nowNext": "Jetzt / nächste",
+      "nextShow": "NÄCHSTE SHOW",
+      "fixedPrograms": "Feste Sendungen",
+      "dateTime": "Datum / Uhrzeit",
+      "programType": "Sendungstyp",
+      "musicFocus": "Musikfokus",
+      "requestCenter": "Wünsche einen Song für eine Show",
+      "requestHelp": "Schreibe deinen Wunsch, wähle die passende Show und wann du ihn hören möchtest.",
+      "namePlaceholder": "Dein Twitch-Name",
+      "songPlaceholder": "Artist - Song",
+      "saveRequest": "Wunsch speichern",
+      "latestRequests": "Letzte Wünsche",
+      "chartTitle": "Wöchentliche Top 20 · EDM / Pop / Dance",
+      "newsTitle": "Programmbasierte News",
+      "offline": "OFFLINE",
+      "liveNow": "LIVE JETZT",
+      "next": "NÄCHSTE",
+      "noRequests": "Noch keine Wünsche."
+    }
+  },
+  "programs": [
+    {
+      "id": "good-morning",
+      "day": "Monday",
+      "time": "09:00",
+      "duration": 120,
+      "colorA": "#ffb000",
+      "colorB": "#ffffff",
+      "icon": "☀️",
+      "i18n": {
+        "da": {
+          "title": "Good Morning Twitch",
+          "type": "Morgenshow",
+          "description": "Nyheder, kaffe, vejr, musik og den bedste start på dagen.",
+          "musicFocus": "pop, feelgood, dansk musik og morgenklassikere"
+        },
+        "en": {
+          "title": "Good Morning Twitch",
+          "type": "Morning Show",
+          "description": "News, coffee, weather, music and the best start to the day.",
+          "musicFocus": "pop, feelgood, Danish music and morning classics"
+        },
+        "de": {
+          "title": "Good Morning Twitch",
+          "type": "Morgensendung",
+          "description": "Nachrichten, Kaffee, Wetter, Musik und der beste Start in den Tag.",
+          "musicFocus": "Pop, Feelgood, dänische Musik und Morgenklassiker"
+        }
+      }
+    },
+    {
+      "id": "trance-tuesday",
+      "day": "Tuesday",
+      "time": "20:00",
+      "duration": 180,
+      "colorA": "#7b2fff",
+      "colorB": "#00e5ff",
+      "icon": "💜",
+      "i18n": {
+        "da": {
+          "title": "Trance Tuesday",
+          "type": "Trance Show",
+          "description": "Uplifting, progressive og store melodiske trance moments.",
+          "musicFocus": "trance, uplifting, progressive, Anjuna og Armada"
+        },
+        "en": {
+          "title": "Trance Tuesday",
+          "type": "Trance Show",
+          "description": "Uplifting, progressive and big melodic trance moments.",
+          "musicFocus": "trance, uplifting, progressive, Anjuna and Armada"
+        },
+        "de": {
+          "title": "Trance Tuesday",
+          "type": "Trance Show",
+          "description": "Uplifting, Progressive und große melodische Trance-Momente.",
+          "musicFocus": "Trance, Uplifting, Progressive, Anjuna und Armada"
+        }
+      }
+    },
+    {
+      "id": "popup",
+      "day": "Wednesday",
+      "time": "20:00",
+      "duration": 150,
+      "colorA": "#ff00ea",
+      "colorB": "#00d4ff",
+      "icon": "⚡",
+      "i18n": {
+        "da": {
+          "title": "Folsoe Popup",
+          "type": "Popup Show",
+          "description": "Et overraskelsesstream hvor chatten former retningen.",
+          "musicFocus": "seerønsker, pop, dance, klassikere og overraskelser"
+        },
+        "en": {
+          "title": "Folsoe Popup",
+          "type": "Popup Show",
+          "description": "A surprise stream where chat shapes the direction.",
+          "musicFocus": "viewer requests, pop, dance, classics and surprises"
+        },
+        "de": {
+          "title": "Folsoe Popup",
+          "type": "Popup Show",
+          "description": "Ein Überraschungsstream, bei dem der Chat die Richtung bestimmt.",
+          "musicFocus": "Musikwünsche, Pop, Dance, Klassiker und Überraschungen"
+        }
+      }
+    },
+    {
+      "id": "fredagsbar",
+      "day": "Friday",
+      "time": "20:00",
+      "duration": 210,
+      "colorA": "#ffb000",
+      "colorB": "#ff2f78",
+      "icon": "🍻",
+      "i18n": {
+        "da": {
+          "title": "Fredagsbar",
+          "type": "Fredagsbar",
+          "description": "Weekendstart, singalong, bangers og chat-energi.",
+          "musicFocus": "party, pop, dance, dansk singalong og requests"
+        },
+        "en": {
+          "title": "Friday Bar",
+          "type": "Friday Bar",
+          "description": "Weekend start, singalong, bangers and chat energy.",
+          "musicFocus": "party, pop, dance, Danish singalong and requests"
+        },
+        "de": {
+          "title": "Freitagsbar",
+          "type": "Freitagsbar",
+          "description": "Wochenendstart, Mitsingen, Banger und Chat-Energie.",
+          "musicFocus": "Party, Pop, Dance, dänische Singalongs und Wünsche"
+        }
+      }
+    },
+    {
+      "id": "chart-show",
+      "day": "Saturday",
+      "time": "20:00",
+      "duration": 180,
+      "colorA": "#ff284f",
+      "colorB": "#00d4ff",
+      "icon": "🔟",
+      "i18n": {
+        "da": {
+          "title": "DJ FOLSOE Chart Show",
+          "type": "Chart Show",
+          "description": "Ugens DJ FOLSOE hitliste med 20 EDM/pop/dance tracks.",
+          "musicFocus": "EDM, pop, dance, chart og ny musik"
+        },
+        "en": {
+          "title": "DJ FOLSOE Chart Show",
+          "type": "Chart Show",
+          "description": "The weekly DJ FOLSOE Top 20 with EDM/pop/dance tracks.",
+          "musicFocus": "EDM, pop, dance, charts and new music"
+        },
+        "de": {
+          "title": "DJ FOLSOE Chart Show",
+          "type": "Chart Show",
+          "description": "Die wöchentliche DJ FOLSOE Top 20 mit EDM/Pop/Dance Tracks.",
+          "musicFocus": "EDM, Pop, Dance, Charts und neue Musik"
+        }
+      }
+    },
+    {
+      "id": "retro-hits",
+      "day": "Sunday",
+      "time": "19:00",
+      "duration": 180,
+      "colorA": "#ff7a00",
+      "colorB": "#ff2bd6",
+      "icon": "📼",
+      "i18n": {
+        "da": {
+          "title": "Retro Hits",
+          "type": "Retro Show",
+          "description": "70s, 80s, 90s og old school favoritter, der stadig virker.",
+          "musicFocus": "retro, 80s, 90s, eurodance og klassikere"
+        },
+        "en": {
+          "title": "Retro Hits",
+          "type": "Retro Show",
+          "description": "70s, 80s, 90s and old school favorites that still work.",
+          "musicFocus": "retro, 80s, 90s, eurodance and classics"
+        },
+        "de": {
+          "title": "Retro Hits",
+          "type": "Retro Show",
+          "description": "70er, 80er, 90er und Old-School-Favoriten, die immer noch funktionieren.",
+          "musicFocus": "Retro, 80er, 90er, Eurodance und Klassiker"
+        }
+      }
+    }
+  ],
+  "chart": [
+    {
+      "pos": 1,
+      "artist": "Calvin Harris & Ellie Goulding",
+      "title": "Miracle",
+      "genre": "EDM / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 2,
+      "artist": "David Guetta & OneRepublic",
+      "title": "I Don't Wanna Wait",
+      "genre": "EDM / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 3,
+      "artist": "Armin van Buuren",
+      "title": "Lose This Feeling",
+      "genre": "Trance / Dance",
+      "status": "B-list"
+    }
+  ],
+  "newsI18n": {
+    "good-morning": {
+      "da": [
+        "GOOD MORNING TWITCH · Kaffe, nyheder og live musik fra Danmark"
+      ],
+      "en": [
+        "GOOD MORNING TWITCH · Coffee, headlines and live music from Denmark"
+      ],
+      "de": [
+        "GOOD MORNING TWITCH · Kaffee, News und Live-Musik aus Dänemark"
+      ]
+    },
+    "chart-show": {
+      "da": [
+        "CHART SHOW · Ugens 20 tracks er klar til lørdag"
+      ],
+      "en": [
+        "CHART SHOW · This week’s 20 tracks are ready for Saturday"
+      ],
+      "de": [
+        "CHART SHOW · Die 20 Tracks der Woche sind bereit für Samstag"
+      ]
+    },
+    "trance-tuesday": {
+      "da": [
+        "TRANCE TUESDAY · Uplifting og progressive radar er aktiv"
+      ],
+      "en": [
+        "TRANCE TUESDAY · Uplifting and progressive radar is active"
+      ],
+      "de": [
+        "TRANCE TUESDAY · Uplifting- und Progressive-Radar ist aktiv"
+      ]
+    },
+    "popup": {
+      "da": [
+        "POPUP MUSIC NEWS · Alt kan ske i næste headline"
+      ],
+      "en": [
+        "POPUP MUSIC NEWS · Anything can happen in the next headline"
+      ],
+      "de": [
+        "POPUP MUSIC NEWS · In der nächsten Schlagzeile kann alles passieren"
+      ]
+    },
+    "fredagsbar": {
+      "da": [
+        "FREDAGSBAR · Weekend starter når bassen siger til"
+      ],
+      "en": [
+        "FRIDAY BAR · The weekend starts when the bass says so"
+      ],
+      "de": [
+        "FREITAGSBAR · Das Wochenende startet, wenn der Bass es sagt"
+      ]
+    },
+    "retro-hits": {
+      "da": [
+        "RETRO DESK · 80s, 90s og klassikere der nægter at gå på pension"
+      ],
+      "en": [
+        "RETRO DESK · 80s, 90s and classics that refuse to retire"
+      ],
+      "de": [
+        "RETRO DESK · 80er, 90er und Klassiker, die nicht in Rente gehen"
+      ]
+    }
+  }
+}
