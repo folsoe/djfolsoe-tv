@@ -1,0 +1,233 @@
+{
+  "version": "V500",
+  "station": {
+    "name": "DJ FOLSOE TV",
+    "domain": "folsoetv.dk",
+    "twitch": "https://twitch.tv/djfolsoe",
+    "mode": "broadcast",
+    "currentTheme": "morning",
+    "live": false,
+    "viewers": 0,
+    "followers": 870,
+    "followersGoal": 1000,
+    "subsToday": 0,
+    "bitsToday": 0,
+    "nowPlaying": "Live music from Denmark"
+  },
+  "themes": [
+    {
+      "id": "morning",
+      "icon": "☀️",
+      "title": "Good Morning Twitch",
+      "short": "Morning",
+      "colorA": "#ffb000",
+      "colorB": "#ffffff",
+      "headline": "Denmark, Europe, culture and music radar.",
+      "command": "!theme morning"
+    },
+    {
+      "id": "summer",
+      "icon": "🏖️",
+      "title": "Summer 2026",
+      "short": "Summer",
+      "colorA": "#ffe05f",
+      "colorB": "#00d4ff",
+      "headline": "Festival, beach, house and EDM energy.",
+      "command": "!theme summer"
+    },
+    {
+      "id": "trance",
+      "icon": "💜",
+      "title": "Trance Live",
+      "short": "Trance",
+      "colorA": "#7b2fff",
+      "colorB": "#00e5ff",
+      "headline": "Uplifting, progressive, Anjuna and Armin radar.",
+      "command": "!theme trance"
+    },
+    {
+      "id": "eurodance",
+      "icon": "🪩",
+      "title": "Eurodance",
+      "short": "Eurodance",
+      "colorA": "#00f0ff",
+      "colorB": "#4d7dff",
+      "headline": "90s hooks, hands up and classic dance energy.",
+      "command": "!theme eurodance"
+    },
+    {
+      "id": "retro",
+      "icon": "📼",
+      "title": "Retro Hits",
+      "short": "Retro",
+      "colorA": "#ff7a00",
+      "colorB": "#ff2bd6",
+      "headline": "70s, 80s, 90s and music memories.",
+      "command": "!theme retro"
+    },
+    {
+      "id": "popup",
+      "icon": "⚡",
+      "title": "Folsoe Popup",
+      "short": "Popup",
+      "colorA": "#ff00ea",
+      "colorB": "#00d4ff",
+      "headline": "You choose. I play. Anything can happen.",
+      "command": "!theme popup"
+    },
+    {
+      "id": "dansk",
+      "icon": "🇩🇰",
+      "title": "Dansk Musik",
+      "short": "Dansk",
+      "colorA": "#c8102e",
+      "colorB": "#ffffff",
+      "headline": "Danish artists, classics and fællessang.",
+      "command": "!theme dansk"
+    },
+    {
+      "id": "harddance",
+      "icon": "⚡",
+      "title": "Hard Dance",
+      "short": "Hard",
+      "colorA": "#ff2f78",
+      "colorB": "#ff8a00",
+      "headline": "High BPM, bass pressure and festival energy.",
+      "command": "!theme harddance"
+    },
+    {
+      "id": "letsdance",
+      "icon": "🕺",
+      "title": "Let's Dance",
+      "short": "Disco",
+      "colorA": "#ff2bd6",
+      "colorB": "#ffd166",
+      "headline": "Disco, funk, groove and house.",
+      "command": "!theme letsdance"
+    },
+    {
+      "id": "chart",
+      "icon": "🔟",
+      "title": "Chart Countdown",
+      "short": "Chart",
+      "colorA": "#ff284f",
+      "colorB": "#00d4ff",
+      "headline": "Top 10, number ones and music history.",
+      "command": "!theme chart"
+    },
+    {
+      "id": "weekend",
+      "icon": "🎉",
+      "title": "Weekend Vibes",
+      "short": "Weekend",
+      "colorA": "#a855ff",
+      "colorB": "#ffd166",
+      "headline": "Party, club, festival and requests.",
+      "command": "!theme weekend"
+    },
+    {
+      "id": "fredagsbar",
+      "icon": "🍻",
+      "title": "Fredagsbar",
+      "short": "Fredag",
+      "colorA": "#ffb000",
+      "colorB": "#ff2f78",
+      "headline": "Friday bar, singalong chaos and one more song.",
+      "command": "!theme fredagsbar"
+    }
+  ],
+  "headlines": {
+    "morning": [
+      "DENMARK DESK · Culture, sport and music stories are being scanned",
+      "GOOD MORNING TWITCH · Coffee, headlines and live music from Denmark",
+      "EUROPE RADAR · Nordic updates and music culture in focus"
+    ],
+    "summer": [
+      "SUMMER NEWS · Festival, beach, house and EDM radar is live",
+      "FESTIVAL DESK · Lineups, DJs and dance music stories in focus",
+      "HOUSE RADAR · Feel-good music for the summer stream"
+    ],
+    "trance": [
+      "TRANCE NEWS · Uplifting, progressive and Anjuna radar is live",
+      "PROGRESSIVE DESK · Armin, Armada and Anjuna signals scanning",
+      "MELODY LOCK · Long builds and big emotional drops"
+    ],
+    "eurodance": [
+      "EURODANCE NEWS · 90s dance, big hooks and classics radar",
+      "HANDS UP RADAR · The dancefloor remembers everything",
+      "BIG CHORUS ALERT · Rap verse, synths and maximum dance energy"
+    ],
+    "retro": [
+      "RETRO NEWS · 70s, 80s, 90s and classic pop radar",
+      "CLASSIC DESK · Anniversary, reissue and legacy artist stories",
+      "MUSIC MEMORY · The past still knows how to dance"
+    ],
+    "popup": [
+      "POPUP MUSIC NEWS · Anything can happen in the next headline",
+      "SURPRISE DESK · New singles, DJ stories and festival signals",
+      "YOU CHOOSE · I play the direction live"
+    ],
+    "dansk": [
+      "DANISH MUSIC NEWS · Artists, concerts and festival radar",
+      "DANSK MUSIK · Local legends and fællessang energy",
+      "DANISH SIGNAL · National chorus risk is high"
+    ],
+    "harddance": [
+      "HARD DANCE NEWS · Hardstyle, bass and festival radar",
+      "BASS PRESSURE · High BPM and rave signals incoming",
+      "FULL POWER DESK · Kicks and speaker testing"
+    ],
+    "letsdance": [
+      "DISCO NEWS · Nu disco, funk, groove and house radar",
+      "GROOVE DESK · Shoulders are moving without permission",
+      "DANCEFLOOR SIGNAL · Glitter and groove are online"
+    ],
+    "chart": [
+      "CHART NEWS · Top 10, number one and hitlist radar",
+      "COUNTDOWN DESK · Singles, albums and chart movement",
+      "HITLIST SIGNAL · What is climbing and what is falling"
+    ],
+    "weekend": [
+      "WEEKEND NEWS · Party, festival, club and dance radar",
+      "WEEKEND VIBES · Bangers, requests and chat energy",
+      "ONE MORE SONG · Already approved by the broadcast department"
+    ],
+    "fredagsbar": [
+      "FREDAGSBAR NEWS · Friday, party and club radar",
+      "BAR MODE · Cold drinks, warm bass and requests",
+      "FRIDAY DESK · Weekend starts when the bass says so"
+    ]
+  },
+  "schedule": [
+    {
+      "day": "Monday",
+      "time": "20:00",
+      "show": "Popup Music TV",
+      "theme": "popup"
+    },
+    {
+      "day": "Tuesday",
+      "time": "20:00",
+      "show": "Trance Tuesday",
+      "theme": "trance"
+    },
+    {
+      "day": "Friday",
+      "time": "20:00",
+      "show": "Fredagsbar",
+      "theme": "fredagsbar"
+    },
+    {
+      "day": "Saturday",
+      "time": "21:00",
+      "show": "Weekend Vibes",
+      "theme": "weekend"
+    },
+    {
+      "day": "Sunday",
+      "time": "19:00",
+      "show": "Retro Hits",
+      "theme": "retro"
+    }
+  ]
+}

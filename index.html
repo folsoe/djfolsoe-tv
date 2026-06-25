@@ -1,13 +1,79 @@
-<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DJ FOLSOE TV Network V400</title><meta name="description" content="DJ FOLSOE TV Network V400"><link rel="stylesheet" href="assets/css/v400.css"></head><body>
-<div class="bgAura"></div><div class="scanlines"></div>
-<header class="topbar"><a class="brand" href="#home"><span>DJ</span><b>FOLSOE TV</b><em>NETWORK V400</em></a><nav><a href="#live">Live</a><a href="#themes">Themes</a><a href="#news">News</a><a href="#guide">TV Guide</a><a href="#requests">Requests</a><a href="#community">Community</a><a href="#admin">Admin</a></nav><button id="themeShuffle">Shuffle Theme</button></header>
-<main id="home">
-<section class="hero"><div class="copy"><div class="kicker">RADIO 2026 · MUSIC TV · BROADCAST FROM DENMARK</div><h1>DJ FOLSOE TV Network</h1><p>En professionel platform hvor hjemmeside, Twitch, OBS og StreamElements arbejder som én samlet musik-TV-station.</p><div class="actions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank">Watch Live</a><a class="secondary" href="#admin">Open Control Center</a></div><div class="miniStats"><article><span>Status</span><b id="heroStatus">OFFLINE</b></article><article><span>Theme</span><b id="heroTheme">MORNING</b></article><article><span>Requests</span><b>OPEN</b></article></div></div><aside class="tv"><div class="tvTop"><i></i><span>DJ FOLSOE TV · LIVE MUSIC NETWORK</span></div><div class="tvStage"><div id="themeIcon">☀️</div><h2 id="themeTitle">Good Morning Twitch</h2><p id="themeSubtitle">News, weather, culture and morning music</p></div><div class="tvTicker"><b id="tickerBadge">MORNING</b><marquee id="tickerText">Loading broadcast ticker...</marquee></div></aside></section>
-<section id="live" class="panel"><div class="sectionHead"><span>LIVE API CENTER</span><h2>Stationens live-status</h2></div><div class="dash"><article><span>Live Status</span><b id="statusCard">OFFLINE</b><p>Kan kobles til Twitch API.</p></article><article><span>Viewers</span><b id="viewerCard">0</b><p>Live seertal fra Twitch senere.</p></article><article><span>Follower Journey</span><b id="followerCard">Road to 1.000</b><p>Hver follow bygger stationen.</p></article><article><span>Support</span><b id="supportCard">Subs / Bits</b><p>Udvikler det tekniske setup.</p></article></div></section>
-<section id="themes" class="panel"><div class="sectionHead"><span>THEME SYNC ENGINE</span><h2>Alle show-universer</h2></div><div class="themeGrid" id="themeGrid"></div></section>
-<section id="news" class="panel"><div class="sectionHead"><span>MUSIC NEWS NETWORK</span><h2>Theme-specifik nyhedsradar</h2></div><div class="filterBar" id="filterBar"></div><div class="newsGrid" id="newsGrid"></div></section>
-<section id="guide" class="panel split"><div><div class="sectionHead"><span>DJ FOLSOE TV GUIDE</span><h2>Programplan</h2></div><div class="schedule" id="schedule"></div></div><aside class="card"><h3>Next upgrade</h3><p>V401 kan koble programguiden til Google Calendar eller et simpelt admin-panel.</p></aside></section>
-<section id="requests" class="panel split"><div><div class="sectionHead"><span>REQUEST CENTER</span><h2>Viewer controlled music</h2></div><div class="commands" id="commands"></div></div><aside class="requestBox"><label>Demo request</label><input id="requestInput" placeholder="Artist - Song"><button id="requestButton">Preview request</button><small id="requestPreview">Requests sendes via Twitch chat i den rigtige integration.</small></aside></section>
-<section id="community" class="panel"><div class="sectionHead"><span>COMMUNITY GROWTH ENGINE</span><h2>Viewer journey</h2></div><div class="journey"><article><b>Viewer</b><span>Finder streamen</span></article><article><b>Follower</b><span>Kommer tilbage</span></article><article><b>Chatter</b><span>Skaber liv</span></article><article><b>Requester</b><span>Former playlisten</span></article><article><b>Subscriber</b><span>Bygger stationen</span></article></div></section>
-<section id="admin" class="panel"><div class="sectionHead"><span>CONTROL CENTER</span><h2>Simuler stationen</h2></div><div class="controlGrid"><div class="control"><label>Aktivt theme</label><select id="themeSelect"></select></div><div class="control"><label>Live status</label><select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></div><div class="control"><label>Viewers</label><input id="viewerInput" type="number" value="0"></div><div class="control"><label>Followers</label><input id="followersInput" type="number" value="870"></div></div><p class="note">Dette er et statisk V400 admin-demo-lag. Næste version kan gemme data i GitHub/JSON eller Cloudflare KV.</p></section>
-</main><footer class="footer"><b>DJ FOLSOE TV Network V400</b><span>Music Television From Denmark · folsoetv.dk</span></footer><script src="assets/js/v400.js"></script></body></html>
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE Broadcast Platform V500</title>
+<link rel="stylesheet" href="assets/css/v500.css">
+</head>
+<body>
+<div class="bg"></div>
+<header class="top">
+  <a class="brand" href="#"><span>DJ</span><b>FOLSOE TV</b><em>V500</em></a>
+  <nav><a href="#platform">Platform</a><a href="#themes">Themes</a><a href="#control">Control</a><a href="#overlay">Overlay Client</a><a href="#roadmap">Roadmap</a></nav>
+  <button id="shuffle">Shuffle Theme</button>
+</header>
+<main>
+<section class="hero">
+  <div class="copy">
+    <div class="kicker">BROADCAST PLATFORM · WEBSITE + OVERLAY + DATA CENTER</div>
+    <h1>DJ FOLSOE Broadcast Platform</h1>
+    <p>V500 samler hjemmesiden, overlayet og fremtidige API'er i én fælles platform. Hjemmesiden bliver hjertet, og OBS/StreamElements bliver klienter, der læser samme data.</p>
+    <div class="actions"><a href="#control" class="primary">Open Control Center</a><a href="#overlay" class="secondary">Overlay Data</a></div>
+    <div class="stats"><article><span>Mode</span><b>PLATFORM</b></article><article><span>Theme</span><b id="heroTheme">MORNING</b></article><article><span>Sync</span><b>READY</b></article></div>
+  </div>
+  <aside class="broadcast">
+    <div class="bTop"><i></i> WEBSITE + OBS + STREAMELEMENTS</div>
+    <div class="bMid"><div id="icon">☀️</div><h2 id="title">Good Morning Twitch</h2><p id="subtitle">Denmark, Europe, culture and music radar.</p></div>
+    <div class="bTicker"><b id="badge">MORNING</b><span id="ticker">Loading platform ticker...</span></div>
+  </aside>
+</section>
+
+<section id="platform" class="panel">
+  <div class="head"><span>DATA CENTER</span><h2>Én sandhed for hele stationen</h2></div>
+  <div class="architecture">
+    <article><b>platform.json</b><p>Fælles datafil med theme, nyheder, schedule og status.</p></article>
+    <article><b>folsoetv.dk</b><p>Viser stationen professionelt for publikum.</p></article>
+    <article><b>Overlay Client</b><p>OBS/StreamElements kan læse samme data.</p></article>
+    <article><b>Future API</b><p>Twitch, RSS, vejr og now playing kan tilføjes senere.</p></article>
+  </div>
+</section>
+
+<section id="themes" class="panel">
+  <div class="head"><span>THEME ENGINE</span><h2>Theme-universer</h2></div>
+  <div class="themeGrid" id="themeGrid"></div>
+</section>
+
+<section id="control" class="panel split">
+  <div>
+    <div class="head"><span>CONTROL CENTER</span><h2>Simuler live platform</h2></div>
+    <div class="controlGrid">
+      <label>Theme<select id="themeSelect"></select></label>
+      <label>Live<select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></label>
+      <label>Viewers<input id="viewerInput" type="number" value="0"></label>
+      <label>Followers<input id="followersInput" type="number" value="870"></label>
+    </div>
+  </div>
+  <aside class="card">
+    <h3>Sådan bruges V500</h3>
+    <p>Ret data i <b>assets/data/platform.json</b>, commit og push til GitHub. Hjemmesiden opdaterer derefter automatisk.</p>
+  </aside>
+</section>
+
+<section id="overlay" class="panel">
+  <div class="head"><span>OVERLAY CLIENT</span><h2>OBS/StreamElements klar data</h2></div>
+  <div class="codeBox"><pre id="jsonPreview">Loading JSON...</pre></div>
+</section>
+
+<section id="roadmap" class="panel">
+  <div class="head"><span>NEXT BUILDS</span><h2>Roadmap</h2></div>
+  <div class="roadmap">
+    <article><b>V501 Twitch API Layer</b><p>Live/offline, viewers, title og game.</p></article>
+    <article><b>V502 RSS Proxy</b><p>Rigtige musiknyheder uden CORS-problemer.</p></article>
+    <article><b>V503 Overlay Sync</b><p>Overlay læser platform.json og følger website.</p></article>
+    <article><b>V504 Admin Panel</b><p>Rediger themes og nyheder uden kode.</p></article>
+  </div>
+</section>
+</main>
+<footer><b>DJ FOLSOE Broadcast Platform V500</b><span>folsoetv.dk · Music Television From Denmark</span></footer>
+<script src="assets/js/v500.js"></script>
+</body></html>

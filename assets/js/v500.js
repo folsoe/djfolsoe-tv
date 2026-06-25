@@ -1,0 +1,12 @@
+let platform, current='morning', tick=0;
+const $=id=>document.getElementById(id);
+async function boot(){const r=await fetch('assets/data/platform.json');platform=await r.json();current=platform.station.currentTheme;renderThemes();renderControls();setTheme(current);setInterval(ticker,3500);}
+function theme(id){return platform.themes.find(t=>t.id===id)||platform.themes[0];}
+function headlines(id){return platform.headlines[id]||platform.headlines.popup||[];}
+function rgb(hex){hex=hex.replace('#','');const n=parseInt(hex,16);return `${(n>>16)&255},${(n>>8)&255},${n&255}`;}
+function setTheme(id){current=id;const t=theme(id);document.documentElement.style.setProperty('--a',t.colorA);document.documentElement.style.setProperty('--b',t.colorB);document.documentElement.style.setProperty('--rgb',rgb(t.colorA));$('icon').textContent=t.icon;$('title').textContent=t.title;$('subtitle').textContent=t.headline;$('badge').textContent=t.short.toUpperCase();$('heroTheme').textContent=t.short.toUpperCase();$('themeSelect').value=id;document.querySelectorAll('.themeCard').forEach(c=>c.classList.toggle('active',c.dataset.theme===id));ticker();jsonPreview();}
+function renderThemes(){$('themeGrid').innerHTML=platform.themes.map(t=>`<article class="themeCard" data-theme="${t.id}" onclick="setTheme('${t.id}')" style="--ta:${t.colorA};--tb:${t.colorB}"><div class="icon">${t.icon}</div><strong>${t.title}</strong><p>${t.headline}</p><code>${t.command}</code></article>`).join('');}
+function renderControls(){$('themeSelect').innerHTML=platform.themes.map(t=>`<option value="${t.id}">${t.icon} ${t.title}</option>`).join('');$('themeSelect').addEventListener('change',e=>setTheme(e.target.value));$('liveSelect').addEventListener('change',jsonPreview);$('viewerInput').addEventListener('input',jsonPreview);$('followersInput').addEventListener('input',jsonPreview);$('shuffle').addEventListener('click',()=>setTheme(platform.themes[Math.floor(Math.random()*platform.themes.length)].id));}
+function ticker(){const arr=headlines(current);$('ticker').textContent=arr[tick++%arr.length];}
+function jsonPreview(){const out={version:'V500',currentTheme:current,live:$('liveSelect')?.value==='true',viewers:Number($('viewerInput')?.value||0),followers:Number($('followersInput')?.value||870),theme:theme(current),headline:headlines(current)[0]};$('jsonPreview').textContent=JSON.stringify(out,null,2);}
+document.addEventListener('DOMContentLoaded',boot);
