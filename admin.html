@@ -31,7 +31,8 @@
           <div class="control"><label>Followers</label><input id="followersInput" type="number"></div>
           <div class="control"><label>Aktivt program</label><input id="activeShowInput" placeholder="Good Morning Twitch"></div>
         </div>
-        <div class="adminButtons"><button id="saveControl">Gem kontrolcenter</button><button id="openWebsite">Se website</button><button id="adminLogout">Lås admin</button></div>
+        <div class="apiStatusLine" id="apiStatusLine">V804 Live Twitch API Foundation klar.</div>
+        <div class="adminButtons"><button id="saveControl">Gem kontrolcenter</button><button id="fetchTwitch">Hent Twitch live-data nu</button><button id="openWebsite">Se website</button><button id="adminLogout">Lås admin</button></div>
       </section>
 
       <section id="programs" class="panel">
@@ -42,9 +43,16 @@
       </section>
 
       <section id="top20Admin" class="panel">
-        <div class="sectionHead"><span>CHART MANAGER</span><h2>Ugens Top 20</h2></div>
-        <div id="top20Editor" class="top20Editor"></div>
-        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="clearTop20">Ryd Top 20</button></div>
+        <div class="sectionHead"><span>V805 FOLSOE AIRPLAY HOT 20</span><h2>FOLSOE TV Top 20</h2></div>
+        <p class="note">Chartet bygger på vægtning: Dansk Airplay 40%, Hitlisten DK 20%, BBC Radio 1/UK 15%, Spotify Global 10%, Apple Global 5%, Billboard Global 5%, FOLSOE Pick/seerstemmer 5%.</p>
+        <div class="methodGrid">
+          <div><b>40%</b><span>Dansk Airplay</span></div>
+          <div><b>20%</b><span>Hitlisten DK</span></div>
+          <div><b>15%</b><span>BBC Radio 1 / UK</span></div>
+          <div><b>25%</b><span>Global + FOLSOE Pick</span></div>
+        </div>
+        <div id="top20Editor" class="chartEditor"></div>
+        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="sortChart">Sortér efter points</button><button id="clearTop20">Ryd Top 20</button></div>
       </section>
 
       <section id="showsAdmin" class="panel">

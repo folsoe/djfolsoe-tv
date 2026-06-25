@@ -28,3 +28,53 @@
   .programRow,.showRow,.newsRow,.manualRequest{grid-template-columns:1fr}
   .topRow{grid-template-columns:36px 1fr 60px}
 }
+
+/* V804 Live Twitch API Foundation */
+.cardCenter{gap:8px}
+.cardCenter small{display:block;color:rgba(255,255,255,.55);font-weight:800;max-width:85%;line-height:1.35}
+.liveBadge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(255,40,79,.18);border:1px solid rgba(255,40,79,.35);color:#fff;font-weight:1000}
+.liveBadge:before{content:"";width:8px;height:8px;border-radius:50%;background:#ff284f;box-shadow:0 0 16px #ff284f}
+.apiStatusLine{margin-top:10px;padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+.apiGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.apiGrid .control{min-height:110px}
+.apiHelp{font-size:13px;color:rgba(255,255,255,.68);line-height:1.5}
+.apiHelp code{background:rgba(0,0,0,.34);padding:2px 6px;border-radius:7px;color:#ffd166}
+@media(max-width:900px){.apiGrid{grid-template-columns:1fr}}
+
+/* V805 FOLSOE TV Top 20 Chart Engine */
+.chartMethod{color:rgba(255,255,255,.68);line-height:1.5;margin-top:-8px;margin-bottom:18px}
+.topList{columns:1!important;display:grid;gap:10px}
+.chartRow{
+  display:grid!important;
+  grid-template-columns:54px 70px 1fr 80px 110px;
+  gap:12px;align-items:center;
+  padding:14px!important;border-radius:18px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.045))!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+}
+.chartRank{font-size:24px;font-weight:1000;color:#ffd166;text-align:center}
+.chartLast{font-size:11px;color:rgba(255,255,255,.62);font-weight:900;text-transform:uppercase}
+.chartSong b{display:block;font-size:16px;color:#fff}
+.chartSong span{display:block;color:rgba(255,255,255,.62);font-size:13px;margin-top:3px}
+.chartStatus{justify-self:center;font-size:11px;font-weight:1000;border-radius:999px;padding:7px 9px;background:rgba(255,255,255,.12)}
+.chartStatus.NEW{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111}
+.chartStatus.UP{color:#90ffb8}.chartStatus.DOWN{color:#ff8ea5}.chartStatus.SAME{color:#ddd}
+.chartPick{justify-self:end;font-size:11px;font-weight:1000;color:#111;background:#ffd166;border-radius:999px;padding:8px 10px}
+.chartPick.empty{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45)}
+.methodGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 18px}
+.methodGrid div{padding:12px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1)}
+.methodGrid b{display:block;color:#ffd166}
+@media(max-width:760px){
+  .chartRow{grid-template-columns:44px 1fr 58px;gap:9px}
+  .chartLast,.chartPick{display:none}
+  .methodGrid{grid-template-columns:repeat(2,1fr)}
+}
+.chartEditor{display:grid;gap:8px}
+.chartEditRow{
+  display:grid;grid-template-columns:44px 70px 1fr 1fr 92px 80px 70px;
+  gap:8px;align-items:end;padding:10px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08)
+}
+.chartEditRow label{font-size:9px;color:#ffd166;text-transform:uppercase;font-weight:1000;letter-spacing:.7px}
+.chartEditRow div{display:grid;gap:4px}
+.chartEditRow input,.chartEditRow select{width:100%;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.28);color:#fff;padding:0 8px}
+@media(max-width:980px){.chartEditRow{grid-template-columns:1fr 1fr}.chartEditRow .rankCell{grid-column:1/-1}}

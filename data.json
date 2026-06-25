@@ -11,7 +11,12 @@
     "followersCurrent": 870,
     "followersGoal": 1000,
     "subsToday": 0,
-    "bitsToday": 0
+    "bitsToday": 0,
+    "twitchLogin": "djfolsoe",
+    "streamTitle": "",
+    "category": "",
+    "startedAt": "",
+    "twitchApiFoundation": "V804"
   },
   "schedule": [
     {
@@ -112,5 +117,381 @@
       "title": "Program guide and live shows are now part of the public website."
     }
   ],
-  "requests": []
+  "requests": [],
+  "top20Chart": {
+    "title": "FOLSOE TV Top 20",
+    "subtitle": "FOLSOE AIRPLAY HOT 20",
+    "week": "This Week",
+    "method": {
+      "danishAirplay": 40,
+      "hitlistenDk": 20,
+      "bbcRadio1Uk": 15,
+      "spotifyGlobal": 10,
+      "appleGlobal": 5,
+      "billboardGlobal": 5,
+      "folsoePickViewers": 5
+    },
+    "items": [
+      {
+        "rank": 1,
+        "lastWeek": "NEW",
+        "artist": "Aqua",
+        "title": "Barbie Girl",
+        "status": "NEW",
+        "points": 2000,
+        "folsoePick": true,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 2,
+        "lastWeek": 3,
+        "artist": "Darude",
+        "title": "Sandstorm",
+        "status": "DOWN",
+        "points": 1915,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 3,
+        "lastWeek": 4,
+        "artist": "Scooter",
+        "title": "Nessaja",
+        "status": "UP",
+        "points": 1830,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 4,
+        "lastWeek": 5,
+        "artist": "Safri Duo",
+        "title": "Played-A-Live",
+        "status": "SAME",
+        "points": 1745,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 5,
+        "lastWeek": 6,
+        "artist": "Avicii",
+        "title": "Levels",
+        "status": "UP",
+        "points": 1660,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 6,
+        "lastWeek": 7,
+        "artist": "Robert Miles",
+        "title": "Children",
+        "status": "DOWN",
+        "points": 1575,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 7,
+        "lastWeek": "NEW",
+        "artist": "ATB",
+        "title": "9 PM",
+        "status": "NEW",
+        "points": 1490,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 8,
+        "lastWeek": 9,
+        "artist": "Alice Deejay",
+        "title": "Better Off Alone",
+        "status": "SAME",
+        "points": 1405,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 9,
+        "lastWeek": 10,
+        "artist": "Corona",
+        "title": "Rhythm Of The Night",
+        "status": "UP",
+        "points": 1320,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 10,
+        "lastWeek": 11,
+        "artist": "2 Unlimited",
+        "title": "No Limit",
+        "status": "DOWN",
+        "points": 1235,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 11,
+        "lastWeek": 10,
+        "artist": "Eiffel 65",
+        "title": "Blue",
+        "status": "SAME",
+        "points": 1150,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 12,
+        "lastWeek": 11,
+        "artist": "Gigi D'Agostino",
+        "title": "L'Amour Toujours",
+        "status": "SAME",
+        "points": 1065,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 13,
+        "lastWeek": 12,
+        "artist": "Sash!",
+        "title": "Ecuador",
+        "status": "SAME",
+        "points": 980,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 14,
+        "lastWeek": "NEW",
+        "artist": "Faithless",
+        "title": "Insomnia",
+        "status": "NEW",
+        "points": 895,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 15,
+        "lastWeek": 14,
+        "artist": "Daft Punk",
+        "title": "One More Time",
+        "status": "SAME",
+        "points": 810,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 16,
+        "lastWeek": 15,
+        "artist": "Calvin Harris",
+        "title": "Feel So Close",
+        "status": "SAME",
+        "points": 725,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 17,
+        "lastWeek": 16,
+        "artist": "Armin van Buuren",
+        "title": "Blah Blah Blah",
+        "status": "SAME",
+        "points": 640,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 18,
+        "lastWeek": 17,
+        "artist": "Above & Beyond",
+        "title": "Sun & Moon",
+        "status": "SAME",
+        "points": 555,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 19,
+        "lastWeek": 18,
+        "artist": "Medina",
+        "title": "Kun For Mig",
+        "status": "SAME",
+        "points": 470,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      },
+      {
+        "rank": 20,
+        "lastWeek": 19,
+        "artist": "Infernal",
+        "title": "From Paris To Berlin",
+        "status": "SAME",
+        "points": 385,
+        "folsoePick": false,
+        "sources": {
+          "danishAirplay": 40,
+          "hitlistenDk": 20,
+          "bbcRadio1Uk": 15,
+          "spotifyGlobal": 10,
+          "appleGlobal": 5,
+          "billboardGlobal": 5,
+          "folsoePickViewers": 5
+        }
+      }
+    ]
+  }
 }
