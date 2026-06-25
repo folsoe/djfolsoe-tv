@@ -18,8 +18,8 @@
   "programs": [
     {
       "id": "good-morning",
-      "day": "Monday",
-      "time": "09:00",
+      "day": "Saturday",
+      "time": "07:00",
       "duration": 120,
       "title": "Good Morning Twitch",
       "type": "Morning Show",
@@ -32,7 +32,7 @@
     {
       "id": "trance-tuesday",
       "day": "Tuesday",
-      "time": "20:00",
+      "time": "18:30",
       "duration": 180,
       "title": "Trance Tuesday",
       "type": "Trance Show",
@@ -44,8 +44,8 @@
     },
     {
       "id": "popup",
-      "day": "Wednesday",
-      "time": "20:00",
+      "day": "When i feel like it",
+      "time": "",
       "duration": 150,
       "title": "Folsoe Popup",
       "type": "Popup Show",
@@ -57,8 +57,8 @@
     },
     {
       "id": "fredagsbar",
-      "day": "Friday",
-      "time": "20:00",
+      "day": "Every 1 Friday in the month",
+      "time": "19",
       "duration": 210,
       "title": "Fredagsbar",
       "type": "Friday Bar",
@@ -70,8 +70,8 @@
     },
     {
       "id": "chart-show",
-      "day": "Saturday",
-      "time": "20:00",
+      "day": "Torsdag",
+      "time": "18:30",
       "duration": 180,
       "title": "DJ FOLSOE Chart Show",
       "type": "Chart Show",
@@ -84,12 +84,12 @@
     {
       "id": "retro-hits",
       "day": "Sunday",
-      "time": "19:00",
+      "time": "07:00",
       "duration": 180,
       "title": "Retro Hits",
       "type": "Retro Show",
       "description": "70s, 80s, 90s og old school favoritter, der stadig virker.",
-      "musicFocus": "retro, 80s, 90s, eurodance, classics",
+      "musicFocus": "retro,  classics",
       "colorA": "#ff7a00",
       "colorB": "#ff2bd6",
       "icon": "📼"
