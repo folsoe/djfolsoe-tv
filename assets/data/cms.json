@@ -1,242 +1,23 @@
 {
+  "version": "V700.1",
   "station": {
     "name": "DJ FOLSOE TV",
     "domain": "folsoetv.dk",
     "twitchUrl": "https://twitch.tv/djfolsoe",
-    "description": "DJ FOLSOE TV · Music Television From Denmark",
     "live": false,
     "viewers": 0,
     "followers": 870,
     "activeProgram": "chart-show",
     "i18n": {
       "da": {
-        "tagline": "Music Television From Denmark",
         "description": "DJ FOLSOE TV er en dansk music-TV og radio 2026 platform med live DJ-shows, requests, hitlister, fællesskab og broadcast grafik fra Danmark."
       },
       "en": {
-        "tagline": "Music Television From Denmark",
         "description": "DJ FOLSOE TV is a Danish music-TV and Radio 2026 platform with live DJ shows, requests, charts, community energy and broadcast graphics from Denmark."
       },
       "de": {
-        "tagline": "Music Television aus Dänemark",
         "description": "DJ FOLSOE TV ist eine dänische Music-TV- und Radio-2026-Plattform mit Live-DJ-Shows, Musikwünschen, Charts, Community und Broadcast-Grafik aus Dänemark."
       }
-    }
-  },
-  "programs": [
-    {
-      "id": "good-morning",
-      "day": "Monday",
-      "time": "09:00",
-      "duration": 120,
-      "title": "Good Morning Twitch",
-      "type": "Morning Show",
-      "description": "Nyheder, kaffe, vejr, musik og den bedste start på dagen.",
-      "musicFocus": "pop, feelgood, Danish music, morning classics",
-      "colorA": "#ffb000",
-      "colorB": "#ffffff",
-      "icon": "☀️",
-      "i18n": {
-        "da": {
-          "title": "Good Morning Twitch",
-          "type": "Morgenshow",
-          "description": "Nyheder, kaffe, vejr, musik og den bedste start på dagen.",
-          "musicFocus": "pop, feelgood, dansk musik og morgenklassikere"
-        },
-        "en": {
-          "title": "Good Morning Twitch",
-          "type": "Morning Show",
-          "description": "News, coffee, weather, music and the best start to the day.",
-          "musicFocus": "pop, feelgood, Danish music and morning classics"
-        },
-        "de": {
-          "title": "Good Morning Twitch",
-          "type": "Morgensendung",
-          "description": "Nachrichten, Kaffee, Wetter, Musik und der beste Start in den Tag.",
-          "musicFocus": "Pop, Feelgood, dänische Musik und Morgenklassiker"
-        }
-      }
-    },
-    {
-      "id": "trance-tuesday",
-      "day": "Tuesday",
-      "time": "20:00",
-      "duration": 180,
-      "title": "Trance Tuesday",
-      "type": "Trance Show",
-      "description": "Uplifting, progressive og store melodiske trance moments.",
-      "musicFocus": "trance, uplifting, progressive, Anjuna, Armada",
-      "colorA": "#7b2fff",
-      "colorB": "#00e5ff",
-      "icon": "💜",
-      "i18n": {
-        "da": {
-          "title": "Trance Tuesday",
-          "type": "Trance Show",
-          "description": "Uplifting, progressive og store melodiske trance moments.",
-          "musicFocus": "trance, uplifting, progressive, Anjuna og Armada"
-        },
-        "en": {
-          "title": "Trance Tuesday",
-          "type": "Trance Show",
-          "description": "Uplifting, progressive and big melodic trance moments.",
-          "musicFocus": "trance, uplifting, progressive, Anjuna and Armada"
-        },
-        "de": {
-          "title": "Trance Tuesday",
-          "type": "Trance Show",
-          "description": "Uplifting, Progressive und große melodische Trance-Momente.",
-          "musicFocus": "Trance, Uplifting, Progressive, Anjuna und Armada"
-        }
-      }
-    },
-    {
-      "id": "popup",
-      "day": "Wednesday",
-      "time": "20:00",
-      "duration": 150,
-      "title": "Folsoe Popup",
-      "type": "Popup Show",
-      "description": "Et overraskelsesstream hvor chatten former retningen.",
-      "musicFocus": "viewer requests, pop, dance, classics, surprises",
-      "colorA": "#ff00ea",
-      "colorB": "#00d4ff",
-      "icon": "⚡",
-      "i18n": {
-        "da": {
-          "title": "Folsoe Popup",
-          "type": "Popup Show",
-          "description": "Et overraskelsesstream hvor chatten former retningen.",
-          "musicFocus": "seerønsker, pop, dance, klassikere og overraskelser"
-        },
-        "en": {
-          "title": "Folsoe Popup",
-          "type": "Popup Show",
-          "description": "A surprise stream where chat shapes the direction.",
-          "musicFocus": "viewer requests, pop, dance, classics and surprises"
-        },
-        "de": {
-          "title": "Folsoe Popup",
-          "type": "Popup Show",
-          "description": "Ein Überraschungsstream, bei dem der Chat die Richtung bestimmt.",
-          "musicFocus": "Musikwünsche, Pop, Dance, Klassiker und Überraschungen"
-        }
-      }
-    },
-    {
-      "id": "fredagsbar",
-      "day": "Friday",
-      "time": "20:00",
-      "duration": 210,
-      "title": "Fredagsbar",
-      "type": "Friday Bar",
-      "description": "Weekendstart, singalong, bangers og chat-energi.",
-      "musicFocus": "party, pop, dance, Danish singalong, requests",
-      "colorA": "#ffb000",
-      "colorB": "#ff2f78",
-      "icon": "🍻",
-      "i18n": {
-        "da": {
-          "title": "Fredagsbar",
-          "type": "Fredagsbar",
-          "description": "Weekendstart, singalong, bangers og chat-energi.",
-          "musicFocus": "party, pop, dance, dansk singalong og requests"
-        },
-        "en": {
-          "title": "Friday Bar",
-          "type": "Friday Bar",
-          "description": "Weekend start, singalong, bangers and chat energy.",
-          "musicFocus": "party, pop, dance, Danish singalong and requests"
-        },
-        "de": {
-          "title": "Freitagsbar",
-          "type": "Freitagsbar",
-          "description": "Wochenendstart, Mitsingen, Banger und Chat-Energie.",
-          "musicFocus": "Party, Pop, Dance, dänische Singalongs und Wünsche"
-        }
-      }
-    },
-    {
-      "id": "chart-show",
-      "day": "Saturday",
-      "time": "20:00",
-      "duration": 180,
-      "title": "DJ FOLSOE Chart Show",
-      "type": "Chart Show",
-      "description": "Ugens DJ FOLSOE hitliste med 20 EDM/pop/dance tracks.",
-      "musicFocus": "EDM, pop, dance, chart, new music",
-      "colorA": "#ff284f",
-      "colorB": "#00d4ff",
-      "icon": "🔟",
-      "i18n": {
-        "da": {
-          "title": "DJ FOLSOE Chart Show",
-          "type": "Chart Show",
-          "description": "Ugens DJ FOLSOE hitliste med 20 EDM/pop/dance tracks.",
-          "musicFocus": "EDM, pop, dance, chart og ny musik"
-        },
-        "en": {
-          "title": "DJ FOLSOE Chart Show",
-          "type": "Chart Show",
-          "description": "The weekly DJ FOLSOE Top 20 with EDM/pop/dance tracks.",
-          "musicFocus": "EDM, pop, dance, charts and new music"
-        },
-        "de": {
-          "title": "DJ FOLSOE Chart Show",
-          "type": "Chart Show",
-          "description": "Die wöchentliche DJ FOLSOE Top 20 mit EDM/Pop/Dance Tracks.",
-          "musicFocus": "EDM, Pop, Dance, Charts und neue Musik"
-        }
-      }
-    },
-    {
-      "id": "retro-hits",
-      "day": "Sunday",
-      "time": "19:00",
-      "duration": 180,
-      "title": "Retro Hits",
-      "type": "Retro Show",
-      "description": "70s, 80s, 90s og old school favoritter, der stadig virker.",
-      "musicFocus": "retro, 80s, 90s, eurodance, classics",
-      "colorA": "#ff7a00",
-      "colorB": "#ff2bd6",
-      "icon": "📼",
-      "i18n": {
-        "da": {
-          "title": "Retro Hits",
-          "type": "Retro Show",
-          "description": "70s, 80s, 90s og old school favoritter, der stadig virker.",
-          "musicFocus": "retro, 80s, 90s, eurodance og klassikere"
-        },
-        "en": {
-          "title": "Retro Hits",
-          "type": "Retro Show",
-          "description": "70s, 80s, 90s and old school favorites that still work.",
-          "musicFocus": "retro, 80s, 90s, eurodance and classics"
-        },
-        "de": {
-          "title": "Retro Hits",
-          "type": "Retro Show",
-          "description": "70er, 80er, 90er und Old-School-Favoriten, die immer noch funktionieren.",
-          "musicFocus": "Retro, 80er, 90er, Eurodance und Klassiker"
-        }
-      }
-    }
-  ],
-  "chart": [],
-  "news": {},
-  "version": "V700",
-  "languages": {
-    "default": "da",
-    "available": [
-      "da",
-      "en",
-      "de"
-    ],
-    "labels": {
-      "da": "Dansk",
-      "en": "English",
-      "de": "Deutsch"
     }
   },
   "ui": {
@@ -337,89 +118,270 @@
       "noRequests": "Noch keine Wünsche."
     }
   },
+  "programs": [
+    {
+      "id": "good-morning",
+      "day": "Monday",
+      "time": "09:00",
+      "duration": 120,
+      "colorA": "#ffb000",
+      "colorB": "#ffffff",
+      "icon": "☀️",
+      "i18n": {
+        "da": {
+          "title": "Good Morning Twitch",
+          "type": "Morgenshow",
+          "description": "Nyheder, kaffe, vejr, musik og den bedste start på dagen.",
+          "musicFocus": "pop, feelgood, dansk musik og morgenklassikere"
+        },
+        "en": {
+          "title": "Good Morning Twitch",
+          "type": "Morning Show",
+          "description": "News, coffee, weather, music and the best start to the day.",
+          "musicFocus": "pop, feelgood, Danish music and morning classics"
+        },
+        "de": {
+          "title": "Good Morning Twitch",
+          "type": "Morgensendung",
+          "description": "Nachrichten, Kaffee, Wetter, Musik und der beste Start in den Tag.",
+          "musicFocus": "Pop, Feelgood, dänische Musik und Morgenklassiker"
+        }
+      }
+    },
+    {
+      "id": "trance-tuesday",
+      "day": "Tuesday",
+      "time": "20:00",
+      "duration": 180,
+      "colorA": "#7b2fff",
+      "colorB": "#00e5ff",
+      "icon": "💜",
+      "i18n": {
+        "da": {
+          "title": "Trance Tuesday",
+          "type": "Trance Show",
+          "description": "Uplifting, progressive og store melodiske trance moments.",
+          "musicFocus": "trance, uplifting, progressive, Anjuna og Armada"
+        },
+        "en": {
+          "title": "Trance Tuesday",
+          "type": "Trance Show",
+          "description": "Uplifting, progressive and big melodic trance moments.",
+          "musicFocus": "trance, uplifting, progressive, Anjuna and Armada"
+        },
+        "de": {
+          "title": "Trance Tuesday",
+          "type": "Trance Show",
+          "description": "Uplifting, Progressive und große melodische Trance-Momente.",
+          "musicFocus": "Trance, Uplifting, Progressive, Anjuna und Armada"
+        }
+      }
+    },
+    {
+      "id": "popup",
+      "day": "Wednesday",
+      "time": "20:00",
+      "duration": 150,
+      "colorA": "#ff00ea",
+      "colorB": "#00d4ff",
+      "icon": "⚡",
+      "i18n": {
+        "da": {
+          "title": "Folsoe Popup",
+          "type": "Popup Show",
+          "description": "Et overraskelsesstream hvor chatten former retningen.",
+          "musicFocus": "seerønsker, pop, dance, klassikere og overraskelser"
+        },
+        "en": {
+          "title": "Folsoe Popup",
+          "type": "Popup Show",
+          "description": "A surprise stream where chat shapes the direction.",
+          "musicFocus": "viewer requests, pop, dance, classics and surprises"
+        },
+        "de": {
+          "title": "Folsoe Popup",
+          "type": "Popup Show",
+          "description": "Ein Überraschungsstream, bei dem der Chat die Richtung bestimmt.",
+          "musicFocus": "Musikwünsche, Pop, Dance, Klassiker und Überraschungen"
+        }
+      }
+    },
+    {
+      "id": "fredagsbar",
+      "day": "Friday",
+      "time": "20:00",
+      "duration": 210,
+      "colorA": "#ffb000",
+      "colorB": "#ff2f78",
+      "icon": "🍻",
+      "i18n": {
+        "da": {
+          "title": "Fredagsbar",
+          "type": "Fredagsbar",
+          "description": "Weekendstart, singalong, bangers og chat-energi.",
+          "musicFocus": "party, pop, dance, dansk singalong og requests"
+        },
+        "en": {
+          "title": "Friday Bar",
+          "type": "Friday Bar",
+          "description": "Weekend start, singalong, bangers and chat energy.",
+          "musicFocus": "party, pop, dance, Danish singalong and requests"
+        },
+        "de": {
+          "title": "Freitagsbar",
+          "type": "Freitagsbar",
+          "description": "Wochenendstart, Mitsingen, Banger und Chat-Energie.",
+          "musicFocus": "Party, Pop, Dance, dänische Singalongs und Wünsche"
+        }
+      }
+    },
+    {
+      "id": "chart-show",
+      "day": "Saturday",
+      "time": "20:00",
+      "duration": 180,
+      "colorA": "#ff284f",
+      "colorB": "#00d4ff",
+      "icon": "🔟",
+      "i18n": {
+        "da": {
+          "title": "DJ FOLSOE Chart Show",
+          "type": "Chart Show",
+          "description": "Ugens DJ FOLSOE hitliste med 20 EDM/pop/dance tracks.",
+          "musicFocus": "EDM, pop, dance, chart og ny musik"
+        },
+        "en": {
+          "title": "DJ FOLSOE Chart Show",
+          "type": "Chart Show",
+          "description": "The weekly DJ FOLSOE Top 20 with EDM/pop/dance tracks.",
+          "musicFocus": "EDM, pop, dance, charts and new music"
+        },
+        "de": {
+          "title": "DJ FOLSOE Chart Show",
+          "type": "Chart Show",
+          "description": "Die wöchentliche DJ FOLSOE Top 20 mit EDM/Pop/Dance Tracks.",
+          "musicFocus": "EDM, Pop, Dance, Charts und neue Musik"
+        }
+      }
+    },
+    {
+      "id": "retro-hits",
+      "day": "Sunday",
+      "time": "19:00",
+      "duration": 180,
+      "colorA": "#ff7a00",
+      "colorB": "#ff2bd6",
+      "icon": "📼",
+      "i18n": {
+        "da": {
+          "title": "Retro Hits",
+          "type": "Retro Show",
+          "description": "70s, 80s, 90s og old school favoritter, der stadig virker.",
+          "musicFocus": "retro, 80s, 90s, eurodance og klassikere"
+        },
+        "en": {
+          "title": "Retro Hits",
+          "type": "Retro Show",
+          "description": "70s, 80s, 90s and old school favorites that still work.",
+          "musicFocus": "retro, 80s, 90s, eurodance and classics"
+        },
+        "de": {
+          "title": "Retro Hits",
+          "type": "Retro Show",
+          "description": "70er, 80er, 90er und Old-School-Favoriten, die immer noch funktionieren.",
+          "musicFocus": "Retro, 80er, 90er, Eurodance und Klassiker"
+        }
+      }
+    }
+  ],
+  "chart": [
+    {
+      "pos": 1,
+      "artist": "Calvin Harris & Ellie Goulding",
+      "title": "Miracle",
+      "genre": "EDM / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 2,
+      "artist": "David Guetta & OneRepublic",
+      "title": "I Don't Wanna Wait",
+      "genre": "EDM / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 3,
+      "artist": "Armin van Buuren",
+      "title": "Lose This Feeling",
+      "genre": "Trance / Dance",
+      "status": "B-list"
+    }
+  ],
   "newsI18n": {
-    "chart-show": {
+    "good-morning": {
       "da": [
-        "CHART SHOW · Ugens 20 tracks er klar til lørdag",
-        "EDM/POP RADAR · Nye dance-pop tracks scannes til hitlisten"
+        "GOOD MORNING TWITCH · Kaffe, nyheder og live musik fra Danmark"
       ],
       "en": [
-        "CHART SHOW · This week’s 20 tracks are ready for Saturday",
-        "EDM/POP RADAR · New dance-pop tracks are being scanned for the chart"
+        "GOOD MORNING TWITCH · Coffee, headlines and live music from Denmark"
       ],
       "de": [
-        "CHART SHOW · Die 20 Tracks der Woche sind bereit für Samstag",
-        "EDM/POP RADAR · Neue Dance-Pop-Tracks werden für die Hitliste gescannt"
+        "GOOD MORNING TWITCH · Kaffee, News und Live-Musik aus Dänemark"
+      ]
+    },
+    "chart-show": {
+      "da": [
+        "CHART SHOW · Ugens 20 tracks er klar til lørdag"
+      ],
+      "en": [
+        "CHART SHOW · This week’s 20 tracks are ready for Saturday"
+      ],
+      "de": [
+        "CHART SHOW · Die 20 Tracks der Woche sind bereit für Samstag"
       ]
     },
     "trance-tuesday": {
       "da": [
-        "TRANCE TUESDAY · Uplifting og progressive radar er aktiv",
-        "MELODY LOCK · Lange builds og store melodiske drops"
+        "TRANCE TUESDAY · Uplifting og progressive radar er aktiv"
       ],
       "en": [
-        "TRANCE TUESDAY · Uplifting and progressive radar is active",
-        "MELODY LOCK · Long builds and big melodic drops"
+        "TRANCE TUESDAY · Uplifting and progressive radar is active"
       ],
       "de": [
-        "TRANCE TUESDAY · Uplifting- und Progressive-Radar ist aktiv",
-        "MELODY LOCK · Lange Builds und große melodische Drops"
-      ]
-    },
-    "fredagsbar": {
-      "da": [
-        "FREDAGSBAR · Weekend starter når bassen siger til",
-        "PARTY DESK · Requests, singalong og club-energi"
-      ],
-      "en": [
-        "FRIDAY BAR · The weekend starts when the bass says so",
-        "PARTY DESK · Requests, singalong and club energy"
-      ],
-      "de": [
-        "FREITAGSBAR · Das Wochenende startet, wenn der Bass es sagt",
-        "PARTY DESK · Wünsche, Mitsingen und Club-Energie"
-      ]
-    },
-    "good-morning": {
-      "da": [
-        "GOOD MORNING TWITCH · Kaffe, nyheder og live musik fra Danmark",
-        "DENMARK DESK · Kultur, sport og musik scannes"
-      ],
-      "en": [
-        "GOOD MORNING TWITCH · Coffee, headlines and live music from Denmark",
-        "DENMARK DESK · Culture, sport and music stories are being scanned"
-      ],
-      "de": [
-        "GOOD MORNING TWITCH · Kaffee, News und Live-Musik aus Dänemark",
-        "DENMARK DESK · Kultur, Sport und Musik werden gescannt"
-      ]
-    },
-    "retro-hits": {
-      "da": [
-        "RETRO DESK · 80s, 90s og klassikere der nægter at gå på pension",
-        "OLD SCHOOL · Omkvædet virker stadig"
-      ],
-      "en": [
-        "RETRO DESK · 80s, 90s and classics that refuse to retire",
-        "OLD SCHOOL · The chorus still works"
-      ],
-      "de": [
-        "RETRO DESK · 80er, 90er und Klassiker, die nicht in Rente gehen",
-        "OLD SCHOOL · Der Refrain funktioniert immer noch"
+        "TRANCE TUESDAY · Uplifting- und Progressive-Radar ist aktiv"
       ]
     },
     "popup": {
       "da": [
-        "POPUP MUSIC NEWS · Alt kan ske i næste headline",
-        "YOU CHOOSE · Jeg spiller retningen live"
+        "POPUP MUSIC NEWS · Alt kan ske i næste headline"
       ],
       "en": [
-        "POPUP MUSIC NEWS · Anything can happen in the next headline",
-        "YOU CHOOSE · I play the direction live"
+        "POPUP MUSIC NEWS · Anything can happen in the next headline"
       ],
       "de": [
-        "POPUP MUSIC NEWS · In der nächsten Schlagzeile kann alles passieren",
-        "YOU CHOOSE · Ich spiele die Richtung live"
+        "POPUP MUSIC NEWS · In der nächsten Schlagzeile kann alles passieren"
+      ]
+    },
+    "fredagsbar": {
+      "da": [
+        "FREDAGSBAR · Weekend starter når bassen siger til"
+      ],
+      "en": [
+        "FRIDAY BAR · The weekend starts when the bass says so"
+      ],
+      "de": [
+        "FREITAGSBAR · Das Wochenende startet, wenn der Bass es sagt"
+      ]
+    },
+    "retro-hits": {
+      "da": [
+        "RETRO DESK · 80s, 90s og klassikere der nægter at gå på pension"
+      ],
+      "en": [
+        "RETRO DESK · 80s, 90s and classics that refuse to retire"
+      ],
+      "de": [
+        "RETRO DESK · 80er, 90er und Klassiker, die nicht in Rente gehen"
       ]
     }
   }

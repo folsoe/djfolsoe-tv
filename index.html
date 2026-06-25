@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="da">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DJ FOLSOE TV · Broadcast Cloud V700</title>
-<link rel="stylesheet" href="assets/css/site.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE TV · V700.1</title>
+<link rel="stylesheet" href="assets/css/site.css?v=7001">
 </head>
 <body>
 <div class="bg"></div><div class="gridfx"></div>
 <header class="top">
-  <a class="brand" href="#"><span>DJ</span><b>FOLSOE TV</b><em>V700 CLOUD</em></a>
+  <a class="brand" href="#"><span>DJ</span><b>FOLSOE TV</b><em>V700.1</em></a>
   <nav>
     <a href="#live" data-i18n="navLive">Live</a>
     <a href="#next" data-i18n="navNext">Næste show</a>
@@ -18,25 +19,30 @@
     <a href="#news" data-i18n="navNews">Nyheder</a>
     <a href="admin/" data-i18n="navAdmin">Admin</a>
   </nav>
-  <div class="languageSwitch"><button data-lang="da">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></div>
+  <div class="languageSwitch">
+    <button type="button" data-lang="da">DA</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="de">DE</button>
+  </div>
 </header>
 <main>
 <section id="live" class="hero">
   <div class="copy">
     <div class="kicker" data-i18n="heroKicker">BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK</div>
     <h1 id="heroTitle">DJ FOLSOE TV</h1>
-    <p id="heroDesc">Loading station...</p>
+    <p id="heroDesc">Loading...</p>
     <div class="actions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" data-i18n="watchLive">Se live</a><a class="secondary" href="#request" data-i18n="requestSong">Ønsk en sang</a></div>
-    <div class="liveCards"><article><span data-i18n="status">Status</span><b id="liveStatus">Checking...</b></article><article><span data-i18n="viewers">Seere</span><b id="viewers">0</b></article><article><span data-i18n="nowNext">Nu / næste</span><b id="nowNext">Loading</b></article></div>
+    <div class="liveCards"><article><span data-i18n="status">Status</span><b id="liveStatus">-</b></article><article><span data-i18n="viewers">Seere</span><b id="viewers">0</b></article><article><span data-i18n="nowNext">Nu / næste</span><b id="nowNext">-</b></article></div>
   </div>
-  <aside class="broadcast"><div class="cardTop"><i></i><span>DJ FOLSOE TV · LIVE MUSIC</span></div><div class="cardMid"><div id="programIcon">📺</div><h2 id="programTitle">Loading show...</h2><p id="programDesc">Program data loading...</p></div><div class="ticker"><b id="tickerBadge">NEWS</b><span id="tickerText">Loading...</span></div></aside>
+  <aside class="broadcast"><div class="cardTop"><i></i><span>DJ FOLSOE TV · LIVE MUSIC</span></div><div class="cardMid"><div id="programIcon">📺</div><h2 id="programTitle">Loading...</h2><p id="programDesc">Loading...</p></div><div class="ticker"><b id="tickerBadge">NEWS</b><span id="tickerText">Loading...</span></div></aside>
 </section>
-<section id="next" class="panel"><div class="head"><span data-i18n="nextShow">NÆSTE SHOW</span><h2 id="nextTitle">Loading next show...</h2></div><div class="showMeta"><article><span data-i18n="dateTime">Dato / tid</span><b id="nextTime">-</b></article><article><span data-i18n="programType">Programtype</span><b id="nextType">-</b></article><article><span data-i18n="musicFocus">Musikfokus</span><b id="nextFocus">-</b></article></div><p id="nextDescription"></p></section>
+<section id="next" class="panel"><div class="head"><span data-i18n="nextShow">NÆSTE SHOW</span><h2 id="nextTitle">Loading...</h2></div><div class="showMeta"><article><span data-i18n="dateTime">Dato / tid</span><b id="nextTime">-</b></article><article><span data-i18n="programType">Programtype</span><b id="nextType">-</b></article><article><span data-i18n="musicFocus">Musikfokus</span><b id="nextFocus">-</b></article></div><p id="nextDescription"></p></section>
 <section id="guide" class="panel"><div class="head"><span>PROGRAM GUIDE</span><h2 data-i18n="fixedPrograms">Faste programmer</h2></div><div id="programGrid" class="programGrid"></div></section>
-<section id="request" class="panel split"><div><div class="head"><span>REQUEST CENTER</span><h2 data-i18n="requestCenter">Ønsk en sang til et show</h2></div><p class="muted" data-i18n="requestHelp">Skriv dit ønske, vælg hvilket program det passer til, og hvornår du helst vil høre det.</p><form id="requestForm" class="requestForm"><input id="reqName"><input id="reqSong"><select id="reqShow"></select><input id="reqWhen" type="datetime-local"><button data-i18n="saveRequest">Gem ønske</button></form></div><aside class="requestList"><h3 data-i18n="latestRequests">Seneste ønsker</h3><div id="requestOutput"></div></aside></section>
-<section id="chart" class="panel"><div class="head"><span>DJ FOLSOE HITLISTE</span><h2 data-i18n="chartTitle">Ugens Top 20 · EDM / Pop / Dance</h2></div><div id="chartList" class="chartList"></div></section>
-<section id="news" class="panel"><div class="head"><span>MUSIC TV NEWS</span><h2 data-i18n="newsTitle">Programbaserede nyheder</h2></div><div id="newsGrid" class="newsGrid"></div></section>
+<section id="request" class="panel split"><div><div class="head"><span>REQUEST CENTER</span><h2 data-i18n="requestCenter">Ønsk en sang til et show</h2></div><p class="muted" data-i18n="requestHelp"></p><form id="requestForm" class="requestForm"><input id="reqName"><input id="reqSong"><select id="reqShow"></select><input id="reqWhen" type="datetime-local"><button type="submit" data-i18n="saveRequest">Gem ønske</button></form></div><aside class="requestList"><h3 data-i18n="latestRequests">Seneste ønsker</h3><div id="requestOutput"></div></aside></section>
+<section id="chart" class="panel"><div class="head"><span>DJ FOLSOE HITLISTE</span><h2 data-i18n="chartTitle"></h2></div><div id="chartList" class="chartList"></div></section>
+<section id="news" class="panel"><div class="head"><span>MUSIC TV NEWS</span><h2 data-i18n="newsTitle"></h2></div><div id="newsGrid" class="newsGrid"></div></section>
 </main>
-<footer><b>DJ FOLSOE Broadcast Cloud V700</b><span>folsoetv.dk · Music Television From Denmark</span></footer>
-<script src="assets/js/site.js"></script>
-</body></html>
+<footer><b>DJ FOLSOE Broadcast Cloud V700.1</b><span>folsoetv.dk · Music Television From Denmark</span></footer>
+<script src="assets/js/site.js?v=7001"></script>
+</body>
+</html>
