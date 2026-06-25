@@ -1,5 +1,5 @@
 {
-  "version": "V710",
+  "version": "V711",
   "station": {
     "name": "DJ FOLSOE TV",
     "domain": "folsoetv.dk",
@@ -510,37 +510,37 @@
       "website": {
         "label": "Website",
         "status": "online",
-        "detail": "folsoetv.dk is loaded"
+        "detail": "Public website is online"
       },
       "github": {
         "label": "GitHub Save",
         "status": "ready",
-        "detail": "CMS can save to assets/data/cms.json"
+        "detail": "CMS save engine ready"
       },
       "worker": {
         "label": "Cloudflare Worker",
         "status": "ready",
-        "detail": "GitHub Save Engine connected"
+        "detail": "GitHub Save Worker connected"
       },
       "twitch": {
         "label": "Twitch Live",
         "status": "placeholder",
-        "detail": "Ready for Twitch API layer"
+        "detail": "Twitch API comes in V720"
       },
       "obs": {
         "label": "OBS",
         "status": "placeholder",
-        "detail": "OBS WebSocket integration pending"
+        "detail": "OBS WebSocket comes later"
       },
       "streamelements": {
         "label": "StreamElements",
         "status": "placeholder",
-        "detail": "Widget API integration pending"
+        "detail": "Widget integration pending"
       },
       "rss": {
         "label": "RSS Newsroom",
         "status": "placeholder",
-        "detail": "RSS worker integration pending"
+        "detail": "RSS worker comes later"
       }
     },
     "broadcastMetrics": {
@@ -548,15 +548,7 @@
       "followersGoal": 1000,
       "subsToday": 0,
       "bitsToday": 0,
-      "raidsThisWeek": 0,
-      "requestsOpen": 0,
-      "chatActivity": "pending"
-    },
-    "overlay": {
-      "activeFooter": "program-news",
-      "activeWidget": "broadcast-bar",
-      "lastUpdate": "",
-      "status": "ready"
+      "raidsThisWeek": 0
     }
   }
 }
