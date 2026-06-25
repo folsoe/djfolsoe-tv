@@ -212,12 +212,12 @@
         }
       },
       "title": "Folsoe Popup",
-      "description": "Et overraskelsesstream, hvor chatten bestemmer formen og retningen.",
+      "description": "Når jeg har mulighed for det.\nEt overraskelsesstream, hvor chatten bestemmer formen og retningen.",
       "musicFocus": "seerønsker, pop, dance, klassikere, og overraskelser "
     },
     {
       "id": "fredagsbar",
-      "day": "Hver første 1. fredag i hver måned",
+      "day": "",
       "time": "",
       "duration": 210,
       "colorA": "#ffb000",
@@ -244,7 +244,7 @@
         }
       },
       "title": "Fredagsbar",
-      "description": "Weekendstart, Singalong, Bangers and chat energy",
+      "description": "Hver første 1. fredag i hver måned \nWeekendstart, Singalong, Bangers and chat energy",
       "musicFocus": "Party, pop, dance, dansk, and request"
     },
     {
