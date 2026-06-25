@@ -1,1 +1,69 @@
-<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DJ FOLSOE Broadcast CMS</title><link rel="stylesheet" href="../assets/css/site.css"><link rel="stylesheet" href="assets/css/admin.css"></head><body><div class="bg"></div><header class="top"><a class="brand" href="../"><span>DJ</span><b>Broadcast CMS</b><em>V600</em></a><nav><a href="../">Website</a><a href="#dashboard">Dashboard</a><a href="#programs">Programs</a><a href="#chart">Chart</a><a href="#requests">Requests</a><a href="#json">JSON</a></nav></header><main><section id="dashboard" class="panel"><div class="head"><span>ADMIN DASHBOARD</span><h2>Kontrolcenter</h2></div><div class="adminStats"><article><span>Status</span><b id="adminLive">OFFLINE</b></article><article><span>Viewers</span><b id="adminViewers">0</b></article><article><span>Followers</span><b id="adminFollowers">0</b></article><article><span>Active Program</span><b id="adminProgram">-</b></article></div></section><section id="programs" class="panel"><div class="head"><span>PROGRAM MANAGER</span><h2>Rediger programmer</h2></div><div id="programEditor" class="editorGrid"></div></section><section id="chart" class="panel"><div class="head"><span>CHART MANAGER</span><h2>Ugens Top 20</h2></div><div id="chartEditor"></div></section><section id="requests" class="panel"><div class="head"><span>REQUEST MANAGER</span><h2>Indkomne ønsker</h2></div><div id="adminRequests"></div><button id="clearRequests" class="adminBtn">Ryd lokale requests</button></section><section id="json" class="panel"><div class="head"><span>DATA EXPORT</span><h2>Gem ændringer</h2></div><p class="muted">GitHub Pages kan ikke skrive direkte til serveren. Tryk “Byg JSON”, kopier output og erstat <b>assets/data/cms.json</b> i GitHub.</p><button id="buildJson" class="adminBtn">Byg JSON</button><button id="copyJson" class="adminBtn">Kopier JSON</button><textarea id="jsonOutput"></textarea></section></main><script src="assets/js/admin.js"></script></body></html>
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE Broadcast CMS V601</title>
+<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<div class="bg"></div>
+<header class="top">
+  <a class="brand" href="../"><span>DJ</span><b>Broadcast CMS</b><em>V601 SAVE</em></a>
+  <nav><a href="../">Website</a><a href="#dashboard">Dashboard</a><a href="#programs">Programs</a><a href="#chart">Chart</a><a href="#requests">Requests</a><a href="#save">Save Engine</a></nav>
+</header>
+<main>
+<section id="dashboard" class="panel">
+  <div class="head"><span>ADMIN DASHBOARD</span><h2>Kontrolcenter</h2></div>
+  <div class="adminStats">
+    <article><span>Status</span><b id="adminLive">OFFLINE</b></article>
+    <article><span>Viewers</span><b id="adminViewers">0</b></article>
+    <article><span>Followers</span><b id="adminFollowers">0</b></article>
+    <article><span>Active Program</span><b id="adminProgram">-</b></article>
+  </div>
+</section>
+
+<section id="save" class="panel savePanel">
+  <div class="head"><span>GITHUB SAVE ENGINE</span><h2>Gem direkte til GitHub</h2></div>
+  <p class="muted">Indsæt din Cloudflare Worker URL og din admin-adgangskode. Token ligger sikkert i Worker secrets, ikke på hjemmesiden.</p>
+  <div class="saveGrid">
+    <label>Worker URL<input id="workerUrl" placeholder="https://djf-cms-save.ditnavn.workers.dev"></label>
+    <label>Admin password<input id="adminPassword" type="password" placeholder="CMS password"></label>
+    <label>Repository path<input id="repoPath" value="assets/data/cms.json"></label>
+    <label>Branch<input id="branch" value="main"></label>
+  </div>
+  <div class="saveActions">
+    <button id="saveSettings" class="adminBtn">Gem indstillinger lokalt</button>
+    <button id="loadFromGithub" class="adminBtn alt">Hent fra GitHub</button>
+    <button id="saveToGithub" class="adminBtn primarySave">Gem direkte til GitHub</button>
+  </div>
+  <div id="saveStatus" class="statusBox">Klar.</div>
+</section>
+
+<section id="programs" class="panel">
+  <div class="head"><span>PROGRAM MANAGER</span><h2>Rediger programmer</h2></div>
+  <div id="programEditor" class="editorGrid"></div>
+</section>
+
+<section id="chart" class="panel">
+  <div class="head"><span>CHART MANAGER</span><h2>Ugens Top 20</h2></div>
+  <div id="chartEditor"></div>
+</section>
+
+<section id="requests" class="panel">
+  <div class="head"><span>REQUEST MANAGER</span><h2>Indkomne ønsker</h2></div>
+  <div id="adminRequests"></div>
+  <button id="clearRequests" class="adminBtn">Ryd lokale requests</button>
+</section>
+
+<section id="json" class="panel">
+  <div class="head"><span>DATA EXPORT</span><h2>JSON backup</h2></div>
+  <p class="muted">Denne tekstboks viser den JSON, der sendes til GitHub. Den kan stadig kopieres manuelt som backup.</p>
+  <button id="buildJson" class="adminBtn">Byg JSON</button>
+  <button id="copyJson" class="adminBtn">Kopier JSON</button>
+  <textarea id="jsonOutput"></textarea>
+</section>
+</main>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

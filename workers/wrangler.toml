@@ -1,0 +1,12 @@
+name = "dj-folsoe-cms-save"
+main = "github-save-worker.js"
+compatibility_date = "2026-06-25"
+
+[vars]
+GITHUB_OWNER = "folsoe"
+GITHUB_REPO = "djfolsoe-tv"
+GITHUB_BRANCH = "main"
+
+# Add secrets with:
+# wrangler secret put GITHUB_TOKEN
+# wrangler secret put CMS_PASSWORD
