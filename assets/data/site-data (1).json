@@ -1,0 +1,311 @@
+{
+  "station": {
+    "name": "DJ FOLSOE TV",
+    "domain": "folsoetv.dk",
+    "twitch": "https://twitch.tv/djfolsoe",
+    "description_da": "DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.",
+    "description_en": "DJ FOLSOE TV is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community – presented as a modern Music TV channel from Denmark.",
+    "description_de": "DJ FOLSOE TV ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",
+    "live": false,
+    "viewers": 0,
+    "followersCurrent": 870,
+    "followersGoal": 1000,
+    "subsToday": 0,
+    "bitsToday": 0,
+    "twitchLogin": "djfolsoe",
+    "streamTitle": "",
+    "category": "",
+    "activeShow": ""
+  },
+  "schedule": [
+    {
+      "id": 2,
+      "day": "Tuesday",
+      "time": "18:30",
+      "show": "Trance Tuesday",
+      "description": "Uplifting and progressive journeys."
+    },
+    {
+      "id": 4,
+      "day": "Thursday",
+      "time": "18:30",
+      "show": "The Chart Show",
+      "description": "Weekly chart show"
+    },
+    {
+      "id": 5,
+      "day": "Saturday",
+      "time": "07:00",
+      "show": "Good Morning Twitch",
+      "description": "The best way to start your saturday."
+    },
+    {
+      "day": "Thursday",
+      "time": "07:00",
+      "show": "Retro Hits",
+      "description": "Just good old pop/rock 70s, 80s, 90, songs."
+    },
+    {
+      "day": "1st friday in a new month",
+      "time": "",
+      "show": "Fredagsbar",
+      "description": "Plain fun and games"
+    },
+    {
+      "day": "Sometimes",
+      "time": " ",
+      "show": "POP UP",
+      "description": "When i feel for a Pop up on Twich"
+    }
+  ],
+  "shows": [
+    {
+      "title": "Good Morning Twitch",
+      "type": "Morning Show",
+      "text": "Music, headlines, coffee energy and live community from Denmark."
+    },
+    {
+      "title": "Trance Tuesday",
+      "type": "DJ Show",
+      "text": "Uplifting, progressive and emotional trance journeys."
+    },
+    {
+      "title": "Fredagsbar",
+      "type": "Party Show",
+      "text": "Friday bar feeling, singalong classics and weekend pressure."
+    },
+    {
+      "title": "Retro Hits",
+      "type": "Retro Show",
+      "text": "70s, 80s, 90s and forgotten favorites."
+    }
+  ],
+  "top20": [
+    "Tobias Rahim feat. Birthe Kjær - Den Danske Sommer",
+    "Aphaca - En Drøm Om Et Menneske",
+    "Annika - Livsforladt",
+    "Harry Styles - Apenture",
+    "Alex Warren - Ordinary ",
+    "Guldimund & Saveus - Vil Du Noget",
+    "Miley Cyrus - Easy Love",
+    "Chappelle Roan - The Subway",
+    "Sabruna Carpenter - Mandchild",
+    "Benson Boone - Mystical Magical",
+    "Calvin Harris - Blessings",
+    "Lola Young - One Thing",
+    "David Guetta & Hypaton - Together",
+    "Meduza - Edge Of The World",
+    "Teddy Swims - God Went Crazy",
+    "Purple Disco Machine - Dream Machine",
+    "Ed Sheeran - Sapphire",
+    "Cyril - Tears Dry Tonight",
+    "Armin Van Buuren - Dream a Little Dream",
+    "Anton Westerlin & Mille - Minder Hos Andre"
+  ],
+  "news": [
+    {
+      "tag": "Broadcast",
+      "title": "DJ FOLSOE TV builds a modern Music TV universe from Denmark."
+    },
+    {
+      "tag": "Requests",
+      "title": "Viewers can shape the show through song requests and chat energy."
+    },
+    {
+      "tag": "Community",
+      "title": "The station grows through followers, chatters, requests and music lovers."
+    },
+    {
+      "tag": "Shows",
+      "title": "Program guide and live shows are now part of the public website."
+    }
+  ],
+  "requests": [],
+  "top20Chart": {
+    "title": "FOLSOE TV Top 20",
+    "subtitle": "FOLSOE AIRPLAY HOT 20",
+    "week": "This Week",
+    "items": [
+      {
+        "rank": 1,
+        "lastWeek": "2",
+        "artist": "Tobias Rahim feat. Birthe Kjær",
+        "title": "Den Danske Sommer",
+        "status": "UP",
+        "points": 1,
+        "folsoePick": false
+      },
+      {
+        "rank": 2,
+        "lastWeek": "1",
+        "artist": "Aphaca",
+        "title": "En Drøm Om Et Menneske",
+        "status": "DOWN",
+        "points": 1,
+        "folsoePick": false
+      },
+      {
+        "rank": 3,
+        "lastWeek": "5",
+        "artist": "Annika",
+        "title": "Livsforladt",
+        "status": "UP",
+        "points": 2,
+        "folsoePick": false
+      },
+      {
+        "rank": 4,
+        "lastWeek": "4",
+        "artist": "Harry Styles",
+        "title": "Apenture",
+        "status": "SAME",
+        "points": 0,
+        "folsoePick": false
+      },
+      {
+        "rank": 5,
+        "lastWeek": "7",
+        "artist": "Alex Warren",
+        "title": "Ordinary ",
+        "status": "UP",
+        "points": 2,
+        "folsoePick": false
+      },
+      {
+        "rank": 6,
+        "lastWeek": "3",
+        "artist": "Guldimund & Saveus",
+        "title": "Vil Du Noget",
+        "status": "DOWN",
+        "points": 3,
+        "folsoePick": false
+      },
+      {
+        "rank": 7,
+        "lastWeek": "8",
+        "artist": "Miley Cyrus",
+        "title": "Easy Love",
+        "status": "UP",
+        "points": 1,
+        "folsoePick": false
+      },
+      {
+        "rank": 8,
+        "lastWeek": "6",
+        "artist": "Chappelle Roan",
+        "title": "The Subway",
+        "status": "DOWN",
+        "points": 2,
+        "folsoePick": false
+      },
+      {
+        "rank": 9,
+        "lastWeek": "12",
+        "artist": "Sabruna Carpenter",
+        "title": "Mandchild",
+        "status": "UP",
+        "points": 3,
+        "folsoePick": false
+      },
+      {
+        "rank": 10,
+        "lastWeek": "9",
+        "artist": "Benson Boone",
+        "title": "Mystical Magical",
+        "status": "UP",
+        "points": 1,
+        "folsoePick": false
+      },
+      {
+        "rank": 11,
+        "lastWeek": "15",
+        "artist": "Calvin Harris",
+        "title": "Blessings",
+        "status": "UP",
+        "points": 3,
+        "folsoePick": false
+      },
+      {
+        "rank": 12,
+        "lastWeek": "10",
+        "artist": "Lola Young",
+        "title": "One Thing",
+        "status": "DOWN",
+        "points": 2,
+        "folsoePick": false
+      },
+      {
+        "rank": 13,
+        "lastWeek": "New",
+        "artist": "David Guetta & Hypaton",
+        "title": "Together",
+        "status": "NEW",
+        "points": 0,
+        "folsoePick": false
+      },
+      {
+        "rank": 14,
+        "lastWeek": "18",
+        "artist": "Meduza",
+        "title": "Edge Of The World",
+        "status": "UP",
+        "points": 4,
+        "folsoePick": false
+      },
+      {
+        "rank": 15,
+        "lastWeek": "14",
+        "artist": "Teddy Swims",
+        "title": "God Went Crazy",
+        "status": "UP",
+        "points": 1,
+        "folsoePick": false
+      },
+      {
+        "rank": 16,
+        "lastWeek": "0",
+        "artist": "Purple Disco Machine",
+        "title": "Dream Machine",
+        "status": "NEW",
+        "points": 0,
+        "folsoePick": false
+      },
+      {
+        "rank": 17,
+        "lastWeek": "16",
+        "artist": "Ed Sheeran",
+        "title": "Sapphire",
+        "status": "DOWN",
+        "points": 1,
+        "folsoePick": false
+      },
+      {
+        "rank": 18,
+        "lastWeek": "0",
+        "artist": "Cyril",
+        "title": "Tears Dry Tonight",
+        "status": "RE",
+        "points": 0,
+        "folsoePick": false
+      },
+      {
+        "rank": 19,
+        "lastWeek": "0",
+        "artist": "Armin Van Buuren",
+        "title": "Dream a Little Dream",
+        "status": "NEW",
+        "points": 0,
+        "folsoePick": false
+      },
+      {
+        "rank": 20,
+        "lastWeek": "19",
+        "artist": "Anton Westerlin & Mille",
+        "title": "Minder Hos Andre",
+        "status": "DOWN",
+        "points": 1,
+        "folsoePick": false
+      }
+    ]
+  }
+}
