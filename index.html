@@ -2,77 +2,23 @@
 <html lang="da">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DJ FOLSOE TV · Radio 2026</title>
-<meta name="description" content="DJ FOLSOE TV - Music Television From Denmark">
+<title>DJ FOLSOE TV · Broadcast CMS V600</title>
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-<div class="bg"></div><div class="noise"></div>
-<header class="top">
-  <a class="brand" href="#"><span>DJ</span><b>FOLSOE TV</b><em>RADIO 2026</em></a>
-  <nav><a href="#live">Live</a><a href="#next">Næste show</a><a href="#guide">Programplan</a><a href="#request">Request</a><a href="#chart">Hitliste</a><a href="#news">Nyheder</a></nav>
-  <a class="adminLink" href="admin/">Admin</a>
-</header>
+<div class="bg"></div><div class="gridfx"></div>
+<header class="top"><a class="brand" href="#"><span>DJ</span><b>FOLSOE TV</b><em>V600</em></a><nav><a href="#live">Live</a><a href="#next">Næste show</a><a href="#guide">Programplan</a><a href="#request">Request</a><a href="#chart">Hitliste</a><a href="#news">Nyheder</a><a href="admin/">Admin</a></nav></header>
 <main>
 <section id="live" class="hero">
-  <div class="copy">
-    <div class="kicker">MUSIC TV · LIVE FROM DENMARK · TWITCH.TV/DJFOLSOE</div>
-    <h1 id="heroTitle">DJ FOLSOE TV</h1>
-    <p id="heroDesc">Loading station description...</p>
-    <div class="actions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank">Watch Live</a><a class="secondary" href="#request">Request a song</a></div>
-    <div class="liveCards">
-      <article><span>Status</span><b id="liveStatus">Checking...</b></article>
-      <article><span>Viewers</span><b id="viewers">0</b></article>
-      <article><span>Now / Next</span><b id="nowNext">Loading</b></article>
-    </div>
-  </div>
-  <aside class="broadcastCard">
-    <div class="cardTop"><i></i><span id="cardTopText">DJ FOLSOE TV · LIVE MUSIC</span></div>
-    <div class="cardMid"><div id="programIcon">📺</div><h2 id="programTitle">Loading show...</h2><p id="programDesc">Program data loading...</p></div>
-    <div class="ticker"><b id="tickerBadge">NEWS</b><span id="tickerText">Loading...</span></div>
-  </aside>
+  <div class="copy"><div class="kicker">BROADCAST CMS · RADIO 2026 · MUSIC TV FROM DENMARK</div><h1 id="heroTitle">DJ FOLSOE TV</h1><p id="heroDesc">Loading station...</p><div class="actions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank">Watch Live</a><a class="secondary" href="#request">Request a song</a></div><div class="liveCards"><article><span>Status</span><b id="liveStatus">Checking...</b></article><article><span>Viewers</span><b id="viewers">0</b></article><article><span>Now / Next</span><b id="nowNext">Loading</b></article></div></div>
+  <aside class="broadcast"><div class="cardTop"><i></i><span>DJ FOLSOE TV · LIVE MUSIC</span></div><div class="cardMid"><div id="programIcon">📺</div><h2 id="programTitle">Loading show...</h2><p id="programDesc">Program data loading...</p></div><div class="ticker"><b id="tickerBadge">NEWS</b><span id="tickerText">Loading...</span></div></aside>
 </section>
-
-<section id="next" class="panel nextShow">
-  <div class="head"><span>NEXT SHOW</span><h2 id="nextTitle">Loading next show...</h2></div>
-  <div class="showMeta">
-    <article><span>Dato / tid</span><b id="nextTime">-</b></article>
-    <article><span>Programtype</span><b id="nextType">-</b></article>
-    <article><span>Musikfokus</span><b id="nextFocus">-</b></article>
-  </div>
-  <p id="nextDescription"></p>
-</section>
-
-<section id="guide" class="panel">
-  <div class="head"><span>PROGRAM GUIDE</span><h2>Faste programmer</h2></div>
-  <div id="programGrid" class="programGrid"></div>
-</section>
-
-<section id="request" class="panel split">
-  <div>
-    <div class="head"><span>REQUEST CENTER</span><h2>Ønsk en sang til et show</h2></div>
-    <p class="muted">Skriv dit ønske, vælg hvilket program det passer til, og hvornår du helst vil høre det. I denne version gemmes ønsket lokalt i browseren; næste version kan sende det til admin/Discord/StreamElements.</p>
-    <form id="requestForm" class="requestForm">
-      <input id="reqName" placeholder="Dit Twitch-navn">
-      <input id="reqSong" placeholder="Artist - Song">
-      <select id="reqShow"></select>
-      <input id="reqWhen" type="datetime-local">
-      <button>Gem ønske</button>
-    </form>
-  </div>
-  <aside class="requestList"><h3>Seneste ønsker</h3><div id="requestOutput"></div></aside>
-</section>
-
-<section id="chart" class="panel">
-  <div class="head"><span>DJ FOLSOE HITLISTE</span><h2>Ugens Top 20 · EDM / Pop / Dance</h2></div>
-  <div id="chartList" class="chartList"></div>
-</section>
-
-<section id="news" class="panel">
-  <div class="head"><span>MUSIC TV NEWS</span><h2>Nyheder til det aktuelle program</h2></div>
-  <div id="newsGrid" class="newsGrid"></div>
-</section>
+<section id="next" class="panel"><div class="head"><span>NEXT SHOW</span><h2 id="nextTitle">Loading next show...</h2></div><div class="showMeta"><article><span>Dato / tid</span><b id="nextTime">-</b></article><article><span>Programtype</span><b id="nextType">-</b></article><article><span>Musikfokus</span><b id="nextFocus">-</b></article></div><p id="nextDescription"></p></section>
+<section id="guide" class="panel"><div class="head"><span>PROGRAM GUIDE</span><h2>Faste programmer</h2></div><div id="programGrid" class="programGrid"></div></section>
+<section id="request" class="panel split"><div><div class="head"><span>REQUEST CENTER</span><h2>Ønsk en sang til et show</h2></div><p class="muted">V600 gemmer requests lokalt i browseren. V601 kan sende dem til Cloudflare/Discord/admin-database.</p><form id="requestForm" class="requestForm"><input id="reqName" placeholder="Dit Twitch-navn"><input id="reqSong" placeholder="Artist - Song"><select id="reqShow"></select><input id="reqWhen" type="datetime-local"><button>Gem ønske</button></form></div><aside class="requestList"><h3>Seneste ønsker</h3><div id="requestOutput"></div></aside></section>
+<section id="chart" class="panel"><div class="head"><span>DJ FOLSOE HITLISTE</span><h2>Ugens Top 20 · EDM / Pop / Dance</h2></div><div id="chartList" class="chartList"></div></section>
+<section id="news" class="panel"><div class="head"><span>PROGRAM NEWS</span><h2>Nyheder til programmet</h2></div><div id="newsGrid" class="newsGrid"></div></section>
 </main>
-<footer><b>DJ FOLSOE TV</b><span>folsoetv.dk · Music Television From Denmark</span></footer>
+<footer><b>DJ FOLSOE Broadcast CMS V600</b><span>folsoetv.dk · Music Television From Denmark</span></footer>
 <script src="assets/js/site.js"></script>
 </body></html>

@@ -1,0 +1,267 @@
+{
+  "version": "V600",
+  "station": {
+    "name": "DJ FOLSOE TV",
+    "domain": "folsoetv.dk",
+    "twitchChannel": "djfolsoe",
+    "twitchUrl": "https://twitch.tv/djfolsoe",
+    "description": "DJ FOLSOE TV · Music Television From Denmark · Radio 2026 broadcast platform.",
+    "live": false,
+    "viewers": 0,
+    "followers": 870,
+    "followersGoal": 1000,
+    "subsToday": 0,
+    "bitsToday": 0,
+    "nowPlaying": "DJ FOLSOE TV · Live music from Denmark",
+    "activeProgram": "chart-show"
+  },
+  "programs": [
+    {
+      "id": "good-morning",
+      "day": "Monday",
+      "time": "09:00",
+      "duration": 120,
+      "title": "Good Morning Twitch",
+      "type": "Morning Show",
+      "description": "Nyheder, kaffe, vejr, musik og den bedste start på dagen.",
+      "musicFocus": "pop, feelgood, Danish music, morning classics",
+      "colorA": "#ffb000",
+      "colorB": "#ffffff",
+      "icon": "☀️"
+    },
+    {
+      "id": "trance-tuesday",
+      "day": "Tuesday",
+      "time": "20:00",
+      "duration": 180,
+      "title": "Trance Tuesday",
+      "type": "Trance Show",
+      "description": "Uplifting, progressive og store melodiske trance moments.",
+      "musicFocus": "trance, uplifting, progressive, Anjuna, Armada",
+      "colorA": "#7b2fff",
+      "colorB": "#00e5ff",
+      "icon": "💜"
+    },
+    {
+      "id": "popup",
+      "day": "Wednesday",
+      "time": "20:00",
+      "duration": 150,
+      "title": "Folsoe Popup",
+      "type": "Popup Show",
+      "description": "Et overraskelsesstream hvor chatten former retningen.",
+      "musicFocus": "viewer requests, pop, dance, classics, surprises",
+      "colorA": "#ff00ea",
+      "colorB": "#00d4ff",
+      "icon": "⚡"
+    },
+    {
+      "id": "fredagsbar",
+      "day": "Friday",
+      "time": "20:00",
+      "duration": 210,
+      "title": "Fredagsbar",
+      "type": "Friday Bar",
+      "description": "Weekendstart, singalong, bangers og chat-energi.",
+      "musicFocus": "party, pop, dance, Danish singalong, requests",
+      "colorA": "#ffb000",
+      "colorB": "#ff2f78",
+      "icon": "🍻"
+    },
+    {
+      "id": "chart-show",
+      "day": "Saturday",
+      "time": "20:00",
+      "duration": 180,
+      "title": "DJ FOLSOE Chart Show",
+      "type": "Chart Show",
+      "description": "Ugens DJ FOLSOE hitliste med 20 EDM/pop/dance tracks.",
+      "musicFocus": "EDM, pop, dance, chart, new music",
+      "colorA": "#ff284f",
+      "colorB": "#00d4ff",
+      "icon": "🔟"
+    },
+    {
+      "id": "retro-hits",
+      "day": "Sunday",
+      "time": "19:00",
+      "duration": 180,
+      "title": "Retro Hits",
+      "type": "Retro Show",
+      "description": "70s, 80s, 90s og old school favoritter, der stadig virker.",
+      "musicFocus": "retro, 80s, 90s, eurodance, classics",
+      "colorA": "#ff7a00",
+      "colorB": "#ff2bd6",
+      "icon": "📼"
+    }
+  ],
+  "requests": [],
+  "chart": [
+    {
+      "pos": 1,
+      "artist": "Calvin Harris & Ellie Goulding",
+      "title": "Miracle",
+      "genre": "EDM / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 2,
+      "artist": "David Guetta & OneRepublic",
+      "title": "I Don't Wanna Wait",
+      "genre": "EDM / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 3,
+      "artist": "Armin van Buuren",
+      "title": "Lose This Feeling",
+      "genre": "Trance / Dance",
+      "status": "B-list"
+    },
+    {
+      "pos": 4,
+      "artist": "Peggy Gou",
+      "title": "(It Goes Like) Nanana",
+      "genre": "House / Pop",
+      "status": "A-list"
+    },
+    {
+      "pos": 5,
+      "artist": "Tiësto",
+      "title": "Lay Low",
+      "genre": "EDM",
+      "status": "B-list"
+    },
+    {
+      "pos": 6,
+      "artist": "Purple Disco Machine",
+      "title": "Substitution",
+      "genre": "Nu Disco",
+      "status": "B-list"
+    },
+    {
+      "pos": 7,
+      "artist": "Swedish House Mafia",
+      "title": "Ray Of Solar",
+      "genre": "EDM",
+      "status": "C-list"
+    },
+    {
+      "pos": 8,
+      "artist": "Meduza",
+      "title": "Phone",
+      "genre": "Dance",
+      "status": "B-list"
+    },
+    {
+      "pos": 9,
+      "artist": "Joel Corry",
+      "title": "0800 Heaven",
+      "genre": "Dance Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 10,
+      "artist": "Kygo",
+      "title": "Whatever",
+      "genre": "Tropical Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 11,
+      "artist": "Topic",
+      "title": "Lucid Dream",
+      "genre": "Dance",
+      "status": "C-list"
+    },
+    {
+      "pos": 12,
+      "artist": "Robin Schulz",
+      "title": "I'll Be There",
+      "genre": "House Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 13,
+      "artist": "Above & Beyond",
+      "title": "Crazy Love",
+      "genre": "Trance",
+      "status": "Special"
+    },
+    {
+      "pos": 14,
+      "artist": "Ava Max",
+      "title": "My Oh My",
+      "genre": "Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 15,
+      "artist": "Becky Hill",
+      "title": "Disconnect",
+      "genre": "Dance Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 16,
+      "artist": "Lost Frequencies",
+      "title": "The Feeling",
+      "genre": "Dance",
+      "status": "C-list"
+    },
+    {
+      "pos": 17,
+      "artist": "Martin Garrix",
+      "title": "Carry You",
+      "genre": "EDM",
+      "status": "Special"
+    },
+    {
+      "pos": 18,
+      "artist": "Dua Lipa",
+      "title": "Houdini",
+      "genre": "Pop / Dance",
+      "status": "C-list"
+    },
+    {
+      "pos": 19,
+      "artist": "RAYE",
+      "title": "Prada",
+      "genre": "Dance Pop",
+      "status": "C-list"
+    },
+    {
+      "pos": 20,
+      "artist": "Scooter",
+      "title": "Nessaja",
+      "genre": "Hands Up Classic",
+      "status": "Wildcard"
+    }
+  ],
+  "news": {
+    "chart-show": [
+      "CHART SHOW · Ugens 20 tracks er klar til lørdag",
+      "EDM/POP RADAR · Nye dance-pop tracks scannes til hitlisten"
+    ],
+    "trance-tuesday": [
+      "TRANCE TUESDAY · Uplifting and progressive radar is active",
+      "MELODY LOCK · Long builds and big emotional drops"
+    ],
+    "fredagsbar": [
+      "FREDAGSBAR · Weekend starts when the bass says so",
+      "PARTY DESK · Requests, singalong and club energy"
+    ],
+    "good-morning": [
+      "GOOD MORNING TWITCH · Coffee, headlines and live music from Denmark",
+      "DENMARK DESK · Culture, sport and music stories are being scanned"
+    ],
+    "retro-hits": [
+      "RETRO DESK · 80s, 90s and classics that refuse to retire",
+      "OLD SCHOOL · The chorus still works"
+    ],
+    "popup": [
+      "POPUP MUSIC NEWS · Anything can happen in the next headline",
+      "YOU CHOOSE · I play the direction live"
+    ]
+  }
+}

@@ -1,74 +1,15 @@
 let DATA, currentProgram, ticker=0;
 const $=id=>document.getElementById(id);
 const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
-async function boot(){
-  const res=await fetch("assets/data/site.json");
-  DATA=await res.json();
-  currentProgram=findCurrentOrNext();
-  applyProgram(currentProgram.program, currentProgram.isLive);
-  renderPrograms(); renderRequests(); renderChart(); renderNews(); setupRequestForm();
-  setInterval(updateTicker,3500);
-}
+async function boot(){const res=await fetch("assets/data/cms.json");DATA=await res.json();currentProgram=findCurrentOrNext();applyProgram(currentProgram.program,currentProgram.isLive);renderPrograms();renderRequests();renderChart();renderNews();setupRequestForm();setInterval(updateTicker,3500);}
 function rgb(hex){hex=hex.replace("#","");const n=parseInt(hex,16);return `${(n>>16)&255},${(n>>8)&255},${n&255}`;}
-function nextDateFor(day,time){
-  const now=new Date(), target=days.indexOf(day);
-  let d=new Date(now);
-  d.setDate(now.getDate()+((target-now.getDay()+7)%7));
-  const [h,m]=time.split(":").map(Number); d.setHours(h,m,0,0);
-  if(d<now)d.setDate(d.getDate()+7);
-  return d;
-}
-function findCurrentOrNext(){
-  const now=new Date();
-  for(const p of DATA.programs){
-    const start=nextDateFor(p.day,p.time); if(start>now) start.setDate(start.getDate()-7);
-    const end=new Date(start.getTime()+p.duration*60000);
-    if(now>=start && now<=end) return {program:p,isLive:true,nextDate:start};
-  }
-  const upcoming=DATA.programs.map(p=>({program:p,isLive:false,nextDate:nextDateFor(p.day,p.time)})).sort((a,b)=>a.nextDate-b.nextDate)[0];
-  return upcoming;
-}
-function applyProgram(p,isLive){
-  document.documentElement.style.setProperty("--a",p.colorA);
-  document.documentElement.style.setProperty("--b",p.colorB);
-  document.documentElement.style.setProperty("--rgb",rgb(p.colorA));
-  $("heroTitle").textContent = isLive ? "LIVE NOW · "+p.title : "Next Show · "+p.title;
-  $("heroDesc").textContent = DATA.station.descriptionFallback;
-  $("liveStatus").textContent = isLive ? "LIVE NOW" : "OFFLINE";
-  $("viewers").textContent = "0";
-  $("nowNext").textContent = isLive ? "LIVE" : "NEXT";
-  $("programIcon").textContent=p.icon; $("programTitle").textContent=p.title; $("programDesc").textContent=p.description;
-  $("tickerBadge").textContent=p.type.toUpperCase();
-  $("nextTitle").textContent = p.title;
-  $("nextTime").textContent = currentProgram.nextDate.toLocaleString("da-DK",{weekday:"long",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});
-  $("nextType").textContent=p.type; $("nextFocus").textContent=p.musicFocus; $("nextDescription").textContent=p.description;
-}
-function renderPrograms(){
-  $("programGrid").innerHTML=DATA.programs.map(p=>`<article class="programCard" style="--pa:${p.colorA};--pb:${p.colorB}"><div style="font-size:34px">${p.icon}</div><b>${p.title}</b><p>${p.day} · ${p.time}</p><p>${p.description}</p><small>${p.musicFocus}</small></article>`).join("");
-  $("reqShow").innerHTML=DATA.programs.map(p=>`<option value="${p.title}">${p.title}</option>`).join("");
-}
-function renderChart(){
-  $("chartList").innerHTML=DATA.chart.map(t=>`<div class="chartRow"><div class="pos">${t.pos}</div><div><b>${t.artist} - ${t.title}</b><br><small>${t.note}</small></div><div>${t.genre}</div></div>`).join("");
-}
-function renderNews(){
-  const key=currentProgram.program.id, arr=DATA.news[key]||DATA.news.popup||[];
-  $("newsGrid").innerHTML=arr.map((n,i)=>`<article class="newsItem"><b>${i?"THEME RADAR":"TOP STORY"}</b><p>${n}</p></article>`).join("");
-}
-function updateTicker(){
-  const arr=DATA.news[currentProgram.program.id]||DATA.news.popup||["DJ FOLSOE TV · Music Television From Denmark"];
-  $("tickerText").textContent=arr[ticker++%arr.length];
-}
-function setupRequestForm(){
-  $("requestForm").addEventListener("submit",e=>{
-    e.preventDefault();
-    const item={name:$("reqName").value||"Viewer",song:$("reqSong").value||"Artist - Song",show:$("reqShow").value,when:$("reqWhen").value||"Next show"};
-    const all=JSON.parse(localStorage.getItem("djf_requests")||"[]"); all.unshift(item); localStorage.setItem("djf_requests",JSON.stringify(all.slice(0,10)));
-    renderRequests(); e.target.reset();
-  });
-}
-function renderRequests(){
-  const all=JSON.parse(localStorage.getItem("djf_requests")||"[]");
-  $("requestOutput").innerHTML=all.length?all.map(r=>`<div class="requestItem"><b>${r.song}</b><br><small>${r.name} · ${r.show} · ${r.when}</small></div>`).join(""):"<p class='muted'>Ingen ønsker endnu.</p>";
-}
+function nextDateFor(day,time){const now=new Date(),target=days.indexOf(day);let d=new Date(now);d.setDate(now.getDate()+((target-now.getDay()+7)%7));const [h,m]=time.split(":").map(Number);d.setHours(h,m,0,0);if(d<now)d.setDate(d.getDate()+7);return d;}
+function findCurrentOrNext(){const now=new Date();for(const p of DATA.programs){const start=nextDateFor(p.day,p.time);if(start>now)start.setDate(start.getDate()-7);const end=new Date(start.getTime()+p.duration*60000);if(now>=start&&now<=end)return{program:p,isLive:true,nextDate:start};}return DATA.programs.map(p=>({program:p,isLive:false,nextDate:nextDateFor(p.day,p.time)})).sort((a,b)=>a.nextDate-b.nextDate)[0];}
+function applyProgram(p,isLive){document.documentElement.style.setProperty("--a",p.colorA);document.documentElement.style.setProperty("--b",p.colorB);document.documentElement.style.setProperty("--rgb",rgb(p.colorA));$("heroTitle").textContent=isLive?"LIVE NOW · "+p.title:"Next Show · "+p.title;$("heroDesc").textContent=DATA.station.description;$("liveStatus").textContent=isLive?"LIVE NOW":"OFFLINE";$("viewers").textContent=DATA.station.viewers;$("nowNext").textContent=isLive?"LIVE":"NEXT";$("programIcon").textContent=p.icon;$("programTitle").textContent=p.title;$("programDesc").textContent=p.description;$("tickerBadge").textContent=p.type.toUpperCase();$("nextTitle").textContent=p.title;$("nextTime").textContent=currentProgram.nextDate.toLocaleString("da-DK",{weekday:"long",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"});$("nextType").textContent=p.type;$("nextFocus").textContent=p.musicFocus;$("nextDescription").textContent=p.description;}
+function renderPrograms(){$("programGrid").innerHTML=DATA.programs.map(p=>`<article class="programCard" style="--pa:${p.colorA};--pb:${p.colorB}"><div style="font-size:34px">${p.icon}</div><b>${p.title}</b><p>${p.day} · ${p.time}</p><p>${p.description}</p><small>${p.musicFocus}</small></article>`).join("");$("reqShow").innerHTML=DATA.programs.map(p=>`<option value="${p.title}">${p.title}</option>`).join("");}
+function renderChart(){$("chartList").innerHTML=DATA.chart.map(t=>`<div class="chartRow"><div class="pos">${t.pos}</div><div><b>${t.artist} - ${t.title}</b><br><small>${t.status}</small></div><div>${t.genre}</div></div>`).join("");}
+function renderNews(){const key=currentProgram.program.id,arr=DATA.news[key]||DATA.news.popup||[];$("newsGrid").innerHTML=arr.map((n,i)=>`<article class="newsItem"><b>${i?"PROGRAM RADAR":"TOP STORY"}</b><p>${n}</p></article>`).join("");}
+function updateTicker(){const arr=DATA.news[currentProgram.program.id]||DATA.news.popup||["DJ FOLSOE TV · Music Television From Denmark"];$("tickerText").textContent=arr[ticker++%arr.length];}
+function setupRequestForm(){$("requestForm").addEventListener("submit",e=>{e.preventDefault();const item={name:$("reqName").value||"Viewer",song:$("reqSong").value||"Artist - Song",show:$("reqShow").value,when:$("reqWhen").value||"Next show"};const all=JSON.parse(localStorage.getItem("djf_requests")||"[]");all.unshift(item);localStorage.setItem("djf_requests",JSON.stringify(all.slice(0,30)));renderRequests();e.target.reset();});}
+function renderRequests(){const all=JSON.parse(localStorage.getItem("djf_requests")||"[]");$("requestOutput").innerHTML=all.length?all.map(r=>`<div class="requestItem"><b>${r.song}</b><br><small>${r.name} · ${r.show} · ${r.when}</small></div>`).join(""):"<p class='muted'>Ingen ønsker endnu.</p>";}
 document.addEventListener("DOMContentLoaded",boot);

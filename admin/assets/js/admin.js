@@ -1,0 +1,12 @@
+let DATA;
+async function boot(){const r=await fetch("../assets/data/cms.json");DATA=await r.json();renderDashboard();renderPrograms();renderChart();renderRequests();buildJson();}
+const $=id=>document.getElementById(id);
+function renderDashboard(){$("adminLive").textContent=DATA.station.live?"LIVE":"OFFLINE";$("adminViewers").textContent=DATA.station.viewers;$("adminFollowers").textContent=DATA.station.followers;$("adminProgram").textContent=DATA.station.activeProgram;}
+function renderPrograms(){$("programEditor").innerHTML=DATA.programs.map((p,i)=>`<div class="editorCard"><h3>${p.icon} ${p.title}</h3><input data-p="${i}" data-k="title" value="${p.title}"><input data-p="${i}" data-k="day" value="${p.day}"><input data-p="${i}" data-k="time" value="${p.time}"><textarea data-p="${i}" data-k="description">${p.description}</textarea><input data-p="${i}" data-k="musicFocus" value="${p.musicFocus}"></div>`).join("");document.querySelectorAll("[data-p]").forEach(el=>el.addEventListener("input",e=>{DATA.programs[e.target.dataset.p][e.target.dataset.k]=e.target.value;buildJson();}));}
+function renderChart(){$("chartEditor").innerHTML=DATA.chart.map((t,i)=>`<div class="chartEditRow"><b>${t.pos}</b><input data-c="${i}" data-k="artist" value="${t.artist}"><input data-c="${i}" data-k="title" value="${t.title}"><input data-c="${i}" data-k="genre" value="${t.genre}"></div>`).join("");document.querySelectorAll("[data-c]").forEach(el=>el.addEventListener("input",e=>{DATA.chart[e.target.dataset.c][e.target.dataset.k]=e.target.value;buildJson();}));}
+function renderRequests(){const all=JSON.parse(localStorage.getItem("djf_requests")||"[]");$("adminRequests").innerHTML=all.length?all.map((r,i)=>`<div class="requestItem"><button onclick="markPlayed(${i})">Played</button><b>${r.song}</b><br><small>${r.name} · ${r.show} · ${r.when}</small></div>`).join(""):"<p class='muted'>Ingen lokale requests.</p>";}
+function markPlayed(i){const all=JSON.parse(localStorage.getItem("djf_requests")||"[]");all.splice(i,1);localStorage.setItem("djf_requests",JSON.stringify(all));renderRequests();}
+$("clearRequests").onclick=()=>{localStorage.removeItem("djf_requests");renderRequests();}
+function buildJson(){$("jsonOutput").value=JSON.stringify(DATA,null,2);}
+$("buildJson").onclick=buildJson;$("copyJson").onclick=async()=>{await navigator.clipboard.writeText($("jsonOutput").value);alert("JSON kopieret");}
+document.addEventListener("DOMContentLoaded",boot);
