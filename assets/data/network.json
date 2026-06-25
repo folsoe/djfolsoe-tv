@@ -10,7 +10,12 @@
     "followersGoal": 1000,
     "followersCurrent": 870,
     "subsToday": 0,
-    "bitsToday": 0
+    "bitsToday": 0,
+    "descriptions": {
+      "da": "DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.",
+      "en": "DJ FOLSOE TV is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community – presented as a modern Music TV channel from Denmark.",
+      "de": "DJ FOLSOE TV ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark."
+    }
   },
   "themes": [
     {
@@ -24,6 +29,13 @@
       "commands": [
         "!theme morning",
         "!morgen"
+      ],
+      "rssTags": [
+        "denmark",
+        "europe",
+        "culture",
+        "music",
+        "weather"
       ]
     },
     {
@@ -37,6 +49,13 @@
       "commands": [
         "!theme summer",
         "!sommer"
+      ],
+      "rssTags": [
+        "festival",
+        "house",
+        "edm",
+        "ibiza",
+        "summer"
       ]
     },
     {
@@ -49,6 +68,13 @@
       "colorB": "#00e5ff",
       "commands": [
         "!theme trance"
+      ],
+      "rssTags": [
+        "trance",
+        "uplifting",
+        "progressive",
+        "anjuna",
+        "armin"
       ]
     },
     {
@@ -61,6 +87,13 @@
       "colorB": "#4d7dff",
       "commands": [
         "!theme eurodance"
+      ],
+      "rssTags": [
+        "90s",
+        "eurodance",
+        "classic",
+        "dance",
+        "hands up"
       ]
     },
     {
@@ -73,6 +106,13 @@
       "colorB": "#ff2bd6",
       "commands": [
         "!theme retro"
+      ],
+      "rssTags": [
+        "retro",
+        "80s",
+        "90s",
+        "classic",
+        "reissue"
       ]
     },
     {
@@ -85,6 +125,13 @@
       "colorB": "#00d4ff",
       "commands": [
         "!theme popup"
+      ],
+      "rssTags": [
+        "music",
+        "dj",
+        "festival",
+        "single",
+        "album"
       ]
     },
     {
@@ -97,6 +144,13 @@
       "colorB": "#ffffff",
       "commands": [
         "!theme dansk"
+      ],
+      "rssTags": [
+        "dansk",
+        "danish",
+        "musik",
+        "festival",
+        "concert"
       ]
     },
     {
@@ -109,6 +163,13 @@
       "colorB": "#ff8a00",
       "commands": [
         "!theme harddance"
+      ],
+      "rssTags": [
+        "hardstyle",
+        "hard dance",
+        "bass",
+        "rave",
+        "festival"
       ]
     },
     {
@@ -121,6 +182,13 @@
       "colorB": "#ffd166",
       "commands": [
         "!theme letsdance"
+      ],
+      "rssTags": [
+        "disco",
+        "funk",
+        "groove",
+        "house",
+        "dance"
       ]
     },
     {
@@ -133,6 +201,13 @@
       "colorB": "#00d4ff",
       "commands": [
         "!theme chart"
+      ],
+      "rssTags": [
+        "chart",
+        "top 10",
+        "single",
+        "album",
+        "hit"
       ]
     },
     {
@@ -145,6 +220,13 @@
       "colorB": "#ffd166",
       "commands": [
         "!theme weekend"
+      ],
+      "rssTags": [
+        "weekend",
+        "party",
+        "club",
+        "dance",
+        "festival"
       ]
     },
     {
@@ -157,6 +239,13 @@
       "colorB": "#ff2f78",
       "commands": [
         "!theme fredagsbar"
+      ],
+      "rssTags": [
+        "friday",
+        "party",
+        "bar",
+        "club",
+        "weekend"
       ]
     }
   ],
@@ -227,6 +316,11 @@
       "cmd": "!theme retro",
       "lang": "ALL",
       "desc": "Skift stream til Retro Hits"
+    },
+    {
+      "cmd": "!theme popup",
+      "lang": "ALL",
+      "desc": "Skift stream til Folsoe Popup"
     }
   ],
   "headlines": {

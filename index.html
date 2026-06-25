@@ -1,13 +1,72 @@
-<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DJ FOLSOE TV Network V400</title><meta name="description" content="DJ FOLSOE TV Network V400"><link rel="stylesheet" href="assets/css/v400.css"></head><body>
-<div class="bgAura"></div><div class="scanlines"></div>
-<header class="topbar"><a class="brand" href="#home"><span>DJ</span><b>FOLSOE TV</b><em>NETWORK V400</em></a><nav><a href="#live">Live</a><a href="#themes">Themes</a><a href="#news">News</a><a href="#guide">TV Guide</a><a href="#requests">Requests</a><a href="#community">Community</a><a href="#admin">Admin</a></nav><button id="themeShuffle">Shuffle Theme</button></header>
-<main id="home">
-<section class="hero"><div class="copy"><div class="kicker">BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK</div><h1>DJ FOLSOE TV</h1><p>DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.</p><div class="actions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank">Watch Live</a><a class="secondary" href="#admin">Open Control Center</a></div><div class="miniStats"><article><span>Status</span><b id="heroStatus">OFFLINE</b></article><article><span>Theme</span><b id="heroTheme">MORNING</b></article><article><span>Requests</span><b>OPEN</b></article></div></div><aside class="tv"><div class="tvTop"><i></i><span>DJ FOLSOE TV · LIVE MUSIC NETWORK</span></div><div class="tvStage"><div id="themeIcon">☀️</div><h2 id="themeTitle">Good Morning Twitch</h2><p id="themeSubtitle">News, weather, culture and morning music</p></div><div class="tvTicker"><b id="tickerBadge">MORNING</b><marquee id="tickerText">Loading broadcast ticker...</marquee></div></aside></section>
-<section id="live" class="panel"><div class="sectionHead"><span>LIVE API CENTER</span><h2>Stationens live-status</h2></div><div class="dash"><article><span>Live Status</span><b id="statusCard">OFFLINE</b><p>Kan kobles til Twitch API.</p></article><article><span>Viewers</span><b id="viewerCard">0</b><p>Live seertal fra Twitch senere.</p></article><article><span>Follower Journey</span><b id="followerCard">Road to 1.000</b><p>Hver follow bygger stationen.</p></article><article><span>Support</span><b id="supportCard">Subs / Bits</b><p>Udvikler det tekniske setup.</p></article></div></section>
-<section id="themes" class="panel"><div class="sectionHead"><span>THEME SYNC ENGINE</span><h2>Alle show-universer</h2></div><div class="themeGrid" id="themeGrid"></div></section>
-<section id="news" class="panel"><div class="sectionHead"><span>MUSIC NEWS NETWORK</span><h2>Theme-specifik nyhedsradar</h2></div><div class="filterBar" id="filterBar"></div><div class="newsGrid" id="newsGrid"></div></section>
-<section id="guide" class="panel split"><div><div class="sectionHead"><span>DJ FOLSOE TV GUIDE</span><h2>Programplan</h2></div><div class="schedule" id="schedule"></div></div><aside class="card"><h3>Next upgrade</h3><p>V401 kan koble programguiden til Google Calendar eller et simpelt admin-panel.</p></aside></section>
-<section id="requests" class="panel split"><div><div class="sectionHead"><span>REQUEST CENTER</span><h2>Viewer controlled music</h2></div><div class="commands" id="commands"></div></div><aside class="requestBox"><label>Demo request</label><input id="requestInput" placeholder="Artist - Song"><button id="requestButton">Preview request</button><small id="requestPreview">Requests sendes via Twitch chat i den rigtige integration.</small></aside></section>
-<section id="community" class="panel"><div class="sectionHead"><span>COMMUNITY GROWTH ENGINE</span><h2>Viewer journey</h2></div><div class="journey"><article><b>Viewer</b><span>Finder streamen</span></article><article><b>Follower</b><span>Kommer tilbage</span></article><article><b>Chatter</b><span>Skaber liv</span></article><article><b>Requester</b><span>Former playlisten</span></article><article><b>Subscriber</b><span>Bygger stationen</span></article></div></section>
-<section id="admin" class="panel"><div class="sectionHead"><span>CONTROL CENTER</span><h2>Simuler stationen</h2></div><div class="controlGrid"><div class="control"><label>Aktivt theme</label><select id="themeSelect"></select></div><div class="control"><label>Live status</label><select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></div><div class="control"><label>Viewers</label><input id="viewerInput" type="number" value="0"></div><div class="control"><label>Followers</label><input id="followersInput" type="number" value="870"></div></div><p class="note">Dette er et statisk V400 admin-demo-lag. Næste version kan gemme data i GitHub/JSON eller Cloudflare KV.</p></section>
-</main><footer class="footer"><b>DJ FOLSOE TV Network V400</b><span>Music Television From Denmark · folsoetv.dk</span></footer><script src="assets/js/v400.js"></script></body></html>
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE TV Network V800 Gold Master</title>
+  <meta name="description" content="DJ FOLSOE TV Network V800 Gold Master - music TV, radio 2026 and Twitch broadcast platform.">
+  <link rel="stylesheet" href="assets/css/v800.css">
+</head>
+<body>
+  <div class="bgAura"></div><div class="scanlines"></div>
+  <header class="topbar">
+    <a class="brand" href="#home"><span>DJ</span><b>FOLSOE TV</b><em>V800 GOLD MASTER</em></a>
+    <nav>
+      <a href="#live">Live</a><a href="#themes">Themes</a><a href="#news">News</a><a href="#guide">TV Guide</a><a href="#requests">Requests</a><a href="#community">Community</a><a href="#admin">Admin</a>
+    </nav>
+    <div class="langSwitch"><button data-lang="da" class="active">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></div>
+    <button id="themeShuffle" data-i18n="shuffle">Shuffle Theme</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="copy">
+        <div class="kicker" data-i18n="kicker">BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK</div>
+        <h1 data-i18n="heroTitle">DJ FOLSOE TV</h1>
+        <p data-i18n="heroText">DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.</p>
+        <div class="actions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" data-i18n="watchLive">Se live</a><a class="secondary" href="#admin" data-i18n="openControl">Åbn kontrolcenter</a></div>
+        <div class="miniStats"><article><span data-i18n="status">Status</span><b id="heroStatus">OFFLINE</b></article><article><span data-i18n="theme">Tema</span><b id="heroTheme">MORNING</b></article><article><span data-i18n="requests">Ønsker</span><b data-i18n="open">ÅBEN</b></article></div>
+      </div>
+      <aside class="tv">
+        <div class="tvTop"><i></i><span>DJ FOLSOE TV · LIVE MUSIC NETWORK</span></div>
+        <div class="tvStage"><div id="themeIcon">☀️</div><h2 id="themeTitle">Good Morning Twitch</h2><p id="themeSubtitle">Denmark, Europe, music, culture and weather.</p></div>
+        <div class="tvTicker"><b id="tickerBadge">MORNING</b><marquee id="tickerText">Loading broadcast ticker...</marquee></div>
+      </aside>
+    </section>
+
+    <section id="live" class="panel">
+      <div class="sectionHead"><span>LIVE API CENTER</span><h2 data-i18n="liveStatusTitle">Stationens live-status</h2></div>
+      <div class="dash"><article><span>Live Status</span><b id="statusCard">OFFLINE</b><p data-i18n="twitchFuture">Kan kobles til Twitch API.</p></article><article><span>Viewers</span><b id="viewerCard">0</b><p data-i18n="viewerFuture">Live seertal fra Twitch senere.</p></article><article><span>Follower Journey</span><b id="followerCard">Road to 1.000</b><p data-i18n="followBuilds">Hver follow bygger stationen.</p></article><article><span>Support</span><b id="supportCard">Subs / Bits</b><p data-i18n="supportSetup">Udvikler det tekniske setup.</p></article></div>
+    </section>
+
+    <section id="themes" class="panel"><div class="sectionHead"><span>THEME SYNC ENGINE</span><h2 data-i18n="themesTitle">Alle show-universer</h2></div><div class="themeGrid" id="themeGrid"></div></section>
+    <section id="news" class="panel"><div class="sectionHead"><span>MUSIC NEWS NETWORK</span><h2 data-i18n="newsTitle">Theme-specifik nyhedsradar</h2></div><div class="filterBar" id="filterBar"></div><div class="newsGrid" id="newsGrid"></div></section>
+    <section id="guide" class="panel split"><div><div class="sectionHead"><span>DJ FOLSOE TV GUIDE</span><h2 data-i18n="guideTitle">Programplan</h2></div><div class="schedule" id="schedule"></div></div><aside class="card"><h3>Next upgrade</h3><p data-i18n="nextUpgrade">Næste version kan koble programguiden til Google Calendar eller et simpelt admin-panel.</p></aside></section>
+    <section id="requests" class="panel split"><div><div class="sectionHead"><span>REQUEST CENTER</span><h2 data-i18n="requestTitle">Seerstyret musik</h2></div><div class="commands" id="commands"></div></div><aside class="requestBox"><label>Demo request</label><input id="requestInput" placeholder="Artist - Song"><button id="requestButton">Preview request</button><small id="requestPreview" data-i18n="requestHint">Requests sendes via Twitch chat i den rigtige integration.</small></aside></section>
+    <section id="community" class="panel"><div class="sectionHead"><span>COMMUNITY GROWTH ENGINE</span><h2 data-i18n="journeyTitle">Viewer journey</h2></div><div class="journey"><article><b>Viewer</b><span>Finder streamen</span></article><article><b>Follower</b><span>Kommer tilbage</span></article><article><b>Chatter</b><span>Skaber liv</span></article><article><b>Requester</b><span>Former playlisten</span></article><article><b>Subscriber</b><span>Bygger stationen</span></article></div></section>
+
+    <section id="admin" class="panel adminPanel">
+      <div class="sectionHead"><span>PROTECTED CONTROL CENTER</span><h2 data-i18n="controlTitle">Beskyttet admin</h2></div>
+      <div id="adminLocked" class="adminLock">
+        <h3>Admin er låst</h3>
+        <p>Indtast adgangskode for at åbne kontrolcenteret.</p>
+        <input id="adminPassword" type="password" placeholder="Password">
+        <button id="adminLogin">Lås admin op</button>
+        <small id="adminMessage">Kun til dig. Brug serverbeskyttelse senere for fuld sikkerhed.</small>
+      </div>
+      <div id="adminUnlocked" class="adminUnlocked hidden">
+        <div class="controlGrid">
+          <div class="control"><label>Aktivt theme</label><select id="themeSelect"></select></div>
+          <div class="control"><label>Live status</label><select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></div>
+          <div class="control"><label>Viewers</label><input id="viewerInput" type="number" value="0"></div>
+          <div class="control"><label>Followers</label><input id="followersInput" type="number" value="870"></div>
+        </div>
+        <button id="adminLogout" class="logout">Lås admin igen</button>
+        <p class="note">V800 bruger klient-side adgangskode som første beskyttelse. V801 bør flytte admin bag Cloudflare Access eller server-login.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><b>DJ FOLSOE TV Network V800 Gold Master</b><span data-i18n="footerText">Music Television From Denmark · folsoetv.dk</span></footer>
+  <script src="assets/js/v800.js"></script>
+</body>
+</html>
