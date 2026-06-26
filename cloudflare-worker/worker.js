@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V813.2-FRONTEND-BINDING - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE NETWORK V813.3 STABLE - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V813.2-FRONTEND-BINDING",
+    version: "V813.3 STABLE",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V813.2-FRONTEND-BINDING";
+  data.broadcastCore.version = "V813.3 STABLE";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V813.2-FRONTEND-BINDING";
+  core.unifiedNewsroom.version = "V813.3 STABLE";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V813.2-FRONTEND-BINDING";
+  core.broadcastCore.version = "V813.3 STABLE";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -292,13 +292,18 @@ export default {
     const path = url.pathname.replace(/\/+$/, "") || "/";
 
     try {
+      if (path === "/api/stable-status") {
+        const core = await getCore(env);
+        return json({ok:true,version:"V813.3 STABLE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+      }
+
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V813.2-FRONTEND-BINDING Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V813.3 STABLE Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.2-FRONTEND-BINDING Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.3 STABLE Admin" });
       }
 
       if (path === "/api/seed") {
@@ -316,7 +321,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V813.2-FRONTEND-BINDING", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V813.3 STABLE", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
