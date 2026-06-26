@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.6 LIVE CONTENT MOTION LAYER",
+    "version": "V813.7 BOTTOM BROADCAST DECK",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -639,7 +639,8 @@
     "stableRelease": true,
     "overlayIntegration": "V170.3",
     "streamElementsReady": true,
-    "liveContentMotionLayer": true
+    "liveContentMotionLayer": true,
+    "bottomBroadcastDeck": true
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2220,7 +2221,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.6 LIVE CONTENT MOTION LAYER",
+  "platformVersion": "V813.7 BOTTOM BROADCAST DECK",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2229,17 +2230,17 @@
       "4 box footer layout preserved"
     ],
     "endpoint": "/api/overlay/v170-state",
-    "layout": "camera-safe-side-stacked",
+    "layout": "bottom-side-deck-camera-safe",
     "boxLayout": {
-      "leftTop": "box3_music",
-      "leftBottom": "box1_live_status",
-      "rightTop": "box4_community",
-      "rightBottom": "box2_program",
-      "cameraSafeArea": {
-        "x1": 500,
-        "x2": 1420,
-        "y1": 120,
-        "y2": 920
+      "leftColumnTop": "box1_live",
+      "leftColumnBottom": "box3_music",
+      "rightColumnTop": "box2_program",
+      "rightColumnBottom": "box4_community",
+      "centerSafeArea": {
+        "x1": 430,
+        "x2": 1490,
+        "y1": 90,
+        "y2": 1080
       }
     },
     "motion": {
@@ -2248,7 +2249,15 @@
       "dynamicFooterCards": true,
       "classicTicker": false,
       "themeAnimations": true
-    }
+    },
+    "safeAreaLock": {
+      "centerClear": true,
+      "middleBottomClear": true,
+      "noCenterElements": true,
+      "noMiddleBottomTicker": true,
+      "contentOnlyBottomLeftAndBottomRight": true
+    },
+    "contentSource": "admin-website-cloud-master"
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
