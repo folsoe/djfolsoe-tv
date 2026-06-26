@@ -98,6 +98,14 @@
         <div class="adminButtons"><button id="addShow">Tilføj feed-kort</button><button id="saveShows">Gem feed</button></div>
       </section>
 
+      <section id="newsroomAdmin" class="panel">
+        <div class="sectionHead"><span>V813 UNIFIED MUSIC NEWSROOM</span><h2>FOLSOE Music Newsroom</h2></div>
+        <p class="note">Henter samlet RSS fra EDM, dance, Danmark og internationale musikkilder via Cloudflare Worker.</p>
+        <div class="adminButtons"><button id="refreshNewsroom">Hent nyheder nu</button><button id="openNewsroomApi">Åbn /api/newsroom</button></div>
+        <div class="apiStatusLine" id="newsroomStatus">Newsroom ikke opdateret endnu.</div>
+        <div id="newsroomAdminList" class="newsroomGrid"></div>
+      </section>
+
       <section id="newsAdmin" class="panel">
         <div class="sectionHead"><span>NEWS MANAGER</span><h2>Nyheder</h2></div>
         <div id="newsEditor" class="programEditor"></div>

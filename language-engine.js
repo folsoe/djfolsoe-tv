@@ -222,3 +222,16 @@
 /* V812.3 Import Playlist Autofill */
 .autoFillHelp{margin:12px 0;padding:12px 14px;border-radius:16px;background:rgba(255,209,102,.10);border:1px solid rgba(255,209,102,.25);color:#ffd166;font-weight:900;line-height:1.45}
 .candidateImportBox{min-height:160px!important}
+
+/* V813 Unified Music Newsroom */
+.newsroomTabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.newsroomTabs button{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:9px 12px;font-weight:900;cursor:pointer}
+.newsroomTabs button.active{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111}
+.newsroomGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.newsroomItem{padding:18px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.055));border:1px solid rgba(255,255,255,.12)}
+.newsroomItem b{display:inline-block;color:#111;background:#ffd166;border-radius:999px;padding:5px 9px;font-size:11px;margin-bottom:10px}
+.newsroomItem h3{margin:5px 0 8px;font-size:18px}
+.newsroomItem p{color:rgba(255,255,255,.68);line-height:1.45}
+.newsroomItem small{color:rgba(255,255,255,.48)}
+.newsroomItem a{color:#ffd166;text-decoration:none;font-weight:1000}
+@media(max-width:900px){.newsroomGrid{grid-template-columns:1fr}}

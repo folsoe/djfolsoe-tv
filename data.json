@@ -1,11 +1,11 @@
 {
   "station": {
-    "name": "DJ FOLSOE TV",
+    "name": "DJ FOLSOE",
     "domain": "folsoetv.dk",
     "twitch": "https://twitch.tv/djfolsoe",
-    "description_da": "DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.",
-    "description_en": "DJ FOLSOE TV is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community – presented as a modern Music TV channel from Denmark.",
-    "description_de": "DJ FOLSOE TV ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",
+    "description_da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab",
+    "description_en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
+    "description_de": "DJ FOLSOE ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",
     "live": false,
     "viewers": 0,
     "followersCurrent": 870,
@@ -102,7 +102,7 @@
   "news": [
     {
       "tag": "Broadcast",
-      "title": "DJ FOLSOE TV builds a modern Music TV universe from Denmark."
+      "title": "DJ FOLSOE builds a modern Music TV universe from Denmark."
     },
     {
       "tag": "Requests",
@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V812.3",
+    "version": "V813.1",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -633,13 +633,14 @@
       "chartApi": "api/chart.json",
       "broadcastApi": "api/broadcast-core.json"
     },
-    "cloudIntegration": "Cloud-first with local fallback"
+    "cloudIntegration": "Cloud-first with local fallback",
+    "brandingLock": "DJ FOLSOE"
   },
   "brand": "DJ FOLSOE",
   "about": {
-    "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab — præsenteret som en moderne Music TV-kanal fra Danmark.",
-    "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv featuring live DJ shows, song requests, music charts and a strong music community — presented as a modern Music TV channel from Denmark.",
-    "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community — präsentiert als moderner Music-TV-Kanal aus Dänemark."
+    "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
+    "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
+    "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community."
   },
   "chartDescription": {
     "da": "FOLSOE Weekly Listening Chart er baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og streamingdata.",
@@ -681,6 +682,31 @@
       "da": "Baseret på FOLSOE's mest lyttede sange i denne uge, danske hitlister, EDM-trends, Spotify og seernes ønsker.",
       "en": "Based on FOLSOE's most listened songs this week, Danish charts, EDM trends, Spotify and viewer requests.",
       "de": "Basierend auf FOLSOEs meistgehörten Songs dieser Woche, dänischen Charts, EDM-Trends, Spotify und Zuschauerwünschen."
+    },
+    "newsroomTitle": {
+      "da": "FOLSOE Music Newsroom",
+      "en": "FOLSOE Music Newsroom",
+      "de": "FOLSOE Music Newsroom"
+    },
+    "newsroomText": {
+      "da": "Samlede musiknyheder fra EDM, dance, Danmark og internationale kilder.",
+      "en": "Unified music news from EDM, dance, Denmark and international sources.",
+      "de": "Gebündelte Musiknachrichten aus EDM, Dance, Dänemark und internationalen Quellen."
+    },
+    "heroRibbon": {
+      "da": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
+      "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
+      "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
+    },
+    "heroDescription": {
+      "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
+      "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
+      "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community."
+    },
+    "about": {
+      "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
+      "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
+      "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community."
     }
   },
   "twitchProfile": {
@@ -2106,5 +2132,82 @@
       "version": "V812.3",
       "mode": "playlist-import-autofill"
     }
+  },
+  "unifiedNewsroom": {
+    "version": "V813",
+    "title": "FOLSOE Unified Music Newsroom",
+    "description": "Samlet nyhedsrum for musik, EDM, dance, danske musiknyheder, festivaler og internationale musikstories.",
+    "sources": [
+      {
+        "id": "edm",
+        "label": "EDM.com",
+        "category": "EDM",
+        "url": "https://edm.com/.rss/full/"
+      },
+      {
+        "id": "djmag",
+        "label": "DJ Mag",
+        "category": "DJ / Club",
+        "url": "https://djmag.com/rss.xml"
+      },
+      {
+        "id": "mixmag",
+        "label": "Mixmag",
+        "category": "Dance / Club",
+        "url": "https://mixmag.net/rss.xml"
+      },
+      {
+        "id": "ra",
+        "label": "Resident Advisor",
+        "category": "Electronic",
+        "url": "https://ra.co/xml/news.xml"
+      },
+      {
+        "id": "nme_music",
+        "label": "NME Music",
+        "category": "Music",
+        "url": "https://www.nme.com/music/feed"
+      },
+      {
+        "id": "rollingstone_music",
+        "label": "Rolling Stone Music",
+        "category": "Music",
+        "url": "https://www.rollingstone.com/music/music-news/feed/"
+      },
+      {
+        "id": "bbc_music",
+        "label": "BBC Music News",
+        "category": "UK / BBC",
+        "url": "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"
+      },
+      {
+        "id": "dr_kultur",
+        "label": "DR Kultur",
+        "category": "Danmark",
+        "url": "https://www.dr.dk/nyheder/service/feeds/kultur"
+      },
+      {
+        "id": "gaffa",
+        "label": "GAFFA",
+        "category": "Danmark",
+        "url": "https://gaffa.dk/rss/"
+      }
+    ],
+    "items": [
+      {
+        "category": "Music",
+        "title": "FOLSOE Newsroom is ready",
+        "source": "DJ FOLSOE",
+        "url": "",
+        "publishedAt": "",
+        "summary": "Music news, EDM, Denmark and chart stories are collected in one newsroom."
+      }
+    ],
+    "lastUpdated": ""
+  },
+  "heroRibbon": {
+    "da": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
+    "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
+    "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   }
 }

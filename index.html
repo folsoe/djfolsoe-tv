@@ -25,9 +25,9 @@
   <main id="home">
     <section class="hero">
       <div>
-        <div class="kicker" data-i18n="kicker">BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK</div>
+        <div class="kicker" data-i18n="kicker"><span data-i18n="heroRibbon">BROADCAST CLOUD · DJ FOLSOE ON TWITCH</span></div>
         <h1>DJ FOLSOE</h1>
-        <p data-i18n="heroText">DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.</p>
+        <p data-i18n="heroText"><span data-i18n="heroDescription">DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.</span></p>
         <div class="cloudStatus" id="cloudStatus">Cloud status: checking...</div>
         <div class="actions">
           <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" data-i18n="watchLive">Se live</a>
@@ -76,6 +76,14 @@
     <section id="top20" class="panel">
       <div class="sectionHead"><span>FOLSOE WEEKLY LISTENING CHART</span><h2 data-i18n="top20Title">FOLSOE Weekly Listening Chart</h2></div><p class="chartMethod">Baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og Spotify-data.</p>
       <div class="chartDashboard" id="chartDashboard"></div><div class="topList" id="topList"></div><div class="apiNote">Chart API: <code>api/chart.json</code> · Broadcast Core: <code>api/broadcast-core.json</code></div>
+    </section>
+
+    
+    <section id="newsroomUnified" class="panel">
+      <div class="sectionHead"><span>UNIFIED MUSIC NEWSROOM</span><h2 data-i18n="newsroomTitle">FOLSOE Music Newsroom</h2></div>
+      <p data-i18n="newsroomText" class="chartMethod">Samlede musiknyheder fra EDM, dance, Danmark og internationale kilder.</p>
+      <div class="newsroomTabs" id="newsroomTabs"></div>
+      <div class="newsroomGrid" id="newsroomGrid"></div>
     </section>
 
     <section id="news" class="panel">
