@@ -1,4 +1,4 @@
-// DJ FOLSOE TV NETWORK V812 - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE NETWORK V813.2-FRONTEND-BINDING - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -18,7 +18,7 @@
 
 const DEFAULT_DATA = {
   station: {
-    name: "DJ FOLSOE TV",
+    name: "DJ FOLSOE",
     domain: "folsoetv.dk",
     twitch: "https://twitch.tv/djfolsoe",
     twitchLogin: "djfolsoe",
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V812",
+    version: "V813.2-FRONTEND-BINDING",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V812";
+  data.broadcastCore.version = "V813.2-FRONTEND-BINDING";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -198,6 +198,92 @@ async function twitchLive(env) {
   };
 }
 
+
+function stripHtml(input){ return String(input||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim(); }
+function xmlText(block, tag){
+  const m = block.match(new RegExp("<"+tag+"(?:\\\\s[^>]*)?>([\\\\s\\\\S]*?)<\\\\/"+tag+">","i"));
+  if(!m) return "";
+  return m[1].replace(/<!\[CDATA\[/g,"").replace(/\]\]>/g,"").trim();
+}
+function decodeXml(s){
+  return String(s||"").replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&#39;/g,"'");
+}
+async function fetchRssSource(source){
+  try{
+    const res = await fetch(source.url, {headers:{"user-agent":"DJ FOLSOE Newsroom"}});
+    if(!res.ok) return [];
+    const xml = await res.text();
+    const blocks = [...xml.matchAll(/<item[\s\S]*?<\/item>/gi)].map(m=>m[0]).slice(0,8);
+    return blocks.map(item=>({
+      category: source.category,
+      source: source.label,
+      title: decodeXml(stripHtml(xmlText(item,"title"))),
+      url: decodeXml(stripHtml(xmlText(item,"link"))),
+      publishedAt: decodeXml(stripHtml(xmlText(item,"pubDate"))),
+      summary: decodeXml(stripHtml(xmlText(item,"description"))).slice(0,220)
+    })).filter(x=>x.title);
+  }catch(e){ return []; }
+}
+async function collectNewsroom(env){
+  let core = await getCore(env);
+  const sources = (core.unifiedNewsroom && core.unifiedNewsroom.sources) || [
+    {id:"edm",label:"EDM.com",category:"EDM",url:"https://edm.com/.rss/full/"},
+    {id:"mixmag",label:"Mixmag",category:"Dance / Club",url:"https://mixmag.net/rss.xml"},
+    {id:"ra",label:"Resident Advisor",category:"Electronic",url:"https://ra.co/xml/news.xml"},
+    {id:"nme_music",label:"NME Music",category:"Music",url:"https://www.nme.com/music/feed"},
+    {id:"dr_kultur",label:"DR Kultur",category:"Danmark",url:"https://www.dr.dk/nyheder/service/feeds/kultur"}
+  ];
+  const batches = await Promise.all(sources.map(fetchRssSource));
+  const items = batches.flat().slice(0,60);
+  core.unifiedNewsroom = core.unifiedNewsroom || {};
+  core.unifiedNewsroom.version = "V813.2-FRONTEND-BINDING";
+  core.unifiedNewsroom.sources = sources;
+  core.unifiedNewsroom.items = items;
+  core.unifiedNewsroom.lastUpdated = new Date().toISOString();
+  await putCore(env, core);
+  return core.unifiedNewsroom;
+}
+
+
+function forceBrandingPatch(core) {
+  core = core || {};
+  core.brand = "DJ FOLSOE";
+  core.heroRibbon = { da:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH", en:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH", de:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH" };
+  core.about = { da:"DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.", en:"DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de:"DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community." };
+  core.station = core.station || {};
+  core.station.name = "DJ FOLSOE";
+  core.station.description_da = "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.";
+  core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
+  core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
+  core.broadcastCore = core.broadcastCore || {};
+  core.broadcastCore.version = "V813.2-FRONTEND-BINDING";
+  core.broadcastCore.brandingLock = "DJ FOLSOE";
+  core.translations = core.translations || {};
+  core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
+  core.translations.heroRibbon = { da:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH", en:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH", de:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH" };
+  core.translations.heroDescription = { da:"DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.", en:"DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de:"DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community." };
+  core.translations.about = { da:"DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.", en:"DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de:"DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community." };
+
+  const clean = (value) => {
+    if (typeof value === "string") {
+      return value
+        .replaceAll("DJ FOLSOE", "DJ FOLSOE")
+        .replaceAll("FOLSOE TV", "FOLSOE")
+        .replace(/\s*[–—-]\s*presented as a modern Music TV channel from Denmark\.?/gi, "")
+        .replace(/\s*[–—-]\s*præsenteret som en moderne Music TV-kanal fra Danmark\.?/gi, "")
+        .replace(/\s*[–—-]\s*präsentiert als moderner Music-TV-Sender aus Dänemark\.?/gi, "")
+        .replace(/\s*[–—-]\s*präsentiert als moderner Music-TV-Kanal aus Dänemark\.?/gi, "");
+    }
+    if (Array.isArray(value)) return value.map(clean);
+    if (value && typeof value === "object") {
+      for (const k of Object.keys(value)) value[k] = clean(value[k]);
+      return value;
+    }
+    return value;
+  };
+  return clean(core);
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return okOptions();
@@ -207,12 +293,12 @@ export default {
 
     try {
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE TV V812 Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V813.2-FRONTEND-BINDING Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V812 Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.2-FRONTEND-BINDING Admin" });
       }
 
       if (path === "/api/seed") {
@@ -223,6 +309,35 @@ export default {
         existing.requests = requests;
         const saved = await putCore(env, existing);
         return json({ ok: true, seeded: true, data: saved });
+      }
+
+
+      if (path === "/api/newsroom") {
+        const core = await getCore(env);
+        if (request.method === "GET") {
+          if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
+          return json(core.unifiedNewsroom || { version:"V813.2-FRONTEND-BINDING", sources:[], items:[] });
+        }
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+          const newsroom = await request.json();
+          core.unifiedNewsroom = newsroom;
+          const saved = await putCore(env, core);
+          return json({ ok:true, newsroom:saved.unifiedNewsroom });
+        }
+      }
+
+      if (path === "/api/newsroom/refresh") {
+        if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+        return json({ ok:true, newsroom: await collectNewsroom(env) });
+      }
+
+      if (path === "/api/admin/force-branding") {
+        if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+        let core = await getCore(env);
+        core = forceBrandingPatch(core);
+        const saved = await putCore(env, core);
+        return json({ ok:true, message:"Branding forced into KV", core:saved });
       }
 
       if (path === "/api/broadcast-core") {
@@ -238,6 +353,39 @@ export default {
           const saved = await putCore(env, body);
           return json({ ok: true, data: saved });
         }
+      }
+
+      if (path === "/api/chart-lab") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json(core.chartLab || { candidates: [], method: { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 }});
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401);
+          const lab = await request.json();
+          core.chartLab = lab;
+          const saved = await putCore(env, core);
+          return json({ ok:true, chartLab:saved.chartLab });
+        }
+      }
+
+      if (path === "/api/chart-lab/calculate") {
+        if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401);
+        const core = await getCore(env);
+        const lab = core.chartLab || { candidates: [], method: { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 } };
+        const weights = lab.method || { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 };
+        const calc = (x) => {
+          const s = x.scores || {};
+          return Math.round((Number(s.folsoeListening||0)*weights.folsoeListening + Number(s.danishCharts||0)*weights.danishCharts + Number(s.edmTrend||0)*weights.edmTrend + Number(s.spotify||0)*weights.spotify + Number(s.viewerRequests||0)*weights.viewerRequests)/100);
+        };
+        const filled = (lab.candidates || []).filter(x => x.artist || x.title).map(x => ({...x, points: calc(x)})).sort((a,b)=>(b.points||0)-(a.points||0));
+        filled.forEach((x,i)=>{ x.rank=i+1; const lw=Number(x.lastWeek); x.status=String(x.lastWeek).toUpperCase()==="NEW"||!x.lastWeek||x.lastWeek==="-"?"NEW":(!isNaN(lw)?(lw>x.rank?"UP":lw<x.rank?"DOWN":"SAME"):"SAME"); x.weeks=x.status==="NEW"?1:Number(x.weeks||1)+1; x.peak=Math.min(Number(x.peak||x.rank),x.rank); });
+        lab.candidates = [...filled, ...(lab.candidates||[]).filter(x=>!(x.artist||x.title))].slice(0,40);
+        const top = filled.slice(0,20).map((x,i)=>({rank:i+1,lastWeek:x.lastWeek,artist:x.artist,title:x.title,status:x.status,points:x.points,weeks:x.weeks,peak:x.peak,genre:x.genre,folsoePick:!!x.pick,cover:x.cover,youtube:x.youtube,scores:x.scores}));
+        core.chartLab = lab;
+        core.weeklyListeningChart = { ...(core.weeklyListeningChart||{}), title:"FOLSOE Weekly Listening Chart", method:weights, items:top };
+        core.top20Chart = core.weeklyListeningChart;
+        core.top20 = top.map(x => `${x.artist} - ${x.title}`);
+        const saved = await putCore(env, core);
+        return json({ ok:true, chartLab:saved.chartLab, chart:saved.weeklyListeningChart });
       }
 
       if (path === "/api/weekly-listening-chart") {
