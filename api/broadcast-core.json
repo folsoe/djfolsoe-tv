@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.7.2 NEWS TICKER THEME SYNC",
+    "version": "V813.7.4 CLEAN TOPBAR NEWS CLOCK",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -2224,7 +2224,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.7.2 NEWS TICKER THEME SYNC",
+  "platformVersion": "V813.7.4 CLEAN TOPBAR NEWS CLOCK",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2271,12 +2271,13 @@
     },
     "miniCardsRemoved": true,
     "topbar": {
-      "left": "active show/title",
-      "center": "scrolling broadcast news from admin/homepage",
+      "left": "logo only",
+      "center": "broadcast news scroller",
       "right": "clock",
-      "noTextCut": true,
-      "themeAware": true
-    }
+      "showTitleRemoved": true,
+      "themeTitleRemoved": true
+    },
+    "topbarLogoSafe": true
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
