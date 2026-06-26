@@ -235,3 +235,7 @@
 .newsroomItem small{color:rgba(255,255,255,.48)}
 .newsroomItem a{color:#ffd166;text-decoration:none;font-weight:1000}
 @media(max-width:900px){.newsroomGrid{grid-template-columns:1fr}}
+
+/* V813.3 Stable Release */
+.stableVersionBadge,.adminStableBadge{position:fixed;right:14px;bottom:12px;z-index:9999;padding:8px 11px;border-radius:999px;background:rgba(0,0,0,.54);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.68);font-size:10px;font-weight:1000;letter-spacing:.08em;backdrop-filter:blur(14px);pointer-events:none}
+.adminStableBadge{color:#ffd166}
