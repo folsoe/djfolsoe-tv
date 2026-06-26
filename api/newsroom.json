@@ -1,0 +1,59 @@
+{
+  "sources": [
+    {
+      "id": "edm",
+      "label": "EDM.com",
+      "category": "EDM",
+      "url": "https://edm.com/.rss/full/"
+    },
+    {
+      "id": "djmag",
+      "label": "DJ Mag",
+      "category": "DJ / Club",
+      "url": "https://djmag.com/rss.xml"
+    },
+    {
+      "id": "mixmag",
+      "label": "Mixmag",
+      "category": "Dance / Club",
+      "url": "https://mixmag.net/rss.xml"
+    },
+    {
+      "id": "ra",
+      "label": "Resident Advisor",
+      "category": "Electronic",
+      "url": "https://ra.co/xml/news.xml"
+    },
+    {
+      "id": "nme_music",
+      "label": "NME Music",
+      "category": "Music",
+      "url": "https://www.nme.com/music/feed"
+    },
+    {
+      "id": "rollingstone_music",
+      "label": "Rolling Stone Music",
+      "category": "Music",
+      "url": "https://www.rollingstone.com/music/music-news/feed/"
+    },
+    {
+      "id": "bbc_music",
+      "label": "BBC Music News",
+      "category": "UK / BBC",
+      "url": "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"
+    },
+    {
+      "id": "dr_kultur",
+      "label": "DR Kultur",
+      "category": "Danmark",
+      "url": "https://www.dr.dk/nyheder/service/feeds/kultur"
+    },
+    {
+      "id": "gaffa",
+      "label": "GAFFA",
+      "category": "Danmark",
+      "url": "https://gaffa.dk/rss/"
+    }
+  ],
+  "items": []
+}
