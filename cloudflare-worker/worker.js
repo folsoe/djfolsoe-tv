@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V813.7.4 CLEAN TOPBAR NEWS CLOCK - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE NETWORK V813.8 DENSE BOTTOM DECK CODE UPDATE - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V813.7.4 CLEAN TOPBAR NEWS CLOCK",
+    version: "V813.8 DENSE BOTTOM DECK CODE UPDATE",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V813.7.4 CLEAN TOPBAR NEWS CLOCK";
+  data.broadcastCore.version = "V813.8 DENSE BOTTOM DECK CODE UPDATE";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V813.7.4 CLEAN TOPBAR NEWS CLOCK";
+  core.unifiedNewsroom.version = "V813.8 DENSE BOTTOM DECK CODE UPDATE";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V813.7.4 CLEAN TOPBAR NEWS CLOCK";
+  core.broadcastCore.version = "V813.8 DENSE BOTTOM DECK CODE UPDATE";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V813.7.4 CLEAN TOPBAR NEWS CLOCK",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V813.8 DENSE BOTTOM DECK CODE UPDATE",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -324,7 +324,7 @@ function normalizeThemeName(name){
 function getThemePayload(core){
   const engine=core.themeEngine||{};
   const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
-  return {ok:true,version:"V813.7.4 CLEAN TOPBAR NEWS CLOCK",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+  return {ok:true,version:"V813.8 DENSE BOTTOM DECK CODE UPDATE",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
 }
 function applyThemeToOverlayState(state, core){
   const payload=getThemePayload(core);
@@ -350,7 +350,7 @@ function buildMotionPayload(state){
   const danish = chartItems.find(x=>String(x.genre||"").toLowerCase().includes("dansk")) || top;
 
   state.motion = {
-    version:"V813.7.4 CLEAN TOPBAR NEWS CLOCK",
+    version:"V813.8 DENSE BOTTOM DECK CODE UPDATE",
     layout:"camera-safe-side-stacked",
     rotationMs:8000,
     classicTicker:false,
@@ -498,7 +498,7 @@ export default {
     try {
       if (path === "/api/broadcast-news") {
         const core = await getCore(env);
-        if (request.method === "GET") return json({ ok:true, version:"V813.7.4 CLEAN TOPBAR NEWS CLOCK", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
+        if (request.method === "GET") return json({ ok:true, version:"V813.8 DENSE BOTTOM DECK CODE UPDATE", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
           const body = await request.json();
@@ -529,16 +529,16 @@ export default {
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V813.7.4 CLEAN TOPBAR NEWS CLOCK",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V813.8 DENSE BOTTOM DECK CODE UPDATE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V813.7.4 CLEAN TOPBAR NEWS CLOCK Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V813.8 DENSE BOTTOM DECK CODE UPDATE Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.7.4 CLEAN TOPBAR NEWS CLOCK Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.8 DENSE BOTTOM DECK CODE UPDATE Admin" });
       }
 
       if (path === "/api/seed") {
@@ -556,7 +556,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V813.7.4 CLEAN TOPBAR NEWS CLOCK", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V813.8 DENSE BOTTOM DECK CODE UPDATE", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);

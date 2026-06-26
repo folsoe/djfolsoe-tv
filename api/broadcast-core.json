@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.7.4 CLEAN TOPBAR NEWS CLOCK",
+    "version": "V813.8 DENSE BOTTOM DECK CODE UPDATE",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -2224,7 +2224,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.7.4 CLEAN TOPBAR NEWS CLOCK",
+  "platformVersion": "V813.8 DENSE BOTTOM DECK CODE UPDATE",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2233,7 +2233,7 @@
       "4 box footer layout preserved"
     ],
     "endpoint": "/api/overlay/v170-state",
-    "layout": "bottom-side-deck-no-mini-center",
+    "layout": "dense-bottom-side-deck",
     "boxLayout": {
       "leftColumnTop": "box1_live",
       "leftColumnBottom": "box3_music",
@@ -2277,7 +2277,8 @@
       "showTitleRemoved": true,
       "themeTitleRemoved": true
     },
-    "topbarLogoSafe": true
+    "topbarLogoSafe": true,
+    "denseBottomDeck": true
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
