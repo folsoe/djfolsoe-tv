@@ -816,7 +816,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V809",
+    "version": "V810",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -825,5 +825,43 @@
       "broadcastApi": "api/broadcast-core.json"
     },
     "cloudIntegration": "Cloud-first with local fallback"
+  },
+  "brand": "DJ FOLSOE",
+  "about": {
+    "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab — præsenteret som en moderne Music TV-kanal fra Danmark.",
+    "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv featuring live DJ shows, song requests, music charts and a strong music community — presented as a modern Music TV channel from Denmark.",
+    "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community — präsentiert als moderner Music-TV-Kanal aus Dänemark."
+  },
+  "chartDescription": {
+    "da": "FOLSOE Weekly Listening Chart er baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og streamingdata.",
+    "en": "The FOLSOE Weekly Listening Chart is based on the songs FOLSOE listened to the most this week, combined with Danish charts, EDM trends and streaming data.",
+    "de": "Die FOLSOE Weekly Listening Chart basiert auf den Songs, die FOLSOE in dieser Woche am häufigsten gehört hat, kombiniert mit dänischen Charts, EDM-Trends und Streamingdaten."
+  },
+  "translations": {
+    "siteTitle": {
+      "da": "DJ FOLSOE",
+      "en": "DJ FOLSOE",
+      "de": "DJ FOLSOE"
+    },
+    "guide": {
+      "da": "Programguide",
+      "en": "Program Guide",
+      "de": "Programmplan"
+    },
+    "news": {
+      "da": "Nyheder",
+      "en": "News",
+      "de": "Nachrichten"
+    },
+    "requests": {
+      "da": "Musikønsker",
+      "en": "Song Requests",
+      "de": "Musikwünsche"
+    },
+    "chart": {
+      "da": "FOLSOE Weekly Listening Chart",
+      "en": "FOLSOE Weekly Listening Chart",
+      "de": "FOLSOE Weekly Listening Chart"
+    }
   }
 }
