@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.3 STABLE",
+    "version": "V813.4 V170.3 BROADCAST INTEGRATION",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -636,7 +636,9 @@
     "cloudIntegration": "Cloud-first with local fallback",
     "brandingLock": "DJ FOLSOE",
     "frontendBinding": true,
-    "stableRelease": true
+    "stableRelease": true,
+    "overlayIntegration": "V170.3",
+    "streamElementsReady": true
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2217,5 +2219,14 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.3 STABLE"
+  "platformVersion": "V813.4 V170.3 BROADCAST INTEGRATION",
+  "v170Overlay": {
+    "version": "V170.3",
+    "lockedRules": [
+      "Only one DJ FOLSOE LIVE logo/TV-bug in left corner",
+      "No duplicate left-corner logo",
+      "4 box footer layout preserved"
+    ],
+    "endpoint": "/api/overlay/v170-state"
+  }
 }
