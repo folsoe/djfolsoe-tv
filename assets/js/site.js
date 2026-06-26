@@ -1,6 +1,13 @@
 let data, lang=localStorage.getItem('djf_lang')||'da', tick=0;
 const $=id=>document.getElementById(id);
 const T={da:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK",heroText:"DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.",watchLive:"Se live",requestSong:"Ønsk en sang",streamTitle:"Feed fra streamen",guideTitle:"Programplan",top20Title:"Top 20 fra stationen",newsTitle:"Nyheder",requestsTitle:"Ønsk en sang",requestsText:"Skriv dit musikønske her. Det gemmes lokalt i admin-demoen og kan senere kobles til rigtig backend.",yourName:"Dit navn",songRequest:"Sangønske",sendRequest:"Send ønske"},en:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV FROM DENMARK",heroText:"DJ FOLSOE TV is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community – presented as a modern Music TV channel from Denmark.",watchLive:"Watch Live",requestSong:"Request a song",streamTitle:"Stream feed",guideTitle:"TV Guide",top20Title:"Station Top 20",newsTitle:"News",requestsTitle:"Request a song",requestsText:"Write your music request here. It is saved locally in the admin demo and can later be connected to a real backend.",yourName:"Your name",songRequest:"Song request",sendRequest:"Send request"},de:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV AUS DÄNEMARK",heroText:"DJ FOLSOE TV ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",watchLive:"Live ansehen",requestSong:"Song wünschen",streamTitle:"Stream-Feed",guideTitle:"TV-Guide",top20Title:"Station Top 20",newsTitle:"Nachrichten",requestsTitle:"Song wünschen",requestsText:"Schreibe deinen Musikwunsch hier. Er wird lokal in der Admin-Demo gespeichert und kann später mit einem echten Backend verbunden werden.",yourName:"Dein Name",songRequest:"Musikwunsch",sendRequest:"Wunsch senden"}};
+function setCloudStatus(ok,msg){
+  const el=document.getElementById('cloudStatus');
+  if(!el) return;
+  el.classList.toggle('ok',!!ok);
+  el.classList.toggle('fail',ok===false);
+  el.textContent=msg;
+}
 async function boot(){
   data = await loadBroadcastData();
   mergeLocal();
@@ -13,9 +20,16 @@ async function loadBroadcastData(){
   const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
   if(base){
     try{
+      const h=await fetch(base+'/api/health',{cache:'no-store'});
+      if(h.ok) setCloudStatus(true,'Cloud online · Broadcast backend connected');
       const r=await fetch(base+'/api/broadcast-core',{cache:'no-store'});
       if(r.ok) return await r.json();
-    }catch(e){}
+      setCloudStatus(false,'Cloud reachable · data fallback active');
+    }catch(e){
+      setCloudStatus(false,'Cloud offline · local fallback active');
+    }
+  }else{
+    setCloudStatus(false,'Cloud not configured · local mode');
   }
   const r=await fetch('assets/data/site-data.json');
   return await r.json();

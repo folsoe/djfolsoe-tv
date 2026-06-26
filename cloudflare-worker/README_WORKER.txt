@@ -1,31 +1,32 @@
-DJ FOLSOE TV V808 CLOUDFLARE WORKER
+DJ FOLSOE TV V809 CLOUDFLARE WORKER
 
-1. Install Wrangler:
-   npm install -g wrangler
+Du har allerede:
+- Worker deployet
+- /api/health virker
+- KV namespace DJF_DATA oprettet
+- KV binding DJF_DATA sat på Workeren
+- ADMIN_TOKEN og TWITCH_CHANNEL som secrets
 
-2. Login:
-   wrangler login
+V809 endpoint check:
+https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/health
+https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/broadcast-core
+https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/chart
+https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/requests
 
-3. Create KV namespace:
-   wrangler kv namespace create DJF_DATA
+Admin validering:
+GET /api/admin/validate
+Header:
+x-admin-token: DIN_ADMIN_TOKEN
 
-4. Copy the returned id into wrangler.toml:
-   [[kv_namespaces]]
-   binding = "DJF_DATA"
-   id = "..."
+Frontend:
+assets/js/config.js er sat til:
+https://djfolsoe-tv-api.sunefolsoe.workers.dev
 
-5. Add secrets:
-   wrangler secret put ADMIN_TOKEN
-   wrangler secret put TWITCH_CLIENT_ID
-   wrangler secret put TWITCH_ACCESS_TOKEN
-   wrangler secret put TWITCH_CHANNEL
-
-6. Deploy:
-   wrangler deploy
-
-7. In Cloudflare, add route/subdomain:
-   api.folsoetv.dk/* -> djfolsoe-tv-api
-
-Frontend config:
-Open assets/js/config.js and set:
+Når du senere laver api.folsoetv.dk, ændres config.js til:
 window.DJF_API_BASE = "https://api.folsoetv.dk";
+
+Secrets:
+ADMIN_TOKEN
+TWITCH_CHANNEL
+TWITCH_CLIENT_ID
+TWITCH_ACCESS_TOKEN

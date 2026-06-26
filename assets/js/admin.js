@@ -44,7 +44,7 @@ async function saveToBackend(){
   try{
     const r=await fetch(base+'/api/broadcast-core',{method:'POST',headers:{'content-type':'application/json','x-admin-token':token},body:JSON.stringify(data)});
     if(!r.ok) throw new Error(await r.text());
-    setBackendStatus('Data gemt i Cloudflare Worker backend.');
+    setBackendStatus('Data gemt i Broadcast Cloud / Cloudflare KV.'); if($('cloudKvStatus')) $('cloudKvStatus').textContent='Saved';
   }catch(e){setBackendStatus('Backend save fejl: '+e.message);}
 }
 async function loadRequestsBackend(){
@@ -58,7 +58,7 @@ async function loadRequestsBackend(){
     setBackendStatus('Requests hentet fra backend.');
   }catch(e){setBackendStatus('Request backend fejl: '+e.message);}
 }
-function saveBackendConfig(){
+function saveBackendConfig(){if($('apiBaseLogin')) localStorage.setItem('djf_api_base',$('apiBaseLogin').value.trim());
   if($('apiBaseInput')) localStorage.setItem('djf_api_base',$('apiBaseInput').value.trim());
   if($('adminTokenInput')) localStorage.setItem(window.DJF_ADMIN_TOKEN_STORAGE_KEY||'djf_admin_token',$('adminTokenInput').value.trim());
   window.DJF_API_BASE=apiBase();
@@ -66,8 +66,35 @@ function saveBackendConfig(){
 }
 function setBackendStatus(msg){const el=$('backendStatus'); if(el) el.textContent=msg;}
 function mergeLocal(){const saved=localStorage.getItem('djf_site_data');if(saved){try{data={...data,...JSON.parse(saved)}}catch(e){}}data.station=data.station||{};data.station.twitchLogin=data.station.twitchLogin||'djfolsoe';data.station.streamTitle=data.station.streamTitle||'';data.station.category=data.station.category||'';}
-function initLogin(){if(localStorage.getItem('djf_admin_unlocked')==='1')unlock();$('adminLogin').onclick=async()=>{const h=await sha256(SALT+$('adminPassword').value);if(h===HASH){localStorage.setItem('djf_admin_unlocked','1');unlock();}else $('adminMessage').textContent='Forkert password.'};$('adminPassword').onkeydown=e=>{if(e.key==='Enter')$('adminLogin').click()}}
-function unlock(){$('adminLocked').classList.add('hidden');$('adminUnlocked').classList.remove('hidden')}
+function initLogin(){
+  if($('apiBaseLogin')) $('apiBaseLogin').value = apiBase() || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev';
+  if(localStorage.getItem('djf_admin_unlocked')==='1' && adminToken()) unlock();
+  $('adminLogin').onclick=async()=>{
+    if($('apiBaseLogin')) localStorage.setItem('djf_api_base',$('apiBaseLogin').value.trim());
+    if($('adminPassword')) localStorage.setItem(window.DJF_ADMIN_TOKEN_STORAGE_KEY||'djf_admin_token',$('adminPassword').value.trim());
+    const ok=await validateCloudAdmin();
+    if(ok){
+      localStorage.setItem('djf_admin_unlocked','1');
+      unlock();
+      await loadFromBackend();
+    }
+  };
+  $('adminPassword').onkeydown=e=>{if(e.key==='Enter')$('adminLogin').click()};
+}
+async function validateCloudAdmin(){
+  const base=apiBase(), token=adminToken();
+  if(!base||!token){$('adminMessage').textContent='Mangler API Base URL eller ADMIN_TOKEN.';return false;}
+  try{
+    const r=await fetch(base+'/api/admin/validate',{headers:{'x-admin-token':token},cache:'no-store'});
+    if(!r.ok) throw new Error('Token blev afvist');
+    $('adminMessage').textContent='Cloud admin godkendt.';
+    return true;
+  }catch(e){
+    $('adminMessage').textContent='Cloud login fejl: '+e.message;
+    return false;
+  }
+}
+function unlock(){$('adminLocked').classList.add('hidden');$('adminUnlocked').classList.remove('hidden');setTimeout(testCloud,300)}
 function saveAll(){localStorage.setItem('djf_site_data',JSON.stringify(data));updateBackup();}
 function renderAdmin(){renderControl();renderPrograms();renderTop20();renderShows();renderNews();renderRequests();updateBackup();}
 function renderControl(){$('liveSelect').value=String(data.station.live);$('viewerInput').value=data.station.viewers||0;$('followersInput').value=data.station.followersCurrent||0;$('activeShowInput').value=data.station.activeShow||'';if($('twitchLoginInput'))$('twitchLoginInput').value=data.station.twitchLogin||'djfolsoe';const api=JSON.parse(localStorage.getItem('djf_twitch_api')||'{}');if($('twitchClientIdInput'))$('twitchClientIdInput').value=api.clientId||'';if($('twitchTokenInput'))$('twitchTokenInput').value=api.token||'';if($('twitchAutoInput'))$('twitchAutoInput').value=String(api.auto||false);}
@@ -182,6 +209,35 @@ function renderRequests(){const reqs=JSON.parse(localStorage.getItem('djf_reques
 function collectAll(){collectControl();collectPrograms();collectTop20();collectShows();collectNews();}
 function updateBackup(){$('jsonBackup').value=JSON.stringify(data,null,2);}
 
+
+async function testCloud(){
+  const base=apiBase();
+  if(!base){setBackendStatus('Mangler API Base URL.');return false;}
+  try{
+    const h=await fetch(base+'/api/health',{cache:'no-store'});
+    if(!h.ok) throw new Error('Health failed');
+    const health=await h.json();
+    const c=await fetch(base+'/api/broadcast-core',{cache:'no-store'});
+    if(!c.ok) throw new Error('Broadcast core failed');
+    if($('cloudApiStatus')) $('cloudApiStatus').textContent='Online';
+    if($('cloudKvStatus')) $('cloudKvStatus').textContent='Connected';
+    if($('cloudMode')) $('cloudMode').textContent='Cloud-first';
+    setBackendStatus('Cloud OK: '+health.service);
+    return true;
+  }catch(e){
+    if($('cloudApiStatus')) $('cloudApiStatus').textContent='Offline';
+    if($('cloudKvStatus')) $('cloudKvStatus').textContent='Fallback';
+    setBackendStatus('Cloud test fejl: '+e.message);
+    return false;
+  }
+}
+function setupV809Buttons(){
+  if($('testCloud')) $('testCloud').onclick=()=>testCloud();
+  if($('loadFromBackendTop')) $('loadFromBackendTop').onclick=()=>loadFromBackend();
+  if($('saveToBackendTop')) $('saveToBackendTop').onclick=()=>saveToBackend();
+  if($('openWorkerHealth')) $('openWorkerHealth').onclick=()=>window.open(apiBase()+'/api/health','_blank');
+}
+
 function saveTwitchSettings(){
   const api={
     channel: $('twitchLoginInput')?.value.trim() || 'djfolsoe',
@@ -252,7 +308,7 @@ function startTwitchAutoRefresh(){
   }
 }
 
-document.addEventListener('DOMContentLoaded',()=>{boot();
+document.addEventListener('DOMContentLoaded',()=>{boot();setTimeout(setupV809Buttons,500);
 $('saveControl').onclick=()=>{collectControl();saveAll();alert('Kontrolcenter gemt.')};$('fetchTwitch').onclick=()=>fetchTwitchLiveData();$('openWebsite').onclick=()=>window.open('index.html','_blank');if($('saveTwitchApi'))$('saveTwitchApi').onclick=()=>saveTwitchSettings();if($('testTwitchApi'))$('testTwitchApi').onclick=()=>fetchTwitchLiveData();startTwitchAutoRefresh();
 $('addProgram').onclick=()=>{data.schedule.push({day:'New day',time:'20:00',show:'New show',description:'Description'});renderPrograms();saveAll();};
 $('savePrograms').onclick=()=>{collectPrograms();saveAll();alert('Programmer gemt.')};$('addShow').onclick=()=>{data.shows.push({title:'New show',type:'Show',text:'Description'});renderShows();saveAll();};

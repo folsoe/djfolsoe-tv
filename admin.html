@@ -15,14 +15,33 @@
 
   <main>
     <section class="panel adminLock" id="adminLocked">
-      <div class="sectionHead"><span>PROTECTED CONTROL CENTER</span><h2>Admin er låst</h2></div>
-      <p>Indtast adgangskode for at åbne admin.</p>
-      <input id="adminPassword" type="password" placeholder="Password">
-      <button id="adminLogin">Lås op</button>
-      <small id="adminMessage">Standard password: CHANGE-ME-V800</small>
+      <div class="sectionHead"><span>V809 CLOUD ADMIN LOGIN</span><h2>Broadcast Cloud Admin</h2></div>
+      <div class="adminCloudLogin">
+        <p class="cloudLockedNote">Log ind med din Cloudflare <b>ADMIN_TOKEN</b>. Når token er godkendt, kan admin gemme direkte i Cloudflare KV.</p>
+        <input id="apiBaseLogin" placeholder="API Base URL" value="https://djfolsoe-tv-api.sunefolsoe.workers.dev">
+        <input id="adminPassword" type="password" placeholder="ADMIN_TOKEN">
+        <button id="adminLogin">Forbind til Broadcast Cloud</button>
+        <small id="adminMessage">Token gemmes kun lokalt i din browser.</small>
+      </div>
     </section>
 
     <section class="adminUnlocked hidden" id="adminUnlocked">
+      <section id="cloudDashboard" class="panel">
+        <div class="sectionHead"><span>V809 BROADCAST CLOUD</span><h2>Cloud Integration</h2></div>
+        <div class="backendHero">
+          <div class="control"><label>API Status</label><b id="cloudApiStatus">Checking...</b></div>
+          <div class="control"><label>KV Database</label><b id="cloudKvStatus">Unknown</b></div>
+          <div class="control"><label>Mode</label><b id="cloudMode">Cloud-first</b></div>
+        </div>
+        <div class="backendStatusBig" id="backendStatus">Klar til at forbinde admin, hjemmeside og Cloudflare KV.</div>
+        <div class="backendActionLine">
+          <button id="testCloud">Test Cloud</button>
+          <button id="loadFromBackendTop">Hent fra Cloud</button>
+          <button id="saveToBackendTop">Gem alt til Cloud</button>
+          <button id="openWorkerHealth">Åbn /api/health</button>
+        </div>
+      </section>
+
       <section id="control" class="panel">
         <div class="sectionHead"><span>ADMIN DASHBOARD</span><h2>Kontrolcenter</h2></div>
         <div class="controlGrid">

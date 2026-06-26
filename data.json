@@ -816,13 +816,14 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V807",
+    "version": "V809",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
       "website": "assets/data/site-data.json",
       "chartApi": "api/chart.json",
       "broadcastApi": "api/broadcast-core.json"
-    }
+    },
+    "cloudIntegration": "Cloud-first with local fallback"
   }
 }
