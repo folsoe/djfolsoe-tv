@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V813.7 BOTTOM BROADCAST DECK - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE NETWORK V813.7.2 NEWS TICKER THEME SYNC - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V813.7 BOTTOM BROADCAST DECK",
+    version: "V813.7.2 NEWS TICKER THEME SYNC",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V813.7 BOTTOM BROADCAST DECK";
+  data.broadcastCore.version = "V813.7.2 NEWS TICKER THEME SYNC";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V813.7 BOTTOM BROADCAST DECK";
+  core.unifiedNewsroom.version = "V813.7.2 NEWS TICKER THEME SYNC";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V813.7 BOTTOM BROADCAST DECK";
+  core.broadcastCore.version = "V813.7.2 NEWS TICKER THEME SYNC";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V813.7 BOTTOM BROADCAST DECK",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V813.7.2 NEWS TICKER THEME SYNC",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -324,7 +324,7 @@ function normalizeThemeName(name){
 function getThemePayload(core){
   const engine=core.themeEngine||{};
   const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
-  return {ok:true,version:"V813.7 BOTTOM BROADCAST DECK",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+  return {ok:true,version:"V813.7.2 NEWS TICKER THEME SYNC",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
 }
 function applyThemeToOverlayState(state, core){
   const payload=getThemePayload(core);
@@ -350,7 +350,7 @@ function buildMotionPayload(state){
   const danish = chartItems.find(x=>String(x.genre||"").toLowerCase().includes("dansk")) || top;
 
   state.motion = {
-    version:"V813.7 BOTTOM BROADCAST DECK",
+    version:"V813.7.2 NEWS TICKER THEME SYNC",
     layout:"camera-safe-side-stacked",
     rotationMs:8000,
     classicTicker:false,
@@ -417,6 +417,77 @@ function publicNewsItems(core){
   return manual.length ? manual : newsroom;
 }
 
+
+function adminInputCards(core){
+  const news = publicNewsItems(core);
+  const chart = core.weeklyListeningChart || core.top20Chart || {items:[]};
+  const items = chart.items || [];
+  const station = core.station || {};
+  const show = currentScheduleShow(core);
+  const theme = getThemePayload(core);
+  const requests = core.requests || [];
+  const cards = [];
+
+  news.slice(0,8).forEach((n,i)=>cards.push({type:n.category||"NEWS", text:n.title||"", body:n.summary||"", source:"news"}));
+  items.slice(0,8).forEach(x=>cards.push({type:`TOP 20 #${x.rank}`, text:`${x.artist||""} – ${x.title||""}`.trim(), body:`${x.points||0} points · ${x.genre||"Dance"}`, source:"chart"}));
+  cards.push({type:"PROGRAM", text:show.show||show.title||"DJ FOLSOE LIVE", body:`${show.day||""} ${show.time||""}`.trim(), source:"schedule"});
+  cards.push({type:"THEME", text:(theme.theme.emoji||"")+" "+(theme.theme.title||"DJ FOLSOE"), body:theme.theme.mood||"Broadcast Cloud", source:"theme"});
+  cards.push({type:"FOLLOW GOAL", text:`${station.followersCurrent||0}/${station.followersGoal||1000} followers`, body:"Help DJ FOLSOE grow", source:"growth"});
+  cards.push({type:"REQUESTS", text:requests[0] ? (requests[0].artist ? `${requests[0].artist} – ${requests[0].title||""}` : requests[0].title||requests[0].text||"Song requests") : "Song requests open", body:"Send your music wish", source:"requests"});
+  cards.push({type:"COMMUNITY", text:"Chat, requests and good vibes", body:"Be active and shape the show", source:"community"});
+  return cards.filter(x=>x.text);
+}
+function bindBoxesFromAdminContent(state, core){
+  const cards = adminInputCards(core);
+  const bySource = (s)=>cards.filter(x=>x.source===s);
+  const news = bySource("news");
+  const chart = bySource("chart");
+  const schedule = bySource("schedule");
+  const theme = bySource("theme");
+  const growth = bySource("growth");
+  const requests = bySource("requests");
+  const community = bySource("community");
+
+  state.topbarNews = broadcastNewsItems(core).map(x=>`${x.label||"NEWS"} · ${x.text}`);
+
+  if(!state.motion) return state;
+  state.motion.adminCards = cards;
+  state.broadcastNews = broadcastNewsItems(core);
+  state.motion.lanes = {
+    box1:[...growth, ...cards.filter(x=>["growth","community"].includes(x.source))].map(x=>({label:x.type, headline:x.text, body:x.body})),
+    box2:[...schedule, ...theme].map(x=>({label:x.type, headline:x.text, body:x.body})),
+    box3:[...chart].map(x=>({label:x.type, headline:x.text, body:x.body})),
+    box4:[...news, ...requests, ...community].map(x=>({label:x.type, headline:x.text, body:x.body}))
+  };
+  for (const key of ["box1","box2","box3","box4"]) {
+    if(!state.motion.lanes[key] || !state.motion.lanes[key].length) {
+      state.motion.lanes[key] = cards.slice(0,4).map(x=>({label:x.type, headline:x.text, body:x.body}));
+    }
+  }
+  state.motion.footerCards = cards.slice(0,12);
+  state.motion.capsules = cards.slice(0,8).map(x=>({icon:x.source==="news"?"🚨":x.source==="chart"?"🎵":x.source==="growth"?"❤️":"✨",title:x.type,text:x.text}));
+  return state;
+}
+
+
+function broadcastNewsItems(core){
+  const themePayload = getThemePayload(core);
+  const active = themePayload.activeTheme || "fredagsbar";
+  const manual = (core.broadcastNews || []).filter(x => x && x.active !== false).filter(x => !x.theme || x.theme === "all" || x.theme === active);
+  const fallbackNews = publicNewsItems(core).map((x,i)=>({id:"site-news-"+i,active:true,theme:"all",label:x.category||"NEWS",text:x.title||"",priority:50+i}));
+  const chart = core.weeklyListeningChart || core.top20Chart || {items:[]};
+  const top = (chart.items||[])[0];
+  const theme = themePayload.theme || {};
+  const auto = [
+    top ? {id:"auto-top20",active:true,theme:"all",label:"TOP 20",text:`#1 ${top.artist||""} – ${top.title||""}`.trim(),priority:20} : null,
+    {id:"auto-theme",active:true,theme:"all",label:theme.title||"THEME",text:theme.mood||"Broadcast Cloud",priority:30}
+  ].filter(Boolean);
+  return [...manual, ...auto, ...fallbackNews]
+    .filter(x=>x.text)
+    .sort((a,b)=>(Number(a.priority||99)-Number(b.priority||99)))
+    .slice(0,24);
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return okOptions();
@@ -425,6 +496,18 @@ export default {
     const path = url.pathname.replace(/\/+$/, "") || "/";
 
     try {
+      if (path === "/api/broadcast-news") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json({ ok:true, version:"V813.7.2 NEWS TICKER THEME SYNC", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+          const body = await request.json();
+          core.broadcastNews = Array.isArray(body.items) ? body.items : [];
+          const saved = await putCore(env, core);
+          return json({ ok:true, items:broadcastNewsItems(saved), raw:saved.broadcastNews||[] });
+        }
+      }
+
       if (path === "/api/theme") {
         const core = await getCore(env);
         if (request.method === "GET") return json(getThemePayload(core));
@@ -441,21 +524,21 @@ export default {
 
       if (path === "/api/overlay/v170-state") {
         const core = await getCore(env);
-        return json(buildMotionPayload(applyThemeToOverlayState(buildV170OverlayState(core), core)));
+        return json(bindBoxesFromAdminContent(buildMotionPayload(applyThemeToOverlayState(buildV170OverlayState(core), core)), core));
       }
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V813.7 BOTTOM BROADCAST DECK",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V813.7.2 NEWS TICKER THEME SYNC",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V813.7 BOTTOM BROADCAST DECK Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V813.7.2 NEWS TICKER THEME SYNC Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.7 BOTTOM BROADCAST DECK Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.7.2 NEWS TICKER THEME SYNC Admin" });
       }
 
       if (path === "/api/seed") {
@@ -473,7 +556,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V813.7 BOTTOM BROADCAST DECK", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V813.7.2 NEWS TICKER THEME SYNC", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);

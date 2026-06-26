@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.7 BOTTOM BROADCAST DECK",
+    "version": "V813.7.2 NEWS TICKER THEME SYNC",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -640,7 +640,10 @@
     "overlayIntegration": "V170.3",
     "streamElementsReady": true,
     "liveContentMotionLayer": true,
-    "bottomBroadcastDeck": true
+    "bottomBroadcastDeck": true,
+    "topbarNewsRotation": true,
+    "boxContentBinding": true,
+    "newsTickerThemeSync": true
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2221,7 +2224,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.7 BOTTOM BROADCAST DECK",
+  "platformVersion": "V813.7.2 NEWS TICKER THEME SYNC",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2230,7 +2233,7 @@
       "4 box footer layout preserved"
     ],
     "endpoint": "/api/overlay/v170-state",
-    "layout": "bottom-side-deck-camera-safe",
+    "layout": "bottom-side-deck-no-mini-center",
     "boxLayout": {
       "leftColumnTop": "box1_live",
       "leftColumnBottom": "box3_music",
@@ -2257,7 +2260,23 @@
       "noMiddleBottomTicker": true,
       "contentOnlyBottomLeftAndBottomRight": true
     },
-    "contentSource": "admin-website-cloud-master"
+    "contentSource": "admin-website-cloud-master",
+    "contentBinding": {
+      "topbarTitle": "fixed",
+      "topbarNews": "admin-news-rotating",
+      "topbarClock": "fixed",
+      "boxTitles": "dynamic-from-current-content",
+      "boxContent": "admin-website-cloud-master",
+      "noHardcodedBoxCopy": true
+    },
+    "miniCardsRemoved": true,
+    "topbar": {
+      "left": "active show/title",
+      "center": "scrolling broadcast news from admin/homepage",
+      "right": "clock",
+      "noTextCut": true,
+      "themeAware": true
+    }
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
@@ -2386,5 +2405,39 @@
       "!theme summer",
       "!theme weekend"
     ]
-  }
+  },
+  "broadcastNews": [
+    {
+      "id": "news1",
+      "active": true,
+      "theme": "all",
+      "label": "NEWS",
+      "text": "Velkommen til DJ FOLSOE – live DJ-shows, requests og Top 20 fra Danmark.",
+      "priority": 1
+    },
+    {
+      "id": "news2",
+      "active": true,
+      "theme": "trance",
+      "label": "TRANCE",
+      "text": "Trance Tuesday: rendyrket musik direkte til sjælen.",
+      "priority": 2
+    },
+    {
+      "id": "news3",
+      "active": true,
+      "theme": "fredagsbar",
+      "label": "FREDAGSBAR",
+      "text": "Fredagsbar: party classics, weekend vibes og chatten i centrum.",
+      "priority": 3
+    },
+    {
+      "id": "news4",
+      "active": true,
+      "theme": "all",
+      "label": "TOP 20",
+      "text": "FOLSOE Weekly Listening Chart opdateres fra admin og vises både på hjemmeside og overlay.",
+      "priority": 4
+    }
+  ]
 }

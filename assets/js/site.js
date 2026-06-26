@@ -170,3 +170,17 @@ document.addEventListener("DOMContentLoaded",()=>setTimeout(forcePublicBrandingG
 
 /* V813.2 frontend binding hook after normal render */
 document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{ if(window.DJF_REBIND_FRONTEND) window.DJF_REBIND_FRONTEND(); },2200));
+
+/* V813.7.2 public broadcast news */
+async function renderBroadcastNewsPublic(){
+  const el=document.getElementById("broadcastNewsPublicGrid");
+  if(!el)return;
+  const base=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
+  try{
+    const r=await fetch(base+"/api/broadcast-news?ts="+Date.now(),{cache:"no-store"});
+    const j=await r.json();
+    const items=(j.items||[]).slice(0,8);
+    el.innerHTML=items.map(x=>`<article class="newsroomItem"><b>${x.label||'NEWS'}</b><h3>${x.text||''}</h3><p>${x.theme&&x.theme!=='all'?'Theme: '+x.theme:'Alle themes'}</p></article>`).join("");
+  }catch(e){el.innerHTML="<p>Broadcast news loader...</p>";}
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(renderBroadcastNewsPublic,1800));

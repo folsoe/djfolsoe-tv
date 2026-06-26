@@ -728,3 +728,54 @@ async function setThemeEngine(theme){
     if(st) st.textContent="Aktivt tema: "+result.theme.activeTheme;
   }catch(e){ if(st) st.textContent="Theme fejl: "+e.message; }
 }
+
+/* V813.7.2 Broadcast News Editor */
+function ensureBroadcastNews(){
+  data.broadcastNews = data.broadcastNews || [
+    {id:"news1",active:true,theme:"all",label:"NEWS",text:"Velkommen til DJ FOLSOE – live DJ-shows, requests og Top 20 fra Danmark.",priority:1}
+  ];
+}
+function renderBroadcastNewsEditor(){
+  ensureBroadcastNews();
+  const el=document.getElementById("broadcastNewsEditor");
+  if(!el) return;
+  el.innerHTML=data.broadcastNews.map((n,i)=>`
+    <div class="chartEditRow lab">
+      <div><label>Active</label><select data-bn="${i}" data-field="active"><option value="true" ${n.active!==false?'selected':''}>Yes</option><option value="false" ${n.active===false?'selected':''}>No</option></select></div>
+      <div><label>Theme</label><input value="${n.theme||'all'}" data-bn="${i}" data-field="theme"></div>
+      <div><label>Label</label><input value="${n.label||'NEWS'}" data-bn="${i}" data-field="label"></div>
+      <div class="wide"><label>Text</label><input value="${n.text||''}" data-bn="${i}" data-field="text"></div>
+      <div><label>Priority</label><input type="number" value="${n.priority||99}" data-bn="${i}" data-field="priority"></div>
+      <div><label>Delete</label><button onclick="deleteBroadcastNews(${i})">Slet</button></div>
+    </div>`).join("");
+}
+function collectBroadcastNews(){
+  ensureBroadcastNews();
+  document.querySelectorAll("[data-bn][data-field]").forEach(inp=>{
+    const i=Number(inp.dataset.bn), f=inp.dataset.field;
+    let v=inp.value;
+    if(f==="active") v=v==="true";
+    if(f==="priority") v=Number(v||99);
+    data.broadcastNews[i][f]=v;
+  });
+}
+function addBroadcastNews(){
+  ensureBroadcastNews();
+  data.broadcastNews.push({id:"news"+Date.now(),active:true,theme:"all",label:"NEWS",text:"",priority:data.broadcastNews.length+1});
+  renderBroadcastNewsEditor();
+}
+function deleteBroadcastNews(i){
+  ensureBroadcastNews();
+  data.broadcastNews.splice(i,1);
+  renderBroadcastNewsEditor();
+}
+async function saveBroadcastNews(){
+  collectBroadcastNews();
+  const base=apiBase(); const token=adminToken();
+  if(!base||!token){ alert("Mangler API Base URL eller ADMIN_TOKEN"); return; }
+  const r=await fetch(base+"/api/broadcast-news",{method:"POST",headers:{"content-type":"application/json","x-admin-token":token},body:JSON.stringify({items:data.broadcastNews})});
+  if(!r.ok){ alert("Broadcast news fejl: "+await r.text()); return; }
+  saveAll();
+  alert("Broadcast news gemt til Cloud.");
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(renderBroadcastNewsEditor,1000));
