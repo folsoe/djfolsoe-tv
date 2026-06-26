@@ -169,3 +169,17 @@
 .twitchStats div{padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1)}
 .twitchStats b{display:block;color:#ffd166;font-size:20px}.twitchStats span{font-size:11px;color:rgba(255,255,255,.58);text-transform:uppercase;font-weight:900}
 @media(max-width:720px){.twitchProfileCard{grid-template-columns:1fr}.twitchStats{grid-template-columns:1fr}}
+
+/* V812 FOLSOE Weekly Listening Chart Engine */
+.listeningMethod{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 18px;
+}
+.listeningMethod div{
+  padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1);
+}
+.listeningMethod b{display:block;color:#ffd166;font-size:20px}
+.listeningMethod span{font-size:11px;color:rgba(255,255,255,.62);font-weight:900;text-transform:uppercase}
+.chartStatus.LISTEN{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111}
+.chartEditRow.v812{grid-template-columns:40px 58px 1fr 1fr 78px 70px 62px 68px 74px 74px}
+@media(max-width:1000px){.listeningMethod{grid-template-columns:repeat(2,1fr)}.chartEditRow.v812{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.listeningMethod{grid-template-columns:1fr}}

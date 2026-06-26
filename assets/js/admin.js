@@ -106,20 +106,20 @@ function removeProgram(i){data.schedule.splice(i,1);renderPrograms();saveAll();}
 
 function ensureChart(){
   if(!data.top20Chart){
-    data.top20Chart={title:'FOLSOE TV Top 20',subtitle:'FOLSOE AIRPLAY HOT 20',week:'This Week',archive:[],items:[]};
+    data.top20Chart={title:'FOLSOE Weekly Listening Chart',subtitle:'FOLSOE WEEKLY LISTENING CHART',week:'This Week',archive:[],items:[]};
   }
   if(!data.top20Chart.method){
-    data.top20Chart.method={danishAirplay:40,hitlistenDk:20,bbcRadio1Uk:15,spotifyGlobal:10,appleGlobal:5,billboardGlobal:5,folsoePickViewers:5};
+    data.top20Chart.method={folsoeListening:45,danishCharts:20,edmTrend:15,spotify:15,viewerRequests:5};
   }
-  if(!Array.isArray(data.top20Chart.items)) data.top20Chart.items=[];
-  while(data.top20Chart.items.length<20){
-    const i=data.top20Chart.items.length;
-    data.top20Chart.items.push({rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false,weeks:1,peak:i+1,genre:'Dance',cover:'',spotify:'',youtube:'',apple:'',scores:{danishAirplay:0,hitlistenDk:0,bbcRadio1Uk:0,spotifyGlobal:0,appleGlobal:0,billboardGlobal:0,folsoePickViewers:0}});
+  if(!Array.isArray((data.weeklyListeningChart||data.top20Chart).items)) (data.weeklyListeningChart||data.top20Chart).items=[];
+  while((data.weeklyListeningChart||data.top20Chart).items.length<20){
+    const i=(data.weeklyListeningChart||data.top20Chart).items.length;
+    (data.weeklyListeningChart||data.top20Chart).items.push({rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false,weeks:1,peak:i+1,genre:'Dance',cover:'',spotify:'',youtube:'',apple:'',scores:{folsoeListening:0,danishCharts:0,edmTrend:0,spotify:0,viewerRequests:0}});
   }
-  data.top20Chart.items=data.top20Chart.items.slice(0,20);
-  data.top20Chart.items.forEach((x,i)=>{
+  (data.weeklyListeningChart||data.top20Chart).items=(data.weeklyListeningChart||data.top20Chart).items.slice(0,20);
+  (data.weeklyListeningChart||data.top20Chart).items.forEach((x,i)=>{
     if(!x.rank)x.rank=i+1;
-    if(!x.scores)x.scores={danishAirplay:0,hitlistenDk:0,bbcRadio1Uk:0,spotifyGlobal:0,appleGlobal:0,billboardGlobal:0,folsoePickViewers:0};
+    if(!x.scores)x.scores={folsoeListening:0,danishCharts:0,edmTrend:0,spotify:0,viewerRequests:0};
     if(!x.weeks)x.weeks=1;
     if(!x.peak)x.peak=x.rank||i+1;
     if(!x.genre)x.genre='Dance';
@@ -127,7 +127,7 @@ function ensureChart(){
 }
 function renderTop20(){
   ensureChart();
-  $('top20Editor').innerHTML=data.top20Chart.items.map((x,i)=>`
+  $('top20Editor').innerHTML=(data.weeklyListeningChart||data.top20Chart).items.map((x,i)=>`
     <div class="chartEditRow v806">
       <div class="rankCell"><label>Rank</label><input value="${x.rank||i+1}" data-chart="${i}" data-field="rank" type="number"></div>
       <div><label>Last</label><input value="${x.lastWeek||''}" data-chart="${i}" data-field="lastWeek"></div>
@@ -139,13 +139,13 @@ function renderTop20(){
       <div><label>Peak</label><input value="${x.peak||x.rank||i+1}" data-chart="${i}" data-field="peak" type="number"></div>
       <div><label>Genre</label><input value="${x.genre||''}" data-chart="${i}" data-field="genre"></div>
       <div><label>Pick</label><select data-chart="${i}" data-field="folsoePick"><option value="false" ${!x.folsoePick?'selected':''}>No</option><option value="true" ${x.folsoePick?'selected':''}>Yes</option></select></div>
-      <div><label>Airplay</label><input value="${x.scores?.danishAirplay||0}" data-chart="${i}" data-score="danishAirplay" type="number"></div>
-      <div><label>Hitlisten</label><input value="${x.scores?.hitlistenDk||0}" data-chart="${i}" data-score="hitlistenDk" type="number"></div>
-      <div><label>BBC/UK</label><input value="${x.scores?.bbcRadio1Uk||0}" data-chart="${i}" data-score="bbcRadio1Uk" type="number"></div>
-      <div><label>Spotify</label><input value="${x.scores?.spotifyGlobal||0}" data-chart="${i}" data-score="spotifyGlobal" type="number"></div>
-      <div><label>Apple</label><input value="${x.scores?.appleGlobal||0}" data-chart="${i}" data-score="appleGlobal" type="number"></div>
-      <div><label>Billboard</label><input value="${x.scores?.billboardGlobal||0}" data-chart="${i}" data-score="billboardGlobal" type="number"></div>
-      <div><label>FOLSOE</label><input value="${x.scores?.folsoePickViewers||0}" data-chart="${i}" data-score="folsoePickViewers" type="number"></div>
+      <div><label>FOLSOE</label><input value="${x.scores?.danishFOLSOE||0}" data-chart="${i}" data-score="folsoeListening" type="number"></div>
+      <div><label>DK Chart</label><input value="${x.scores?.hitlistenDk||0}" data-chart="${i}" data-score="danishCharts" type="number"></div>
+      <div><label>EDM</label><input value="${x.scores?.bbcRadio1Uk||0}" data-chart="${i}" data-score="edmTrend" type="number"></div>
+      <div><label>Spotify</label><input value="${x.scores?.spotifyGlobal||0}" data-chart="${i}" data-score="spotify" type="number"></div>
+      <div><label>Apple</label><input value="${x.scores?.appleGlobal||0}" data-chart="${i}" data-score="viewerRequests" type="number"></div>
+      <div><label>Spotify</label><input value="${x.scores?.billboardGlobal||0}" data-chart="${i}" data-score="spotify" type="number"></div>
+      <div><label>FOLSOE</label><input value="${x.scores?.folsoePickViewers||0}" data-chart="${i}" data-score="viewerRequests" type="number"></div>
       <div class="wide"><label>Cover URL</label><input value="${x.cover||''}" data-chart="${i}" data-field="cover"></div>
       <div class="wide"><label>YouTube URL</label><input value="${x.youtube||''}" data-chart="${i}" data-field="youtube"></div>
     </div>`).join('');
@@ -157,25 +157,25 @@ function collectTop20(){
     let v=inp.value;
     if(['rank','points','weeks','peak'].includes(f)) v=Number(v||0);
     if(f==='folsoePick') v=v==='true';
-    data.top20Chart.items[i][f]=v;
+    (data.weeklyListeningChart||data.top20Chart).items[i][f]=v;
   });
   document.querySelectorAll('[data-chart][data-score]').forEach(inp=>{
     const i=Number(inp.dataset.chart), f=inp.dataset.score;
-    data.top20Chart.items[i].scores=data.top20Chart.items[i].scores||{};
-    data.top20Chart.items[i].scores[f]=Number(inp.value||0);
+    (data.weeklyListeningChart||data.top20Chart).items[i].scores=(data.weeklyListeningChart||data.top20Chart).items[i].scores||{};
+    (data.weeklyListeningChart||data.top20Chart).items[i].scores[f]=Number(inp.value||0);
   });
-  data.top20Chart.items.sort((a,b)=>(Number(a.rank)||999)-(Number(b.rank)||999));
-  data.top20=data.top20Chart.items.filter(x=>x.artist||x.title).map(x=>`${x.artist||''} - ${x.title||''}`.replace(/^ - /,'').replace(/ - $/,''));
+  (data.weeklyListeningChart||data.top20Chart).items.sort((a,b)=>(Number(a.rank)||999)-(Number(b.rank)||999));
+  data.top20=(data.weeklyListeningChart||data.top20Chart).items.filter(x=>x.artist||x.title).map(x=>`${x.artist||''} - ${x.title||''}`.replace(/^ - /,'').replace(/ - $/,''));
 }
 function calculateChart(){
   collectTop20();
-  const weights=data.top20Chart.method||{danishAirplay:40,hitlistenDk:20,bbcRadio1Uk:15,spotifyGlobal:10,appleGlobal:5,billboardGlobal:5,folsoePickViewers:5};
-  data.top20Chart.items.forEach(x=>{
+  const weights=data.top20Chart.method||{folsoeListening:45,danishCharts:20,edmTrend:15,spotify:15,viewerRequests:5};
+  (data.weeklyListeningChart||data.top20Chart).items.forEach(x=>{
     const s=x.scores||{};
     x.points=Math.round(Object.keys(weights).reduce((sum,k)=>sum+(Number(s[k]||0)*Number(weights[k]||0)),0));
   });
-  data.top20Chart.items.sort((a,b)=>(b.points||0)-(a.points||0));
-  data.top20Chart.items.forEach((x,i)=>{
+  (data.weeklyListeningChart||data.top20Chart).items.sort((a,b)=>(b.points||0)-(a.points||0));
+  (data.weeklyListeningChart||data.top20Chart).items.forEach((x,i)=>{
     x.rank=i+1;
     const lw=Number(x.lastWeek);
     if(String(x.lastWeek).toUpperCase()==='NEW'||!x.lastWeek) x.status='NEW';
@@ -194,11 +194,11 @@ function archiveChart(){
   ensureChart(); collectTop20();
   const stamp=new Date().toISOString().slice(0,10);
   data.top20Chart.archive=data.top20Chart.archive||[];
-  data.top20Chart.archive.unshift({week:data.top20Chart.week||stamp,date:stamp,items:JSON.parse(JSON.stringify(data.top20Chart.items))});
+  data.top20Chart.archive.unshift({week:data.top20Chart.week||stamp,date:stamp,items:JSON.parse(JSON.stringify((data.weeklyListeningChart||data.top20Chart).items))});
   saveAll();
   alert('Chart arkiveret for '+stamp);
 }
-function clearTop(i){ ensureChart(); data.top20Chart.items[i]={rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false,weeks:1,peak:i+1,genre:'Dance',cover:'',spotify:'',youtube:'',apple:'',scores:{}}; renderTop20(); }
+function clearTop(i){ ensureChart(); (data.weeklyListeningChart||data.top20Chart).items[i]={rank:i+1,lastWeek:'-',artist:'',title:'',status:'SAME',points:0,folsoePick:false,weeks:1,peak:i+1,genre:'Dance',cover:'',spotify:'',youtube:'',apple:'',scores:{}}; renderTop20(); }
 function renderShows(){$('showsEditor').innerHTML=(data.shows||[]).map((s,i)=>`<div class="showRow"><div><label>Titel</label><input value="${s.title||''}" data-show="${i}" data-field="title"></div><div><label>Type</label><input value="${s.type||''}" data-show="${i}" data-field="type"></div><div><label>Tekst</label><input value="${s.text||''}" data-show="${i}" data-field="text"></div><button onclick="removeShow(${i})">Slet</button></div>`).join('');}
 function collectShows(){document.querySelectorAll('[data-show]').forEach(inp=>{const i=Number(inp.dataset.show);data.shows[i][inp.dataset.field]=inp.value;});}
 function removeShow(i){data.shows.splice(i,1);renderShows();saveAll();}
@@ -313,7 +313,7 @@ $('saveControl').onclick=()=>{collectControl();saveAll();alert('Kontrolcenter ge
 $('addProgram').onclick=()=>{data.schedule.push({day:'New day',time:'20:00',show:'New show',description:'Description'});renderPrograms();saveAll();};
 $('savePrograms').onclick=()=>{collectPrograms();saveAll();alert('Programmer gemt.')};$('addShow').onclick=()=>{data.shows.push({title:'New show',type:'Show',text:'Description'});renderShows();saveAll();};
 $('saveShows').onclick=()=>{collectShows();saveAll();alert('Feed gemt.')};$('addNews').onclick=()=>{data.news.push({tag:'News',title:'New headline'});renderNews();saveAll();};
-$('saveNews').onclick=()=>{collectNews();saveAll();alert('Nyheder gemt.')};$('saveTop20').onclick=()=>{collectTop20();saveAll();renderTop20();alert('Top 20 gemt.')};if($('calculateChart'))$('calculateChart').onclick=()=>calculateChart();if($('sortChart'))$('sortChart').onclick=()=>{collectTop20();data.top20Chart.items.sort((a,b)=>(b.points||0)-(a.points||0));data.top20Chart.items.forEach((x,i)=>x.rank=i+1);saveAll();renderTop20();};if($('archiveChart'))$('archiveChart').onclick=()=>archiveChart();$('clearTop20').onclick=()=>{data.top20Chart={title:'FOLSOE TV Top 20',subtitle:'FOLSOE AIRPLAY HOT 20',week:'This Week',items:[]};renderTop20();saveAll();};
+$('saveNews').onclick=()=>{collectNews();saveAll();alert('Nyheder gemt.')};$('saveTop20').onclick=()=>{collectTop20();saveAll();renderTop20();alert('Top 20 gemt.')};if($('calculateChart'))$('calculateChart').onclick=()=>calculateChart();if($('sortChart'))$('sortChart').onclick=()=>{collectTop20();(data.weeklyListeningChart||data.top20Chart).items.sort((a,b)=>(b.points||0)-(a.points||0));(data.weeklyListeningChart||data.top20Chart).items.forEach((x,i)=>x.rank=i+1);saveAll();renderTop20();};if($('archiveChart'))$('archiveChart').onclick=()=>archiveChart();$('clearTop20').onclick=()=>{data.top20Chart={title:'FOLSOE Weekly Listening Chart',subtitle:'FOLSOE WEEKLY LISTENING CHART',week:'This Week',items:[]};renderTop20();saveAll();};
 $('addManualRequest').onclick=()=>{const arr=JSON.parse(localStorage.getItem('djf_requests')||'[]');arr.unshift({name:$('manualName').value||'Admin',song:$('manualSong').value||'',time:new Date().toISOString()});localStorage.setItem('djf_requests',JSON.stringify(arr));$('manualSong').value='';renderRequests();};
 $('clearRequests').onclick=()=>{localStorage.removeItem('djf_requests');renderRequests();};$('exportJson').onclick=()=>{collectAll();const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='site-data.json';a.click();};
 $('copyJson').onclick=()=>{collectAll();updateBackup();navigator.clipboard.writeText($('jsonBackup').value);alert('JSON kopieret.')};$('resetLocal').onclick=()=>{localStorage.removeItem('djf_site_data');location.reload();};

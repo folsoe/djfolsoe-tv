@@ -1,4 +1,4 @@
-// DJ FOLSOE TV NETWORK V811 - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE TV NETWORK V812 - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V811",
+    version: "V812",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V811";
+  data.broadcastCore.version = "V812";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -207,12 +207,12 @@ export default {
 
     try {
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE TV V811 Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE TV V812 Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V811 Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V812 Admin" });
       }
 
       if (path === "/api/seed") {
@@ -238,6 +238,44 @@ export default {
           const saved = await putCore(env, body);
           return json({ ok: true, data: saved });
         }
+      }
+
+      if (path === "/api/weekly-listening-chart") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json(core.weeklyListeningChart || core.top20Chart || DEFAULT_DATA.top20Chart);
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401);
+          const chart = await request.json();
+          core.weeklyListeningChart = chart;
+          core.top20Chart = chart;
+          core.top20 = (chart.items || []).filter(x => x.artist || x.title).map(x => `${x.artist || ""} - ${x.title || ""}`.replace(/^ - /,"").replace(/ - $/,""));
+          const saved = await putCore(env, core);
+          return json({ ok: true, chart: saved.weeklyListeningChart });
+        }
+      }
+
+      if (path === "/api/chart/calculate") {
+        if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401);
+        const core = await getCore(env);
+        const chart = core.weeklyListeningChart || core.top20Chart || DEFAULT_DATA.top20Chart;
+        const weights = chart.method || { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 };
+        chart.items = (chart.items || []).map((x, idx) => {
+          const s = x.scores || {};
+          x.points = Math.round(Object.keys(weights).reduce((sum,k)=>sum + (Number(s[k] || 0) * Number(weights[k] || 0)), 0));
+          return x;
+        }).sort((a,b)=>(b.points||0)-(a.points||0)).map((x, idx) => {
+          x.rank = idx + 1;
+          const lw = Number(x.lastWeek);
+          if (String(x.lastWeek).toUpperCase() === "NEW" || !x.lastWeek) x.status = "NEW";
+          else if (!isNaN(lw)) x.status = lw > x.rank ? "UP" : lw < x.rank ? "DOWN" : "SAME";
+          x.weeks = String(x.status).toUpperCase() === "NEW" ? 1 : Number(x.weeks || 0) + 1;
+          x.peak = Math.min(Number(x.peak || x.rank), x.rank);
+          return x;
+        });
+        core.weeklyListeningChart = chart;
+        core.top20Chart = chart;
+        const saved = await putCore(env, core);
+        return json({ ok:true, chart:saved.weeklyListeningChart });
       }
 
       if (path === "/api/chart") {
