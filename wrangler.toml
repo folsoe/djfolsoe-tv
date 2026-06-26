@@ -1,4 +1,4 @@
-// DJ FOLSOE TV NETWORK V812.1 - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE TV NETWORK V812.2 - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V812.1",
+    version: "V812.2",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V812.1";
+  data.broadcastCore.version = "V812.2";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -207,12 +207,12 @@ export default {
 
     try {
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE TV V812.1 Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE TV V812.2 Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V812.1 Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V812.2 Admin" });
       }
 
       if (path === "/api/seed") {

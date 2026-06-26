@@ -91,3 +91,22 @@ function renderTwitchProfile(){
   const up=document.getElementById('twitchUptime'); if(up) up.textContent=live.live?'LIVE':'OFFLINE';
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{renderTwitchProfile();refreshTwitchFull();},1200));
+
+
+
+/* V812.2 PUBLIC CHART FETCH FIX */
+async function v8122RefreshWeeklyChart(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  if(!base || !window.data && typeof data === 'undefined') return;
+  try{
+    const r=await fetch(base+'/api/weekly-listening-chart',{cache:'no-store'});
+    if(!r.ok) return;
+    const chart=await r.json();
+    if(typeof data !== 'undefined'){
+      data.weeklyListeningChart=chart;
+      data.top20Chart=chart;
+      if(typeof render === 'function') render();
+    }
+  }catch(e){}
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(v8122RefreshWeeklyChart,1500));

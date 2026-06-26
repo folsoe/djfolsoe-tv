@@ -213,3 +213,8 @@
 .chartEditRow.lab .pointsPreview{color:#ffd166;font-weight:1000;text-align:center;font-size:18px}
 @media(max-width:1100px){.chartEditRow.lab{grid-template-columns:1fr 1fr}.chartEditRow.lab .wide{grid-column:span 2}}
 @media(max-width:620px){.chartEditRow.lab{grid-template-columns:1fr}.chartEditRow.lab .wide{grid-column:span 1}}
+
+/* V812.2 Data Fetch Fix status colors */
+.chartLabSummary.sync-ok{border-color:rgba(91,255,165,.45)!important;color:#9fffc8!important}
+.chartLabSummary.sync-warn{border-color:rgba(255,209,102,.55)!important;color:#ffd166!important}
+.chartLabSummary.sync-error{border-color:rgba(255,40,79,.55)!important;color:#ff9daf!important}
