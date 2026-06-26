@@ -1,0 +1,185 @@
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#07070d;color:#fff;font-family:Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}.hidden{display:none!important}.bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 12% 12%,rgba(255,0,234,.24),transparent 33%),radial-gradient(circle at 85% 18%,rgba(0,229,255,.18),transparent 32%),linear-gradient(135deg,#07070d,#17081b 55%,#06131d)}.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 28px;background:rgba(7,7,13,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.12)}.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}.brand span{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111;font-weight:1000}.topbar nav{display:flex;gap:15px;flex-wrap:wrap}.topbar a{color:rgba(255,255,255,.78);text-decoration:none;font-weight:900;font-size:13px}.langSwitch{display:flex;gap:6px;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:4px;background:rgba(255,255,255,.08)}.langSwitch button,.requestBox button,.adminLock button,#saveAdmin,#exportJson,#adminLogout{border:0;border-radius:999px;padding:10px 14px;font-weight:1000;cursor:pointer}.langSwitch button{background:transparent;color:#fff}.langSwitch .active,.primary,.requestBox button,#saveAdmin,#exportJson{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff)!important;color:#111!important}main{width:min(1240px,calc(100% - 32px));margin:40px auto 80px}.hero{display:grid;grid-template-columns:1fr .85fr;gap:34px;align-items:center;min-height:560px}.kicker,.sectionHead span{color:#ffd166;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:1000}.hero h1{font-size:76px;line-height:.86;margin:12px 0;letter-spacing:-4px}.hero p{font-size:20px;line-height:1.55;color:rgba(255,255,255,.76)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.primary,.secondary{padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:1000}.secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff}.panel,.liveCard,.showCard,.scheduleItem,.newsItem,.requestBox,.control,.adminLock{background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 90px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.16);border-radius:26px}.liveCard{overflow:hidden;min-height:320px}.cardTop{height:54px;padding:0 18px;background:rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;font-size:12px;font-weight:1000;letter-spacing:1px}.cardTop i{width:9px;height:9px;border-radius:50%;background:#ff284f;box-shadow:0 0 16px #ff284f}.cardCenter{height:210px;display:grid;place-items:center;text-align:center}.cardCenter b{font-size:42px}.cardCenter span{color:rgba(255,255,255,.7)}.miniTicker{height:56px;background:rgba(0,0,0,.35);display:flex;align-items:center;padding:0 18px;color:#ffd166;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.panel{padding:28px;margin:28px 0}.sectionHead h2{font-size:40px;margin:6px 0 0}.showGrid,.newsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.showCard,.newsItem{padding:18px}.showCard b,.newsItem b,.scheduleItem b{color:#ffd166}.showCard p,.newsItem p,.scheduleItem em{color:rgba(255,255,255,.68);line-height:1.45}.schedule{display:grid;gap:10px}.scheduleItem{display:grid;grid-template-columns:90px 1fr 100px;gap:12px;align-items:center;padding:15px}.topList{columns:2;column-gap:18px}.topList div{break-inside:avoid;margin-bottom:8px;padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08)}.split{display:grid;grid-template-columns:1fr .65fr;gap:18px}.requestBox,.adminLock{padding:22px;display:grid;gap:12px}.requestBox input,.adminLock input,.control input,.control select,textarea{height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.25);color:#fff;padding:0 14px}textarea{width:100%;height:170px;padding:14px;font-family:monospace}.controlGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.control{padding:16px;display:grid;gap:8px}.control label{color:#ffd166;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:1px}#adminSchedule,#adminRequests{display:grid;gap:10px}.footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;width:min(1240px,calc(100% - 32px));margin:auto;padding:30px;color:rgba(255,255,255,.65);border-top:1px solid rgba(255,255,255,.1)}@media(max-width:900px){.topbar{display:block}.topbar nav,.langSwitch{margin-top:12px}.hero,.split{grid-template-columns:1fr}.hero h1{font-size:48px}.showGrid,.newsGrid,.controlGrid{grid-template-columns:repeat(2,1fr)}.scheduleItem{grid-template-columns:1fr}.topList{columns:1}}@media(max-width:560px){.showGrid,.newsGrid,.controlGrid{grid-template-columns:1fr}.panel{padding:20px}.hero h1{font-size:40px}}
+/* V802 Direct Admin Manager */
+.adminButtons{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.adminButtons button,.programRow button,.topRow button,.manualRequest button{
+  border:0;border-radius:999px;padding:10px 14px;font-weight:1000;cursor:pointer;
+  background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111;
+}
+.programEditor{display:grid;gap:14px}
+.programRow,.showRow,.newsRow{
+  display:grid;grid-template-columns:120px 120px 1fr 1.3fr 72px;gap:10px;align-items:end;
+  padding:14px;border-radius:20px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1)
+}
+.showRow{grid-template-columns:1fr 1fr 2fr 72px}
+.newsRow{grid-template-columns:160px 1fr 72px}
+.programRow label,.showRow label,.newsRow label,.topRow label{font-size:10px;color:#ffd166;text-transform:uppercase;font-weight:1000;letter-spacing:.8px}
+.programRow div,.showRow div,.newsRow div,.topRow div{display:grid;gap:5px}
+.programRow input,.showRow input,.newsRow input,.topRow input,.manualRequest input{
+  width:100%;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.28);color:#fff;padding:0 10px;
+}
+.top20Editor{display:grid;gap:8px}
+.topRow{display:grid;grid-template-columns:44px 1fr 72px;gap:10px;align-items:end;padding:10px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08)}
+.topRow .rank{font-weight:1000;color:#ffd166;text-align:center}
+.manualRequest{display:grid;grid-template-columns:1fr 1fr 180px;gap:10px;margin:16px 0}
+.jsonBackup{height:360px!important;font-family:Consolas,monospace;font-size:12px;white-space:pre}
+.note{color:rgba(255,255,255,.68);line-height:1.5}
+@media(max-width:900px){
+  .programRow,.showRow,.newsRow,.manualRequest{grid-template-columns:1fr}
+  .topRow{grid-template-columns:36px 1fr 60px}
+}
+
+/* V804 Live Twitch API Foundation */
+.cardCenter{gap:8px}
+.cardCenter small{display:block;color:rgba(255,255,255,.55);font-weight:800;max-width:85%;line-height:1.35}
+.liveBadge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(255,40,79,.18);border:1px solid rgba(255,40,79,.35);color:#fff;font-weight:1000}
+.liveBadge:before{content:"";width:8px;height:8px;border-radius:50%;background:#ff284f;box-shadow:0 0 16px #ff284f}
+.apiStatusLine{margin-top:10px;padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.75)}
+.apiGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.apiGrid .control{min-height:110px}
+.apiHelp{font-size:13px;color:rgba(255,255,255,.68);line-height:1.5}
+.apiHelp code{background:rgba(0,0,0,.34);padding:2px 6px;border-radius:7px;color:#ffd166}
+@media(max-width:900px){.apiGrid{grid-template-columns:1fr}}
+
+/* V805 FOLSOE TV Top 20 Chart Engine */
+.chartMethod{color:rgba(255,255,255,.68);line-height:1.5;margin-top:-8px;margin-bottom:18px}
+.topList{columns:1!important;display:grid;gap:10px}
+.chartRow{
+  display:grid!important;
+  grid-template-columns:54px 70px 1fr 80px 110px;
+  gap:12px;align-items:center;
+  padding:14px!important;border-radius:18px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.045))!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+}
+.chartRank{font-size:24px;font-weight:1000;color:#ffd166;text-align:center}
+.chartLast{font-size:11px;color:rgba(255,255,255,.62);font-weight:900;text-transform:uppercase}
+.chartSong b{display:block;font-size:16px;color:#fff}
+.chartSong span{display:block;color:rgba(255,255,255,.62);font-size:13px;margin-top:3px}
+.chartStatus{justify-self:center;font-size:11px;font-weight:1000;border-radius:999px;padding:7px 9px;background:rgba(255,255,255,.12)}
+.chartStatus.NEW{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111}
+.chartStatus.UP{color:#90ffb8}.chartStatus.DOWN{color:#ff8ea5}.chartStatus.SAME{color:#ddd}
+.chartPick{justify-self:end;font-size:11px;font-weight:1000;color:#111;background:#ffd166;border-radius:999px;padding:8px 10px}
+.chartPick.empty{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45)}
+.methodGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 18px}
+.methodGrid div{padding:12px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1)}
+.methodGrid b{display:block;color:#ffd166}
+@media(max-width:760px){
+  .chartRow{grid-template-columns:44px 1fr 58px;gap:9px}
+  .chartLast,.chartPick{display:none}
+  .methodGrid{grid-template-columns:repeat(2,1fr)}
+}
+.chartEditor{display:grid;gap:8px}
+.chartEditRow{
+  display:grid;grid-template-columns:44px 70px 1fr 1fr 92px 80px 70px;
+  gap:8px;align-items:end;padding:10px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08)
+}
+.chartEditRow label{font-size:9px;color:#ffd166;text-transform:uppercase;font-weight:1000;letter-spacing:.7px}
+.chartEditRow div{display:grid;gap:4px}
+.chartEditRow input,.chartEditRow select{width:100%;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.28);color:#fff;padding:0 8px}
+@media(max-width:980px){.chartEditRow{grid-template-columns:1fr 1fr}.chartEditRow .rankCell{grid-column:1/-1}}
+
+/* V806 + V807 Chart Intelligence + Broadcast Data Core */
+.chartDashboard{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0 18px;
+}
+.chartDashCard{
+  padding:16px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.055));
+  border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+}
+.chartDashCard span{display:block;color:rgba(255,255,255,.58);font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:1000}
+.chartDashCard b{display:block;font-size:18px;margin-top:6px;color:#ffd166}
+.apiNote{
+  margin-top:16px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.24);
+  border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.68);font-size:13px;
+}
+.apiNote code{color:#ffd166}
+.chartRow.v806{
+  grid-template-columns:54px 70px 1fr 70px 70px 100px 110px;
+}
+.chartMeta{font-size:11px;color:rgba(255,255,255,.58);font-weight:900}
+.chartWeeks,.chartPeak{font-size:11px;color:rgba(255,255,255,.7);font-weight:900;text-align:center}
+.chartCover{
+  width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#ffd166,#00d4ff);
+  display:grid;place-items:center;color:#111;font-weight:1000;
+}
+.dataCorePanel{
+  padding:16px;border-radius:20px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);margin:14px 0;
+}
+.dataCorePanel b{color:#ffd166}
+.scoreGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:12px 0}
+.scoreGrid div{padding:10px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);text-align:center}
+.scoreGrid b{display:block;color:#ffd166}
+.chartEditRow.v806{
+  grid-template-columns:40px 58px 1fr 1fr 78px 68px 58px 58px 70px 70px;
+}
+.chartEditRow.v806 .wide{grid-column:span 2}
+@media(max-width:1050px){
+  .chartDashboard{grid-template-columns:repeat(2,1fr)}
+  .chartRow.v806{grid-template-columns:44px 1fr 62px}
+  .chartRow.v806 .chartLast,.chartRow.v806 .chartWeeks,.chartRow.v806 .chartPeak,.chartRow.v806 .chartPick{display:none}
+  .scoreGrid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){.chartDashboard{grid-template-columns:1fr}}
+
+/* V808 Cloudflare Worker Backend Restore */
+.apiStatusLine{margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.72)}
+
+/* V809 Broadcast Cloud Integration */
+.cloudStatus{
+  display:inline-flex;align-items:center;gap:8px;
+  margin:14px 0 0;padding:10px 12px;border-radius:999px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.72);font-size:12px;font-weight:900;
+}
+.cloudStatus.ok{background:rgba(91,255,165,.12);border-color:rgba(91,255,165,.35);color:#9fffc8}
+.cloudStatus.fail{background:rgba(255,40,79,.12);border-color:rgba(255,40,79,.35);color:#ff9daf}
+.backendHero{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0;
+}
+.backendHero .control{min-height:105px}
+.backendHero b{font-size:18px;color:#ffd166}
+.backendActionLine{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0;
+}
+.backendActionLine button{
+  border:0;border-radius:999px;padding:10px 14px;font-weight:1000;cursor:pointer;
+  background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111;
+}
+.backendStatusBig{
+  padding:14px;border-radius:18px;background:rgba(0,0,0,.26);
+  border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.76);line-height:1.5;
+}
+.adminCloudLogin{
+  display:grid;gap:12px;max-width:520px;
+}
+.adminCloudLogin input{
+  height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.25);color:#fff;padding:0 14px;
+}
+.cloudLockedNote{color:rgba(255,255,255,.65);line-height:1.5}
+@media(max-width:900px){.backendHero{grid-template-columns:1fr}}
+
+/* V811 Complete Twitch API Platform */
+.twitchProfileCard{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center}
+.twitchProfileCard img{width:150px;height:150px;border-radius:32px;object-fit:cover;background:linear-gradient(135deg,#ffd166,#00d4ff)}
+.twitchProfileCard h3{font-size:32px;margin:0 0 8px}
+.twitchProfileCard p{color:rgba(255,255,255,.72);line-height:1.5}
+.twitchStats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.twitchStats div{padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1)}
+.twitchStats b{display:block;color:#ffd166;font-size:20px}.twitchStats span{font-size:11px;color:rgba(255,255,255,.58);text-transform:uppercase;font-weight:900}
+@media(max-width:720px){.twitchProfileCard{grid-template-columns:1fr}.twitchStats{grid-template-columns:1fr}}
+
+/* V812 FOLSOE Weekly Listening Chart Engine */
+.listeningMethod{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 18px;
+}
+.listeningMethod div{
+  padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1);
+}
+.listeningMethod b{display:block;color:#ffd166;font-size:20px}
+.listeningMethod span{font-size:11px;color:rgba(255,255,255,.62);font-weight:900;text-transform:uppercase}
+.chartStatus.LISTEN{background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111}
+.chartEditRow.v812{grid-template-columns:40px 58px 1fr 1fr 78px 70px 62px 68px 74px 74px}
+@media(max-width:1000px){.listeningMethod{grid-template-columns:repeat(2,1fr)}.chartEditRow.v812{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.listeningMethod{grid-template-columns:1fr}}
