@@ -1,19 +1,15 @@
-DJ FOLSOE V813.4 V170.3 BROADCAST INTEGRATION
-
-Kobler V813.3 STABLE sammen med V170.3 Broadcast Revolution StreamElements overlay.
+DJ FOLSOE V813.5 THEME ENGINE
 
 Nyt:
-- Worker endpoint: /api/overlay/v170-state
-- StreamElements package i mappen: streamelements-v170.3-overlay/
-- Admin panel til overlay API
-- 4 footer bokse: Live Status, Program, Top 20, Community
-- Låst regel: kun ét DJ FOLSOE LIVE logo i venstre hjørne
-
-Dataflow:
-Admin → Cloudflare KV → /api/overlay/v170-state → StreamElements → OBS
+- 8 låste V160/V170 themes: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend
+- Worker endpoint: GET/POST /api/theme
+- /api/overlay/v170-state inkluderer aktivt theme
+- StreamElements V170.3 overlay skifter farver/titler automatisk
+- Admin Theme Engine panel
+- THEME_COMMANDS_V813_5.txt
 
 Deploy:
-1. Upload hele pakken til GitHub
-2. Deploy cloudflare-worker/worker.js i Cloudflare
-3. Test https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/overlay/v170-state
-4. Kopiér HTML/CSS/JS fra streamelements-v170.3-overlay ind i StreamElements Custom Widget
+1. Upload hele pakken til GitHub.
+2. Deploy cloudflare-worker/worker.js i Cloudflare.
+3. Test /api/theme og /api/overlay/v170-state.
+4. Opdatér StreamElements med HTML/CSS/JS fra streamelements-v170.3-overlay.

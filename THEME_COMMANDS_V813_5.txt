@@ -1,0 +1,20 @@
+V813.5 THEME ENGINE – kommandoer
+
+!theme fredagsbar
+!theme popup
+!theme trance
+!theme retro
+!theme eurodance
+!theme morning
+!theme summer
+!theme weekend
+
+Endpoint:
+GET  https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/theme
+POST https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/theme
+
+POST body:
+{"theme":"trance"}
+
+Header:
+x-admin-token: DIN_ADMIN_TOKEN

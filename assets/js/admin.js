@@ -715,3 +715,16 @@ function djfStableBrandingLock(){
  data.broadcastCore=data.broadcastCore||{};data.broadcastCore.version='V813.3 STABLE';data.broadcastCore.stableRelease=true;data.broadcastCore.brandingLock='DJ FOLSOE';
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(djfStableBrandingLock,800));
+
+/* V813.5 Theme Engine Admin */
+async function setThemeEngine(theme){
+  const base=apiBase(); const token=adminToken(); const st=document.getElementById("themeStatus");
+  if(!base||!token){ if(st)st.textContent="Mangler API Base URL eller ADMIN_TOKEN"; return; }
+  try{
+    const r=await fetch(base+"/api/theme",{method:"POST",headers:{"content-type":"application/json","x-admin-token":token},body:JSON.stringify({theme})});
+    if(!r.ok) throw new Error(await r.text());
+    const result=await r.json();
+    data.themeEngine=result.theme; saveAll();
+    if(st) st.textContent="Aktivt tema: "+result.theme.activeTheme;
+  }catch(e){ if(st) st.textContent="Theme fejl: "+e.message; }
+}

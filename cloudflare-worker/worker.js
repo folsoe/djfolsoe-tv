@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V813.4 V170.3 BROADCAST INTEGRATION - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE NETWORK V813.5 THEME ENGINE - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V813.4 V170.3 BROADCAST INTEGRATION",
+    version: "V813.5 THEME ENGINE",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V813.4 V170.3 BROADCAST INTEGRATION";
+  data.broadcastCore.version = "V813.5 THEME ENGINE";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V813.4 V170.3 BROADCAST INTEGRATION";
+  core.unifiedNewsroom.version = "V813.5 THEME ENGINE";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V813.4 V170.3 BROADCAST INTEGRATION";
+  core.broadcastCore.version = "V813.5 THEME ENGINE";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V813.4 V170.3 BROADCAST INTEGRATION",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V813.5 THEME ENGINE",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -314,6 +314,27 @@ function buildV170OverlayState(core){
   };
 }
 
+
+const DJF_THEMES = {"fredagsbar": {"title": "FREDAGSBAR", "emoji": "🍺", "primary": "#FFD166", "secondary": "#FF4D6D", "accent": "#FF9F1C", "mood": "Weekend starts here", "boxLabels": ["FREDAGSBAR LIVE", "BAR REQUESTS", "TOP 20", "PARTY CHAT"]}, "popup": {"title": "POPUP", "emoji": "⚡", "primary": "#FFFFFF", "secondary": "#00D4FF", "accent": "#FF2E93", "mood": "On when you least expect it", "boxLabels": ["POPUP LIVE", "CHALLENGE ME", "YOU CHOOSE", "I PLAY"]}, "trance": {"title": "TRANCE TUESDAY", "emoji": "💙", "primary": "#00D4FF", "secondary": "#8A2BE2", "accent": "#B8F7FF", "mood": "Music for the soul", "boxLabels": ["TRANCE LIVE", "NEXT DROP", "TOP TRANCE", "REQUESTS"]}, "retro": {"title": "RETRO HITS", "emoji": "🕹️", "primary": "#FF2E93", "secondary": "#7C3AED", "accent": "#FFD166", "mood": "70s 80s 90s memories", "boxLabels": ["RETRO LIVE", "OLD SCHOOL", "CLASSICS", "CHAT"]}, "eurodance": {"title": "EURODANCE", "emoji": "💛", "primary": "#FFE600", "secondary": "#005DFF", "accent": "#FF2E93", "mood": "90s and 00s dance energy", "boxLabels": ["EURODANCE LIVE", "RAVE ENERGY", "TOP 20", "DANCE CHAT"]}, "morning": {"title": "GOOD MORNING TWITCH", "emoji": "☀️", "primary": "#FFD166", "secondary": "#7DD3FC", "accent": "#FFFFFF", "mood": "Coffee, music and morning energy", "boxLabels": ["GOOD MORNING", "TODAY", "NEWS", "CHAT"]}, "summer": {"title": "SUMMER BEATS", "emoji": "🌴", "primary": "#00F5D4", "secondary": "#FFB703", "accent": "#FB5607", "mood": "Summer 2026 beats", "boxLabels": ["SUMMER LIVE", "VACATION VIBES", "TOP 20", "REQUESTS"]}, "weekend": {"title": "WEEKEND VIBES", "emoji": "🎉", "primary": "#FF4D6D", "secondary": "#FFD166", "accent": "#00D4FF", "mood": "Party, club and dancefloor energy", "boxLabels": ["WEEKEND LIVE", "PARTY MODE", "TOP 20", "COMMUNITY"]}};
+function normalizeThemeName(name){
+  const n=String(name||"").toLowerCase().trim();
+  return DJF_THEMES[n]?n:"fredagsbar";
+}
+function getThemePayload(core){
+  const engine=core.themeEngine||{};
+  const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
+  return {ok:true,version:"V813.5 THEME ENGINE",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+}
+function applyThemeToOverlayState(state, core){
+  const payload=getThemePayload(core);
+  const t=payload.theme;
+  state.theme=payload;
+  state.visual={primary:t.primary,secondary:t.secondary,accent:t.accent,title:t.title,emoji:t.emoji,mood:t.mood};
+  if(state.footerBoxes&&t.boxLabels) state.footerBoxes.forEach((b,i)=>{ if(t.boxLabels[i]) b.label=t.boxLabels[i]; });
+  state.ticker=[`${t.emoji} ${t.title} · ${t.mood}`, ...(state.ticker||[])];
+  return state;
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return okOptions();
@@ -322,23 +343,37 @@ export default {
     const path = url.pathname.replace(/\/+$/, "") || "/";
 
     try {
+      if (path === "/api/theme") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json(getThemePayload(core));
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+          const body = await request.json();
+          core.themeEngine = core.themeEngine || {};
+          core.themeEngine.activeTheme = normalizeThemeName(body.theme || body.activeTheme);
+          core.themeEngine.themes = DJF_THEMES;
+          const saved = await putCore(env, core);
+          return json({ ok:true, theme:getThemePayload(saved) });
+        }
+      }
+
       if (path === "/api/overlay/v170-state") {
         const core = await getCore(env);
-        return json(buildV170OverlayState(core));
+        return json(applyThemeToOverlayState(buildV170OverlayState(core), core));
       }
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V813.4 V170.3 BROADCAST INTEGRATION",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V813.5 THEME ENGINE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V813.4 V170.3 BROADCAST INTEGRATION Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V813.5 THEME ENGINE Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.4 V170.3 BROADCAST INTEGRATION Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.5 THEME ENGINE Admin" });
       }
 
       if (path === "/api/seed") {
@@ -356,7 +391,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V813.4 V170.3 BROADCAST INTEGRATION", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V813.5 THEME ENGINE", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);

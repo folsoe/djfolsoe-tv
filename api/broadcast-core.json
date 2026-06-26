@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.4 V170.3 BROADCAST INTEGRATION",
+    "version": "V813.5 THEME ENGINE",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -2219,7 +2219,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.4 V170.3 BROADCAST INTEGRATION",
+  "platformVersion": "V813.5 THEME ENGINE",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2228,5 +2228,133 @@
       "4 box footer layout preserved"
     ],
     "endpoint": "/api/overlay/v170-state"
+  },
+  "themeEngine": {
+    "version": "V813.5 THEME ENGINE",
+    "activeTheme": "fredagsbar",
+    "themes": {
+      "fredagsbar": {
+        "title": "FREDAGSBAR",
+        "emoji": "🍺",
+        "primary": "#FFD166",
+        "secondary": "#FF4D6D",
+        "accent": "#FF9F1C",
+        "mood": "Weekend starts here",
+        "boxLabels": [
+          "FREDAGSBAR LIVE",
+          "BAR REQUESTS",
+          "TOP 20",
+          "PARTY CHAT"
+        ]
+      },
+      "popup": {
+        "title": "POPUP",
+        "emoji": "⚡",
+        "primary": "#FFFFFF",
+        "secondary": "#00D4FF",
+        "accent": "#FF2E93",
+        "mood": "On when you least expect it",
+        "boxLabels": [
+          "POPUP LIVE",
+          "CHALLENGE ME",
+          "YOU CHOOSE",
+          "I PLAY"
+        ]
+      },
+      "trance": {
+        "title": "TRANCE TUESDAY",
+        "emoji": "💙",
+        "primary": "#00D4FF",
+        "secondary": "#8A2BE2",
+        "accent": "#B8F7FF",
+        "mood": "Music for the soul",
+        "boxLabels": [
+          "TRANCE LIVE",
+          "NEXT DROP",
+          "TOP TRANCE",
+          "REQUESTS"
+        ]
+      },
+      "retro": {
+        "title": "RETRO HITS",
+        "emoji": "🕹️",
+        "primary": "#FF2E93",
+        "secondary": "#7C3AED",
+        "accent": "#FFD166",
+        "mood": "70s 80s 90s memories",
+        "boxLabels": [
+          "RETRO LIVE",
+          "OLD SCHOOL",
+          "CLASSICS",
+          "CHAT"
+        ]
+      },
+      "eurodance": {
+        "title": "EURODANCE",
+        "emoji": "💛",
+        "primary": "#FFE600",
+        "secondary": "#005DFF",
+        "accent": "#FF2E93",
+        "mood": "90s and 00s dance energy",
+        "boxLabels": [
+          "EURODANCE LIVE",
+          "RAVE ENERGY",
+          "TOP 20",
+          "DANCE CHAT"
+        ]
+      },
+      "morning": {
+        "title": "GOOD MORNING TWITCH",
+        "emoji": "☀️",
+        "primary": "#FFD166",
+        "secondary": "#7DD3FC",
+        "accent": "#FFFFFF",
+        "mood": "Coffee, music and morning energy",
+        "boxLabels": [
+          "GOOD MORNING",
+          "TODAY",
+          "NEWS",
+          "CHAT"
+        ]
+      },
+      "summer": {
+        "title": "SUMMER BEATS",
+        "emoji": "🌴",
+        "primary": "#00F5D4",
+        "secondary": "#FFB703",
+        "accent": "#FB5607",
+        "mood": "Summer 2026 beats",
+        "boxLabels": [
+          "SUMMER LIVE",
+          "VACATION VIBES",
+          "TOP 20",
+          "REQUESTS"
+        ]
+      },
+      "weekend": {
+        "title": "WEEKEND VIBES",
+        "emoji": "🎉",
+        "primary": "#FF4D6D",
+        "secondary": "#FFD166",
+        "accent": "#00D4FF",
+        "mood": "Party, club and dancefloor energy",
+        "boxLabels": [
+          "WEEKEND LIVE",
+          "PARTY MODE",
+          "TOP 20",
+          "COMMUNITY"
+        ]
+      }
+    },
+    "lockedCommands": [
+      "!theme fredagsbar",
+      "!theme popup",
+      "!theme trance",
+      "!theme retro",
+      "!theme eurodance",
+      "!theme morning",
+      "!theme summer",
+      "!theme weekend"
+    ]
   }
 }
