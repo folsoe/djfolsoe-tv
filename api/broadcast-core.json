@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.5 THEME ENGINE",
+    "version": "V813.6 LIVE CONTENT MOTION LAYER",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -638,7 +638,8 @@
     "frontendBinding": true,
     "stableRelease": true,
     "overlayIntegration": "V170.3",
-    "streamElementsReady": true
+    "streamElementsReady": true,
+    "liveContentMotionLayer": true
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2219,7 +2220,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.5 THEME ENGINE",
+  "platformVersion": "V813.6 LIVE CONTENT MOTION LAYER",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2227,7 +2228,27 @@
       "No duplicate left-corner logo",
       "4 box footer layout preserved"
     ],
-    "endpoint": "/api/overlay/v170-state"
+    "endpoint": "/api/overlay/v170-state",
+    "layout": "camera-safe-side-stacked",
+    "boxLayout": {
+      "leftTop": "box3_music",
+      "leftBottom": "box1_live_status",
+      "rightTop": "box4_community",
+      "rightBottom": "box2_program",
+      "cameraSafeArea": {
+        "x1": 500,
+        "x2": 1420,
+        "y1": 120,
+        "y2": 920
+      }
+    },
+    "motion": {
+      "rotationSeconds": 8,
+      "floatingCapsules": true,
+      "dynamicFooterCards": true,
+      "classicTicker": false,
+      "themeAnimations": true
+    }
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",

@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V813.5 THEME ENGINE - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE NETWORK V813.6 LIVE CONTENT MOTION LAYER - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V813.5 THEME ENGINE",
+    version: "V813.6 LIVE CONTENT MOTION LAYER",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V813.5 THEME ENGINE";
+  data.broadcastCore.version = "V813.6 LIVE CONTENT MOTION LAYER";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V813.5 THEME ENGINE";
+  core.unifiedNewsroom.version = "V813.6 LIVE CONTENT MOTION LAYER";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V813.5 THEME ENGINE";
+  core.broadcastCore.version = "V813.6 LIVE CONTENT MOTION LAYER";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V813.5 THEME ENGINE",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V813.6 LIVE CONTENT MOTION LAYER",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -323,7 +323,7 @@ function normalizeThemeName(name){
 function getThemePayload(core){
   const engine=core.themeEngine||{};
   const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
-  return {ok:true,version:"V813.5 THEME ENGINE",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+  return {ok:true,version:"V813.6 LIVE CONTENT MOTION LAYER",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
 }
 function applyThemeToOverlayState(state, core){
   const payload=getThemePayload(core);
@@ -332,6 +332,70 @@ function applyThemeToOverlayState(state, core){
   state.visual={primary:t.primary,secondary:t.secondary,accent:t.accent,title:t.title,emoji:t.emoji,mood:t.mood};
   if(state.footerBoxes&&t.boxLabels) state.footerBoxes.forEach((b,i)=>{ if(t.boxLabels[i]) b.label=t.boxLabels[i]; });
   state.ticker=[`${t.emoji} ${t.title} · ${t.mood}`, ...(state.ticker||[])];
+  return state;
+}
+
+
+function buildMotionPayload(state){
+  const chartItems = (state.chart && state.chart.items) || [];
+  const top = chartItems[0] || {};
+  const newsItems = (state.newsroom && state.newsroom.items) || [];
+  const live = state.live || {};
+  const show = state.show || {};
+  const visual = state.visual || {};
+  const themeTitle = visual.title || "DJ FOLSOE";
+  const pick = chartItems.find(x=>x.folsoePick) || top;
+  const newest = chartItems.find(x=>String(x.status||"").toUpperCase()==="NEW") || top;
+  const danish = chartItems.find(x=>String(x.genre||"").toLowerCase().includes("dansk")) || top;
+
+  state.motion = {
+    version:"V813.6 LIVE CONTENT MOTION LAYER",
+    layout:"camera-safe-side-stacked",
+    rotationMs:8000,
+    classicTicker:false,
+    cameraSafeArea:{x1:500,x2:1420,y1:120,y2:920},
+    lanes:{
+      box3:[
+        {label:"FOLSOE TOP 20 #1", headline:top.artist||"FOLSOE Chart", body:top.title||"Weekly Listening Chart"},
+        {label:"FOLSOE PICK", headline:pick.artist||"DJ FOLSOE", body:pick.title||"Pick of the week"},
+        {label:"NEW ENTRY", headline:newest.artist||"New music", body:newest.title||"Fresh on the chart"},
+        {label:"DANISH TRACK", headline:danish.artist||"Danish vibes", body:danish.title||"From Denmark"},
+        {label:"TOP TRENDING", headline:chartItems[1]?`#${chartItems[1].rank} ${chartItems[1].artist}`:"Trending", body:chartItems[1]?chartItems[1].title:"Broadcast Cloud"}
+      ],
+      box1:[
+        {label:"LIVE STATUS", headline:live.isLive?"LIVE NOW":"OFFLINE", body:`${live.viewers||0} viewers · ${live.category||"Music"}`},
+        {label:"FOLLOW GOAL", headline:`${live.followers||0}/${live.followersGoal||1000}`, body:"Journey to the next milestone"},
+        {label:"TODAY", headline:`${live.subsToday||0} subs · ${live.bitsToday||0} bits`, body:"Support keeps the broadcast growing"},
+        {label:"STREAM TITLE", headline:live.title||"DJ FOLSOE", body:"Live DJ shows from Denmark"}
+      ],
+      box4:[
+        {label:"COMMUNITY", headline:"REQUESTS · CHAT", body:"Be active and shape the show"},
+        {label:"SONG REQUESTS", headline:"Request center", body:"Send your favorite track"},
+        {label:"FOLLOWER JOURNEY", headline:`${live.followers||0}/${live.followersGoal||1000}`, body:"Help DJ FOLSOE grow"},
+        {label:"CHAT ENERGY", headline:"Drop some love", body:"Emotes, requests and good vibes"}
+      ],
+      box2:[
+        {label:"CURRENT SHOW", headline:show.title||"DJ FOLSOE LIVE", body:show.description||"Music, community and requests"},
+        {label:"PROGRAM TIME", headline:`${show.day||"Today"} ${show.time||""}`.trim(), body:"Broadcast Cloud schedule"},
+        {label:"ACTIVE THEME", headline:themeTitle, body:visual.mood||"Theme Engine active"},
+        {label:"NEXT EVENT", headline:"Stay tuned", body:"More shows, more music, more community"}
+      ]
+    },
+    footerCards:[
+      {type:"TOP20", text:top.artist?`#1 ${top.artist} – ${top.title}`:"FOLSOE Weekly Listening Chart"},
+      {type:"NEWS", text:newsItems[0]?newsItems[0].title:"FOLSOE Music Newsroom"},
+      {type:"THEME", text:`${visual.emoji||""} ${themeTitle}`.trim()},
+      {type:"GOALS", text:`Followers ${live.followers||0}/${live.followersGoal||1000}`},
+      {type:"REQUESTS", text:"Requests, chat and community energy"}
+    ],
+    capsules:[
+      {icon:"🎵", title:"NEW #1", text:top.artist?`${top.artist} – ${top.title}`:"FOLSOE Chart"},
+      {icon:"🔥", title:"FOLSOE PICK", text:pick.title||"Pick of the week"},
+      {icon:"❤️", title:"FOLLOW GOAL", text:`${live.followers||0}/${live.followersGoal||1000}`},
+      {icon:"🚨", title:"MUSIC NEWS", text:newsItems[0]?newsItems[0].title:"Newsroom loading"},
+      {icon:visual.emoji||"✨", title:"THEME", text:themeTitle}
+    ]
+  };
   return state;
 }
 
@@ -359,21 +423,21 @@ export default {
 
       if (path === "/api/overlay/v170-state") {
         const core = await getCore(env);
-        return json(applyThemeToOverlayState(buildV170OverlayState(core), core));
+        return json(buildMotionPayload(applyThemeToOverlayState(buildV170OverlayState(core), core)));
       }
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V813.5 THEME ENGINE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V813.6 LIVE CONTENT MOTION LAYER",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V813.5 THEME ENGINE Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V813.6 LIVE CONTENT MOTION LAYER Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.5 THEME ENGINE Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V813.6 LIVE CONTENT MOTION LAYER Admin" });
       }
 
       if (path === "/api/seed") {
@@ -391,7 +455,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V813.5 THEME ENGINE", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V813.6 LIVE CONTENT MOTION LAYER", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
