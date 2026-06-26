@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.2",
+    "version": "V813.2-FRONTEND-BINDING",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -634,7 +634,8 @@
       "broadcastApi": "api/broadcast-core.json"
     },
     "cloudIntegration": "Cloud-first with local fallback",
-    "brandingLock": "DJ FOLSOE"
+    "brandingLock": "DJ FOLSOE",
+    "frontendBinding": true
   },
   "brand": "DJ FOLSOE",
   "about": {

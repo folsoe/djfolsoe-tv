@@ -7,6 +7,17 @@
   <meta name="description" content="DJ FOLSOE - Danish music streamer on Twitch.tv with live DJ shows, requests, charts and community.">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
+
+<!-- V813.2 FRONTEND BINDING FIX: all hero text is injected from data.json/site-data.json -->
+<script>
+window.DJF_FRONTEND_BINDING_VERSION = "V813.2";
+window.DJF_BRAND_FALLBACK = {
+  brand: "DJ FOLSOE",
+  heroRibbon: { da: "<span data-bind="heroRibbon" data-i18n="heroRibbon">BROADCAST CLOUD · DJ FOLSOE ON TWITCH</span>", en: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH", de: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH" },
+  heroDescription: { da: "<span data-bind="heroDescription" data-i18n="heroDescription">DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.</span>", en: "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de: "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community." }
+};
+</script>
+
 <body>
   <div class="bg"></div>
   <header class="topbar">
@@ -26,7 +37,7 @@
     <section class="hero">
       <div>
         <div class="kicker" data-i18n="kicker"><span data-i18n="heroRibbon">BROADCAST CLOUD · DJ FOLSOE ON TWITCH</span></div>
-        <h1>DJ FOLSOE</h1>
+        <h1><span data-bind="siteTitle" data-i18n="siteTitle">DJ FOLSOE</span></h1>
         <p data-i18n="heroText"><span data-i18n="heroDescription">DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.</span></p>
         <div class="cloudStatus" id="cloudStatus">Cloud status: checking...</div>
         <div class="actions">
@@ -111,5 +122,6 @@
   <script src="assets/js/config.js"></script>
 <script src="assets/js/language-engine.js"></script>
   <script src="assets/js/site.js"></script>
+<script src="assets/js/frontend-binding.js?v=8132fb"></script>
 </body>
 </html>
