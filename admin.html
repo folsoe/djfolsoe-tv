@@ -80,12 +80,13 @@
         </div>
         <div class="dataCorePanel"><b>Broadcast Data Core:</b> Top 20 gemmes nu i samme datamodel som hjemmeside, API, admin og fremtidigt overlay. Eksporter <code>site-data.json</code> for permanent GitHub-opdatering.</div><div class="scoreGrid"><div><b>40%</b>Airplay DK</div><div><b>20%</b>Hitlisten</div><div><b>15%</b>BBC/UK</div><div><b>10%</b>Spotify</div><div><b>5%</b>Apple</div><div><b>5%</b>Billboard</div><div><b>5%</b>FOLSOE</div></div><div class="chartLabToolbar">
           <button id="addCandidate">Tilføj kandidat</button>
-          <button id="importCandidates">Importer kandidater</button>
+          <button id="importCandidates">Importér playlist + autofyld</button>
           <button id="calculateChartLab">Beregn Top 20</button>
           <button id="promoteTop20">Send Top 20 til website</button>
           <button id="exportChartLab">Eksportér Chart Lab JSON</button>
         </div>
-        <textarea id="candidateImportBox" class="candidateImportBox" placeholder="Indsæt kandidater her: Artist - Title | Genre | FOLSOE | DK | EDM | Spotify | Viewer"></textarea>
+        <div class="autoFillHelp">V812.3: Indsæt bare artist - titel. Systemet foreslår automatisk genre + scores.</div>
+        <textarea id="candidateImportBox" class="candidateImportBox" placeholder="Indsæt én sang pr. linje: Artist - Title. Eksempel: Axwell, Bonn - Whatever Turns You On"></textarea>
         <div id="chartLabSummary" class="chartLabSummary">Chart Lab klar.</div>
         <div id="top20Editor" class="chartEditor chartLabEditor"></div>
         <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="calculateChart">Beregn Top 20</button><button id="sortChart">Sortér efter points</button><button id="archiveChart">Arkivér uge</button><button id="clearTop20">Ryd Top 20</button></div>

@@ -218,3 +218,7 @@
 .chartLabSummary.sync-ok{border-color:rgba(91,255,165,.45)!important;color:#9fffc8!important}
 .chartLabSummary.sync-warn{border-color:rgba(255,209,102,.55)!important;color:#ffd166!important}
 .chartLabSummary.sync-error{border-color:rgba(255,40,79,.55)!important;color:#ff9daf!important}
+
+/* V812.3 Import Playlist Autofill */
+.autoFillHelp{margin:12px 0;padding:12px 14px;border-radius:16px;background:rgba(255,209,102,.10);border:1px solid rgba(255,209,102,.25);color:#ffd166;font-weight:900;line-height:1.45}
+.candidateImportBox{min-height:160px!important}

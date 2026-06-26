@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V812.1",
+    "version": "V812.3",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -2101,6 +2101,10 @@
           "viewerRequests": 75
         }
       }
-    ]
+    ],
+    "importEngine": {
+      "version": "V812.3",
+      "mode": "playlist-import-autofill"
+    }
   }
 }
