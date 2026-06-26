@@ -1,4 +1,4 @@
-// DJ FOLSOE TV NETWORK V809 - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE TV NETWORK V811 - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V809",
+    version: "V811",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V809";
+  data.broadcastCore.version = "V811";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -110,6 +110,54 @@ async function getRequests(env) {
 async function putRequests(env, requests) {
   await env.DJF_DATA.put(KEY_REQUESTS, JSON.stringify(requests));
   return requests;
+}
+
+
+async function twitchHeaders(env){
+  return {"Client-ID": env.TWITCH_CLIENT_ID, "Authorization": `Bearer ${env.TWITCH_ACCESS_TOKEN}`};
+}
+async function twitchUser(env){
+  const clientId=env.TWITCH_CLIENT_ID, token=env.TWITCH_ACCESS_TOKEN, login=env.TWITCH_CHANNEL||"djfolsoe";
+  if(!clientId||!token) return {configured:false, login};
+  const res=await fetch(`https://api.twitch.tv/helix/users?login=${encodeURIComponent(login)}`,{headers: await twitchHeaders(env)});
+  const j=await res.json();
+  return {configured:true, user:j.data&&j.data[0], login};
+}
+async function twitchProfile(env){
+  const tu=await twitchUser(env);
+  if(!tu.configured) return {configured:false,message:"Missing TWITCH_CLIENT_ID or TWITCH_ACCESS_TOKEN"};
+  if(!tu.user) return {configured:true, found:false, login:tu.login};
+  let followers=0;
+  try{
+    const fr=await fetch(`https://api.twitch.tv/helix/channels/followers?broadcaster_id=${encodeURIComponent(tu.user.id)}`,{headers: await twitchHeaders(env)});
+    const fj=await fr.json(); followers=fj.total||0;
+  }catch(e){}
+  return {configured:true, found:true, login:tu.login, userId:tu.user.id, displayName:tu.user.display_name, description:tu.user.description||"", profileImage:tu.user.profile_image_url||"", offlineImage:tu.user.offline_image_url||"", broadcasterType:tu.user.broadcaster_type||"", createdAt:tu.user.created_at||"", followers};
+}
+async function twitchChannelInfo(env,userId){
+  if(!userId) return {};
+  const r=await fetch(`https://api.twitch.tv/helix/channels?broadcaster_id=${encodeURIComponent(userId)}`,{headers: await twitchHeaders(env)});
+  const j=await r.json(); return (j.data&&j.data[0])||{};
+}
+async function twitchVideos(env,userId){
+  if(!userId) return [];
+  const r=await fetch(`https://api.twitch.tv/helix/videos?user_id=${encodeURIComponent(userId)}&first=10&type=archive`,{headers: await twitchHeaders(env)});
+  const j=await r.json(); return j.data||[];
+}
+async function twitchClips(env,userId){
+  if(!userId) return [];
+  const started=new Date(Date.now()-1000*60*60*24*30).toISOString();
+  const r=await fetch(`https://api.twitch.tv/helix/clips?broadcaster_id=${encodeURIComponent(userId)}&first=10&started_at=${encodeURIComponent(started)}`,{headers: await twitchHeaders(env)});
+  const j=await r.json(); return j.data||[];
+}
+async function fullTwitchPackage(env){
+  const profile=await twitchProfile(env);
+  if(!profile.configured||!profile.found) return profile;
+  const live=await twitchLive(env);
+  const channel=await twitchChannelInfo(env,profile.userId);
+  const videos=await twitchVideos(env,profile.userId);
+  const clips=await twitchClips(env,profile.userId);
+  return {configured:true,found:true,profile,live,channel,videos,clips,lastUpdated:new Date().toISOString()};
 }
 
 async function twitchLive(env) {
@@ -159,12 +207,12 @@ export default {
 
     try {
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE TV V809 Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE TV V811 Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V809 Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V811 Admin" });
       }
 
       if (path === "/api/seed") {
@@ -227,6 +275,25 @@ export default {
           await putRequests(env, []);
           return json({ ok: true, requests: [] });
         }
+      }
+
+      if (path === "/api/twitch-profile") {
+        const profile = await twitchProfile(env);
+        return json(profile);
+      }
+
+      if (path === "/api/twitch-full") {
+        const pkg = await fullTwitchPackage(env);
+        const core = await getCore(env);
+        core.twitchProfile = pkg.profile || pkg;
+        core.twitchLive = pkg.live || {};
+        core.twitchChannel = pkg.channel || {};
+        core.twitchVideos = pkg.videos || [];
+        core.twitchClips = pkg.clips || [];
+        core.broadcastCore = core.broadcastCore || {};
+        core.broadcastCore.lastTwitchSync = new Date().toISOString();
+        await putCore(env, core);
+        return json(pkg);
       }
 
       if (path === "/api/twitch-live") {

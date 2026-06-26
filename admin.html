@@ -42,7 +42,14 @@
         </div>
       </section>
 
-      <section id="control" class="panel">
+      <section id="twitchApiFull" class="panel">
+        <div class="sectionHead"><span>V811 TWITCH API PLATFORM</span><h2>Complete Twitch API</h2></div>
+        <p class="note">Henter profil, avatar, about/bio, followers, live status, viewers, streamtitel, category, clips og seneste videoer via Cloudflare Worker.</p>
+        <div class="adminButtons"><button id="fetchTwitchFull">Hent alt fra Twitch</button><button id="openTwitchProfileApi">Åbn /api/twitch-profile</button><button id="openTwitchFullApi">Åbn /api/twitch-full</button></div>
+        <div class="apiStatusLine" id="twitchFullStatus">Ikke hentet endnu.</div>
+      </section>
+
+      <section id="control"  class="panel">
         <div class="sectionHead"><span>ADMIN DASHBOARD</span><h2>Kontrolcenter</h2></div>
         <div class="controlGrid">
           <div class="control"><label>Live status</label><select id="liveSelect"><option value="false">OFFLINE</option><option value="true">LIVE</option></select></div>

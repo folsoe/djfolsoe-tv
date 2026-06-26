@@ -68,3 +68,26 @@ if(base){
   }catch(e){}
 }
 const arr=JSON.parse(localStorage.getItem('djf_requests')||'[]');arr.unshift(req);localStorage.setItem('djf_requests',JSON.stringify(arr));$('requestMessage').textContent='Tak! Dit ønske er gemt lokalt.';$('reqSong').value='';};boot();});
+async function refreshTwitchFull(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  if(!base) return;
+  try{
+    const r=await fetch(base+'/api/twitch-full',{cache:'no-store'});
+    if(!r.ok) return;
+    const pkg=await r.json();
+    data.twitchProfile=pkg.profile||data.twitchProfile;
+    data.twitchLive=pkg.live||data.twitchLive;
+    renderTwitchProfile();
+  }catch(e){}
+}
+function renderTwitchProfile(){
+  const p=(data.twitchProfile&&data.twitchProfile.profile)?data.twitchProfile.profile:(data.twitchProfile||{});
+  const live=data.twitchLive||{};
+  const img=document.getElementById('twitchAvatar'); if(img) img.src=p.profileImage||p.profile_image_url||'';
+  const name=document.getElementById('twitchDisplayName'); if(name) name.textContent=p.displayName||p.display_name||'DJ FOLSOE';
+  const desc=document.getElementById('twitchDescription'); if(desc) desc.textContent=p.description||data?.about?.[window.DJF_LANG||'da']||'DJ FOLSOE on Twitch.';
+  const fol=document.getElementById('twitchFollowers'); if(fol) fol.textContent=p.followers||data?.station?.followersCurrent||0;
+  const cat=document.getElementById('twitchCategory'); if(cat) cat.textContent=live.category||data?.station?.category||'Music';
+  const up=document.getElementById('twitchUptime'); if(up) up.textContent=live.live?'LIVE':'OFFLINE';
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{renderTwitchProfile();refreshTwitchFull();},1200));

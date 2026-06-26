@@ -159,3 +159,13 @@
 }
 .cloudLockedNote{color:rgba(255,255,255,.65);line-height:1.5}
 @media(max-width:900px){.backendHero{grid-template-columns:1fr}}
+
+/* V811 Complete Twitch API Platform */
+.twitchProfileCard{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center}
+.twitchProfileCard img{width:150px;height:150px;border-radius:32px;object-fit:cover;background:linear-gradient(135deg,#ffd166,#00d4ff)}
+.twitchProfileCard h3{font-size:32px;margin:0 0 8px}
+.twitchProfileCard p{color:rgba(255,255,255,.72);line-height:1.5}
+.twitchStats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.twitchStats div{padding:12px;border-radius:16px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.1)}
+.twitchStats b{display:block;color:#ffd166;font-size:20px}.twitchStats span{font-size:11px;color:rgba(255,255,255,.58);text-transform:uppercase;font-weight:900}
+@media(max-width:720px){.twitchProfileCard{grid-template-columns:1fr}.twitchStats{grid-template-columns:1fr}}

@@ -816,7 +816,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V810",
+    "version": "V811",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -863,5 +863,24 @@
       "en": "FOLSOE Weekly Listening Chart",
       "de": "FOLSOE Weekly Listening Chart"
     }
-  }
+  },
+  "twitchProfile": {
+    "login": "djfolsoe",
+    "displayName": "DJ FOLSOE",
+    "profileImage": "",
+    "offlineImage": "",
+    "description": "",
+    "broadcasterType": "",
+    "createdAt": "",
+    "followers": 0,
+    "live": false,
+    "viewers": 0,
+    "streamTitle": "",
+    "category": "",
+    "startedAt": "",
+    "uptime": "",
+    "lastUpdated": ""
+  },
+  "twitchClips": [],
+  "twitchVideos": []
 }

@@ -323,3 +323,25 @@ if($('saveToBackend'))$('saveToBackend').onclick=()=>saveToBackend();
 if($('loadRequestsBackend'))$('loadRequestsBackend').onclick=()=>loadRequestsBackend();
 $('adminLogout').onclick=()=>{localStorage.removeItem('djf_admin_unlocked');location.reload();};
 });
+async function fetchTwitchFullPackage(){
+  const base=apiBase(); if(!base){setBackendStatus('Mangler API Base URL');return;}
+  const el=document.getElementById('twitchFullStatus');
+  try{
+    if(el) el.textContent='Henter Twitch API package...';
+    const r=await fetch(base+'/api/twitch-full',{cache:'no-store'});
+    if(!r.ok) throw new Error(await r.text());
+    const pkg=await r.json();
+    data.twitchProfile=pkg.profile||pkg;
+    data.twitchLive=pkg.live||{};
+    data.twitchChannel=pkg.channel||{};
+    data.twitchVideos=pkg.videos||[];
+    data.twitchClips=pkg.clips||[];
+    saveAll();
+    if(el) el.textContent='Twitch data hentet og gemt i Broadcast Cloud.';
+  }catch(e){ if(el) el.textContent='Twitch fejl: '+e.message; }
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
+  const b=document.getElementById('fetchTwitchFull'); if(b)b.onclick=()=>fetchTwitchFullPackage();
+  const p=document.getElementById('openTwitchProfileApi'); if(p)p.onclick=()=>window.open(apiBase()+'/api/twitch-profile','_blank');
+  const f=document.getElementById('openTwitchFullApi'); if(f)f.onclick=()=>window.open(apiBase()+'/api/twitch-full','_blank');
+},800));
