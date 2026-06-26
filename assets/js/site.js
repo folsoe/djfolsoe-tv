@@ -1,6 +1,6 @@
 let data, lang=localStorage.getItem('djf_lang')||'da', tick=0;
 const $=id=>document.getElementById(id);
-const T={da:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK",heroText:"DJ FOLSOE TV er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab – præsenteret som en moderne Music TV-kanal fra Danmark.",watchLive:"Se live",requestSong:"Ønsk en sang",streamTitle:"Feed fra streamen",guideTitle:"Programplan",top20Title:"Top 20 fra stationen",newsTitle:"Nyheder",requestsTitle:"Ønsk en sang",requestsText:"Skriv dit musikønske her. Det gemmes lokalt i admin-demoen og kan senere kobles til rigtig backend.",yourName:"Dit navn",songRequest:"Sangønske",sendRequest:"Send ønske"},en:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV FROM DENMARK",heroText:"DJ FOLSOE TV is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community – presented as a modern Music TV channel from Denmark.",watchLive:"Watch Live",requestSong:"Request a song",streamTitle:"Stream feed",guideTitle:"TV Guide",top20Title:"Station Top 20",newsTitle:"News",requestsTitle:"Request a song",requestsText:"Write your music request here. It is saved locally in the admin demo and can later be connected to a real backend.",yourName:"Your name",songRequest:"Song request",sendRequest:"Send request"},de:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV AUS DÄNEMARK",heroText:"DJ FOLSOE TV ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",watchLive:"Live ansehen",requestSong:"Song wünschen",streamTitle:"Stream-Feed",guideTitle:"TV-Guide",top20Title:"Station Top 20",newsTitle:"Nachrichten",requestsTitle:"Song wünschen",requestsText:"Schreibe deinen Musikwunsch hier. Er wird lokal in der Admin-Demo gespeichert und kann später mit einem echten Backend verbunden werden.",yourName:"Dein Name",songRequest:"Musikwunsch",sendRequest:"Wunsch senden"}};
+const T={da:{kicker:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH",heroText:"DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab",watchLive:"Se live",requestSong:"Ønsk en sang",streamTitle:"Feed fra streamen",guideTitle:"Programplan",top20Title:"Top 20 fra stationen",newsTitle:"Nyheder",requestsTitle:"Ønsk en sang",requestsText:"Skriv dit musikønske her. Det gemmes lokalt i admin-demoen og kan senere kobles til rigtig backend.",yourName:"Dit navn",songRequest:"Sangønske",sendRequest:"Send ønske"},en:{kicker:"BROADCAST CLOUD · DJ FOLSOE ON TWITCH",heroText:"DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",watchLive:"Watch Live",requestSong:"Request a song",streamTitle:"Stream feed",guideTitle:"TV Guide",top20Title:"Station Top 20",newsTitle:"News",requestsTitle:"Request a song",requestsText:"Write your music request here. It is saved locally in the admin demo and can later be connected to a real backend.",yourName:"Your name",songRequest:"Song request",sendRequest:"Send request"},de:{kicker:"BROADCAST CLOUD · RADIO 2026 · MUSIC TV AUS DÄNEMARK",heroText:"DJ FOLSOE ist ein dänischer Musik-Streamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Chart-Countdowns und einer starken Musik-Community – präsentiert als moderner Music-TV-Sender aus Dänemark.",watchLive:"Live ansehen",requestSong:"Song wünschen",streamTitle:"Stream-Feed",guideTitle:"TV-Guide",top20Title:"Station Top 20",newsTitle:"Nachrichten",requestsTitle:"Song wünschen",requestsText:"Schreibe deinen Musikwunsch hier. Er wird lokal in der Admin-Demo gespeichert und kann später mit einem echten Backend verbunden werden.",yourName:"Dein Name",songRequest:"Musikwunsch",sendRequest:"Wunsch senden"}};
 function setCloudStatus(ok,msg){
   const el=document.getElementById('cloudStatus');
   if(!el) return;
@@ -91,3 +91,82 @@ function renderTwitchProfile(){
   const up=document.getElementById('twitchUptime'); if(up) up.textContent=live.live?'LIVE':'OFFLINE';
 }
 document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{renderTwitchProfile();refreshTwitchFull();},1200));
+
+
+
+/* V812.2 PUBLIC CHART FETCH FIX */
+async function v8122RefreshWeeklyChart(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  if(!base || !window.data && typeof data === 'undefined') return;
+  try{
+    const r=await fetch(base+'/api/weekly-listening-chart',{cache:'no-store'});
+    if(!r.ok) return;
+    const chart=await r.json();
+    if(typeof data !== 'undefined'){
+      data.weeklyListeningChart=chart;
+      data.top20Chart=chart;
+      if(typeof render === 'function') render();
+    }
+  }catch(e){}
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(v8122RefreshWeeklyChart,1500));
+
+/* V813 Unified Music Newsroom */
+let djfNewsroomCategory="ALL";
+async function v813LoadNewsroom(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  try{
+    let dataUrl=base?base+'/api/newsroom?refresh=1':'api/newsroom.json';
+    const r=await fetch(dataUrl,{cache:'no-store'});
+    if(!r.ok) throw new Error('newsroom unavailable');
+    const newsroom=await r.json();
+    window.DJF_NEWSROOM=newsroom;
+    v813RenderNewsroom();
+  }catch(e){
+    window.DJF_NEWSROOM={items:[]};
+    v813RenderNewsroom();
+  }
+}
+function v813RenderNewsroom(){
+  const n=window.DJF_NEWSROOM||{items:[]};
+  const items=n.items||[];
+  const cats=["ALL",...Array.from(new Set(items.map(x=>x.category).filter(Boolean)))];
+  const tabs=document.getElementById('newsroomTabs');
+  if(tabs) tabs.innerHTML=cats.map(c=>`<button class="${c===djfNewsroomCategory?'active':''}" onclick="djfNewsroomCategory='${c}';v813RenderNewsroom();">${c}</button>`).join('');
+  const filtered=djfNewsroomCategory==="ALL"?items:items.filter(x=>x.category===djfNewsroomCategory);
+  const grid=document.getElementById('newsroomGrid');
+  if(grid) grid.innerHTML=(filtered.slice(0,12).map(x=>`<article class="newsroomItem"><b>${x.category||'Music'}</b><h3>${x.title||''}</h3><p>${x.summary||''}</p><small>${x.source||''} · ${x.publishedAt||''}</small><br>${x.url?`<a href="${x.url}" target="_blank">Læs mere</a>`:''}</article>`).join('') || '<p>Newsroom loader...</p>');
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(v813LoadNewsroom,1600));
+
+
+
+/* V813.2 PUBLIC BRANDING GUARD */
+function forcePublicBrandingGuard(){
+  const replaceText = (node) => {
+    if(node.nodeType === Node.TEXT_NODE){
+      node.nodeValue = node.nodeValue
+        .replaceAll("DJ FOLSOE TV","DJ FOLSOE")
+        .replaceAll("FOLSOE TV","FOLSOE")
+        .replace(/\s*[–—-]\s*presented as a modern Music TV channel from Denmark\.?/gi,"")
+        .replace(/\s*[–—-]\s*præsenteret som en moderne Music TV-kanal fra Danmark\.?/gi,"")
+        .replace(/\s*[–—-]\s*präsentiert als moderner Music-TV-Sender aus Dänemark\.?/gi,"")
+        .replace(/\s*[–—-]\s*präsentiert als moderner Music-TV-Kanal aus Dänemark\.?/gi,"");
+    } else {
+      node.childNodes && node.childNodes.forEach(replaceText);
+    }
+  };
+  replaceText(document.body);
+  const ribbon = document.querySelector('[data-i18n="heroRibbon"]');
+  if(ribbon) ribbon.textContent = "BROADCAST CLOUD · DJ FOLSOE ON TWITCH";
+  const desc = document.querySelector('[data-i18n="heroDescription"]');
+  if(desc){
+    const lang = localStorage.getItem("djf_lang") || "da";
+    desc.textContent = lang==="en" ? "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community." : lang==="de" ? "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community." : "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.";
+  }
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(forcePublicBrandingGuard,500));
+document.addEventListener("DOMContentLoaded",()=>setTimeout(forcePublicBrandingGuard,1800));
+
+/* V813.2 frontend binding hook after normal render */
+document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{ if(window.DJF_REBIND_FRONTEND) window.DJF_REBIND_FRONTEND(); },2200));

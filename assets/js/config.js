@@ -1,4 +1,4 @@
-// DJ FOLSOE TV V809 FRONTEND CONFIG
+// DJ FOLSOE V809 FRONTEND CONFIG
 // Cloudflare Worker API base.
 // Ret denne til din Worker URL eller dit API-domæne.
 // Når api.folsoetv.dk er klar, kan den ændres til: https://api.folsoetv.dk
