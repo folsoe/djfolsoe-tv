@@ -69,7 +69,7 @@
       </section>
 
       <section id="top20Admin" class="panel">
-        <div class="sectionHead"><span>V805 V812 FOLSOE WEEKLY LISTENING CHART</span><h2>FOLSOE Weekly Listening Chart</h2></div>
+        <div class="sectionHead"><span>V805 V812.1 CHART LAB</span><h2>FOLSOE Chart Lab</h2></div>
         <p class="note">Chartet bygger på: FOLSOE's mest lyttede sange 45%, danske hitlister 20%, EDM-trends 15%, Spotify 15% og seernes ønsker 5%.</p>
         <div class="methodGrid">
           <div><b>45%</b><span>FOLSOE Listening</span></div>
@@ -78,8 +78,17 @@
           <div><b>15%</b><span>Spotify</span></div>
           <div><b>5%</b><span>Seerønsker</span></div>
         </div>
-        <div class="dataCorePanel"><b>Broadcast Data Core:</b> Top 20 gemmes nu i samme datamodel som hjemmeside, API, admin og fremtidigt overlay. Eksporter <code>site-data.json</code> for permanent GitHub-opdatering.</div><div class="scoreGrid"><div><b>40%</b>Airplay DK</div><div><b>20%</b>Hitlisten</div><div><b>15%</b>BBC/UK</div><div><b>10%</b>Spotify</div><div><b>5%</b>Apple</div><div><b>5%</b>Billboard</div><div><b>5%</b>FOLSOE</div></div><div id="top20Editor" class="chartEditor"></div>
-        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="calculateChart">Beregn Weekly Listening Score</button><button id="sortChart">Sortér efter points</button><button id="archiveChart">Arkivér uge</button><button id="clearTop20">Ryd Top 20</button></div>
+        <div class="dataCorePanel"><b>Broadcast Data Core:</b> Top 20 gemmes nu i samme datamodel som hjemmeside, API, admin og fremtidigt overlay. Eksporter <code>site-data.json</code> for permanent GitHub-opdatering.</div><div class="scoreGrid"><div><b>40%</b>Airplay DK</div><div><b>20%</b>Hitlisten</div><div><b>15%</b>BBC/UK</div><div><b>10%</b>Spotify</div><div><b>5%</b>Apple</div><div><b>5%</b>Billboard</div><div><b>5%</b>FOLSOE</div></div><div class="chartLabToolbar">
+          <button id="addCandidate">Tilføj kandidat</button>
+          <button id="importCandidates">Importer kandidater</button>
+          <button id="calculateChartLab">Beregn Top 20</button>
+          <button id="promoteTop20">Send Top 20 til website</button>
+          <button id="exportChartLab">Eksportér Chart Lab JSON</button>
+        </div>
+        <textarea id="candidateImportBox" class="candidateImportBox" placeholder="Indsæt kandidater her: Artist - Title | Genre | FOLSOE | DK | EDM | Spotify | Viewer"></textarea>
+        <div id="chartLabSummary" class="chartLabSummary">Chart Lab klar.</div>
+        <div id="top20Editor" class="chartEditor chartLabEditor"></div>
+        <div class="adminButtons"><button id="saveTop20">Gem Top 20</button><button id="calculateChart">Beregn Top 20</button><button id="sortChart">Sortér efter points</button><button id="archiveChart">Arkivér uge</button><button id="clearTop20">Ryd Top 20</button></div>
       </section>
 
       <section id="showsAdmin" class="panel">

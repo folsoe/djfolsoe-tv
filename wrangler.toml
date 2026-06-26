@@ -1,4 +1,4 @@
-// DJ FOLSOE TV NETWORK V812 - CLOUDFLARE WORKER BACKEND RESTORE
+// DJ FOLSOE TV NETWORK V812.1 - CLOUDFLARE WORKER BACKEND RESTORE
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V812",
+    version: "V812.1",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V812";
+  data.broadcastCore.version = "V812.1";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -207,12 +207,12 @@ export default {
 
     try {
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE TV V812 Worker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE TV V812.1 Worker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V812 Admin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE TV V812.1 Admin" });
       }
 
       if (path === "/api/seed") {
@@ -238,6 +238,39 @@ export default {
           const saved = await putCore(env, body);
           return json({ ok: true, data: saved });
         }
+      }
+
+      if (path === "/api/chart-lab") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json(core.chartLab || { candidates: [], method: { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 }});
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401);
+          const lab = await request.json();
+          core.chartLab = lab;
+          const saved = await putCore(env, core);
+          return json({ ok:true, chartLab:saved.chartLab });
+        }
+      }
+
+      if (path === "/api/chart-lab/calculate") {
+        if (!isAdmin(request, env)) return json({ error: "Unauthorized" }, 401);
+        const core = await getCore(env);
+        const lab = core.chartLab || { candidates: [], method: { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 } };
+        const weights = lab.method || { folsoeListening:45, danishCharts:20, edmTrend:15, spotify:15, viewerRequests:5 };
+        const calc = (x) => {
+          const s = x.scores || {};
+          return Math.round((Number(s.folsoeListening||0)*weights.folsoeListening + Number(s.danishCharts||0)*weights.danishCharts + Number(s.edmTrend||0)*weights.edmTrend + Number(s.spotify||0)*weights.spotify + Number(s.viewerRequests||0)*weights.viewerRequests)/100);
+        };
+        const filled = (lab.candidates || []).filter(x => x.artist || x.title).map(x => ({...x, points: calc(x)})).sort((a,b)=>(b.points||0)-(a.points||0));
+        filled.forEach((x,i)=>{ x.rank=i+1; const lw=Number(x.lastWeek); x.status=String(x.lastWeek).toUpperCase()==="NEW"||!x.lastWeek||x.lastWeek==="-"?"NEW":(!isNaN(lw)?(lw>x.rank?"UP":lw<x.rank?"DOWN":"SAME"):"SAME"); x.weeks=x.status==="NEW"?1:Number(x.weeks||1)+1; x.peak=Math.min(Number(x.peak||x.rank),x.rank); });
+        lab.candidates = [...filled, ...(lab.candidates||[]).filter(x=>!(x.artist||x.title))].slice(0,40);
+        const top = filled.slice(0,20).map((x,i)=>({rank:i+1,lastWeek:x.lastWeek,artist:x.artist,title:x.title,status:x.status,points:x.points,weeks:x.weeks,peak:x.peak,genre:x.genre,folsoePick:!!x.pick,cover:x.cover,youtube:x.youtube,scores:x.scores}));
+        core.chartLab = lab;
+        core.weeklyListeningChart = { ...(core.weeklyListeningChart||{}), title:"FOLSOE Weekly Listening Chart", method:weights, items:top };
+        core.top20Chart = core.weeklyListeningChart;
+        core.top20 = top.map(x => `${x.artist} - ${x.title}`);
+        const saved = await putCore(env, core);
+        return json({ ok:true, chartLab:saved.chartLab, chart:saved.weeklyListeningChart });
       }
 
       if (path === "/api/weekly-listening-chart") {

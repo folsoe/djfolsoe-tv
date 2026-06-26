@@ -183,3 +183,33 @@
 .chartEditRow.v812{grid-template-columns:40px 58px 1fr 1fr 78px 70px 62px 68px 74px 74px}
 @media(max-width:1000px){.listeningMethod{grid-template-columns:repeat(2,1fr)}.chartEditRow.v812{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.listeningMethod{grid-template-columns:1fr}}
+
+/* V812.1 Chart Lab */
+.chartLabToolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.chartLabToolbar button{
+  border:0;border-radius:999px;padding:10px 14px;font-weight:1000;cursor:pointer;
+  background:linear-gradient(135deg,#fff,#ffd166,#00d4ff);color:#111;
+}
+.candidateImportBox{
+  width:100%;height:92px!important;margin:10px 0 14px;border-radius:18px!important;
+  background:rgba(0,0,0,.26)!important;color:#fff!important;border:1px solid rgba(255,255,255,.14)!important;
+}
+.chartLabSummary{
+  margin:12px 0;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.24);
+  border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.74);font-weight:900;
+}
+.chartEditRow.lab{
+  display:grid;
+  grid-template-columns:44px 58px 1.2fr 1.2fr 86px 80px 62px 62px 62px 70px 70px 70px;
+  gap:8px;align-items:end;padding:14px;border-radius:20px;background:rgba(0,0,0,.23);border:1px solid rgba(255,255,255,.10);
+}
+.chartEditRow.lab label{font-size:9px;color:#ffd166;text-transform:uppercase;font-weight:1000;letter-spacing:.7px}
+.chartEditRow.lab div{display:grid;gap:4px}
+.chartEditRow.lab input,.chartEditRow.lab select{
+  width:100%;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.28);color:#fff;padding:0 8px;
+}
+.chartEditRow.lab .wide{grid-column:span 2}
+.chartEditRow.lab .pointsPreview{color:#ffd166;font-weight:1000;text-align:center;font-size:18px}
+@media(max-width:1100px){.chartEditRow.lab{grid-template-columns:1fr 1fr}.chartEditRow.lab .wide{grid-column:span 2}}
+@media(max-width:620px){.chartEditRow.lab{grid-template-columns:1fr}.chartEditRow.lab .wide{grid-column:span 1}}
