@@ -705,3 +705,13 @@ document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{
   const b=document.getElementById("forceBrandingFix");
   if(b) b.onclick=()=>forceBrandingFix();
 },1000));
+
+/* V813.3 STABLE ADMIN LOCK */
+function djfStableBrandingLock(){
+ if(typeof data==='undefined'||!data)return;
+ data.brand='DJ FOLSOE';data.platformVersion='V813.3 STABLE';
+ data.station=data.station||{};data.station.name='DJ FOLSOE';
+ data.station.description_da=`DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.`;data.station.description_en=`DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.`;data.station.description_de=`DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.`;
+ data.broadcastCore=data.broadcastCore||{};data.broadcastCore.version='V813.3 STABLE';data.broadcastCore.stableRelease=true;data.broadcastCore.brandingLock='DJ FOLSOE';
+}
+document.addEventListener('DOMContentLoaded',()=>setTimeout(djfStableBrandingLock,800));

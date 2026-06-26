@@ -86,3 +86,16 @@
   window.addEventListener("storage", run);
   window.DJF_REBIND_FRONTEND = run;
 })();
+
+/* V813.3 STABLE HARDENING */
+(function(){
+  function stableClean(){
+    if(!document.body) return;
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+    const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n=>{n.nodeValue=String(n.nodeValue||"").replaceAll("DJ FOLSOE TV","DJ FOLSOE").replaceAll("FOLSOE TV","FOLSOE").replace(/\s*[–—-]\s*presented as a modern Music TV channel from Denmark\.?/gi,"");});
+    document.querySelectorAll('[data-bind="stableVersion"],[data-i18n="stableVersion"]').forEach(el=>el.textContent="DJ FOLSOE PLATFORM V813.3 STABLE");
+  }
+  document.addEventListener("DOMContentLoaded",()=>setTimeout(stableClean,600));
+  window.addEventListener("load",()=>setTimeout(stableClean,1800));
+})();

@@ -1,0 +1,12 @@
+DJ FOLSOE V813.3 STABLE DEPLOYMENT CHECKLIST
+
+1. Pak ZIP-filen ud.
+2. Upload INDHOLDET af mappen til roden af GitHub repo.
+3. Vent på grøn GitHub Pages deployment.
+4. Deploy cloudflare-worker/worker.js i Cloudflare.
+5. Åbn https://folsoetv.dk/?v=8133stable og tryk Ctrl+F5.
+6. Test /api/stable-status.
+
+Forventet tekst:
+BROADCAST CLOUD · DJ FOLSOE ON TWITCH
+DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.
