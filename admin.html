@@ -1,12 +1,115 @@
 <!doctype html>
-<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DJ FOLSOE V816 Admin</title><link rel="stylesheet" href="assets/css/admin.css"></head>
-<body><header class="top"><div><small>DJ FOLSOE NETWORK V816</small><h1>Broadcast OS Kontrolcenter</h1></div><div class="login"><label>ADMIN_TOKEN</label><input id="token" placeholder="Indsæt token"><button onclick="saveToken()">Gem token</button></div></header>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE V816.12 Admin</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<header class="adminHero">
+  <div>
+    <span class="kicker">DJ FOLSOE NETWORK V816.12</span>
+    <h1>Broadcast Control Center</h1>
+    <p>Ét panel til hjemmeside, overlay, Twitch-data, tickers, shows, Top 20, requests og sprog.</p>
+  </div>
+  <div class="loginCard">
+    <label>ADMIN_TOKEN</label>
+    <input id="token" placeholder="Indsæt ADMIN_TOKEN">
+    <button onclick="saveToken()">Gem token</button>
+  </div>
+</header>
+
+<nav class="adminTabs">
+  <button onclick="jump('theme')">🎨 Theme</button>
+  <button onclick="jump('homepage')">🏠 Forside</button>
+  <button onclick="jump('news')">📰 Nyheder</button>
+  <button onclick="jump('tickers')">📡 Tickers</button>
+  <button onclick="jump('shows')">📺 Shows</button>
+  <button onclick="jump('top20')">🏆 Top 20</button>
+  <button onclick="jump('requests')">🎧 Requests</button>
+  <button onclick="jump('twitch')">🟣 Twitch</button>
+</nav>
+
 <main>
-<section class="panel"><h2>1. Theme Engine · Skift overlay tema</h2><p class="note">Dette styrer overlayet. Forsiden bruger ikke theme engine som hovedfunktion.</p><div id="themeGrid" class="themeGrid"></div><pre id="activeTheme">Aktivt tema: loading</pre></section>
-<section class="panel"><h2>2. Forside nyheder</h2><div class="buttons"><button onclick="addRow('news')">Tilføj nyhed</button><button onclick="saveRows('news')">Gem nyheder</button></div><div id="newsEditor"></div></section>
-<section class="panel"><h2>3. Top ticker til overlay</h2><div class="buttons"><button onclick="addRow('top')">Tilføj top ticker</button><button onclick="saveRows('top')">Gem top ticker</button></div><div id="topEditor"></div></section>
-<section class="panel"><h2>4. Bund ticker til overlay</h2><div class="buttons"><button onclick="addRow('bottom')">Tilføj bund ticker</button><button onclick="saveRows('bottom')">Gem bund ticker</button></div><div id="bottomEditor"></div></section>
-<section class="panel"><h2>5. Shows på forsiden</h2><div class="buttons"><button onclick="addRow('shows')">Tilføj show</button><button onclick="saveRows('shows')">Gem shows</button></div><div id="showsEditor"></div></section>
-<section class="panel"><h2>6. Top 20</h2><div class="buttons"><button onclick="addRow('top20')">Tilføj sang</button><button onclick="saveRows('top20')">Gem Top 20</button></div><div id="top20Editor"></div></section>
-<section class="panel"><h2>Test</h2><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test alt</button><button onclick="openApi('/api/homepage')">Homepage API</button><button onclick="openApi('/api/overlay/v170-state')">Overlay API</button><pre id="status">Klar.</pre></section>
-<section class="panel"><h2>Homepage Content OS</h2><p class="note">Forsiden henter nu Twitch profilbillede, banner, bio, live status, viewers, followers, stream title, category, requests, shows, news, Top20 og mods.</p><button onclick="openApi('/api/homepage')">Test Homepage API</button><button onclick="openApi('/api/requests')">Test Requests API</button></section></main><script src="assets/js/admin.js"></script></body></html>
+  <section id="status" class="panel statusPanel">
+    <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test alt</button></div></div>
+    <pre id="statusBox">Klar. Indsæt token og tryk Hent data.</pre>
+  </section>
+
+  <section id="theme" class="panel">
+    <div class="panelHead"><h2>🎨 Theme Engine til overlay</h2><button onclick="openApi('/api/theme')">Test theme API</button></div>
+    <p class="note">Tema skifter overlayets farver og aktive show-look. Hjemmesidens grafik røres ikke.</p>
+    <div id="themeGrid" class="themeGrid"></div>
+    <pre id="activeTheme">Aktivt tema: loading</pre>
+  </section>
+
+  <section id="homepage" class="panel">
+    <div class="panelHead"><h2>🏠 Hjemmeside indhold</h2><button onclick="openApi('/api/homepage')">Test homepage API</button></div>
+    <p class="note">Forsiden henter Twitch profil, banner, bio, live status, viewers, followers, stream title og category. Her kan du gemme profilens fallback-indhold.</p>
+    <div class="formGrid">
+      <div><label>Profilnavn</label><input id="profileName" value="DJ FOLSOE"></div>
+      <div><label>Twitch channel</label><input id="twitchChannel" value="djfolsoe"></div>
+      <div class="wide"><label>Fallback bio</label><textarea id="profileDescription" rows="4"></textarea></div>
+      <div class="wide"><label>Genres komma-separeret</label><input id="profileGenres"></div>
+    </div>
+    <div class="buttons"><button onclick="saveProfile()">Gem profil/forside</button></div>
+  </section>
+
+  <section id="news" class="panel">
+    <div class="panelHead"><h2>📰 Forside nyheder/cards</h2><button onclick="addRow('news')">Tilføj nyhed</button></div>
+    <p class="note">Vises som kort på forsiden: Seneste show, Top20 nyt, Requests, Community, Twitch updates osv.</p>
+    <div id="newsEditor"></div>
+    <button onclick="saveRows('news')">Gem nyheder</button>
+  </section>
+
+  <section id="tickers" class="panel twoCol">
+    <div>
+      <div class="panelHead"><h2>📡 Top ticker overlay</h2><button onclick="addRow('top')">Tilføj</button></div>
+      <p class="note">Top ticker kan være theme-specifik. Fx theme = weekend.</p>
+      <div id="topEditor"></div>
+      <button onclick="saveRows('top')">Gem top ticker</button>
+    </div>
+    <div>
+      <div class="panelHead"><h2>📻 Bottom ticker overlay</h2><button onclick="addRow('bottom')">Tilføj</button></div>
+      <p class="note">Bottom ticker kan være theme = all.</p>
+      <div id="bottomEditor"></div>
+      <button onclick="saveRows('bottom')">Gem bottom ticker</button>
+    </div>
+  </section>
+
+  <section id="shows" class="panel">
+    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Tilføj show</button></div>
+    <p class="note">Styrer show-kort på forsiden.</p>
+    <div id="showsEditor"></div>
+    <button onclick="saveRows('shows')">Gem shows</button>
+  </section>
+
+  <section id="top20" class="panel">
+    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Tilføj sang</button><button onclick="seedTop20()">Indsæt standard Top 20</button></div></div>
+    <p class="note">Styrer FOLSOE Top 20 på forsiden og overlayets musik-bokse.</p>
+    <div id="top20Editor"></div>
+    <button onclick="saveRows('top20')">Gem Top 20</button>
+  </section>
+
+  <section id="requests" class="panel">
+    <div class="panelHead"><h2>🎧 Requests</h2><button onclick="openApi('/api/requests')">Test requests API</button></div>
+    <p class="note">Forsiden viser de sidste 3. Du kan også teste manuelt her.</p>
+    <div class="formGrid">
+      <div><label>Bruger</label><input id="reqUser" placeholder="Twitch navn"></div>
+      <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
+    </div>
+    <button onclick="addRequest()">Gem test-request</button>
+    <div id="requestsPreview" class="previewGrid"></div>
+  </section>
+
+  <section id="twitch" class="panel">
+    <div class="panelHead"><h2>🟣 Twitch sync</h2><div><button onclick="openApi('/api/twitch-profile')">Profil API</button><button onclick="openApi('/api/homepage')">Homepage API</button></div></div>
+    <p class="note">Kræver Cloudflare secrets: TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL=djfolsoe.</p>
+    <div id="twitchPreview" class="twitchPreview"></div>
+  </section>
+</main>
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
