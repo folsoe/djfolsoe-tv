@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V813.8 DENSE BOTTOM DECK CODE UPDATE",
+    "version": "V814 BROADCAST HYBRID ENGINE",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -643,7 +643,16 @@
     "bottomBroadcastDeck": true,
     "topbarNewsRotation": true,
     "boxContentBinding": true,
-    "newsTickerThemeSync": true
+    "newsTickerThemeSync": true,
+    "broadcastHybridEngine": true,
+    "v814LayoutLock": {
+      "topbar": "logo + admin news ticker + clock",
+      "center": "fully clear",
+      "bottomStack": "box1 above box3, box2 above box4",
+      "footerTicker": "returned",
+      "box4": "locked to chat only",
+      "contentMaster": "website/admin/cloud"
+    }
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2224,7 +2233,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V813.8 DENSE BOTTOM DECK CODE UPDATE",
+  "platformVersion": "V814 BROADCAST HYBRID ENGINE",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2233,18 +2242,13 @@
       "4 box footer layout preserved"
     ],
     "endpoint": "/api/overlay/v170-state",
-    "layout": "dense-bottom-side-deck",
+    "layout": "v814-bottom-stacked-hybrid",
     "boxLayout": {
-      "leftColumnTop": "box1_live",
-      "leftColumnBottom": "box3_music",
-      "rightColumnTop": "box2_program",
-      "rightColumnBottom": "box4_community",
-      "centerSafeArea": {
-        "x1": 430,
-        "x2": 1490,
-        "y1": 90,
-        "y2": 1080
-      }
+      "leftTop": "box1_follow_journey",
+      "leftBottom": "box3_music_top20",
+      "rightTop": "box2_program_theme",
+      "rightBottom": "box4_chat_locked",
+      "stackedNearBottom": true
     },
     "motion": {
       "rotationSeconds": 8,
@@ -2278,7 +2282,10 @@
       "themeTitleRemoved": true
     },
     "topbarLogoSafe": true,
-    "denseBottomDeck": true
+    "denseBottomDeck": true,
+    "textInsideBoxFix": true,
+    "box4LockedToChat": true,
+    "footerTicker": true
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
