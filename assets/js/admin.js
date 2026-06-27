@@ -6,7 +6,6 @@ let core=null, home=null, activeTheme="weekend";
 let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discoveryItems=[],requestItems=[];
 
 document.addEventListener("DOMContentLoaded",()=>{
-  ensureAdminPatchDom();
   document.getElementById("token").value=localStorage.getItem("DJF_ADMIN_TOKEN")||"";
   renderThemes();
   loadAll();
@@ -44,7 +43,6 @@ async function setTheme(k){
 }
 
 async function loadAll(){
-  ensureAdminPatchDom();
   try{
     const results=await Promise.allSettled([
       api("/api/core"), api("/api/homepage"), api("/api/theme"), api("/api/theme-ticker-top"),
@@ -146,7 +144,16 @@ async function saveRows(type){
 
 function seedTop20(){top20Items=TOP20_SEED.map(x=>Object.assign({},x));renderEditors();}
 
-
+async function addRequest(){
+  try{
+    const user=document.getElementById("reqUser").value||"Admin";
+    const text=document.getElementById("reqText").value||"!ønske Artist - Title";
+    const r=await api("/api/requests",{method:"POST",body:JSON.stringify({user,text})});
+    requestItems=r.items||[];
+    renderRequests();
+    setStatus("✅ Request gemt");
+  }catch(e){setStatus("❌ Request-fejl: "+e.message);}
+}
 
 function renderRequests(){
   document.getElementById("requestsPreview").innerHTML=(requestItems||[]).slice(0,3).map(x=>`<div class="previewCard"><b>${esc(x.song||x.text||"")}</b><p>${esc(x.user||"Twitch chat")}</p><small>${esc(x.time||"")}</small></div>`).join("");
@@ -416,164 +423,4 @@ function fillSEO(){
 async function saveSEO(){
   const seo={...seoItem,siteName:document.getElementById('seoSiteName').value.trim(),domain:document.getElementById('seoDomain').value.trim(),keywords:document.getElementById('seoKeywords').value.split(',').map(x=>x.trim()).filter(Boolean),sameAs:document.getElementById('seoSameAs').value.split(/\n|,/).map(x=>x.trim()).filter(Boolean),title:{da:document.getElementById('seoTitleDa').value,en:document.getElementById('seoTitleEn').value,de:document.getElementById('seoTitleDe').value},description:{da:document.getElementById('seoDescDa').value,en:document.getElementById('seoDescEn').value,de:document.getElementById('seoDescDe').value}};
   try{ await api('/api/seo',{method:'POST',body:JSON.stringify(seo)}); setStatus('✅ SEO gemt'); loadSEO(); }catch(e){ setStatus('❌ SEO-fejl: '+e.message); }
-}
-
-
-// ===== V816.19 Request Ecosystem =====
-let requestManagerItems=[];
-let requestManagerStats={};
-
-async function loadRequestManager(){
-  try{
-    const r=await api('/api/requests');
-    requestManagerItems=r.all||r.items||[];
-    requestManagerStats=r.stats||{};
-  }catch(e){
-    requestManagerItems=[];
-    requestManagerStats={};
-  }
-  renderRequestManager();
-}
-
-function renderRequestManager(){
-  const statsEl=document.getElementById('requestStatsPreview');
-  if(statsEl){
-    const s=requestManagerStats||{};
-    statsEl.innerHTML=[
-      ['I dag',s.today||0],
-      ['I alt',s.total||0],
-      ['Top artist',s.topArtist?.name||'-'],
-      ['Top requester',s.topRequester?.name||'-']
-    ].map(x=>`<div class="previewCard"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('');
-  }
-  const el=document.getElementById('requestsManager');
-  if(!el)return;
-  el.innerHTML=(requestManagerItems||[]).map((r,i)=>`
-    <div class="row requestRow">
-      <div><label>Status</label><select data-req-i="${i}" data-f="status"><option value="approved" ${r.status!=='rejected'?'selected':''}>Approved</option><option value="rejected" ${r.status==='rejected'?'selected':''}>Rejected</option></select></div>
-      <div><label>Pin</label><select data-req-i="${i}" data-f="pinned"><option value="false" ${!r.pinned?'selected':''}>No</option><option value="true" ${r.pinned?'selected':''}>Yes</option></select></div>
-      <div><label>User</label><input data-req-i="${i}" data-f="user" value="${esc(r.user||'')}"></div>
-      <div><label>Song</label><input data-req-i="${i}" data-f="song" value="${esc(r.song||'')}"></div>
-      <div><label>Lang</label><input data-req-i="${i}" data-f="language" value="${esc(r.language||'da')}"></div>
-      <button onclick="requestManagerItems.splice(${i},1);renderRequestManager()">Slet</button>
-    </div>`).join('');
-}
-
-function collectRequestManager(){
-  document.querySelectorAll('[data-req-i][data-f]').forEach(inp=>{
-    const i=Number(inp.dataset.reqI), f=inp.dataset.f;
-    if(!requestManagerItems[i])requestManagerItems[i]={};
-    let v=inp.value;
-    if(f==='pinned')v=v==='true';
-    requestManagerItems[i][f]=v;
-  });
-}
-
-async function addRequest(){
-  try{
-    const body={
-      user:document.getElementById('reqUser').value||'Admin',
-      text:document.getElementById('reqText').value||'!ønske Artist - Title',
-      language:document.getElementById('reqLang')?.value||'da',
-      show:document.getElementById('reqShow')?.value||'DJ FOLSOE LIVE'
-    };
-    await api('/api/requests',{method:'POST',body:JSON.stringify(body)});
-    setStatus('✅ Request tilføjet');
-    loadRequestManager();
-  }catch(e){setStatus('❌ Request fejl: '+e.message);}
-}
-
-async function saveRequestList(){
-  collectRequestManager();
-  try{
-    const r=await api('/api/requests',{method:'PUT',body:JSON.stringify({items:requestManagerItems})});
-    requestManagerItems=r.items||requestManagerItems;
-    requestManagerStats=r.stats||{};
-    renderRequestManager();
-    setStatus('✅ Request-listen er gemt');
-  }catch(e){setStatus('❌ Request gem-fejl: '+e.message);}
-}
-
-
-// ===== V816.20 Community Wall Manager override =====
-let communityStatsItem={};
-
-async function loadCommunityV20(){
-  try{
-    const r=await api('/api/community-wall');
-    communityItems=r.items||[];
-    communityStatsItem=r.stats||{};
-  }catch(e){}
-  renderCommunityEditor();
-}
-function renderCommunityEditor(){
-  const el=document.getElementById('communityEditor'); if(!el)return;
-  el.innerHTML=(communityItems||[]).map((m,i)=>`
-    <div class="row communityRow v20CommunityRow">
-      <div><label>Active</label><select data-com-i="${i}" data-f="active"><option value="true" ${m.active!==false?'selected':''}>Yes</option><option value="false" ${m.active===false?'selected':''}>No</option></select></div>
-      <div><label>Type</label><input data-com-i="${i}" data-f="type" value="${esc(m.type||'follower')}"></div>
-      <div><label>Label</label><input data-com-i="${i}" data-f="label" value="${esc(m.label||'')}"></div>
-      <div><label>User/Login</label><input data-com-i="${i}" data-f="user" value="${esc(m.user||m.login||'')}"></div>
-      <div><label>Value</label><input data-com-i="${i}" data-f="value" value="${esc(m.value||'')}"></div>
-      <div><label>Pin</label><select data-com-i="${i}" data-f="pinned"><option value="false" ${!m.pinned?'selected':''}>No</option><option value="true" ${m.pinned?'selected':''}>Yes</option></select></div>
-      <div><label>Sort</label><input data-com-i="${i}" data-f="priority" value="${m.priority||i+1}"></div>
-      <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Slet</button>
-    </div>`).join('');
-  if(document.getElementById('communityRaids')){
-    document.getElementById('communityRaids').value=communityStatsItem.raids||0;
-    document.getElementById('communityMembers').value=communityStatsItem.members||0;
-    document.getElementById('communitySubs').value=communityStatsItem.subs||0;
-    document.getElementById('communityFollowers').value=communityStatsItem.followers||870;
-  }
-}
-function collectCommunity(){
-  document.querySelectorAll('[data-com-i][data-f]').forEach(inp=>{
-    const i=Number(inp.dataset.comI), f=inp.dataset.f;
-    if(!communityItems[i]) communityItems[i]={};
-    let v=inp.value; 
-    if(f==='active'||f==='pinned')v=v==='true'; 
-    if(f==='priority')v=Number(v||99);
-    communityItems[i][f]=v;
-  });
-}
-function addCommunity(){
-  collectCommunity();
-  communityItems.push({type:'follower',label:'Nyt felt',user:'',value:'',active:true,pinned:false,priority:communityItems.length+1});
-  renderCommunityEditor();
-}
-async function saveCommunity(){
-  collectCommunity();
-  try{
-    await api('/api/community-wall',{method:'POST',body:JSON.stringify({items:communityItems})});
-    const stats={
-      raids:Number(document.getElementById('communityRaids')?.value||0),
-      members:Number(document.getElementById('communityMembers')?.value||0),
-      subs:Number(document.getElementById('communitySubs')?.value||0),
-      followers:Number(document.getElementById('communityFollowers')?.value||870)
-    };
-    await api('/api/community-stats',{method:'POST',body:JSON.stringify({item:stats})});
-    setStatus('✅ Community Wall gemt');
-    loadCommunityV20();
-  }catch(e){setStatus('❌ Community fejl: '+e.message);}
-}
-
-
-function ensureAdminPatchDom(){
-  const main = document.querySelector("main") || document.body;
-  if(!document.getElementById("communityEditor")){
-    const sec=document.createElement("section");
-    sec.id="communityManager";
-    sec.className="panel";
-    sec.innerHTML='<div class="panelHead"><h2>❤️ Community Wall Manager</h2><button onclick="addCommunity()">Tilføj community felt</button></div><div id="communityEditor"></div><button onclick="saveCommunity()">Gem community wall</button>';
-    main.appendChild(sec);
-  }
-  if(!document.getElementById("communityRaids")){
-    const sec=document.getElementById("communityManager");
-    if(sec){
-      const box=document.createElement("div");
-      box.className="formGrid";
-      box.innerHTML='<div><label>Raids</label><input id="communityRaids" type="number"></div><div><label>Members</label><input id="communityMembers" type="number"></div><div><label>Subs fallback</label><input id="communitySubs" type="number"></div><div><label>Followers fallback</label><input id="communityFollowers" type="number"></div>';
-      sec.appendChild(box);
-    }
-  }
 }

@@ -135,22 +135,16 @@
     <button onclick="saveDiscovery()">Gem discovery picks</button>
   </section>
 
-
   <section id="requests" class="panel">
-    <div class="panelHead"><h2>🎧 Request Manager</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
-    <p class="note">Styrer seneste musikønsker fra !ønske / !request / !Wunsch. Du kan godkende, afvise, fastgøre og slette.</p>
+    <div class="panelHead"><h2>🎧 Requests</h2><button onclick="openApi('/api/requests')">Test requests API</button></div>
+    <p class="note">Forsiden viser de sidste 3. Du kan også teste manuelt her.</p>
     <div class="formGrid">
       <div><label>Bruger</label><input id="reqUser" placeholder="Twitch navn"></div>
       <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
-      <div><label>Sprog</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
-      <div><label>Show</label><input id="reqShow" placeholder="Fredagsbar"></div>
     </div>
-    <button onclick="addRequest()">Tilføj request</button>
-    <button onclick="saveRequestList()">Gem ændringer</button>
-    <div id="requestStatsPreview" class="previewGrid"></div>
-    <div id="requestsManager"></div>
+    <button onclick="addRequest()">Gem test-request</button>
+    <div id="requestsPreview" class="previewGrid"></div>
   </section>
-
 
   
   <section id="modsManager" class="panel">
@@ -160,21 +154,12 @@
     <button onclick="saveMods()">Gem mods</button>
   </section>
 
-
   <section id="communityManager" class="panel">
-    <div class="panelHead"><h2>❤️ Community Wall Manager</h2><div><button onclick="addCommunity()">Tilføj community felt</button><button onclick="openApi('/api/community-wall')">Community API</button></div></div>
-    <p class="note">Styrer Community Love på forsiden. Skriv Twitch-navn i User/Login for at hente profilbillede og live-status.</p>
+    <div class="panelHead"><h2>❤️ Community Wall</h2><button onclick="addCommunity()">Tilføj community felt</button></div>
+    <p class="note">Styrer Community Love sektionen på forsiden.</p>
     <div id="communityEditor"></div>
-    <h3>Community Stats</h3>
-    <div class="formGrid">
-      <div><label>Raids</label><input id="communityRaids" type="number"></div>
-      <div><label>Members</label><input id="communityMembers" type="number"></div>
-      <div><label>Subs fallback</label><input id="communitySubs" type="number"></div>
-      <div><label>Followers fallback</label><input id="communityFollowers" type="number"></div>
-    </div>
     <button onclick="saveCommunity()">Gem community wall</button>
   </section>
-
 
   <section id="nextShowManager" class="panel">
     <div class="panelHead"><h2>📅 Næste show</h2></div>
