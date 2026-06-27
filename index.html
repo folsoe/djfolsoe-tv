@@ -1,1 +1,31 @@
-<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FOLSOE TV</title><link rel="stylesheet" href="assets/style.css"></head><body><div class="lang"><button onclick="Folsoe.setLang('da')">DA</button><button onclick="Folsoe.setLang('en')">EN</button><button onclick="Folsoe.setLang('de')">DE</button></div><main class="page"><section class="card hero"><div class="kicker">V814 BROADCAST CLOUD</div><h1>FOLSOE TV</h1><p class="muted" data-i18n="aboutText"></p><div class="status"><b data-i18n="latestTop"></b>: <span data-news-top></span></div></section><section class="card"><div class="kicker">THEME LIVE PREVIEW</div><h1><span data-theme-name></span></h1><div class="overlay-preview"><div class="safe-box"><div>STATUS<br><b data-theme-name></b></div><div>INFO<br>DJ FOLSOE LIVE</div><div>COMMUNITY<br>Subs / Followers</div><div data-i18n="chatTitle"></div></div></div></section><section class="card grid"><div><h1 data-i18n="aboutTitle"></h1><p class="muted" data-i18n="aboutText"></p></div><div><h1 data-i18n="modsTitle"></h1><p class="muted" data-i18n="modsText"></p></div></section><section class="card"><div class="kicker">V813 UNIFIED MUSIC NEWSROOM</div><h1 data-i18n="newsroom"></h1><p class="muted" data-i18n="newsroomText"></p><div class="pills"><button class="pill" onclick="Folsoe.fetchNews()" data-i18n="fetchNews"></button><a class="pill" href="/api/newsroom" target="_blank" data-i18n="openNewsApi"></a></div><div class="status" data-news-status data-i18n="notUpdated"></div><div data-news-list></div></section></main><div class="ticker"><span data-i18n="latestBottom"></span>: <span data-news-bottom></span></div><script src="assets/app.js"></script></body></html>
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE · Broadcast Cloud</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <header class="siteTop">
+    <div class="logo">DJ FOLSOE <span>LIVE</span></div>
+    <nav><button data-lang="da">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="kicker" data-i18n="brand.kicker">Broadcast Cloud · DJ FOLSOE på Twitch</div>
+      <h1 data-i18n="hero.title">DJ FOLSOE</h1>
+      <h2 data-i18n="hero.subtitle">Music TV fra Danmark</h2>
+      <p data-i18n="hero.body">DJ FOLSOE er en dansk musikstreamer på Twitch...</p>
+      <div class="themePill"><span data-i18n="theme.active">Aktivt tema</span>: <b id="activeTheme">loading</b></div>
+    </section>
+    <section class="tickerSection"><h2>Top ticker</h2><div id="topTickerList" class="cards"></div></section>
+    <section class="tickerSection"><h2>Bottom ticker</h2><div id="bottomTickerList" class="cards"></div></section>
+    <section><h2 data-i18n="about.title">Hvem er DJ FOLSOE?</h2><p id="aboutText" data-i18n="about.body"></p></section>
+    <section><h2 data-i18n="mods.title">Mod-teamet</h2><p data-i18n="mods.body"></p><div id="modsGrid" class="cards"></div></section>
+    <section><h2 data-i18n="shows.title">Shows</h2><div id="showsGrid" class="cards"></div></section>
+    <section><h2 data-i18n="top20.title">FOLSOE Top 20</h2><div id="chartGrid" class="cards"></div></section>
+  </main>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
