@@ -173,3 +173,25 @@ body.isOffline .avatarLive{background:#4b5563}
 .modLive,.modOffline{display:inline-block;margin-top:9px;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:1000}
 .modLive{background:rgba(34,197,94,.18);color:#4ade80}.modOffline{background:rgba(255,255,255,.08);color:rgba(255,255,255,.55)}
 @media(max-width:900px){.nextShowCard{display:block}.nextShowCard strong{display:block;margin-top:14px;white-space:normal}}
+
+/* V816.19 Request Ecosystem */
+.requestStatsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.requestStatCard{padding:14px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10)}
+.requestStatCard span{display:block;color:#22d3ee;font-size:10px;text-transform:uppercase;font-weight:1000;letter-spacing:.10em}
+.requestStatCard b{display:block;margin-top:7px;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.requestCard small{display:inline-block;margin-top:10px;padding:4px 8px;border-radius:999px;background:linear-gradient(135deg,#f59e0b,#ec4899);font-size:10px;font-weight:1000}
+@media(max-width:900px){.requestStatsGrid{grid-template-columns:1fr 1fr}}
+
+/* V816.20 Community Wall */
+.richCommunityCard{position:relative;min-height:178px;text-align:left;overflow:hidden}
+.communityAvatar,.communityIcon{width:58px;height:58px;border-radius:20px;object-fit:cover;display:grid;place-items:center;margin-bottom:13px;border:2px solid #22d3ee;box-shadow:0 0 18px rgba(34,211,238,.25)}
+.communityIcon{font-size:28px;background:linear-gradient(135deg,#7c3aed,#ec4899)}
+.richCommunityCard p{margin:8px 0 0;color:rgba(255,255,255,.67);font-size:12px}
+.richCommunityCard small{display:inline-block;margin-top:10px;padding:4px 8px;border-radius:999px;background:linear-gradient(135deg,#f59e0b,#ec4899);font-size:10px;font-weight:1000}
+.richCommunityCard em{position:absolute;right:12px;top:12px;font-style:normal;font-size:10px;font-weight:1000;color:#4ade80}
+.richCommunityCard em.offline{color:rgba(255,255,255,.45)}
+.communityStatsGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+.communityStatCard{padding:14px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10)}
+.communityStatCard span{display:block;color:#ffd166;font-size:10px;text-transform:uppercase;font-weight:1000;letter-spacing:.10em}
+.communityStatCard b{display:block;margin-top:7px;font-size:20px}
+@media(max-width:900px){.communityStatsGrid{grid-template-columns:1fr 1fr}}

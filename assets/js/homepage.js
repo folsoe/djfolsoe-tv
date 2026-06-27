@@ -196,11 +196,23 @@ function renderShows(items){
 
 function renderRequests(items){
   const fallback=[
-    {user:"Chat",song:lang==="de"?"Schreibe !Wunsch Künstler - Titel":lang==="en"?"Use !request Artist - Title":"Skriv !ønske Kunstner - Titel",time:t("ready")},
-    {user:"Chat",song:"!request Artist - Title",time:t("ready")},
-    {user:"Chat",song:"!Wunsch Künstler - Titel",time:t("ready")}
+    {user:"Chat",song:lang==="de"?"Schreibe !Wunsch Künstler - Titel":lang==="en"?"Use !request Artist - Title":"Skriv !ønske Kunstner - Titel",time:t("ready"),language:lang,show:"DJ FOLSOE LIVE"},
+    {user:"Chat",song:"!request Artist - Title",time:t("ready"),language:"en",show:"DJ FOLSOE LIVE"},
+    {user:"Chat",song:"!Wunsch Künstler - Titel",time:t("ready"),language:"de",show:"DJ FOLSOE LIVE"}
   ];
-  q("requestsGrid").innerHTML=(items.length?items:fallback).slice(0,3).map(x=>`<article class="requestCard"><span>${timeLabel(x.time)}</span><b>${x.song||x.text||""}</b><p>${x.user||"Twitch chat"}</p></article>`).join("");
+  const used=(items&&items.length?items:fallback).slice(0,3);
+  q("requestsGrid").innerHTML=used.map(x=>`<article class="requestCard"><span>${timeLabel(x.time)} · ${(x.language||"").toUpperCase()}</span><b>${x.song||x.text||""}</b><p>${x.user||"Twitch chat"} · ${x.show||"DJ FOLSOE LIVE"}</p>${x.pinned?'<small>PINNED</small>':''}</article>`).join("");
+  renderRequestStats(state.requestStats||{});
+}
+function renderRequestStats(stats){
+  const el=q("requestStatsGrid"); if(!el)return;
+  const cards=[
+    {label:lang==="de"?"Heute":lang==="en"?"Today":"I dag",value:stats.today||0},
+    {label:lang==="de"?"Gesamt":lang==="en"?"Total":"I alt",value:stats.total||0},
+    {label:lang==="de"?"Top Künstler":lang==="en"?"Top artist":"Top artist",value:stats.topArtist?.name||"-"},
+    {label:lang==="de"?"Top Wunsch":lang==="en"?"Top requester":"Top requester",value:stats.topRequester?.name||"-"}
+  ];
+  el.innerHTML=cards.map(c=>`<article class="requestStatCard"><span>${c.label}</span><b>${c.value}</b></article>`).join("");
 }
 
 function renderNews(items,tw){
@@ -240,16 +252,33 @@ function toggleChart(){q("chartGrid").classList.toggle("open");}
 document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem("djf_home_lang",lang);render();loadHome();});
 loadHome(); setInterval(loadHome,30000);
 
+function communityIcon(type){
+  const map={follower:"💜",sub:"⭐",raid:"🚀",topRequester:"🎵",memberOfMonth:"🏆"};
+  return map[type]||"❤️";
+}
 function renderCommunityWall(items){
   const el=q("communityWallGrid"); if(!el)return;
   const fallback=[
-    {label:"Seneste follower",value:"Twitch community"},
-    {label:"Seneste sub",value:"Tak for støtten"},
-    {label:"Seneste raid",value:"DJ Network love"},
-    {label:"Top requester",value:"Chatten bestemmer"},
-    {label:"Månedens community medlem",value:"Good vibes only"}
+    {type:"follower",label:"Seneste follower",user:"Twitch community",value:"Velkommen"},
+    {type:"sub",label:"Seneste sub",user:"Tak for støtten",value:"Support the channel"},
+    {type:"raid",label:"Seneste raid",user:"DJ Network love",value:"Community power"},
+    {type:"topRequester",label:"Top requester",user:"Chatten bestemmer",value:"Musikønsker"},
+    {type:"memberOfMonth",label:"Månedens community",user:"Good vibes only",value:"Community love"}
   ];
-  el.innerHTML=(items&&items.length?items:fallback).filter(x=>x.active!==false).slice(0,6).map(x=>`<article class="communityLoveCard"><span>${x.label||""}</span><b>${x.value||""}</b></article>`).join("");
+  const used=(items&&items.length?items:fallback).filter(x=>x.active!==false).slice(0,6);
+  el.innerHTML=used.map(x=>`<article class="communityLoveCard richCommunityCard">${x.avatar?`<img class="communityAvatar" src="${x.avatar}" alt="${x.displayName||x.user||""}">`:`<div class="communityIcon">${communityIcon(x.type)}</div>`}<span>${x.label||""}</span><b>${x.displayName||x.user||""}</b><p>${x.value||""}</p>${x.pinned?'<small>PINNED</small>':''}${x.isLive?'<em>● Live</em>':'<em class="offline">○ Offline</em>'}</article>`).join("");
+  renderCommunityStats(state.communityStats||{});
+}
+function renderCommunityStats(stats){
+  const el=q("communityStatsGrid"); if(!el)return;
+  const cards=[
+    ["Followers",stats.followers||0],
+    ["Requests",stats.requests||0],
+    ["Raids",stats.raids||0],
+    ["Subs",stats.subs||0],
+    ["Community",stats.members||0]
+  ];
+  el.innerHTML=cards.map(c=>`<article class="communityStatCard"><span>${c[0]}</span><b>${c[1]}</b></article>`).join("");
 }
 function renderNextShow(item){
   const el=q("nextShowCard"); if(!el)return;
