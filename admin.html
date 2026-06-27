@@ -1,63 +1,12 @@
 <!doctype html>
-<html lang="da">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DJ FOLSOE Kontrolcenter</title>
-<link rel="stylesheet" href="assets/css/admin.css">
-</head>
-<body>
-<header class="top">
-  <div><small>AUTOMATION & BROADCAST</small><h1>Kontrolcenter</h1></div>
-  <div class="login"><label>ADMIN_TOKEN</label><input id="token" placeholder="Indsæt token"><button onclick="saveToken()">Gem</button></div>
-</header>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DJ FOLSOE V816 Admin</title><link rel="stylesheet" href="assets/css/admin.css"></head>
+<body><header class="top"><div><small>DJ FOLSOE NETWORK V816</small><h1>Broadcast OS Kontrolcenter</h1></div><div class="login"><label>ADMIN_TOKEN</label><input id="token" placeholder="Indsæt token"><button onclick="saveToken()">Gem token</button></div></header>
 <main>
-<section class="panel statusPanel">
-  <h2>Github / Cloudflare status</h2>
-  <p class="note">Start her: Indsæt ADMIN_TOKEN. Theme Engine gemmer direkte til Cloudflare Worker.</p>
-  <div class="buttons"><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test API</button><button onclick="openApi('/api/overlay/v170-state')">Åbn overlay API</button></div>
-  <pre id="status">Klar.</pre>
-</section>
-
-<section class="panel themePanel">
-  <h2>Theme Engine · Skift overlay tema</h2>
-  <p class="note">Dette er knapperne der skal bruges. Når du klikker, skifter overlay via /api/theme.</p>
-  <div id="themeGrid" class="themeGrid"></div>
-  <div id="activeTheme" class="activeTheme">Aktivt tema: loading</div>
-</section>
-
-<section class="panel">
-  <h2>Forside nyheder</h2>
-  <p class="note">Disse vises som kort på forsiden — ikke som ticker.</p>
-  <div class="buttons"><button onclick="addRow('news')">Tilføj nyhed</button><button onclick="saveRows('news')">Gem forside nyheder</button></div>
-  <div id="newsEditor"></div>
-</section>
-
-<section class="panel">
-  <h2>Top ticker til overlay</h2>
-  <p class="note">Top ticker handler kun om aktivt theme. Sæt theme fx morning/summer/trance.</p>
-  <div class="buttons"><button onclick="addRow('top')">Tilføj top ticker</button><button onclick="saveRows('top')">Gem top ticker</button></div>
-  <div id="topEditor"></div>
-</section>
-
-<section class="panel">
-  <h2>Bund ticker til overlay</h2>
-  <p class="note">Bund ticker kan være theme=all eller et bestemt tema.</p>
-  <div class="buttons"><button onclick="addRow('bottom')">Tilføj bund ticker</button><button onclick="saveRows('bottom')">Gem bund ticker</button></div>
-  <div id="bottomEditor"></div>
-</section>
-
-<section class="panel">
-  <h2>Rediger shows på forsiden</h2>
-  <div class="buttons"><button onclick="addRow('shows')">Tilføj show</button><button onclick="saveRows('shows')">Gem shows</button></div>
-  <div id="showsEditor"></div>
-</section>
-
-<section class="panel">
-  <h2>Twitch data</h2>
-  <p class="note">Hentes fra Twitch via Worker secrets: TWITCH_CLIENT_ID + TWITCH_ACCESS_TOKEN.</p>
-  <div class="buttons"><button onclick="openApi('/api/twitch-profile')">Test Twitch profile</button><button onclick="openApi('/api/homepage')">Test homepage API</button></div>
-</section>
-</main>
-<script src="assets/js/admin.js"></script>
-</body>
-</html>
+<section class="panel"><h2>1. Theme Engine · Skift overlay tema</h2><p class="note">Dette styrer overlayet. Forsiden bruger ikke theme engine som hovedfunktion.</p><div id="themeGrid" class="themeGrid"></div><pre id="activeTheme">Aktivt tema: loading</pre></section>
+<section class="panel"><h2>2. Forside nyheder</h2><div class="buttons"><button onclick="addRow('news')">Tilføj nyhed</button><button onclick="saveRows('news')">Gem nyheder</button></div><div id="newsEditor"></div></section>
+<section class="panel"><h2>3. Top ticker til overlay</h2><div class="buttons"><button onclick="addRow('top')">Tilføj top ticker</button><button onclick="saveRows('top')">Gem top ticker</button></div><div id="topEditor"></div></section>
+<section class="panel"><h2>4. Bund ticker til overlay</h2><div class="buttons"><button onclick="addRow('bottom')">Tilføj bund ticker</button><button onclick="saveRows('bottom')">Gem bund ticker</button></div><div id="bottomEditor"></div></section>
+<section class="panel"><h2>5. Shows på forsiden</h2><div class="buttons"><button onclick="addRow('shows')">Tilføj show</button><button onclick="saveRows('shows')">Gem shows</button></div><div id="showsEditor"></div></section>
+<section class="panel"><h2>6. Top 20</h2><div class="buttons"><button onclick="addRow('top20')">Tilføj sang</button><button onclick="saveRows('top20')">Gem Top 20</button></div><div id="top20Editor"></div></section>
+<section class="panel"><h2>Test</h2><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test alt</button><button onclick="openApi('/api/homepage')">Homepage API</button><button onclick="openApi('/api/overlay/v170-state')">Overlay API</button><pre id="status">Klar.</pre></section>
+</main><script src="assets/js/admin.js"></script></body></html>

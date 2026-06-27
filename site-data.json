@@ -1,63 +1,71 @@
 {
-  "version": "DJ FOLSOE NETWORK V813.8 STABLE REBASE HOME ADMIN",
-  "activeTheme": "morning",
+  "version": "DJ FOLSOE NETWORK V816 BROADCAST OS",
+  "activeTheme": "weekend",
+  "language": "da",
   "twitchChannel": "djfolsoe",
   "themes": {
     "fredagsbar": {
       "emoji": "🍺",
       "title": "FREDAGSBAR",
-      "desc": "Weekend starts here",
+      "desc": "Weekend starts here · live from Denmark",
       "primary": "#ffb000",
       "secondary": "#ff2f78",
-      "accent": "#ffd166"
+      "accent": "#ffd166",
+      "bg": "linear-gradient(135deg,#341007,#22051e)"
     },
     "popup": {
       "emoji": "⚡",
       "title": "POPUP",
-      "desc": "Når du mindst venter det",
+      "desc": "You never know when DJ FOLSOE goes live",
       "primary": "#00d4ff",
       "secondary": "#ff00ea",
-      "accent": "#ffffff"
+      "accent": "#ffffff",
+      "bg": "linear-gradient(135deg,#061c2a,#2b0631)"
     },
     "trance": {
       "emoji": "💙",
       "title": "TRANCE TUESDAY",
-      "desc": "Uplifting trance energy",
+      "desc": "Uplifting energy · goosebumps may occur",
       "primary": "#00e5ff",
       "secondary": "#7b2fff",
-      "accent": "#b8f7ff"
+      "accent": "#b8f7ff",
+      "bg": "linear-gradient(135deg,#031525,#170935)"
     },
     "retro": {
       "emoji": "🕹️",
       "title": "RETRO HITS",
-      "desc": "Klassikere der aldrig dør",
+      "desc": "Classics that refuse to retire",
       "primary": "#ff2bd6",
       "secondary": "#7b2fff",
-      "accent": "#ffd166"
+      "accent": "#ffd166",
+      "bg": "linear-gradient(135deg,#230821,#15112a)"
     },
     "eurodance": {
       "emoji": "💛",
       "title": "EURODANCE",
-      "desc": "Big beats and big hooks",
+      "desc": "Big beats · big hooks · 90s/00s survived",
       "primary": "#00f0ff",
       "secondary": "#005dff",
-      "accent": "#ffe600"
+      "accent": "#ffe600",
+      "bg": "linear-gradient(135deg,#031b2a,#081d52)"
     },
     "morning": {
       "emoji": "☀️",
       "title": "GOOD MORNING TWITCH",
-      "desc": "Kaffe, musik og god stemning",
+      "desc": "Coffee, music and good vibes",
       "primary": "#ffb000",
       "secondary": "#ff5a00",
-      "accent": "#fff1a8"
+      "accent": "#fff1a8",
+      "bg": "linear-gradient(135deg,#2b1300,#1c1021)"
     },
     "summer": {
       "emoji": "🌴",
       "title": "SUMMER BEATS",
-      "desc": "Summer 2026 beats",
+      "desc": "Summer 2026 · sunshine and bangers",
       "primary": "#00f5d4",
       "secondary": "#ffb703",
-      "accent": "#fff08a"
+      "accent": "#fff08a",
+      "bg": "linear-gradient(135deg,#052b2a,#372105)"
     },
     "weekend": {
       "emoji": "🎉",
@@ -65,53 +73,88 @@
       "desc": "Maximum music and community",
       "primary": "#ffd166",
       "secondary": "#ff4d6d",
-      "accent": "#00d4ff"
+      "accent": "#00d4ff",
+      "bg": "linear-gradient(135deg,#23102c,#061b2b)"
     }
   },
-  "topTickerItems": [
+  "station": {
+    "followers": 870,
+    "followersGoal": 1000,
+    "subs": 0,
+    "viewers": 0,
+    "category": "Music"
+  },
+  "profile": {
+    "name": "DJ FOLSOE",
+    "fallbackAvatar": "",
+    "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.",
+    "genres": [
+      "Trance",
+      "Eurodance",
+      "Retro",
+      "EDM",
+      "Pop",
+      "Nu-Disco"
+    ],
+    "mods": [
+      {
+        "name": "Mod Master",
+        "role": "Chat Safety"
+      },
+      {
+        "name": "Vibe Guardian",
+        "role": "Community"
+      },
+      {
+        "name": "Request Helper",
+        "role": "Requests"
+      },
+      {
+        "name": "DJ Support",
+        "role": "Tech & Support"
+      },
+      {
+        "name": "Good Vibes",
+        "role": "Positivity"
+      }
+    ]
+  },
+  "shows": [
     {
-      "id": "top_morning",
-      "active": true,
-      "theme": "morning",
-      "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes",
-      "priority": 1
+      "key": "trance",
+      "title": "Trance Tuesday",
+      "time": "Tirsdag 18:30",
+      "body": "Uplifting trance, emotion and big melodies."
     },
     {
-      "id": "top_summer",
-      "active": true,
-      "theme": "summer",
-      "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers",
-      "priority": 2
+      "key": "top20",
+      "title": "FOLSOE Top 20",
+      "time": "Torsdag 18:30",
+      "body": "Weekly listening chart and countdown show."
     },
     {
-      "id": "top_trance",
-      "active": true,
-      "theme": "trance",
-      "text": "💙 TRANCE TUESDAY · Uplifting energy · goosebumps may occur",
-      "priority": 3
+      "key": "fredagsbar",
+      "title": "Fredagsbar",
+      "time": "1. fredag hver måned 20:00",
+      "body": "Weekend energy, party tracks and community."
     },
     {
-      "id": "top_fredagsbar",
-      "active": true,
-      "theme": "fredagsbar",
-      "text": "🍺 FREDAGSBAR · Weekend starts here · live from Denmark",
-      "priority": 4
-    }
-  ],
-  "bottomTickerItems": [
-    {
-      "id": "bottom1",
-      "active": true,
-      "theme": "all",
-      "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",
-      "priority": 1
+      "key": "retro",
+      "title": "Retro Hits",
+      "time": "Søndag 20:00",
+      "body": "Classic tracks, nostalgia and singalong moments."
     },
     {
-      "id": "bottom2",
-      "active": true,
-      "theme": "all",
-      "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE",
-      "priority": 2
+      "key": "morning",
+      "title": "Good Morning Twitch",
+      "time": "Hver dag 07:00",
+      "body": "Coffee, music and the best start of the day."
+    },
+    {
+      "key": "popup",
+      "title": "PopUp",
+      "time": "Surprise!",
+      "body": "Surprise streams when you least expect it."
     }
   ],
   "homepageNews": [
@@ -150,44 +193,70 @@
       "body": "Chat, emotes, follows og god stemning hver stream.",
       "theme": "all",
       "priority": 4
+    },
+    {
+      "id": "news5",
+      "active": true,
+      "type": "DJ Network",
+      "title": "Danske DJs live nu",
+      "body": "Se hvem der er live og find næste raid target.",
+      "theme": "all",
+      "priority": 5
+    },
+    {
+      "id": "news6",
+      "active": true,
+      "type": "Twitch updates",
+      "title": "Nye emotes unlocked",
+      "body": "Tjek de nye emotes og brug dem i chatten.",
+      "theme": "all",
+      "priority": 6
     }
   ],
-  "shows": [
+  "topTickerItems": [
     {
-      "key": "trance",
-      "title": "Trance Tuesday",
-      "time": "Tirsdag 18:30",
-      "body": "Uplifting trance, emotion and big melodies."
+      "id": "top_weekend",
+      "active": true,
+      "theme": "weekend",
+      "text": "🎉 WEEKEND VIBES · Broadcast Cloud",
+      "priority": 1
     },
     {
-      "key": "top20",
-      "title": "FOLSOE Top 20",
-      "time": "Torsdag 18:30",
-      "body": "Weekly listening chart and countdown show."
+      "id": "top_morning",
+      "active": true,
+      "theme": "morning",
+      "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes",
+      "priority": 2
     },
     {
-      "key": "fredagsbar",
-      "title": "Fredagsbar",
-      "time": "1. fredag hver måned 20:00",
-      "body": "Weekend energy, party tracks and community."
+      "id": "top_summer",
+      "active": true,
+      "theme": "summer",
+      "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers",
+      "priority": 3
     },
     {
-      "key": "retro",
-      "title": "Retro Hits",
-      "time": "Søndag 20:00",
-      "body": "Classic tracks, nostalgia and singalong moments."
+      "id": "top_trance",
+      "active": true,
+      "theme": "trance",
+      "text": "💙 TRANCE TUESDAY · Uplifting energy",
+      "priority": 4
+    }
+  ],
+  "bottomTickerItems": [
+    {
+      "id": "bottom1",
+      "active": true,
+      "theme": "all",
+      "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",
+      "priority": 1
     },
     {
-      "key": "morning",
-      "title": "Good Morning Twitch",
-      "time": "Hver dag 07:00",
-      "body": "Coffee, music and the best start of the day."
-    },
-    {
-      "key": "popup",
-      "title": "PopUp",
-      "time": "Surprise!",
-      "body": "Surprise streams when you least expect it."
+      "id": "bottom2",
+      "active": true,
+      "theme": "all",
+      "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE",
+      "priority": 2
     }
   ],
   "top20": [
@@ -232,41 +301,34 @@
       "title": "Dream A Little Dream",
       "genre": "Trance",
       "points": 85
+    },
+    {
+      "rank": 7,
+      "artist": "Lost Frequencies",
+      "title": "Live It All",
+      "genre": "Dance Pop",
+      "points": 84
+    },
+    {
+      "rank": 8,
+      "artist": "David Guetta, Alok",
+      "title": "Run Run River",
+      "genre": "Progressive EDM",
+      "points": 83
+    },
+    {
+      "rank": 9,
+      "artist": "Anyma",
+      "title": "Bad Angel",
+      "genre": "Melodic Techno",
+      "points": 82
+    },
+    {
+      "rank": 10,
+      "artist": "Bebe Rexha",
+      "title": "New Religion",
+      "genre": "Pop Dance",
+      "points": 81
     }
-  ],
-  "profile": {
-    "name": "DJ FOLSOE",
-    "fallbackAvatar": "",
-    "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.",
-    "mods": [
-      {
-        "name": "Mod Master",
-        "role": "Chat Safety"
-      },
-      {
-        "name": "Vibe Guardian",
-        "role": "Community"
-      },
-      {
-        "name": "Request Helper",
-        "role": "Requests"
-      },
-      {
-        "name": "DJ Support",
-        "role": "Tech & Support"
-      },
-      {
-        "name": "Good Vibes",
-        "role": "Positivity"
-      }
-    ],
-    "genres": [
-      "Trance",
-      "Eurodance",
-      "Retro",
-      "EDM",
-      "Pop",
-      "Nu-Disco"
-    ]
-  }
+  ]
 }

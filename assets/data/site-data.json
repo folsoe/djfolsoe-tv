@@ -1,2381 +1,334 @@
 {
-  "station": {
-    "name": "DJ FOLSOE",
-    "domain": "folsoetv.dk",
-    "twitch": "https://twitch.tv/djfolsoe",
-    "description_da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
-    "description_en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
-    "description_de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.",
-    "live": false,
-    "viewers": 0,
-    "followersCurrent": 870,
-    "followersGoal": 1000,
-    "subsToday": 0,
-    "bitsToday": 0,
-    "twitchLogin": "djfolsoe",
-    "streamTitle": "",
-    "category": "",
-    "startedAt": "",
-    "twitchApiFoundation": "V804"
-  },
-  "schedule": [
-    {
-      "id": 1,
-      "day": "Monday",
-      "time": "20:00",
-      "show": "Popup Music TV",
-      "description": "Viewer choice and surprise music flow."
+  "version": "DJ FOLSOE NETWORK V816 BROADCAST OS",
+  "activeTheme": "weekend",
+  "language": "da",
+  "twitchChannel": "djfolsoe",
+  "themes": {
+    "fredagsbar": {
+      "emoji": "🍺",
+      "title": "FREDAGSBAR",
+      "desc": "Weekend starts here · live from Denmark",
+      "primary": "#ffb000",
+      "secondary": "#ff2f78",
+      "accent": "#ffd166",
+      "bg": "linear-gradient(135deg,#341007,#22051e)"
     },
-    {
-      "id": 2,
-      "day": "Tuesday",
-      "time": "20:00",
-      "show": "Trance Tuesday",
-      "description": "Uplifting and progressive journeys."
+    "popup": {
+      "emoji": "⚡",
+      "title": "POPUP",
+      "desc": "You never know when DJ FOLSOE goes live",
+      "primary": "#00d4ff",
+      "secondary": "#ff00ea",
+      "accent": "#ffffff",
+      "bg": "linear-gradient(135deg,#061c2a,#2b0631)"
     },
-    {
-      "id": 3,
-      "day": "Friday",
-      "time": "20:00",
-      "show": "Fredagsbar",
-      "description": "Weekend starts here."
+    "trance": {
+      "emoji": "💙",
+      "title": "TRANCE TUESDAY",
+      "desc": "Uplifting energy · goosebumps may occur",
+      "primary": "#00e5ff",
+      "secondary": "#7b2fff",
+      "accent": "#b8f7ff",
+      "bg": "linear-gradient(135deg,#031525,#170935)"
     },
-    {
-      "id": 4,
-      "day": "Saturday",
-      "time": "21:00",
-      "show": "Weekend Vibes",
-      "description": "Party, club and dancefloor energy."
+    "retro": {
+      "emoji": "🕹️",
+      "title": "RETRO HITS",
+      "desc": "Classics that refuse to retire",
+      "primary": "#ff2bd6",
+      "secondary": "#7b2fff",
+      "accent": "#ffd166",
+      "bg": "linear-gradient(135deg,#230821,#15112a)"
     },
-    {
-      "id": 5,
-      "day": "Sunday",
-      "time": "19:00",
-      "show": "Retro Hits / Dansk Musik",
-      "description": "Old school, Danish classics and nostalgia."
+    "eurodance": {
+      "emoji": "💛",
+      "title": "EURODANCE",
+      "desc": "Big beats · big hooks · 90s/00s survived",
+      "primary": "#00f0ff",
+      "secondary": "#005dff",
+      "accent": "#ffe600",
+      "bg": "linear-gradient(135deg,#031b2a,#081d52)"
+    },
+    "morning": {
+      "emoji": "☀️",
+      "title": "GOOD MORNING TWITCH",
+      "desc": "Coffee, music and good vibes",
+      "primary": "#ffb000",
+      "secondary": "#ff5a00",
+      "accent": "#fff1a8",
+      "bg": "linear-gradient(135deg,#2b1300,#1c1021)"
+    },
+    "summer": {
+      "emoji": "🌴",
+      "title": "SUMMER BEATS",
+      "desc": "Summer 2026 · sunshine and bangers",
+      "primary": "#00f5d4",
+      "secondary": "#ffb703",
+      "accent": "#fff08a",
+      "bg": "linear-gradient(135deg,#052b2a,#372105)"
+    },
+    "weekend": {
+      "emoji": "🎉",
+      "title": "WEEKEND VIBES",
+      "desc": "Maximum music and community",
+      "primary": "#ffd166",
+      "secondary": "#ff4d6d",
+      "accent": "#00d4ff",
+      "bg": "linear-gradient(135deg,#23102c,#061b2b)"
     }
-  ],
+  },
+  "station": {
+    "followers": 870,
+    "followersGoal": 1000,
+    "subs": 0,
+    "viewers": 0,
+    "category": "Music"
+  },
+  "profile": {
+    "name": "DJ FOLSOE",
+    "fallbackAvatar": "",
+    "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.",
+    "genres": [
+      "Trance",
+      "Eurodance",
+      "Retro",
+      "EDM",
+      "Pop",
+      "Nu-Disco"
+    ],
+    "mods": [
+      {
+        "name": "Mod Master",
+        "role": "Chat Safety"
+      },
+      {
+        "name": "Vibe Guardian",
+        "role": "Community"
+      },
+      {
+        "name": "Request Helper",
+        "role": "Requests"
+      },
+      {
+        "name": "DJ Support",
+        "role": "Tech & Support"
+      },
+      {
+        "name": "Good Vibes",
+        "role": "Positivity"
+      }
+    ]
+  },
   "shows": [
     {
-      "title": "Good Morning Twitch",
-      "type": "Morning Show",
-      "text": "Music, headlines, coffee energy and live community from Denmark."
-    },
-    {
+      "key": "trance",
       "title": "Trance Tuesday",
-      "type": "DJ Show",
-      "text": "Uplifting, progressive and emotional trance journeys."
+      "time": "Tirsdag 18:30",
+      "body": "Uplifting trance, emotion and big melodies."
     },
     {
+      "key": "top20",
+      "title": "FOLSOE Top 20",
+      "time": "Torsdag 18:30",
+      "body": "Weekly listening chart and countdown show."
+    },
+    {
+      "key": "fredagsbar",
       "title": "Fredagsbar",
-      "type": "Party Show",
-      "text": "Friday bar feeling, singalong classics and weekend pressure."
+      "time": "1. fredag hver måned 20:00",
+      "body": "Weekend energy, party tracks and community."
     },
     {
+      "key": "retro",
       "title": "Retro Hits",
-      "type": "Retro Show",
-      "text": "70s, 80s, 90s and forgotten favorites."
+      "time": "Søndag 20:00",
+      "body": "Classic tracks, nostalgia and singalong moments."
+    },
+    {
+      "key": "morning",
+      "title": "Good Morning Twitch",
+      "time": "Hver dag 07:00",
+      "body": "Coffee, music and the best start of the day."
+    },
+    {
+      "key": "popup",
+      "title": "PopUp",
+      "time": "Surprise!",
+      "body": "Surprise streams when you least expect it."
+    }
+  ],
+  "homepageNews": [
+    {
+      "id": "news1",
+      "active": true,
+      "type": "Seneste show",
+      "title": "Fredagsbar – Tak for en fantastisk aften!",
+      "body": "Se highlights, requests og moments fra seneste show.",
+      "theme": "all",
+      "priority": 1
+    },
+    {
+      "id": "news2",
+      "active": true,
+      "type": "Top 20 nyt",
+      "title": "Ny Top 20 ude nu",
+      "body": "Se denne uges største hits på FOLSOE Top 20.",
+      "theme": "all",
+      "priority": 2
+    },
+    {
+      "id": "news3",
+      "active": true,
+      "type": "Request info",
+      "title": "Husk dine requests",
+      "body": "Brug !ønske / !request / !Wunsch i chatten.",
+      "theme": "all",
+      "priority": 3
+    },
+    {
+      "id": "news4",
+      "active": true,
+      "type": "Community news",
+      "title": "Fællesskabet vokser",
+      "body": "Chat, emotes, follows og god stemning hver stream.",
+      "theme": "all",
+      "priority": 4
+    },
+    {
+      "id": "news5",
+      "active": true,
+      "type": "DJ Network",
+      "title": "Danske DJs live nu",
+      "body": "Se hvem der er live og find næste raid target.",
+      "theme": "all",
+      "priority": 5
+    },
+    {
+      "id": "news6",
+      "active": true,
+      "type": "Twitch updates",
+      "title": "Nye emotes unlocked",
+      "body": "Tjek de nye emotes og brug dem i chatten.",
+      "theme": "all",
+      "priority": 6
+    }
+  ],
+  "topTickerItems": [
+    {
+      "id": "top_weekend",
+      "active": true,
+      "theme": "weekend",
+      "text": "🎉 WEEKEND VIBES · Broadcast Cloud",
+      "priority": 1
+    },
+    {
+      "id": "top_morning",
+      "active": true,
+      "theme": "morning",
+      "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes",
+      "priority": 2
+    },
+    {
+      "id": "top_summer",
+      "active": true,
+      "theme": "summer",
+      "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers",
+      "priority": 3
+    },
+    {
+      "id": "top_trance",
+      "active": true,
+      "theme": "trance",
+      "text": "💙 TRANCE TUESDAY · Uplifting energy",
+      "priority": 4
+    }
+  ],
+  "bottomTickerItems": [
+    {
+      "id": "bottom1",
+      "active": true,
+      "theme": "all",
+      "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",
+      "priority": 1
+    },
+    {
+      "id": "bottom2",
+      "active": true,
+      "theme": "all",
+      "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE",
+      "priority": 2
     }
   ],
   "top20": [
-    "Aqua - Barbie Girl",
-    "Darude - Sandstorm",
-    "Scooter - Nessaja",
-    "Safri Duo - Played-A-Live",
-    "Avicii - Levels",
-    "Robert Miles - Children",
-    "ATB - 9 PM",
-    "Alice Deejay - Better Off Alone",
-    "Corona - Rhythm Of The Night",
-    "2 Unlimited - No Limit",
-    "Eiffel 65 - Blue",
-    "Gigi D'Agostino - L'Amour Toujours",
-    "Sash! - Ecuador",
-    "Faithless - Insomnia",
-    "Daft Punk - One More Time",
-    "Calvin Harris - Feel So Close",
-    "Armin van Buuren - Blah Blah Blah",
-    "Above & Beyond - Sun & Moon",
-    "Medina - Kun For Mig",
-    "Infernal - From Paris To Berlin"
-  ],
-  "news": [
     {
-      "tag": "Broadcast",
-      "title": "DJ FOLSOE builds a modern Music TV universe from Denmark."
+      "rank": 1,
+      "artist": "Axwell & Bonn",
+      "title": "Whatever Turns You On",
+      "genre": "Dance",
+      "points": 92
     },
     {
-      "tag": "Requests",
-      "title": "Viewers can shape the show through song requests and chat energy."
+      "rank": 2,
+      "artist": "Hugel, David Guetta",
+      "title": "Shine",
+      "genre": "Dance",
+      "points": 90
     },
     {
-      "tag": "Community",
-      "title": "The station grows through followers, chatters, requests and music lovers."
+      "rank": 3,
+      "artist": "Calvin Harris",
+      "title": "Satisfy",
+      "genre": "Dance",
+      "points": 88
     },
     {
-      "tag": "Shows",
-      "title": "Program guide and live shows are now part of the public website."
+      "rank": 4,
+      "artist": "Rune Rask, Hampenberg, The Minds of 99",
+      "title": "Under Din Sne",
+      "genre": "Bootleg Remix",
+      "points": 87
+    },
+    {
+      "rank": 5,
+      "artist": "Svenstrup & Vendelboe x DJ Encore",
+      "title": "Udødelige",
+      "genre": "Dance",
+      "points": 86
+    },
+    {
+      "rank": 6,
+      "artist": "Armin Van Buuren",
+      "title": "Dream A Little Dream",
+      "genre": "Trance",
+      "points": 85
+    },
+    {
+      "rank": 7,
+      "artist": "Lost Frequencies",
+      "title": "Live It All",
+      "genre": "Dance Pop",
+      "points": 84
+    },
+    {
+      "rank": 8,
+      "artist": "David Guetta, Alok",
+      "title": "Run Run River",
+      "genre": "Progressive EDM",
+      "points": 83
+    },
+    {
+      "rank": 9,
+      "artist": "Anyma",
+      "title": "Bad Angel",
+      "genre": "Melodic Techno",
+      "points": 82
+    },
+    {
+      "rank": 10,
+      "artist": "Bebe Rexha",
+      "title": "New Religion",
+      "genre": "Pop Dance",
+      "points": 81
     }
-  ],
-  "requests": [],
-  "top20Chart": {
-    "title": "FOLSOE Weekly Listening Chart",
-    "subtitle": "This week's most played and most loved FOLSOE tracks",
-    "description": {
-      "da": "FOLSOE Weekly Listening Chart er baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og streamingdata.",
-      "en": "The FOLSOE Weekly Listening Chart is based on the songs FOLSOE listened to the most this week, combined with Danish charts, EDM trends and streaming data.",
-      "de": "Die FOLSOE Weekly Listening Chart basiert auf den Songs, die FOLSOE in dieser Woche am häufigsten gehört hat, kombiniert mit dänischen Charts, EDM-Trends und Streamingdaten."
-    },
-    "method": {
-      "folsoeListening": 45,
-      "danishCharts": 20,
-      "edmTrend": 15,
-      "spotify": 15,
-      "viewerRequests": 5
-    },
-    "focus": [
-      "Danish charts",
-      "EDM",
-      "Spotify",
-      "FOLSOE listening",
-      "Viewer requests"
-    ],
-    "items": [
-      {
-        "rank": 1,
-        "lastWeek": "NEW",
-        "artist": "Aqua",
-        "title": "Barbie Girl",
-        "status": "NEW",
-        "points": 2000,
-        "folsoePick": true,
-        "weeks": 1,
-        "peak": 1,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 2,
-        "lastWeek": 3,
-        "artist": "Darude",
-        "title": "Sandstorm",
-        "status": "DOWN",
-        "points": 1915,
-        "folsoePick": false,
-        "weeks": 11,
-        "peak": 2,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 3,
-        "lastWeek": 4,
-        "artist": "Scooter",
-        "title": "Nessaja",
-        "status": "UP",
-        "points": 1830,
-        "folsoePick": false,
-        "weeks": 10,
-        "peak": 3,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 4,
-        "lastWeek": 5,
-        "artist": "Safri Duo",
-        "title": "Played-A-Live",
-        "status": "SAME",
-        "points": 1745,
-        "folsoePick": false,
-        "weeks": 9,
-        "peak": 4,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 5,
-        "lastWeek": 6,
-        "artist": "Avicii",
-        "title": "Levels",
-        "status": "UP",
-        "points": 1660,
-        "folsoePick": false,
-        "weeks": 8,
-        "peak": 5,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 6,
-        "lastWeek": 7,
-        "artist": "Robert Miles",
-        "title": "Children",
-        "status": "DOWN",
-        "points": 1575,
-        "folsoePick": false,
-        "weeks": 7,
-        "peak": 6,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 7,
-        "lastWeek": "NEW",
-        "artist": "ATB",
-        "title": "9 PM",
-        "status": "NEW",
-        "points": 1490,
-        "folsoePick": false,
-        "weeks": 1,
-        "peak": 7,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 8,
-        "lastWeek": 9,
-        "artist": "Alice Deejay",
-        "title": "Better Off Alone",
-        "status": "SAME",
-        "points": 1405,
-        "folsoePick": false,
-        "weeks": 5,
-        "peak": 8,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 9,
-        "lastWeek": 10,
-        "artist": "Corona",
-        "title": "Rhythm Of The Night",
-        "status": "UP",
-        "points": 1320,
-        "folsoePick": false,
-        "weeks": 4,
-        "peak": 9,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 10,
-        "lastWeek": 11,
-        "artist": "2 Unlimited",
-        "title": "No Limit",
-        "status": "DOWN",
-        "points": 1235,
-        "folsoePick": false,
-        "weeks": 3,
-        "peak": 10,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 11,
-        "lastWeek": 10,
-        "artist": "Eiffel 65",
-        "title": "Blue",
-        "status": "SAME",
-        "points": 1150,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 11,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 12,
-        "lastWeek": 11,
-        "artist": "Gigi D'Agostino",
-        "title": "L'Amour Toujours",
-        "status": "SAME",
-        "points": 1065,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 12,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 13,
-        "lastWeek": 12,
-        "artist": "Sash!",
-        "title": "Ecuador",
-        "status": "SAME",
-        "points": 980,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 13,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 14,
-        "lastWeek": "NEW",
-        "artist": "Faithless",
-        "title": "Insomnia",
-        "status": "NEW",
-        "points": 895,
-        "folsoePick": false,
-        "weeks": 1,
-        "peak": 14,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 15,
-        "lastWeek": 14,
-        "artist": "Daft Punk",
-        "title": "One More Time",
-        "status": "SAME",
-        "points": 810,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 15,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 16,
-        "lastWeek": 15,
-        "artist": "Calvin Harris",
-        "title": "Feel So Close",
-        "status": "SAME",
-        "points": 725,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 16,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 17,
-        "lastWeek": 16,
-        "artist": "Armin van Buuren",
-        "title": "Blah Blah Blah",
-        "status": "SAME",
-        "points": 640,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 17,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 18,
-        "lastWeek": 17,
-        "artist": "Above & Beyond",
-        "title": "Sun & Moon",
-        "status": "SAME",
-        "points": 555,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 18,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 19,
-        "lastWeek": 18,
-        "artist": "Medina",
-        "title": "Kun For Mig",
-        "status": "SAME",
-        "points": 470,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 19,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 20,
-        "lastWeek": 19,
-        "artist": "Infernal",
-        "title": "From Paris To Berlin",
-        "status": "SAME",
-        "points": 385,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 20,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      }
-    ],
-    "archive": []
-  },
-  "broadcastCore": {
-    "version": "V813.6 LIVE CONTENT MOTION LAYER",
-    "singleSourceOfTruth": true,
-    "lastUpdated": "",
-    "exports": {
-      "website": "assets/data/site-data.json",
-      "chartApi": "api/chart.json",
-      "broadcastApi": "api/broadcast-core.json"
-    },
-    "cloudIntegration": "Cloud-first with local fallback",
-    "brandingLock": "DJ FOLSOE",
-    "frontendBinding": true,
-    "stableRelease": true,
-    "overlayIntegration": "V170.3",
-    "streamElementsReady": true,
-    "liveContentMotionLayer": true
-  },
-  "brand": "DJ FOLSOE",
-  "about": {
-    "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
-    "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
-    "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community."
-  },
-  "chartDescription": {
-    "da": "FOLSOE Weekly Listening Chart er baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og streamingdata.",
-    "en": "The FOLSOE Weekly Listening Chart is based on the songs FOLSOE listened to the most this week, combined with Danish charts, EDM trends and streaming data.",
-    "de": "Die FOLSOE Weekly Listening Chart basiert auf den Songs, die FOLSOE in dieser Woche am häufigsten gehört hat, kombiniert mit dänischen Charts, EDM-Trends und Streamingdaten."
-  },
-  "translations": {
-    "siteTitle": {
-      "da": "DJ FOLSOE",
-      "en": "DJ FOLSOE",
-      "de": "DJ FOLSOE"
-    },
-    "guide": {
-      "da": "Programguide",
-      "en": "Program Guide",
-      "de": "Programmplan"
-    },
-    "news": {
-      "da": "Nyheder",
-      "en": "News",
-      "de": "Nachrichten"
-    },
-    "requests": {
-      "da": "Musikønsker",
-      "en": "Song Requests",
-      "de": "Musikwünsche"
-    },
-    "chart": {
-      "da": "FOLSOE Weekly Listening Chart",
-      "en": "FOLSOE Weekly Listening Chart",
-      "de": "FOLSOE Weekly Listening Chart"
-    },
-    "chartDescription": {
-      "da": "FOLSOE Weekly Listening Chart er baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og streamingdata.",
-      "en": "The FOLSOE Weekly Listening Chart is based on the songs FOLSOE listened to the most this week, combined with Danish charts, EDM trends and streaming data.",
-      "de": "Die FOLSOE Weekly Listening Chart basiert auf den Songs, die FOLSOE in dieser Woche am häufigsten gehört hat, kombiniert mit dänischen Charts, EDM-Trends und Streamingdaten."
-    },
-    "chartMethod": {
-      "da": "Baseret på FOLSOE's mest lyttede sange i denne uge, danske hitlister, EDM-trends, Spotify og seernes ønsker.",
-      "en": "Based on FOLSOE's most listened songs this week, Danish charts, EDM trends, Spotify and viewer requests.",
-      "de": "Basierend auf FOLSOEs meistgehörten Songs dieser Woche, dänischen Charts, EDM-Trends, Spotify und Zuschauerwünschen."
-    },
-    "newsroomTitle": {
-      "da": "FOLSOE Music Newsroom",
-      "en": "FOLSOE Music Newsroom",
-      "de": "FOLSOE Music Newsroom"
-    },
-    "newsroomText": {
-      "da": "Samlede musiknyheder fra EDM, dance, Danmark og internationale kilder.",
-      "en": "Unified music news from EDM, dance, Denmark and international sources.",
-      "de": "Gebündelte Musiknachrichten aus EDM, Dance, Dänemark und internationalen Quellen."
-    },
-    "heroRibbon": {
-      "da": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
-      "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
-      "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
-    },
-    "heroDescription": {
-      "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
-      "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
-      "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community."
-    },
-    "about": {
-      "da": "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.",
-      "en": "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.",
-      "de": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community."
-    },
-    "stableVersion": {
-      "da": "DJ FOLSOE PLATFORM V813.3 STABLE",
-      "en": "DJ FOLSOE PLATFORM V813.3 STABLE",
-      "de": "DJ FOLSOE PLATFORM V813.3 STABLE"
-    }
-  },
-  "twitchProfile": {
-    "login": "djfolsoe",
-    "displayName": "DJ FOLSOE",
-    "profileImage": "",
-    "offlineImage": "",
-    "description": "",
-    "broadcasterType": "",
-    "createdAt": "",
-    "followers": 0,
-    "live": false,
-    "viewers": 0,
-    "streamTitle": "",
-    "category": "",
-    "startedAt": "",
-    "uptime": "",
-    "lastUpdated": ""
-  },
-  "twitchClips": [],
-  "twitchVideos": [],
-  "weeklyListeningChart": {
-    "title": "FOLSOE Weekly Listening Chart",
-    "subtitle": "This week's most played and most loved FOLSOE tracks",
-    "description": {
-      "da": "FOLSOE Weekly Listening Chart er baseret på de sange, FOLSOE har lyttet mest til i denne uge, kombineret med danske hitlister, EDM-trends og streamingdata.",
-      "en": "The FOLSOE Weekly Listening Chart is based on the songs FOLSOE listened to the most this week, combined with Danish charts, EDM trends and streaming data.",
-      "de": "Die FOLSOE Weekly Listening Chart basiert auf den Songs, die FOLSOE in dieser Woche am häufigsten gehört hat, kombiniert mit dänischen Charts, EDM-Trends und Streamingdaten."
-    },
-    "method": {
-      "folsoeListening": 45,
-      "danishCharts": 20,
-      "edmTrend": 15,
-      "spotify": 15,
-      "viewerRequests": 5
-    },
-    "focus": [
-      "Danish charts",
-      "EDM",
-      "Spotify",
-      "FOLSOE listening",
-      "Viewer requests"
-    ],
-    "items": [
-      {
-        "rank": 1,
-        "lastWeek": "NEW",
-        "artist": "Aqua",
-        "title": "Barbie Girl",
-        "status": "NEW",
-        "points": 2000,
-        "folsoePick": true,
-        "weeks": 1,
-        "peak": 1,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 2,
-        "lastWeek": 3,
-        "artist": "Darude",
-        "title": "Sandstorm",
-        "status": "DOWN",
-        "points": 1915,
-        "folsoePick": false,
-        "weeks": 11,
-        "peak": 2,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 3,
-        "lastWeek": 4,
-        "artist": "Scooter",
-        "title": "Nessaja",
-        "status": "UP",
-        "points": 1830,
-        "folsoePick": false,
-        "weeks": 10,
-        "peak": 3,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 4,
-        "lastWeek": 5,
-        "artist": "Safri Duo",
-        "title": "Played-A-Live",
-        "status": "SAME",
-        "points": 1745,
-        "folsoePick": false,
-        "weeks": 9,
-        "peak": 4,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 5,
-        "lastWeek": 6,
-        "artist": "Avicii",
-        "title": "Levels",
-        "status": "UP",
-        "points": 1660,
-        "folsoePick": false,
-        "weeks": 8,
-        "peak": 5,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 6,
-        "lastWeek": 7,
-        "artist": "Robert Miles",
-        "title": "Children",
-        "status": "DOWN",
-        "points": 1575,
-        "folsoePick": false,
-        "weeks": 7,
-        "peak": 6,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 7,
-        "lastWeek": "NEW",
-        "artist": "ATB",
-        "title": "9 PM",
-        "status": "NEW",
-        "points": 1490,
-        "folsoePick": false,
-        "weeks": 1,
-        "peak": 7,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 8,
-        "lastWeek": 9,
-        "artist": "Alice Deejay",
-        "title": "Better Off Alone",
-        "status": "SAME",
-        "points": 1405,
-        "folsoePick": false,
-        "weeks": 5,
-        "peak": 8,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 9,
-        "lastWeek": 10,
-        "artist": "Corona",
-        "title": "Rhythm Of The Night",
-        "status": "UP",
-        "points": 1320,
-        "folsoePick": false,
-        "weeks": 4,
-        "peak": 9,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 10,
-        "lastWeek": 11,
-        "artist": "2 Unlimited",
-        "title": "No Limit",
-        "status": "DOWN",
-        "points": 1235,
-        "folsoePick": false,
-        "weeks": 3,
-        "peak": 10,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 11,
-        "lastWeek": 10,
-        "artist": "Eiffel 65",
-        "title": "Blue",
-        "status": "SAME",
-        "points": 1150,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 11,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 12,
-        "lastWeek": 11,
-        "artist": "Gigi D'Agostino",
-        "title": "L'Amour Toujours",
-        "status": "SAME",
-        "points": 1065,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 12,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 13,
-        "lastWeek": 12,
-        "artist": "Sash!",
-        "title": "Ecuador",
-        "status": "SAME",
-        "points": 980,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 13,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 14,
-        "lastWeek": "NEW",
-        "artist": "Faithless",
-        "title": "Insomnia",
-        "status": "NEW",
-        "points": 895,
-        "folsoePick": false,
-        "weeks": 1,
-        "peak": 14,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 15,
-        "lastWeek": 14,
-        "artist": "Daft Punk",
-        "title": "One More Time",
-        "status": "SAME",
-        "points": 810,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 15,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 16,
-        "lastWeek": 15,
-        "artist": "Calvin Harris",
-        "title": "Feel So Close",
-        "status": "SAME",
-        "points": 725,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 16,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 17,
-        "lastWeek": 16,
-        "artist": "Armin van Buuren",
-        "title": "Blah Blah Blah",
-        "status": "SAME",
-        "points": 640,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 17,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 18,
-        "lastWeek": 17,
-        "artist": "Above & Beyond",
-        "title": "Sun & Moon",
-        "status": "SAME",
-        "points": 555,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 18,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 19,
-        "lastWeek": 18,
-        "artist": "Medina",
-        "title": "Kun For Mig",
-        "status": "SAME",
-        "points": 470,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 19,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      },
-      {
-        "rank": 20,
-        "lastWeek": 19,
-        "artist": "Infernal",
-        "title": "From Paris To Berlin",
-        "status": "SAME",
-        "points": 385,
-        "folsoePick": false,
-        "weeks": 2,
-        "peak": 20,
-        "genre": "Dance",
-        "cover": "",
-        "spotify": "",
-        "youtube": "",
-        "scores": {
-          "danishAirplay": 40,
-          "hitlistenDk": 20,
-          "bbcRadio1Uk": 15,
-          "spotifyGlobal": 10,
-          "appleGlobal": 5,
-          "billboardGlobal": 5,
-          "folsoePickViewers": 5
-        }
-      }
-    ],
-    "archive": []
-  },
-  "chartLab": {
-    "version": "V812.1",
-    "title": "FOLSOE Chart Lab",
-    "maxCandidates": 40,
-    "outputSize": 20,
-    "method": {
-      "folsoeListening": 45,
-      "danishCharts": 20,
-      "edmTrend": 15,
-      "spotify": 15,
-      "viewerRequests": 5
-    },
-    "candidates": [
-      {
-        "candidate": true,
-        "rank": 1,
-        "lastWeek": "NEW",
-        "artist": "Aqua",
-        "title": "Barbie Girl",
-        "status": "NEW",
-        "points": 2000,
-        "weeks": 1,
-        "peak": 1,
-        "genre": "Dance",
-        "pick": true,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 2,
-        "lastWeek": 3,
-        "artist": "Darude",
-        "title": "Sandstorm",
-        "status": "DOWN",
-        "points": 1915,
-        "weeks": 11,
-        "peak": 2,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 3,
-        "lastWeek": 4,
-        "artist": "Scooter",
-        "title": "Nessaja",
-        "status": "UP",
-        "points": 1830,
-        "weeks": 10,
-        "peak": 3,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 4,
-        "lastWeek": 5,
-        "artist": "Safri Duo",
-        "title": "Played-A-Live",
-        "status": "SAME",
-        "points": 1745,
-        "weeks": 9,
-        "peak": 4,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 5,
-        "lastWeek": 6,
-        "artist": "Avicii",
-        "title": "Levels",
-        "status": "UP",
-        "points": 1660,
-        "weeks": 8,
-        "peak": 5,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 6,
-        "lastWeek": 7,
-        "artist": "Robert Miles",
-        "title": "Children",
-        "status": "DOWN",
-        "points": 1575,
-        "weeks": 7,
-        "peak": 6,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 7,
-        "lastWeek": "NEW",
-        "artist": "ATB",
-        "title": "9 PM",
-        "status": "NEW",
-        "points": 1490,
-        "weeks": 1,
-        "peak": 7,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 8,
-        "lastWeek": 9,
-        "artist": "Alice Deejay",
-        "title": "Better Off Alone",
-        "status": "SAME",
-        "points": 1405,
-        "weeks": 5,
-        "peak": 8,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 9,
-        "lastWeek": 10,
-        "artist": "Corona",
-        "title": "Rhythm Of The Night",
-        "status": "UP",
-        "points": 1320,
-        "weeks": 4,
-        "peak": 9,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 10,
-        "lastWeek": 11,
-        "artist": "2 Unlimited",
-        "title": "No Limit",
-        "status": "DOWN",
-        "points": 1235,
-        "weeks": 3,
-        "peak": 10,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 11,
-        "lastWeek": 10,
-        "artist": "Eiffel 65",
-        "title": "Blue",
-        "status": "SAME",
-        "points": 1150,
-        "weeks": 2,
-        "peak": 11,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 12,
-        "lastWeek": 11,
-        "artist": "Gigi D'Agostino",
-        "title": "L'Amour Toujours",
-        "status": "SAME",
-        "points": 1065,
-        "weeks": 2,
-        "peak": 12,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 13,
-        "lastWeek": 12,
-        "artist": "Sash!",
-        "title": "Ecuador",
-        "status": "SAME",
-        "points": 980,
-        "weeks": 2,
-        "peak": 13,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 14,
-        "lastWeek": "NEW",
-        "artist": "Faithless",
-        "title": "Insomnia",
-        "status": "NEW",
-        "points": 895,
-        "weeks": 1,
-        "peak": 14,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 15,
-        "lastWeek": 14,
-        "artist": "Daft Punk",
-        "title": "One More Time",
-        "status": "SAME",
-        "points": 810,
-        "weeks": 2,
-        "peak": 15,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 16,
-        "lastWeek": 15,
-        "artist": "Calvin Harris",
-        "title": "Feel So Close",
-        "status": "SAME",
-        "points": 725,
-        "weeks": 2,
-        "peak": 16,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 17,
-        "lastWeek": 16,
-        "artist": "Armin van Buuren",
-        "title": "Blah Blah Blah",
-        "status": "SAME",
-        "points": 640,
-        "weeks": 2,
-        "peak": 17,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 18,
-        "lastWeek": 17,
-        "artist": "Above & Beyond",
-        "title": "Sun & Moon",
-        "status": "SAME",
-        "points": 555,
-        "weeks": 2,
-        "peak": 18,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 19,
-        "lastWeek": 18,
-        "artist": "Medina",
-        "title": "Kun For Mig",
-        "status": "SAME",
-        "points": 470,
-        "weeks": 2,
-        "peak": 19,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 20,
-        "lastWeek": 19,
-        "artist": "Infernal",
-        "title": "From Paris To Berlin",
-        "status": "SAME",
-        "points": 385,
-        "weeks": 2,
-        "peak": 20,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 40,
-          "danishCharts": 20,
-          "edmTrend": 15,
-          "spotify": 10,
-          "viewerRequests": 5
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 21,
-        "lastWeek": "-",
-        "artist": "Axwell & Bonn",
-        "title": "Whatever Turns You On",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 21,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 100,
-          "danishCharts": 75,
-          "edmTrend": 100,
-          "spotify": 90,
-          "viewerRequests": 70
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 22,
-        "lastWeek": "-",
-        "artist": "Calvin Harris & Jazzy",
-        "title": "Satisfy",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 22,
-        "genre": "House",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 95,
-          "danishCharts": 85,
-          "edmTrend": 95,
-          "spotify": 95,
-          "viewerRequests": 65
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 23,
-        "lastWeek": "-",
-        "artist": "David Guetta & Sia",
-        "title": "Beautiful People",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 23,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 92,
-          "danishCharts": 85,
-          "edmTrend": 90,
-          "spotify": 92,
-          "viewerRequests": 70
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 24,
-        "lastWeek": "-",
-        "artist": "Armin van Buuren",
-        "title": "Dream A Little Dream",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 24,
-        "genre": "Trance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 96,
-          "danishCharts": 50,
-          "edmTrend": 98,
-          "spotify": 72,
-          "viewerRequests": 80
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 25,
-        "lastWeek": "-",
-        "artist": "Anyma",
-        "title": "Hypnotized",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 25,
-        "genre": "Melodic Techno",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 95,
-          "danishCharts": 55,
-          "edmTrend": 100,
-          "spotify": 75,
-          "viewerRequests": 65
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 26,
-        "lastWeek": "-",
-        "artist": "Swedish House Mafia",
-        "title": "Wait So Long",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 26,
-        "genre": "EDM",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 94,
-          "danishCharts": 60,
-          "edmTrend": 98,
-          "spotify": 78,
-          "viewerRequests": 60
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 27,
-        "lastWeek": "-",
-        "artist": "Purple Disco Machine",
-        "title": "Beat Of Your Heart",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 27,
-        "genre": "Nu Disco",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 90,
-          "danishCharts": 75,
-          "edmTrend": 92,
-          "spotify": 80,
-          "viewerRequests": 70
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 28,
-        "lastWeek": "-",
-        "artist": "Meduza",
-        "title": "Edge Of The World",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 28,
-        "genre": "House",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 89,
-          "danishCharts": 60,
-          "edmTrend": 93,
-          "spotify": 76,
-          "viewerRequests": 55
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 29,
-        "lastWeek": "-",
-        "artist": "Sonny Fodera",
-        "title": "Somedays",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 29,
-        "genre": "House",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 88,
-          "danishCharts": 70,
-          "edmTrend": 92,
-          "spotify": 78,
-          "viewerRequests": 60
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 30,
-        "lastWeek": "-",
-        "artist": "John Summit",
-        "title": "Focus",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 30,
-        "genre": "Tech House",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 90,
-          "danishCharts": 45,
-          "edmTrend": 95,
-          "spotify": 75,
-          "viewerRequests": 50
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 31,
-        "lastWeek": "-",
-        "artist": "Dom Dolla",
-        "title": "Dreamin",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 31,
-        "genre": "Tech House",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 88,
-          "danishCharts": 40,
-          "edmTrend": 94,
-          "spotify": 78,
-          "viewerRequests": 45
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 32,
-        "lastWeek": "-",
-        "artist": "KREAM",
-        "title": "Arrival",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 32,
-        "genre": "Progressive House",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 90,
-          "danishCharts": 40,
-          "edmTrend": 95,
-          "spotify": 65,
-          "viewerRequests": 55
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 33,
-        "lastWeek": "-",
-        "artist": "Lost Frequencies",
-        "title": "Love Is The Only Thing",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 33,
-        "genre": "Dance Pop",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 85,
-          "danishCharts": 75,
-          "edmTrend": 88,
-          "spotify": 82,
-          "viewerRequests": 55
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 34,
-        "lastWeek": "-",
-        "artist": "Topic",
-        "title": "Out My Head",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 34,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 82,
-          "danishCharts": 78,
-          "edmTrend": 85,
-          "spotify": 84,
-          "viewerRequests": 45
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 35,
-        "lastWeek": "-",
-        "artist": "Joel Corry",
-        "title": "Tears On My Piano",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 35,
-        "genre": "Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 80,
-          "danishCharts": 75,
-          "edmTrend": 84,
-          "spotify": 80,
-          "viewerRequests": 50
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 36,
-        "lastWeek": "-",
-        "artist": "Robin Schulz",
-        "title": "Old Friend",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 36,
-        "genre": "Dance Pop",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 78,
-          "danishCharts": 80,
-          "edmTrend": 80,
-          "spotify": 78,
-          "viewerRequests": 40
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 37,
-        "lastWeek": "-",
-        "artist": "Hardwell",
-        "title": "No Sleep",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 37,
-        "genre": "Big Room",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 94,
-          "danishCharts": 40,
-          "edmTrend": 98,
-          "spotify": 60,
-          "viewerRequests": 70
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 38,
-        "lastWeek": "-",
-        "artist": "Maddix",
-        "title": "Open Sesame",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 38,
-        "genre": "Techno",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 93,
-          "danishCharts": 25,
-          "edmTrend": 99,
-          "spotify": 55,
-          "viewerRequests": 60
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 39,
-        "lastWeek": "-",
-        "artist": "Ben Nicky",
-        "title": "Alive",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 39,
-        "genre": "Hard Dance",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 95,
-          "danishCharts": 30,
-          "edmTrend": 99,
-          "spotify": 58,
-          "viewerRequests": 85
-        }
-      },
-      {
-        "candidate": true,
-        "rank": 40,
-        "lastWeek": "-",
-        "artist": "Da Tweekaz",
-        "title": "The Mountain King",
-        "status": "SAME",
-        "points": 0,
-        "weeks": 1,
-        "peak": 40,
-        "genre": "Hardstyle",
-        "pick": false,
-        "cover": "",
-        "youtube": "",
-        "scores": {
-          "folsoeListening": 92,
-          "danishCharts": 30,
-          "edmTrend": 99,
-          "spotify": 50,
-          "viewerRequests": 75
-        }
-      }
-    ],
-    "importEngine": {
-      "version": "V812.3",
-      "mode": "playlist-import-autofill"
-    }
-  },
-  "unifiedNewsroom": {
-    "version": "V813",
-    "title": "FOLSOE Unified Music Newsroom",
-    "description": "Samlet nyhedsrum for musik, EDM, dance, danske musiknyheder, festivaler og internationale musikstories.",
-    "sources": [
-      {
-        "id": "edm",
-        "label": "EDM.com",
-        "category": "EDM",
-        "url": "https://edm.com/.rss/full/"
-      },
-      {
-        "id": "djmag",
-        "label": "DJ Mag",
-        "category": "DJ / Club",
-        "url": "https://djmag.com/rss.xml"
-      },
-      {
-        "id": "mixmag",
-        "label": "Mixmag",
-        "category": "Dance / Club",
-        "url": "https://mixmag.net/rss.xml"
-      },
-      {
-        "id": "ra",
-        "label": "Resident Advisor",
-        "category": "Electronic",
-        "url": "https://ra.co/xml/news.xml"
-      },
-      {
-        "id": "nme_music",
-        "label": "NME Music",
-        "category": "Music",
-        "url": "https://www.nme.com/music/feed"
-      },
-      {
-        "id": "rollingstone_music",
-        "label": "Rolling Stone Music",
-        "category": "Music",
-        "url": "https://www.rollingstone.com/music/music-news/feed/"
-      },
-      {
-        "id": "bbc_music",
-        "label": "BBC Music News",
-        "category": "UK / BBC",
-        "url": "https://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"
-      },
-      {
-        "id": "dr_kultur",
-        "label": "DR Kultur",
-        "category": "Danmark",
-        "url": "https://www.dr.dk/nyheder/service/feeds/kultur"
-      },
-      {
-        "id": "gaffa",
-        "label": "GAFFA",
-        "category": "Danmark",
-        "url": "https://gaffa.dk/rss/"
-      }
-    ],
-    "items": [
-      {
-        "category": "Music",
-        "title": "FOLSOE Newsroom is ready",
-        "source": "DJ FOLSOE",
-        "url": "",
-        "publishedAt": "",
-        "summary": "Music news, EDM, Denmark and chart stories are collected in one newsroom."
-      }
-    ],
-    "lastUpdated": ""
-  },
-  "heroRibbon": {
-    "da": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
-    "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
-    "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
-  },
-  "platformVersion": "V813.6 LIVE CONTENT MOTION LAYER",
-  "v170Overlay": {
-    "version": "V170.3",
-    "lockedRules": [
-      "Only one DJ FOLSOE LIVE logo/TV-bug in left corner",
-      "No duplicate left-corner logo",
-      "4 box footer layout preserved"
-    ],
-    "endpoint": "/api/overlay/v170-state",
-    "layout": "camera-safe-side-stacked",
-    "boxLayout": {
-      "leftTop": "box3_music",
-      "leftBottom": "box1_live_status",
-      "rightTop": "box4_community",
-      "rightBottom": "box2_program",
-      "cameraSafeArea": {
-        "x1": 500,
-        "x2": 1420,
-        "y1": 120,
-        "y2": 920
-      }
-    },
-    "motion": {
-      "rotationSeconds": 8,
-      "floatingCapsules": true,
-      "dynamicFooterCards": true,
-      "classicTicker": false,
-      "themeAnimations": true
-    }
-  },
-  "themeEngine": {
-    "version": "V813.5 THEME ENGINE",
-    "activeTheme": "fredagsbar",
-    "themes": {
-      "fredagsbar": {
-        "title": "FREDAGSBAR",
-        "emoji": "🍺",
-        "primary": "#FFD166",
-        "secondary": "#FF4D6D",
-        "accent": "#FF9F1C",
-        "mood": "Weekend starts here",
-        "boxLabels": [
-          "FREDAGSBAR LIVE",
-          "BAR REQUESTS",
-          "TOP 20",
-          "PARTY CHAT"
-        ]
-      },
-      "popup": {
-        "title": "POPUP",
-        "emoji": "⚡",
-        "primary": "#FFFFFF",
-        "secondary": "#00D4FF",
-        "accent": "#FF2E93",
-        "mood": "On when you least expect it",
-        "boxLabels": [
-          "POPUP LIVE",
-          "CHALLENGE ME",
-          "YOU CHOOSE",
-          "I PLAY"
-        ]
-      },
-      "trance": {
-        "title": "TRANCE TUESDAY",
-        "emoji": "💙",
-        "primary": "#00D4FF",
-        "secondary": "#8A2BE2",
-        "accent": "#B8F7FF",
-        "mood": "Music for the soul",
-        "boxLabels": [
-          "TRANCE LIVE",
-          "NEXT DROP",
-          "TOP TRANCE",
-          "REQUESTS"
-        ]
-      },
-      "retro": {
-        "title": "RETRO HITS",
-        "emoji": "🕹️",
-        "primary": "#FF2E93",
-        "secondary": "#7C3AED",
-        "accent": "#FFD166",
-        "mood": "70s 80s 90s memories",
-        "boxLabels": [
-          "RETRO LIVE",
-          "OLD SCHOOL",
-          "CLASSICS",
-          "CHAT"
-        ]
-      },
-      "eurodance": {
-        "title": "EURODANCE",
-        "emoji": "💛",
-        "primary": "#FFE600",
-        "secondary": "#005DFF",
-        "accent": "#FF2E93",
-        "mood": "90s and 00s dance energy",
-        "boxLabels": [
-          "EURODANCE LIVE",
-          "RAVE ENERGY",
-          "TOP 20",
-          "DANCE CHAT"
-        ]
-      },
-      "morning": {
-        "title": "GOOD MORNING TWITCH",
-        "emoji": "☀️",
-        "primary": "#FFD166",
-        "secondary": "#7DD3FC",
-        "accent": "#FFFFFF",
-        "mood": "Coffee, music and morning energy",
-        "boxLabels": [
-          "GOOD MORNING",
-          "TODAY",
-          "NEWS",
-          "CHAT"
-        ]
-      },
-      "summer": {
-        "title": "SUMMER BEATS",
-        "emoji": "🌴",
-        "primary": "#00F5D4",
-        "secondary": "#FFB703",
-        "accent": "#FB5607",
-        "mood": "Summer 2026 beats",
-        "boxLabels": [
-          "SUMMER LIVE",
-          "VACATION VIBES",
-          "TOP 20",
-          "REQUESTS"
-        ]
-      },
-      "weekend": {
-        "title": "WEEKEND VIBES",
-        "emoji": "🎉",
-        "primary": "#FF4D6D",
-        "secondary": "#FFD166",
-        "accent": "#00D4FF",
-        "mood": "Party, club and dancefloor energy",
-        "boxLabels": [
-          "WEEKEND LIVE",
-          "PARTY MODE",
-          "TOP 20",
-          "COMMUNITY"
-        ]
-      }
-    },
-    "lockedCommands": [
-      "!theme fredagsbar",
-      "!theme popup",
-      "!theme trance",
-      "!theme retro",
-      "!theme eurodance",
-      "!theme morning",
-      "!theme summer",
-      "!theme weekend"
-    ]
-  }
+  ]
 }
