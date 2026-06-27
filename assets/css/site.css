@@ -8,3 +8,6 @@ main{max-width:1180px;margin:auto;padding:42px 26px}.hero{min-height:380px;paddi
 .themePill{display:inline-block;margin-top:20px;padding:14px 18px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.15);font-weight:900}
 section{margin:34px 0;padding:28px;border-radius:28px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.card{padding:18px;border-radius:22px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}.card b{color:var(--theme-c,#ffd166)}
+
+/* V815.1 website rescue */
+.hero{border:2px solid var(--theme-a,#00e5ff)} .card{min-height:120px} .tickerSection .card b{display:block;font-size:18px;line-height:1.25}

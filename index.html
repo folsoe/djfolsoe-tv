@@ -3,29 +3,76 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE · Broadcast Cloud</title>
-  <link rel="stylesheet" href="assets/css/site.css">
+  <title>DJ FOLSOE · Twitch Music TV</title>
+  <link rel="stylesheet" href="assets/css/homepage.css">
 </head>
 <body>
-  <header class="siteTop">
-    <div class="logo">DJ FOLSOE <span>LIVE</span></div>
-    <nav><button data-lang="da">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></nav>
+  <header class="siteNav">
+    <div class="navLogo">DJ FOLSOE <span>NETWORK</span></div>
+    <nav>
+      <a href="#about">Hvem er DJ FOLSOE?</a>
+      <a href="#shows">Shows</a>
+      <a href="#news">Nyheder</a>
+      <a href="#top20">Top 20</a>
+      <button data-lang="da">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button>
+    </nav>
   </header>
+
   <main>
-    <section class="hero">
-      <div class="kicker" data-i18n="brand.kicker">Broadcast Cloud · DJ FOLSOE på Twitch</div>
-      <h1 data-i18n="hero.title">DJ FOLSOE</h1>
-      <h2 data-i18n="hero.subtitle">Music TV fra Danmark</h2>
-      <p data-i18n="hero.body">DJ FOLSOE er en dansk musikstreamer på Twitch...</p>
-      <div class="themePill"><span data-i18n="theme.active">Aktivt tema</span>: <b id="activeTheme">loading</b></div>
+    <section class="hero" id="hero">
+      <div class="heroMedia">
+        <div class="avatarRing"><img id="twitchAvatar" alt="DJ FOLSOE Twitch profile"><div id="avatarFallback">DJ</div></div>
+        <div id="liveBadge" class="liveBadge">Loading</div>
+      </div>
+      <div class="heroCopy">
+        <div class="kicker" data-i18n="brand.kicker">DJ FOLSOE på Twitch · Broadcast Cloud</div>
+        <h1>DJ FOLSOE</h1>
+        <h2 id="twitchStatusText">Twitch Music TV from Denmark</h2>
+        <p id="twitchDescription">Henter Twitch kanalbeskrivelse...</p>
+        <div class="heroActions">
+          <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" data-i18n="hero.cta.twitch">Åbn Twitch</a>
+          <a class="secondary" href="#top20" data-i18n="hero.cta.top20">Se Top 20</a>
+        </div>
+      </div>
     </section>
-    <section class="tickerSection"><h2>Top ticker</h2><div id="topTickerList" class="cards"></div></section>
-    <section class="tickerSection"><h2>Bottom ticker</h2><div id="bottomTickerList" class="cards"></div></section>
-    <section><h2 data-i18n="about.title">Hvem er DJ FOLSOE?</h2><p id="aboutText" data-i18n="about.body"></p></section>
-    <section><h2 data-i18n="mods.title">Mod-teamet</h2><p data-i18n="mods.body"></p><div id="modsGrid" class="cards"></div></section>
-    <section><h2 data-i18n="shows.title">Shows</h2><div id="showsGrid" class="cards"></div></section>
-    <section><h2 data-i18n="top20.title">FOLSOE Top 20</h2><div id="chartGrid" class="cards"></div></section>
+
+    <section id="about" class="aboutBlock">
+      <div>
+        <span class="sectionKicker" data-i18n="section.twitchProfile">Twitch profil</span>
+        <h2 data-i18n="about.title">Hvem er DJ FOLSOE?</h2>
+        <p data-i18n="about.body">DJ FOLSOE er et dansk Music TV-univers...</p>
+      </div>
+      <div class="profileFacts" id="profileFacts"></div>
+    </section>
+
+    <section id="shows">
+      <div class="sectionHead">
+        <div><span class="sectionKicker">Broadcast Cloud</span><h2 data-i18n="shows.title">Shows</h2><p data-i18n="shows.body">Faste og skiftende shows direkte fra Broadcast Cloud.</p></div>
+      </div>
+      <div id="showsGrid" class="showGrid"></div>
+    </section>
+
+    <section id="news">
+      <div class="sectionHead">
+        <div><span class="sectionKicker">Newsroom</span><h2 data-i18n="news.title">Nyheder og info</h2><p data-i18n="news.body">Ingen tickere på forsiden — her får du klikbare kort.</p></div>
+      </div>
+      <div id="newsGrid" class="newsGrid"></div>
+    </section>
+
+    <section id="top20">
+      <div class="sectionHead">
+        <div><span class="sectionKicker">Chart show</span><h2 data-i18n="top20.title">FOLSOE Top 20</h2><p data-i18n="top20.body">Ugens chart kan åbnes og bruges til countdown show.</p></div>
+        <button class="openChart" onclick="toggleChart()" data-i18n="button.open">Åbn</button>
+      </div>
+      <div id="chartGrid" class="chartGrid"></div>
+    </section>
+
+    <section id="mods">
+      <div class="sectionHead"><div><span class="sectionKicker">Community</span><h2 data-i18n="mods.title">Mod-team</h2><p data-i18n="mods.body">Mods hjælper chatten...</p></div></div>
+      <div id="modsGrid" class="modsGrid"></div>
+    </section>
   </main>
-  <script src="assets/js/site.js"></script>
+
+  <script src="assets/js/homepage.js"></script>
 </body>
 </html>

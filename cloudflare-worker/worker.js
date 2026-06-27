@@ -1,5 +1,5 @@
 
-const VERSION = "V815 BROADCAST CLOUD UNIFICATION";
+const VERSION = "DJ FOLSOE NETWORK V813.6 HOMEPAGE TWITCH CONTENT FIX";
 const DEFAULT_CHANNEL = "djfolsoe";
 
 const DEFAULT_THEMES = {"fredagsbar": {"emoji": "🍺", "title": {"da": "FREDAGSBAR", "en": "FRIDAY BAR", "de": "FREITAGSBAR"}, "slogan": {"da": "Weekenden starter her", "en": "Weekend starts here", "de": "Das Wochenende beginnt hier"}, "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166"}, "popup": {"emoji": "⚡", "title": {"da": "POPUP", "en": "POPUP", "de": "POPUP"}, "slogan": {"da": "Når du mindst venter det", "en": "When you least expect it", "de": "Wenn du es am wenigsten erwartest"}, "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff"}, "trance": {"emoji": "💙", "title": {"da": "TRANCE TUESDAY", "en": "TRANCE TUESDAY", "de": "TRANCE TUESDAY"}, "slogan": {"da": "Uplifting energy", "en": "Uplifting energy", "de": "Uplifting Energy"}, "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff"}, "retro": {"emoji": "🕹️", "title": {"da": "RETRO HITS", "en": "RETRO HITS", "de": "RETRO HITS"}, "slogan": {"da": "Klassikere der aldrig dør", "en": "Classics that refuse to retire", "de": "Klassiker, die nie sterben"}, "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166"}, "eurodance": {"emoji": "💛", "title": {"da": "EURODANCE", "en": "EURODANCE", "de": "EURODANCE"}, "slogan": {"da": "Store beats og store hooks", "en": "Big beats and big hooks", "de": "Große Beats und große Hooks"}, "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600"}, "morning": {"emoji": "☀️", "title": {"da": "GOOD MORNING TWITCH", "en": "GOOD MORNING TWITCH", "de": "GOOD MORNING TWITCH"}, "slogan": {"da": "Kaffe, musik og god stemning", "en": "Coffee, music and good vibes", "de": "Kaffee, Musik und gute Stimmung"}, "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8"}, "summer": {"emoji": "🌴", "title": {"da": "SUMMER BEATS", "en": "SUMMER BEATS", "de": "SUMMER BEATS"}, "slogan": {"da": "Sommer 2026 med sol og bangers", "en": "Summer 2026 with sunshine and bangers", "de": "Sommer 2026 mit Sonne und Bangers"}, "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a"}, "weekend": {"emoji": "🎉", "title": {"da": "WEEKEND VIBES", "en": "WEEKEND VIBES", "de": "WEEKEND VIBES"}, "slogan": {"da": "Maksimal musik og fællesskab", "en": "Maximum music and community", "de": "Maximale Musik und Community"}, "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff"}};
@@ -181,6 +181,69 @@ async function twitchProfile(env, login){
   }catch(e){return {ok:false, login, avatar:"", error:e.message || "profile error"};}
 }
 
+
+async function getTwitchProfilePayload(env, core){
+  const login = String(core.twitchChannel || env.TWITCH_CHANNEL || "djfolsoe").toLowerCase();
+  const fallback = {
+    ok:false,
+    login,
+    displayName:"DJ FOLSOE",
+    avatar:"",
+    description:"Danish music streamer on Twitch with live DJ shows, song requests, Top 20 countdowns and community.",
+    broadcasterType:"",
+    viewCount:0,
+    offline:false
+  };
+  try{
+    if(!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return fallback;
+    const token = String(env.TWITCH_ACCESS_TOKEN).startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
+    const headers = {"Client-ID":env.TWITCH_CLIENT_ID,"Authorization":"Bearer "+token};
+    const uRes = await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {headers});
+    const uJson = await uRes.json();
+    const u = uJson && uJson.data && uJson.data[0];
+    if(!u) return fallback;
+    let stream = null;
+    try{
+      const sRes = await fetch("https://api.twitch.tv/helix/streams?user_login="+encodeURIComponent(login), {headers});
+      const sJson = await sRes.json();
+      stream = sJson && sJson.data && sJson.data[0];
+    }catch(e){}
+    return {
+      ok:true,
+      login,
+      id:u.id,
+      displayName:u.display_name || "DJ FOLSOE",
+      avatar:u.profile_image_url || "",
+      description:u.description || fallback.description,
+      broadcasterType:u.broadcaster_type || "",
+      viewCount:u.view_count || 0,
+      isLive:!!stream,
+      liveTitle:stream?.title || "",
+      liveGame:stream?.game_name || "Music",
+      viewers:stream?.viewer_count || 0,
+      startedAt:stream?.started_at || ""
+    };
+  }catch(e){
+    return {...fallback, error:e.message || "Twitch profile error"};
+  }
+}
+function homepageNewsCards(core, overlay){
+  const top = (core.themeTickerTop || []).filter(x=>x && x.active !== false).slice(0,6).map(x=>({type:"Show update", title:x.text || "", theme:x.theme || "all"}));
+  const bottom = (core.broadcastTickerBottom || []).filter(x=>x && x.active !== false).slice(0,8).map(x=>({type:"Broadcast info", title:x.text || "", theme:x.theme || "all"}));
+  const manual = (core.broadcastNews || []).filter(x=>x && x.active !== false).map(x=>({type:x.label||"News", title:x.text||x.title||"", theme:x.theme||"all"}));
+  const chart = overlay.chart?.items?.[0] ? [{type:"Top 20 nyt", title:`#1 ${overlay.chart.items[0].artist} – ${overlay.chart.items[0].title}`, theme:"all"}] : [];
+  return [
+    ...manual,
+    ...chart,
+    {type:"Request info", title:"Send dit musikønske i Twitch chatten og vær med til at forme showet.", theme:"all"},
+    {type:"Community news", title:"Chat, emotes, requests og fællesskab er en fast del af DJ FOLSOE.", theme:"all"},
+    {type:"DJ Network", title:"Danske DJ streams, raids og community support.", theme:"all"},
+    {type:"Twitch updates", title:"Følg DJ FOLSOE på Twitch, så du ikke misser næste live show.", theme:"all"},
+    ...top,
+    ...bottom
+  ].filter(x=>x.title).slice(0,16);
+}
+
 export default {
   async fetch(request, env){
     if(request.method === "OPTIONS") return new Response("", {headers:cors()});
@@ -189,6 +252,32 @@ export default {
     try{
       if(path === "/" || path === "/api") return json({ok:true, version:VERSION, endpoints:["/api/theme","/api/overlay/v170-state","/api/theme-ticker-top","/api/bottom-ticker","/api/site","/api/i18n","/api/chat-profile"]});
       const core = await getCore(env);
+
+      if(path === "/api/homepage"){
+        const profile = await getTwitchProfilePayload(env, core);
+        const overlay = overlayPayload(core);
+        return json({
+          ok:true,
+          version:"DJ FOLSOE NETWORK V813.6 HOMEPAGE TWITCH CONTENT FIX",
+          language:lang(core),
+          i18n:DEFAULT_I18N[lang(core)] || DEFAULT_I18N.da,
+          twitch:profile,
+          profile:core.profile || DEFAULT_CORE.profile,
+          shows:[
+            {key:"trance",title:"Trance Tuesday",body:"Uplifting trance, emotion and big melodies."},
+            {key:"top20",title:"FOLSOE Top 20",body:"Weekly listening chart and countdown show."},
+            {key:"fredagsbar",title:"Fredagsbar",body:"Weekend energy, party tracks and community."},
+            {key:"retro",title:"Retro Hits",body:"Classic tracks, nostalgia and singalong moments."},
+            {key:"morning",title:"Good Morning Twitch",body:"Coffee, music and the best start of the day."},
+            {key:"popup",title:"PopUp",body:"Surprise streams when you least expect it."},
+            {key:"weekend",title:"Weekend / Eurodance / Summer",body:"Special themes as needed."}
+          ],
+          newsCards:homepageNewsCards(core, overlay),
+          chart:overlay.chart,
+          mods:(core.profile && core.profile.mods) || DEFAULT_CORE.profile.mods || [],
+          overlay
+        });
+      }
 
       if(path === "/api/overlay/v170-state") return json(overlayPayload(core));
       if(path === "/api/site") return json({...overlayPayload(core), core});
