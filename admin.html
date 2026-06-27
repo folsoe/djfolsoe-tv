@@ -27,7 +27,7 @@
   <button onclick="jump('tickers')">📡 Tickers</button>
   <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay bokse</button>
   <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
-  <button onclick="jump('requests')">🎧 Requests</button>
+  <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Næste show</button>
   <button onclick="jump('twitch')">🟣 Twitch</button>
 </nav>
 
@@ -129,6 +129,32 @@
     </div>
     <button onclick="addRequest()">Gem test-request</button>
     <div id="requestsPreview" class="previewGrid"></div>
+  </section>
+
+  
+  <section id="modsManager" class="panel">
+    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Tilføj mod</button></div>
+    <p class="note">Skriv Twitch login. Forsiden henter profilbillede, display name og live/offline status automatisk.</p>
+    <div id="modsEditor"></div>
+    <button onclick="saveMods()">Gem mods</button>
+  </section>
+
+  <section id="communityManager" class="panel">
+    <div class="panelHead"><h2>❤️ Community Wall</h2><button onclick="addCommunity()">Tilføj community felt</button></div>
+    <p class="note">Styrer Community Love sektionen på forsiden.</p>
+    <div id="communityEditor"></div>
+    <button onclick="saveCommunity()">Gem community wall</button>
+  </section>
+
+  <section id="nextShowManager" class="panel">
+    <div class="panelHead"><h2>📅 Næste show</h2></div>
+    <p class="note">Styrer Næste show og countdown på forsiden.</p>
+    <div class="formGrid">
+      <div><label>Titel</label><input id="nextShowTitle" placeholder="Fredagsbar"></div>
+      <div><label>Dato/tid</label><input id="nextShowDateTime" type="datetime-local"></div>
+      <div class="wide"><label>Beskrivelse</label><textarea id="nextShowDescription" rows="3"></textarea></div>
+    </div>
+    <button onclick="saveNextShow()">Gem næste show</button>
   </section>
 
   <section id="twitch" class="panel">

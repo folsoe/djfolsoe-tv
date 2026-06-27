@@ -40,3 +40,8 @@ pre{white-space:pre-wrap;background:rgba(0,0,0,.35);padding:16px;border-radius:1
 .row.overlayItem{grid-template-columns:70px 90px 1fr 1.2fr 1fr 70px}
 code{color:#2dd4ef}
 @media(max-width:900px){.row.visual,.row.overlayItem{grid-template-columns:1fr}}
+
+/* V816.16 manager rows */
+.row.modRow{grid-template-columns:76px 140px 1fr 1.4fr 80px 70px}
+.row.communityRow{grid-template-columns:76px 1fr 1.4fr 80px 70px}
+@media(max-width:900px){.row.modRow,.row.communityRow{grid-template-columns:1fr}}

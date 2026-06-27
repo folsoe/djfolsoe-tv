@@ -330,3 +330,77 @@ async function saveDiscovery(){
     setStatus('❌ Discovery gem-fejl: '+e.message);
   }
 }
+
+
+// ===== V816.16 Mods + Community + Next Show =====
+let modItems=[];
+let communityItems=[];
+let nextShowItem={};
+
+async function loadEcosystem(){
+  try{ modItems=(await api('/api/mod-team')).items||[]; }catch(e){ modItems=[{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}]; }
+  try{ communityItems=(await api('/api/community-wall')).items||[]; }catch(e){ communityItems=[{"key": "latestFollower", "label": "Seneste follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Seneste sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Seneste raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Månedens community medlem", "value": "Good vibes only", "active": true, "priority": 5}]; }
+  try{ nextShowItem=(await api('/api/next-show')).item||{}; }catch(e){ nextShowItem={"title": "Fredagsbar", "dateTime": "", "description": "Fest, grin, requests og weekendstemning.", "active": true}; }
+  renderModsEditor();
+  renderCommunityEditor();
+  renderNextShowEditor();
+}
+
+function renderModsEditor(){
+  const el=document.getElementById('modsEditor'); if(!el)return;
+  el.innerHTML=modItems.map((m,i)=>`
+    <div class="row modRow">
+      <div><label>Active</label><select data-mod-i="${i}" data-f="active"><option value="true" ${m.active!==false?'selected':''}>Yes</option><option value="false" ${m.active===false?'selected':''}>No</option></select></div>
+      <div><label>Twitch login</label><input data-mod-i="${i}" data-f="login" value="${esc(m.login||m.name||'')}"></div>
+      <div><label>Rolle</label><input data-mod-i="${i}" data-f="role" value="${esc(m.role||'')}"></div>
+      <div><label>Beskrivelse</label><input data-mod-i="${i}" data-f="description" value="${esc(m.description||'')}"></div>
+      <div><label>Sort</label><input data-mod-i="${i}" data-f="priority" value="${m.priority||i+1}"></div>
+      <button onclick="modItems.splice(${i},1);renderModsEditor()">Slet</button>
+    </div>`).join('');
+}
+function collectMods(){
+  document.querySelectorAll('[data-mod-i][data-f]').forEach(inp=>{
+    const i=Number(inp.dataset.modI), f=inp.dataset.f;
+    if(!modItems[i]) modItems[i]={};
+    let v=inp.value; if(f==='active')v=v==='true'; if(f==='priority')v=Number(v||99);
+    modItems[i][f]=v;
+  });
+}
+function addMod(){collectMods();modItems.push({login:'',role:'Mod',description:'',active:true,priority:modItems.length+1});renderModsEditor();}
+async function saveMods(){collectMods();try{await api('/api/mod-team',{method:'POST',body:JSON.stringify({items:modItems})});setStatus('✅ Mods gemt');loadEcosystem();}catch(e){setStatus('❌ Mods fejl: '+e.message);}}
+
+function renderCommunityEditor(){
+  const el=document.getElementById('communityEditor'); if(!el)return;
+  el.innerHTML=communityItems.map((m,i)=>`
+    <div class="row communityRow">
+      <div><label>Active</label><select data-com-i="${i}" data-f="active"><option value="true" ${m.active!==false?'selected':''}>Yes</option><option value="false" ${m.active===false?'selected':''}>No</option></select></div>
+      <div><label>Label</label><input data-com-i="${i}" data-f="label" value="${esc(m.label||'')}"></div>
+      <div><label>Value</label><input data-com-i="${i}" data-f="value" value="${esc(m.value||'')}"></div>
+      <div><label>Sort</label><input data-com-i="${i}" data-f="priority" value="${m.priority||i+1}"></div>
+      <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Slet</button>
+    </div>`).join('');
+}
+function collectCommunity(){
+  document.querySelectorAll('[data-com-i][data-f]').forEach(inp=>{
+    const i=Number(inp.dataset.comI), f=inp.dataset.f;
+    if(!communityItems[i]) communityItems[i]={};
+    let v=inp.value; if(f==='active')v=v==='true'; if(f==='priority')v=Number(v||99);
+    communityItems[i][f]=v;
+  });
+}
+function addCommunity(){collectCommunity();communityItems.push({label:'Nyt felt',value:'',active:true,priority:communityItems.length+1});renderCommunityEditor();}
+async function saveCommunity(){collectCommunity();try{await api('/api/community-wall',{method:'POST',body:JSON.stringify({items:communityItems})});setStatus('✅ Community wall gemt');loadEcosystem();}catch(e){setStatus('❌ Community fejl: '+e.message);}}
+
+function renderNextShowEditor(){
+  if(!document.getElementById('nextShowTitle'))return;
+  document.getElementById('nextShowTitle').value=nextShowItem.title||'';
+  document.getElementById('nextShowDescription').value=nextShowItem.description||'';
+  if(nextShowItem.dateTime){
+    const d=new Date(nextShowItem.dateTime);
+    if(!isNaN(d)) document.getElementById('nextShowDateTime').value=d.toISOString().slice(0,16);
+  }
+}
+async function saveNextShow(){
+  const item={active:true,title:document.getElementById('nextShowTitle').value,description:document.getElementById('nextShowDescription').value,dateTime:document.getElementById('nextShowDateTime').value};
+  try{await api('/api/next-show',{method:'POST',body:JSON.stringify({item})});setStatus('✅ Næste show gemt');loadEcosystem();}catch(e){setStatus('❌ Næste show fejl: '+e.message);}
+}

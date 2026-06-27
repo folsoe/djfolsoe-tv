@@ -131,6 +131,8 @@ function render(){
   renderChart(state.top20||state.chart?.items||[]);
   renderDiscovery(state.discoveryPicks||[]);
   renderMods(state.mods||state.profile?.mods||[]);
+  renderCommunityWall(state.communityWall||[]);
+  renderNextShow(state.nextShow||{});
 }
 
 function showKey(title){
@@ -230,9 +232,35 @@ function renderDiscovery(items){
 
 
 function renderMods(items){
-  q("modsGrid").innerHTML=(items||[]).slice(0,8).map(m=>`<article class="modCard"><div class="modAvatar"></div><b>${m.name||""}</b><p>${m.role||""}</p></article>`).join("");
+  q("modsGrid").innerHTML=(items||[]).slice(0,8).map(m=>`<article class="modCard modTwitchCard">${m.avatar?`<img class="modTwitchAvatar" src="${m.avatar}" alt="${m.displayName||m.name||m.login}">`:`<div class="modAvatar"></div>`}<b>${m.displayName||m.name||m.login||""}</b><p>${m.role||""}</p><small>${m.description||""}</small><span class="${m.isLive?"modLive":"modOffline"}">${m.isLive?"● Live":"○ Offline"}</span></article>`).join("");
 }
 
 function toggleChart(){q("chartGrid").classList.toggle("open");}
 document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem("djf_home_lang",lang);render();loadHome();});
 loadHome(); setInterval(loadHome,30000);
+
+function renderCommunityWall(items){
+  const el=q("communityWallGrid"); if(!el)return;
+  const fallback=[
+    {label:"Seneste follower",value:"Twitch community"},
+    {label:"Seneste sub",value:"Tak for støtten"},
+    {label:"Seneste raid",value:"DJ Network love"},
+    {label:"Top requester",value:"Chatten bestemmer"},
+    {label:"Månedens community medlem",value:"Good vibes only"}
+  ];
+  el.innerHTML=(items&&items.length?items:fallback).filter(x=>x.active!==false).slice(0,6).map(x=>`<article class="communityLoveCard"><span>${x.label||""}</span><b>${x.value||""}</b></article>`).join("");
+}
+function renderNextShow(item){
+  const el=q("nextShowCard"); if(!el)return;
+  item=item||{};
+  const dt=item.dateTime?new Date(item.dateTime):null;
+  let countdown="Dato ikke sat endnu";
+  if(dt && !isNaN(dt)){
+    const diff=dt-new Date();
+    if(diff>0){
+      const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000);
+      countdown=`${d} dage · ${h} timer · ${m} min`;
+    } else countdown="Showet er i gang eller har været sendt";
+  }
+  el.innerHTML=`<div><span>NÆSTE SHOW</span><h3>${item.title||"DJ FOLSOE LIVE"}</h3><p>${item.description||""}</p></div><strong>${countdown}</strong>`;
+}
