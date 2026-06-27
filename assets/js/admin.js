@@ -6,6 +6,7 @@ let core=null, home=null, activeTheme="weekend";
 let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discoveryItems=[],requestItems=[];
 
 document.addEventListener("DOMContentLoaded",()=>{
+  ensureAdminPatchDom();
   document.getElementById("token").value=localStorage.getItem("DJF_ADMIN_TOKEN")||"";
   renderThemes();
   loadAll();
@@ -43,6 +44,7 @@ async function setTheme(k){
 }
 
 async function loadAll(){
+  ensureAdminPatchDom();
   try{
     const results=await Promise.allSettled([
       api("/api/core"), api("/api/homepage"), api("/api/theme"), api("/api/theme-ticker-top"),
@@ -553,4 +555,25 @@ async function saveCommunity(){
     setStatus('✅ Community Wall gemt');
     loadCommunityV20();
   }catch(e){setStatus('❌ Community fejl: '+e.message);}
+}
+
+
+function ensureAdminPatchDom(){
+  const main = document.querySelector("main") || document.body;
+  if(!document.getElementById("communityEditor")){
+    const sec=document.createElement("section");
+    sec.id="communityManager";
+    sec.className="panel";
+    sec.innerHTML='<div class="panelHead"><h2>❤️ Community Wall Manager</h2><button onclick="addCommunity()">Tilføj community felt</button></div><div id="communityEditor"></div><button onclick="saveCommunity()">Gem community wall</button>';
+    main.appendChild(sec);
+  }
+  if(!document.getElementById("communityRaids")){
+    const sec=document.getElementById("communityManager");
+    if(sec){
+      const box=document.createElement("div");
+      box.className="formGrid";
+      box.innerHTML='<div><label>Raids</label><input id="communityRaids" type="number"></div><div><label>Members</label><input id="communityMembers" type="number"></div><div><label>Subs fallback</label><input id="communitySubs" type="number"></div><div><label>Followers fallback</label><input id="communityFollowers" type="number"></div>';
+      sec.appendChild(box);
+    }
+  }
 }

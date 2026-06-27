@@ -64,6 +64,18 @@ const I18N={
 
 function t(key){return (I18N[lang]&&I18N[lang][key])||I18N.da[key]||key;}
 function q(id){return document.getElementById(id);}
+function djfSafeHtml(id, html){
+  const el = document.getElementById(id);
+  if(!el) { console.warn("Missing element:", id); return false; }
+  el.innerHTML = html;
+  return true;
+}
+function djfSafeText(id, text){
+  const el = document.getElementById(id);
+  if(!el) { console.warn("Missing element:", id); return false; }
+  el.textContent = text ?? "";
+  return true;
+}
 function formatNum(n){n=Number(n||0);if(n>=1000000)return(n/1000000).toFixed(1)+"M";if(n>=1000)return(n/1000).toFixed(1)+"K";return String(n);}
 function timeLabel(v){if(!v)return t("ready"); const d=new Date(v); if(isNaN(d))return String(v); return d.toLocaleTimeString(lang==="de"?"de-DE":lang==="en"?"en-GB":"da-DK",{hour:"2-digit",minute:"2-digit"});}
 function setText(id,v){const el=q(id); if(el)el.textContent=v??"";}
@@ -85,6 +97,7 @@ async function loadHome(){
 }
 
 function render(){
+  ensureCommunityDom();
   applyStaticLanguage();
   const tw=state.twitch||state.hero||{};
   const live=!!tw.isLive;
@@ -201,7 +214,7 @@ function renderRequests(items){
     {user:"Chat",song:"!Wunsch Künstler - Titel",time:t("ready"),language:"de",show:"DJ FOLSOE LIVE"}
   ];
   const used=(items&&items.length?items:fallback).slice(0,3);
-  q("requestsGrid").innerHTML=used.map(x=>`<article class="requestCard"><span>${timeLabel(x.time)} · ${(x.language||"").toUpperCase()}</span><b>${x.song||x.text||""}</b><p>${x.user||"Twitch chat"} · ${x.show||"DJ FOLSOE LIVE"}</p>${x.pinned?'<small>PINNED</small>':''}</article>`).join("");
+  djfSafeHtml("requestsGrid", used.map(x=>`<article class="requestCard"><span>${timeLabel(x.time)} · ${(x.language||"").toUpperCase()}</span><b>${x.song||x.text||""}</b><p>${x.user||"Twitch chat"} · ${x.show||"DJ FOLSOE LIVE"}</p>${x.pinned?'<small>PINNED</small>':''}</article>`).join(""));
   renderRequestStats(state.requestStats||{});
 }
 function renderRequestStats(stats){
@@ -245,7 +258,7 @@ function renderDiscovery(items){
 
 
 function renderMods(items){
-  q("modsGrid").innerHTML=(items||[]).slice(0,8).map(m=>`<article class="modCard modTwitchCard">${m.avatar?`<img class="modTwitchAvatar" src="${m.avatar}" alt="${m.displayName||m.name||m.login}">`:`<div class="modAvatar"></div>`}<b>${m.displayName||m.name||m.login||""}</b><p>${m.role||""}</p><small>${m.description||""}</small><span class="${m.isLive?"modLive":"modOffline"}">${m.isLive?"● Live":"○ Offline"}</span></article>`).join("");
+  djfSafeHtml("modsGrid", (items||[]).slice(0,8).map(m=>`<article class="modCard modTwitchCard">${m.avatar?`<img class="modTwitchAvatar" src="${m.avatar}" alt="${m.displayName||m.name||m.login}">`:`<div class="modAvatar"></div>`}<b>${m.displayName||m.name||m.login||""}</b><p>${m.role||""}</p><small>${m.description||""}</small><span class="${m.isLive?"modLive":"modOffline"}">${m.isLive?"● Live":"○ Offline"}</span></article>`).join(""));
 }
 
 function toggleChart(){q("chartGrid").classList.toggle("open");}
@@ -313,4 +326,32 @@ function applySEO(){
   upsertMeta('meta[name="twitter:description"]',"content",seo.description);
   upsertMeta('meta[name="twitter:image"]',"content",seo.image);
   const schema=document.getElementById("seoSchema"); if(schema&&seo.schema) schema.textContent=JSON.stringify(seo.schema);
+}
+
+
+function ensureCommunityDom(){
+  if(!document.getElementById("communityWallGrid")){
+    const section = document.getElementById("communityWall") || document.querySelector(".communityWallPanel") || document.querySelector("main");
+    if(section){
+      const div=document.createElement("div");
+      div.id="communityWallGrid";
+      div.className="communityWallGrid";
+      section.appendChild(div);
+    }
+  }
+  if(!document.getElementById("communityStatsGrid")){
+    const section = document.getElementById("communityWall") || document.querySelector(".communityWallPanel") || document.querySelector("main");
+    if(section){
+      const div=document.createElement("div");
+      div.id="communityStatsGrid";
+      div.className="communityStatsGrid";
+      section.appendChild(div);
+    }
+  }
+  if(!document.getElementById("requestStatsGrid") && document.getElementById("requests")){
+    const div=document.createElement("div");
+    div.id="requestStatsGrid";
+    div.className="requestStatsGrid";
+    document.getElementById("requests").appendChild(div);
+  }
 }
