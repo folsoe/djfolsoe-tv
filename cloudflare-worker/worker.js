@@ -1,47 +1,8 @@
 
-const VERSION = "DJ FOLSOE NETWORK V813.6 HOMEPAGE TWITCH CONTENT FIX";
-const DEFAULT_CHANNEL = "djfolsoe";
+const VERSION = "DJ FOLSOE NETWORK V813.8 STABLE REBASE HOME ADMIN";
+const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V813.8 STABLE REBASE HOME ADMIN", "activeTheme": "morning", "twitchChannel": "djfolsoe", "themes": {"fredagsbar": {"emoji": "🍺", "title": "FREDAGSBAR", "desc": "Weekend starts here", "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166"}, "popup": {"emoji": "⚡", "title": "POPUP", "desc": "Når du mindst venter det", "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff"}, "trance": {"emoji": "💙", "title": "TRANCE TUESDAY", "desc": "Uplifting trance energy", "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff"}, "retro": {"emoji": "🕹️", "title": "RETRO HITS", "desc": "Klassikere der aldrig dør", "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166"}, "eurodance": {"emoji": "💛", "title": "EURODANCE", "desc": "Big beats and big hooks", "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600"}, "morning": {"emoji": "☀️", "title": "GOOD MORNING TWITCH", "desc": "Kaffe, musik og god stemning", "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8"}, "summer": {"emoji": "🌴", "title": "SUMMER BEATS", "desc": "Summer 2026 beats", "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a"}, "weekend": {"emoji": "🎉", "title": "WEEKEND VIBES", "desc": "Maximum music and community", "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff"}}, "topTickerItems": [{"id": "top_morning", "active": true, "theme": "morning", "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes", "priority": 1}, {"id": "top_summer", "active": true, "theme": "summer", "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers", "priority": 2}, {"id": "top_trance", "active": true, "theme": "trance", "text": "💙 TRANCE TUESDAY · Uplifting energy · goosebumps may occur", "priority": 3}, {"id": "top_fredagsbar", "active": true, "theme": "fredagsbar", "text": "🍺 FREDAGSBAR · Weekend starts here · live from Denmark", "priority": 4}], "bottomTickerItems": [{"id": "bottom1", "active": true, "theme": "all", "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud", "priority": 1}, {"id": "bottom2", "active": true, "theme": "all", "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE", "priority": 2}], "homepageNews": [{"id": "news1", "active": true, "type": "Seneste show", "title": "Fredagsbar – Tak for en fantastisk aften!", "body": "Se highlights, requests og moments fra seneste show.", "theme": "all", "priority": 1}, {"id": "news2", "active": true, "type": "Top 20 nyt", "title": "Ny Top 20 ude nu", "body": "Se denne uges største hits på FOLSOE Top 20.", "theme": "all", "priority": 2}, {"id": "news3", "active": true, "type": "Request info", "title": "Husk dine requests", "body": "Brug !ønske / !request / !Wunsch i chatten.", "theme": "all", "priority": 3}, {"id": "news4", "active": true, "type": "Community news", "title": "Fællesskabet vokser", "body": "Chat, emotes, follows og god stemning hver stream.", "theme": "all", "priority": 4}], "shows": [{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Uplifting trance, emotion and big melodies."}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Weekly listening chart and countdown show."}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "1. fredag hver måned 20:00", "body": "Weekend energy, party tracks and community."}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Classic tracks, nostalgia and singalong moments."}, {"key": "morning", "title": "Good Morning Twitch", "time": "Hver dag 07:00", "body": "Coffee, music and the best start of the day."}, {"key": "popup", "title": "PopUp", "time": "Surprise!", "body": "Surprise streams when you least expect it."}], "top20": [{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}], "profile": {"name": "DJ FOLSOE", "fallbackAvatar": "", "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.", "mods": [{"name": "Mod Master", "role": "Chat Safety"}, {"name": "Vibe Guardian", "role": "Community"}, {"name": "Request Helper", "role": "Requests"}, {"name": "DJ Support", "role": "Tech & Support"}, {"name": "Good Vibes", "role": "Positivity"}], "genres": ["Trance", "Eurodance", "Retro", "EDM", "Pop", "Nu-Disco"]}};
 
-const DEFAULT_THEMES = {"fredagsbar": {"emoji": "🍺", "title": {"da": "FREDAGSBAR", "en": "FRIDAY BAR", "de": "FREITAGSBAR"}, "slogan": {"da": "Weekenden starter her", "en": "Weekend starts here", "de": "Das Wochenende beginnt hier"}, "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166"}, "popup": {"emoji": "⚡", "title": {"da": "POPUP", "en": "POPUP", "de": "POPUP"}, "slogan": {"da": "Når du mindst venter det", "en": "When you least expect it", "de": "Wenn du es am wenigsten erwartest"}, "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff"}, "trance": {"emoji": "💙", "title": {"da": "TRANCE TUESDAY", "en": "TRANCE TUESDAY", "de": "TRANCE TUESDAY"}, "slogan": {"da": "Uplifting energy", "en": "Uplifting energy", "de": "Uplifting Energy"}, "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff"}, "retro": {"emoji": "🕹️", "title": {"da": "RETRO HITS", "en": "RETRO HITS", "de": "RETRO HITS"}, "slogan": {"da": "Klassikere der aldrig dør", "en": "Classics that refuse to retire", "de": "Klassiker, die nie sterben"}, "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166"}, "eurodance": {"emoji": "💛", "title": {"da": "EURODANCE", "en": "EURODANCE", "de": "EURODANCE"}, "slogan": {"da": "Store beats og store hooks", "en": "Big beats and big hooks", "de": "Große Beats und große Hooks"}, "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600"}, "morning": {"emoji": "☀️", "title": {"da": "GOOD MORNING TWITCH", "en": "GOOD MORNING TWITCH", "de": "GOOD MORNING TWITCH"}, "slogan": {"da": "Kaffe, musik og god stemning", "en": "Coffee, music and good vibes", "de": "Kaffee, Musik und gute Stimmung"}, "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8"}, "summer": {"emoji": "🌴", "title": {"da": "SUMMER BEATS", "en": "SUMMER BEATS", "de": "SUMMER BEATS"}, "slogan": {"da": "Sommer 2026 med sol og bangers", "en": "Summer 2026 with sunshine and bangers", "de": "Sommer 2026 mit Sonne und Bangers"}, "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a"}, "weekend": {"emoji": "🎉", "title": {"da": "WEEKEND VIBES", "en": "WEEKEND VIBES", "de": "WEEKEND VIBES"}, "slogan": {"da": "Maksimal musik og fællesskab", "en": "Maximum music and community", "de": "Maximale Musik und Community"}, "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff"}};
-
-const DEFAULT_I18N = {"da": {"brand.kicker": "Broadcast Cloud · DJ FOLSOE på Twitch", "hero.title": "DJ FOLSOE", "hero.subtitle": "Music TV fra Danmark", "hero.body": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og broadcast-grafik bygget som en moderne Music TV-kanal.", "about.title": "Hvem er DJ FOLSOE?", "about.body": "DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers. Kanalen blander radioenergi, TV-grafik og fællesskab på Twitch.", "mods.title": "Mod-teamet", "mods.body": "Mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.", "shows.title": "Shows", "news.title": "Nyheder", "top20.title": "FOLSOE Top 20", "requests.title": "Musikønsker", "theme.active": "Aktivt tema", "chat.title": "Live Twitch chat", "box.follow": "Follow journey", "box.program": "Program / tema", "box.music": "Music desk", "box.chat": "Live Twitch chat", "admin.theme": "Theme Engine", "admin.topTicker": "Top ticker maskine", "admin.bottomTicker": "Bund ticker maskine", "admin.save": "Gem", "admin.add": "Tilføj", "admin.delete": "Slet", "admin.test": "Test"}, "en": {"brand.kicker": "Broadcast Cloud · DJ FOLSOE on Twitch", "hero.title": "DJ FOLSOE", "hero.subtitle": "Music TV from Denmark", "hero.body": "DJ FOLSOE is a Danish music streamer on Twitch with live DJ shows, song requests, Top 20 countdowns, community and broadcast graphics built as a modern Music TV channel.", "about.title": "Who is DJ FOLSOE?", "about.body": "DJ FOLSOE brings music, chat, requests and Danish DJ culture into a live broadcast universe. The channel blends radio energy, TV graphics and community on Twitch.", "mods.title": "The mod team", "mods.body": "Mods keep chat friendly, help new viewers and protect the good energy around the stream.", "shows.title": "Shows", "news.title": "News", "top20.title": "FOLSOE Top 20", "requests.title": "Song requests", "theme.active": "Active theme", "chat.title": "Live Twitch chat", "box.follow": "Follow journey", "box.program": "Program / theme", "box.music": "Music desk", "box.chat": "Live Twitch chat", "admin.theme": "Theme Engine", "admin.topTicker": "Top ticker machine", "admin.bottomTicker": "Bottom ticker machine", "admin.save": "Save", "admin.add": "Add", "admin.delete": "Delete", "admin.test": "Test"}, "de": {"brand.kicker": "Broadcast Cloud · DJ FOLSOE auf Twitch", "hero.title": "DJ FOLSOE", "hero.subtitle": "Music TV aus Dänemark", "hero.body": "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch mit Live-DJ-Shows, Musikwünschen, Top-20-Countdowns, Community und Broadcast-Grafik wie ein moderner Music-TV-Kanal.", "about.title": "Wer ist DJ FOLSOE?", "about.body": "DJ FOLSOE verbindet Musik, Chat, Musikwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum. Der Kanal kombiniert Radio-Energie, TV-Grafik und Community auf Twitch.", "mods.title": "Das Mod-Team", "mods.body": "Mods halten den Chat freundlich, helfen neuen Zuschauern und schützen die gute Stimmung im Stream.", "shows.title": "Shows", "news.title": "Nachrichten", "top20.title": "FOLSOE Top 20", "requests.title": "Musikwünsche", "theme.active": "Aktives Theme", "chat.title": "Live Twitch Chat", "box.follow": "Follower-Reise", "box.program": "Programm / Theme", "box.music": "Music Desk", "box.chat": "Live Twitch Chat", "admin.theme": "Theme Engine", "admin.topTicker": "Top-Ticker-Maschine", "admin.bottomTicker": "Bottom-Ticker-Maschine", "admin.save": "Speichern", "admin.add": "Hinzufügen", "admin.delete": "Löschen", "admin.test": "Test"}};
-
-const DEFAULT_CORE = {
-  platformVersion: VERSION,
-  settings: { language: "da" },
-  themeEngine: { activeTheme: "morning" },
-  themes: DEFAULT_THEMES,
-  themeTickerTop: Object.entries(DEFAULT_THEMES).map(([k,v],i)=>({id:"top_"+k,active:true,theme:k,text:`${v.emoji} ${v.title.da} · ${v.slogan.da}`,priority:i+1})),
-  broadcastTickerBottom: [
-    {id:"bottom_all_1",active:true,theme:"all",text:"TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",priority:1}
-  ],
-  station: { followersCurrent: 870, followersGoal: 1000, viewers: 0, category: "Music" },
-  schedule: [
-    {day:"", time:"", show:"DJ FOLSOE LIVE", title:"DJ FOLSOE LIVE"}
-  ],
-  weeklyListeningChart: { title:"FOLSOE Weekly Listening Chart", items:[
-    {rank:1, artist:"Axwell & Bonn", title:"Whatever Turns You On", points:92, genre:"Dance"},
-    {rank:2, artist:"Lost Frequencies", title:"Live It All", points:88, genre:"Dance Pop"}
-  ]},
-  broadcastNews: [
-    {id:"n1",active:true,theme:"all",label:"NEWS",text:"DJ FOLSOE Broadcast Cloud is live",priority:1}
-  ],
-  profile: {
-    name:"DJ FOLSOE",
-    tagline:"Music TV from Denmark",
-    twitch:"https://twitch.tv/djfolsoe",
-    genres:["Trance","Eurodance","Retro","EDM","Nu-Disco","Dance"],
-    equipment:["Denon DJ","OBS","StreamElements","Broadcast Cloud"],
-    mods:[{name:"Mod Team",role:"Chat safety, welcome and community"},{name:"VIP Crew",role:"Requests, vibes and support"}],
-    about:{
-      da:DEFAULT_I18N.da["about.body"],
-      en:DEFAULT_I18N.en["about.body"],
-      de:DEFAULT_I18N.de["about.body"]
-    }
-  }
-};
-
-function cors(){
+function cors() {
   return {
     "access-control-allow-origin":"*",
     "access-control-allow-methods":"GET,POST,OPTIONS",
@@ -49,281 +10,158 @@ function cors(){
     "cache-control":"no-store"
   };
 }
-function json(data, status=200){
-  return new Response(JSON.stringify(data,null,2), {status, headers:{"content-type":"application/json; charset=utf-8", ...cors()}});
+function json(data,status=200) {
+  return new Response(JSON.stringify(data,null,2), {status,headers:{"content-type":"application/json; charset=utf-8",...cors()}});
 }
-function deepMerge(base, extra){
-  if(!extra || typeof extra !== "object") return structuredClone(base);
-  const out = Array.isArray(base) ? [...base] : {...base};
-  for(const [k,v] of Object.entries(extra)){
-    if(v && typeof v === "object" && !Array.isArray(v) && out[k] && typeof out[k] === "object" && !Array.isArray(out[k])) out[k]=deepMerge(out[k],v);
-    else out[k]=v;
-  }
-  return out;
+function adminOk(request, env) {
+  const t = request.headers.get("x-admin-token") || (request.headers.get("authorization")||"").replace(/^Bearer\s+/i,"");
+  return !!env.ADMIN_TOKEN && t === env.ADMIN_TOKEN;
 }
-async function getCore(env){
+async function getCore(env) {
   let saved = null;
-  try{
-    if(env.DJF_DATA && env.DJF_DATA.get) saved = await env.DJF_DATA.get("broadcast-core","json");
-    else if(env.DJF_DATA && env.DJF_DATA.getWithMetadata) saved = (await env.DJF_DATA.getWithMetadata("broadcast-core","json")).value;
-  }catch(e){}
-  return deepMerge(DEFAULT_CORE, saved || {});
+  try {
+    if (env.DJF_DATA && env.DJF_DATA.get) saved = await env.DJF_DATA.get("broadcast-core","json");
+  } catch(e) {}
+  return Object.assign({}, DEFAULT_CORE, saved || {}, {themes: Object.assign({}, DEFAULT_CORE.themes, (saved&&saved.themes)||{})});
 }
-async function putCore(env, core){
-  core.platformVersion = VERSION;
+async function putCore(env, core) {
+  core.version = VERSION;
   core.updatedAt = new Date().toISOString();
-  if(env.DJF_DATA && env.DJF_DATA.put) await env.DJF_DATA.put("broadcast-core", JSON.stringify(core));
+  if (env.DJF_DATA && env.DJF_DATA.put) await env.DJF_DATA.put("broadcast-core", JSON.stringify(core));
   return core;
 }
-function adminOk(request, env){
-  const token = request.headers.get("x-admin-token") || request.headers.get("authorization")?.replace(/^Bearer\s+/i,"") || "";
-  return !!env.ADMIN_TOKEN && token === env.ADMIN_TOKEN;
+function activeTheme(core) {
+  return String(core.activeTheme || core.themeEngine?.activeTheme || "morning").toLowerCase();
 }
-function lang(core){
-  return (core.settings && core.settings.language) || "da";
+function themePayload(core) {
+  const key = activeTheme(core);
+  const t = core.themes?.[key] || DEFAULT_CORE.themes[key] || DEFAULT_CORE.themes.morning;
+  return {activeTheme:key, theme:{key, ...t}};
 }
-function activeThemeKey(core){
-  return String(core.themeEngine?.activeTheme || core.activeTheme || "morning").toLowerCase();
+function sortItems(items) {
+  return (Array.isArray(items)?items:[]).filter(x=>x&&x.active!==false).sort((a,b)=>Number(a.priority||99)-Number(b.priority||99));
 }
-function themePayload(core){
-  const key = activeThemeKey(core);
-  const t = (core.themes && core.themes[key]) || DEFAULT_THEMES[key] || DEFAULT_THEMES.morning;
-  const l = lang(core);
-  return {
-    activeTheme:key,
-    theme:{
-      key,
-      emoji:t.emoji || "",
-      title:(t.title && (t.title[l] || t.title.da || t.title.en)) || t.title || key.toUpperCase(),
-      slogan:(t.slogan && (t.slogan[l] || t.slogan.da || t.slogan.en)) || t.slogan || "",
-      primary:t.primary || "#00e5ff",
-      secondary:t.secondary || "#7b2fff",
-      accent:t.accent || "#ffd166"
-    }
-  };
+function topTicker(core) {
+  const key = activeTheme(core);
+  const items = sortItems(core.topTickerItems).filter(x=>String(x.theme||"").toLowerCase()===key);
+  const t = themePayload(core).theme;
+  return items.length ? items.map(x=>x.text).filter(Boolean) : [`${t.emoji} ${t.title} · ${t.desc}`];
 }
-function ticker(core, pos){
-  const active = activeThemeKey(core);
-  const items = Array.isArray(core[pos==="top"?"themeTickerTop":"broadcastTickerBottom"]) ? core[pos==="top"?"themeTickerTop":"broadcastTickerBottom"] : [];
-  const filtered = items
-    .filter(x=>x && x.active !== false)
-    .filter(x=>pos==="top" ? String(x.theme||"").toLowerCase()===active : (!x.theme || x.theme==="all" || String(x.theme).toLowerCase()===active))
-    .sort((a,b)=>Number(a.priority||99)-Number(b.priority||99))
-    .map(x=>String(x.text||"").trim()).filter(Boolean);
-  if(filtered.length) return filtered;
-  const tp = themePayload(core).theme;
-  return pos==="top" ? [`${tp.emoji} ${tp.title} · ${tp.slogan}`] : ["TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY"];
+function bottomTicker(core) {
+  const key = activeTheme(core);
+  const items = sortItems(core.bottomTickerItems).filter(x=>!x.theme||x.theme==="all"||String(x.theme).toLowerCase()===key);
+  return items.length ? items.map(x=>x.text).filter(Boolean) : ["TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY"];
 }
-function showState(core){
-  const s = Array.isArray(core.schedule) && core.schedule[0] ? core.schedule[0] : {};
-  const tp = themePayload(core).theme;
-  return { title:s.show || s.title || tp.title || "DJ FOLSOE LIVE", day:s.day||"", time:s.time||"", description:s.description || tp.slogan || "" };
-}
-function overlayPayload(core){
-  const tp = themePayload(core);
-  const l = lang(core);
-  const station = core.station || {};
-  const chartItems = core.weeklyListeningChart?.items || core.top20Chart?.items || [];
-  const top = chartItems[0] || {};
-  const pick = chartItems.find(x=>x.folsoePick || x.pick===true || String(x.pick||"").toLowerCase()==="yes") || chartItems[1] || top || {};
-  const show = showState(core);
-  const followers = Number(station.followersCurrent || station.followers || 870);
-  const goal = Number(station.followersGoal || 1000);
-  const viewers = Number(station.viewers || 0);
-  const topbarNews = ticker(core,"top");
-  const footerTicker = ticker(core,"bottom");
-  return {
-    ok:true,
-    version:VERSION,
-    language:l,
-    i18n: DEFAULT_I18N[l] || DEFAULT_I18N.da,
-    theme:tp,
-    visual:{primary:tp.theme.primary, secondary:tp.theme.secondary, accent:tp.theme.accent, title:tp.theme.title, emoji:tp.theme.emoji, mood:tp.theme.slogan},
-    live:{isLive:!!station.live, viewers, followers, followersGoal:goal, subsToday:Number(station.subsToday||0), bitsToday:Number(station.bitsToday||0), category:station.category||"Music"},
-    show,
-    chart:{title:core.weeklyListeningChart?.title || "FOLSOE Weekly Listening Chart", items:chartItems.slice(0,20)},
-    topbarNews,
-    footerTicker,
-    profile:core.profile || DEFAULT_CORE.profile,
-    twitchChat:{channel:String(core.twitchChannel || DEFAULT_CHANNEL).toLowerCase(), enabled:true},
-    motion:{lanes:{
-      box1:[
-        {label:DEFAULT_I18N[l]?.["box.follow"] || "Follow journey", headline:`${followers}/${goal} followers`, body:`${Math.max(0,goal-followers)} to go · ${viewers} viewers`},
-        {label:"LIVE DATA", headline:`${viewers} viewers`, body:`${station.category || "Music"} · Broadcast Cloud`},
-        {label:"SUPPORT", headline:`${station.subsToday || 0} subs · ${station.bitsToday || 0} bits`, body:"Follow · Subscribe · Share · Chat"}
-      ],
-      box2:[
-        {label:DEFAULT_I18N[l]?.["box.program"] || "Program / theme", headline:show.title, body:`${show.day} ${show.time}`.trim() || show.description},
-        {label:DEFAULT_I18N[l]?.["theme.active"] || "Active theme", headline:`${tp.theme.emoji} ${tp.theme.title}`.trim(), body:tp.theme.slogan},
-        {label:"BROADCAST CLOUD", headline:"Website + admin + overlay", body:"One unified content engine"}
-      ],
-      box3:[
-        {label: top.rank ? `TOP 20 #${top.rank}` : "TOP 20", headline:top.artist || "FOLSOE Chart", body:top.title || "Weekly Listening Chart"},
-        {label:"FOLSOE PICK", headline:pick.artist || "DJ FOLSOE", body:pick.title || "Pick of the week"},
-        {label:"REQUESTS", headline:"Requests open", body:"Use chat to request music"}
-      ],
-      box4:[{label:DEFAULT_I18N[l]?.["chat.title"] || "Live Twitch chat", headline:"Twitch chat", body:"Locked to real chat"}]
-    }}
-  };
-}
-async function twitchProfile(env, login){
-  login = String(login||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
-  if(!login) return {ok:false, error:"Missing login"};
-  try{
-    if(!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return {ok:false, login, avatar:""};
-    const token = String(env.TWITCH_ACCESS_TOKEN).startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
-    const r = await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {
-      headers:{"Client-ID":env.TWITCH_CLIENT_ID, "Authorization":"Bearer "+token}
-    });
-    const j = await r.json();
-    const u = j?.data?.[0];
-    return {ok:!!u, login, displayName:u?.display_name || login, avatar:u?.profile_image_url || ""};
-  }catch(e){return {ok:false, login, avatar:"", error:e.message || "profile error"};}
-}
-
-
-async function getTwitchProfilePayload(env, core){
+async function twitchProfile(env, core) {
   const login = String(core.twitchChannel || env.TWITCH_CHANNEL || "djfolsoe").toLowerCase();
   const fallback = {
-    ok:false,
-    login,
-    displayName:"DJ FOLSOE",
-    avatar:"",
-    description:"Danish music streamer on Twitch with live DJ shows, song requests, Top 20 countdowns and community.",
-    broadcasterType:"",
-    viewCount:0,
-    offline:false
+    ok:false, login, displayName:"DJ FOLSOE", avatar:core.profile?.fallbackAvatar||"",
+    description:core.profile?.description || DEFAULT_CORE.profile.description, isLive:false, viewers:0, viewCount:0, game:"Music"
   };
-  try{
-    if(!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return fallback;
+  try {
+    if (!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return fallback;
     const token = String(env.TWITCH_ACCESS_TOKEN).startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
     const headers = {"Client-ID":env.TWITCH_CLIENT_ID,"Authorization":"Bearer "+token};
     const uRes = await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {headers});
     const uJson = await uRes.json();
-    const u = uJson && uJson.data && uJson.data[0];
-    if(!u) return fallback;
+    const u = uJson?.data?.[0];
+    if (!u) return fallback;
     let stream = null;
-    try{
+    try {
       const sRes = await fetch("https://api.twitch.tv/helix/streams?user_login="+encodeURIComponent(login), {headers});
-      const sJson = await sRes.json();
-      stream = sJson && sJson.data && sJson.data[0];
-    }catch(e){}
+      stream = (await sRes.json())?.data?.[0] || null;
+    } catch(e) {}
     return {
-      ok:true,
-      login,
-      id:u.id,
-      displayName:u.display_name || "DJ FOLSOE",
-      avatar:u.profile_image_url || "",
-      description:u.description || fallback.description,
-      broadcasterType:u.broadcaster_type || "",
-      viewCount:u.view_count || 0,
-      isLive:!!stream,
-      liveTitle:stream?.title || "",
-      liveGame:stream?.game_name || "Music",
-      viewers:stream?.viewer_count || 0,
-      startedAt:stream?.started_at || ""
+      ok:true, login, id:u.id, displayName:u.display_name||"DJ FOLSOE", avatar:u.profile_image_url||"",
+      description:u.description||fallback.description, viewCount:u.view_count||0,
+      isLive:!!stream, viewers:stream?.viewer_count||0, game:stream?.game_name||"Music", liveTitle:stream?.title||""
     };
-  }catch(e){
-    return {...fallback, error:e.message || "Twitch profile error"};
+  } catch(e) {
+    return {...fallback,error:e.message||"Twitch error"};
   }
 }
-function homepageNewsCards(core, overlay){
-  const top = (core.themeTickerTop || []).filter(x=>x && x.active !== false).slice(0,6).map(x=>({type:"Show update", title:x.text || "", theme:x.theme || "all"}));
-  const bottom = (core.broadcastTickerBottom || []).filter(x=>x && x.active !== false).slice(0,8).map(x=>({type:"Broadcast info", title:x.text || "", theme:x.theme || "all"}));
-  const manual = (core.broadcastNews || []).filter(x=>x && x.active !== false).map(x=>({type:x.label||"News", title:x.text||x.title||"", theme:x.theme||"all"}));
-  const chart = overlay.chart?.items?.[0] ? [{type:"Top 20 nyt", title:`#1 ${overlay.chart.items[0].artist} – ${overlay.chart.items[0].title}`, theme:"all"}] : [];
-  return [
-    ...manual,
-    ...chart,
-    {type:"Request info", title:"Send dit musikønske i Twitch chatten og vær med til at forme showet.", theme:"all"},
-    {type:"Community news", title:"Chat, emotes, requests og fællesskab er en fast del af DJ FOLSOE.", theme:"all"},
-    {type:"DJ Network", title:"Danske DJ streams, raids og community support.", theme:"all"},
-    {type:"Twitch updates", title:"Følg DJ FOLSOE på Twitch, så du ikke misser næste live show.", theme:"all"},
-    ...top,
-    ...bottom
-  ].filter(x=>x.title).slice(0,16);
+async function buildHomepage(env, core) {
+  const tw = await twitchProfile(env, core);
+  return {
+    ok:true, version:VERSION, twitch:tw, theme:themePayload(core), profile:core.profile,
+    shows: core.shows || DEFAULT_CORE.shows,
+    newsCards: sortItems(core.homepageNews || DEFAULT_CORE.homepageNews),
+    top20: core.top20 || DEFAULT_CORE.top20,
+    topTickerItems: core.topTickerItems || [],
+    bottomTickerItems: core.bottomTickerItems || [],
+    mods: core.profile?.mods || DEFAULT_CORE.profile.mods
+  };
 }
-
+function overlayState(core) {
+  const theme = themePayload(core);
+  return {
+    ok:true, version:VERSION, theme, visual:{primary:theme.theme.primary,secondary:theme.theme.secondary,accent:theme.theme.accent,title:theme.theme.title,emoji:theme.theme.emoji,mood:theme.theme.desc},
+    topbarNews: topTicker(core), footerTicker: bottomTicker(core),
+    chart:{items:core.top20||DEFAULT_CORE.top20},
+    show:{title:theme.theme.title,description:theme.theme.desc},
+    live:{followers:870,followersGoal:1000,viewers:0},
+    twitchChat:{channel:core.twitchChannel||"djfolsoe"}
+  };
+}
 export default {
-  async fetch(request, env){
-    if(request.method === "OPTIONS") return new Response("", {headers:cors()});
+  async fetch(request, env) {
+    if (request.method === "OPTIONS") return new Response("",{headers:cors()});
     const url = new URL(request.url);
     const path = url.pathname;
-    try{
-      if(path === "/" || path === "/api") return json({ok:true, version:VERSION, endpoints:["/api/theme","/api/overlay/v170-state","/api/theme-ticker-top","/api/bottom-ticker","/api/site","/api/i18n","/api/chat-profile"]});
+    try {
       const core = await getCore(env);
-
-      if(path === "/api/homepage"){
-        const profile = await getTwitchProfilePayload(env, core);
-        const overlay = overlayPayload(core);
-        return json({
-          ok:true,
-          version:"DJ FOLSOE NETWORK V813.6 HOMEPAGE TWITCH CONTENT FIX",
-          language:lang(core),
-          i18n:DEFAULT_I18N[lang(core)] || DEFAULT_I18N.da,
-          twitch:profile,
-          profile:core.profile || DEFAULT_CORE.profile,
-          shows:[
-            {key:"trance",title:"Trance Tuesday",body:"Uplifting trance, emotion and big melodies."},
-            {key:"top20",title:"FOLSOE Top 20",body:"Weekly listening chart and countdown show."},
-            {key:"fredagsbar",title:"Fredagsbar",body:"Weekend energy, party tracks and community."},
-            {key:"retro",title:"Retro Hits",body:"Classic tracks, nostalgia and singalong moments."},
-            {key:"morning",title:"Good Morning Twitch",body:"Coffee, music and the best start of the day."},
-            {key:"popup",title:"PopUp",body:"Surprise streams when you least expect it."},
-            {key:"weekend",title:"Weekend / Eurodance / Summer",body:"Special themes as needed."}
-          ],
-          newsCards:homepageNewsCards(core, overlay),
-          chart:overlay.chart,
-          mods:(core.profile && core.profile.mods) || DEFAULT_CORE.profile.mods || [],
-          overlay
-        });
-      }
-
-      if(path === "/api/overlay/v170-state") return json(overlayPayload(core));
-      if(path === "/api/site") return json({...overlayPayload(core), core});
-      if(path === "/api/i18n") return json({ok:true, language:lang(core), profiles:DEFAULT_I18N});
-      if(path === "/api/chat-profile") return json(await twitchProfile(env, url.searchParams.get("login")));
-
-      if(path === "/api/theme"){
-        if(request.method === "GET") return json(themePayload(core));
-        if(!adminOk(request,env)) return json({error:"Unauthorized"},401);
+      if (path === "/" || path === "/api") return json({ok:true,version:VERSION});
+      if (path === "/api/core") {
+        if (request.method === "GET") return json(core);
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
         const body = await request.json();
-        const key = String(body.theme || body.activeTheme || body.key || "").toLowerCase();
-        if(!DEFAULT_THEMES[key] && !(core.themes && core.themes[key])) return json({error:"Unknown theme", theme:key},400);
-        core.themeEngine = core.themeEngine || {};
-        core.themeEngine.activeTheme = key;
-        await putCore(env, core);
-        return json({...themePayload(core), saved:true, overlay:overlayPayload(core)});
+        return json({ok:true,core:await putCore(env,Object.assign(core,body))});
       }
-
-      if(path === "/api/settings"){
-        if(request.method === "GET") return json({ok:true, settings:core.settings || {}});
-        if(!adminOk(request,env)) return json({error:"Unauthorized"},401);
+      if (path === "/api/theme") {
+        if (request.method === "GET") return json(themePayload(core));
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
         const body = await request.json();
-        core.settings = {...(core.settings||{}), ...body};
-        await putCore(env, core);
-        return json({ok:true, settings:core.settings});
+        const key = String(body.theme || body.activeTheme || "").toLowerCase();
+        if (!core.themes?.[key]) return json({error:"Unknown theme", key},400);
+        core.activeTheme = key;
+        core.themeEngine = {activeTheme:key};
+        await putCore(env,core);
+        return json({ok:true,...themePayload(core),overlay:overlayState(core)});
       }
-
-      if(path === "/api/theme-ticker-top" || path === "/api/bottom-ticker"){
-        const key = path === "/api/theme-ticker-top" ? "themeTickerTop" : "broadcastTickerBottom";
-        if(request.method === "GET") return json({ok:true, items:core[key] || [], active:ticker(core, key==="themeTickerTop"?"top":"bottom")});
-        if(!adminOk(request,env)) return json({error:"Unauthorized"},401);
-        const body = await request.json();
-        core[key] = Array.isArray(body.items) ? body.items : [];
-        await putCore(env, core);
-        return json({ok:true, items:core[key], active:ticker(core, key==="themeTickerTop"?"top":"bottom")});
+      if (path === "/api/overlay/v170-state") return json(overlayState(core));
+      if (path === "/api/homepage" || path === "/api/site") return json(await buildHomepage(env, core));
+      if (path === "/api/twitch-profile") return json(await twitchProfile(env, core));
+      if (path === "/api/chat-profile") {
+        const login = url.searchParams.get("login") || core.twitchChannel || "djfolsoe";
+        return json(await twitchProfile(env, {...core,twitchChannel:login}));
       }
-
-      if(path === "/api/core"){
-        if(request.method === "GET") return json(core);
-        if(!adminOk(request,env)) return json({error:"Unauthorized"},401);
-        const body = await request.json();
-        const saved = await putCore(env, deepMerge(core, body));
-        return json({ok:true, core:saved});
+      if (path === "/api/theme-ticker-top") {
+        if (request.method === "GET") return json({ok:true,items:core.topTickerItems||[],active:topTicker(core)});
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        const body = await request.json(); core.topTickerItems = Array.isArray(body.items)?body.items:[];
+        await putCore(env,core); return json({ok:true,items:core.topTickerItems,active:topTicker(core)});
       }
-
-      return json({error:"Not found", path},404);
-    }catch(e){return json({error:e.message || "Worker error", stack:String(e.stack||"")},500);}
+      if (path === "/api/bottom-ticker") {
+        if (request.method === "GET") return json({ok:true,items:core.bottomTickerItems||[],active:bottomTicker(core)});
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        const body = await request.json(); core.bottomTickerItems = Array.isArray(body.items)?body.items:[];
+        await putCore(env,core); return json({ok:true,items:core.bottomTickerItems,active:bottomTicker(core)});
+      }
+      if (path === "/api/homepage-news") {
+        if (request.method === "GET") return json({ok:true,items:core.homepageNews||[]});
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        const body = await request.json(); core.homepageNews = Array.isArray(body.items)?body.items:[];
+        await putCore(env,core); return json({ok:true,items:core.homepageNews});
+      }
+      if (path === "/api/shows") {
+        if (request.method === "GET") return json({ok:true,items:core.shows||[]});
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        const body = await request.json(); core.shows = Array.isArray(body.items)?body.items:[];
+        await putCore(env,core); return json({ok:true,items:core.shows});
+      }
+      return json({error:"Not found",path},404);
+    } catch(e) {
+      return json({error:e.message||"worker error", stack:String(e.stack||"")},500);
+    }
   }
-};
+}

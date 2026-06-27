@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V815 BROADCAST CLOUD UNIFICATION",
+    "version": "V813.6 LIVE CONTENT MOTION LAYER",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -639,29 +639,7 @@
     "stableRelease": true,
     "overlayIntegration": "V170.3",
     "streamElementsReady": true,
-    "liveContentMotionLayer": true,
-    "bottomBroadcastDeck": true,
-    "topbarNewsRotation": true,
-    "boxContentBinding": true,
-    "newsTickerThemeSync": true,
-    "broadcastHybridEngine": true,
-    "v814LayoutLock": {
-      "topbar": "logo + admin news ticker + clock",
-      "center": "fully clear",
-      "bottomStack": "box1 above box3, box2 above box4",
-      "footerTicker": "returned",
-      "box4": "locked to chat only",
-      "contentMaster": "website/admin/cloud"
-    },
-    "contentBindingFix": true,
-    "tvStationChatEngine": true,
-    "v814_2": {
-      "removeBoxNumbers": true,
-      "box4LockedToRealTwitchChat": true,
-      "v170GraphicsImported": true,
-      "footerTickerEnhanced": true,
-      "moreContentInCards": true
-    }
+    "liveContentMotionLayer": true
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2242,7 +2220,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V815 BROADCAST CLOUD UNIFICATION",
+  "platformVersion": "V813.6 LIVE CONTENT MOTION LAYER",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2251,13 +2229,18 @@
       "4 box footer layout preserved"
     ],
     "endpoint": "/api/overlay/v170-state",
-    "layout": "v814-bottom-stacked-hybrid",
+    "layout": "camera-safe-side-stacked",
     "boxLayout": {
-      "leftTop": "box1_follow_journey",
-      "leftBottom": "box3_music_top20",
-      "rightTop": "box2_program_theme",
-      "rightBottom": "box4_chat_locked",
-      "stackedNearBottom": true
+      "leftTop": "box3_music",
+      "leftBottom": "box1_live_status",
+      "rightTop": "box4_community",
+      "rightBottom": "box2_program",
+      "cameraSafeArea": {
+        "x1": 500,
+        "x2": 1420,
+        "y1": 120,
+        "y2": 920
+      }
     },
     "motion": {
       "rotationSeconds": 8,
@@ -2265,50 +2248,7 @@
       "dynamicFooterCards": true,
       "classicTicker": false,
       "themeAnimations": true
-    },
-    "safeAreaLock": {
-      "centerClear": true,
-      "middleBottomClear": true,
-      "noCenterElements": true,
-      "noMiddleBottomTicker": true,
-      "contentOnlyBottomLeftAndBottomRight": true
-    },
-    "contentSource": "admin-website-cloud-master",
-    "contentBinding": {
-      "topbarTitle": "fixed",
-      "topbarNews": "admin-news-rotating",
-      "topbarClock": "fixed",
-      "boxTitles": "dynamic-from-current-content",
-      "boxContent": "admin-website-cloud-master",
-      "noHardcodedBoxCopy": true
-    },
-    "miniCardsRemoved": true,
-    "topbar": {
-      "left": "logo only",
-      "center": "broadcast news scroller",
-      "right": "clock",
-      "showTitleRemoved": true,
-      "themeTitleRemoved": true
-    },
-    "topbarLogoSafe": true,
-    "denseBottomDeck": true,
-    "textInsideBoxFix": true,
-    "box4LockedToChat": true,
-    "footerTicker": true,
-    "contentBindingFix": {
-      "fallbackContent": true,
-      "frontendNormalizesPayload": true,
-      "box1": "follow journey",
-      "box2": "program theme",
-      "box3": "music top20",
-      "box4": "chat locked"
-    },
-    "boxNumbersRemoved": true,
-    "box4": "real twitch chat via Twitch IRC WebSocket",
-    "noLoadingDataFix": true,
-    "proMusicTvPolish": true,
-    "trueMusicTvForceReplace": true,
-    "themeTickerChatLockFix": true
+    }
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
@@ -2437,280 +2377,5 @@
       "!theme summer",
       "!theme weekend"
     ]
-  },
-  "broadcastNews": [
-    {
-      "id": "news1",
-      "active": true,
-      "theme": "all",
-      "label": "NEWS",
-      "text": "Velkommen til DJ FOLSOE – live DJ-shows, requests og Top 20 fra Danmark.",
-      "priority": 1
-    },
-    {
-      "id": "news2",
-      "active": true,
-      "theme": "trance",
-      "label": "TRANCE",
-      "text": "Trance Tuesday: rendyrket musik direkte til sjælen.",
-      "priority": 2
-    },
-    {
-      "id": "news3",
-      "active": true,
-      "theme": "fredagsbar",
-      "label": "FREDAGSBAR",
-      "text": "Fredagsbar: party classics, weekend vibes og chatten i centrum.",
-      "priority": 3
-    },
-    {
-      "id": "news4",
-      "active": true,
-      "theme": "all",
-      "label": "TOP 20",
-      "text": "FOLSOE Weekly Listening Chart opdateres fra admin og vises både på hjemmeside og overlay.",
-      "priority": 4
-    }
-  ],
-  "themeTickerTop": [
-    {
-      "id": "top_fredagsbar",
-      "active": true,
-      "theme": "fredagsbar",
-      "text": "FREDAGSBAR · Weekend starts here · professionally unserious · live from Denmark",
-      "priority": 1
-    },
-    {
-      "id": "top_popup",
-      "active": true,
-      "theme": "popup",
-      "text": "POPUP · You never know when DJ FOLSOE goes live · surprise broadcast mode",
-      "priority": 2
-    },
-    {
-      "id": "top_trance",
-      "active": true,
-      "theme": "trance",
-      "text": "TRANCE TUESDAY · Uplifting energy · goosebumps may occur",
-      "priority": 3
-    },
-    {
-      "id": "top_retro",
-      "active": true,
-      "theme": "retro",
-      "text": "RETRO HITS · Old school forever · classics that refuse to retire",
-      "priority": 4
-    },
-    {
-      "id": "top_eurodance",
-      "active": true,
-      "theme": "eurodance",
-      "text": "EURODANCE · Big beats · big hooks · 90s/00s survived",
-      "priority": 5
-    },
-    {
-      "id": "top_morning",
-      "active": true,
-      "theme": "morning",
-      "text": "GOOD MORNING TWITCH · Coffee, music and dangerously good mood",
-      "priority": 6
-    },
-    {
-      "id": "top_summer",
-      "active": true,
-      "theme": "summer",
-      "text": "SUMMER BEATS · Summer 2026 · sunshine and bangers",
-      "priority": 7
-    },
-    {
-      "id": "top_weekend",
-      "active": true,
-      "theme": "weekend",
-      "text": "WEEKEND VIBES · zero excuses · maximum music",
-      "priority": 8
-    }
-  ],
-  "broadcastTickerBottom": [
-    {
-      "id": "bottom_all_1",
-      "active": true,
-      "theme": "all",
-      "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",
-      "priority": 1
-    },
-    {
-      "id": "bottom_all_2",
-      "active": true,
-      "theme": "all",
-      "text": "FOLLOW THE CHANNEL · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE",
-      "priority": 2
-    }
-  ],
-  "themes": {
-    "fredagsbar": {
-      "emoji": "🍺",
-      "title": {
-        "da": "FREDAGSBAR",
-        "en": "FRIDAY BAR",
-        "de": "FREITAGSBAR"
-      },
-      "slogan": {
-        "da": "Weekenden starter her",
-        "en": "Weekend starts here",
-        "de": "Das Wochenende beginnt hier"
-      },
-      "primary": "#ffb000",
-      "secondary": "#ff2f78",
-      "accent": "#ffd166"
-    },
-    "popup": {
-      "emoji": "⚡",
-      "title": {
-        "da": "POPUP",
-        "en": "POPUP",
-        "de": "POPUP"
-      },
-      "slogan": {
-        "da": "Når du mindst venter det",
-        "en": "When you least expect it",
-        "de": "Wenn du es am wenigsten erwartest"
-      },
-      "primary": "#00d4ff",
-      "secondary": "#ff00ea",
-      "accent": "#ffffff"
-    },
-    "trance": {
-      "emoji": "💙",
-      "title": {
-        "da": "TRANCE TUESDAY",
-        "en": "TRANCE TUESDAY",
-        "de": "TRANCE TUESDAY"
-      },
-      "slogan": {
-        "da": "Uplifting energy",
-        "en": "Uplifting energy",
-        "de": "Uplifting Energy"
-      },
-      "primary": "#00e5ff",
-      "secondary": "#7b2fff",
-      "accent": "#b8f7ff"
-    },
-    "retro": {
-      "emoji": "🕹️",
-      "title": {
-        "da": "RETRO HITS",
-        "en": "RETRO HITS",
-        "de": "RETRO HITS"
-      },
-      "slogan": {
-        "da": "Klassikere der aldrig dør",
-        "en": "Classics that refuse to retire",
-        "de": "Klassiker, die nie sterben"
-      },
-      "primary": "#ff2bd6",
-      "secondary": "#7b2fff",
-      "accent": "#ffd166"
-    },
-    "eurodance": {
-      "emoji": "💛",
-      "title": {
-        "da": "EURODANCE",
-        "en": "EURODANCE",
-        "de": "EURODANCE"
-      },
-      "slogan": {
-        "da": "Store beats og store hooks",
-        "en": "Big beats and big hooks",
-        "de": "Große Beats und große Hooks"
-      },
-      "primary": "#00f0ff",
-      "secondary": "#005dff",
-      "accent": "#ffe600"
-    },
-    "morning": {
-      "emoji": "☀️",
-      "title": {
-        "da": "GOOD MORNING TWITCH",
-        "en": "GOOD MORNING TWITCH",
-        "de": "GOOD MORNING TWITCH"
-      },
-      "slogan": {
-        "da": "Kaffe, musik og god stemning",
-        "en": "Coffee, music and good vibes",
-        "de": "Kaffee, Musik und gute Stimmung"
-      },
-      "primary": "#ffb000",
-      "secondary": "#ff5a00",
-      "accent": "#fff1a8"
-    },
-    "summer": {
-      "emoji": "🌴",
-      "title": {
-        "da": "SUMMER BEATS",
-        "en": "SUMMER BEATS",
-        "de": "SUMMER BEATS"
-      },
-      "slogan": {
-        "da": "Sommer 2026 med sol og bangers",
-        "en": "Summer 2026 with sunshine and bangers",
-        "de": "Sommer 2026 mit Sonne und Bangers"
-      },
-      "primary": "#00f5d4",
-      "secondary": "#ffb703",
-      "accent": "#fff08a"
-    },
-    "weekend": {
-      "emoji": "🎉",
-      "title": {
-        "da": "WEEKEND VIBES",
-        "en": "WEEKEND VIBES",
-        "de": "WEEKEND VIBES"
-      },
-      "slogan": {
-        "da": "Maksimal musik og fællesskab",
-        "en": "Maximum music and community",
-        "de": "Maximale Musik und Community"
-      },
-      "primary": "#ffd166",
-      "secondary": "#ff4d6d",
-      "accent": "#00d4ff"
-    }
-  },
-  "settings": {
-    "language": "da"
-  },
-  "profile": {
-    "name": "DJ FOLSOE",
-    "tagline": "Music TV from Denmark",
-    "twitch": "https://twitch.tv/djfolsoe",
-    "genres": [
-      "Trance",
-      "Eurodance",
-      "Retro",
-      "EDM",
-      "Nu-Disco",
-      "Dance"
-    ],
-    "equipment": [
-      "Denon DJ",
-      "OBS",
-      "StreamElements",
-      "Broadcast Cloud"
-    ],
-    "mods": [
-      {
-        "name": "Mod Team",
-        "role": "Chat safety, welcome and community"
-      },
-      {
-        "name": "VIP Crew",
-        "role": "Requests, vibes and support"
-      }
-    ],
-    "about": {
-      "da": "DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers. Kanalen blander radioenergi, TV-grafik og fællesskab på Twitch.",
-      "en": "DJ FOLSOE brings music, chat, requests and Danish DJ culture into a live broadcast universe. The channel blends radio energy, TV graphics and community on Twitch.",
-      "de": "DJ FOLSOE verbindet Musik, Chat, Musikwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum. Der Kanal kombiniert Radio-Energie, TV-Grafik und Community auf Twitch."
-    }
   }
 }

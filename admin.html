@@ -1,76 +1,63 @@
 <!doctype html>
 <html lang="da">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE Admin V815.1</title>
-  <link rel="stylesheet" href="assets/css/admin.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE Kontrolcenter</title>
+<link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
-<header class="adminTop">
-  <div>
-    <div class="version">V815.1</div>
-    <h1>DJ FOLSOE Broadcast Cloud Admin</h1>
-    <p>Start her: login med ADMIN_TOKEN og skift tema øverst.</p>
-  </div>
-  <div class="tokenBox">
-    <label>ADMIN_TOKEN</label>
-    <input id="token" placeholder="Indsæt ADMIN_TOKEN">
-    <button onclick="saveToken()">Gem token</button>
-  </div>
+<header class="top">
+  <div><small>AUTOMATION & BROADCAST</small><h1>Kontrolcenter</h1></div>
+  <div class="login"><label>ADMIN_TOKEN</label><input id="token" placeholder="Indsæt token"><button onclick="saveToken()">Gem</button></div>
 </header>
-
 <main>
-  <section class="priorityPanel">
-    <div class="sectionHead"><span>0</span><h2>Homepage redesign</h2></div>
-    <p class="note">Forsiden bruger nu Twitch profile data, shows, nyhedskort, Top 20 og mod-team. Den bruger IKKE overlayets theme engine som hovedfunktion. Theme engine er kun til overlay/admin.</p>
-    <div class="buttons"><button onclick="window.open('index.html?v=8136home','_blank')">Åbn forside</button><button onclick="openApi('/api/homepage')">Test homepage API</button></div>
-  </section>
-  <section class="priorityPanel">
-    <div class="sectionHead">
-      <span>1</span>
-      <h2>Skift tema til overlay + hjemmeside</h2>
-    </div>
-    <p class="note">Tryk på et tema her. Det gemmes i Cloudflare via <code>/api/theme</code>. Overlayet henter ændringen automatisk fra <code>/api/overlay/v170-state</code>.</p>
-    <div id="themeButtons" class="themeGrid"></div>
-    <div id="themeStatus" class="statusBox">Henter aktivt tema...</div>
-  </section>
+<section class="panel statusPanel">
+  <h2>Github / Cloudflare status</h2>
+  <p class="note">Start her: Indsæt ADMIN_TOKEN. Theme Engine gemmer direkte til Cloudflare Worker.</p>
+  <div class="buttons"><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test API</button><button onclick="openApi('/api/overlay/v170-state')">Åbn overlay API</button></div>
+  <pre id="status">Klar.</pre>
+</section>
 
-  <section>
-    <div class="sectionHead"><span>2</span><h2>Top ticker maskine</h2></div>
-    <p class="note">Top ticker viser kun tekst for det aktive tema. Skriv theme som: <code>morning</code>, <code>summer</code>, <code>fredagsbar</code>, <code>trance</code>, <code>retro</code>, <code>eurodance</code>, <code>popup</code>, <code>weekend</code>.</p>
-    <div class="buttons"><button onclick="addTicker('top')">Tilføj top tekst</button><button onclick="saveTicker('top')">Gem top ticker</button><button onclick="openApi('/api/theme-ticker-top')">Test top API</button></div>
-    <div id="topEditor" class="editor"></div>
-  </section>
+<section class="panel themePanel">
+  <h2>Theme Engine · Skift overlay tema</h2>
+  <p class="note">Dette er knapperne der skal bruges. Når du klikker, skifter overlay via /api/theme.</p>
+  <div id="themeGrid" class="themeGrid"></div>
+  <div id="activeTheme" class="activeTheme">Aktivt tema: loading</div>
+</section>
 
-  <section>
-    <div class="sectionHead"><span>3</span><h2>Bund ticker maskine</h2></div>
-    <p class="note">Bund ticker kan være theme = <code>all</code> eller et bestemt tema.</p>
-    <div class="buttons"><button onclick="addTicker('bottom')">Tilføj bund tekst</button><button onclick="saveTicker('bottom')">Gem bund ticker</button><button onclick="openApi('/api/bottom-ticker')">Test bund API</button></div>
-    <div id="bottomEditor" class="editor"></div>
-  </section>
+<section class="panel">
+  <h2>Forside nyheder</h2>
+  <p class="note">Disse vises som kort på forsiden — ikke som ticker.</p>
+  <div class="buttons"><button onclick="addRow('news')">Tilføj nyhed</button><button onclick="saveRows('news')">Gem forside nyheder</button></div>
+  <div id="newsEditor"></div>
+</section>
 
-  <section>
-    <div class="sectionHead"><span>4</span><h2>Sprog</h2></div>
-    <div class="themeGrid mini">
-      <button onclick="setLanguage('da')">🇩🇰 Dansk</button>
-      <button onclick="setLanguage('en')">🇬🇧 English</button>
-      <button onclick="setLanguage('de')">🇩🇪 Deutsch</button>
-    </div>
-  </section>
+<section class="panel">
+  <h2>Top ticker til overlay</h2>
+  <p class="note">Top ticker handler kun om aktivt theme. Sæt theme fx morning/summer/trance.</p>
+  <div class="buttons"><button onclick="addRow('top')">Tilføj top ticker</button><button onclick="saveRows('top')">Gem top ticker</button></div>
+  <div id="topEditor"></div>
+</section>
 
-  <section>
-    <div class="sectionHead"><span>5</span><h2>Test forbindelsen</h2></div>
-    <div class="buttons">
-      <button onclick="openApi('/api/theme')">Åbn Theme API</button>
-      <button onclick="openApi('/api/overlay/v170-state')">Åbn Overlay API</button>
-      <button onclick="openApi('/api/site')">Åbn Site API</button>
-      <button onclick="runFullTest()">Kør test</button>
-    </div>
-    <pre id="testOutput" class="testOutput">Ingen test kørt endnu.</pre>
-  </section>
+<section class="panel">
+  <h2>Bund ticker til overlay</h2>
+  <p class="note">Bund ticker kan være theme=all eller et bestemt tema.</p>
+  <div class="buttons"><button onclick="addRow('bottom')">Tilføj bund ticker</button><button onclick="saveRows('bottom')">Gem bund ticker</button></div>
+  <div id="bottomEditor"></div>
+</section>
+
+<section class="panel">
+  <h2>Rediger shows på forsiden</h2>
+  <div class="buttons"><button onclick="addRow('shows')">Tilføj show</button><button onclick="saveRows('shows')">Gem shows</button></div>
+  <div id="showsEditor"></div>
+</section>
+
+<section class="panel">
+  <h2>Twitch data</h2>
+  <p class="note">Hentes fra Twitch via Worker secrets: TWITCH_CLIENT_ID + TWITCH_ACCESS_TOKEN.</p>
+  <div class="buttons"><button onclick="openApi('/api/twitch-profile')">Test Twitch profile</button><button onclick="openApi('/api/homepage')">Test homepage API</button></div>
+</section>
 </main>
-
 <script src="assets/js/admin.js"></script>
 </body>
 </html>
