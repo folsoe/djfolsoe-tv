@@ -26,7 +26,7 @@
   <button onclick="jump('news')">📰 Nyheder</button>
   <button onclick="jump('tickers')">📡 Tickers</button>
   <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay bokse</button>
-  <button onclick="jump('top20')">🏆 Top 20</button>
+  <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
   <button onclick="jump('requests')">🎧 Requests</button>
   <button onclick="jump('twitch')">🟣 Twitch</button>
 </nav>
@@ -110,6 +110,14 @@
     <p class="note">Styrer FOLSOE Top 20 på forsiden og overlayets musik-bokse.</p>
     <div id="top20Editor"></div>
     <button onclick="saveRows('top20')">Gem Top 20</button>
+  </section>
+
+  
+  <section id="discovery" class="panel">
+    <div class="panelHead"><h2>✨ Dem her har jeg lige opdaget</h2><button onclick="addRow('discovery')">Tilføj discovery</button></div>
+    <p class="note">3 ekstra felter til nye tracks/boblere, som vises på forsiden under Top 20.</p>
+    <div id="discoveryEditor"></div>
+    <button onclick="saveRows('discovery')">Gem discovery picks</button>
   </section>
 
   <section id="requests" class="panel">

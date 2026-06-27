@@ -129,6 +129,7 @@ function render(){
   renderRequests(state.requests||[]);
   renderNews(state.newsCards||[], tw);
   renderChart(state.top20||state.chart?.items||[]);
+  renderDiscovery(state.discoveryPicks||[]);
   renderMods(state.mods||state.profile?.mods||[]);
 }
 
@@ -215,6 +216,18 @@ function renderNews(items,tw){
 function renderChart(items){
   q("chartGrid").innerHTML=(items||[]).slice(0,20).map(x=>`<article class="chartItem"><div class="rank">${String(x.rank||"").padStart(2,"0")}</div><div class="cover"></div><div><b>${x.artist||""}</b><p>${x.title||""}</p></div></article>`).join("");
 }
+
+function renderDiscovery(items){
+  const el=q("discoveryGrid");
+  if(!el)return;
+  const fallback=[
+    {artist:"Ny artist",title:"Ny sang",genre:"Discovery",note:"Dem her har jeg lige opdaget."},
+    {artist:"Upcoming",title:"Frisk lyd",genre:"New Music",note:"Kan blive en del af næste chart."},
+    {artist:"FOLSOE Pick",title:"Lyt med",genre:"Broadcast",note:"Et track der fortjener ekstra kærlighed."}
+  ];
+  el.innerHTML=(items&&items.length?items:fallback).slice(0,3).map((x,i)=>`<article class="discoveryCard"><span>DISCOVERY ${i+1}</span><b>${x.artist||""}</b><h3>${x.title||""}</h3><p>${x.genre||""}</p><small>${x.note||"Dem her har jeg lige opdaget."}</small></article>`).join("");
+}
+
 
 function renderMods(items){
   q("modsGrid").innerHTML=(items||[]).slice(0,8).map(m=>`<article class="modCard"><div class="modAvatar"></div><b>${m.name||""}</b><p>${m.role||""}</p></article>`).join("");
