@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V814 BROADCAST HYBRID ENGINE",
+    "version": "V814.1 CONTENT BINDING FIX",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -652,7 +652,8 @@
       "footerTicker": "returned",
       "box4": "locked to chat only",
       "contentMaster": "website/admin/cloud"
-    }
+    },
+    "contentBindingFix": true
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2233,7 +2234,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V814 BROADCAST HYBRID ENGINE",
+  "platformVersion": "V814.1 CONTENT BINDING FIX",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2285,7 +2286,15 @@
     "denseBottomDeck": true,
     "textInsideBoxFix": true,
     "box4LockedToChat": true,
-    "footerTicker": true
+    "footerTicker": true,
+    "contentBindingFix": {
+      "fallbackContent": true,
+      "frontendNormalizesPayload": true,
+      "box1": "follow journey",
+      "box2": "program theme",
+      "box3": "music top20",
+      "box4": "chat locked"
+    }
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",

@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V814 BROADCAST HYBRID ENGINE
+// DJ FOLSOE NETWORK V814.1 CONTENT BINDING FIX
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V814 BROADCAST HYBRID ENGINE",
+    version: "V814.1 CONTENT BINDING FIX",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V814 BROADCAST HYBRID ENGINE";
+  data.broadcastCore.version = "V814.1 CONTENT BINDING FIX";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V814 BROADCAST HYBRID ENGINE";
+  core.unifiedNewsroom.version = "V814.1 CONTENT BINDING FIX";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V814 BROADCAST HYBRID ENGINE";
+  core.broadcastCore.version = "V814.1 CONTENT BINDING FIX";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V814 BROADCAST HYBRID ENGINE",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V814.1 CONTENT BINDING FIX",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -324,7 +324,7 @@ function normalizeThemeName(name){
 function getThemePayload(core){
   const engine=core.themeEngine||{};
   const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
-  return {ok:true,version:"V814 BROADCAST HYBRID ENGINE",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+  return {ok:true,version:"V814.1 CONTENT BINDING FIX",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
 }
 function applyThemeToOverlayState(state, core){
   const payload=getThemePayload(core);
@@ -350,7 +350,7 @@ function buildMotionPayload(state){
   const danish = chartItems.find(x=>String(x.genre||"").toLowerCase().includes("dansk")) || top;
 
   state.motion = {
-    version:"V814 BROADCAST HYBRID ENGINE",
+    version:"V814.1 CONTENT BINDING FIX",
     layout:"camera-safe-side-stacked",
     rotationMs:8000,
     classicTicker:false,
@@ -499,7 +499,7 @@ function applyV814HybridLayout(state, core){
   const news = state.broadcastNews || state.websiteNews || [];
   const station = core.station || {};
   const requests = core.requests || [];
-  state.layout = {version:"V814 BROADCAST HYBRID ENGINE",topbar:"logo-news-clock",centerClear:true,footerTicker:true,box4LockedToChat:true,bottomStack:true};
+  state.layout = {version:"V814.1 CONTENT BINDING FIX",topbar:"logo-news-clock",centerClear:true,footerTicker:true,box4LockedToChat:true,bottomStack:true};
   state.motion = state.motion || {}; state.motion.layout = "v814-bottom-stacked-hybrid"; state.motion.rotationMs = 8000;
   state.motion.lanes = {
     box1:[
@@ -542,6 +542,126 @@ function applyV814HybridLayout(state, core){
   return state;
 }
 
+
+function safeArr(x){ return Array.isArray(x) ? x : []; }
+function num(v, fallback){ v=Number(v); return Number.isFinite(v) ? v : fallback; }
+function buildV814ContentPayload(core){
+  core = core || {};
+  const station = core.station || {};
+  const themePayload = (typeof getThemePayload === "function") ? getThemePayload(core) : {activeTheme:"fredagsbar", theme:{title:"FREDAGSBAR", emoji:"🍺", mood:"Weekend starts here", primary:"#ffd166", secondary:"#ff4d6d", accent:"#ff9f1c"}};
+  const theme = themePayload.theme || {};
+  const schedule = safeArr(core.schedule);
+  const show = (typeof currentScheduleShow === "function") ? currentScheduleShow(core) : (schedule[0] || {});
+  const chart = core.weeklyListeningChart || core.top20Chart || core.top20 || {items:[]};
+  const chartItems = safeArr(chart.items);
+  const top = chartItems[0] || {};
+  const pick = chartItems.find(x=>x && (x.folsoePick || x.pick === true || String(x.pick||"").toLowerCase()==="yes")) || chartItems[1] || top;
+  const requests = safeArr(core.requests);
+  const rawNews = (typeof broadcastNewsItems === "function") ? broadcastNewsItems(core) : safeArr(core.broadcastNews);
+  const newsItems = rawNews.length ? rawNews : [{label:"NEWS", text:"DJ FOLSOE Broadcast Cloud is live"}];
+
+  const followers = num(station.followersCurrent, 870);
+  const goal = num(station.followersGoal, 1000);
+  const viewers = num(station.viewers, 0);
+  const subs = num(station.subsToday, 0);
+  const bits = num(station.bitsToday, 0);
+  const toGo = Math.max(0, goal - followers);
+  const pct = Math.max(0, Math.min(100, Math.round((followers / Math.max(1, goal)) * 100)));
+
+  const live = {
+    isLive:Boolean(station.live),
+    viewers,
+    followers,
+    followersGoal:goal,
+    subsToday:subs,
+    bitsToday:bits,
+    title:station.streamTitle || "",
+    category:station.category || "Music"
+  };
+
+  const visual = {
+    primary:theme.primary || (theme.colors && theme.colors[0]) || "#ffd166",
+    secondary:theme.secondary || (theme.colors && theme.colors[1]) || "#00d4ff",
+    accent:theme.accent || (theme.colors && theme.colors[2]) || "#ff2e93",
+    title:theme.title || show.show || show.title || "DJ FOLSOE",
+    emoji:theme.emoji || "",
+    mood:theme.mood || theme.slogan || "Broadcast Cloud"
+  };
+
+  const showState = {
+    day:show.day || "",
+    time:show.time || "",
+    title:show.show || show.title || visual.title || "DJ FOLSOE LIVE",
+    description:show.description || visual.mood || ""
+  };
+
+  const topbarNews = newsItems.map(x => `${x.label || x.category || "NEWS"} · ${x.text || x.title || ""}`).filter(Boolean);
+
+  const box1 = [
+    {label:"FOLLOW GOAL", headline:`${followers}/${goal} followers`, body:`${pct}% complete · ${toGo} to go`},
+    {label:"LIVE STATUS", headline:live.isLive ? "LIVE NOW" : "OFFLINE", body:`${viewers} viewers · ${live.category}`},
+    {label:"TODAY", headline:`${subs} subs · ${bits} bits`, body:"Support keeps the broadcast growing"},
+    {label:"HYPE METER", headline:`${pct}%`, body:"Community energy is building"}
+  ];
+  const box2 = [
+    {label:"PROGRAM", headline:showState.title, body:`${showState.day} ${showState.time}`.trim() || showState.description || "Broadcast Cloud schedule"},
+    {label:"THEME", headline:`${visual.emoji ? visual.emoji + " " : ""}${visual.title}`.trim(), body:visual.mood},
+    {label:"NEXT SHOW", headline:schedule[1] ? (schedule[1].show || schedule[1].title || "Next show") : "Stay tuned", body:schedule[1] ? `${schedule[1].day||""} ${schedule[1].time||""}`.trim() : "More music is coming"},
+    {label:"THIS WEEK", headline:"Broadcast plan", body:"Shows and content are controlled from admin"}
+  ];
+  const box3 = [
+    {label:top.rank ? `TOP 20 #${top.rank}` : "TOP 20", headline:top.artist || "FOLSOE Chart", body:top.title || "Weekly Listening Chart"},
+    {label:"FOLSOE PICK", headline:pick.artist || "DJ FOLSOE", body:pick.title || "Pick of the week"},
+    {label:"NEW ENTRY", headline:(chartItems.find(x=>String(x.status||"").toUpperCase()==="NEW")||top).artist || "New music", body:(chartItems.find(x=>String(x.status||"").toUpperCase()==="NEW")||top).title || "Fresh music"},
+    {label:"LATEST REQUEST", headline:requests[0] ? (requests[0].artist || requests[0].user || "Request") : "Requests open", body:requests[0] ? (requests[0].title || requests[0].text || "") : "Send your song request"}
+  ];
+  const box4 = [
+    {label:"LIVE CHAT", headline:"Chat is live", body:"Messages, emotes and community highlights"},
+    {label:"CHAT HIGHLIGHT", headline:"Drop some love", body:"Be active and shape the show"},
+    {label:"FIRST CHATTER", headline:"Welcome in", body:"First-time chatters get the spotlight"},
+    {label:"EMOTE ENERGY", headline:"Spam the love", body:"Twitch emotes belong here"}
+  ];
+
+  const footerTicker = [
+    top.artist ? `TOP20 #${top.rank||1} ${top.artist} – ${top.title||""}` : "FOLSOE Weekly Listening Chart",
+    pick.title ? `FOLSOE PICK ${pick.artist||""} – ${pick.title}` : "",
+    `FOLLOW GOAL ${followers}/${goal}`,
+    showState.title ? `NOW/NEXT ${showState.title} ${showState.time||""}` : "",
+    requests[0] ? `REQUEST ${requests[0].artist?requests[0].artist+" – ":""}${requests[0].title||requests[0].text||""}` : "REQUESTS OPEN",
+    ...chartItems.slice(1,5).map(x=>`TOP20 #${x.rank} ${x.artist} – ${x.title}`),
+    ...topbarNews.slice(0,5)
+  ].filter(Boolean);
+
+  return {
+    ok:true,
+    version:"V814.1 CONTENT BINDING FIX",
+    overlay:"V814 Broadcast Hybrid Engine",
+    brand:"DJ FOLSOE",
+    apiTime:new Date().toISOString(),
+    layout:{centerClear:true,bottomStack:true,box4LockedToChat:true,footerTicker:true},
+    theme:themePayload,
+    visual,
+    live,
+    show:showState,
+    chart:{title:chart.title || "FOLSOE Weekly Listening Chart", items:chartItems.slice(0,20), topTrack:top},
+    topbarNews,
+    footerTicker,
+    motion:{
+      layout:"v814-bottom-stacked-hybrid",
+      rotationMs:8000,
+      lanes:{box1,box2,box3,box4}
+    },
+    chat:{
+      locked:true,
+      placeholder:[
+        {user:"DJ FOLSOE", text:"Velkommen i chatten ❤️"},
+        {user:"Community", text:"Requests, emotes og god energi"},
+        {user:"System", text:"Chatbox låst til box 4"}
+      ]
+    }
+  };
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return okOptions();
@@ -552,7 +672,7 @@ export default {
     try {
       if (path === "/api/broadcast-news") {
         const core = await getCore(env);
-        if (request.method === "GET") return json({ ok:true, version:"V814 BROADCAST HYBRID ENGINE", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
+        if (request.method === "GET") return json({ ok:true, version:"V814.1 CONTENT BINDING FIX", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
           const body = await request.json();
@@ -578,21 +698,21 @@ export default {
 
       if (path === "/api/overlay/v170-state") {
         const core = await getCore(env);
-        return json(applyV814HybridLayout(bindBoxesFromAdminContent(buildMotionPayload(applyThemeToOverlayState(buildV170OverlayState(core), core)), core), core));
+        return json(buildV814ContentPayload(core));
       }
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V814 BROADCAST HYBRID ENGINE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V814.1 CONTENT BINDING FIX",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V814 BROADCAST HYBRID ENGINEorker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V814.1 CONTENT BINDING FIXorker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V814 BROADCAST HYBRID ENGINEdmin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V814.1 CONTENT BINDING FIXdmin" });
       }
 
       if (path === "/api/seed") {
@@ -610,7 +730,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V814 BROADCAST HYBRID ENGINE", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V814.1 CONTENT BINDING FIX", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
