@@ -1,6 +1,6 @@
 
-const VERSION = "DJ FOLSOE NETWORK V816.1 OVERLAY FIX ONLY"; // V816.1 overlay fix marker
-const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816 BROADCAST OS", "activeTheme": "weekend", "language": "da", "twitchChannel": "djfolsoe", "themes": {"fredagsbar": {"emoji": "🍺", "title": "FREDAGSBAR", "desc": "Weekend starts here · live from Denmark", "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166", "bg": "linear-gradient(135deg,#341007,#22051e)"}, "popup": {"emoji": "⚡", "title": "POPUP", "desc": "You never know when DJ FOLSOE goes live", "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff", "bg": "linear-gradient(135deg,#061c2a,#2b0631)"}, "trance": {"emoji": "💙", "title": "TRANCE TUESDAY", "desc": "Uplifting energy · goosebumps may occur", "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff", "bg": "linear-gradient(135deg,#031525,#170935)"}, "retro": {"emoji": "🕹️", "title": "RETRO HITS", "desc": "Classics that refuse to retire", "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166", "bg": "linear-gradient(135deg,#230821,#15112a)"}, "eurodance": {"emoji": "💛", "title": "EURODANCE", "desc": "Big beats · big hooks · 90s/00s survived", "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600", "bg": "linear-gradient(135deg,#031b2a,#081d52)"}, "morning": {"emoji": "☀️", "title": "GOOD MORNING TWITCH", "desc": "Coffee, music and good vibes", "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8", "bg": "linear-gradient(135deg,#2b1300,#1c1021)"}, "summer": {"emoji": "🌴", "title": "SUMMER BEATS", "desc": "Summer 2026 · sunshine and bangers", "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a", "bg": "linear-gradient(135deg,#052b2a,#372105)"}, "weekend": {"emoji": "🎉", "title": "WEEKEND VIBES", "desc": "Maximum music and community", "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff", "bg": "linear-gradient(135deg,#23102c,#061b2b)"}}, "station": {"followers": 870, "followersGoal": 1000, "subs": 0, "viewers": 0, "category": "Music"}, "profile": {"name": "DJ FOLSOE", "fallbackAvatar": "", "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.", "genres": ["Trance", "Eurodance", "Retro", "EDM", "Pop", "Nu-Disco"], "mods": [{"name": "Mod Master", "role": "Chat Safety"}, {"name": "Vibe Guardian", "role": "Community"}, {"name": "Request Helper", "role": "Requests"}, {"name": "DJ Support", "role": "Tech & Support"}, {"name": "Good Vibes", "role": "Positivity"}]}, "shows": [{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Uplifting trance, emotion and big melodies."}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Weekly listening chart and countdown show."}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "1. fredag hver måned 20:00", "body": "Weekend energy, party tracks and community."}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Classic tracks, nostalgia and singalong moments."}, {"key": "morning", "title": "Good Morning Twitch", "time": "Hver dag 07:00", "body": "Coffee, music and the best start of the day."}, {"key": "popup", "title": "PopUp", "time": "Surprise!", "body": "Surprise streams when you least expect it."}], "homepageNews": [{"id": "news1", "active": true, "type": "Seneste show", "title": "Fredagsbar – Tak for en fantastisk aften!", "body": "Se highlights, requests og moments fra seneste show.", "theme": "all", "priority": 1}, {"id": "news2", "active": true, "type": "Top 20 nyt", "title": "Ny Top 20 ude nu", "body": "Se denne uges største hits på FOLSOE Top 20.", "theme": "all", "priority": 2}, {"id": "news3", "active": true, "type": "Request info", "title": "Husk dine requests", "body": "Brug !ønske / !request / !Wunsch i chatten.", "theme": "all", "priority": 3}, {"id": "news4", "active": true, "type": "Community news", "title": "Fællesskabet vokser", "body": "Chat, emotes, follows og god stemning hver stream.", "theme": "all", "priority": 4}, {"id": "news5", "active": true, "type": "DJ Network", "title": "Danske DJs live nu", "body": "Se hvem der er live og find næste raid target.", "theme": "all", "priority": 5}, {"id": "news6", "active": true, "type": "Twitch updates", "title": "Nye emotes unlocked", "body": "Tjek de nye emotes og brug dem i chatten.", "theme": "all", "priority": 6}], "topTickerItems": [{"id": "top_weekend", "active": true, "theme": "weekend", "text": "🎉 WEEKEND VIBES · Broadcast Cloud", "priority": 1}, {"id": "top_morning", "active": true, "theme": "morning", "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes", "priority": 2}, {"id": "top_summer", "active": true, "theme": "summer", "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers", "priority": 3}, {"id": "top_trance", "active": true, "theme": "trance", "text": "💙 TRANCE TUESDAY · Uplifting energy", "priority": 4}], "bottomTickerItems": [{"id": "bottom1", "active": true, "theme": "all", "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud", "priority": 1}, {"id": "bottom2", "active": true, "theme": "all", "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE", "priority": 2}], "top20": [{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}]};
+const VERSION = "DJ FOLSOE NETWORK V816.8 HOMEPAGE TWITCH CONTENT OS";
+const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816.8 HOMEPAGE TWITCH CONTENT OS", "activeTheme": "weekend", "language": "da", "twitchChannel": "djfolsoe", "themes": {"fredagsbar": {"emoji": "🍺", "title": "FREDAGSBAR", "desc": "Weekend starts here · live from Denmark", "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166", "bg": "linear-gradient(135deg,#341007,#22051e)"}, "popup": {"emoji": "⚡", "title": "POPUP", "desc": "You never know when DJ FOLSOE goes live", "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff", "bg": "linear-gradient(135deg,#061c2a,#2b0631)"}, "trance": {"emoji": "💙", "title": "TRANCE TUESDAY", "desc": "Uplifting energy · goosebumps may occur", "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff", "bg": "linear-gradient(135deg,#031525,#170935)"}, "retro": {"emoji": "🕹️", "title": "RETRO HITS", "desc": "Classics that refuse to retire", "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166", "bg": "linear-gradient(135deg,#230821,#15112a)"}, "eurodance": {"emoji": "💛", "title": "EURODANCE", "desc": "Big beats · big hooks · 90s/00s survived", "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600", "bg": "linear-gradient(135deg,#031b2a,#081d52)"}, "morning": {"emoji": "☀️", "title": "GOOD MORNING TWITCH", "desc": "Coffee, music and good vibes", "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8", "bg": "linear-gradient(135deg,#2b1300,#1c1021)"}, "summer": {"emoji": "🌴", "title": "SUMMER BEATS", "desc": "Summer 2026 · sunshine and bangers", "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a", "bg": "linear-gradient(135deg,#052b2a,#372105)"}, "weekend": {"emoji": "🎉", "title": "WEEKEND VIBES", "desc": "Maximum music and community", "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff", "bg": "linear-gradient(135deg,#23102c,#061b2b)"}}, "station": {"followers": 870, "followersGoal": 1000, "subs": 0, "viewers": 0, "category": "Music"}, "profile": {"name": "DJ FOLSOE", "fallbackAvatar": "", "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.", "genres": ["Trance", "Eurodance", "Retro", "EDM", "Pop", "Nu-Disco"], "mods": [{"name": "Mod Master", "role": "Chat Safety"}, {"name": "Vibe Guardian", "role": "Community"}, {"name": "Request Helper", "role": "Requests"}, {"name": "DJ Support", "role": "Tech & Support"}, {"name": "Good Vibes", "role": "Positivity"}]}, "shows": [{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Uplifting trance, emotion and big melodies."}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Weekly listening chart and countdown show."}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "1. fredag hver måned 20:00", "body": "Weekend energy, party tracks and community."}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Classic tracks, nostalgia and singalong moments."}, {"key": "morning", "title": "Good Morning Twitch", "time": "Hver dag 07:00", "body": "Coffee, music and the best start of the day."}, {"key": "popup", "title": "PopUp", "time": "Surprise!", "body": "Surprise streams when you least expect it."}], "homepageNews": [{"id": "news1", "active": true, "type": "Seneste show", "title": "Fredagsbar – Tak for en fantastisk aften!", "body": "Se highlights, requests og moments fra seneste show.", "theme": "all", "priority": 1}, {"id": "news2", "active": true, "type": "Top 20 nyt", "title": "Ny Top 20 ude nu", "body": "Se denne uges største hits på FOLSOE Top 20.", "theme": "all", "priority": 2}, {"id": "news3", "active": true, "type": "Request info", "title": "Husk dine requests", "body": "Brug !ønske / !request / !Wunsch i chatten.", "theme": "all", "priority": 3}, {"id": "news4", "active": true, "type": "Community news", "title": "Fællesskabet vokser", "body": "Chat, emotes, follows og god stemning hver stream.", "theme": "all", "priority": 4}, {"id": "news5", "active": true, "type": "DJ Network", "title": "Danske DJs live nu", "body": "Se hvem der er live og find næste raid target.", "theme": "all", "priority": 5}, {"id": "news6", "active": true, "type": "Twitch updates", "title": "Nye emotes unlocked", "body": "Tjek de nye emotes og brug dem i chatten.", "theme": "all", "priority": 6}], "topTickerItems": [{"id": "top_weekend", "active": true, "theme": "weekend", "text": "🎉 WEEKEND VIBES · Broadcast Cloud", "priority": 1}, {"id": "top_morning", "active": true, "theme": "morning", "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes", "priority": 2}, {"id": "top_summer", "active": true, "theme": "summer", "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers", "priority": 3}, {"id": "top_trance", "active": true, "theme": "trance", "text": "💙 TRANCE TUESDAY · Uplifting energy", "priority": 4}], "bottomTickerItems": [{"id": "bottom1", "active": true, "theme": "all", "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud", "priority": 1}, {"id": "bottom2", "active": true, "theme": "all", "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE", "priority": 2}], "top20": [{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}]};
 const I18N = {"da": {"nav.home": "Forside", "nav.shows": "Shows", "nav.top20": "Top 20", "nav.news": "Nyheder", "nav.community": "Community", "nav.network": "DJ Network", "nav.about": "Om mig", "hero.subtitle": "Music TV fra Danmark", "hero.cta.twitch": "Se mig live på Twitch", "hero.cta.follow": "Følg mig", "hero.live": "Live på Twitch", "hero.offline": "Offline lige nu", "chat.title": "Live chat", "chat.open": "Åbn chat på Twitch", "about.title": "Hvem er DJ FOLSOE?", "about.body": "DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers. Kanalen blander radioenergi, TV-grafik og fællesskab på Twitch.", "shows.title": "Shows", "shows.all": "Se alle shows →", "news.title": "Nyheder & opdateringer", "news.all": "Se alle nyheder →", "top20.title": "FOLSOE Top 20", "top20.full": "Se hele listen →", "top20.button": "Se hele Top 20", "community.title": "Fællesskab & stats", "mods.title": "Mod-teamet", "mods.body": "Vores mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.", "cta.title": "Klar til næste show?", "cta.body": "Følg kanalen på Twitch, så du aldrig går glip af et show.", "cta.button": "Følg mig på Twitch"}, "en": {"nav.home": "Home", "nav.shows": "Shows", "nav.top20": "Top 20", "nav.news": "News", "nav.community": "Community", "nav.network": "DJ Network", "nav.about": "About", "hero.subtitle": "Music TV from Denmark", "hero.cta.twitch": "Watch me live on Twitch", "hero.cta.follow": "Follow me", "hero.live": "Live on Twitch", "hero.offline": "Offline right now", "chat.title": "Live chat", "chat.open": "Open chat on Twitch", "about.title": "Who is DJ FOLSOE?", "about.body": "DJ FOLSOE brings music, chat, requests and Danish DJ culture into a living broadcast universe. The channel blends radio energy, TV graphics and community on Twitch.", "shows.title": "Shows", "shows.all": "See all shows →", "news.title": "News & updates", "news.all": "See all news →", "top20.title": "FOLSOE Top 20", "top20.full": "See full list →", "top20.button": "See full Top 20", "community.title": "Community & stats", "mods.title": "Mod team", "mods.body": "Mods keep chat friendly, help new viewers and protect the good vibe around the stream.", "cta.title": "Ready for the next show?", "cta.body": "Follow the channel on Twitch so you never miss a show.", "cta.button": "Follow me on Twitch"}, "de": {"nav.home": "Start", "nav.shows": "Shows", "nav.top20": "Top 20", "nav.news": "News", "nav.community": "Community", "nav.network": "DJ Network", "nav.about": "Über mich", "hero.subtitle": "Music TV aus Dänemark", "hero.cta.twitch": "Live auf Twitch ansehen", "hero.cta.follow": "Folgen", "hero.live": "Live auf Twitch", "hero.offline": "Gerade offline", "chat.title": "Live Chat", "chat.open": "Chat auf Twitch öffnen", "about.title": "Wer ist DJ FOLSOE?", "about.body": "DJ FOLSOE verbindet Musik, Chat, Musikwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum. Der Kanal kombiniert Radio-Energie, TV-Grafik und Community auf Twitch.", "shows.title": "Shows", "shows.all": "Alle Shows →", "news.title": "News & Updates", "news.all": "Alle News →", "top20.title": "FOLSOE Top 20", "top20.full": "Ganze Liste →", "top20.button": "Top 20 ansehen", "community.title": "Community & Stats", "mods.title": "Mod-Team", "mods.body": "Mods halten den Chat freundlich, helfen neuen Zuschauern und schützen die gute Stimmung im Stream.", "cta.title": "Bereit für die nächste Show?", "cta.body": "Folge dem Kanal auf Twitch, damit du keine Show verpasst.", "cta.button": "Auf Twitch folgen"}};
 
 function cors() {
@@ -98,6 +98,7 @@ function overlayState(core) {
     live:{followers:station.followers||870,followersGoal:station.followersGoal||1000,viewers:station.viewers||0,subs:station.subs||0},
     show:{title:theme.theme.title, description:theme.theme.desc},
     twitchChat:{channel:core.twitchChannel||"djfolsoe"},
+    motion:v8162MotionLanes(core, {theme, visual:{primary:theme.theme.primary, secondary:theme.theme.secondary, accent:theme.theme.accent, title:theme.theme.title, emoji:theme.theme.emoji, mood:theme.theme.desc}, topbarNews: topTicker(core), footerTicker: bottomTicker(core), chart:{items:top20}, live:{followers:station.followers||870,followersGoal:station.followersGoal||1000,viewers:station.viewers||0,subs:station.subs||0}, show:{title:theme.theme.title, description:theme.theme.desc}}),
     boxes:{
       music: top20[0] ? {label:"MUSIC", title:`#${top20[0].rank} ${top20[0].artist}`, body:top20[0].title} : {label:"MUSIC",title:"FOLSOE Top 20",body:"Chart loading"},
       community: {label:"COMMUNITY",title:"Live chat",body:"Twitch chat locked to box 4"},
@@ -110,14 +111,42 @@ function overlayState(core) {
   };
 }
 async function homepage(env, core) {
-  const tw = await twitchProfile(env, core);
+  const tw = await twitchChannelFull(env, core);
+  const reqs = await recentRequests(env, core);
+  const lang = core.language || "da";
   return {
-    ok:true, version:VERSION, language:core.language||"da", i18n:I18N[core.language||"da"]||I18N.da,
-    twitch:tw, theme:themePayload(core), profile:core.profile,
+    ok:true, version:VERSION, language:lang, i18n:I18N?.[lang] || I18N?.da || {},
+    twitch:tw,
+    hero:{
+      title:"DJ FOLSOE",
+      avatar:tw.avatar,
+      banner:tw.banner,
+      bio:tw.description,
+      isLive:tw.isLive,
+      viewers:tw.viewers,
+      followers:tw.followers,
+      streamTitle:tw.liveTitle,
+      category:tw.category || tw.game
+    },
+    profile:core.profile,
+    about:{
+      title:"Hvem er DJ FOLSOE?",
+      music:"Trance, Eurodance, Retro, EDM, Pop, Nu-Disco og Music TV fra Danmark.",
+      shows:"Live DJ-shows, chart countdowns og temastreams.",
+      requests:"Musikønsker via !ønske / !request / !Wunsch.",
+      community:"Chat, mods, emotes, dansk DJ-kultur og fællesskab."
+    },
     shows:core.shows||DEFAULT_CORE.shows,
     newsCards:sortItems(core.homepageNews||DEFAULT_CORE.homepageNews),
     top20:core.top20||DEFAULT_CORE.top20,
-    mods:core.profile?.mods||DEFAULT_CORE.profile.mods
+    requests:reqs,
+    mods:core.profile?.mods||DEFAULT_CORE.profile.mods,
+    djNetwork:core.djNetwork || [],
+    twitchUpdates:[
+      {title:"Live status",body:tw.isLive ? "DJ FOLSOE er live nu." : "DJ FOLSOE er offline lige nu."},
+      {title:"Kategori",body:tw.category || "Music"},
+      {title:"Stream title",body:tw.liveTitle || "DJ FOLSOE LIVE"}
+    ]
   };
 }
 async function saveList(request, env, core, key) {
@@ -126,6 +155,104 @@ async function saveList(request, env, core, key) {
   core[key] = Array.isArray(body.items) ? body.items : [];
   await putCore(env,core);
   return json({ok:true,items:core[key]});
+}
+
+
+function v8162MotionLanes(core, state){
+  const theme = state.theme?.theme || {};
+  const live = state.live || {};
+  const top20 = state.chart?.items || [];
+  const news = Array.isArray(core.homepageNews) ? core.homepageNews.filter(x=>x && x.active !== false) : [];
+  const show = Array.isArray(core.shows) && core.shows[0] ? core.shows[0] : {};
+  const top = top20[0] || {};
+  const pick = top20[1] || top || {};
+  return {
+    box1:[
+      {label:"FOLLOW JOURNEY", headline:`${live.followers||870}/${live.followersGoal||1000} followers`, body:`${Math.max(0,(live.followersGoal||1000)-(live.followers||870))} to go · ${live.viewers||0} viewers`, icon:"📡"},
+      {label:"LIVE STATUS", headline:`${live.viewers||0} viewers`, body:"Broadcast Cloud · Twitch Music TV", icon:"👁️"},
+      {label:"GOALS", headline:"Help DJ FOLSOE grow", body:"Follow · Chat · Request · Share the love", icon:"💜"}
+    ],
+    box2:[
+      {label:"PROGRAM", headline:show.title || state.show?.title || theme.title || "DJ FOLSOE LIVE", body:show.time || state.show?.description || theme.desc || "Broadcast Cloud", icon:"📺"},
+      {label:"ACTIVE THEME", headline:`${theme.emoji||""} ${theme.title||"THEME"}`.trim(), body:theme.desc || "Theme Engine", icon:"🎨"},
+      {label:"NEXT SHOW", headline:show.title || "Next DJ FOLSOE show", body:show.body || "Check the website for latest program", icon:"⏭️"}
+    ],
+    box3:[
+      {label:top.rank ? `TOP 20 #${top.rank}` : "TOP 20", headline:top.artist || "FOLSOE Top 20", body:top.title || "Weekly Listening Chart", icon:"🎵"},
+      {label:"FOLSOE PICK", headline:pick.artist || "DJ FOLSOE", body:pick.title || "Pick of the week", icon:"⭐"},
+      {label:news[0]?.type || "NEWS", headline:news[0]?.title || "Broadcast News", body:news[0]?.body || "News from admin", icon:"📰"},
+      {label:"REQUESTS", headline:"Requests open", body:"Use !ønske / !request / !Wunsch in chat", icon:"🎧"}
+    ]
+  };
+}
+
+
+async function twitchChannelFull(env, core){
+  const login = String(core.twitchChannel || env.TWITCH_CHANNEL || "djfolsoe").toLowerCase();
+  const fallback = {
+    ok:false, login, displayName:"DJ FOLSOE", avatar:core.profile?.fallbackAvatar||"",
+    banner:"", description:core.profile?.description || "DJ FOLSOE is a Danish music streamer on Twitch.",
+    isLive:false, viewers:0, viewCount:0, followers:core.station?.followers||870,
+    game:"Music", category:"Music", liveTitle:"DJ FOLSOE LIVE", startedAt:""
+  };
+  try{
+    if(!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return fallback;
+    const token = String(env.TWITCH_ACCESS_TOKEN).startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
+    const headers = {"Client-ID":env.TWITCH_CLIENT_ID,"Authorization":"Bearer "+token};
+
+    const uJson = await (await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {headers})).json();
+    const u = uJson?.data?.[0];
+    if(!u) return fallback;
+
+    let stream = null, followers = fallback.followers;
+    try{
+      const sJson = await (await fetch("https://api.twitch.tv/helix/streams?user_login="+encodeURIComponent(login), {headers})).json();
+      stream = sJson?.data?.[0] || null;
+    }catch(e){}
+    try{
+      const fJson = await (await fetch("https://api.twitch.tv/helix/channels/followers?broadcaster_id="+encodeURIComponent(u.id), {headers})).json();
+      followers = fJson?.total ?? followers;
+    }catch(e){}
+
+    return {
+      ok:true, login, id:u.id, displayName:u.display_name || "DJ FOLSOE",
+      avatar:u.profile_image_url || "", banner:u.offline_image_url || "",
+      description:u.description || fallback.description,
+      viewCount:u.view_count || 0, followers,
+      isLive:!!stream, viewers:stream?.viewer_count || 0,
+      game:stream?.game_name || "Music", category:stream?.game_name || "Music",
+      liveTitle:stream?.title || fallback.liveTitle, startedAt:stream?.started_at || ""
+    };
+  }catch(e){
+    return {...fallback,error:e.message||"Twitch channel error"};
+  }
+}
+async function recentRequests(env, core){
+  try{
+    if(env.DJF_DATA && env.DJF_DATA.get){
+      const saved = await env.DJF_DATA.get("song-requests","json");
+      if(Array.isArray(saved)) return saved.slice(0,3);
+    }
+  }catch(e){}
+  return (core.requests || [
+    {user:"Chat", song:"Skriv !ønske Kunstner - Titel", time:"klar"},
+    {user:"Chat", song:"Use !request Artist - Title", time:"ready"},
+    {user:"Chat", song:"Nutze !Wunsch Künstler - Titel", time:"bereit"}
+  ]).slice(0,3);
+}
+async function addRequest(request, env, core){
+  const body = await request.json().catch(()=>({}));
+  const text = String(body.text || body.song || body.request || "").trim();
+  const user = String(body.user || body.username || "Twitch chat").trim();
+  if(!text) return json({ok:false,error:"Missing request text"},400);
+  const item = {user, song:text.replace(/^!(ønske|request|wunsch)\s*/i,""), time:new Date().toISOString()};
+  let list = [];
+  try{
+    if(env.DJF_DATA && env.DJF_DATA.get) list = await env.DJF_DATA.get("song-requests","json") || [];
+  }catch(e){}
+  list = [item, ...(Array.isArray(list)?list:[])].slice(0,20);
+  if(env.DJF_DATA && env.DJF_DATA.put) await env.DJF_DATA.put("song-requests", JSON.stringify(list));
+  return json({ok:true,item,items:list.slice(0,3)});
 }
 
 export default {
@@ -171,6 +298,10 @@ export default {
       if (path === "/api/shows") {
         if (request.method === "GET") return json({ok:true,items:core.shows||[]});
         return saveList(request,env,core,"shows");
+      }
+      if (path === "/api/requests") {
+        if (request.method === "POST") return addRequest(request, env, core);
+        return json({ok:true,items:await recentRequests(env, core)});
       }
       if (path === "/api/top20") {
         if (request.method === "GET") return json({ok:true,items:core.top20||[]});

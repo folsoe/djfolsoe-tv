@@ -1,114 +1,482 @@
 const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
-let state=null;
-let lastTheme="";
+const DEFAULT_CHANNEL="djfolsoe";
 
-const fallback={
-  ok:true,
-  theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"Broadcast Cloud",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
-  visual:{primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166",title:"WEEKEND VIBES",mood:"Broadcast Cloud"},
-  topbarNews:["🎉 WEEKEND VIBES · Broadcast Cloud"],
-  footerTicker:["TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY"],
-  chart:{items:[{rank:1,artist:"Axwell & Bonn",title:"Whatever Turns You On"}]},
-  live:{followers:870,followersGoal:1000,viewers:0,subs:0},
-  show:{title:"WEEKEND VIBES",description:"Broadcast Cloud"},
-  boxes:{
-    music:{label:"MUSIC",title:"#1 Axwell & Bonn",body:"Whatever Turns You On"},
-    community:{label:"COMMUNITY",title:"Live chat",body:"Twitch chat locked to box 4"},
-    status:{label:"LIVE STATUS",title:"870/1000 followers",body:"Broadcast Cloud online"},
-    program:{label:"PROGRAM",title:"WEEKEND VIBES",body:"Broadcast Cloud"},
-    top20:{label:"TOP20",title:"#1 Axwell & Bonn",body:"Whatever Turns You On"},
-    news:{label:"NEWS",title:"Broadcast News",body:"News from admin"},
-    goals:{label:"GOALS",title:"870/1000 followers",body:"Help DJ FOLSOE grow"}
-  }
+let state=fallbackState();
+let tick=0;
+let lastTheme="";
+let chatQueue=[];
+let twitchSocket=null;
+let twitchConnectedChannel="";
+let reconnectTimer=null;
+let reconnectAttempts=0;
+let chatLive=false;
+const profileCache={};
+
+/* V816.7 - Ported from your working JS:
+   - preserve <img> tags before escaping
+   - parse Twitch IRC emote tags by ranges
+   - parse StreamElements emote objects/arrays
+   - fallback known Twitch emote words
+   - render unicode emoji as proper spans
+*/
+const V97_TWITCH_GLOBAL_EMOTES = {
+  Kappa:"25", PogChamp:"88", LUL:"425618", Kreygasm:"41", "4Head":"354", HeyGuys:"30259",
+  BibleThump:"86", WutFace:"28087", DansGame:"33", CoolStoryBob:"123171", SeemsGood:"64138",
+  NotLikeThis:"58765", FailFish:"360", ResidentSleeper:"245", Jebaited:"114836", VoHiYo:"81274",
+  SwiftRage:"34", Keepo:"1902", FrankerZ:"65", EleGiggle:"4339", PJSalt:"36", RalpherZ:"1900", WTRuck:"114847"
 };
+const V97_TWITCH_GLOBAL_EMOTES_LOWER = Object.keys(V97_TWITCH_GLOBAL_EMOTES).reduce((m,k)=>{m[k.toLowerCase()]=V97_TWITCH_GLOBAL_EMOTES[k];return m;},{});
+const V97_UNICODE_EMOJI_RE = /([\u{1F1E6}-\u{1F1FF}]{2}|[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]\uFE0F?)/gu;
+
+function twitchEmoteImg(emoteId, alt){
+  return `<img class="chatEmote" src="https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/dark/3.0" alt="${esc(alt)}">`;
+}
+function preserveTagsThenEscape(input){
+  const tags=[];
+  let output=String(input||"").replace(/<img\b[^>]*>/gi, match=>{
+    tags.push(match);
+    return "___DJF_IMG_"+(tags.length-1)+"___";
+  });
+  output=esc(output);
+  tags.forEach((tag,index)=>{ output=output.replace("___DJF_IMG_"+index+"___", tag); });
+  return output;
+}
+function renderUnicodeEmoji(html){
+  return String(html||"").replace(V97_UNICODE_EMOJI_RE, match=>`<span class="chatUnicodeEmoji">${match}</span>`);
+}
+function renderFallbackTwitchWords(html){
+  const imgTags=[];
+  let working=String(html||"").replace(/<img\b[^>]*>/gi, match=>{
+    imgTags.push(match);
+    return "___DJF_IMG_"+(imgTags.length-1)+"___";
+  });
+  working=working.replace(/\b([A-Za-z][A-Za-z0-9_]{1,30})\b/g, (full,word)=>{
+    const id=V97_TWITCH_GLOBAL_EMOTES[word] || V97_TWITCH_GLOBAL_EMOTES_LOWER[String(word).toLowerCase()];
+    return id ? twitchEmoteImg(id,word) : full;
+  });
+  imgTags.forEach((tag,index)=>{ working=working.replace("___DJF_IMG_"+index+"___", tag); });
+  return working;
+}
+function parseTwitchTagEmotes(rawText, tagString){
+  try{
+    if(!tagString || typeof tagString !== "string") return null;
+    const replacements=[];
+    tagString.split("/").forEach(group=>{
+      const parts=group.split(":");
+      const emoteId=parts[0];
+      const ranges=(parts[1]||"").split(",");
+      ranges.forEach(range=>{
+        const nums=range.split("-");
+        const start=parseInt(nums[0],10);
+        const end=parseInt(nums[1],10);
+        if(!isNaN(start)&&!isNaN(end)) replacements.push({start,end,emoteId});
+      });
+    });
+    if(!replacements.length) return null;
+    replacements.sort((a,b)=>b.start-a.start);
+    let output=String(rawText||"");
+    replacements.forEach(rep=>{
+      const label=output.substring(rep.start,rep.end+1);
+      output=output.substring(0,rep.start)+twitchEmoteImg(rep.emoteId,label)+output.substring(rep.end+1);
+    });
+    return renderUnicodeEmoji(preserveTagsThenEscape(output));
+  }catch(e){return null;}
+}
+function parseStreamElementsEmotes(rawText, emotes){
+  try{
+    if(!emotes) return null;
+    const raw=String(rawText||"");
+    const replacements=[];
+    if(Array.isArray(emotes)){
+      emotes.forEach(item=>{
+        const emoteId=item.id || item.emoteId || item._id;
+        const name=item.name || item.code || item.text || "";
+        const start=parseInt(item.start ?? item.startIndex ?? item.from,10);
+        const end=parseInt(item.end ?? item.endIndex ?? item.to,10);
+        if(emoteId && !isNaN(start) && !isNaN(end)){
+          replacements.push({start,end,emoteId});
+        } else if(emoteId && name){
+          V97_TWITCH_GLOBAL_EMOTES[name]=emoteId;
+          V97_TWITCH_GLOBAL_EMOTES_LOWER[String(name).toLowerCase()]=emoteId;
+        }
+      });
+    } else if(typeof emotes === "object"){
+      Object.keys(emotes).forEach(emoteId=>{
+        const positions=emotes[emoteId] || [];
+        if(Array.isArray(positions)){
+          positions.forEach(pos=>{
+            if(typeof pos === "string"){
+              const nums=pos.split("-");
+              const start=parseInt(nums[0],10);
+              const end=parseInt(nums[1],10);
+              if(!isNaN(start)&&!isNaN(end)) replacements.push({start,end,emoteId});
+            } else if(typeof pos === "object"){
+              const start=parseInt(pos.start ?? pos.startIndex ?? pos.from,10);
+              const end=parseInt(pos.end ?? pos.endIndex ?? pos.to,10);
+              if(!isNaN(start)&&!isNaN(end)) replacements.push({start,end,emoteId});
+            }
+          });
+        }
+      });
+    }
+    if(!replacements.length) return null;
+    replacements.sort((a,b)=>b.start-a.start);
+    let output=raw;
+    replacements.forEach(rep=>{
+      const label=raw.substring(rep.start,rep.end+1);
+      output=output.substring(0,rep.start)+twitchEmoteImg(rep.emoteId,label)+output.substring(rep.end+1);
+    });
+    return renderUnicodeEmoji(preserveTagsThenEscape(output));
+  }catch(e){return null;}
+}
+function getRenderedChatFromData(data){
+  return data.renderedText || data.renderedMessage || data.messageHtml || data.html || data.rendered || "";
+}
+function chatHTML(text, data){
+  data=data||{};
+  const rawText=String(text||"");
+  const rendered=getRenderedChatFromData(data);
+  if(rendered && String(rendered).includes("<img")){
+    return renderUnicodeEmoji(renderFallbackTwitchWords(preserveTagsThenEscape(rendered)));
+  }
+  const bySE =
+    parseStreamElementsEmotes(rawText, data.emotes) ||
+    parseStreamElementsEmotes(rawText, data.emote) ||
+    parseStreamElementsEmotes(rawText, data.twitchEmotes) ||
+    parseStreamElementsEmotes(rawText, data.badges && data.badges.emotes);
+  if(bySE) return bySE;
+  const byTags =
+    parseTwitchTagEmotes(rawText, data.tags && (data.tags.emotes || data.tags["emotes"])) ||
+    parseTwitchTagEmotes(rawText, data.emotesRaw) ||
+    parseTwitchTagEmotes(rawText, data.rawEmotes) ||
+    parseTwitchTagEmotes(rawText, data.emotes);
+  if(byTags) return byTags;
+  return renderUnicodeEmoji(renderFallbackTwitchWords(esc(rawText)));
+}
+
 
 function q(id){return document.getElementById(id);}
-function clip(v,max){v=String(v||"").trim();return v.length>max?v.slice(0,max-1)+"…":v;}
-function themeClass(key){return "theme-"+String(key||"weekend").toLowerCase();}
+function clip(v,max){v=String(v||"").trim();return v.length>max?v.slice(0,Math.max(0,max-1))+"…":v;}
+function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function safeArr(a,b){return Array.isArray(a)&&a.length?a:b;}
+
+function fallbackState(){
+  return {
+    theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"Broadcast Cloud",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
+    visual:{primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166",title:"WEEKEND VIBES",emoji:"🎉",mood:"Broadcast Cloud"},
+    topbarNews:["🎉 WEEKEND VIBES · Broadcast Cloud"],
+    footerTicker:["TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY"],
+    chart:{items:[{rank:1,artist:"Axwell & Bonn",title:"Whatever Turns You On"},{rank:2,artist:"Hugel, David Guetta",title:"Shine"}]},
+    live:{followers:870,followersGoal:1000,viewers:0,subs:0},
+    show:{title:"WEEKEND VIBES",description:"Broadcast Cloud"},
+    twitchChat:{channel:DEFAULT_CHANNEL},
+    motion:{lanes:{
+      box1:[
+        {label:"FOLLOW JOURNEY",headline:"870/1000 followers",body:"130 to go · 0 viewers",icon:"📡"},
+        {label:"LIVE STATUS",headline:"0 viewers",body:"Broadcast Cloud · Twitch Music TV",icon:"👁️"},
+        {label:"GOALS",headline:"Help DJ FOLSOE grow",body:"Follow · Chat · Request · Share the love",icon:"💜"}
+      ],
+      box2:[
+        {label:"PROGRAM",headline:"DJ FOLSOE LIVE",body:"Broadcast Cloud schedule",icon:"📺"},
+        {label:"ACTIVE THEME",headline:"🎉 WEEKEND VIBES",body:"Maximum music and community",icon:"🎨"},
+        {label:"NEXT SHOW",headline:"Next DJ FOLSOE show",body:"Check the website for latest program",icon:"⏭️"}
+      ],
+      box3:[
+        {label:"TOP 20 #1",headline:"Axwell & Bonn",body:"Whatever Turns You On",icon:"🎵"},
+        {label:"FOLSOE PICK",headline:"Hugel, David Guetta",body:"Shine",icon:"⭐"},
+        {label:"REQUESTS",headline:"Requests open",body:"Use !ønske / !request / !Wunsch in chat",icon:"🎧"}
+      ]
+    }}
+  };
+}
+
+function normalize(j){
+  const fb=fallbackState();
+  const s=(j&&typeof j==="object")?j:{};
+  s.theme=s.theme||fb.theme;
+  s.visual=Object.assign(fb.visual,s.visual||{});
+  s.topbarNews=safeArr(s.topbarNews,fb.topbarNews);
+  s.footerTicker=safeArr(s.footerTicker,fb.footerTicker);
+  s.chart=s.chart||fb.chart;
+  s.live=Object.assign(fb.live,s.live||{});
+  s.show=Object.assign(fb.show,s.show||{});
+  s.twitchChat=Object.assign(fb.twitchChat,s.twitchChat||{});
+  s.motion=s.motion||{lanes:{}};
+  s.motion.lanes=s.motion.lanes||{};
+
+  const top=(s.chart.items&&s.chart.items[0])||fb.chart.items[0];
+  const pick=(s.chart.items&&s.chart.items[1])||top;
+  const v=s.visual, l=s.live;
+
+  s.motion.lanes.box1=safeArr(s.motion.lanes.box1,[
+    {label:"FOLLOW JOURNEY",headline:`${l.followers||870}/${l.followersGoal||1000} followers`,body:`${Math.max(0,(l.followersGoal||1000)-(l.followers||870))} to go · ${l.viewers||0} viewers`,icon:"📡"},
+    {label:"LIVE STATUS",headline:`${l.viewers||0} viewers`,body:"Broadcast Cloud · Twitch Music TV",icon:"👁️"},
+    {label:"GOALS",headline:"Help DJ FOLSOE grow",body:"Follow · Chat · Request · Share the love",icon:"💜"}
+  ]);
+  s.motion.lanes.box2=safeArr(s.motion.lanes.box2,[
+    {label:"PROGRAM",headline:s.show.title||v.title||"DJ FOLSOE LIVE",body:s.show.description||v.mood||"Broadcast Cloud",icon:"📺"},
+    {label:"ACTIVE THEME",headline:`${v.emoji||""} ${v.title||"THEME"}`,body:v.mood||"Theme Engine",icon:"🎨"},
+    {label:"NEXT SHOW",headline:"Next DJ FOLSOE show",body:"Check the website for latest program",icon:"⏭️"}
+  ]);
+  s.motion.lanes.box3=safeArr(s.motion.lanes.box3,[
+    {label:top.rank?`TOP 20 #${top.rank}`:"TOP 20",headline:top.artist||"FOLSOE Top 20",body:top.title||"Weekly Listening Chart",icon:"🎵"},
+    {label:"FOLSOE PICK",headline:pick.artist||"DJ FOLSOE",body:pick.title||"Pick of the week",icon:"⭐"},
+    {label:"REQUESTS",headline:"Requests open",body:"Use !ønske / !request / !Wunsch in chat",icon:"🎧"}
+  ]);
+
+  return s;
+}
 
 async function loadState(){
   try{
     const r=await fetch(API_BASE+"/api/overlay/v170-state?ts="+Date.now(),{cache:"no-store"});
-    const j=await r.json();
-    state=normalize(j);
+    state=normalize(await r.json());
   }catch(e){
-    console.log("V816.1 overlay API fallback", e);
-    state=fallback;
+    console.log("V816.3 API fallback",e);
+    state=normalize(state||fallbackState());
   }
-  render();
+  applyTheme();
+  renderAll();
+  connectChat();
 }
 
-function normalize(j){
-  const s=(j&&typeof j==="object")?j:{};
-  const out=JSON.parse(JSON.stringify(fallback));
-  Object.assign(out,s);
-  out.theme=s.theme||fallback.theme;
-  out.visual=Object.assign(out.visual||{},s.visual||{});
-  out.topbarNews=Array.isArray(s.topbarNews)&&s.topbarNews.length?s.topbarNews:fallback.topbarNews;
-  out.footerTicker=Array.isArray(s.footerTicker)&&s.footerTicker.length?s.footerTicker:fallback.footerTicker;
-  out.chart=s.chart||fallback.chart;
-  out.live=Object.assign(out.live||{},s.live||{});
-  out.show=Object.assign(out.show||{},s.show||{});
-  out.boxes=Object.assign(out.boxes||{},s.boxes||{});
-
-  // If worker did not send boxes, build them from normal payload.
-  const top=(out.chart&&out.chart.items&&out.chart.items[0])||{rank:1,artist:"FOLSOE Chart",title:"Weekly Listening Chart"};
-  const v=out.visual||{};
-  const live=out.live||{};
-  out.boxes.music=Object.assign({label:"MUSIC",title:`#${top.rank||1} ${top.artist||"FOLSOE Chart"}`,body:top.title||"Weekly Listening Chart"},out.boxes.music||{});
-  out.boxes.community=Object.assign({label:"COMMUNITY",title:"Live chat",body:"Twitch chat locked to box 4"},out.boxes.community||{});
-  out.boxes.status=Object.assign({label:"LIVE STATUS",title:`${live.followers||870}/${live.followersGoal||1000} followers`,body:`${live.viewers||0} viewers · Broadcast Cloud`},out.boxes.status||{});
-  out.boxes.program=Object.assign({label:"PROGRAM",title:v.title||out.show.title||"DJ FOLSOE",body:v.mood||out.show.description||"Theme Engine"},out.boxes.program||{});
-  out.boxes.top20=Object.assign({label:"TOP20",title:`#${top.rank||1} ${top.artist||"Chart"}`,body:top.title||""},out.boxes.top20||{});
-  out.boxes.news=Object.assign({label:"NEWS",title:(out.topbarNews[0]||"Broadcast News").replace(/^[^A-ZÆØÅa-zæøå0-9]+/,""),body:"News from admin"},out.boxes.news||{});
-  out.boxes.goals=Object.assign({label:"GOALS",title:`${live.followers||870}/${live.followersGoal||1000} followers`,body:"Help DJ FOLSOE grow"},out.boxes.goals||{});
-  return out;
-}
-
-function setBox(prefix,b){
-  q(prefix+"Label").textContent=clip(b.label||"",18);
-  q(prefix+"Title").textContent=clip(b.title||"",32);
-  if(q(prefix+"Body")) q(prefix+"Body").textContent=clip(b.body||"",72);
-}
-
-function flash(selector){
-  const el=document.querySelector(selector);
-  if(!el)return;
-  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
-}
-
-function render(){
-  const s=state||fallback;
-  const key=(s.theme&&s.theme.activeTheme)||"weekend";
+function applyTheme(){
+  const key=(state.theme&&state.theme.activeTheme)||"weekend";
   if(key!==lastTheme){
-    document.body.className=themeClass(key);
+    document.body.className="theme-"+key;
     lastTheme=key;
   }
+  const v=state.visual||{};
+  document.documentElement.style.setProperty("--a",v.accent||"#ffd166");
+  document.documentElement.style.setProperty("--b",v.secondary||"#ff4d6d");
+  document.documentElement.style.setProperty("--c",v.primary||"#00d4ff");
+}
 
-  const visual=s.visual||{};
-  document.documentElement.style.setProperty("--a",visual.accent||"#ffd166");
-  document.documentElement.style.setProperty("--b",visual.secondary||"#ff4d6d");
-  document.documentElement.style.setProperty("--c",visual.primary||"#00d4ff");
+function setStats(id,items){
+  const el=q(id+"Stats"); if(!el)return;
+  el.innerHTML=(items||[]).slice(0,3).map(x=>`<div class="stat"><span>${clip(x.label,10)}</span><b>${clip(x.value,14)}</b></div>`).join("");
+}
 
-  q("djf816TopText").textContent=(s.topbarNews||fallback.topbarNews).join("     ✦     ");
-  q("djf816FooterText").textContent=(s.footerTicker||fallback.footerTicker).join("     ✦     ");
+function statsFor(box){
+  const l=state.live||{}, c=(state.chart&&state.chart.items)||[], v=state.visual||{}, show=state.show||{};
+  if(box==="box1") return [
+    {label:"Viewers",value:l.viewers||0},
+    {label:"Followers",value:(l.followers||870)+"/"+(l.followersGoal||1000)},
+    {label:"To go",value:Math.max(0,(l.followersGoal||1000)-(l.followers||870))}
+  ];
+  if(box==="box2") return [
+    {label:"Show",value:show.title||"DJ FOLSOE"},
+    {label:"Theme",value:v.title||"Theme"},
+    {label:"Mode",value:"Live"}
+  ];
+  return [
+    {label:"Top #1",value:c[0]?c[0].artist:"Chart"},
+    {label:"Pick",value:(c[1]||c[0]||{}).title||"Pick"},
+    {label:"Tracks",value:c.length||20}
+  ];
+}
 
-  setBox("music",s.boxes.music);
-  setBox("community",s.boxes.community);
-  setBox("status",s.boxes.status);
-  setBox("program",s.boxes.program);
-  setBox("top20",s.boxes.top20);
-  setBox("news",s.boxes.news);
-  setBox("goals",s.boxes.goals);
+function setCard(box,item){
+  q(box+"Label").textContent=clip(item.label||"",24);
+  q(box+"Title").textContent=clip(item.headline||item.title||"",34);
+  q(box+"Body").textContent=clip(item.body||"",78);
+  q(box+"Icon").textContent=item.icon||"•";
+  setStats(box,statsFor(box));
+  const el=q(box); if(el){el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");}
+}
 
-  flash(".boxMusic"); flash(".boxCommunity"); flash(".boxStatus"); flash(".boxProgram"); flash(".miniTop20"); flash(".miniNews"); flash(".miniGoals");
+function renderCards(){
+  const lanes=state.motion.lanes;
+  const i=tick++;
+  setCard("box1",lanes.box1[i%lanes.box1.length]);
+  setCard("box2",lanes.box2[i%lanes.box2.length]);
+  setCard("box3",lanes.box3[i%lanes.box3.length]);
+}
+
+function renderTickers(){
+  const top=(state.topbarNews||[]).join("     ✦     ");
+  const bottom=(state.footerTicker||[]).join("     ✦     ");
+  q("topTickerText").textContent=top+"     ✦     "+top;
+  q("bottomTickerText").textContent=bottom+"     ✦     "+bottom;
+  document.documentElement.style.setProperty("--topDur",Math.max(28,Math.min(95,top.length/4.1))+"s");
+  document.documentElement.style.setProperty("--bottomDur",Math.max(46,Math.min(135,bottom.length/4.6))+"s");
+}
+
+function renderAll(){
+  renderCards();
+  renderTickers();
+  renderChatWaiting();
 }
 
 function clock(){
-  q("djf816Clock").textContent=new Date().toLocaleTimeString("da-DK",{hour:"2-digit",minute:"2-digit"});
+  q("clockBox").textContent=new Date().toLocaleTimeString("da-DK",{hour:"2-digit",minute:"2-digit"});
 }
+
+/* STREAM ELEMENTS CHAT FALLBACK
+   If StreamElements exposes chat events to the widget, this catches them even if Twitch IRC is blocked. */
+window.addEventListener("onEventReceived", function(obj){
+  try{
+    const detail=obj.detail||{};
+    const listener=String(detail.listener||"").toLowerCase();
+    const ev=detail.event||{};
+    if(listener.includes("message") || listener.includes("chat")){
+      const data=ev.data||ev||{};
+      const user=data.displayName||data.nick||data.name||data.username||"CHAT";
+      const login=(data.nick||data.username||user||"chat").toLowerCase();
+      const text=data.text||data.message||data.renderedText||"";
+      if(text) pushChat({user,login,text,html:chatHTML(text,data)});
+    }
+  }catch(e){console.log("SE chat event parse failed",e);}
+});
+
+function htmlFromSEMessage(data,text){
+  // Some StreamElements payloads provide rendered html. Use it only if it contains emote images.
+  if(data.renderedText && String(data.renderedText).includes("<img")) return String(data.renderedText);
+  return esc(text).replace(/([😀-🙏🌀-🗿🚀-🛿☀-⛿✀-➿])/gu,'<span class="chatEmoji">$1</span>');
+}
+
+/* TWITCH IRC OVER WEBSOCKET */
+function parseTags(raw){
+  const tags={};
+  if(!raw||raw[0]!=="@")return tags;
+  raw.slice(1).split(" ")[0].split(";").forEach(pair=>{
+    const [k,v=""]=pair.split("=");
+    tags[k]=v;
+  });
+  return tags;
+}
+
+function decodeIrcValue(v){
+  return String(v||"").replace(/\\s/g," ").replace(/\\:/g,";").replace(/\\r/g,"\r").replace(/\\n/g,"\n");
+}
+
+function emotesToHtml(text,tags){
+  const em=tags.emotes||"";
+  if(!em)return esc(text).replace(/([😀-🙏🌀-🗿🚀-🛿☀-⛿✀-➿])/gu,'<span class="chatEmoji">$1</span>');
+  const ranges=[];
+  em.split("/").forEach(group=>{
+    const [id,pos]=group.split(":");
+    (pos||"").split(",").forEach(p=>{
+      const [s,e]=p.split("-").map(Number);
+      if(Number.isFinite(s)&&Number.isFinite(e))ranges.push({id,s,e});
+    });
+  });
+  ranges.sort((a,b)=>a.s-b.s);
+  let out="",last=0;
+  ranges.forEach(r=>{
+    out+=esc(text.slice(last,r.s));
+    out+=`<img class="chatEmote" src="https://static-cdn.jtvnw.net/emoticons/v2/${r.id}/default/dark/3.0" alt="">`;
+    last=r.e+1;
+  });
+  out+=esc(text.slice(last));
+  return out.replace(/([😀-🙏🌀-🗿🚀-🛿☀-⛿✀-➿])/gu,'<span class="chatEmoji">$1</span>');
+}
+
+async function getAvatar(login){
+  login=String(login||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
+  if(!login)return "";
+  if(profileCache[login])return profileCache[login];
+  try{
+    const r=await fetch(API_BASE+"/api/chat-profile?login="+encodeURIComponent(login),{cache:"force-cache"});
+    const j=await r.json();
+    if(j.avatar){profileCache[login]=j.avatar;return j.avatar;}
+  }catch(e){}
+  return "";
+}
+
+function pushChat(item){
+  chatLive=true;
+  chatQueue.push(item);
+  chatQueue=chatQueue.slice(-10);
+  showChat(item);
+}
+
+async function showChat(item){
+  q("chatUser").textContent=clip(item.user||"CHAT",22);
+  q("chatMessage").innerHTML=item.html||chatHTML(item.text||"",{});
+  q("chatAvatarFallback").textContent=(item.user||"C").slice(0,1).toUpperCase();
+  const img=q("chatAvatarImg"), fb=q("chatAvatarFallback");
+  const av=await getAvatar(item.login||item.user);
+  if(av){img.src=av;img.style.display="block";fb.style.display="none";}
+  else{img.style.display="none";fb.style.display="grid";}
+  const card=q("box4"); if(card){card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");}
+}
+
+function renderChatWaiting(){
+  if(chatQueue.length)return;
+  const status = twitchSocket && twitchSocket.readyState===1 ? "Connected · waiting for next chat message…" : "Connecting to Twitch chat…";
+  showChat({user:"LIVE CHAT",login:"djfolsoe",text:status});
+}
+
+function scheduleReconnect(){
+  clearTimeout(reconnectTimer);
+  const delay=Math.min(30000, 1500 + reconnectAttempts*2500);
+  reconnectAttempts++;
+  reconnectTimer=setTimeout(()=>{twitchSocket=null;connectChat(true);},delay);
+}
+
+function connectChat(force=false){
+  const channel=((state.twitchChat&&state.twitchChat.channel)||DEFAULT_CHANNEL).toLowerCase().replace(/^#/,"");
+  if(!force && twitchSocket && twitchSocket.readyState===1 && twitchConnectedChannel===channel) return;
+  if(twitchSocket && [0,1].includes(twitchSocket.readyState) && twitchConnectedChannel===channel) return;
+
+  twitchConnectedChannel=channel;
+  try{
+    twitchSocket=new WebSocket("wss://irc-ws.chat.twitch.tv:443");
+
+    twitchSocket.onopen=()=>{
+      reconnectAttempts=0;
+      // Correct Twitch anonymous IRC order: PASS, NICK, CAP, JOIN
+      twitchSocket.send("PASS SCHMOOPIIE");
+      twitchSocket.send("NICK justinfan"+Math.floor(10000+Math.random()*89999));
+      twitchSocket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
+      twitchSocket.send("JOIN #"+channel);
+      renderChatWaiting();
+    };
+
+    twitchSocket.onmessage=ev=>{
+      const raw=String(ev.data||"");
+      raw.split("\r\n").filter(Boolean).forEach(line=>{
+        if(line.startsWith("PING")){twitchSocket.send("PONG :tmi.twitch.tv");return;}
+        if(line.includes("RECONNECT")){try{twitchSocket.close();}catch(e){} scheduleReconnect(); return;}
+        if(!line.includes(" PRIVMSG ")) return;
+
+        const t=parseTags(line);
+        const msgIndex=line.indexOf(" :");
+        const text=msgIndex>=0?line.slice(msgIndex+2):"";
+        const login=(line.match(/:([^!]+)!/)||[])[1]||"chat";
+        const user=decodeIrcValue(t["display-name"]||login);
+        if(!text)return;
+
+        pushChat({user,login,text,html:chatHTML(text,{tags:t,emotes:t.emotes})});
+      });
+    };
+
+    twitchSocket.onerror=err=>{
+      console.log("Twitch IRC websocket error",err);
+    };
+
+    twitchSocket.onclose=()=>{
+      console.log("Twitch IRC closed - reconnecting");
+      scheduleReconnect();
+    };
+  }catch(e){
+    console.log("Twitch connect failed",e);
+    scheduleReconnect();
+  }
+}
+
+// Manual test helper in browser console:
+// DJF_TEST_CHAT("Sune", "Hej Kappa 💜")
+window.DJF_TEST_CHAT=function(user,text){
+  pushChat({user:user||"TEST",login:(user||"test").toLowerCase(),text:text||"Test message 💜",html:esc(text||"Test message 💜").replace(/([😀-🙏🌀-🗿🚀-🛿☀-⛿✀-➿])/gu,'<span class="chatEmoji">$1</span>')});
+};
 
 clock();
 setInterval(clock,1000);
 loadState();
-setInterval(loadState,8000);
+setInterval(loadState,10000);
+setInterval(renderCards,8000);
+setTimeout(()=>connectChat(true),1000);
+
+window.DJF_TEST_PORT_EMOTES=function(){ DJF_TEST_CHAT("DJFOLSOE","Kappa LUL PogChamp 💜"); };
