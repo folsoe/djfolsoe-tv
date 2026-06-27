@@ -11,9 +11,9 @@ const I18N={
     "about.title":"Hvem er DJ FOLSOE?","about.musicTitle":"Musik","about.showsTitle":"Shows","about.requestsTitle":"Requests","about.communityTitle":"Community",
     "about.main":"DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers.",
     "about.music":"Trance, Eurodance, Retro, EDM, Pop og Nu-Disco.",
-    "about.shows":"Live DJ-shows, chart countdowns og temastreams.",
-    "about.requests":"Musikønsker via !ønske / !request / !Wunsch.",
-    "about.community":"Chat, mods, emotes og dansk DJ-kultur.",
+    "about.shows":"Live DJ med masse af sjov og ballade.",
+    "about.requests":"Du er medbestemmende — musikønsker via !ønske.",
+    "about.community":"Vi har det hylende morsomt og et godt fællesskab.",
     "shows.title":"Shows","shows.link":"Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend",
     "requests.title":"Seneste musikønsker","requests.link":"Gemmer de sidste 3 fra !ønske",
     "news.title":"Nyheder & opdateringer","news.link":"Seneste show · Top20 · Requests · Community · Twitch",
@@ -30,9 +30,9 @@ const I18N={
     "about.title":"Who is DJ FOLSOE?","about.musicTitle":"Music","about.showsTitle":"Shows","about.requestsTitle":"Requests","about.communityTitle":"Community",
     "about.main":"DJ FOLSOE brings music, chat, requests and Danish DJ culture into a living broadcast universe.",
     "about.music":"Trance, Eurodance, Retro, EDM, Pop and Nu-Disco.",
-    "about.shows":"Live DJ shows, chart countdowns and themed streams.",
-    "about.requests":"Song requests via !ønske / !request / !Wunsch.",
-    "about.community":"Chat, mods, emotes and Danish DJ culture.",
+    "about.shows":"Live DJ sets with lots of fun, energy and good chaos.",
+    "about.requests":"You help shape the show — song requests via !request.",
+    "about.community":"We have a hilarious time and a strong community.",
     "shows.title":"Shows","shows.link":"Trance · Top20 · Friday Bar · Retro · Morning · Popup · Weekend",
     "requests.title":"Latest song requests","requests.link":"Stores the latest 3 requests from !ønske",
     "news.title":"News & updates","news.link":"Latest show · Top20 · Requests · Community · Twitch",
@@ -49,9 +49,9 @@ const I18N={
     "about.title":"Wer ist DJ FOLSOE?","about.musicTitle":"Musik","about.showsTitle":"Shows","about.requestsTitle":"Wünsche","about.communityTitle":"Community",
     "about.main":"DJ FOLSOE verbindet Musik, Chat, Musikwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum.",
     "about.music":"Trance, Eurodance, Retro, EDM, Pop und Nu-Disco.",
-    "about.shows":"Live-DJ-Shows, Chart-Countdowns und Themenstreams.",
-    "about.requests":"Musikwünsche über !ønske / !request / !Wunsch.",
-    "about.community":"Chat, Mods, Emotes und dänische DJ-Kultur.",
+    "about.shows":"Live-DJ-Sets mit viel Spaß, Energie und guter Laune.",
+    "about.requests":"Du bestimmst mit — Musikwünsche über !Wunsch.",
+    "about.community":"Wir haben riesigen Spaß und eine starke Gemeinschaft.",
     "shows.title":"Shows","shows.link":"Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend",
     "requests.title":"Neueste Musikwünsche","requests.link":"Speichert die letzten 3 Wünsche von !ønske",
     "news.title":"News & Updates","news.link":"Letzte Show · Top20 · Wünsche · Community · Twitch",
@@ -132,11 +132,58 @@ function render(){
   renderMods(state.mods||state.profile?.mods||[]);
 }
 
+function showKey(title){
+  const s=String(title||"").toLowerCase();
+  if(s.includes("trance")) return "trance";
+  if(s.includes("top")) return "top20";
+  if(s.includes("fredagsbar")) return "fredagsbar";
+  if(s.includes("retro")) return "retro";
+  if(s.includes("morning")) return "morning";
+  if(s.includes("popup")) return "popup";
+  if(s.includes("weekend")) return "weekend";
+  return "default";
+}
+function showDefault(title){
+  const key=showKey(title);
+  const da={
+    trance:{time:"Tirsdag 18:30",body:"Store melodier, lys, energi og trance-fællesskab."},
+    top20:{time:"Torsdag 18:30",body:"Ugens største tracks i FOLSOE countdown."},
+    fredagsbar:{time:"Fredag 20:00",body:"Fest, grin, requests og weekendstemning."},
+    retro:{time:"Søndag 20:00",body:"Klassikere, nostalgi og gamle hits med nyt liv."},
+    morning:{time:"07:00",body:"Kaffe, god energi og den bedste start på dagen."},
+    popup:{time:"Surprise",body:"Når du mindst venter det — så går vi live."},
+    weekend:{time:"Weekend",body:"Eurodance, summer, community og maksimal energi."}
+  };
+  const en={
+    trance:{time:"Tuesday 18:30",body:"Big melodies, lights, energy and trance community."},
+    top20:{time:"Thursday 18:30",body:"The biggest tracks of the week in the FOLSOE countdown."},
+    fredagsbar:{time:"Friday 20:00",body:"Party, laughs, requests and weekend vibes."},
+    retro:{time:"Sunday 20:00",body:"Classics, nostalgia and old hits brought back to life."},
+    morning:{time:"07:00",body:"Coffee, good energy and the best start of the day."},
+    popup:{time:"Surprise",body:"When you least expect it — we go live."},
+    weekend:{time:"Weekend",body:"Eurodance, summer, community and maximum energy."}
+  };
+  const de={
+    trance:{time:"Dienstag 18:30",body:"Große Melodien, Licht, Energie und Trance-Community."},
+    top20:{time:"Donnerstag 18:30",body:"Die größten Tracks der Woche im FOLSOE Countdown."},
+    fredagsbar:{time:"Freitag 20:00",body:"Party, Lachen, Wünsche und Wochenendstimmung."},
+    retro:{time:"Sonntag 20:00",body:"Klassiker, Nostalgie und alte Hits mit neuem Leben."},
+    morning:{time:"07:00",body:"Kaffee, gute Energie und der beste Start in den Tag."},
+    popup:{time:"Überraschung",body:"Wenn du es am wenigsten erwartest — gehen wir live."},
+    weekend:{time:"Wochenende",body:"Eurodance, Summer, Community und maximale Energie."}
+  };
+  return (lang==="de"?de:lang==="en"?en:da)[key] || {time:"",body:t("showDefault")};
+}
 function renderShows(items){
   const wanted=["Trance Tuesday","FOLSOE Top 20","Fredagsbar","Retro Hits","Good Morning Twitch","PopUp","Weekend"];
   let all=[...items];
-  wanted.forEach(title=>{if(!all.some(x=>String(x.title||"").toLowerCase()===title.toLowerCase())) all.push({title,time:"",body:t("showDefault")});});
-  q("showsGrid").innerHTML=all.slice(0,7).map(x=>`<article class="showCard"><div class="showPoster">${String(x.title||"SHOW").replace(" ","<br>")}</div><div class="showBody"><b>${x.title||""}</b><p>${x.time||""}</p><p>${x.body||t("showDefault")}</p></div></article>`).join("");
+  wanted.forEach(title=>{if(!all.some(x=>String(x.title||"").toLowerCase()===title.toLowerCase())) all.push({title});});
+  q("showsGrid").innerHTML=all.slice(0,7).map(x=>{
+    const key=showKey(x.title);
+    const def=showDefault(x.title);
+    const title=String(x.title||"SHOW");
+    return `<article class="showCard show-${key}"><div class="showPoster"><span>${title.replace(" ","<br>")}</span></div><div class="showBody"><b>${title}</b><p>${x.time||def.time}</p><p>${x.body||def.body}</p></div></article>`;
+  }).join("");
 }
 
 function renderRequests(items){
