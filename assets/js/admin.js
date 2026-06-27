@@ -63,6 +63,7 @@ async function loadAll(){
     renderEditors();
     renderRequests();
     renderTwitch();
+    loadDiscovery();
     loadContentManager();
     setStatus("✅ Data hentet fra Broadcast Cloud\n"+new Date().toLocaleString("da-DK"));
   }catch(e){setStatus("❌ Load-fejl: "+e.message);}
@@ -266,3 +267,66 @@ async function saveOverlayContent(){
 }
 
 function resetOverlayContent(){overlayContent=JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));renderOverlayContent();}
+
+
+// ===== V816.15 Discovery hard fix =====
+discoveryItems = Array.isArray(discoveryItems) ? discoveryItems : [];
+
+async function loadDiscovery(){
+  try{
+    const r = await api('/api/discovery-picks');
+    discoveryItems = Array.isArray(r.items) ? r.items : [];
+  }catch(e){
+    discoveryItems = [{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet"}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Lige opdaget og testet i mix"}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kunne blive en stærk bobler"}];
+  }
+  renderDiscoveryEditor();
+}
+
+function renderDiscoveryEditor(){
+  const el=document.getElementById('discoveryEditor');
+  if(!el)return;
+  while(discoveryItems.length<3) discoveryItems.push({artist:'',title:'',genre:'',note:'Dem her har jeg lige opdaget'});
+  discoveryItems = discoveryItems.slice(0,3);
+  el.innerHTML = discoveryItems.map((x,i)=>`
+    <div class="row top20">
+      <div><label>#</label><input value="${i+1}" disabled></div>
+      <div><label>Artist</label><input data-discovery-i="${i}" data-f="artist" value="${esc(x.artist||'')}"></div>
+      <div><label>Title</label><input data-discovery-i="${i}" data-f="title" value="${esc(x.title||'')}"></div>
+      <div><label>Genre</label><input data-discovery-i="${i}" data-f="genre" value="${esc(x.genre||'')}"></div>
+      <div><label>Note</label><input data-discovery-i="${i}" data-f="note" value="${esc(x.note||'')}"></div>
+      <button onclick="clearDiscovery(${i})">Ryd</button>
+    </div>`).join('');
+}
+
+function collectDiscovery(){
+  document.querySelectorAll('[data-discovery-i][data-f]').forEach(inp=>{
+    const i=Number(inp.dataset.discoveryI), f=inp.dataset.f;
+    if(!discoveryItems[i]) discoveryItems[i]={};
+    discoveryItems[i][f]=inp.value;
+    discoveryItems[i].priority=i+1;
+  });
+  discoveryItems = discoveryItems.slice(0,3);
+}
+
+function addDiscovery(){
+  collectDiscovery();
+  if(discoveryItems.length<3) discoveryItems.push({artist:'',title:'',genre:'',note:'Dem her har jeg lige opdaget'});
+  renderDiscoveryEditor();
+}
+
+function clearDiscovery(i){
+  discoveryItems[i]={artist:'',title:'',genre:'',note:'',priority:i+1};
+  renderDiscoveryEditor();
+}
+
+async function saveDiscovery(){
+  collectDiscovery();
+  try{
+    const r = await api('/api/discovery-picks',{method:'POST',body:JSON.stringify({items:discoveryItems})});
+    discoveryItems = r.items || discoveryItems;
+    renderDiscoveryEditor();
+    setStatus('✅ Discovery picks gemt. Åbn forsiden med ?v=81615 og Ctrl+F5.');
+  }catch(e){
+    setStatus('❌ Discovery gem-fejl: '+e.message);
+  }
+}
