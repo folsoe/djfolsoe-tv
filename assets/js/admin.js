@@ -779,3 +779,47 @@ async function saveBroadcastNews(){
   alert("Broadcast news gemt til Cloud.");
 }
 document.addEventListener("DOMContentLoaded",()=>setTimeout(renderBroadcastNewsEditor,1000));
+
+/* V814.6 ticker machines */
+function v8146EnsureTickers(){
+  data.themeTickerTop = data.themeTickerTop || [
+    {id:"top_morning",active:true,theme:"morning",text:"GOOD MORNING TWITCH · Coffee, music and dangerously good mood",priority:1},
+    {id:"top_summer",active:true,theme:"summer",text:"SUMMER BEATS · Summer 2026 · sunshine and bangers",priority:2}
+  ];
+  data.broadcastTickerBottom = data.broadcastTickerBottom || [
+    {id:"bottom_all",active:true,theme:"all",text:"TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",priority:1}
+  ];
+}
+function v8146EditorRow(item,i,type){
+  return `<div class="chartEditRow lab">
+    <div><label>Active</label><select data-v8146="${type}" data-i="${i}" data-field="active"><option value="true" ${item.active!==false?'selected':''}>Yes</option><option value="false" ${item.active===false?'selected':''}>No</option></select></div>
+    <div><label>Theme</label><input value="${item.theme||'all'}" data-v8146="${type}" data-i="${i}" data-field="theme"></div>
+    <div class="wide"><label>Text</label><input value="${item.text||''}" data-v8146="${type}" data-i="${i}" data-field="text"></div>
+    <div><label>Priority</label><input type="number" value="${item.priority||99}" data-v8146="${type}" data-i="${i}" data-field="priority"></div>
+    <div><label>Delete</label><button onclick="v8146DeleteTicker('${type}',${i})">Slet</button></div>
+  </div>`;
+}
+function v8146RenderTickerMachines(){
+  v8146EnsureTickers();
+  const top=document.getElementById("v8146TopTickerEditor");
+  const bot=document.getElementById("v8146BottomTickerEditor");
+  if(top) top.innerHTML=data.themeTickerTop.map((x,i)=>v8146EditorRow(x,i,"top")).join("");
+  if(bot) bot.innerHTML=data.broadcastTickerBottom.map((x,i)=>v8146EditorRow(x,i,"bottom")).join("");
+}
+function v8146CollectTickers(){
+  v8146EnsureTickers();
+  document.querySelectorAll("[data-v8146][data-i][data-field]").forEach(inp=>{
+    const arr=inp.dataset.v8146==="top"?data.themeTickerTop:data.broadcastTickerBottom;
+    const i=Number(inp.dataset.i), f=inp.dataset.field;
+    let v=inp.value;
+    if(f==="active") v=v==="true";
+    if(f==="priority") v=Number(v||99);
+    arr[i][f]=v;
+  });
+}
+function v8146AddTopTicker(){v8146EnsureTickers();data.themeTickerTop.push({id:"top"+Date.now(),active:true,theme:"fredagsbar",text:"",priority:data.themeTickerTop.length+1});v8146RenderTickerMachines();}
+function v8146AddBottomTicker(){v8146EnsureTickers();data.broadcastTickerBottom.push({id:"bottom"+Date.now(),active:true,theme:"all",text:"",priority:data.broadcastTickerBottom.length+1});v8146RenderTickerMachines();}
+function v8146DeleteTicker(type,i){v8146EnsureTickers();(type==="top"?data.themeTickerTop:data.broadcastTickerBottom).splice(i,1);v8146RenderTickerMachines();}
+async function v8146SaveTopTicker(){v8146CollectTickers();const base=apiBase(),token=adminToken();if(!base||!token){alert("Mangler API Base URL eller ADMIN_TOKEN");return;}const r=await fetch(base+"/api/theme-ticker-top",{method:"POST",headers:{"content-type":"application/json","x-admin-token":token},body:JSON.stringify({items:data.themeTickerTop})});if(!r.ok){alert(await r.text());return;}saveAll();alert("Top ticker gemt");}
+async function v8146SaveBottomTicker(){v8146CollectTickers();const base=apiBase(),token=adminToken();if(!base||!token){alert("Mangler API Base URL eller ADMIN_TOKEN");return;}const r=await fetch(base+"/api/bottom-ticker",{method:"POST",headers:{"content-type":"application/json","x-admin-token":token},body:JSON.stringify({items:data.broadcastTickerBottom})});if(!r.ok){alert(await r.text());return;}saveAll();alert("Bund ticker gemt");}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(v8146RenderTickerMachines,1200));

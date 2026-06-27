@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V814.5 TRUE MUSIC TV FORCE REPLACE",
+    "version": "V814.6 THEME TICKER CHAT LOCK FIX",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -2242,7 +2242,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V814.5 TRUE MUSIC TV FORCE REPLACE",
+  "platformVersion": "V814.6 THEME TICKER CHAT LOCK FIX",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2307,7 +2307,8 @@
     "box4": "real twitch chat via Twitch IRC WebSocket",
     "noLoadingDataFix": true,
     "proMusicTvPolish": true,
-    "trueMusicTvForceReplace": true
+    "trueMusicTvForceReplace": true,
+    "themeTickerChatLockFix": true
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
@@ -2469,6 +2470,80 @@
       "label": "TOP 20",
       "text": "FOLSOE Weekly Listening Chart opdateres fra admin og vises både på hjemmeside og overlay.",
       "priority": 4
+    }
+  ],
+  "themeTickerTop": [
+    {
+      "id": "top_fredagsbar",
+      "active": true,
+      "theme": "fredagsbar",
+      "text": "FREDAGSBAR · Weekend starts here · professionally unserious · live from Denmark",
+      "priority": 1
+    },
+    {
+      "id": "top_popup",
+      "active": true,
+      "theme": "popup",
+      "text": "POPUP · You never know when DJ FOLSOE goes live · surprise broadcast mode",
+      "priority": 2
+    },
+    {
+      "id": "top_trance",
+      "active": true,
+      "theme": "trance",
+      "text": "TRANCE TUESDAY · Uplifting energy · goosebumps may occur",
+      "priority": 3
+    },
+    {
+      "id": "top_retro",
+      "active": true,
+      "theme": "retro",
+      "text": "RETRO HITS · Old school forever · classics that refuse to retire",
+      "priority": 4
+    },
+    {
+      "id": "top_eurodance",
+      "active": true,
+      "theme": "eurodance",
+      "text": "EURODANCE · Big beats · big hooks · 90s/00s survived",
+      "priority": 5
+    },
+    {
+      "id": "top_morning",
+      "active": true,
+      "theme": "morning",
+      "text": "GOOD MORNING TWITCH · Coffee, music and dangerously good mood",
+      "priority": 6
+    },
+    {
+      "id": "top_summer",
+      "active": true,
+      "theme": "summer",
+      "text": "SUMMER BEATS · Summer 2026 · sunshine and bangers",
+      "priority": 7
+    },
+    {
+      "id": "top_weekend",
+      "active": true,
+      "theme": "weekend",
+      "text": "WEEKEND VIBES · zero excuses · maximum music",
+      "priority": 8
+    }
+  ],
+  "broadcastTickerBottom": [
+    {
+      "id": "bottom_all_1",
+      "active": true,
+      "theme": "all",
+      "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud",
+      "priority": 1
+    },
+    {
+      "id": "bottom_all_2",
+      "active": true,
+      "theme": "all",
+      "text": "FOLLOW THE CHANNEL · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE",
+      "priority": 2
     }
   ]
 }

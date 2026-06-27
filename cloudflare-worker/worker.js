@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V814.5 TRUE MUSIC TV FORCE REPLACE
+// DJ FOLSOE NETWORK V814.6 THEME TICKER CHAT LOCK FIX
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V814.5 TRUE MUSIC TV FORCE REPLACE",
+    version: "V814.6 THEME TICKER CHAT LOCK FIX",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V814.5 TRUE MUSIC TV FORCE REPLACE";
+  data.broadcastCore.version = "V814.6 THEME TICKER CHAT LOCK FIX";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V814.5 TRUE MUSIC TV FORCE REPLACE";
+  core.unifiedNewsroom.version = "V814.6 THEME TICKER CHAT LOCK FIX";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V814.5 TRUE MUSIC TV FORCE REPLACE";
+  core.broadcastCore.version = "V814.6 THEME TICKER CHAT LOCK FIX";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V814.5 TRUE MUSIC TV FORCE REPLACE",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V814.6 THEME TICKER CHAT LOCK FIX",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -324,7 +324,7 @@ function normalizeThemeName(name){
 function getThemePayload(core){
   const engine=core.themeEngine||{};
   const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
-  return {ok:true,version:"V814.5 TRUE MUSIC TV FORCE REPLACE",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+  return {ok:true,version:"V814.6 THEME TICKER CHAT LOCK FIX",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
 }
 function applyThemeToOverlayState(state, core){
   const payload=getThemePayload(core);
@@ -350,7 +350,7 @@ function buildMotionPayload(state){
   const danish = chartItems.find(x=>String(x.genre||"").toLowerCase().includes("dansk")) || top;
 
   state.motion = {
-    version:"V814.5 TRUE MUSIC TV FORCE REPLACE",
+    version:"V814.6 THEME TICKER CHAT LOCK FIX",
     layout:"camera-safe-side-stacked",
     rotationMs:8000,
     classicTicker:false,
@@ -499,7 +499,7 @@ function applyV814HybridLayout(state, core){
   const news = state.broadcastNews || state.websiteNews || [];
   const station = core.station || {};
   const requests = core.requests || [];
-  state.layout = {version:"V814.5 TRUE MUSIC TV FORCE REPLACE",topbar:"logo-news-clock",centerClear:true,footerTicker:true,box4LockedToChat:true,bottomStack:true};
+  state.layout = {version:"V814.6 THEME TICKER CHAT LOCK FIX",topbar:"logo-news-clock",centerClear:true,footerTicker:true,box4LockedToChat:true,bottomStack:true};
   state.motion = state.motion || {}; state.motion.layout = "v814-bottom-stacked-hybrid"; state.motion.rotationMs = 8000;
   state.motion.lanes = {
     box1:[
@@ -634,8 +634,8 @@ function buildV814ContentPayload(core){
 
   return {
     ok:true,
-    version:"V814.5 TRUE MUSIC TV FORCE REPLACE",
-    overlay:"V814.5 TRUE MUSIC TV FORCE REPLACEroadcast Hybrid Engine",
+    version:"V814.6 THEME TICKER CHAT LOCK FIX",
+    overlay:"V814.6 THEME TICKER CHAT LOCK FIXroadcast Hybrid Engine",
     brand:"DJ FOLSOE",
     apiTime:new Date().toISOString(),
     layout:{centerClear:true,bottomStack:true,box4LockedToChat:true,footerTicker:true},
@@ -675,7 +675,7 @@ function enhanceV8142Payload(state, core){
   const top = chartItems[0] || {};
   const pick = chartItems.find(x=>x.folsoePick || x.pick === true || String(x.pick||"").toLowerCase()==="yes") || chartItems[1] || top;
 
-  state.version = "V814.5 TRUE MUSIC TV FORCE REPLACE";
+  state.version = "V814.6 THEME TICKER CHAT LOCK FIX";
   state.layout = Object.assign({}, state.layout || {}, {
     boxNumbersRemoved:true,
     box4LockedToRealTwitchChat:true,
@@ -732,6 +732,45 @@ function enhanceV8142Payload(state, core){
   return state;
 }
 
+
+function getThemeTickerItems(core, position){
+  core = core || {};
+  const themePayload = (typeof getThemePayload === "function") ? getThemePayload(core) : {activeTheme:"fredagsbar",theme:{title:"FREDAGSBAR",slogan:"Weekend starts here"}};
+  const active = String(themePayload.activeTheme || "fredagsbar").toLowerCase();
+  const theme = themePayload.theme || {};
+  const key = position === "top" ? "themeTickerTop" : "broadcastTickerBottom";
+  const items = Array.isArray(core[key]) ? core[key] : [];
+  const filtered = items
+    .filter(x => x && x.active !== false)
+    .filter(x => position === "bottom" ? (!x.theme || x.theme === "all" || x.theme === active) : (String(x.theme || "").toLowerCase() === active))
+    .sort((a,b)=>Number(a.priority||99)-Number(b.priority||99))
+    .map(x => String(x.text || "").trim())
+    .filter(Boolean);
+
+  if (position === "top") {
+    return filtered.length ? filtered : [
+      `${theme.title || active.toUpperCase()} · ${theme.slogan || theme.mood || "DJ FOLSOE Theme Engine"}`
+    ];
+  }
+  return filtered.length ? filtered : [
+    "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud"
+  ];
+}
+function applyV8146TickerLock(state, core){
+  state = state || {};
+  const themePayload = (typeof getThemePayload === "function") ? getThemePayload(core) : state.theme;
+  state.theme = themePayload || state.theme;
+  state.topbarNews = getThemeTickerItems(core, "top");
+  state.footerTicker = getThemeTickerItems(core, "bottom");
+  state.tickerControl = {
+    version:"V814.6 THEME TICKER CHAT LOCK FIX",
+    top:"theme-only-admin-machine",
+    bottom:"bottom-admin-machine",
+    activeTheme:(themePayload && themePayload.activeTheme) || "fredagsbar"
+  };
+  return state;
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return okOptions();
@@ -742,7 +781,7 @@ export default {
     try {
       if (path === "/api/broadcast-news") {
         const core = await getCore(env);
-        if (request.method === "GET") return json({ ok:true, version:"V814.5 TRUE MUSIC TV FORCE REPLACE", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
+        if (request.method === "GET") return json({ ok:true, version:"V814.6 THEME TICKER CHAT LOCK FIX", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
           const body = await request.json();
@@ -768,7 +807,7 @@ export default {
 
       if (path === "/api/overlay-health") {
         const core = await getCore(env);
-        return json({ ok:true, version:"V814.5 TRUE MUSIC TV FORCE REPLACE", hasCore:!!core, hasChart:!!(core.weeklyListeningChart||core.top20Chart), hasNews:!!core.broadcastNews });
+        return json({ ok:true, version:"V814.6 THEME TICKER CHAT LOCK FIX", hasCore:!!core, hasChart:!!(core.weeklyListeningChart||core.top20Chart), hasNews:!!core.broadcastNews });
       }
 
       if (path === "/api/chat-profile") {
@@ -788,23 +827,47 @@ export default {
         }
       }
 
+      if (path === "/api/theme-ticker-top") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json({ ok:true, version:"V814.6", items:core.themeTickerTop || [], active:getThemeTickerItems(core,"top") });
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+          const body = await request.json();
+          core.themeTickerTop = Array.isArray(body.items) ? body.items : [];
+          const saved = await putCore(env, core);
+          return json({ ok:true, items:saved.themeTickerTop || [], active:getThemeTickerItems(saved,"top") });
+        }
+      }
+
+      if (path === "/api/bottom-ticker") {
+        const core = await getCore(env);
+        if (request.method === "GET") return json({ ok:true, version:"V814.6", items:core.broadcastTickerBottom || [], active:getThemeTickerItems(core,"bottom") });
+        if (request.method === "POST") {
+          if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
+          const body = await request.json();
+          core.broadcastTickerBottom = Array.isArray(body.items) ? body.items : [];
+          const saved = await putCore(env, core);
+          return json({ ok:true, items:saved.broadcastTickerBottom || [], active:getThemeTickerItems(saved,"bottom") });
+        }
+      }
+
       if (path === "/api/overlay/v170-state") {
         const core = await getCore(env);
-        return json(enhanceV8142Payload(buildV814ContentPayload(core), core));
+        return json(applyV8146TickerLock(enhanceV8142Payload(buildV814ContentPayload(core), core), core));
       }
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V814.5 TRUE MUSIC TV FORCE REPLACE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V814.6 THEME TICKER CHAT LOCK FIX",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V814.5 TRUE MUSIC TV FORCE REPLACEorker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V814.6 THEME TICKER CHAT LOCK FIXorker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V814.5 TRUE MUSIC TV FORCE REPLACEdmin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V814.6 THEME TICKER CHAT LOCK FIXdmin" });
       }
 
       if (path === "/api/seed") {
@@ -822,7 +885,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V814.5 TRUE MUSIC TV FORCE REPLACE", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V814.6 THEME TICKER CHAT LOCK FIX", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
