@@ -81,6 +81,7 @@ async function loadHome(){
     state={twitch:{displayName:"DJ FOLSOE",description:"DJ FOLSOE er en dansk musikstreamer på Twitch.",isLive:false,viewers:0,followers:870,viewCount:0,liveTitle:"DJ FOLSOE LIVE",category:"Music"},profile:{mods:[]},shows:[],newsCards:[],top20:[],requests:[]};
   }
   render();
+  applySEO();
 }
 
 function render(){
@@ -263,4 +264,24 @@ function renderNextShow(item){
     } else countdown="Showet er i gang eller har været sendt";
   }
   el.innerHTML=`<div><span>NÆSTE SHOW</span><h3>${item.title||"DJ FOLSOE LIVE"}</h3><p>${item.description||""}</p></div><strong>${countdown}</strong>`;
+}
+
+function upsertMeta(selector, attr, value){
+  if(!value)return;
+  let el=document.querySelector(selector);
+  if(!el){ el=document.createElement("meta"); const n=selector.match(/name="([^"]+)"/); const p=selector.match(/property="([^"]+)"/); if(n)el.setAttribute("name",n[1]); if(p)el.setAttribute("property",p[1]); document.head.appendChild(el); }
+  el.setAttribute(attr,value);
+}
+function applySEO(){
+  const seo=state&&state.seo; if(!seo)return;
+  if(seo.title) document.title=seo.title;
+  upsertMeta('meta[name="description"]',"content",seo.description);
+  upsertMeta('meta[name="keywords"]',"content",(seo.keywords||[]).join(", "));
+  upsertMeta('meta[property="og:title"]',"content",seo.title);
+  upsertMeta('meta[property="og:description"]',"content",seo.description);
+  upsertMeta('meta[property="og:image"]',"content",seo.image);
+  upsertMeta('meta[name="twitter:title"]',"content",seo.title);
+  upsertMeta('meta[name="twitter:description"]',"content",seo.description);
+  upsertMeta('meta[name="twitter:image"]',"content",seo.image);
+  const schema=document.getElementById("seoSchema"); if(schema&&seo.schema) schema.textContent=JSON.stringify(seo.schema);
 }

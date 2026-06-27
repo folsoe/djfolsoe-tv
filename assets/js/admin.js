@@ -404,3 +404,23 @@ async function saveNextShow(){
   const item={active:true,title:document.getElementById('nextShowTitle').value,description:document.getElementById('nextShowDescription').value,dateTime:document.getElementById('nextShowDateTime').value};
   try{await api('/api/next-show',{method:'POST',body:JSON.stringify({item})});setStatus('✅ Næste show gemt');loadEcosystem();}catch(e){setStatus('❌ Næste show fejl: '+e.message);}
 }
+
+let seoItem={"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musikstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musikwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]};
+async function loadSEO(){ try{ const r=await api('/api/seo'); seoItem=r.seo||r; }catch(e){} fillSEO(); }
+function fillSEO(){
+  if(!document.getElementById('seoSiteName'))return;
+  document.getElementById('seoSiteName').value=seoItem.siteName||'DJ FOLSOE TV';
+  document.getElementById('seoDomain').value=seoItem.domain||'https://folsoetv.dk';
+  document.getElementById('seoKeywords').value=(seoItem.keywords||[]).join(', ');
+  document.getElementById('seoSameAs').value=(seoItem.sameAs||[]).join('\n');
+  document.getElementById('seoTitleDa').value=seoItem.title?.da||'';
+  document.getElementById('seoTitleEn').value=seoItem.title?.en||'';
+  document.getElementById('seoTitleDe').value=seoItem.title?.de||'';
+  document.getElementById('seoDescDa').value=seoItem.description?.da||'';
+  document.getElementById('seoDescEn').value=seoItem.description?.en||'';
+  document.getElementById('seoDescDe').value=seoItem.description?.de||'';
+}
+async function saveSEO(){
+  const seo={...seoItem,siteName:document.getElementById('seoSiteName').value.trim(),domain:document.getElementById('seoDomain').value.trim(),keywords:document.getElementById('seoKeywords').value.split(',').map(x=>x.trim()).filter(Boolean),sameAs:document.getElementById('seoSameAs').value.split(/\n|,/).map(x=>x.trim()).filter(Boolean),title:{da:document.getElementById('seoTitleDa').value,en:document.getElementById('seoTitleEn').value,de:document.getElementById('seoTitleDe').value},description:{da:document.getElementById('seoDescDa').value,en:document.getElementById('seoDescEn').value,de:document.getElementById('seoDescDe').value}};
+  try{ await api('/api/seo',{method:'POST',body:JSON.stringify(seo)}); setStatus('✅ SEO gemt'); loadSEO(); }catch(e){ setStatus('❌ SEO-fejl: '+e.message); }
+}

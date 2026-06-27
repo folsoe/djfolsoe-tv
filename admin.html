@@ -22,7 +22,7 @@
 
 <nav class="adminTabs">
   <button onclick="jump('theme')">🎨 Theme</button>
-  <button onclick="jump('homepage')">🏠 Forside</button>
+  <button onclick="jump('homepage')">🏠 Forside</button><button onclick="jump('seo')">🔎 SEO</button>
   <button onclick="jump('news')">📰 Nyheder</button>
   <button onclick="jump('tickers')">📡 Tickers</button>
   <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay bokse</button>
@@ -35,6 +35,21 @@
   <section id="status" class="panel statusPanel">
     <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test alt</button></div></div>
     <pre id="statusBox">Klar. Indsæt token og tryk Hent data.</pre>
+  </section>
+
+  
+  <section id="seo" class="panel">
+    <div class="panelHead"><h2>🔎 SEO Broadcast Engine</h2><div><button onclick="openApi('/api/seo')">Test SEO API</button><button onclick="openApi('/sitemap.xml')">Sitemap</button><button onclick="openApi('/robots.txt')">Robots</button></div></div>
+    <p class="note">Styrer Google metadata, OpenGraph, Twitter cards, schema.org, sitemap og søgeord.</p>
+    <div class="formGrid">
+      <div><label>Site name</label><input id="seoSiteName"></div><div><label>Domain</label><input id="seoDomain"></div>
+      <div class="wide"><label>Keywords / søgeord</label><textarea id="seoKeywords" rows="3"></textarea></div>
+      <div class="wide"><label>SameAs links</label><textarea id="seoSameAs" rows="2"></textarea></div>
+      <div><label>Title DA</label><input id="seoTitleDa"></div><div><label>Title EN</label><input id="seoTitleEn"></div><div><label>Title DE</label><input id="seoTitleDe"></div>
+      <div class="wide"><label>Description DA</label><textarea id="seoDescDa" rows="2"></textarea></div>
+      <div class="wide"><label>Description EN</label><textarea id="seoDescEn" rows="2"></textarea></div>
+      <div class="wide"><label>Description DE</label><textarea id="seoDescDe" rows="2"></textarea></div>
+    </div><button onclick="saveSEO()">Gem SEO</button>
   </section>
 
   <section id="theme" class="panel">
