@@ -61,6 +61,7 @@ async function loadAll(){
     renderEditors();
     renderRequests();
     renderTwitch();
+    loadContentManager();
     setStatus("✅ Data hentet fra Broadcast Cloud\n"+new Date().toLocaleString("da-DK"));
   }catch(e){setStatus("❌ Load-fejl: "+e.message);}
 }
@@ -163,3 +164,100 @@ async function testAll(){
     setStatus(JSON.stringify(r,null,2));
   }catch(e){setStatus("❌ Test-fejl: "+e.message);}
 }
+
+
+// ===== V816.13 Broadcast Content Manager =====
+const DEFAULT_SHOW_VISUALS={"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}};
+const DEFAULT_OVERLAY_CONTENT={"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "Broadcast Cloud online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}};
+let showVisuals=JSON.parse(JSON.stringify(DEFAULT_SHOW_VISUALS));
+let overlayContent=JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));
+
+async function loadContentManager(){
+  try{
+    const sv=await api('/api/show-visuals');
+    showVisuals=sv.items||DEFAULT_SHOW_VISUALS;
+  }catch(e){showVisuals=DEFAULT_SHOW_VISUALS;}
+  try{
+    const oc=await api('/api/overlay-content');
+    overlayContent=oc.items||DEFAULT_OVERLAY_CONTENT;
+  }catch(e){overlayContent=DEFAULT_OVERLAY_CONTENT;}
+  renderShowVisuals();
+  renderOverlayContent();
+}
+
+function renderShowVisuals(){
+  const el=document.getElementById('showVisualsEditor'); if(!el)return;
+  el.innerHTML=Object.entries(showVisuals).map(([key,v])=>`
+    <div class="row visual">
+      <div><label>Key</label><input data-sv="${key}" data-f="key" value="${key}" disabled></div>
+      <div><label>Icon</label><input data-sv="${key}" data-f="icon" value="${esc(v.icon||'')}"></div>
+      <div><label>Tag</label><input data-sv="${key}" data-f="tag" value="${esc(v.tag||'')}"></div>
+      <div><label>Poster tekst</label><input data-sv="${key}" data-f="posterText" value="${esc(v.posterText||'')}"></div>
+      <div><label>Gradient</label><input data-sv="${key}" data-f="gradient" value="${esc(v.gradient||'')}"></div>
+      <button onclick="delete showVisuals['${key}'];renderShowVisuals()">Slet</button>
+    </div>`).join('');
+}
+
+function collectShowVisuals(){
+  document.querySelectorAll('[data-sv][data-f]').forEach(inp=>{
+    const key=inp.dataset.sv, f=inp.dataset.f;
+    if(!showVisuals[key]) showVisuals[key]={};
+    showVisuals[key][f]=inp.value;
+  });
+}
+
+async function saveShowVisuals(){
+  collectShowVisuals();
+  try{
+    await api('/api/show-visuals',{method:'POST',body:JSON.stringify({items:showVisuals})});
+    setStatus('✅ Show grafik gemt');
+    loadContentManager();
+  }catch(e){setStatus('❌ Show grafik fejl: '+e.message);}
+}
+
+function resetShowVisuals(){showVisuals=JSON.parse(JSON.stringify(DEFAULT_SHOW_VISUALS));renderShowVisuals();}
+
+function overlayArr(box){if(!Array.isArray(overlayContent[box])) overlayContent[box]=[]; return overlayContent[box];}
+function renderOverlayContent(){
+  ['box1','box2','box3'].forEach(box=>{
+    const el=document.getElementById(box+'Editor'); if(!el)return;
+    el.innerHTML=overlayArr(box).map((v,i)=>`
+      <div class="row overlayItem">
+        <div><label>Active</label><select data-oc="${box}" data-i="${i}" data-f="active"><option value="true" ${v.active!==false?'selected':''}>Yes</option><option value="false" ${v.active===false?'selected':''}>No</option></select></div>
+        <div><label>Icon</label><input data-oc="${box}" data-i="${i}" data-f="icon" value="${esc(v.icon||'')}"></div>
+        <div><label>Label</label><input data-oc="${box}" data-i="${i}" data-f="label" value="${esc(v.label||'')}"></div>
+        <div><label>Headline</label><input data-oc="${box}" data-i="${i}" data-f="headline" value="${esc(v.headline||'')}"></div>
+        <div><label>Body</label><input data-oc="${box}" data-i="${i}" data-f="body" value="${esc(v.body||'')}"></div>
+        <button onclick="overlayArr('${box}').splice(${i},1);renderOverlayContent()">Slet</button>
+      </div>`).join('');
+  });
+}
+
+function collectOverlayContent(){
+  document.querySelectorAll('[data-oc][data-i][data-f]').forEach(inp=>{
+    const box=inp.dataset.oc, i=Number(inp.dataset.i), f=inp.dataset.f;
+    const a=overlayArr(box);
+    if(!a[i]) a[i]={};
+    let v=inp.value;
+    if(f==='active') v=v==='true';
+    a[i][f]=v;
+    a[i].priority=i+1;
+  });
+  overlayContent.box4={locked:'twitch-chat'};
+}
+
+function addOverlayItem(box){
+  overlayArr(box).push({active:true,label:'NYT INDHOLD',headline:'Overskrift',body:'Tekst',icon:'✨',priority:overlayArr(box).length+1});
+  renderOverlayContent();
+}
+
+async function saveOverlayContent(){
+  collectOverlayContent();
+  try{
+    await api('/api/overlay-content',{method:'POST',body:JSON.stringify({items:overlayContent})});
+    setStatus('✅ Overlay bokse gemt');
+    loadContentManager();
+  }catch(e){setStatus('❌ Overlay bokse fejl: '+e.message);}
+}
+
+function resetOverlayContent(){overlayContent=JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));renderOverlayContent();}

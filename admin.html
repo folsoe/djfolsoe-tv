@@ -25,7 +25,7 @@
   <button onclick="jump('homepage')">🏠 Forside</button>
   <button onclick="jump('news')">📰 Nyheder</button>
   <button onclick="jump('tickers')">📡 Tickers</button>
-  <button onclick="jump('shows')">📺 Shows</button>
+  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay bokse</button>
   <button onclick="jump('top20')">🏆 Top 20</button>
   <button onclick="jump('requests')">🎧 Requests</button>
   <button onclick="jump('twitch')">🟣 Twitch</button>
@@ -83,6 +83,26 @@
     <p class="note">Styrer show-kort på forsiden.</p>
     <div id="showsEditor"></div>
     <button onclick="saveRows('shows')">Gem shows</button>
+  </section>
+
+  
+  <section id="showVisuals" class="panel">
+    <div class="panelHead"><h2>🎭 Show grafik på forsiden</h2><button onclick="resetShowVisuals()">Indsæt standard grafik</button></div>
+    <p class="note">Her kan du ændre farver, ikon, tag og stor poster-tekst på show-kortene. Brug CSS gradient, fx <code>linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)</code>.</p>
+    <div id="showVisualsEditor"></div>
+    <button onclick="saveShowVisuals()">Gem show grafik</button>
+  </section>
+
+  <section id="overlayContent" class="panel">
+    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay bokse</h2><button onclick="resetOverlayContent()">Indsæt standard bokse</button></div>
+    <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
+    <div class="twoCol">
+      <div><h3>Box 1 · Venstre top</h3><button onclick="addOverlayItem('box1')">Tilføj Box 1 item</button><div id="box1Editor"></div></div>
+      <div><h3>Box 2 · Højre top</h3><button onclick="addOverlayItem('box2')">Tilføj Box 2 item</button><div id="box2Editor"></div></div>
+      <div><h3>Box 3 · Venstre bund</h3><button onclick="addOverlayItem('box3')">Tilføj Box 3 item</button><div id="box3Editor"></div></div>
+      <div><h3>Box 4 · Højre bund</h3><div class="previewCard"><b>LOCKED</b><p>Twitch chat med profilbillede og emotes. Denne boks skal ikke ændres.</p></div></div>
+    </div>
+    <button onclick="saveOverlayContent()">Gem overlay bokse</button>
   </section>
 
   <section id="top20" class="panel">

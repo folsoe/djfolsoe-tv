@@ -178,11 +178,15 @@ function renderShows(items){
   const wanted=["Trance Tuesday","FOLSOE Top 20","Fredagsbar","Retro Hits","Good Morning Twitch","PopUp","Weekend"];
   let all=[...items];
   wanted.forEach(title=>{if(!all.some(x=>String(x.title||"").toLowerCase()===title.toLowerCase())) all.push({title});});
+  const visuals=state.showVisuals||{};
   q("showsGrid").innerHTML=all.slice(0,7).map(x=>{
     const key=showKey(x.title);
     const def=showDefault(x.title);
+    const visual=visuals[key]||{};
     const title=String(x.title||"SHOW");
-    return `<article class="showCard show-${key}"><div class="showPoster"><span>${title.replace(" ","<br>")}</span></div><div class="showBody"><b>${title}</b><p>${x.time||def.time}</p><p>${x.body||def.body}</p></div></article>`;
+    const poster=visual.posterText||title;
+    const style=visual.gradient?` style="--poster:${visual.gradient}"`:"";
+    return `<article class="showCard show-${key}"${style}><div class="showPoster"><small>${visual.icon||""} ${visual.tag||""}</small><span>${poster.replace(" ","<br>")}</span></div><div class="showBody"><b>${title}</b><p>${x.time||def.time}</p><p>${x.body||def.body}</p></div></article>`;
   }).join("");
 }
 

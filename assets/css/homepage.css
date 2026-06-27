@@ -131,3 +131,17 @@ body.isOffline .avatarLive{background:#4b5563}
 .show-popup .showPoster:before{background:radial-gradient(circle at 40% 45%,rgba(255,255,255,.46),transparent 14%),linear-gradient(135deg,#020617,#10b981,#22c55e)!important}
 .show-weekend .showPoster{background:linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)!important}
 .show-weekend .showPoster:before{background:radial-gradient(circle at 28% 45%,rgba(255,255,255,.42),transparent 15%),radial-gradient(circle at 75% 30%,rgba(236,72,153,.65),transparent 20%),linear-gradient(135deg,#1e3a8a,#7c3aed,#f59e0b)!important}
+
+/* V816.13 admin editable show visuals */
+.showCard .showPoster{background:var(--poster, linear-gradient(135deg,#7c3aed,#ec4899))!important}
+.showPoster small{
+  position:absolute!important;
+  left:14px!important;
+  top:12px!important;
+  z-index:3!important;
+  font-size:10px!important;
+  letter-spacing:.16em!important;
+  font-weight:1000!important;
+  color:rgba(255,255,255,.78)!important;
+  text-transform:uppercase!important;
+}

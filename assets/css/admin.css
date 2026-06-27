@@ -34,3 +34,9 @@ pre{white-space:pre-wrap;background:rgba(0,0,0,.35);padding:16px;border-radius:1
 .previewCard b{color:#2dd4ef}
 .twitchAvatar{width:70px;height:70px;border-radius:22px;object-fit:cover;border:2px solid #2dd4ef}
 @media(max-width:900px){.adminHero,.twoCol,.formGrid,.row,.row.news,.row.shows,.row.top20{grid-template-columns:1fr}.adminHero h1{font-size:34px}}
+
+/* V816.13 Content Manager */
+.row.visual{grid-template-columns:105px 70px 100px 1.4fr 1fr 70px}
+.row.overlayItem{grid-template-columns:70px 90px 1fr 1.2fr 1fr 70px}
+code{color:#2dd4ef}
+@media(max-width:900px){.row.visual,.row.overlayItem{grid-template-columns:1fr}}
