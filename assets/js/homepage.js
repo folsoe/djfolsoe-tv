@@ -147,50 +147,17 @@ function showKey(title){
   if(s.includes("weekend")) return "weekend";
   return "default";
 }
-function showDefault(title){
-  const key=showKey(title);
-  const da={
-    trance:{time:"Tirsdag 18:30",body:"Store melodier, lys, energi og trance-fællesskab."},
-    top20:{time:"Torsdag 18:30",body:"Ugens største tracks i FOLSOE countdown."},
-    fredagsbar:{time:"Fredag 20:00",body:"Fest, grin, requests og weekendstemning."},
-    retro:{time:"Søndag 20:00",body:"Klassikere, nostalgi og gamle hits med nyt liv."},
-    morning:{time:"07:00",body:"Kaffe, god energi og den bedste start på dagen."},
-    popup:{time:"Surprise",body:"Når du mindst venter det — så går vi live."},
-    weekend:{time:"Weekend",body:"Eurodance, summer, community og maksimal energi."}
-  };
-  const en={
-    trance:{time:"Tuesday 18:30",body:"Big melodies, lights, energy and trance community."},
-    top20:{time:"Thursday 18:30",body:"The biggest tracks of the week in the FOLSOE countdown."},
-    fredagsbar:{time:"Friday 20:00",body:"Party, laughs, requests and weekend vibes."},
-    retro:{time:"Sunday 20:00",body:"Classics, nostalgia and old hits brought back to life."},
-    morning:{time:"07:00",body:"Coffee, good energy and the best start of the day."},
-    popup:{time:"Surprise",body:"When you least expect it — we go live."},
-    weekend:{time:"Weekend",body:"Eurodance, summer, community and maximum energy."}
-  };
-  const de={
-    trance:{time:"Dienstag 18:30",body:"Große Melodien, Licht, Energie und Trance-Community."},
-    top20:{time:"Donnerstag 18:30",body:"Die größten Tracks der Woche im FOLSOE Countdown."},
-    fredagsbar:{time:"Freitag 20:00",body:"Party, Lachen, Wünsche und Wochenendstimmung."},
-    retro:{time:"Sonntag 20:00",body:"Klassiker, Nostalgie und alte Hits mit neuem Leben."},
-    morning:{time:"07:00",body:"Kaffee, gute Energie und der beste Start in den Tag."},
-    popup:{time:"Überraschung",body:"Wenn du es am wenigsten erwartest — gehen wir live."},
-    weekend:{time:"Wochenende",body:"Eurodance, Summer, Community und maximale Energie."}
-  };
-  return (lang==="de"?de:lang==="en"?en:da)[key] || {time:"",body:t("showDefault")};
-}
 function renderShows(items){
-  const wanted=["Trance Tuesday","FOLSOE Top 20","Fredagsbar","Retro Hits","Good Morning Twitch","PopUp","Weekend"];
-  let all=[...items];
-  wanted.forEach(title=>{if(!all.some(x=>String(x.title||"").toLowerCase()===title.toLowerCase())) all.push({title});});
-  const visuals=state.showVisuals||{};
+  const defaults = [{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Store melodier, lys, energi og trance-fællesskab.", "active": true, "priority": 1}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Ugens største tracks i FOLSOE countdown.", "active": true, "priority": 2}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "Fredag 20:00", "body": "Live DJ med masse af sjov og ballade.", "active": true, "priority": 3}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Klassikere, nostalgi og gamle hits med nyt liv.", "active": true, "priority": 4}, {"key": "morning", "title": "Good Morning Twitch", "time": "07:00", "body": "Kaffe, god energi og den bedste start på dagen.", "active": true, "priority": 5}, {"key": "popup", "title": "PopUp", "time": "Surprise", "body": "Når du mindst venter det — så går vi live.", "active": true, "priority": 6}, {"key": "weekend", "title": "Weekend", "time": "Weekend", "body": "Eurodance, summer, community og maksimal energi.", "active": true, "priority": 7}];
+  let all=(items&&items.length?items:defaults).filter(x=>x.active!==false).sort((a,b)=>Number(a.priority||99)-Number(b.priority||99));
+  const visuals=state.showVisuals||{"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}};
   q("showsGrid").innerHTML=all.slice(0,7).map(x=>{
-    const key=showKey(x.title);
-    const def=showDefault(x.title);
+    const key=x.key||showKey(x.title);
     const visual=visuals[key]||{};
     const title=String(x.title||"SHOW");
     const poster=visual.posterText||title;
     const style=visual.gradient?` style="--poster:${visual.gradient}"`:"";
-    return `<article class="showCard show-${key}"${style}><div class="showPoster"><small>${visual.icon||""} ${visual.tag||""}</small><span>${poster.replace(" ","<br>")}</span></div><div class="showBody"><b>${title}</b><p>${x.time||def.time}</p><p>${x.body||def.body}</p></div></article>`;
+    return `<article class="showCard show-${key}"${style}><div class="showPoster"><small>${visual.icon||""} ${visual.tag||""}</small><span>${poster.replace(" ","<br>")}</span></div><div class="showBody"><b>${title}</b><p>${x.time||""}</p><p>${x.body||""}</p></div></article>`;
   }).join("");
 }
 

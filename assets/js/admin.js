@@ -1,8 +1,11 @@
+const SHOWS_SEED=[{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Store melodier, lys, energi og trance-fællesskab.", "active": true, "priority": 1}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Ugens største tracks i FOLSOE countdown.", "active": true, "priority": 2}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "Fredag 20:00", "body": "Live DJ med masse af sjov og ballade.", "active": true, "priority": 3}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Klassikere, nostalgi og gamle hits med nyt liv.", "active": true, "priority": 4}, {"key": "morning", "title": "Good Morning Twitch", "time": "07:00", "body": "Kaffe, god energi og den bedste start på dagen.", "active": true, "priority": 5}, {"key": "popup", "title": "PopUp", "time": "Surprise", "body": "Når du mindst venter det — så går vi live.", "active": true, "priority": 6}, {"key": "weekend", "title": "Weekend", "time": "Weekend", "body": "Eurodance, summer, community og maksimal energi.", "active": true, "priority": 7}];
+const SHOW_VISUALS_SEED={"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}};
 
 const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 const THEMES={"fredagsbar": "🍺 FREDAGSBAR", "popup": "⚡ POPUP", "trance": "💙 TRANCE TUESDAY", "retro": "🕹️ RETRO HITS", "eurodance": "💛 EURODANCE", "morning": "☀️ GOOD MORNING TWITCH", "summer": "🌴 SUMMER BEATS", "weekend": "🎉 WEEKEND VIBES"};
 const TOP20_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
 let core=null, home=null, activeTheme="weekend";
+let showVisualsItems=JSON.parse(JSON.stringify(SHOW_VISUALS_SEED));
 let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discoveryItems=[],requestItems=[];
 
 document.addEventListener("DOMContentLoaded",()=>{
@@ -54,13 +57,14 @@ async function loadAll(){
     topItems=results[3].value?.items||[];
     bottomItems=results[4].value?.items||[];
     newsItems=results[5].value?.items||home.newsCards||[];
-    showsItems=results[6].value?.items||home.shows||[];
+    showsItems=results[6].value?.items||home.shows||[]; if(!showsItems.length) showsItems=JSON.parse(JSON.stringify(SHOWS_SEED));
     top20Items=results[7].value?.items||home.top20||[];
     top20Items=(top20Items&&top20Items.length?top20Items:TOP20_SEED);
     discoveryItems=results[8].value?.items||home.discoveryPicks||[];
     requestItems=results[9].value?.items||home.requests||[];
     fillProfile();
     renderEditors();
+    loadShowVisuals();
     renderRequests();
     renderTwitch();
     loadDiscovery();
@@ -123,7 +127,7 @@ function collect(){
 
 function addRow(type){
   const a=arr(type);
-  if(type==="shows") a.push({key:"new",title:"Nyt show",time:"",body:""});
+  if(type==="shows") a.push({key:"new",title:"Nyt show",time:"",body:"",active:true,priority:a.length+1});
   else if(type==="top20") a.push({rank:a.length+1,artist:"",title:"",genre:"",points:0});
   else if(type==="discovery") a.push({artist:"",title:"",genre:"",note:"Dem her har jeg lige opdaget"});
   else if(type==="news") a.push({id:"news"+Date.now(),active:true,type:"News",title:"",body:"",priority:a.length+1});
