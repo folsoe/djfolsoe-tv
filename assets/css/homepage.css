@@ -16,3 +16,6 @@
 body.isOffline #liveDot{background:#ff3565;box-shadow:0 0 12px #ff3565}
 body.isOffline .avatarLive{background:#4b5563}
 @media(max-width:1050px){.requestsGrid,.heroMeta{grid-template-columns:1fr}}
+
+.langSwitch button.active{background:linear-gradient(135deg,#7c3aed,#ec4899)!important;color:#fff!important;box-shadow:0 0 18px rgba(236,72,153,.45)}
+.desktopNav{gap:26px}
