@@ -1,14 +1,66 @@
 
-/* V816.18.1.1 PATCH — safe show visuals loader */
-if (typeof window.loadShowVisuals !== "function") {
-  window.loadShowVisuals = async function(){
-    console.warn("loadShowVisuals fallback active");
-    const el = document.getElementById("showVisualsEditor");
-    if (el && !el.innerHTML.trim()) {
-      el.innerHTML = '<div class="previewCard"><b>Show grafik</b><p>Fallback aktiv. Hent data igen eller gem show grafik.</p></div>';
+/* V816.18.1.2 HARD PATCH */
+async function loadShowVisuals(){
+  try{
+    if (typeof api === "function") {
+      const r = await api('/api/show-visuals');
+      window.showVisualsItems = (r && r.items) || window.showVisualsItems || {};
     }
-  };
+  }catch(e){
+    console.warn("loadShowVisuals safe fallback:", e);
+  }
+  if (typeof renderShowVisuals === "function") {
+    try { renderShowVisuals(); } catch(e) { console.warn("renderShowVisuals fallback:", e); }
+  }
 }
+function renderShowVisuals(){
+  const el = document.getElementById("showVisualsEditor");
+  if(!el) return;
+  const items = window.showVisualsItems || {};
+  const keys = Object.keys(items);
+  if(!keys.length){
+    el.innerHTML = '<div class="previewCard"><b>Show grafik</b><p>Data hentes fra /api/show-visuals. Denne fallback stopper admin fra at crashe.</p></div>';
+    return;
+  }
+  el.innerHTML = keys.map(key=>{
+    const v = items[key] || {};
+    return `<div class="row visual">
+      <div><label>Key</label><input value="${key}" disabled></div>
+      <div><label>Icon</label><input data-sv="${key}" data-f="icon" value="${v.icon||''}"></div>
+      <div><label>Tag</label><input data-sv="${key}" data-f="tag" value="${v.tag||''}"></div>
+      <div><label>Poster tekst</label><input data-sv="${key}" data-f="posterText" value="${v.posterText||''}"></div>
+      <div><label>Gradient</label><input data-sv="${key}" data-f="gradient" value="${v.gradient||''}"></div>
+    </div>`;
+  }).join('');
+}
+function collectShowVisuals(){
+  if(!window.showVisualsItems) window.showVisualsItems = {};
+  document.querySelectorAll('[data-sv][data-f]').forEach(inp=>{
+    const k = inp.dataset.sv, f = inp.dataset.f;
+    if(!window.showVisualsItems[k]) window.showVisualsItems[k] = {};
+    window.showVisualsItems[k][f] = inp.value;
+  });
+}
+async function saveShowVisuals(){
+  collectShowVisuals();
+  try{
+    if(typeof api === "function") await api('/api/show-visuals',{method:'POST',body:JSON.stringify({items:window.showVisualsItems||{}})});
+    if(typeof setStatus === "function") setStatus('✅ Show grafik gemt');
+  }catch(e){
+    if(typeof setStatus === "function") setStatus('❌ Show grafik fejl: '+e.message);
+  }
+}
+function resetShowVisuals(){
+  window.showVisualsItems = window.SHOW_VISUALS_SEED || {};
+  renderShowVisuals();
+}
+window.loadShowVisuals = loadShowVisuals;
+window.renderShowVisuals = renderShowVisuals;
+window.saveShowVisuals = saveShowVisuals;
+window.resetShowVisuals = resetShowVisuals;
+
+
+
 
 const SHOWS_SEED=[{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Store melodier, lys, energi og trance-fællesskab.", "active": true, "priority": 1}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Ugens største tracks i FOLSOE countdown.", "active": true, "priority": 2}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "Fredag 20:00", "body": "Live DJ med masse af sjov og ballade.", "active": true, "priority": 3}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Klassikere, nostalgi og gamle hits med nyt liv.", "active": true, "priority": 4}, {"key": "morning", "title": "Good Morning Twitch", "time": "07:00", "body": "Kaffe, god energi og den bedste start på dagen.", "active": true, "priority": 5}, {"key": "popup", "title": "PopUp", "time": "Surprise", "body": "Når du mindst venter det — så går vi live.", "active": true, "priority": 6}, {"key": "weekend", "title": "Weekend", "time": "Weekend", "body": "Eurodance, summer, community og maksimal energi.", "active": true, "priority": 7}];
 const SHOW_VISUALS_SEED={"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}};
@@ -76,7 +128,7 @@ async function loadAll(){
     requestItems=results[9].value?.items||home.requests||[];
     fillProfile();
     renderEditors();
-    if (typeof window.loadShowVisuals === 'function') window.loadShowVisuals();
+    if (typeof window.loadShowVisuals === 'function') loadShowVisuals();
     renderRequests();
     renderTwitch();
     loadDiscovery();
@@ -207,7 +259,7 @@ async function loadContentManager(){
   renderOverlayContent();
 }
 
-function renderShowVisuals(){
+function renderShowVisuals_real(){
   const el=document.getElementById('showVisualsEditor'); if(!el)return;
   el.innerHTML=Object.entries(showVisuals).map(([key,v])=>`
     <div class="row visual">
@@ -228,7 +280,7 @@ function collectShowVisuals(){
   });
 }
 
-async function saveShowVisuals(){
+async function saveShowVisuals_real(){
   collectShowVisuals();
   try{
     await api('/api/show-visuals',{method:'POST',body:JSON.stringify({items:showVisuals})});
@@ -237,7 +289,7 @@ async function saveShowVisuals(){
   }catch(e){setStatus('❌ Show grafik fejl: '+e.message);}
 }
 
-function resetShowVisuals(){showVisuals=JSON.parse(JSON.stringify(DEFAULT_SHOW_VISUALS));renderShowVisuals();}
+function resetShowVisuals_real(){showVisuals=JSON.parse(JSON.stringify(DEFAULT_SHOW_VISUALS));renderShowVisuals();}
 
 function overlayArr(box){if(!Array.isArray(overlayContent[box])) overlayContent[box]=[]; return overlayContent[box];}
 function renderOverlayContent(){

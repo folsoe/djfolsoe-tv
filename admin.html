@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>DJ FOLSOE V816.12 Admin</title>
-  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin.css?v=8161812">
 </head>
 <body>
 <header class="adminHero">
@@ -179,6 +179,12 @@
   </section>
 </main>
 
-<script src="assets/js/admin.js"></script>
+
+<script>
+/* emergency guard before admin.js */
+window.loadShowVisuals = window.loadShowVisuals || async function(){ console.warn("inline loadShowVisuals guard"); };
+</script>
+
+<script src="assets/js/admin.js?v=8161812"></script>
 </body>
 </html>
