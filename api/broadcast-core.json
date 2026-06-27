@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V814.1 CONTENT BINDING FIX",
+    "version": "V814.2 TV STATION CHAT ENGINE",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -653,7 +653,15 @@
       "box4": "locked to chat only",
       "contentMaster": "website/admin/cloud"
     },
-    "contentBindingFix": true
+    "contentBindingFix": true,
+    "tvStationChatEngine": true,
+    "v814_2": {
+      "removeBoxNumbers": true,
+      "box4LockedToRealTwitchChat": true,
+      "v170GraphicsImported": true,
+      "footerTickerEnhanced": true,
+      "moreContentInCards": true
+    }
   },
   "brand": "DJ FOLSOE",
   "about": {
@@ -2234,7 +2242,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V814.1 CONTENT BINDING FIX",
+  "platformVersion": "V814.2 TV STATION CHAT ENGINE",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2294,7 +2302,9 @@
       "box2": "program theme",
       "box3": "music top20",
       "box4": "chat locked"
-    }
+    },
+    "boxNumbersRemoved": true,
+    "box4": "real twitch chat via Twitch IRC WebSocket"
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
