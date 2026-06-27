@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V814.2 TV STATION CHAT ENGINE
+// DJ FOLSOE NETWORK V814.4 PRO MUSIC TV CHAT POLISH
 // Worker routes:
 // GET  /api/broadcast-core
 // POST /api/broadcast-core
@@ -44,7 +44,7 @@ const DEFAULT_DATA = {
   news: [],
   requests: [],
   broadcastCore: {
-    version: "V814.2 TV STATION CHAT ENGINE",
+    version: "V814.4 PRO MUSIC TV CHAT POLISH",
     backend: "Cloudflare Worker",
     singleSourceOfTruth: true
   }
@@ -94,7 +94,7 @@ async function getCore(env) {
 
 async function putCore(env, data) {
   data.broadcastCore = data.broadcastCore || {};
-  data.broadcastCore.version = "V814.2 TV STATION CHAT ENGINE";
+  data.broadcastCore.version = "V814.4 PRO MUSIC TV CHAT POLISH";
   data.broadcastCore.backend = "Cloudflare Worker";
   data.broadcastCore.lastUpdated = new Date().toISOString();
   await env.DJF_DATA.put(KEY_CORE, JSON.stringify(data));
@@ -236,7 +236,7 @@ async function collectNewsroom(env){
   const batches = await Promise.all(sources.map(fetchRssSource));
   const items = batches.flat().slice(0,60);
   core.unifiedNewsroom = core.unifiedNewsroom || {};
-  core.unifiedNewsroom.version = "V814.2 TV STATION CHAT ENGINE";
+  core.unifiedNewsroom.version = "V814.4 PRO MUSIC TV CHAT POLISH";
   core.unifiedNewsroom.sources = sources;
   core.unifiedNewsroom.items = items;
   core.unifiedNewsroom.lastUpdated = new Date().toISOString();
@@ -256,7 +256,7 @@ function forceBrandingPatch(core) {
   core.station.description_en = "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.";
   core.station.description_de = "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community.";
   core.broadcastCore = core.broadcastCore || {};
-  core.broadcastCore.version = "V814.2 TV STATION CHAT ENGINE";
+  core.broadcastCore.version = "V814.4 PRO MUSIC TV CHAT POLISH";
   core.broadcastCore.brandingLock = "DJ FOLSOE";
   core.translations = core.translations || {};
   core.translations.siteTitle = { da:"DJ FOLSOE", en:"DJ FOLSOE", de:"DJ FOLSOE" };
@@ -298,7 +298,7 @@ function buildV170OverlayState(core){
   const twitch=core.twitchLive||{};
   const show=currentScheduleShow(core);
   return {
-    ok:true,version:"V814.2 TV STATION CHAT ENGINE",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
+    ok:true,version:"V814.4 PRO MUSIC TV CHAT POLISH",overlay:"V170.3 Broadcast Revolution",brand:"DJ FOLSOE",apiTime:new Date().toISOString(),
     lockedRules:{singleLeftLogo:true,noDuplicateLogo:true,fourBoxFooter:true,websiteIsMaster:true},
     live:{isLive:Boolean(twitch.live||station.live),viewers:twitch.viewers||station.viewers||0,followers:station.followersCurrent||0,followersGoal:station.followersGoal||1000,subsToday:station.subsToday||0,bitsToday:station.bitsToday||0,title:twitch.title||station.streamTitle||"",category:twitch.category||station.category||"Music"},
     show:{day:show.day||"",time:show.time||"",title:show.show||show.title||"DJ FOLSOE LIVE",description:show.description||""},
@@ -324,7 +324,7 @@ function normalizeThemeName(name){
 function getThemePayload(core){
   const engine=core.themeEngine||{};
   const active=normalizeThemeName(engine.activeTheme||core.activeTheme||"fredagsbar");
-  return {ok:true,version:"V814.2 TV STATION CHAT ENGINE",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
+  return {ok:true,version:"V814.4 PRO MUSIC TV CHAT POLISH",activeTheme:active,theme:DJF_THEMES[active],themes:DJF_THEMES,commands:Object.keys(DJF_THEMES).map(x=>"!theme "+x)};
 }
 function applyThemeToOverlayState(state, core){
   const payload=getThemePayload(core);
@@ -350,7 +350,7 @@ function buildMotionPayload(state){
   const danish = chartItems.find(x=>String(x.genre||"").toLowerCase().includes("dansk")) || top;
 
   state.motion = {
-    version:"V814.2 TV STATION CHAT ENGINE",
+    version:"V814.4 PRO MUSIC TV CHAT POLISH",
     layout:"camera-safe-side-stacked",
     rotationMs:8000,
     classicTicker:false,
@@ -499,7 +499,7 @@ function applyV814HybridLayout(state, core){
   const news = state.broadcastNews || state.websiteNews || [];
   const station = core.station || {};
   const requests = core.requests || [];
-  state.layout = {version:"V814.2 TV STATION CHAT ENGINE",topbar:"logo-news-clock",centerClear:true,footerTicker:true,box4LockedToChat:true,bottomStack:true};
+  state.layout = {version:"V814.4 PRO MUSIC TV CHAT POLISH",topbar:"logo-news-clock",centerClear:true,footerTicker:true,box4LockedToChat:true,bottomStack:true};
   state.motion = state.motion || {}; state.motion.layout = "v814-bottom-stacked-hybrid"; state.motion.rotationMs = 8000;
   state.motion.lanes = {
     box1:[
@@ -634,8 +634,8 @@ function buildV814ContentPayload(core){
 
   return {
     ok:true,
-    version:"V814.2 TV STATION CHAT ENGINE",
-    overlay:"V814.2 TV STATION CHAT ENGINEroadcast Hybrid Engine",
+    version:"V814.4 PRO MUSIC TV CHAT POLISH",
+    overlay:"V814.4 PRO MUSIC TV CHAT POLISHroadcast Hybrid Engine",
     brand:"DJ FOLSOE",
     apiTime:new Date().toISOString(),
     layout:{centerClear:true,bottomStack:true,box4LockedToChat:true,footerTicker:true},
@@ -675,7 +675,7 @@ function enhanceV8142Payload(state, core){
   const top = chartItems[0] || {};
   const pick = chartItems.find(x=>x.folsoePick || x.pick === true || String(x.pick||"").toLowerCase()==="yes") || chartItems[1] || top;
 
-  state.version = "V814.2 TV STATION CHAT ENGINE";
+  state.version = "V814.4 PRO MUSIC TV CHAT POLISH";
   state.layout = Object.assign({}, state.layout || {}, {
     boxNumbersRemoved:true,
     box4LockedToRealTwitchChat:true,
@@ -742,7 +742,7 @@ export default {
     try {
       if (path === "/api/broadcast-news") {
         const core = await getCore(env);
-        if (request.method === "GET") return json({ ok:true, version:"V814.2 TV STATION CHAT ENGINE", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
+        if (request.method === "GET") return json({ ok:true, version:"V814.4 PRO MUSIC TV CHAT POLISH", items:broadcastNewsItems(core), raw:core.broadcastNews||[] });
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);
           const body = await request.json();
@@ -766,6 +766,28 @@ export default {
         }
       }
 
+      if (path === "/api/overlay-health") {
+        const core = await getCore(env);
+        return json({ ok:true, version:"V814.4 PRO MUSIC TV CHAT POLISH", hasCore:!!core, hasChart:!!(core.weeklyListeningChart||core.top20Chart), hasNews:!!core.broadcastNews });
+      }
+
+      if (path === "/api/chat-profile") {
+        const login = (url.searchParams.get("login") || "").toLowerCase().replace(/[^a-z0-9_]/g, "");
+        if (!login) return json({ ok:false, error:"Missing login" }, 400);
+        try {
+          if (!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return json({ ok:false, login, avatar:"" });
+          const token = String(env.TWITCH_ACCESS_TOKEN || "").startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
+          const r = await fetch("https://api.twitch.tv/helix/users?login=" + encodeURIComponent(login), {
+            headers: { "Client-ID": env.TWITCH_CLIENT_ID, "Authorization": "Bearer " + token }
+          });
+          const j = await r.json();
+          const u = j && j.data && j.data[0];
+          return json({ ok:!!u, login, displayName:u?.display_name || login, avatar:u?.profile_image_url || "" });
+        } catch (e) {
+          return json({ ok:false, login, avatar:"", error:e.message || "profile error" });
+        }
+      }
+
       if (path === "/api/overlay/v170-state") {
         const core = await getCore(env);
         return json(enhanceV8142Payload(buildV814ContentPayload(core), core));
@@ -773,16 +795,16 @@ export default {
 
       if (path === "/api/stable-status") {
         const core = await getCore(env);
-        return json({ok:true,version:"V814.2 TV STATION CHAT ENGINE",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
+        return json({ok:true,version:"V814.4 PRO MUSIC TV CHAT POLISH",brand:"DJ FOLSOE",frontendBinding:true,stableRelease:true,cloudDataVersion: core.broadcastCore && core.broadcastCore.version,time:new Date().toISOString()});
       }
 
       if (path === "/api/health") {
-        return json({ ok: true, service: "DJ FOLSOE V814.2 TV STATION CHAT ENGINEorker", time: new Date().toISOString() });
+        return json({ ok: true, service: "DJ FOLSOE V814.4 PRO MUSIC TV CHAT POLISHorker", time: new Date().toISOString() });
       }
 
       if (path === "/api/admin/validate") {
         if (!isAdmin(request, env)) return json({ ok: false, error: "Unauthorized" }, 401);
-        return json({ ok: true, admin: true, service: "DJ FOLSOE V814.2 TV STATION CHAT ENGINEdmin" });
+        return json({ ok: true, admin: true, service: "DJ FOLSOE V814.4 PRO MUSIC TV CHAT POLISHdmin" });
       }
 
       if (path === "/api/seed") {
@@ -800,7 +822,7 @@ export default {
         const core = await getCore(env);
         if (request.method === "GET") {
           if (url.searchParams.get("refresh") === "1") return json(await collectNewsroom(env));
-          return json(core.unifiedNewsroom || { version:"V814.2 TV STATION CHAT ENGINE", sources:[], items:[] });
+          return json(core.unifiedNewsroom || { version:"V814.4 PRO MUSIC TV CHAT POLISH", sources:[], items:[] });
         }
         if (request.method === "POST") {
           if (!isAdmin(request, env)) return json({ error:"Unauthorized" }, 401);

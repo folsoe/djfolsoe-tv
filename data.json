@@ -625,7 +625,7 @@
     "archive": []
   },
   "broadcastCore": {
-    "version": "V814.2 TV STATION CHAT ENGINE",
+    "version": "V814.4 PRO MUSIC TV CHAT POLISH",
     "singleSourceOfTruth": true,
     "lastUpdated": "",
     "exports": {
@@ -2242,7 +2242,7 @@
     "en": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH",
     "de": "BROADCAST CLOUD · DJ FOLSOE ON TWITCH"
   },
-  "platformVersion": "V814.2 TV STATION CHAT ENGINE",
+  "platformVersion": "V814.4 PRO MUSIC TV CHAT POLISH",
   "v170Overlay": {
     "version": "V170.3",
     "lockedRules": [
@@ -2304,7 +2304,9 @@
       "box4": "chat locked"
     },
     "boxNumbersRemoved": true,
-    "box4": "real twitch chat via Twitch IRC WebSocket"
+    "box4": "real twitch chat via Twitch IRC WebSocket",
+    "noLoadingDataFix": true,
+    "proMusicTvPolish": true
   },
   "themeEngine": {
     "version": "V813.5 THEME ENGINE",
