@@ -1,0 +1,12 @@
+<div id="v816">
+  <div class="bug"><b>DJ FOLSOE</b><span>LIVE</span></div>
+  <div class="topbar"><div id="topText">Broadcast Cloud</div><b id="clock">--.--</b></div>
+  <section class="card c1"><h3 id="musicLabel">MUSIC</h3><h2 id="musicTitle">FOLSOE Top 20</h2><p id="musicBody">Chart ready</p></section>
+  <section class="card c2"><h3 id="communityLabel">COMMUNITY</h3><h2 id="communityTitle">Live chat</h2><p id="communityBody">Waiting for Twitch chat</p></section>
+  <section class="card c3"><h3 id="statusLabel">LIVE STATUS</h3><h2 id="statusTitle">Broadcast Cloud</h2><p id="statusBody">Online</p></section>
+  <section class="card c4"><h3 id="programLabel">PROGRAM</h3><h2 id="programTitle">DJ FOLSOE</h2><p id="programBody">Theme Engine</p></section>
+  <section class="mini m1"><h3 id="top20Label">TOP20</h3><h2 id="top20Title">Chart</h2></section>
+  <section class="mini m2"><h3 id="newsLabel">NEWS</h3><h2 id="newsTitle">News</h2></section>
+  <section class="mini m3"><h3 id="goalsLabel">GOALS</h3><h2 id="goalsTitle">Goal</h2></section>
+  <div class="footer"><div id="footerText">TOP20 · REQUESTS · NEWS</div></div>
+</div>
