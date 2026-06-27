@@ -1,12 +1,58 @@
-<div id="v816">
-  <div class="bug"><b>DJ FOLSOE</b><span>LIVE</span></div>
-  <div class="topbar"><div id="topText">Broadcast Cloud</div><b id="clock">--.--</b></div>
-  <section class="card c1"><h3 id="musicLabel">MUSIC</h3><h2 id="musicTitle">FOLSOE Top 20</h2><p id="musicBody">Chart ready</p></section>
-  <section class="card c2"><h3 id="communityLabel">COMMUNITY</h3><h2 id="communityTitle">Live chat</h2><p id="communityBody">Waiting for Twitch chat</p></section>
-  <section class="card c3"><h3 id="statusLabel">LIVE STATUS</h3><h2 id="statusTitle">Broadcast Cloud</h2><p id="statusBody">Online</p></section>
-  <section class="card c4"><h3 id="programLabel">PROGRAM</h3><h2 id="programTitle">DJ FOLSOE</h2><p id="programBody">Theme Engine</p></section>
-  <section class="mini m1"><h3 id="top20Label">TOP20</h3><h2 id="top20Title">Chart</h2></section>
-  <section class="mini m2"><h3 id="newsLabel">NEWS</h3><h2 id="newsTitle">News</h2></section>
-  <section class="mini m3"><h3 id="goalsLabel">GOALS</h3><h2 id="goalsTitle">Goal</h2></section>
-  <div class="footer"><div id="footerText">TOP20 · REQUESTS · NEWS</div></div>
+<div id="djf816Overlay">
+  <div class="djf816Bug"><b>DJ FOLSOE</b><span>LIVE</span></div>
+
+  <div class="djf816Topbar">
+    <div class="djf816TopMask"><div id="djf816TopText">Broadcast Cloud loading...</div></div>
+    <div id="djf816Clock">--:--</div>
+  </div>
+
+  <div class="djf816SafeLabel">CAMERA SAFE AREA</div>
+
+  <section class="djf816Card boxMusic">
+    <header><span id="musicLabel">MUSIC</span></header>
+    <h2 id="musicTitle">Loading...</h2>
+    <p id="musicBody">Loading...</p>
+  </section>
+
+  <section class="djf816Card boxCommunity">
+    <header><span id="communityLabel">COMMUNITY</span></header>
+    <h2 id="communityTitle">Loading...</h2>
+    <p id="communityBody">Loading...</p>
+  </section>
+
+  <section class="djf816Card boxStatus">
+    <header><span id="statusLabel">LIVE STATUS</span></header>
+    <h2 id="statusTitle">Loading...</h2>
+    <p id="statusBody">Loading...</p>
+  </section>
+
+  <section class="djf816Card boxProgram">
+    <header><span id="programLabel">PROGRAM</span></header>
+    <h2 id="programTitle">Loading...</h2>
+    <p id="programBody">Loading...</p>
+  </section>
+
+  <div class="djf816BottomDeck">
+    <section class="djf816Mini miniTop20">
+      <header><span id="top20Label">TOP20</span></header>
+      <h2 id="top20Title">Loading...</h2>
+      <p id="top20Body"></p>
+    </section>
+
+    <section class="djf816Mini miniNews">
+      <header><span id="newsLabel">NEWS</span></header>
+      <h2 id="newsTitle">Loading...</h2>
+      <p id="newsBody"></p>
+    </section>
+
+    <section class="djf816Mini miniGoals">
+      <header><span id="goalsLabel">GOALS</span></header>
+      <h2 id="goalsTitle">Loading...</h2>
+      <p id="goalsBody"></p>
+    </section>
+  </div>
+
+  <div class="djf816Footer">
+    <div class="djf816FooterMask"><div id="djf816FooterText">TOP20 · REQUESTS · NEWS · COMMUNITY</div></div>
+  </div>
 </div>

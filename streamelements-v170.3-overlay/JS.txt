@@ -1,1 +1,114 @@
-const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";let state=null;function q(id){return document.getElementById(id)}function setTheme(v){document.documentElement.style.setProperty("--a",v.accent||"#ffd166");document.documentElement.style.setProperty("--b",v.secondary||"#ff4d6d");document.documentElement.style.setProperty("--c",v.primary||"#00d4ff")}async function load(){try{const r=await fetch(API_BASE+"/api/overlay/v170-state?ts="+Date.now(),{cache:"no-store"});state=await r.json();}catch(e){state=null}render()}function render(){const s=state||{visual:{title:"DJ FOLSOE",mood:"Broadcast Cloud"},topbarNews:["Broadcast Cloud"],footerTicker:["TOP20 · REQUESTS · NEWS"],boxes:{music:{label:"MUSIC",title:"FOLSOE Top 20",body:"Chart ready"},community:{label:"COMMUNITY",title:"Live chat",body:"Waiting for Twitch chat"},status:{label:"LIVE STATUS",title:"Broadcast Cloud",body:"Online"},program:{label:"PROGRAM",title:"DJ FOLSOE",body:"Theme Engine"},top20:{label:"TOP20",title:"Chart"},news:{label:"NEWS",title:"News"},goals:{label:"GOALS",title:"Goal"}}};setTheme(s.visual||{});q("topText").textContent=(s.topbarNews||["Broadcast Cloud"]).join(" ✦ ")+" ✦ ";q("footerText").textContent=(s.footerTicker||["TOP20"]).join(" ✦ ")+" ✦ ";for(const [key,prefix] of Object.entries({music:"music",community:"community",status:"status",program:"program",top20:"top20",news:"news",goals:"goals"})){const b=s.boxes[key]||{};if(q(prefix+"Label"))q(prefix+"Label").textContent=b.label||key.toUpperCase();if(q(prefix+"Title"))q(prefix+"Title").textContent=b.title||"";if(q(prefix+"Body"))q(prefix+"Body").textContent=b.body||"";}}function clock(){q("clock").textContent=new Date().toLocaleTimeString("da-DK",{hour:"2-digit",minute:"2-digit"})}clock();setInterval(clock,1000);load();setInterval(load,8000);
+const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+let state=null;
+let lastTheme="";
+
+const fallback={
+  ok:true,
+  theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"Broadcast Cloud",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
+  visual:{primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166",title:"WEEKEND VIBES",mood:"Broadcast Cloud"},
+  topbarNews:["🎉 WEEKEND VIBES · Broadcast Cloud"],
+  footerTicker:["TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY"],
+  chart:{items:[{rank:1,artist:"Axwell & Bonn",title:"Whatever Turns You On"}]},
+  live:{followers:870,followersGoal:1000,viewers:0,subs:0},
+  show:{title:"WEEKEND VIBES",description:"Broadcast Cloud"},
+  boxes:{
+    music:{label:"MUSIC",title:"#1 Axwell & Bonn",body:"Whatever Turns You On"},
+    community:{label:"COMMUNITY",title:"Live chat",body:"Twitch chat locked to box 4"},
+    status:{label:"LIVE STATUS",title:"870/1000 followers",body:"Broadcast Cloud online"},
+    program:{label:"PROGRAM",title:"WEEKEND VIBES",body:"Broadcast Cloud"},
+    top20:{label:"TOP20",title:"#1 Axwell & Bonn",body:"Whatever Turns You On"},
+    news:{label:"NEWS",title:"Broadcast News",body:"News from admin"},
+    goals:{label:"GOALS",title:"870/1000 followers",body:"Help DJ FOLSOE grow"}
+  }
+};
+
+function q(id){return document.getElementById(id);}
+function clip(v,max){v=String(v||"").trim();return v.length>max?v.slice(0,max-1)+"…":v;}
+function themeClass(key){return "theme-"+String(key||"weekend").toLowerCase();}
+
+async function loadState(){
+  try{
+    const r=await fetch(API_BASE+"/api/overlay/v170-state?ts="+Date.now(),{cache:"no-store"});
+    const j=await r.json();
+    state=normalize(j);
+  }catch(e){
+    console.log("V816.1 overlay API fallback", e);
+    state=fallback;
+  }
+  render();
+}
+
+function normalize(j){
+  const s=(j&&typeof j==="object")?j:{};
+  const out=JSON.parse(JSON.stringify(fallback));
+  Object.assign(out,s);
+  out.theme=s.theme||fallback.theme;
+  out.visual=Object.assign(out.visual||{},s.visual||{});
+  out.topbarNews=Array.isArray(s.topbarNews)&&s.topbarNews.length?s.topbarNews:fallback.topbarNews;
+  out.footerTicker=Array.isArray(s.footerTicker)&&s.footerTicker.length?s.footerTicker:fallback.footerTicker;
+  out.chart=s.chart||fallback.chart;
+  out.live=Object.assign(out.live||{},s.live||{});
+  out.show=Object.assign(out.show||{},s.show||{});
+  out.boxes=Object.assign(out.boxes||{},s.boxes||{});
+
+  // If worker did not send boxes, build them from normal payload.
+  const top=(out.chart&&out.chart.items&&out.chart.items[0])||{rank:1,artist:"FOLSOE Chart",title:"Weekly Listening Chart"};
+  const v=out.visual||{};
+  const live=out.live||{};
+  out.boxes.music=Object.assign({label:"MUSIC",title:`#${top.rank||1} ${top.artist||"FOLSOE Chart"}`,body:top.title||"Weekly Listening Chart"},out.boxes.music||{});
+  out.boxes.community=Object.assign({label:"COMMUNITY",title:"Live chat",body:"Twitch chat locked to box 4"},out.boxes.community||{});
+  out.boxes.status=Object.assign({label:"LIVE STATUS",title:`${live.followers||870}/${live.followersGoal||1000} followers`,body:`${live.viewers||0} viewers · Broadcast Cloud`},out.boxes.status||{});
+  out.boxes.program=Object.assign({label:"PROGRAM",title:v.title||out.show.title||"DJ FOLSOE",body:v.mood||out.show.description||"Theme Engine"},out.boxes.program||{});
+  out.boxes.top20=Object.assign({label:"TOP20",title:`#${top.rank||1} ${top.artist||"Chart"}`,body:top.title||""},out.boxes.top20||{});
+  out.boxes.news=Object.assign({label:"NEWS",title:(out.topbarNews[0]||"Broadcast News").replace(/^[^A-ZÆØÅa-zæøå0-9]+/,""),body:"News from admin"},out.boxes.news||{});
+  out.boxes.goals=Object.assign({label:"GOALS",title:`${live.followers||870}/${live.followersGoal||1000} followers`,body:"Help DJ FOLSOE grow"},out.boxes.goals||{});
+  return out;
+}
+
+function setBox(prefix,b){
+  q(prefix+"Label").textContent=clip(b.label||"",18);
+  q(prefix+"Title").textContent=clip(b.title||"",32);
+  if(q(prefix+"Body")) q(prefix+"Body").textContent=clip(b.body||"",72);
+}
+
+function flash(selector){
+  const el=document.querySelector(selector);
+  if(!el)return;
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+}
+
+function render(){
+  const s=state||fallback;
+  const key=(s.theme&&s.theme.activeTheme)||"weekend";
+  if(key!==lastTheme){
+    document.body.className=themeClass(key);
+    lastTheme=key;
+  }
+
+  const visual=s.visual||{};
+  document.documentElement.style.setProperty("--a",visual.accent||"#ffd166");
+  document.documentElement.style.setProperty("--b",visual.secondary||"#ff4d6d");
+  document.documentElement.style.setProperty("--c",visual.primary||"#00d4ff");
+
+  q("djf816TopText").textContent=(s.topbarNews||fallback.topbarNews).join("     ✦     ");
+  q("djf816FooterText").textContent=(s.footerTicker||fallback.footerTicker).join("     ✦     ");
+
+  setBox("music",s.boxes.music);
+  setBox("community",s.boxes.community);
+  setBox("status",s.boxes.status);
+  setBox("program",s.boxes.program);
+  setBox("top20",s.boxes.top20);
+  setBox("news",s.boxes.news);
+  setBox("goals",s.boxes.goals);
+
+  flash(".boxMusic"); flash(".boxCommunity"); flash(".boxStatus"); flash(".boxProgram"); flash(".miniTop20"); flash(".miniNews"); flash(".miniGoals");
+}
+
+function clock(){
+  q("djf816Clock").textContent=new Date().toLocaleTimeString("da-DK",{hour:"2-digit",minute:"2-digit"});
+}
+
+clock();
+setInterval(clock,1000);
+loadState();
+setInterval(loadState,8000);

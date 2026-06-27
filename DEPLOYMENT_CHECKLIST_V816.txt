@@ -1,0 +1,25 @@
+V816 CHECKLIST
+
+Cloudflare:
+1. Deploy cloudflare-worker/worker.js
+2. Secrets: ADMIN_TOKEN, TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL
+3. KV binding: DJF_DATA
+
+GitHub:
+4. Upload alle filer til repo root.
+
+Admin:
+5. https://folsoetv.dk/admin.html?v=816
+6. Ctrl+F5
+7. Gem ADMIN_TOKEN
+8. Skift tema
+9. Opret forside-nyheder
+10. Opret top/bund ticker
+11. Rediger shows
+12. Rediger Top 20
+
+Test:
+- /api/theme
+- /api/homepage
+- /api/overlay/v170-state
+- /api/twitch-profile
