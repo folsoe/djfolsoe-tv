@@ -11,7 +11,7 @@
     <header class="siteNav">
       <a class="navBrand" href="#top"><span class="brandOrb"></span><strong>DJ FOLSOE</strong><em id="navLive">LIVE</em></a>
       <nav class="desktopNav">
-        <a href="#top">Forside</a><a href="#about">Om mig</a><a href="#shows">Shows</a><a href="#requests">Requests</a><a href="#news">Nyheder</a><a href="#top20">Top 20</a><a href="#network">DJ Network</a>
+        <a href="#top" data-i18n="nav.home">Forside</a><a href="#about" data-i18n="nav.about">Om mig</a><a href="#shows" data-i18n="nav.shows">Shows</a><a href="#requests" data-i18n="nav.requests">Requests</a><a href="#news" data-i18n="nav.news">Nyheder</a><a href="#top20" data-i18n="nav.top20">Top 20</a>
       </nav>
       <div class="langSwitch"><button data-lang="da">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></div>
     </header>
@@ -26,19 +26,19 @@
         <div class="heroCopy">
           <div class="onlineLine"><span id="liveDot"></span><b id="heroStatusMini">Henter Twitch...</b></div>
           <h1>DJ FOLSOE</h1>
-          <h2 id="heroSubtitle">Music TV fra Danmark</h2>
+          <h2 id="heroSubtitle" data-i18n="hero.subtitle">Music TV fra Danmark</h2>
           <p id="twitchDescription">Henter Twitch bio...</p>
           <div class="heroMeta">
-            <div><span>Stream title</span><b id="streamTitle">Loading...</b></div>
-            <div><span>Category</span><b id="streamCategory">Music</b></div>
+            <div><span data-i18n="hero.streamTitle">Stream title</span><b id="streamTitle">Loading...</b></div>
+            <div><span data-i18n="hero.category">Category</span><b id="streamCategory">Music</b></div>
           </div>
           <div class="heroButtons">
-            <a class="btn primary" href="https://twitch.tv/djfolsoe" target="_blank">Se mig live på Twitch</a>
-            <a class="btn ghost" href="#requests">Musikønsker</a>
+            <a class="btn primary" href="https://twitch.tv/djfolsoe" target="_blank" data-i18n="hero.cta.twitch">Se mig live på Twitch</a>
+            <a class="btn ghost" href="#requests" data-i18n="hero.cta.requests">Musikønsker</a>
           </div>
         </div>
         <aside class="liveChatPreview">
-          <h3>Live data</h3>
+          <h3 data-i18n="hero.liveData">Live data</h3>
           <div class="chatRows">
             <div><b>Status:</b><span id="sideStatus">Loading</span></div>
             <div><b>Viewers:</b><span id="sideViewers">0</span></div>
@@ -49,54 +49,54 @@
           <a class="btn primary chatBtn" href="https://twitch.tv/djfolsoe" target="_blank">Åbn Twitch</a>
         </aside>
         <div class="heroStats">
-          <div><span>Followers</span><b id="statFollowers">0</b></div>
-          <div><span>Viewers</span><b id="statOnline">0</b></div>
-          <div><span>Views</span><b id="statViews">0</b></div>
-          <div><span>Stream</span><b id="statLive">Offline</b></div>
-          <div><span>Category</span><b id="statCategory">Music</b></div>
+          <div><span data-i18n="stats.followers">Followers</span><b id="statFollowers">0</b></div>
+          <div><span data-i18n="stats.viewers">Viewers</span><b id="statOnline">0</b></div>
+          <div><span data-i18n="stats.views">Views</span><b id="statViews">0</b></div>
+          <div><span data-i18n="stats.stream">Stream</span><b id="statLive">Offline</b></div>
+          <div><span data-i18n="hero.category">Category</span><b id="statCategory">Music</b></div>
         </div>
       </section>
 
       <section id="about" class="panel aboutPanel">
-        <div class="panelHead"><h2>Hvem er DJ FOLSOE?</h2></div>
+        <div class="panelHead"><h2 data-i18n="about.title">Hvem er DJ FOLSOE?</h2></div>
         <p id="aboutText">DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers.</p>
         <div class="featureGrid">
-          <div class="feature"><i>🎵</i><b>Musik</b><span id="aboutMusic">Trance, Retro, EDM, Pop & mere</span></div>
-          <div class="feature"><i>📺</i><b>Shows</b><span id="aboutShows">Live DJ-shows og temastreams</span></div>
-          <div class="feature"><i>🎙️</i><b>Requests</b><span id="aboutRequests">!ønske / !request / !Wunsch</span></div>
-          <div class="feature"><i>💜</i><b>Community</b><span id="aboutCommunity">Chat, mods og dansk DJ-kultur</span></div>
+          <div class="feature"><i>🎵</i><b data-i18n="about.musicTitle">Musik</b><span id="aboutMusic">Trance, Retro, EDM, Pop & mere</span></div>
+          <div class="feature"><i>📺</i><b data-i18n="about.showsTitle">Shows</b><span id="aboutShows">Live DJ-shows og temastreams</span></div>
+          <div class="feature"><i>🎙️</i><b data-i18n="about.requestsTitle">Requests</b><span id="aboutRequests">!ønske / !request / !Wunsch</span></div>
+          <div class="feature"><i>💜</i><b data-i18n="about.communityTitle">Community</b><span id="aboutCommunity">Chat, mods og dansk DJ-kultur</span></div>
         </div>
       </section>
 
       <section id="shows" class="panel">
-        <div class="panelHead"><h2>Shows</h2><a href="#shows">Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend</a></div>
+        <div class="panelHead"><h2 data-i18n="shows.title">Shows</h2><a href="#shows">Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend</a></div>
         <div id="showsGrid" class="showGrid"></div>
       </section>
 
       <section id="requests" class="panel">
-        <div class="panelHead"><h2>Seneste musikønsker</h2><a href="#requests">Gemmer de sidste 3 fra !ønske</a></div>
+        <div class="panelHead"><h2 data-i18n="requests.title">Seneste musikønsker</h2><a href="#requests">Gemmer de sidste 3 fra !ønske</a></div>
         <div id="requestsGrid" class="requestsGrid"></div>
       </section>
 
       <section id="news" class="panel">
-        <div class="panelHead"><h2>Nyheder & opdateringer</h2><a href="#news">Seneste show · Top20 · Requests · Community · DJ Network · Twitch</a></div>
+        <div class="panelHead"><h2 data-i18n="news.title">Nyheder & opdateringer</h2><a href="#news">Seneste show · Top20 · Requests · Community · DJ Network · Twitch</a></div>
         <div id="newsGrid" class="newsGrid"></div>
       </section>
 
       <section id="top20" class="panel">
-        <div class="panelHead"><h2>FOLSOE Top 20</h2><a href="#top20" onclick="toggleChart()">Se hele listen →</a></div>
+        <div class="panelHead"><h2 data-i18n="top20.title">FOLSOE Top 20</h2><a href="#top20" onclick="toggleChart()">Se hele listen →</a></div>
         <div id="chartGrid" class="chartGrid"></div>
-        <div class="centerAction"><button class="btn primary" onclick="toggleChart()">Se hele Top 20</button></div>
+        <div class="centerAction"><button class="btn primary" onclick="toggleChart()" data-i18n="top20.button">Se hele Top 20</button></div>
       </section>
 
       <section id="network" class="panel modPanel">
-        <div class="panelHead"><h2>Mod-teamet & DJ Network</h2></div>
+        <div class="panelHead"><h2 data-i18n="mods.title">Mod-teamet</h2></div>
         <p>Mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.</p>
         <div id="modsGrid" class="modsGrid"></div>
       </section>
     </main>
 
-    <footer><span>© 2026 DJ FOLSOE</span><div><a href="#shows">Shows</a><a href="#requests">Requests</a><a href="#top20">Top 20</a></div></footer>
+    <footer><span>© 2026 DJ FOLSOE</span><div><a href="#shows" data-i18n="nav.shows">Shows</a><a href="#requests" data-i18n="nav.requests">Requests</a><a href="#top20" data-i18n="nav.top20">Top 20</a></div></footer>
   </div>
   <script src="assets/js/homepage.js"></script>
 </body>
