@@ -50,3 +50,5 @@ code{color:#2dd4ef}
 @media(max-width:900px){.row.requestRow{grid-template-columns:1fr}}
 
 .ceRow{grid-template-columns:repeat(4,minmax(120px,1fr));align-items:end}.ceRow input{width:100%}@media(max-width:900px){.ceRow{grid-template-columns:1fr}}
+
+.v820Row{grid-template-columns:repeat(4,minmax(120px,1fr)) 80px;align-items:end}.v820Row input{width:100%}@media(max-width:900px){.v820Row{grid-template-columns:1fr}}
