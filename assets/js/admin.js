@@ -1,3 +1,30 @@
+
+/* ==========================================================
+   V816.19.2 ADMIN NULL FIX
+   Safe DOM helpers. Prevents:
+   Cannot set properties of null (setting 'innerHTML')
+   ========================================================== */
+function djfEl(id){ return document.getElementById(id); }
+function djfHTML(id, html){
+  const el = djfEl(id);
+  if(!el){ console.warn("[DJF ADMIN] Missing HTML element:", id); return; }
+  el.innerHTML = html || "";
+}
+function djfText(id, text){
+  const el = djfEl(id);
+  if(!el){ console.warn("[DJF ADMIN] Missing text element:", id); return; }
+  el.textContent = text || "";
+}
+function djfValue(id, value){
+  const el = djfEl(id);
+  if(!el){ console.warn("[DJF ADMIN] Missing value element:", id); return; }
+  el.value = value || "";
+}
+function djfGet(id){
+  const el = djfEl(id);
+  return el ? el.value : "";
+}
+
 const TOP20_STABLE_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
 const DISCOVERY_STABLE_SEED=[{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet", "priority": 1}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Lige opdaget og testet i mix", "priority": 2}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kunne blive en stærk bobler", "priority": 3}];
 
@@ -75,16 +102,16 @@ let showVisualsItems=JSON.parse(JSON.stringify(SHOW_VISUALS_SEED));
 let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discoveryItems=[],requestItems=[];
 
 document.addEventListener("DOMContentLoaded",()=>{
-  document.getElementById("token").value=localStorage.getItem("DJF_ADMIN_TOKEN")||"";
+  djfValue("token", localStorage.getItem("DJF_ADMIN_TOKEN")||"");
   renderThemes();
   loadAll();
 });
 
 function jump(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});}
-function token(){return localStorage.getItem("DJF_ADMIN_TOKEN")||document.getElementById("token").value||"";}
-function saveToken(){localStorage.setItem("DJF_ADMIN_TOKEN",document.getElementById("token").value.trim());setStatus("✅ Token gemt");loadAll();}
+function token(){return localStorage.getItem("DJF_ADMIN_TOKEN")||djfGet("token")||"";}
+function saveToken(){localStorage.setItem("DJF_ADMIN_TOKEN",djfGet("token").trim());setStatus("✅ Token gemt");loadAll();}
 function openApi(path){window.open(API_BASE+path,"_blank");}
-function setStatus(v){document.getElementById("statusBox").textContent=v;}
+function setStatus(v){djfText("statusBox", v);}
 
 async function api(path,opt={}){
   opt.headers=Object.assign({"content-type":"application/json","x-admin-token":token()},opt.headers||{});
@@ -96,12 +123,12 @@ async function api(path,opt={}){
 }
 
 function renderThemes(){
-  document.getElementById("themeGrid").innerHTML=Object.entries(THEMES).map(([k,l])=>`<button id="theme_${k}" onclick="setTheme('${k}')">${l}</button>`).join("");
+  djfHTML("themeGrid", Object.entries(THEMES).map(([k,l])=>`<button id="theme_${k}" onclick="setTheme('${k}')">${l}</button>`).join(""));
 }
 function markTheme(k){
   activeTheme=k||activeTheme;
   Object.keys(THEMES).forEach(x=>document.getElementById("theme_"+x)?.classList.toggle("activeThemeBtn",x===activeTheme));
-  document.getElementById("activeTheme").textContent="Aktivt tema: "+activeTheme;
+  djfText("activeTheme", "Aktivt tema: "+activeTheme);
 }
 async function setTheme(k){
   try{
@@ -141,20 +168,20 @@ async function loadAll(){
 }
 
 function fillProfile(){
-  document.getElementById("profileName").value=core.profile?.name||home.profile?.name||"DJ FOLSOE";
-  document.getElementById("twitchChannel").value=core.twitchChannel||home.twitch?.login||"djfolsoe";
-  document.getElementById("profileDescription").value=core.profile?.description||home.twitch?.description||"";
-  document.getElementById("profileGenres").value=(core.profile?.genres||home.profile?.genres||[]).join(", ");
+  djfValue("profileName", core.profile?.name||home.profile?.name||"DJ FOLSOE");
+  djfValue("twitchChannel", core.twitchChannel||home.twitch?.login||"djfolsoe");
+  djfValue("profileDescription", core.profile?.description||home.twitch?.description||"");
+  djfValue("profileGenres", (core.profile?.genres||home.profile?.genres||[]).join(", "));
 }
 
 async function saveProfile(){
   try{
     const profile=Object.assign({},core.profile||{}, {
-      name:document.getElementById("profileName").value.trim()||"DJ FOLSOE",
-      description:document.getElementById("profileDescription").value.trim(),
-      genres:document.getElementById("profileGenres").value.split(",").map(x=>x.trim()).filter(Boolean)
+      name:djfGet("profileName").trim()||"DJ FOLSOE",
+      description:djfGet("profileDescription").trim(),
+      genres:djfGet("profileGenres").split(",").map(x=>x.trim()).filter(Boolean)
     });
-    const twitchChannel=document.getElementById("twitchChannel").value.trim().toLowerCase()||"djfolsoe";
+    const twitchChannel=djfGet("twitchChannel").trim().toLowerCase()||"djfolsoe";
     await api("/api/core",{method:"POST",body:JSON.stringify({profile,twitchChannel})});
     setStatus("✅ Profil/forside fallback gemt");
     loadAll();
@@ -173,12 +200,12 @@ function row(type,item,i){
 }
 
 function renderEditors(){
-  document.getElementById("newsEditor").innerHTML=newsItems.map((x,i)=>row("news",x,i)).join("");
-  document.getElementById("topEditor").innerHTML=topItems.map((x,i)=>row("top",x,i)).join("");
-  document.getElementById("bottomEditor").innerHTML=bottomItems.map((x,i)=>row("bottom",x,i)).join("");
-  document.getElementById("showsEditor").innerHTML=showsItems.map((x,i)=>row("shows",x,i)).join("");
-  document.getElementById("top20Editor").innerHTML=top20Items.map((x,i)=>row("top20",x,i)).join("");
-  if(document.getElementById("discoveryEditor")) document.getElementById("discoveryEditor").innerHTML=discoveryItems.map((x,i)=>row("discovery",x,i)).join("");
+  djfHTML("newsEditor", newsItems.map((x,i)=>row("news",x,i)).join(""));
+  djfHTML("topEditor", topItems.map((x,i)=>row("top",x,i)).join(""));
+  djfHTML("bottomEditor", bottomItems.map((x,i)=>row("bottom",x,i)).join(""));
+  djfHTML("showsEditor", showsItems.map((x,i)=>row("shows",x,i)).join(""));
+  djfHTML("top20Editor", top20Items.map((x,i)=>row("top20",x,i)).join(""));
+  if(document.getElementById("discoveryEditor")) djfHTML("discoveryEditor", discoveryItems.map((x,i)=>row("discovery",x,i)).join(""));
 }
 
 function collect(){
@@ -217,8 +244,8 @@ function seedTop20(){top20Items=TOP20_SEED.map(x=>Object.assign({},x));renderEdi
 
 async function addRequest(){
   try{
-    const user=document.getElementById("reqUser").value||"Admin";
-    const text=document.getElementById("reqText").value||"!ønske Artist - Title";
+    const user=djfGet("reqUser")||"Admin";
+    const text=djfGet("reqText")||"!ønske Artist - Title";
     const r=await api("/api/requests",{method:"POST",body:JSON.stringify({user,text})});
     requestItems=r.items||[];
     renderRequests();
@@ -227,12 +254,12 @@ async function addRequest(){
 }
 
 function renderRequests(){
-  document.getElementById("requestsPreview").innerHTML=(requestItems||[]).slice(0,3).map(x=>`<div class="previewCard"><b>${esc(x.song||x.text||"")}</b><p>${esc(x.user||"Twitch chat")}</p><small>${esc(x.time||"")}</small></div>`).join("");
+  djfHTML("requestsPreview", (requestItems||[]).slice(0,3).map(x=>`<div class="previewCard"><b>${esc(x.song||x.text||"")}</b><p>${esc(x.user||"Twitch chat")}</p><small>${esc(x.time||"")}</small></div>`).join(""));
 }
 
 function renderTwitch(){
   const tw=home?.twitch||{};
-  document.getElementById("twitchPreview").innerHTML=`<div class="previewCard">${tw.avatar?`<img class="twitchAvatar" src="${tw.avatar}">`:""}<h3>${esc(tw.displayName||"DJ FOLSOE")}</h3><p>${esc(tw.description||"")}</p><p><b>Status:</b> ${tw.isLive?"LIVE":"Offline"}</p><p><b>Viewers:</b> ${tw.viewers||0}</p><p><b>Followers:</b> ${tw.followers||0}</p><p><b>Category:</b> ${esc(tw.category||"Music")}</p></div>`;
+  djfHTML("twitchPreview", `<div class="previewCard">${tw.avatar?`<img class="twitchAvatar" src="${tw.avatar}">`:""}<h3>${esc(tw.displayName||"DJ FOLSOE")}</h3><p>${esc(tw.description||"")}</p><p><b>Status:</b> ${tw.isLive?"LIVE":"Offline"}</p><p><b>Viewers:</b> ${tw.viewers||0}</p><p><b>Followers:</b> ${tw.followers||0}</p><p><b>Category:</b> ${esc(tw.category||"Music")}</p></div>`);
 }
 
 async function testAll(){
