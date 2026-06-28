@@ -20,7 +20,7 @@ const I18N={
     "top20.title":"FOLSOE Top 20","top20.link":"Se hele listen →","top20.button":"Se hele Top 20",
     "mods.title":"Mod-teamet","mods.body":"Mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.",
     "openTwitch":"Åbn Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Kategori","title":"Titel",
-    "offline":"Offline","live":"Live","ready":"klar","showDefault":"folsoetv.dk show"
+    "offline":"Offline","live":"Live","ready":"klar","showDefault":"Broadcast Cloud show"
   },
   en:{
     "nav.home":"Home","nav.about":"About me","nav.shows":"Shows","nav.requests":"Requests","nav.news":"News","nav.top20":"Top 20",
@@ -39,7 +39,7 @@ const I18N={
     "top20.title":"FOLSOE Top 20","top20.link":"See full list →","top20.button":"See full Top 20",
     "mods.title":"Mod team","mods.body":"Mods keep the chat friendly, help new viewers and protect the good vibe around the stream.",
     "openTwitch":"Open Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Category","title":"Title",
-    "offline":"Offline","live":"Live","ready":"ready","showDefault":"folsoetv.dk show"
+    "offline":"Offline","live":"Live","ready":"ready","showDefault":"Broadcast Cloud show"
   },
   de:{
     "nav.home":"Startseite","nav.about":"Über mich","nav.shows":"Shows","nav.requests":"Wünsche","nav.news":"News","nav.top20":"Top 20",
@@ -58,7 +58,7 @@ const I18N={
     "top20.title":"FOLSOE Top 20","top20.link":"Ganze Liste ansehen →","top20.button":"Ganze Top 20 ansehen",
     "mods.title":"Mod-Team","mods.body":"Mods halten den Chat freundlich, helfen neuen Zuschauern und schützen die gute Stimmung im Stream.",
     "openTwitch":"Twitch öffnen","status":"Status","viewers":"Zuschauer","followers":"Follower","category":"Kategorie","title":"Titel",
-    "offline":"Offline","live":"Live","ready":"bereit","showDefault":"folsoetv.dk Show"
+    "offline":"Offline","live":"Live","ready":"bereit","showDefault":"Broadcast Cloud Show"
   }
 };
 
@@ -131,6 +131,7 @@ function render(){
   renderNews(state.newsCards||[], tw);
   renderChart(state.top20||state.chart?.items||[]);
   renderDiscovery(state.discoveryPicks||[]);
+  renderV81619();
   renderMods(state.mods||state.profile?.mods||[]);
   renderCommunityWall(state.communityWall||[]);
   renderNextShow(state.nextShow||{});
@@ -180,7 +181,7 @@ function renderRequestStats(stats){
 
 function renderNews(items,tw){
   const base=[
-    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Seneste show",title:tw.liveTitle||"DJ FOLSOE folsoetv.dk",body:tw.isLive?t("hero.live"):t("hero.offline")},
+    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Seneste show",title:tw.liveTitle||"DJ FOLSOE Broadcast Cloud",body:tw.isLive?t("hero.live"):t("hero.offline")},
     {type:lang==="de"?"Top20 neu":lang==="en"?"Top20 update":"Top20 nyt",title:"FOLSOE Top 20",body:lang==="de"?"Sieh die wöchentlichen Charts.":lang==="en"?"See the weekly chart.":"Se ugens chart og countdown."},
     {type:"Requests",title:lang==="de"?"Musikwünsche sind offen":lang==="en"?"Song requests are open":"Musikønsker er åbne",body:"!ønske / !request / !Wunsch"},
     {type:"Community",title:lang==="de"?"Der Chat ist das Herz":lang==="en"?"Chat is the heart":"Chatten er hjertet",body:lang==="de"?"Emotes, Mods und gute Stimmung.":lang==="en"?"Emotes, mods and good vibes.":"Emotes, mods og god stemning."},
@@ -259,4 +260,19 @@ function applySEO(){
   upsertMeta('meta[name="twitter:description"]',"content",seo.description);
   upsertMeta('meta[name="twitter:image"]',"content",seo.image);
   const schema=document.getElementById("seoSchema"); if(schema&&seo.schema) schema.textContent=JSON.stringify(seo.schema);
+}
+
+
+// ===== V816.19 Big Content Expansion =====
+function cePct(c,t){c=Number(c||0);t=Number(t||1);return Math.max(0,Math.min(100,Math.round(c/t*100)));}
+function renderV81619(){
+ const s=window.state||state||{};
+ const fill=(id,html)=>{const el=document.getElementById(id); if(el) el.innerHTML=html;};
+ const tv=[{"day": "Tirsdag", "time": "18:30", "title": "Trance Tuesday", "text": "Store melodier, energi og trance-fællesskab.", "type": "trance", "active": true, "priority": 1}, {"day": "Torsdag", "time": "18:30", "title": "FOLSOE Top 20", "text": "Ugens største tracks i countdown-format.", "type": "chart", "active": true, "priority": 2}, {"day": "Fredag", "time": "20:00", "title": "Fredagsbar", "text": "Live DJ med sjov, ballade og weekendstemning.", "type": "party", "active": true, "priority": 3}, {"day": "Søndag", "time": "20:00", "title": "Retro Hits", "text": "Klassikere, nostalgi og gamle hits med nyt liv.", "type": "retro", "active": true, "priority": 4}], journey=[{"key": "followers", "label": "Followers", "current": 870, "target": 1000, "text": "Rejsen mod 1000 followers på Twitch.", "active": true, "priority": 1}, {"key": "subs", "label": "Subs", "current": 0, "target": 100, "text": "Subs hjælper med teknik, grafik og shows.", "active": true, "priority": 2}, {"key": "community", "label": "Community", "current": 0, "target": 500, "text": "Flere aktive seere og mere fællesskab.", "active": true, "priority": 3}], hof=[{"title": "Månedens chatter", "name": "Twitch chatten", "text": "Den der holder energien oppe.", "icon": "💬", "active": true, "priority": 1}, {"title": "Top requester", "name": "Musikønsker", "text": "Den der finder de bedste tracks.", "icon": "🎧", "active": true, "priority": 2}, {"title": "Community hero", "name": "DJ FOLSOE Family", "text": "Kærlighed til dem der støtter streamen.", "icon": "💜", "active": true, "priority": 3}], req=[{"user": "Chat", "song": "Skriv !ønske Artist - Title", "language": "da", "time": "live", "active": true, "priority": 1}, {"user": "Chat", "song": "Use !request Artist - Title", "language": "en", "time": "live", "active": true, "priority": 2}, {"user": "Chat", "song": "Nutze !Wunsch Künstler - Titel", "language": "de", "time": "live", "active": true, "priority": 3}], disc=[{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet.", "active": true, "priority": 1}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Frisk house-vibe til streamen.", "active": true, "priority": 2}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kan blive en stærk bobler.", "active": true, "priority": 3}], arch=[{"title": "Trance Tuesday Highlights", "date": "Seneste show", "text": "Melodisk trance, energi og community moments.", "image": "", "active": true, "priority": 1}, {"title": "Fredagsbar Replay", "date": "Seneste fredag", "text": "Weekendstemning og live DJ-energi.", "image": "", "active": true, "priority": 2}, {"title": "Top 20 Countdown", "date": "Denne uge", "text": "Ugens vigtigste tracks og discoveries.", "image": "", "active": true, "priority": 3}];
+ fill("tvGuideGrid",(s.tvGuide?.length?s.tvGuide:tv).map(x=>`<article class="tvGuideCard"><span>${x.day||""} · ${x.time||""}</span><h3>${x.title||""}</h3><p>${x.text||""}</p></article>`).join(""));
+ fill("viewerJourneyGrid",(s.viewerJourney?.length?s.viewerJourney:journey).map(x=>{const p=cePct(x.current,x.target);return `<article class="journeyCard"><span>${x.label||""}</span><h3>${x.current||0} / ${x.target||0}</h3><div class="journeyBar"><i style="width:${p}%"></i></div><p>${x.text||""}</p></article>`}).join(""));
+ fill("hallOfFameGrid",(s.hallOfFame?.length?s.hallOfFame:hof).map(x=>`<article class="hofCard"><b>${x.icon||"⭐"}</b><span>${x.title||""}</span><h3>${x.name||""}</h3><p>${x.text||""}</p></article>`).join(""));
+ fill("liveRequestWallGrid",(s.liveRequestWall?.length?s.liveRequestWall:(s.requests?.length?s.requests:req)).slice(0,10).map(x=>`<article class="liveReqCard"><span>${x.time||"live"} · ${(x.language||"").toUpperCase()}</span><h3>${x.song||x.text||""}</h3><p>${x.user||"Chat"}</p></article>`).join(""));
+ fill("musicDiscoveryGrid",(s.musicDiscovery?.length?s.musicDiscovery:(s.discoveryPicks?.length?s.discoveryPicks:disc)).map((x,i)=>`<article class="musicDiscoveryCard"><span>DISCOVERY ${i+1}</span><h3>${x.artist||""}</h3><b>${x.title||""}</b><p>${x.genre||""} · ${x.note||""}</p></article>`).join(""));
+ fill("showArchiveGrid",(s.showArchive?.length?s.showArchive:arch).map(x=>`<article class="archiveCard">${x.image?`<img src="${x.image}" alt="">`:""}<span>${x.date||""}</span><h3>${x.title||""}</h3><p>${x.text||""}</p></article>`).join(""));
 }

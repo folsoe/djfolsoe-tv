@@ -3,7 +3,7 @@
 (function(){
   const FALLBACK = window.DJF_BRAND_FALLBACK || {
     brand: "DJ FOLSOE",
-    heroRibbon: { da: "FOLSOETV.DK · DJ FOLSOE ON TWITCH", en: "FOLSOETV.DK · DJ FOLSOE ON TWITCH", de: "FOLSOETV.DK · DJ FOLSOE ON TWITCH" },
+    heroRibbon: { da: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH", en: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH", de: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH" },
     heroDescription: { da: "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.", en: "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de: "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community." }
   };
 
@@ -67,8 +67,8 @@
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => {
       n.nodeValue = cleanText(n.nodeValue)
-        .replaceAll("FOLSOETV.DK · RADIO 2026 · MUSIC TV FROM DENMARK", "FOLSOETV.DK · DJ FOLSOE ON TWITCH")
-        .replaceAll("FOLSOETV.DK · RADIO 2026 · MUSIC TV FRA DANMARK", "FOLSOETV.DK · DJ FOLSOE ON TWITCH");
+        .replaceAll("BROADCAST CLOUD · RADIO 2026 · MUSIC TV FROM DENMARK", "BROADCAST CLOUD · DJ FOLSOE ON TWITCH")
+        .replaceAll("BROADCAST CLOUD · RADIO 2026 · MUSIC TV FRA DANMARK", "BROADCAST CLOUD · DJ FOLSOE ON TWITCH");
     });
 
     const title = document.querySelector("title");

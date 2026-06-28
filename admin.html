@@ -1,11 +1,6 @@
 <!doctype html>
 <html lang="da">
 <head>
-<script>
-/* DJF early admin null guard bootstrap */
-window.__DJF_ADMIN_BOOTSTRAP__ = true;
-</script>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>DJ FOLSOE V816.12 Admin</title>
@@ -34,6 +29,7 @@ window.__DJF_ADMIN_BOOTSTRAP__ = true;
   <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
   <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Næste show</button>
   <button onclick="jump('twitch')">🟣 Twitch</button>
+<button onclick="jump('contentExpansion')">📺 Content Expansion</button>
 </nav>
 
 <main>
@@ -184,6 +180,7 @@ window.__DJF_ADMIN_BOOTSTRAP__ = true;
     <p class="note">Kræver Cloudflare secrets: TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL=djfolsoe.</p>
     <div id="twitchPreview" class="twitchPreview"></div>
   </section>
+<section id="contentExpansion" class="panel"><div class="panelHead"><h2>📺 V816.19 Content Expansion</h2><button onclick="loadCEAdmin()">Hent alt</button></div><p class="note">TV Guide, Viewer Journey, Hall Of Fame, Request Wall, Music Discovery og Show Archive.</p><div id="ceAdmin"></div><button onclick="saveCEAdmin()">Gem alt indhold</button></section>
 </main>
 
 
@@ -192,6 +189,6 @@ window.__DJF_ADMIN_BOOTSTRAP__ = true;
 window.loadShowVisuals = window.loadShowVisuals || async function(){ console.warn("inline loadShowVisuals guard"); };
 </script>
 
-<script src="assets/js/admin.js?v=81613-nullguard"></script>
+<script src="assets/js/admin.js?v=81619big"></script>
 </body>
 </html>
