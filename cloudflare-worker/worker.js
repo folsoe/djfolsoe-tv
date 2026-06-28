@@ -166,6 +166,7 @@ async function homepage(env, core) {
     discoveryPicks:(core.discoveryPicks&&core.discoveryPicks.length?core.discoveryPicks:DEFAULT_CORE.discoveryPicks||[]).slice(0,3),
     discoveryPicks:core.discoveryPicks||DEFAULT_CORE.discoveryPicks||[],
     requests:reqs,
+    homepageLayout:v821LayoutHotfix(core),
     homepageLayout:v821Layout(core),
     broadcastPlanner:v820Items(core,"broadcastPlanner",[{"id": "show_001", "date": "2026-08-14", "start": "20:00", "end": "23:00", "title": "Summer Closing Party", "show": "Fredagsbar", "theme": "SUMMER", "type": "Live DJ Show", "description": "Sommerens sidste store fest med live DJ, requests og fællesskab.", "cover": "", "featured": true, "liveEvent": false, "specialEvent": true, "active": true, "priority": 1}, {"id": "show_002", "date": "2026-08-18", "start": "20:00", "end": "23:00", "title": "Trance Tuesday", "show": "Trance Tuesday", "theme": "TRANCE", "type": "Trance", "description": "Melodisk trance, energi og store følelser.", "cover": "", "featured": false, "liveEvent": false, "specialEvent": false, "active": true, "priority": 2}, {"id": "show_003", "date": "2026-08-21", "start": "20:00", "end": "23:30", "title": "Fredagsbar", "show": "Fredagsbar", "theme": "FREDAGSBAR", "type": "Party", "description": "Weekendstemning, sjov og ballade direkte fra Danmark.", "cover": "", "featured": false, "liveEvent": false, "specialEvent": false, "active": true, "priority": 3}]),
     nextShow:v820Next(core,[{"id": "show_001", "date": "2026-08-14", "start": "20:00", "end": "23:00", "title": "Summer Closing Party", "show": "Fredagsbar", "theme": "SUMMER", "type": "Live DJ Show", "description": "Sommerens sidste store fest med live DJ, requests og fællesskab.", "cover": "", "featured": true, "liveEvent": false, "specialEvent": true, "active": true, "priority": 1}, {"id": "show_002", "date": "2026-08-18", "start": "20:00", "end": "23:00", "title": "Trance Tuesday", "show": "Trance Tuesday", "theme": "TRANCE", "type": "Trance", "description": "Melodisk trance, energi og store følelser.", "cover": "", "featured": false, "liveEvent": false, "specialEvent": false, "active": true, "priority": 2}, {"id": "show_003", "date": "2026-08-21", "start": "20:00", "end": "23:30", "title": "Fredagsbar", "show": "Fredagsbar", "theme": "FREDAGSBAR", "type": "Party", "description": "Weekendstemning, sjov og ballade direkte fra Danmark.", "cover": "", "featured": false, "liveEvent": false, "specialEvent": false, "active": true, "priority": 3}])[0]||null,
@@ -442,6 +443,21 @@ async function v821SaveLayout(request,env,core){
   core.homepageLayout=Array.isArray(body.items)?body.items:[];
   await putCore(env,core);
   return json({ok:true,items:core.homepageLayout});
+}
+
+
+// ===== V816.21.1 Homepage Director Hotfix =====
+const V821_DEFAULT_LAYOUT = [{"key": "hero", "label": "Hero", "selector": "#hero,.hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "about", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem,.about", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam,.mods", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discovery", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "requests", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "journey", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "hof", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
+function v821LayoutHotfix(core){
+  const items = Array.isArray(core.homepageLayout) && core.homepageLayout.length ? core.homepageLayout : V821_DEFAULT_LAYOUT;
+  return items.slice().sort((a,b)=>Number(a.priority||99)-Number(b.priority||99));
+}
+async function v821SaveLayoutHotfix(request, env, core){
+  if (typeof adminOk === "function" && !adminOk(request,env)) return json({error:"Unauthorized"},401);
+  const body = await request.json().catch(()=>({}));
+  core.homepageLayout = Array.isArray(body.items) ? body.items : V821_DEFAULT_LAYOUT;
+  if (typeof putCore === "function") await putCore(env,core);
+  return json({ok:true,items:v821LayoutHotfix(core)});
 }
 
 export default {

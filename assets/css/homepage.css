@@ -200,3 +200,6 @@ body.isOffline .avatarLive{background:#4b5563}
 .hpFeatured{box-shadow:0 0 0 1px rgba(250,204,21,.25),0 24px 70px rgba(250,204,21,.08)!important}
 .hpBreaking{position:relative;box-shadow:0 0 0 2px rgba(236,72,153,.55),0 24px 80px rgba(236,72,153,.16)!important}
 .hpBreaking::before{content:"BREAKING";position:absolute;right:18px;top:12px;color:#06101e;background:linear-gradient(135deg,#facc15,#ec4899);padding:7px 12px;border-radius:999px;font-weight:1000;letter-spacing:.12em;font-size:11px;z-index:5}
+
+/* ===== V816.21.1 Homepage Director Hotfix ===== */
+.hpFeatured{box-shadow:0 0 0 1px rgba(250,204,21,.25),0 24px 70px rgba(250,204,21,.08)!important}.hpBreaking{position:relative;box-shadow:0 0 0 2px rgba(236,72,153,.55),0 24px 80px rgba(236,72,153,.16)!important}.hpBreaking::before{content:'BREAKING';position:absolute;right:18px;top:12px;color:#06101e;background:linear-gradient(135deg,#facc15,#ec4899);padding:7px 12px;border-radius:999px;font-weight:1000;letter-spacing:.12em;font-size:11px;z-index:5}

@@ -310,3 +310,28 @@ function applyHomepageDirector(){
   });
   cards.sort((a,b)=>(b.breaking-a.breaking)||(a.priority-b.priority)).forEach(x=>main.appendChild(x.el));
 }
+
+
+// ===== V816.21.1 Homepage Director Hotfix =====
+const V821_DEFAULT_LAYOUT = [{"key": "hero", "label": "Hero", "selector": "#hero,.hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "about", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem,.about", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam,.mods", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discovery", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "requests", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "journey", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "hof", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
+async function initHomepageDirectorHotfix(){
+  let layout = (window.state&&window.state.homepageLayout) || null;
+  try{
+    const r=await fetch("/api/homepage-layout?v=816211",{cache:"no-store"});
+    if(r.ok){const d=await r.json(); if(Array.isArray(d.items))layout=d.items;}
+  }catch(e){console.warn("[V816.21.1] layout fallback",e)}
+  layout = Array.isArray(layout)&&layout.length ? layout : V821_DEFAULT_LAYOUT;
+  const main=document.querySelector("main")||document.body;
+  const found=[];
+  layout.forEach(item=>{
+    let el=null;
+    String(item.selector||"").split(",").map(s=>s.trim()).filter(Boolean).some(sel=>{el=document.querySelector(sel);return !!el;});
+    if(!el)return;
+    el.style.display=item.visible===false?"none":"";
+    el.classList.toggle("hpFeatured",!!item.featured);
+    el.classList.toggle("hpBreaking",!!item.breaking);
+    if(item.visible!==false)found.push({el,priority:Number(item.priority||99),breaking:!!item.breaking});
+  });
+  found.sort((a,b)=>(Number(b.breaking)-Number(a.breaking))||(a.priority-b.priority)).forEach(x=>main.appendChild(x.el));
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(initHomepageDirectorHotfix,1000));

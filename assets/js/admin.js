@@ -661,12 +661,33 @@ function collectHomepageDirector(){
     HOMEPAGE_LAYOUT[i][f]=v;
   });
 }
-async function loadHomepageDirector(){
+async function loadHomepageDirectorHotfixAdmin(){
   try{const r=await api("/api/homepage-layout");HOMEPAGE_LAYOUT=r.items||HOMEPAGE_LAYOUT;}catch(e){console.warn(e)}
   renderHomepageDirector();
 }
-async function saveHomepageDirector(){
+async function saveHomepageDirectorHotfixAdmin(){
   collectHomepageDirector();
   try{const r=await api("/api/homepage-layout",{method:"POST",body:JSON.stringify({items:HOMEPAGE_LAYOUT})});HOMEPAGE_LAYOUT=r.items||HOMEPAGE_LAYOUT;renderHomepageDirector();if(typeof setStatus==="function")setStatus("✅ Forside-layout gemt")}catch(e){if(typeof setStatus==="function")setStatus("❌ Layout-fejl: "+e.message)}
 }
-document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{try{loadHomepageDirector()}catch(e){console.warn(e)}},1000));
+document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{try{loadHomepageDirectorHotfixAdmin()}catch(e){console.warn(e)}},1000));
+
+
+// ===== V816.21.1 Homepage Director Admin Hotfix =====
+const V821_HOTFIX_DEFAULT_LAYOUT = [{"key": "hero", "label": "Hero", "selector": "#hero,.hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "about", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem,.about", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam,.mods", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discovery", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "requests", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "journey", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "hof", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
+async function loadHomepageDirectorHotfixAdmin(){
+  try{
+    const r=await api("/api/homepage-layout?v=816211");
+    HOMEPAGE_LAYOUT=Array.isArray(r.items)?r.items:V821_HOTFIX_DEFAULT_LAYOUT.slice();
+    if(typeof renderHomepageDirector==="function")renderHomepageDirector();
+    if(typeof setStatus==="function")setStatus("✅ Forside-layout hentet");
+  }catch(e){console.warn(e);if(typeof setStatus==="function")setStatus("❌ /api/homepage-layout mangler - upload worker.js fra V816.21.1");}
+}
+async function saveHomepageDirectorHotfixAdmin(){
+  if(typeof collectHomepageDirector==="function")collectHomepageDirector();
+  try{
+    const r=await api("/api/homepage-layout",{method:"POST",body:JSON.stringify({items:HOMEPAGE_LAYOUT})});
+    HOMEPAGE_LAYOUT=Array.isArray(r.items)?r.items:HOMEPAGE_LAYOUT;
+    if(typeof renderHomepageDirector==="function")renderHomepageDirector();
+    if(typeof setStatus==="function")setStatus("✅ Forside-layout gemt");
+  }catch(e){console.warn(e);if(typeof setStatus==="function")setStatus("❌ Layout API mangler: upload worker.js fra V816.21.1");}
+}
