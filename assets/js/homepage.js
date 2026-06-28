@@ -37,3 +37,14 @@ function render(data){
 
 document.addEventListener("DOMContentLoaded", async()=>{ render(await loadData()); });
 window.DJF = {loadData, saveData, resetData, render, STORAGE_KEY};
+
+// ===== V818.1 Language Pack =====
+const DJF_LANG_KEY="DJF_V818_LANG";
+const DJF_TRANSLATIONS={
+ da:{next:"Næste show",about:"Hvem er DJ FOLSOE?",mods:"Mod-teamet",shows:"Shows",top20:"FOLSOE Top 20",discovery:"Music Discovery Universe",requests:"Live Request Wall",community:"Community Love",journey:"Viewer Journey",hof:"Hall Of Fame",network:"DJ Network",coming:"Coming Up"},
+ en:{next:"Next Show",about:"Who is DJ FOLSOE?",mods:"Mod Team",shows:"Shows",top20:"FOLSOE Top 20",discovery:"Music Discovery Universe",requests:"Live Request Wall",community:"Community Love",journey:"Viewer Journey",hof:"Hall Of Fame",network:"DJ Network",coming:"Coming Up"},
+ de:{next:"Nächste Show",about:"Wer ist DJ FOLSOE?",mods:"Mod-Team",shows:"Shows",top20:"FOLSOE Top 20",discovery:"Music Discovery Universe",requests:"Live Request Wall",community:"Community Love",journey:"Viewer Journey",hof:"Hall Of Fame",network:"DJ Network",coming:"Demnächst"}
+};
+function applyLanguage(lang){const t=DJF_TRANSLATIONS[lang]||DJF_TRANSLATIONS.da;document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(e=>{const k=e.dataset.i18n;if(t[k])e.textContent=t[k]});document.querySelectorAll(".langs button").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang))}
+function setLanguage(lang){localStorage.setItem(DJF_LANG_KEY,lang);applyLanguage(lang)}
+document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang||"da")));applyLanguage(localStorage.getItem(DJF_LANG_KEY)||"da")});
