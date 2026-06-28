@@ -31,6 +31,7 @@
   <button onclick="jump('twitch')">🟣 Twitch</button>
 <button onclick="jump('contentExpansion')">📺 Content Expansion</button>
 <button onclick="jump('tvStationExperience')">📺 TV Station</button>
+<button onclick="jump('homepageDirector')">🎬 Forside Director</button>
 </nav>
 
 <main>
@@ -183,6 +184,12 @@
   </section>
 <section id="contentExpansion" class="panel"><div class="panelHead"><h2>📺 V816.19 Content Expansion</h2><button onclick="loadCEAdmin()">Hent alt</button></div><p class="note">TV Guide, Viewer Journey, Hall Of Fame, Request Wall, Music Discovery og Show Archive.</p><div id="ceAdmin"></div><button onclick="saveCEAdmin()">Gem alt indhold</button></section>
 <section id="tvStationExperience" class="panel"><div class="panelHead"><h2>📺 V816.20 TV Station Experience</h2><button onclick="loadV820Admin()">Hent alt</button></div><p class="note">Broadcast Planner Pro: opret shows 2-3 måneder frem.</p><h3>Broadcast Planner Pro</h3><div id="broadcastPlannerEditor"></div><button onclick="addV820('broadcastPlanner')">Tilføj show</button><button onclick="saveV820('broadcastPlanner','/api/broadcast-planner')">Gem planner</button><h3>Music Discovery Universe</h3><div id="discoveryUniverseEditor"></div><button onclick="addV820('discoveryUniverse')">Tilføj discovery</button><button onclick="saveV820('discoveryUniverse','/api/discovery-universe')">Gem discovery</button><h3>Hall Of Fame</h3><div id="hallOfFameV820Editor"></div><button onclick="addV820('hallOfFameV820')">Tilføj award</button><button onclick="saveV820('hallOfFameV820','/api/hall-of-fame-v820')">Gem Hall Of Fame</button></section>
+<section id="homepageDirector" class="panel">
+  <div class="panelHead"><h2>🎬 Homepage Broadcast Director</h2><button onclick="loadHomepageDirector()">Hent layout</button></div>
+  <p class="note">Vis/skjul forsidebokse og bestem prioritet. Laveste prioritet vises øverst. Breaking går altid først.</p>
+  <div id="homepageDirectorEditor"></div>
+  <button onclick="saveHomepageDirector()">Gem forside-layout</button>
+</section>
 </main>
 
 
@@ -191,7 +198,7 @@
 window.loadShowVisuals = window.loadShowVisuals || async function(){ console.warn("inline loadShowVisuals guard"); };
 </script>
 
-<script src="assets/js/admin.js?v=81620"></script>
+<script src="assets/js/admin.js?v=81621"></script>
 <div id="djfAdminFallbacks" style="display:none"><div id="themeGrid"></div><div id="newsEditor"></div><div id="topEditor"></div><div id="bottomEditor"></div><div id="showsEditor"></div><div id="top20Editor"></div><div id="requestsPreview"></div><div id="twitchPreview"></div><div id="ceAdmin"></div><div id="tvGuideEditor"></div><div id="viewerJourneyEditor"></div><div id="hallOfFameEditor"></div><div id="liveRequestWallEditor"></div><div id="musicDiscoveryEditor"></div><div id="showArchiveEditor"></div></div>
 </body>
 </html>

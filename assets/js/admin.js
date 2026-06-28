@@ -635,3 +635,38 @@ function addV820(type){collectV820(type);const seed=JSON.parse(JSON.stringify(V8
 async function loadV820Admin(){try{const r=await api("/api/tv-station");V820.broadcastPlanner=r.broadcastPlanner||V820_SEEDS.broadcastPlanner;V820.discoveryUniverse=r.discoveryUniverse||V820_SEEDS.discoveryUniverse;V820.hallOfFameV820=r.hallOfFameV820||V820_SEEDS.hallOfFameV820;}catch(e){console.warn(e)}Object.keys(V820_SEEDS).forEach(renderV820Admin)}
 async function saveV820(type,path){collectV820(type);try{const r=await api(path,{method:"POST",body:JSON.stringify({items:V820[type]})});V820[type]=r.items||V820[type];renderV820Admin(type);if(typeof setStatus==="function")setStatus("✅ "+type+" gemt")}catch(e){if(typeof setStatus==="function")setStatus("❌ "+type+" fejl: "+e.message)}}
 document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{try{loadV820Admin()}catch(e){console.warn(e)}},800));
+
+
+// ===== V816.21 Homepage Broadcast Director Admin =====
+let HOMEPAGE_LAYOUT=[{"key": "hero", "label": "Hero", "selector": "#hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "who", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discoveryuniverse", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "livewall", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "viewerjourney", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "halloffame", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
+function hpdEsc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll('"',"&quot;")}
+function renderHomepageDirector(){
+  const el=document.getElementById("homepageDirectorEditor"); if(!el)return;
+  HOMEPAGE_LAYOUT.sort((a,b)=>Number(a.priority||99)-Number(b.priority||99));
+  el.innerHTML=HOMEPAGE_LAYOUT.map((x,i)=>`<div class="row hpdRow">
+    <div><label>Vis</label><select data-hpd="${i}" data-f="visible"><option value="true" ${x.visible!==false?"selected":""}>Vis</option><option value="false" ${x.visible===false?"selected":""}>Skjul</option></select></div>
+    <div><label>Prioritet</label><input type="number" data-hpd="${i}" data-f="priority" value="${hpdEsc(x.priority)}"></div>
+    <div><label>Sektion</label><input data-hpd="${i}" data-f="label" value="${hpdEsc(x.label)}"></div>
+    <div><label>Featured</label><select data-hpd="${i}" data-f="featured"><option value="false" ${!x.featured?"selected":""}>Nej</option><option value="true" ${x.featured?"selected":""}>Ja</option></select></div>
+    <div><label>Breaking</label><select data-hpd="${i}" data-f="breaking"><option value="false" ${!x.breaking?"selected":""}>Nej</option><option value="true" ${x.breaking?"selected":""}>Ja</option></select></div>
+    <button onclick="HOMEPAGE_LAYOUT[${i}].priority=Math.max(1,Number(HOMEPAGE_LAYOUT[${i}].priority||99)-1);renderHomepageDirector()">↑</button>
+    <button onclick="HOMEPAGE_LAYOUT[${i}].priority=Number(HOMEPAGE_LAYOUT[${i}].priority||99)+1;renderHomepageDirector()">↓</button>
+  </div>`).join("");
+}
+function collectHomepageDirector(){
+  document.querySelectorAll("[data-hpd][data-f]").forEach(inp=>{
+    const i=Number(inp.dataset.hpd),f=inp.dataset.f; let v=inp.value;
+    if(f==="priority")v=Number(v||99);
+    if(["visible","featured","breaking"].includes(f))v=(v==="true");
+    HOMEPAGE_LAYOUT[i][f]=v;
+  });
+}
+async function loadHomepageDirector(){
+  try{const r=await api("/api/homepage-layout");HOMEPAGE_LAYOUT=r.items||HOMEPAGE_LAYOUT;}catch(e){console.warn(e)}
+  renderHomepageDirector();
+}
+async function saveHomepageDirector(){
+  collectHomepageDirector();
+  try{const r=await api("/api/homepage-layout",{method:"POST",body:JSON.stringify({items:HOMEPAGE_LAYOUT})});HOMEPAGE_LAYOUT=r.items||HOMEPAGE_LAYOUT;renderHomepageDirector();if(typeof setStatus==="function")setStatus("✅ Forside-layout gemt")}catch(e){if(typeof setStatus==="function")setStatus("❌ Layout-fejl: "+e.message)}
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{try{loadHomepageDirector()}catch(e){console.warn(e)}},1000));

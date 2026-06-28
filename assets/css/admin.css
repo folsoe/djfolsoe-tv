@@ -52,3 +52,5 @@ code{color:#2dd4ef}
 .ceRow{grid-template-columns:repeat(4,minmax(120px,1fr));align-items:end}.ceRow input{width:100%}@media(max-width:900px){.ceRow{grid-template-columns:1fr}}
 
 .v820Row{grid-template-columns:repeat(4,minmax(120px,1fr)) 80px;align-items:end}.v820Row input{width:100%}@media(max-width:900px){.v820Row{grid-template-columns:1fr}}
+
+.hpdRow{grid-template-columns:90px 110px minmax(180px,1fr) 110px 110px 44px 44px;align-items:end}.hpdRow input,.hpdRow select{width:100%}@media(max-width:1000px){.hpdRow{grid-template-columns:1fr}}

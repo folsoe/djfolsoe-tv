@@ -133,6 +133,7 @@ function render(){
   renderDiscovery(state.discoveryPicks||[]);
   renderV81619();
   renderV820();
+  applyHomepageDirector();
   renderMods(state.mods||state.profile?.mods||[]);
   renderCommunityWall(state.communityWall||[]);
   renderNextShow(state.nextShow||{});
@@ -288,4 +289,24 @@ function renderV820(){
   fill("comingUpGrid",(coming||[]).slice(0,4).map(x=>`<article class="comingUpCard"><span>${x.date||""} · ${x.start||""}</span><h3>${x.title||x.show||""}</h3><p>${x.type||""} · ${x.theme||""}</p></article>`).join(""));
   fill("discoveryUniverseGrid",(discovery||[]).slice(0,8).map(x=>`<article class="discoveryUniverseCard"><span>${x.category||"Discovery"}</span><h3>${x.artist||""}</h3><b>${x.title||""}</b><p>${x.note||""}</p></article>`).join(""));
   const hofEl=document.getElementById("hallOfFameGrid"); if(hofEl&&hof&&hof.length) hofEl.innerHTML=hof.slice(0,8).map(x=>`<article class="hofCard"><b>${x.icon||"🏆"}</b><span>${x.title||""}</span><h3>${x.name||""}</h3><p>${x.text||""}</p></article>`).join("");
+}
+
+
+// ===== V816.21 Homepage Broadcast Director =====
+function applyHomepageDirector(){
+  const layout=(window.state&&window.state.homepageLayout)||state?.homepageLayout||[{"key": "hero", "label": "Hero", "selector": "#hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "who", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discoveryuniverse", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "livewall", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "viewerjourney", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "halloffame", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
+  const main=document.querySelector("main")||document.body;
+  const cards=[];
+  layout.forEach(item=>{
+    const selectors=String(item.selector||"").split(",").map(s=>s.trim()).filter(Boolean);
+    let el=null;
+    for(const s of selectors){ el=document.querySelector(s); if(el)break; }
+    if(!el)return;
+    el.dataset.homepageSection=item.key||"";
+    el.style.display=item.visible===false?"none":"";
+    el.classList.toggle("hpFeatured",!!item.featured);
+    el.classList.toggle("hpBreaking",!!item.breaking);
+    if(item.visible!==false) cards.push({el,priority:Number(item.priority||99),breaking:!!item.breaking});
+  });
+  cards.sort((a,b)=>(b.breaking-a.breaking)||(a.priority-b.priority)).forEach(x=>main.appendChild(x.el));
 }
