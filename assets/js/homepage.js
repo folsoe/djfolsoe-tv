@@ -291,13 +291,44 @@ function renderV820(){
 }
 
 
-// ===== V816.21.3B Fixed Frontpage Order FULL =====
-function applyFixedFrontpageOrder(){/* V816.21.4 no-op: order is hardcoded in index.html */}
-
+// ===== V816.22 Frontpage Lock =====
+// No API ordering, no admin ordering, no JS reordering.
+// Section order is physically locked in index.html.
+// This tiny guard only removes accidental duplicate legacy sections if old cache appears.
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
-    try { applyFixedFrontpageOrder(); } catch(e) { console.warn("Fixed frontpage order failed", e); }
-  }, 1200);
+    const seen = new Set();
+    const map = {
+      nextshow: ["nextshow","nextShow"],
+      about: ["about","who","hvem"],
+      mods: ["mods","modteam","modTeam"],
+      shows: ["shows"],
+      top20: ["top20"],
+      discovery: ["discoveryuniverse","musicdiscovery","musicDiscovery","discovery"],
+      requests: ["livewall","requests"],
+      community: ["community","communityWall"],
+      journey: ["viewerjourney","viewerJourney"],
+      hof: ["halloffame","hallOfFame"],
+      djnetwork: ["djnetwork","djNetwork","network"],
+      comingup: ["comingup","comingUp"]
+    };
+    Object.keys(map).forEach(key => {
+      map[key].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (seen.has(key)) {
+          el.style.display = "none";
+          el.setAttribute("hidden", "hidden");
+        } else {
+          seen.add(key);
+          el.style.display = "";
+          el.removeAttribute("hidden");
+        }
+      });
+    });
+    ["tvguide","showarchive","homepageDirector"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.display = "none"; el.setAttribute("hidden","hidden"); }
+    });
+  }, 1300);
 });
-
-// V816.21.4: frontpage section order is physically hardcoded in index.html. No JS reorder.
