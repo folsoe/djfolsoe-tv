@@ -133,7 +133,6 @@ function render(){
   renderDiscovery(state.discoveryPicks||[]);
   renderV81619();
   renderV820();
-  applyHomepageDirector();
   renderMods(state.mods||state.profile?.mods||[]);
   renderCommunityWall(state.communityWall||[]);
   renderNextShow(state.nextShow||{});
@@ -292,46 +291,50 @@ function renderV820(){
 }
 
 
-// ===== V816.21 Homepage Broadcast Director =====
-function applyHomepageDirector(){
-  const layout=(window.state&&window.state.homepageLayout)||state?.homepageLayout||[{"key": "hero", "label": "Hero", "selector": "#hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "who", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discoveryuniverse", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "livewall", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "viewerjourney", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "halloffame", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
-  const main=document.querySelector("main")||document.body;
-  const cards=[];
-  layout.forEach(item=>{
-    const selectors=String(item.selector||"").split(",").map(s=>s.trim()).filter(Boolean);
-    let el=null;
-    for(const s of selectors){ el=document.querySelector(s); if(el)break; }
-    if(!el)return;
-    el.dataset.homepageSection=item.key||"";
-    el.style.display=item.visible===false?"none":"";
-    el.classList.toggle("hpFeatured",!!item.featured);
-    el.classList.toggle("hpBreaking",!!item.breaking);
-    if(item.visible!==false) cards.push({el,priority:Number(item.priority||99),breaking:!!item.breaking});
+// ===== V816.21.3B Fixed Frontpage Order FULL =====
+function applyFixedFrontpageOrder(){
+  const main = document.querySelector("main") || document.body;
+
+  const order = [
+    "#hero,.hero",
+    "#nextshow",
+    "#about,#who,#hvem,.about",
+    "#mods,#modteam,#modTeam,.mods",
+    "#shows",
+    "#top20",
+    "#discoveryuniverse,#musicdiscovery,#musicDiscovery",
+    "#livewall,#requests",
+    "#community",
+    "#viewerjourney,#viewerJourney",
+    "#halloffame,#hallOfFame",
+    "#djnetwork,#djNetwork",
+    "#comingup"
+  ];
+
+  ["#tvguide","#showarchive"].forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      el.style.display = "none";
+      el.setAttribute("hidden", "hidden");
+    });
   });
-  cards.sort((a,b)=>(b.breaking-a.breaking)||(a.priority-b.priority)).forEach(x=>main.appendChild(x.el));
+
+  order.forEach(group => {
+    const selectors = group.split(",").map(s => s.trim()).filter(Boolean);
+    let el = null;
+    for (const sel of selectors) {
+      el = document.querySelector(sel);
+      if (el) break;
+    }
+    if (el) {
+      el.style.display = "";
+      el.removeAttribute("hidden");
+      main.appendChild(el);
+    }
+  });
 }
 
-
-// ===== V816.21.1 Homepage Director Hotfix =====
-const V821_DEFAULT_LAYOUT = [{"key": "hero", "label": "Hero", "selector": "#hero,.hero", "visible": true, "priority": 1, "featured": false, "breaking": false}, {"key": "nextshow", "label": "Næste show", "selector": "#nextshow", "visible": true, "priority": 2, "featured": true, "breaking": false}, {"key": "about", "label": "Hvem er DJ FOLSOE", "selector": "#about,#who,#hvem,.about", "visible": true, "priority": 3, "featured": false, "breaking": false}, {"key": "mods", "label": "Mod Team", "selector": "#mods,#modteam,#modTeam,.mods", "visible": true, "priority": 4, "featured": false, "breaking": false}, {"key": "shows", "label": "Shows", "selector": "#shows", "visible": true, "priority": 5, "featured": false, "breaking": false}, {"key": "top20", "label": "FOLSOE Top 20", "selector": "#top20", "visible": true, "priority": 6, "featured": false, "breaking": false}, {"key": "discovery", "label": "Music Discovery", "selector": "#discoveryuniverse,#musicdiscovery,#musicDiscovery", "visible": true, "priority": 7, "featured": false, "breaking": false}, {"key": "requests", "label": "Live Request Wall", "selector": "#livewall,#requests", "visible": true, "priority": 8, "featured": false, "breaking": false}, {"key": "community", "label": "Community", "selector": "#community", "visible": true, "priority": 9, "featured": false, "breaking": false}, {"key": "journey", "label": "Follower Journey", "selector": "#viewerjourney,#viewerJourney", "visible": true, "priority": 10, "featured": false, "breaking": false}, {"key": "hof", "label": "Hall Of Fame", "selector": "#halloffame,#hallOfFame", "visible": true, "priority": 11, "featured": false, "breaking": false}, {"key": "djnetwork", "label": "DJ Network", "selector": "#djnetwork,#djNetwork", "visible": true, "priority": 12, "featured": false, "breaking": false}, {"key": "comingup", "label": "Coming Up", "selector": "#comingup", "visible": true, "priority": 13, "featured": false, "breaking": false}, {"key": "tvguide", "label": "TV Guide", "selector": "#tvguide", "visible": false, "priority": 80, "featured": false, "breaking": false}, {"key": "showarchive", "label": "Show Archive", "selector": "#showarchive", "visible": false, "priority": 90, "featured": false, "breaking": false}];
-async function initHomepageDirectorHotfix(){
-  let layout = (window.state&&window.state.homepageLayout) || null;
-  try{
-    const r=await fetch("/api/homepage-layout?v=816211",{cache:"no-store"});
-    if(r.ok){const d=await r.json(); if(Array.isArray(d.items))layout=d.items;}
-  }catch(e){console.warn("[V816.21.1] layout fallback",e)}
-  layout = Array.isArray(layout)&&layout.length ? layout : V821_DEFAULT_LAYOUT;
-  const main=document.querySelector("main")||document.body;
-  const found=[];
-  layout.forEach(item=>{
-    let el=null;
-    String(item.selector||"").split(",").map(s=>s.trim()).filter(Boolean).some(sel=>{el=document.querySelector(sel);return !!el;});
-    if(!el)return;
-    el.style.display=item.visible===false?"none":"";
-    el.classList.toggle("hpFeatured",!!item.featured);
-    el.classList.toggle("hpBreaking",!!item.breaking);
-    if(item.visible!==false)found.push({el,priority:Number(item.priority||99),breaking:!!item.breaking});
-  });
-  found.sort((a,b)=>(Number(b.breaking)-Number(a.breaking))||(a.priority-b.priority)).forEach(x=>main.appendChild(x.el));
-}
-document.addEventListener("DOMContentLoaded",()=>setTimeout(initHomepageDirectorHotfix,1000));
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    try { applyFixedFrontpageOrder(); } catch(e) { console.warn("Fixed frontpage order failed", e); }
+  }, 1200);
+});
