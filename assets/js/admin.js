@@ -1,3 +1,5 @@
+const TOP20_STABLE_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
+const DISCOVERY_STABLE_SEED=[{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet", "priority": 1}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Lige opdaget og testet i mix", "priority": 2}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kunne blive en stærk bobler", "priority": 3}];
 
 /* V816.18.1.2 HARD PATCH */
 async function loadShowVisuals(){
@@ -128,12 +130,13 @@ async function loadAll(){
     requestItems=results[9].value?.items||home.requests||[];
     fillProfile();
     renderEditors();
+    loadDiscoveryStable();
     if (typeof window.loadShowVisuals === 'function') loadShowVisuals();
     renderRequests();
     renderTwitch();
     loadDiscovery();
     loadContentManager();
-    setStatus("✅ Data hentet fra Broadcast Cloud\n"+new Date().toLocaleString("da-DK"));
+    setStatus("✅ Data hentet fra folsoetv.dk\n"+new Date().toLocaleString("da-DK"));
   }catch(e){setStatus("❌ Load-fejl: "+e.message);}
 }
 
@@ -242,7 +245,7 @@ async function testAll(){
 
 // ===== V816.13 Broadcast Content Manager =====
 const DEFAULT_SHOW_VISUALS={"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}};
-const DEFAULT_OVERLAY_CONTENT={"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "Broadcast Cloud online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}};
+const DEFAULT_OVERLAY_CONTENT={"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "folsoetv.dk online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}};
 let showVisuals=JSON.parse(JSON.stringify(DEFAULT_SHOW_VISUALS));
 let overlayContent=JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));
 
@@ -492,3 +495,94 @@ async function saveSEO(){
   const seo={...seoItem,siteName:document.getElementById('seoSiteName').value.trim(),domain:document.getElementById('seoDomain').value.trim(),keywords:document.getElementById('seoKeywords').value.split(',').map(x=>x.trim()).filter(Boolean),sameAs:document.getElementById('seoSameAs').value.split(/\n|,/).map(x=>x.trim()).filter(Boolean),title:{da:document.getElementById('seoTitleDa').value,en:document.getElementById('seoTitleEn').value,de:document.getElementById('seoTitleDe').value},description:{da:document.getElementById('seoDescDa').value,en:document.getElementById('seoDescEn').value,de:document.getElementById('seoDescDe').value}};
   try{ await api('/api/seo',{method:'POST',body:JSON.stringify(seo)}); setStatus('✅ SEO gemt'); loadSEO(); }catch(e){ setStatus('❌ SEO-fejl: '+e.message); }
 }
+
+
+// ===== V816.18.2 Top20 + Discovery Stable =====
+let discoveryItemsStable=[];
+
+async function loadTop20Stable(){
+  try{
+    const r=await api('/api/top20');
+    top20Items=(r.items&&r.items.length?r.items:TOP20_STABLE_SEED).slice(0,20);
+  }catch(e){ top20Items=TOP20_STABLE_SEED.slice(0,20); }
+  renderEditors();
+}
+
+async function loadDiscoveryStable(){
+  try{
+    const r=await api('/api/discovery-picks');
+    discoveryItemsStable=(r.items&&r.items.length?r.items:DISCOVERY_STABLE_SEED).slice(0,3);
+  }catch(e){ discoveryItemsStable=DISCOVERY_STABLE_SEED.slice(0,3); }
+  renderDiscoveryEditor();
+}
+
+function renderDiscoveryEditor(){
+  const el=document.getElementById('discoveryEditor');
+  if(!el)return;
+  while(discoveryItemsStable.length<3) discoveryItemsStable.push({artist:'',title:'',genre:'',note:'Dem her har jeg lige opdaget',priority:discoveryItemsStable.length+1});
+  discoveryItemsStable=discoveryItemsStable.slice(0,3);
+  el.innerHTML=discoveryItemsStable.map((x,i)=>`
+    <div class="row top20">
+      <div><label>#</label><input value="${i+1}" disabled></div>
+      <div><label>Artist</label><input data-discovery-i="${i}" data-f="artist" value="${esc(x.artist||'')}"></div>
+      <div><label>Title</label><input data-discovery-i="${i}" data-f="title" value="${esc(x.title||'')}"></div>
+      <div><label>Genre</label><input data-discovery-i="${i}" data-f="genre" value="${esc(x.genre||'')}"></div>
+      <div><label>Note</label><input data-discovery-i="${i}" data-f="note" value="${esc(x.note||'')}"></div>
+      <button onclick="clearDiscovery(${i})">Ryd</button>
+    </div>`).join('');
+}
+
+function collectDiscovery(){
+  document.querySelectorAll('[data-discovery-i][data-f]').forEach(inp=>{
+    const i=Number(inp.dataset.discoveryI), f=inp.dataset.f;
+    if(!discoveryItemsStable[i]) discoveryItemsStable[i]={};
+    discoveryItemsStable[i][f]=inp.value;
+    discoveryItemsStable[i].priority=i+1;
+  });
+  discoveryItemsStable=discoveryItemsStable.slice(0,3);
+}
+
+function addDiscovery(){
+  collectDiscovery();
+  if(discoveryItemsStable.length<3) discoveryItemsStable.push({artist:'',title:'',genre:'',note:'Dem her har jeg lige opdaget',priority:discoveryItemsStable.length+1});
+  renderDiscoveryEditor();
+}
+function clearDiscovery(i){ discoveryItemsStable[i]={artist:'',title:'',genre:'',note:'',priority:i+1}; renderDiscoveryEditor(); }
+
+async function saveDiscovery(){
+  collectDiscovery();
+  try{
+    const r=await api('/api/discovery-picks',{method:'POST',body:JSON.stringify({items:discoveryItemsStable})});
+    discoveryItemsStable=(r.items||discoveryItemsStable).slice(0,3);
+    renderDiscoveryEditor();
+    setStatus('✅ Discovery gemt');
+  }catch(e){ setStatus('❌ Discovery gem-fejl: '+e.message); }
+}
+
+async function saveTop20Stable(){
+  collect();
+  top20Items=top20Items.slice(0,20);
+  try{
+    const r=await api('/api/top20',{method:'POST',body:JSON.stringify({items:top20Items})});
+    top20Items=(r.items||top20Items).slice(0,20);
+    renderEditors();
+    setStatus('✅ Top 20 gemt');
+  }catch(e){ setStatus('❌ Top20 gem-fejl: '+e.message); }
+}
+
+
+// ===== V816.18.4 Request Engine Stable =====
+let requestManagerItems=[];
+async function loadRequestManager(){
+  try{const r=await api('/api/requests');requestManagerItems=r.all||r.items||[];renderRequestManager(r.stats||{});}
+  catch(e){requestManagerItems=[];renderRequestManager({});if(typeof setStatus==="function")setStatus('❌ Request load-fejl: '+e.message);}
+}
+function renderRequestManager(stats){
+  const statsEl=document.getElementById('requestStatsPreview');
+  if(statsEl){const s=stats||{};statsEl.innerHTML=[['I dag',s.today||0],['I alt',s.total||0],['Top artist',s.topArtist?.name||'-'],['Top requester',s.topRequester?.name||'-']].map(x=>`<div class="previewCard"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('');}
+  const el=document.getElementById('requestsManager'); if(!el)return;
+  el.innerHTML=(requestManagerItems||[]).map((r,i)=>`<div class="row requestRow"><div><label>Status</label><select data-req-i="${i}" data-f="status"><option value="approved" ${r.status!=='rejected'?'selected':''}>Approved</option><option value="rejected" ${r.status==='rejected'?'selected':''}>Rejected</option></select></div><div><label>Pin</label><select data-req-i="${i}" data-f="pinned"><option value="false" ${!r.pinned?'selected':''}>No</option><option value="true" ${r.pinned?'selected':''}>Yes</option></select></div><div><label>User</label><input data-req-i="${i}" data-f="user" value="${esc(r.user||r.name||'')}"></div><div><label>Song</label><input data-req-i="${i}" data-f="song" value="${esc(r.song||'')}"></div><div><label>Lang</label><input data-req-i="${i}" data-f="language" value="${esc(r.language||'da')}"></div><button onclick="requestManagerItems.splice(${i},1);renderRequestManager({})">Slet</button></div>`).join('');
+}
+function collectRequestManager(){document.querySelectorAll('[data-req-i][data-f]').forEach(inp=>{const i=Number(inp.dataset.reqI),f=inp.dataset.f;if(!requestManagerItems[i])requestManagerItems[i]={};let v=inp.value;if(f==='pinned')v=v==='true';requestManagerItems[i][f]=v;});}
+async function addRequest(){try{const body={user:document.getElementById('reqUser')?.value||'Admin',text:document.getElementById('reqText')?.value||'!ønske Artist - Title',language:document.getElementById('reqLang')?.value||'da',show:document.getElementById('reqShow')?.value||'DJ FOLSOE LIVE'};await api('/api/requests',{method:'POST',body:JSON.stringify(body)});if(typeof setStatus==="function")setStatus('✅ Request tilføjet');await loadRequestManager();}catch(e){if(typeof setStatus==="function")setStatus('❌ Request fejl: '+e.message);}}
+async function saveRequestList(){collectRequestManager();try{const r=await api('/api/requests',{method:'PUT',body:JSON.stringify({items:requestManagerItems})});requestManagerItems=r.items||requestManagerItems;renderRequestManager(r.stats||{});if(typeof setStatus==="function")setStatus('✅ Request-listen er gemt');}catch(e){if(typeof setStatus==="function")setStatus('❌ Request gem-fejl: '+e.message);}}

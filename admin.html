@@ -9,7 +9,7 @@
 <body>
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V816.12</span>
+    <span class="kicker">DJ FOLSOE NETWORK V816.18.4.1 OVERLAY LABEL PATCH
     <h1>Broadcast Control Center</h1>
     <p>Ét panel til hjemmeside, overlay, Twitch-data, tickers, shows, Top 20, requests og sprog.</p>
   </div>
@@ -136,14 +136,16 @@
   </section>
 
   <section id="requests" class="panel">
-    <div class="panelHead"><h2>🎧 Requests</h2><button onclick="openApi('/api/requests')">Test requests API</button></div>
-    <p class="note">Forsiden viser de sidste 3. Du kan også teste manuelt her.</p>
+    <div class="panelHead"><h2>🎧 Request Engine Stabilisering</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
+    <p class="note">Styrer !ønske / !request / !Wunsch. Du kan tilføje, pinne, godkende, afvise og slette uden at admin crasher.</p>
     <div class="formGrid">
       <div><label>Bruger</label><input id="reqUser" placeholder="Twitch navn"></div>
       <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
+      <div><label>Sprog</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
+      <div><label>Show</label><input id="reqShow" placeholder="Fredagsbar"></div>
     </div>
-    <button onclick="addRequest()">Gem test-request</button>
-    <div id="requestsPreview" class="previewGrid"></div>
+    <button onclick="addRequest()">Tilføj request</button><button onclick="saveRequestList()">Gem ændringer</button><button onclick="loadRequestManager()">Hent requests</button>
+    <div id="requestStatsPreview" class="previewGrid"></div><div id="requestsManager"></div>
   </section>
 
   
@@ -185,6 +187,6 @@
 window.loadShowVisuals = window.loadShowVisuals || async function(){ console.warn("inline loadShowVisuals guard"); };
 </script>
 
-<script src="assets/js/admin.js?v=8161812"></script>
+<script src="assets/js/admin.js?v=816184?v=816184"></script>
 </body>
 </html>

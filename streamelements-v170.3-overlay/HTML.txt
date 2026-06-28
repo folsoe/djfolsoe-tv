@@ -6,7 +6,7 @@
   </div>
 
   <div class="topTicker">
-    <div class="topMask"><div id="topTickerText">Broadcast Cloud loading…</div></div>
+    <div class="topMask"><div id="topTickerText">folsoetv.dk loading…</div></div>
     <div id="clockBox">--:--</div>
   </div>
 
@@ -67,7 +67,7 @@
   </div>
 
   <div class="bottomTicker">
-    <div class="bottomLabel">BROADCAST CLOUD</div>
+    <div class="bottomLabel">FOLSOETV.DK</div>
     <div class="bottomMask"><div id="bottomTickerText">TOP20 · REQUESTS · NEWS · COMMUNITY</div></div>
   </div>
 </div>

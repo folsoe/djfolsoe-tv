@@ -162,22 +162,22 @@ function safeArr(a,b){return Array.isArray(a)&&a.length?a:b;}
 
 function fallbackState(){
   return {
-    theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"Broadcast Cloud",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
-    visual:{primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166",title:"WEEKEND VIBES",emoji:"🎉",mood:"Broadcast Cloud"},
-    topbarNews:["🎉 WEEKEND VIBES · Broadcast Cloud"],
+    theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"folsoetv.dk",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
+    visual:{primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166",title:"WEEKEND VIBES",emoji:"🎉",mood:"folsoetv.dk"},
+    topbarNews:["🎉 WEEKEND VIBES · folsoetv.dk"],
     footerTicker:["TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY"],
     chart:{items:[{rank:1,artist:"Axwell & Bonn",title:"Whatever Turns You On"},{rank:2,artist:"Hugel, David Guetta",title:"Shine"}]},
     live:{followers:870,followersGoal:1000,viewers:0,subs:0},
-    show:{title:"WEEKEND VIBES",description:"Broadcast Cloud"},
+    show:{title:"WEEKEND VIBES",description:"folsoetv.dk"},
     twitchChat:{channel:DEFAULT_CHANNEL},
     motion:{lanes:{
       box1:[
         {label:"FOLLOW JOURNEY",headline:"870/1000 followers",body:"130 to go · 0 viewers",icon:"📡"},
-        {label:"LIVE STATUS",headline:"0 viewers",body:"Broadcast Cloud · Twitch Music TV",icon:"👁️"},
+        {label:"LIVE STATUS",headline:"0 viewers",body:"folsoetv.dk · Twitch Music TV",icon:"👁️"},
         {label:"GOALS",headline:"Help DJ FOLSOE grow",body:"Follow · Chat · Request · Share the love",icon:"💜"}
       ],
       box2:[
-        {label:"PROGRAM",headline:"DJ FOLSOE LIVE",body:"Broadcast Cloud schedule",icon:"📺"},
+        {label:"PROGRAM",headline:"DJ FOLSOE LIVE",body:"folsoetv.dk schedule",icon:"📺"},
         {label:"ACTIVE THEME",headline:"🎉 WEEKEND VIBES",body:"Maximum music and community",icon:"🎨"},
         {label:"NEXT SHOW",headline:"Next DJ FOLSOE show",body:"Check the website for latest program",icon:"⏭️"}
       ],
@@ -210,11 +210,11 @@ function normalize(j){
 
   s.motion.lanes.box1=safeArr(s.motion.lanes.box1,[
     {label:"FOLLOW JOURNEY",headline:`${l.followers||870}/${l.followersGoal||1000} followers`,body:`${Math.max(0,(l.followersGoal||1000)-(l.followers||870))} to go · ${l.viewers||0} viewers`,icon:"📡"},
-    {label:"LIVE STATUS",headline:`${l.viewers||0} viewers`,body:"Broadcast Cloud · Twitch Music TV",icon:"👁️"},
+    {label:"LIVE STATUS",headline:`${l.viewers||0} viewers`,body:"folsoetv.dk · Twitch Music TV",icon:"👁️"},
     {label:"GOALS",headline:"Help DJ FOLSOE grow",body:"Follow · Chat · Request · Share the love",icon:"💜"}
   ]);
   s.motion.lanes.box2=safeArr(s.motion.lanes.box2,[
-    {label:"PROGRAM",headline:s.show.title||v.title||"DJ FOLSOE LIVE",body:s.show.description||v.mood||"Broadcast Cloud",icon:"📺"},
+    {label:"PROGRAM",headline:s.show.title||v.title||"DJ FOLSOE LIVE",body:s.show.description||v.mood||"folsoetv.dk",icon:"📺"},
     {label:"ACTIVE THEME",headline:`${v.emoji||""} ${v.title||"THEME"}`,body:v.mood||"Theme Engine",icon:"🎨"},
     {label:"NEXT SHOW",headline:"Next DJ FOLSOE show",body:"Check the website for latest program",icon:"⏭️"}
   ]);

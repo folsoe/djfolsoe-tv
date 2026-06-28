@@ -20,7 +20,7 @@ const I18N={
     "top20.title":"FOLSOE Top 20","top20.link":"Se hele listen →","top20.button":"Se hele Top 20",
     "mods.title":"Mod-teamet","mods.body":"Mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.",
     "openTwitch":"Åbn Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Kategori","title":"Titel",
-    "offline":"Offline","live":"Live","ready":"klar","showDefault":"Broadcast Cloud show"
+    "offline":"Offline","live":"Live","ready":"klar","showDefault":"folsoetv.dk show"
   },
   en:{
     "nav.home":"Home","nav.about":"About me","nav.shows":"Shows","nav.requests":"Requests","nav.news":"News","nav.top20":"Top 20",
@@ -39,7 +39,7 @@ const I18N={
     "top20.title":"FOLSOE Top 20","top20.link":"See full list →","top20.button":"See full Top 20",
     "mods.title":"Mod team","mods.body":"Mods keep the chat friendly, help new viewers and protect the good vibe around the stream.",
     "openTwitch":"Open Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Category","title":"Title",
-    "offline":"Offline","live":"Live","ready":"ready","showDefault":"Broadcast Cloud show"
+    "offline":"Offline","live":"Live","ready":"ready","showDefault":"folsoetv.dk show"
   },
   de:{
     "nav.home":"Startseite","nav.about":"Über mich","nav.shows":"Shows","nav.requests":"Wünsche","nav.news":"News","nav.top20":"Top 20",
@@ -58,7 +58,7 @@ const I18N={
     "top20.title":"FOLSOE Top 20","top20.link":"Ganze Liste ansehen →","top20.button":"Ganze Top 20 ansehen",
     "mods.title":"Mod-Team","mods.body":"Mods halten den Chat freundlich, helfen neuen Zuschauern und schützen die gute Stimmung im Stream.",
     "openTwitch":"Twitch öffnen","status":"Status","viewers":"Zuschauer","followers":"Follower","category":"Kategorie","title":"Titel",
-    "offline":"Offline","live":"Live","ready":"bereit","showDefault":"Broadcast Cloud Show"
+    "offline":"Offline","live":"Live","ready":"bereit","showDefault":"folsoetv.dk Show"
   }
 };
 
@@ -163,16 +163,24 @@ function renderShows(items){
 
 function renderRequests(items){
   const fallback=[
-    {user:"Chat",song:lang==="de"?"Schreibe !Wunsch Künstler - Titel":lang==="en"?"Use !request Artist - Title":"Skriv !ønske Kunstner - Titel",time:t("ready")},
-    {user:"Chat",song:"!request Artist - Title",time:t("ready")},
-    {user:"Chat",song:"!Wunsch Künstler - Titel",time:t("ready")}
+    {user:"Chat",song:lang==="de"?"Schreibe !Wunsch Künstler - Titel":lang==="en"?"Use !request Artist - Title":"Skriv !ønske Kunstner - Titel",time:t("ready"),language:lang,show:"DJ FOLSOE LIVE"},
+    {user:"Chat",song:"!request Artist - Title",time:t("ready"),language:"en",show:"DJ FOLSOE LIVE"},
+    {user:"Chat",song:"!Wunsch Künstler - Titel",time:t("ready"),language:"de",show:"DJ FOLSOE LIVE"}
   ];
-  q("requestsGrid").innerHTML=(items.length?items:fallback).slice(0,3).map(x=>`<article class="requestCard"><span>${timeLabel(x.time)}</span><b>${x.song||x.text||""}</b><p>${x.user||"Twitch chat"}</p></article>`).join("");
+  const used=(items&&items.length?items:fallback).slice(0,3);
+  const html=used.map(x=>`<article class="requestCard"><span>${timeLabel(x.time)} · ${(x.language||"").toUpperCase()}</span><b>${x.song||x.text||""}</b><p>${x.user||"Twitch chat"} · ${x.show||"DJ FOLSOE LIVE"}</p>${x.pinned?'<small>PINNED</small>':''}</article>`).join("");
+  const el=q("requestsGrid"); if(el) el.innerHTML=html;
+  renderRequestStats(state.requestStats||{});
+}
+function renderRequestStats(stats){
+  const el=q("requestStatsGrid"); if(!el)return;
+  const cards=[{label:lang==="de"?"Heute":lang==="en"?"Today":"I dag",value:stats.today||0},{label:lang==="de"?"Gesamt":lang==="en"?"Total":"I alt",value:stats.total||0},{label:lang==="de"?"Top Künstler":lang==="en"?"Top artist":"Top artist",value:stats.topArtist?.name||"-"},{label:lang==="de"?"Top Wunsch":lang==="en"?"Top requester":"Top requester",value:stats.topRequester?.name||"-"}];
+  el.innerHTML=cards.map(c=>`<article class="requestStatCard"><span>${c.label}</span><b>${c.value}</b></article>`).join("");
 }
 
 function renderNews(items,tw){
   const base=[
-    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Seneste show",title:tw.liveTitle||"DJ FOLSOE Broadcast Cloud",body:tw.isLive?t("hero.live"):t("hero.offline")},
+    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Seneste show",title:tw.liveTitle||"DJ FOLSOE folsoetv.dk",body:tw.isLive?t("hero.live"):t("hero.offline")},
     {type:lang==="de"?"Top20 neu":lang==="en"?"Top20 update":"Top20 nyt",title:"FOLSOE Top 20",body:lang==="de"?"Sieh die wöchentlichen Charts.":lang==="en"?"See the weekly chart.":"Se ugens chart og countdown."},
     {type:"Requests",title:lang==="de"?"Musikwünsche sind offen":lang==="en"?"Song requests are open":"Musikønsker er åbne",body:"!ønske / !request / !Wunsch"},
     {type:"Community",title:lang==="de"?"Der Chat ist das Herz":lang==="en"?"Chat is the heart":"Chatten er hjertet",body:lang==="de"?"Emotes, Mods und gute Stimmung.":lang==="en"?"Emotes, mods and good vibes.":"Emotes, mods og god stemning."},
