@@ -292,49 +292,12 @@ function renderV820(){
 
 
 // ===== V816.21.3B Fixed Frontpage Order FULL =====
-function applyFixedFrontpageOrder(){
-  const main = document.querySelector("main") || document.body;
-
-  const order = [
-    "#hero,.hero",
-    "#nextshow",
-    "#about,#who,#hvem,.about",
-    "#mods,#modteam,#modTeam,.mods",
-    "#shows",
-    "#top20",
-    "#discoveryuniverse,#musicdiscovery,#musicDiscovery",
-    "#livewall,#requests",
-    "#community",
-    "#viewerjourney,#viewerJourney",
-    "#halloffame,#hallOfFame",
-    "#djnetwork,#djNetwork",
-    "#comingup"
-  ];
-
-  ["#tvguide","#showarchive"].forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => {
-      el.style.display = "none";
-      el.setAttribute("hidden", "hidden");
-    });
-  });
-
-  order.forEach(group => {
-    const selectors = group.split(",").map(s => s.trim()).filter(Boolean);
-    let el = null;
-    for (const sel of selectors) {
-      el = document.querySelector(sel);
-      if (el) break;
-    }
-    if (el) {
-      el.style.display = "";
-      el.removeAttribute("hidden");
-      main.appendChild(el);
-    }
-  });
-}
+function applyFixedFrontpageOrder(){/* V816.21.4 no-op: order is hardcoded in index.html */}
 
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     try { applyFixedFrontpageOrder(); } catch(e) { console.warn("Fixed frontpage order failed", e); }
   }, 1200);
 });
+
+// V816.21.4: frontpage section order is physically hardcoded in index.html. No JS reorder.

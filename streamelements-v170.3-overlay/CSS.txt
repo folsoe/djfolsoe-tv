@@ -1,4 +1,4 @@
-/* DJ FOLSOE NETWORK V816.18.4.1 OVERLAY LABEL PATCH
+/* DJ FOLSOE NETWORK V816.2 · V170 REBORN OVERLAY LOCKED CHAT */
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent;font-family:Inter,Montserrat,Arial,sans-serif}
 :root{--a:#ffd166;--b:#ff4d6d;--c:#00d4ff;--glass:rgba(8,11,22,.56)}

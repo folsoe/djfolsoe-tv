@@ -211,3 +211,7 @@ body.isOffline .avatarLive{background:#4b5563}
 #musicDiscovery{
   display:block;
 }
+
+
+/* ===== V816.21.4 Hardcoded Frontpage Order ===== */
+#tvguide,#showarchive{display:none!important}
