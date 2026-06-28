@@ -332,3 +332,78 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 1300);
 });
+
+
+// ===== V816.22.1 Content Recovery =====
+// Frontpage order is locked. This restores visible content if API/worker/cache fails.
+function djfSetHTML(id, html){
+  const el = document.getElementById(id);
+  if(el && !el.innerHTML.trim()) el.innerHTML = html;
+}
+
+function djfCard(title, text, tag){
+  return `<article class="recoveryCard"><span>${tag||""}</span><h3>${title||""}</h3><p>${text||""}</p></article>`;
+}
+
+function restoreFrontpageContent(){
+  // NÆSTE SHOW
+  djfSetHTML("nextShowGrid", `
+    <article class="nextShowHero recoveryHero">
+      <div>
+        <span>NÆSTE SHOW</span>
+        <h3>GOOD MORNING TWITCH</h3>
+        <p>Lørdag morgen · kaffe, musik og god stemning.</p>
+        <p>Hold øje med Twitch og folsoetv.dk for næste live-show.</p>
+      </div>
+      <aside>
+        <b>DJ FOLSOE TV</b>
+        <em>Music TV fra Danmark</em>
+        <strong>COMING UP</strong>
+      </aside>
+    </article>
+  `);
+
+  // MUSIC DISCOVERY UNIVERSE
+  djfSetHTML("discoveryUniverseGrid", `
+    ${djfCard("Mau P", "The Less I Know The Better · Ny energi til chart-showet.", "DISCOVERY")}
+    ${djfCard("Peggy Gou", "Find The Way · Frisk house-vibe til streamen.", "BUBBLING UNDER")}
+    ${djfCard("Anyma", "Hypnotized · Stærk kandidat til kommende shows.", "FUTURE HITS")}
+    ${djfCard("DJ FOLSOE", "Viewer Pick · Plads til dine egne opdagelser.", "DJ PICKS")}
+  `);
+
+  // LIVE REQUEST WALL
+  djfSetHTML("liveRequestWallGrid", `
+    ${djfCard("Skriv !ønske Artist - Title", "Dansk musikønske i Twitch chatten.", "DA")}
+    ${djfCard("Use !request Artist - Title", "English song request in Twitch chat.", "EN")}
+    ${djfCard("Nutze !Wunsch Künstler - Titel", "Deutscher Musikwunsch im Twitch Chat.", "DE")}
+  `);
+
+  // VIEWER JOURNEY
+  djfSetHTML("viewerJourneyGrid", `
+    <article class="journeyCard"><span>FOLLOWERS</span><h3>870 / 1000</h3><div class="journeyBar"><i style="width:87%"></i></div><p>Rejsen mod 1000 followers på Twitch.</p></article>
+    <article class="journeyCard"><span>SUBS</span><h3>0 / 100</h3><div class="journeyBar"><i style="width:0%"></i></div><p>Subs hjælper med teknik, grafik og nye shows.</p></article>
+    <article class="journeyCard"><span>COMMUNITY</span><h3>Music TV Family</h3><div class="journeyBar"><i style="width:45%"></i></div><p>Mere chat, flere requests og stærkere fællesskab.</p></article>
+  `);
+
+  // HALL OF FAME
+  djfSetHTML("hallOfFameGrid", `
+    ${djfCard("Månedens chatter", "Den der holder energien oppe i chatten.", "💬")}
+    ${djfCard("Månedens supporter", "Tak til dem der støtter udviklingen.", "💜")}
+    ${djfCard("Månedens request", "Den der finder de bedste tracks.", "🎧")}
+    ${djfCard("Månedens raid", "Når fællesskabet vokser på tværs.", "🚀")}
+  `);
+
+  // COMING UP
+  djfSetHTML("comingUpGrid", `
+    ${djfCard("Trance Tuesday", "Uplifting energy, store melodier og goosebumps.", "TIRSDAG")}
+    ${djfCard("FOLSOE Top 20", "Ugens vigtigste tracks og discoveries.", "TORSDAG")}
+    ${djfCard("Fredagsbar", "Weekend, requests og live DJ-stemning.", "FREDAG")}
+    ${djfCard("Retro Hits", "Klassikere der aldrig dør.", "SØNDAG")}
+  `);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    try { restoreFrontpageContent(); } catch(e) { console.warn("V816.22.1 recovery failed", e); }
+  }, 1600);
+});
