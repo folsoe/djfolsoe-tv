@@ -1,9 +1,60 @@
 <!doctype html>
-<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DJ FOLSOE Admin V818.1</title><link rel="stylesheet" href="assets/css/homepage.css?v=8181">
-<style>.adminGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.adminGrid label{display:block;color:#ff36e8;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px}.adminGrid input,.adminGrid textarea,#editor{width:100%;border-radius:14px;background:#070a16;color:#fff;border:1px solid rgba(255,255,255,.14);padding:13px;font:inherit}.adminGrid textarea{min-height:90px}.full{grid-column:1/-1}#editor{min-height:420px;font-family:ui-monospace,Consolas,monospace}.adminBtns{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.adminBtns button{border:0;border-radius:999px;padding:12px 16px;font-weight:1000;background:linear-gradient(135deg,#22d3ee,#ff36e8);color:#050712;cursor:pointer}#status{color:#ffd166;font-weight:1000}@media(max-width:900px){.adminGrid{grid-template-columns:1fr}}</style>
-</head><body><div class="siteShell"><header class="topbar"><a class="brand" href="index.html?v=8181"><span class="orb"></span><strong>DJ FOLSOE ADMIN</strong><em>V818.1</em></a><nav><a href="index.html?v=8181">Forside</a><a href="overlay/index.html?v=8181">Overlay</a></nav></header><main>
-<section class="panel"><div class="panelHead"><h2>Broadcast Content Manager</h2><span id="status">Indlæser...</span></div><div class="adminBtns"><button onclick="loadAdmin()">Hent data</button><button onclick="saveAdmin()">Gem data</button><button onclick="resetAdmin()">Nulstil</button><button onclick="exportData()">Download data</button></div>
-<div class="adminGrid"><div class="full"><label>Hero headline</label><input id="heroTitle"></div><div class="full"><label>Hero tekst</label><textarea id="heroSubtitle"></textarea></div><div class="full"><label>Hvem er DJ FOLSOE?</label><textarea id="aboutBody"></textarea></div><div><label>Næste show titel</label><input id="nextTitle"></div><div><label>Dato</label><input id="nextDate"></div><div><label>Start</label><input id="nextStart"></div><div><label>Slut</label><input id="nextEnd"></div><div class="full"><label>Næste show tekst</label><textarea id="nextDesc"></textarea></div><div class="full"><label>Overlay top ticker</label><input id="topText"></div><div class="full"><label>Overlay bund ticker</label><input id="bottomText"></div><div><label>Overlay boks 1</label><input id="box1Main"></div><div><label>Overlay boks 2</label><input id="box2Main"></div><div><label>Overlay boks 3</label><input id="box3Main"></div><div><label>Overlay boks 4</label><input id="box4Main"></div></div></section>
-<section class="panel"><div class="panelHead"><h2>Avanceret JSON</h2><span>Alt indhold</span></div><textarea id="editor"></textarea></section>
-</main></div><script src="assets/js/homepage.js?v=8181"></script><script src="assets/js/admin.js?v=8181"></script></body></html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE Admin V818.2</title>
+<link rel="stylesheet" href="assets/css/homepage.css?v=8182">
+<style>
+.adminTabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.adminTabs a{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none;font-weight:1000;font-size:11px;text-transform:uppercase}
+.adminActions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 20px}
+.adminActions button,.adminActions label{border:0;border-radius:999px;padding:12px 16px;font-weight:1000;background:linear-gradient(135deg,#22d3ee,#ff36e8);color:#050712;cursor:pointer;font-size:13px}
+.adminActions input{display:none}
+.editorGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.editorGrid label{display:block;color:#ff36e8;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.10em}
+.editorGrid input,.editorGrid textarea,#jsonEditor{width:100%;margin-top:6px;border-radius:12px;background:#070a16;color:#fff;border:1px solid rgba(255,255,255,.14);padding:12px;font:inherit}
+.editorGrid textarea{min-height:90px}.wide{grid-column:1/-1}.editCard,.miniCard{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)}.editCard h3{font-size:16px;color:#fff}.sectionAnchor{scroll-margin-top:90px}#jsonEditor{min-height:520px;font-family:ui-monospace,Consolas,monospace}#status{color:#ffd166;font-weight:1000}
+@media(max-width:900px){.editorGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="siteShell">
+<header class="topbar">
+  <a class="brand" href="index.html?v=8182"><span class="orb"></span><strong>DJ FOLSOE ADMIN</strong><em>V818.2</em></a>
+  <nav><a href="index.html?v=8182">Forside</a><a href="overlay/index.html?v=8182">Overlay</a></nav>
+</header>
+<main>
+<section class="panel">
+  <div class="panelHead"><h2>Broadcast Content Manager</h2><span id="status">Indlæser...</span></div>
+  <div class="adminActions">
+    <button onclick="adminSave()">Gem felter</button>
+    <button onclick="adminSaveJson()">Gem JSON</button>
+    <button onclick="adminReset()">Nulstil</button>
+    <button onclick="adminExport()">Download site-data.json</button>
+    <label>Import JSON <input type="file" accept=".json" onchange="adminImport(event)"></label>
+  </div>
+  <div class="adminTabs">
+    <a href="#heroAdmin">Hero</a><a href="#nextAdmin">Næste show</a><a href="#aboutAdmin">Om DJ</a><a href="#modsAdmin">Mods</a><a href="#showsAdmin">Shows</a><a href="#top20Admin">Top20</a><a href="#discoveryAdmin">Discovery</a><a href="#requestsAdmin">Requests</a><a href="#communityAdmin">Community</a><a href="#journeyAdmin">Journey</a><a href="#hofAdmin">Hall</a><a href="#networkAdmin">Network</a><a href="#overlayAdmin">Overlay</a><a href="#jsonAdmin">JSON</a>
+  </div>
+</section>
+
+<section id="heroAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Hero</h2><span>Forside</span></div><div id="heroEditor" class="editorGrid"></div></section>
+<section id="nextAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Næste shows</h2><span>Dato / tid</span></div><div id="nextShowsEditor" class="editorGrid"></div></section>
+<section id="aboutAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Hvem er DJ FOLSOE?</h2><span>Profil</span></div><div id="aboutEditor" class="editorGrid"></div></section>
+<section id="modsAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Mod-teamet</h2><span>Community crew</span></div><div id="modsEditor" class="editorGrid"></div></section>
+<section id="showsAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Shows</h2><span>Programmer</span></div><div id="showsEditor" class="editorGrid"></div></section>
+<section id="top20Admin" class="panel sectionAnchor"><div class="panelHead"><h2>Top20</h2><span>Chart</span></div><div id="top20Editor" class="editorGrid"></div></section>
+<section id="discoveryAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Music Discovery</h2><span>Nye tracks</span></div><div id="discoveryEditor" class="editorGrid"></div></section>
+<section id="requestsAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Requests</h2><span>DA / EN / DE</span></div><div id="requestsEditor" class="editorGrid"></div></section>
+<section id="communityAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Community Love</h2><span>Status</span></div><div id="communityEditor" class="editorGrid"></div></section>
+<section id="journeyAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Viewer Journey</h2><span>Mål</span></div><div id="journeyEditor" class="editorGrid"></div></section>
+<section id="hofAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Hall Of Fame</h2><span>Awards</span></div><div id="hofEditor" class="editorGrid"></div></section>
+<section id="networkAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>DJ Network</h2><span>Raid radar</span></div><div id="networkEditor" class="editorGrid"></div></section>
+<section id="overlayAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Overlay</h2><span>OBS / StreamElements</span></div><div id="overlayEditor" class="editorGrid"></div></section>
+<section id="jsonAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Avanceret JSON</h2><span>Alt indhold</span></div><textarea id="jsonEditor"></textarea></section>
+</main>
+</div>
+<script src="assets/js/admin.js?v=8182"></script>
+</body>
+</html>

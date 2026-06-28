@@ -1,0 +1,4 @@
+async function loadData(){try{const r=await fetch("../assets/data/site-data.json?v=8180",{cache:"no-store"});return await r.json()}catch(e){return {overlay:{}}}}
+function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v||""}
+function tick(){const d=new Date();set("clock",String(d.getHours()).padStart(2,"0")+"."+String(d.getMinutes()).padStart(2,"0"))}
+document.addEventListener("DOMContentLoaded",async()=>{const d=await loadData();const o=d.overlay||{};["topText","bottomText","box1Title","box1Main","box1Sub","box2Title","box2Main","box2Sub","box3Title","box3Main","box3Sub","box4Title","box4Main","box4Sub"].forEach(k=>set(k,o[k]));tick();setInterval(tick,1000)})

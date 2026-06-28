@@ -20,3 +20,6 @@ footer{height:70px;border-top:1px solid var(--line);display:flex;justify-content
 
 /* V818.1 admin language fix */
 .langs button.active{background:linear-gradient(135deg,#7c3aed,#ff36e8)!important;box-shadow:0 0 18px rgba(255,54,232,.45)}
+
+/* V818.2 admin manager */
+.langs button.active{background:linear-gradient(135deg,#7c3aed,#ff36e8)!important;box-shadow:0 0 18px rgba(255,54,232,.45)}
