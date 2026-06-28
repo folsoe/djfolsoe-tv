@@ -1,19 +1,50 @@
-:root{
-  --bg:#050712;--panel:#0d1020;--line:rgba(255,255,255,.12);
-  --text:#fff;--muted:rgba(255,255,255,.72);--pink:#ff36e8;--cyan:#22d3ee;--yellow:#ffd166;
+const STORAGE_KEY = "DJF_V818_SITE_DATA";
+
+async function loadData(){
+  const local = localStorage.getItem(STORAGE_KEY);
+  if(local){ try{return JSON.parse(local)}catch(e){} }
+  const res = await fetch("assets/data/site-data.json?v=8180",{cache:"no-store"});
+  return await res.json();
 }
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 0 0,#35104c 0,#11071d 36%,#030611 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-.siteShell{width:min(1180px,calc(100% - 34px));margin:18px auto 64px;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:rgba(5,7,18,.88);box-shadow:0 30px 90px rgba(0,0,0,.58)}
-.topbar{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 24px;background:rgba(0,0,0,.52);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;backdrop-filter:blur(16px)}
-.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;letter-spacing:.03em}.brand strong{font-weight:1000}.brand em{color:#ff2f78;font-style:normal;font-size:11px;font-weight:1000}.orb{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#ff3bd4,#ffd166);box-shadow:0 0 22px #ff36e8}
-nav{display:flex;gap:20px;flex-wrap:wrap}nav a{color:rgba(255,255,255,.78);text-decoration:none;font-size:12px;font-weight:1000;text-transform:uppercase;letter-spacing:.08em}.langs{display:flex;gap:6px}.langs button{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#151827;color:#fff;font-weight:900}.langs button:first-child{background:linear-gradient(135deg,#7c3aed,#ff36e8)}
-main{padding:20px 24px 38px;display:flex;flex-direction:column;gap:18px}.heroSection,.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.015)),rgba(10,12,26,.82)}
-.heroSection{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;min-height:360px;padding:34px;align-items:center;background:radial-gradient(circle at 14% 20%,rgba(34,211,238,.22),transparent 34%),radial-gradient(circle at 82% 10%,rgba(255,54,232,.18),transparent 32%),linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02)),rgba(10,12,26,.86)}
-.kicker,.panelHead span,.card span,.chartItem span{color:var(--pink);font-weight:1000;text-transform:uppercase;letter-spacing:.15em;font-size:12px}
-h1{font-size:clamp(48px,8vw,96px);line-height:.88;margin:12px 0 20px;letter-spacing:-.06em;text-transform:uppercase}h2{font-size:24px;margin:0;text-transform:uppercase;letter-spacing:-.03em}h3{margin:8px 0;color:#fff;font-size:22px;line-height:1.05}.lead,p{color:var(--muted);line-height:1.45}.btn{display:inline-flex;padding:13px 18px;border-radius:999px;border:1px solid var(--line);color:#fff;text-decoration:none;font-weight:1000;text-transform:uppercase;font-size:12px}.btn.primary{background:linear-gradient(135deg,#7c3aed,#ff36e8,#ffd166);color:#080914}.heroActions{display:flex;gap:12px;flex-wrap:wrap}.heroPanel{min-height:250px;border-radius:28px;padding:28px;background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(255,54,232,.10)),rgba(255,255,255,.05);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}.heroPanel strong{font-size:38px;letter-spacing:.05em}
-.panel{padding:22px}.panelHead{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.featuredPanel{background:radial-gradient(circle at 25% 0,rgba(255,54,232,.18),transparent 30%),rgba(10,12,26,.86)}
-.grid{display:grid;gap:14px}.grid.two{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(4,1fr)}
-.card,.chartItem,.nextCard{min-height:135px;padding:18px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.18)}.card .icon{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:rgba(255,54,232,.14);margin-bottom:12px}.card b{color:#ffd166}.chartGrid{display:grid;gap:10px}.chartItem{min-height:auto;display:grid;grid-template-columns:58px 1fr auto;align-items:center}.rank{font-size:26px;font-weight:1000;color:var(--cyan)}
-.nextCard{display:grid;grid-template-columns:1.5fr .7fr;gap:18px;min-height:220px;background:radial-gradient(circle at 15% 20%,rgba(34,211,238,.18),transparent 30%),radial-gradient(circle at 85% 20%,rgba(255,54,232,.18),transparent 30%),rgba(255,255,255,.05)}.nextCard h3{font-size:44px;text-transform:uppercase}.badgeList{display:flex;flex-direction:column;gap:10px;justify-content:center}.badgeList b{display:inline-flex;width:max-content;padding:9px 12px;border-radius:999px;background:linear-gradient(135deg,var(--cyan),var(--yellow),var(--pink));color:#050712;font-weight:1000}.bar{height:12px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden;margin:12px 0}.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--yellow),var(--pink))}
-footer{height:70px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 24px;color:rgba(255,255,255,.55);font-size:12px}
-@media(max-width:900px){.topbar{height:auto;align-items:flex-start;flex-direction:column;padding:16px}nav{gap:12px}.heroSection,.nextCard,.grid.two,.grid.three,.grid.four{grid-template-columns:1fr}main{padding:14px}.siteShell{width:calc(100% - 18px);margin:9px auto}.panelHead{align-items:flex-start;flex-direction:column}h1{font-size:54px}.nextCard h3{font-size:34px}}
+function saveData(data){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+function resetData(){ localStorage.removeItem(STORAGE_KEY); location.reload(); }
+function el(id){ return document.getElementById(id); }
+function html(id, value){ const n=el(id); if(n) n.innerHTML=value || ""; }
+function card(x){return `<article class="card"><div class="icon">${x.icon||"✦"}</div><span>${x.tag||x.category||x.role||x.label||""}</span><h3>${x.title||x.name||x.value||""}</h3><p>${x.text||x.note||""}</p></article>`}
+function pct(c,t){return Math.max(0,Math.min(100,Math.round(Number(c||0)/Number(t||1)*100)))}
+function dateLabel(x){return [x.date,[x.start,x.end].filter(Boolean).join("–")].filter(Boolean).join(" · ")}
+
+function render(data){
+  const shows = (data.nextShows||[]).filter(x=>x.active!==false).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
+  const next = shows[0] || {};
+  const hero = data.hero || {};
+  const subtitle = el("heroSubtitle"); if(subtitle) subtitle.textContent = hero.subtitle || subtitle.textContent;
+
+  html("nextShowContent", `<article class="nextCard"><div><span>NÆSTE SHOW</span><h3>${next.title||"DJ FOLSOE LIVE"}</h3><p><b>${next.show||""}</b> · ${dateLabel(next)}</p><p>${next.description||"Hold øje med folsoetv.dk og Twitch."}</p></div><aside class="badgeList"><b>${next.theme||"MUSIC TV"}</b><b>${next.featured?"FEATURED":"COMING UP"}</b><b>folsoetv.dk</b></aside></article>`);
+  html("aboutText", data.about?.body || "");
+  html("aboutCards", (data.about?.cards||[]).map(card).join(""));
+  html("modsGrid", (data.mods||[]).filter(x=>x.active!==false).map(card).join(""));
+  html("showsGrid", (data.shows||[]).map(card).join(""));
+  html("top20Grid", (data.top20||[]).map(x=>`<article class="chartItem"><div class="rank">#${x.rank}</div><div><h3>${x.artist}</h3><p>${x.title}</p></div><span>${x.genre||""}</span></article>`).join(""));
+  html("discoveryGrid", (data.discovery||[]).map(card).join(""));
+  html("requestsGrid", (data.requests||[]).map(x=>card({tag:x.lang,title:x.title,text:x.text,icon:"🎧"})).join(""));
+  html("communityGrid", (data.community||[]).map(x=>card({label:x.label,title:x.value,text:x.text,icon:"💜"})).join(""));
+  html("journeyGrid", (data.journey||[]).map(x=>`<article class="card"><span>${x.label}</span><h3>${x.current} / ${x.target}</h3><div class="bar"><i style="width:${pct(x.current,x.target)}%"></i></div><p>${x.text}</p></article>`).join(""));
+  html("hofGrid", (data.hallOfFame||[]).map(card).join(""));
+  html("networkGrid", (data.djNetwork||[]).map(card).join(""));
+  html("comingGrid", shows.slice(1,4).map(x=>card({tag:x.date,title:x.title,text:`${x.start}–${x.end} · ${x.description}`,icon:"📺"})).join(""));
+}
+
+document.addEventListener("DOMContentLoaded", async()=>{ render(await loadData()); });
+window.DJF = {loadData, saveData, resetData, render, STORAGE_KEY};
+
+// ===== V818.1 Language Pack =====
+const DJF_LANG_KEY="DJF_V818_LANG";
+const DJF_TRANSLATIONS={
+ da:{next:"Næste show",about:"Hvem er DJ FOLSOE?",mods:"Mod-teamet",shows:"Shows",top20:"FOLSOE Top 20",discovery:"Music Discovery Universe",requests:"Live Request Wall",community:"Community Love",journey:"Viewer Journey",hof:"Hall Of Fame",network:"DJ Network",coming:"Coming Up"},
+ en:{next:"Next Show",about:"Who is DJ FOLSOE?",mods:"Mod Team",shows:"Shows",top20:"FOLSOE Top 20",discovery:"Music Discovery Universe",requests:"Live Request Wall",community:"Community Love",journey:"Viewer Journey",hof:"Hall Of Fame",network:"DJ Network",coming:"Coming Up"},
+ de:{next:"Nächste Show",about:"Wer ist DJ FOLSOE?",mods:"Mod-Team",shows:"Shows",top20:"FOLSOE Top 20",discovery:"Music Discovery Universe",requests:"Live Request Wall",community:"Community Love",journey:"Viewer Journey",hof:"Hall Of Fame",network:"DJ Network",coming:"Demnächst"}
+};
+function applyLanguage(lang){const t=DJF_TRANSLATIONS[lang]||DJF_TRANSLATIONS.da;document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(e=>{const k=e.dataset.i18n;if(t[k])e.textContent=t[k]});document.querySelectorAll(".langs button").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang))}
+function setLanguage(lang){localStorage.setItem(DJF_LANG_KEY,lang);applyLanguage(lang)}
+document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".langs button").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang||"da")));applyLanguage(localStorage.getItem(DJF_LANG_KEY)||"da")});
