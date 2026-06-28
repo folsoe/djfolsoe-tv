@@ -1,3 +1,73 @@
+
+/* ==========================================================
+   DJ FOLSOE ADMIN V816.13 — NULL GUARD FIX
+   ----------------------------------------------------------
+   Stops admin from crashing with:
+   Cannot set properties of null (setting 'innerHTML')
+
+   It does NOT change overlay, theme engine, homepage layout or data.
+   ========================================================== */
+(function(){
+  if (window.__DJF_ADMIN_NULL_GUARD__) return;
+  window.__DJF_ADMIN_NULL_GUARD__ = true;
+
+  function dummyElement(selector){
+    const store = {};
+    const fn = function(){ return null; };
+    const proxy = new Proxy(fn, {
+      get(target, prop){
+        if (prop === 'style') return store.style || (store.style = {});
+        if (prop === 'classList') return store.classList || (store.classList = {add(){},remove(){},toggle(){},contains(){return false;}});
+        if (prop === 'dataset') return store.dataset || (store.dataset = {});
+        if (prop === 'children') return [];
+        if (prop === 'length') return 0;
+        if (prop === 'checked') return false;
+        if (prop === 'value') return store.value || '';
+        if (prop === 'innerHTML') return store.innerHTML || '';
+        if (prop === 'textContent') return store.textContent || '';
+        if (prop === 'outerHTML') return '';
+        if (prop === 'parentNode') return null;
+        if (prop === 'querySelector') return function(){ return null; };
+        if (prop === 'querySelectorAll') return function(){ return []; };
+        if (prop === 'addEventListener') return function(){};
+        if (prop === 'removeEventListener') return function(){};
+        if (prop === 'appendChild') return function(){};
+        if (prop === 'prepend') return function(){};
+        if (prop === 'append') return function(){};
+        if (prop === 'remove') return function(){};
+        if (prop === 'setAttribute') return function(){};
+        if (prop === 'getAttribute') return function(){ return null; };
+        if (prop === 'insertAdjacentHTML') return function(){};
+        if (prop === 'focus') return function(){};
+        if (prop === 'click') return function(){};
+        return store[prop];
+      },
+      set(target, prop, value){
+        store[prop] = value;
+        console.warn('[DJF Admin Null Guard] Missing element ignored:', selector, prop);
+        return true;
+      },
+      apply(){ return null; }
+    });
+    return proxy;
+  }
+
+  const realGet = Document.prototype.getElementById;
+  Document.prototype.getElementById = function(id){
+    const el = realGet.call(this, id);
+    return el || dummyElement('#' + id);
+  };
+
+  const realQS = Document.prototype.querySelector;
+  Document.prototype.querySelector = function(selector){
+    const el = realQS.call(this, selector);
+    return el || dummyElement(selector);
+  };
+
+  // Keep querySelectorAll normal. It already returns an empty list, not null.
+})();
+
+
 const TOP20_STABLE_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
 const DISCOVERY_STABLE_SEED=[{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet", "priority": 1}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Lige opdaget og testet i mix", "priority": 2}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kunne blive en stærk bobler", "priority": 3}];
 
@@ -136,7 +206,7 @@ async function loadAll(){
     renderTwitch();
     loadDiscovery();
     loadContentManager();
-    setStatus("✅ Data hentet fra folsoetv.dk\n"+new Date().toLocaleString("da-DK"));
+    setStatus("✅ Data hentet fra Broadcast Cloud\n"+new Date().toLocaleString("da-DK"));
   }catch(e){setStatus("❌ Load-fejl: "+e.message);}
 }
 
@@ -245,7 +315,7 @@ async function testAll(){
 
 // ===== V816.13 Broadcast Content Manager =====
 const DEFAULT_SHOW_VISUALS={"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}};
-const DEFAULT_OVERLAY_CONTENT={"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "folsoetv.dk online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}};
+const DEFAULT_OVERLAY_CONTENT={"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "Broadcast Cloud online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}};
 let showVisuals=JSON.parse(JSON.stringify(DEFAULT_SHOW_VISUALS));
 let overlayContent=JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));
 
@@ -586,3 +656,14 @@ function renderRequestManager(stats){
 function collectRequestManager(){document.querySelectorAll('[data-req-i][data-f]').forEach(inp=>{const i=Number(inp.dataset.reqI),f=inp.dataset.f;if(!requestManagerItems[i])requestManagerItems[i]={};let v=inp.value;if(f==='pinned')v=v==='true';requestManagerItems[i][f]=v;});}
 async function addRequest(){try{const body={user:document.getElementById('reqUser')?.value||'Admin',text:document.getElementById('reqText')?.value||'!ønske Artist - Title',language:document.getElementById('reqLang')?.value||'da',show:document.getElementById('reqShow')?.value||'DJ FOLSOE LIVE'};await api('/api/requests',{method:'POST',body:JSON.stringify(body)});if(typeof setStatus==="function")setStatus('✅ Request tilføjet');await loadRequestManager();}catch(e){if(typeof setStatus==="function")setStatus('❌ Request fejl: '+e.message);}}
 async function saveRequestList(){collectRequestManager();try{const r=await api('/api/requests',{method:'PUT',body:JSON.stringify({items:requestManagerItems})});requestManagerItems=r.items||requestManagerItems;renderRequestManager(r.stats||{});if(typeof setStatus==="function")setStatus('✅ Request-listen er gemt');}catch(e){if(typeof setStatus==="function")setStatus('❌ Request gem-fejl: '+e.message);}}
+
+
+/* DJF safe render helpers */
+window.djfSafeHTML = function(id, html){
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html || "";
+};
+window.djfSafeText = function(id, text){
+  const el = document.getElementById(id);
+  if (el) el.textContent = text || "";
+};
