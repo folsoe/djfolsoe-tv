@@ -271,15 +271,55 @@ function communityIcon(type){
 }
 function renderCommunityWall(items){
   const el=q("communityWallGrid"); if(!el)return;
-  const fallback=[
-    {type:"follower",label:"Seneste follower",user:"Twitch community",value:"Velkommen"},
-    {type:"sub",label:"Seneste sub",user:"Tak for støtten",value:"Support the channel"},
-    {type:"raid",label:"Seneste raid",user:"DJ Network love",value:"Community power"},
-    {type:"topRequester",label:"Top requester",user:"Chatten bestemmer",value:"Musikønsker"},
-    {type:"memberOfMonth",label:"Månedens community",user:"Good vibes only",value:"Community love"}
+  const twitchCommunity = state?.twitchCommunity || {};
+  const manual = (items && items.length ? items : []).filter(x=>x && x.active !== false);
+
+  function manualBy(key, fallbackLabel, fallbackValue){
+    return manual.find(x => String(x.key||x.type||"").toLowerCase() === String(key).toLowerCase()) || {label:fallbackLabel,value:fallbackValue,active:true};
+  }
+
+  const follower = twitchCommunity.latestFollower || {};
+  const sub = twitchCommunity.latestSub || {};
+  const raid = twitchCommunity.latestRaid || {};
+
+  const used=[
+    {
+      type:"latestFollower",
+      label:"Seneste follower",
+      displayName:follower.displayName || follower.userName || manualBy("latestFollower","Seneste follower","Twitch community").value || "Twitch community",
+      value:follower.followedAt ? ("Fulgte " + new Date(follower.followedAt).toLocaleDateString("da-DK")) : "Hentes fra Twitch når token/scope tillader det",
+      avatar:follower.avatar || "",
+      isLive:false
+    },
+    {
+      type:"latestSub",
+      label:"Seneste sub",
+      displayName:sub.displayName || sub.userName || manualBy("latestSub","Seneste sub","Tak for støtten").value || "Tak for støtten",
+      value:sub.tier ? ("Tier " + sub.tier) : "Hentes fra Twitch når token/scope tillader det",
+      avatar:sub.avatar || "",
+      isLive:false
+    },
+    {
+      type:"latestRaid",
+      label:"Seneste raid",
+      displayName:raid.displayName || raid.userName || manualBy("latestRaid","Seneste raid","DJ Network love").value || "DJ Network love",
+      value:raid.viewers ? (raid.viewers + " viewers") : "Raid udfyldes via Twitch/EventSub eller manuelt",
+      avatar:raid.avatar || "",
+      isLive:false
+    },
+    {
+      ...manualBy("topRequester","Top requester","Chatten bestemmer"),
+      type:"topRequester",
+      displayName:manualBy("topRequester","Top requester","Chatten bestemmer").user || manualBy("topRequester","Top requester","Chatten bestemmer").value || "Chatten bestemmer"
+    },
+    {
+      ...manualBy("memberOfMonth","Månedens community medlem","Good vibes only"),
+      type:"memberOfMonth",
+      displayName:manualBy("memberOfMonth","Månedens community medlem","Good vibes only").user || manualBy("memberOfMonth","Månedens community medlem","Good vibes only").value || "Good vibes only"
+    }
   ];
-  const used=(items&&items.length?items:fallback).filter(x=>x.active!==false).slice(0,6);
-  el.innerHTML=used.map(x=>`<article class="communityLoveCard richCommunityCard">${x.avatar?`<img class="communityAvatar" src="${x.avatar}" alt="${x.displayName||x.user||""}">`:`<div class="communityIcon">${communityIcon(x.type)}</div>`}<span>${x.label||""}</span><b>${x.displayName||x.user||""}</b><p>${x.value||""}</p>${x.pinned?'<small>PINNED</small>':''}${x.isLive?'<em>● Live</em>':'<em class="offline">○ Offline</em>'}</article>`).join("");
+
+  el.innerHTML=used.slice(0,5).map(x=>`<article class="communityLoveCard richCommunityCard">${x.avatar?`<img class="communityAvatar" src="${x.avatar}" alt="${x.displayName||x.user||""}">`:`<div class="communityIcon">${communityIcon(x.type)}</div>`}<span>${x.label||""}</span><b>${x.displayName||x.user||""}</b><p>${x.value||""}</p>${x.pinned?'<small>PINNED</small>':''}${x.isLive?'<em>● Live</em>':'<em class="offline">○ Offline</em>'}</article>`).join("");
   renderCommunityStats(state.communityStats||{});
 }
 function renderCommunityStats(stats){
