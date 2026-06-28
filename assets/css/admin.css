@@ -46,9 +46,10 @@ code{color:#2dd4ef}
 .row.communityRow{grid-template-columns:76px 1fr 1.4fr 80px 70px}
 @media(max-width:900px){.row.modRow,.row.communityRow{grid-template-columns:1fr}}
 
+/* V816.19 Request Manager */
 .row.requestRow{grid-template-columns:105px 80px 1fr 1.6fr 70px 70px}
 @media(max-width:900px){.row.requestRow{grid-template-columns:1fr}}
 
-.ceRow{grid-template-columns:repeat(4,minmax(120px,1fr));align-items:end}.ceRow input{width:100%}@media(max-width:900px){.ceRow{grid-template-columns:1fr}}
-
-.v820Row{grid-template-columns:repeat(4,minmax(120px,1fr)) 80px;align-items:end}.v820Row input{width:100%}@media(max-width:900px){.v820Row{grid-template-columns:1fr}}
+/* V816.20 Community Manager */
+.row.v20CommunityRow{grid-template-columns:76px 110px 1fr 1fr 1.3fr 76px 70px 70px}
+@media(max-width:900px){.row.v20CommunityRow{grid-template-columns:1fr}}

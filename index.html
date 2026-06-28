@@ -3,110 +3,141 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE TV · Music TV from Denmark</title>
-  <meta name="description" content="DJ FOLSOE er en dansk Twitch DJ og Music TV-kanal med shows, Top 20, requests og community.">
-  <link rel="stylesheet" href="assets/css/homepage.css?v=8182">
+  <title>DJ FOLSOE · Broadcast OS</title>
+  <link rel="stylesheet" href="assets/css/homepage.css">
+
+  <meta name="description" content="DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.">
+  <meta name="keywords" content="DJ FOLSOE, DJ Folsoe Twitch, Danish Twitch DJ, dance music streams Denmark, music streams Denmark, Twitch music streamer Denmark, Eurodance Twitch, Trance DJ Denmark">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://folsoetv.dk/">
+  <link rel="alternate" hreflang="da" href="https://folsoetv.dk/?lang=da">
+  <link rel="alternate" hreflang="en" href="https://folsoetv.dk/?lang=en">
+  <link rel="alternate" hreflang="de" href="https://folsoetv.dk/?lang=de">
+  <link rel="alternate" hreflang="x-default" href="https://folsoetv.dk/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="DJ FOLSOE TV">
+  <meta property="og:title" content="DJ FOLSOE | Dansk Twitch DJ, Dance Music &amp; Music Streams Denmark">
+  <meta property="og:description" content="DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.">
+  <meta property="og:url" content="https://folsoetv.dk/">
+  <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DJ FOLSOE | Dansk Twitch DJ, Dance Music &amp; Music Streams Denmark">
+  <meta name="twitter:description" content="DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.">
+  <meta name="twitter:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
+  <script id="seoSchema" type="application/ld+json"></script>
+
 </head>
 <body>
-  <div class="siteShell">
-    <header class="topbar">
-      <a class="brand" href="#hero"><span class="orb"></span><strong>DJ FOLSOE</strong><em>LIVE</em></a>
-      <nav>
-        <a href="#nextshow">Næste show</a>
-        <a href="#about">Om mig</a>
-        <a href="#mods">Mods</a>
-        <a href="#shows">Shows</a>
-        <a href="#top20">Top 20</a>
-        <a href="#requests">Requests</a><a href="admin.html?v=8182">Admin</a>
+  <div class="pageShell">
+    <header class="siteNav">
+      <a class="navBrand" href="#top"><span class="brandOrb"></span><strong>DJ FOLSOE</strong><em id="navLive">LIVE</em></a>
+      <nav class="desktopNav">
+        <a href="#top" data-i18n="nav.home">Forside</a><a href="#about" data-i18n="nav.about">Om mig</a><a href="#shows" data-i18n="nav.shows">Shows</a><a href="#communityWall">Community</a><a href="#nextShow">Næste show</a><a href="#requests" data-i18n="nav.requests">Requests</a><a href="#news" data-i18n="nav.news">Nyheder</a><a href="#top20" data-i18n="nav.top20">Top 20</a>
       </nav>
-      <div class="langs"><button data-lang="da" class="active">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></div>
+      <div class="langSwitch"><button data-lang="da">DA</button><button data-lang="en">EN</button><button data-lang="de">DE</button></div>
     </header>
 
-    <main>
-      <section id="hero" class="heroSection">
+    <main id="top">
+      <section class="hero richHero">
+        <div id="heroBanner" class="heroBanner"></div>
+        <div class="heroProfile">
+          <div class="avatarRing"><img id="twitchAvatar" alt="DJ FOLSOE Twitch profile"><div id="avatarFallback">DJ</div></div>
+          <div id="heroLivePill" class="avatarLive">OFFLINE</div>
+        </div>
         <div class="heroCopy">
-          <span class="kicker">DJ FOLSOE TV</span>
-          <h1>More music.<br>Less noise.</h1>
-          <p id="heroSubtitle">Music TV fra Danmark · live på Twitch · Top 20 · requests · fællesskab.</p>
-          <div class="heroActions">
-            <a class="btn primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Se live på Twitch</a>
-            <a class="btn" href="#nextshow">Se næste show</a>
+          <div class="onlineLine"><span id="liveDot"></span><b id="heroStatusMini">Henter Twitch...</b></div>
+          <h1>DJ FOLSOE</h1>
+          <h2 id="heroSubtitle" data-i18n="hero.subtitle">Music TV fra Danmark</h2>
+          <p id="twitchDescription">Henter Twitch bio...</p>
+          <div class="heroMeta">
+            <div><span data-i18n="hero.streamTitle">Stream title</span><b id="streamTitle">Loading...</b></div>
+            <div><span data-i18n="hero.category">Category</span><b id="streamCategory">Music</b></div>
+          </div>
+          <div class="heroButtons">
+            <a class="btn primary" href="https://twitch.tv/djfolsoe" target="_blank" data-i18n="hero.cta.twitch">Se mig live på Twitch</a>
+            <a class="btn ghost" href="#requests" data-i18n="hero.cta.requests">Musikønsker</a>
           </div>
         </div>
-        <div class="heroPanel">
-          <span>ON AIR SYSTEM</span>
-          <strong>FOLSOETV.DK</strong>
-          <p>Broadcast planner · Requests · Discovery · Community · Overlay</p>
+        <aside class="liveChatPreview">
+          <h3 data-i18n="hero.liveData">Live data</h3>
+          <div class="chatRows">
+            <div><b>Status:</b><span id="sideStatus">Loading</span></div>
+            <div><b>Viewers:</b><span id="sideViewers">0</span></div>
+            <div><b>Followers:</b><span id="sideFollowers">0</span></div>
+            <div><b>Category:</b><span id="sideCategory">Music</span></div>
+            <div><b>Title:</b><span id="sideTitle">DJ FOLSOE</span></div>
+          </div>
+          <a class="btn primary chatBtn" href="https://twitch.tv/djfolsoe" target="_blank">Åbn Twitch</a>
+        </aside>
+        <div class="heroStats">
+          <div><span data-i18n="stats.followers">Followers</span><b id="statFollowers">0</b></div>
+          <div><span data-i18n="stats.viewers">Viewers</span><b id="statOnline">0</b></div>
+          <div><span data-i18n="stats.views">Views</span><b id="statViews">0</b></div>
+          <div><span data-i18n="stats.stream">Stream</span><b id="statLive">Offline</b></div>
+          <div><span data-i18n="hero.category">Category</span><b id="statCategory">Music</b></div>
         </div>
       </section>
 
-      <section id="nextshow" class="panel featuredPanel">
-        <div class="panelHead"><h2 data-i18n="next">Næste show</h2><span>Countdown</span></div>
-        <div id="nextShowContent"></div>
-      </section>
-
-      <section id="about" class="panel">
-        <div class="panelHead"><h2 data-i18n="about">Hvem er DJ FOLSOE?</h2><span>Music TV</span></div>
-        <p id="aboutText" class="lead"></p>
-        <div id="aboutCards" class="grid four"></div>
-      </section>
-
-      <section id="mods" class="panel">
-        <div class="panelHead"><h2 data-i18n="mods">Mod-teamet</h2><span>Community crew</span></div>
-        <div id="modsGrid" class="grid three"></div>
+      <section id="about" class="panel aboutPanel">
+        <div class="panelHead"><h2 data-i18n="about.title">Hvem er DJ FOLSOE?</h2></div>
+        <p id="aboutText">DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers.</p>
+        <div class="featureGrid">
+          <div class="feature"><i>🎵</i><b data-i18n="about.musicTitle">Musik</b><span id="aboutMusic">Trance, Retro, EDM, Pop & mere</span></div>
+          <div class="feature"><i>📺</i><b data-i18n="about.showsTitle">Shows</b><span id="aboutShows">Live DJ-shows og temastreams</span></div>
+          <div class="feature"><i>🎙️</i><b data-i18n="about.requestsTitle">Requests</b><span id="aboutRequests">!ønske / !request / !Wunsch</span></div>
+          <div class="feature"><i>💜</i><b data-i18n="about.communityTitle">Community</b><span id="aboutCommunity">Chat, mods og dansk DJ-kultur</span></div>
+        </div>
       </section>
 
       <section id="shows" class="panel">
-        <div class="panelHead"><h2 data-i18n="shows">Shows</h2><span>Trance · Top20 · Fredagsbar · Retro · Morning · Popup</span></div>
-        <div id="showsGrid" class="grid three"></div>
-      </section>
-
-      <section id="top20" class="panel">
-        <div class="panelHead"><h2 data-i18n="top20">FOLSOE Top 20</h2><span>Weekly chart</span></div>
-        <div id="top20Grid" class="chartGrid"></div>
-      </section>
-
-      <section id="discovery" class="panel">
-        <div class="panelHead"><h2 data-i18n="discovery">Music Discovery Universe</h2><span>Under Top 20</span></div>
-        <div id="discoveryGrid" class="grid four"></div>
+        <div class="panelHead"><h2 data-i18n="shows.title">Shows</h2><a href="#shows">Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend</a></div>
+        <div id="showsGrid" class="showGrid"></div>
       </section>
 
       <section id="requests" class="panel">
-        <div class="panelHead"><h2 data-i18n="requests">Live Request Wall</h2><span>Musikønsker</span></div>
-        <div id="requestsGrid" class="grid three"></div>
+        <div class="panelHead"><h2 data-i18n="requests.title">Seneste musikønsker</h2><a href="#requests">Gemmer de sidste 3 fra !ønske</a></div>
+        <div id="requestsGrid" class="requestsGrid"></div>
+        <div id="requestStatsGrid" class="requestStatsGrid"></div>
       </section>
 
-      <section id="community" class="panel">
-        <div class="panelHead"><h2 data-i18n="community">Community Love</h2><span>Follower · Sub · Raid · Top requester</span></div>
-        <div id="communityGrid" class="grid four"></div>
+      <section id="news" class="panel">
+        <div class="panelHead"><h2 data-i18n="news.title">Nyheder & opdateringer</h2><a href="#news">Seneste show · Top20 · Requests · Community · DJ Network · Twitch</a></div>
+        <div id="newsGrid" class="newsGrid"></div>
       </section>
 
-      <section id="journey" class="panel">
-        <div class="panelHead"><h2 data-i18n="journey">Viewer Journey</h2><span>Følg på Twitch</span></div>
-        <div id="journeyGrid" class="grid three"></div>
+      <section id="top20" class="panel">
+        <div class="panelHead"><h2 data-i18n="top20.title">FOLSOE Top 20</h2><a href="#top20" onclick="toggleChart()">Se hele listen →</a></div>
+        <div id="chartGrid" class="chartGrid"></div>
+        <div class="centerAction"><button class="btn primary" onclick="toggleChart()" data-i18n="top20.button">Se hele Top 20</button></div>
       </section>
 
-      <section id="halloffame" class="panel">
-        <div class="panelHead"><h2 data-i18n="hof">Hall Of Fame</h2><span>Community</span></div>
-        <div id="hofGrid" class="grid four"></div>
+
+      <section id="discovery" class="panel discoveryPanel">
+        <div class="panelHead"><h2>Dem her har jeg lige opdaget</h2><a href="#discovery">3 nye boblere</a></div>
+        <div id="discoveryGrid" class="discoveryGrid"></div>
       </section>
 
-      <section id="network" class="panel">
-        <div class="panelHead"><h2 data-i18n="network">DJ Network</h2><span>Raid radar</span></div>
-        <div id="networkGrid" class="grid two"></div>
+
+      <section id="communityWall" class="panel communityWallPanel">
+        <div class="panelHead"><h2>Community Love</h2><a href="#communityWall">Follower · Sub · Raid · Top requester</a></div>
+        <div id="communityWallGrid" class="communityWallGrid"></div>
+        <div id="communityStatsGrid" class="communityStatsGrid"></div>
       </section>
 
-      <section id="comingup" class="panel">
-        <div class="panelHead"><h2 data-i18n="coming">Coming Up</h2><span>Flere shows</span></div>
-        <div id="comingGrid" class="grid three"></div>
+      <section id="nextShow" class="panel nextShowPanel">
+        <div class="panelHead"><h2>Næste show</h2><a href="#nextShow">Countdown</a></div>
+        <div id="nextShowCard" class="nextShowCard"></div>
+      </section>
+
+      <section id="network" class="panel modPanel">
+        <div class="panelHead"><h2 data-i18n="mods.title">Mod-teamet</h2></div>
+        <p>Mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.</p>
+        <div id="modsGrid" class="modsGrid"></div>
       </section>
     </main>
 
-    <footer>
-      <span>© 2026 DJ FOLSOE</span>
-      <span>folsoetv.dk · Twitch Music TV</span>
-    </footer>
+    <footer><span>© 2026 DJ FOLSOE</span><div><a href="#shows" data-i18n="nav.shows">Shows</a><a href="#requests" data-i18n="nav.requests">Requests</a><a href="#top20" data-i18n="nav.top20">Top 20</a></div></footer>
   </div>
-  <script src="assets/js/homepage.js?v=8182"></script>
+  <script src="assets/js/homepage.js"></script>
 </body>
 </html>

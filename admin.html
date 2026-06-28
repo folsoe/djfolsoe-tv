@@ -1,60 +1,199 @@
 <!doctype html>
 <html lang="da">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DJ FOLSOE Admin V818.2</title>
-<link rel="stylesheet" href="assets/css/homepage.css?v=8182">
-<style>
-.adminTabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.adminTabs a{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none;font-weight:1000;font-size:11px;text-transform:uppercase}
-.adminActions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 20px}
-.adminActions button,.adminActions label{border:0;border-radius:999px;padding:12px 16px;font-weight:1000;background:linear-gradient(135deg,#22d3ee,#ff36e8);color:#050712;cursor:pointer;font-size:13px}
-.adminActions input{display:none}
-.editorGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.editorGrid label{display:block;color:#ff36e8;font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.10em}
-.editorGrid input,.editorGrid textarea,#jsonEditor{width:100%;margin-top:6px;border-radius:12px;background:#070a16;color:#fff;border:1px solid rgba(255,255,255,.14);padding:12px;font:inherit}
-.editorGrid textarea{min-height:90px}.wide{grid-column:1/-1}.editCard,.miniCard{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)}.editCard h3{font-size:16px;color:#fff}.sectionAnchor{scroll-margin-top:90px}#jsonEditor{min-height:520px;font-family:ui-monospace,Consolas,monospace}#status{color:#ffd166;font-weight:1000}
-@media(max-width:900px){.editorGrid{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE V816.12 Admin</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
-<div class="siteShell">
-<header class="topbar">
-  <a class="brand" href="index.html?v=8182"><span class="orb"></span><strong>DJ FOLSOE ADMIN</strong><em>V818.2</em></a>
-  <nav><a href="index.html?v=8182">Forside</a><a href="overlay/index.html?v=8182">Overlay</a></nav>
+<header class="adminHero">
+  <div>
+    <span class="kicker">DJ FOLSOE NETWORK V816.12</span>
+    <h1>Broadcast Control Center</h1>
+    <p>Ét panel til hjemmeside, overlay, Twitch-data, tickers, shows, Top 20, requests og sprog.</p>
+  </div>
+  <div class="loginCard">
+    <label>ADMIN_TOKEN</label>
+    <input id="token" placeholder="Indsæt ADMIN_TOKEN">
+    <button onclick="saveToken()">Gem token</button>
+  </div>
 </header>
-<main>
-<section class="panel">
-  <div class="panelHead"><h2>Broadcast Content Manager</h2><span id="status">Indlæser...</span></div>
-  <div class="adminActions">
-    <button onclick="adminSave()">Gem felter</button>
-    <button onclick="adminSaveJson()">Gem JSON</button>
-    <button onclick="adminReset()">Nulstil</button>
-    <button onclick="adminExport()">Download site-data.json</button>
-    <label>Import JSON <input type="file" accept=".json" onchange="adminImport(event)"></label>
-  </div>
-  <div class="adminTabs">
-    <a href="#heroAdmin">Hero</a><a href="#nextAdmin">Næste show</a><a href="#aboutAdmin">Om DJ</a><a href="#modsAdmin">Mods</a><a href="#showsAdmin">Shows</a><a href="#top20Admin">Top20</a><a href="#discoveryAdmin">Discovery</a><a href="#requestsAdmin">Requests</a><a href="#communityAdmin">Community</a><a href="#journeyAdmin">Journey</a><a href="#hofAdmin">Hall</a><a href="#networkAdmin">Network</a><a href="#overlayAdmin">Overlay</a><a href="#jsonAdmin">JSON</a>
-  </div>
-</section>
 
-<section id="heroAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Hero</h2><span>Forside</span></div><div id="heroEditor" class="editorGrid"></div></section>
-<section id="nextAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Næste shows</h2><span>Dato / tid</span></div><div id="nextShowsEditor" class="editorGrid"></div></section>
-<section id="aboutAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Hvem er DJ FOLSOE?</h2><span>Profil</span></div><div id="aboutEditor" class="editorGrid"></div></section>
-<section id="modsAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Mod-teamet</h2><span>Community crew</span></div><div id="modsEditor" class="editorGrid"></div></section>
-<section id="showsAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Shows</h2><span>Programmer</span></div><div id="showsEditor" class="editorGrid"></div></section>
-<section id="top20Admin" class="panel sectionAnchor"><div class="panelHead"><h2>Top20</h2><span>Chart</span></div><div id="top20Editor" class="editorGrid"></div></section>
-<section id="discoveryAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Music Discovery</h2><span>Nye tracks</span></div><div id="discoveryEditor" class="editorGrid"></div></section>
-<section id="requestsAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Requests</h2><span>DA / EN / DE</span></div><div id="requestsEditor" class="editorGrid"></div></section>
-<section id="communityAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Community Love</h2><span>Status</span></div><div id="communityEditor" class="editorGrid"></div></section>
-<section id="journeyAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Viewer Journey</h2><span>Mål</span></div><div id="journeyEditor" class="editorGrid"></div></section>
-<section id="hofAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Hall Of Fame</h2><span>Awards</span></div><div id="hofEditor" class="editorGrid"></div></section>
-<section id="networkAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>DJ Network</h2><span>Raid radar</span></div><div id="networkEditor" class="editorGrid"></div></section>
-<section id="overlayAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Overlay</h2><span>OBS / StreamElements</span></div><div id="overlayEditor" class="editorGrid"></div></section>
-<section id="jsonAdmin" class="panel sectionAnchor"><div class="panelHead"><h2>Avanceret JSON</h2><span>Alt indhold</span></div><textarea id="jsonEditor"></textarea></section>
+<nav class="adminTabs">
+  <button onclick="jump('theme')">🎨 Theme</button>
+  <button onclick="jump('homepage')">🏠 Forside</button><button onclick="jump('seo')">🔎 SEO</button>
+  <button onclick="jump('news')">📰 Nyheder</button>
+  <button onclick="jump('tickers')">📡 Tickers</button>
+  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay bokse</button>
+  <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
+  <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Næste show</button>
+  <button onclick="jump('twitch')">🟣 Twitch</button>
+</nav>
+
+<main>
+  <section id="status" class="panel statusPanel">
+    <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Hent data</button><button onclick="testAll()">Test alt</button></div></div>
+    <pre id="statusBox">Klar. Indsæt token og tryk Hent data.</pre>
+  </section>
+
+  
+  <section id="seo" class="panel">
+    <div class="panelHead"><h2>🔎 SEO Broadcast Engine</h2><div><button onclick="openApi('/api/seo')">Test SEO API</button><button onclick="openApi('/sitemap.xml')">Sitemap</button><button onclick="openApi('/robots.txt')">Robots</button></div></div>
+    <p class="note">Styrer Google metadata, OpenGraph, Twitter cards, schema.org, sitemap og søgeord.</p>
+    <div class="formGrid">
+      <div><label>Site name</label><input id="seoSiteName"></div><div><label>Domain</label><input id="seoDomain"></div>
+      <div class="wide"><label>Keywords / søgeord</label><textarea id="seoKeywords" rows="3"></textarea></div>
+      <div class="wide"><label>SameAs links</label><textarea id="seoSameAs" rows="2"></textarea></div>
+      <div><label>Title DA</label><input id="seoTitleDa"></div><div><label>Title EN</label><input id="seoTitleEn"></div><div><label>Title DE</label><input id="seoTitleDe"></div>
+      <div class="wide"><label>Description DA</label><textarea id="seoDescDa" rows="2"></textarea></div>
+      <div class="wide"><label>Description EN</label><textarea id="seoDescEn" rows="2"></textarea></div>
+      <div class="wide"><label>Description DE</label><textarea id="seoDescDe" rows="2"></textarea></div>
+    </div><button onclick="saveSEO()">Gem SEO</button>
+  </section>
+
+  <section id="theme" class="panel">
+    <div class="panelHead"><h2>🎨 Theme Engine til overlay</h2><button onclick="openApi('/api/theme')">Test theme API</button></div>
+    <p class="note">Tema skifter overlayets farver og aktive show-look. Hjemmesidens grafik røres ikke.</p>
+    <div id="themeGrid" class="themeGrid"></div>
+    <pre id="activeTheme">Aktivt tema: loading</pre>
+  </section>
+
+  <section id="homepage" class="panel">
+    <div class="panelHead"><h2>🏠 Hjemmeside indhold</h2><button onclick="openApi('/api/homepage')">Test homepage API</button></div>
+    <p class="note">Forsiden henter Twitch profil, banner, bio, live status, viewers, followers, stream title og category. Her kan du gemme profilens fallback-indhold.</p>
+    <div class="formGrid">
+      <div><label>Profilnavn</label><input id="profileName" value="DJ FOLSOE"></div>
+      <div><label>Twitch channel</label><input id="twitchChannel" value="djfolsoe"></div>
+      <div class="wide"><label>Fallback bio</label><textarea id="profileDescription" rows="4"></textarea></div>
+      <div class="wide"><label>Genres komma-separeret</label><input id="profileGenres"></div>
+    </div>
+    <div class="buttons"><button onclick="saveProfile()">Gem profil/forside</button></div>
+  </section>
+
+  <section id="news" class="panel">
+    <div class="panelHead"><h2>📰 Forside nyheder/cards</h2><button onclick="addRow('news')">Tilføj nyhed</button></div>
+    <p class="note">Vises som kort på forsiden: Seneste show, Top20 nyt, Requests, Community, Twitch updates osv.</p>
+    <div id="newsEditor"></div>
+    <button onclick="saveRows('news')">Gem nyheder</button>
+  </section>
+
+  <section id="tickers" class="panel twoCol">
+    <div>
+      <div class="panelHead"><h2>📡 Top ticker overlay</h2><button onclick="addRow('top')">Tilføj</button></div>
+      <p class="note">Top ticker kan være theme-specifik. Fx theme = weekend.</p>
+      <div id="topEditor"></div>
+      <button onclick="saveRows('top')">Gem top ticker</button>
+    </div>
+    <div>
+      <div class="panelHead"><h2>📻 Bottom ticker overlay</h2><button onclick="addRow('bottom')">Tilføj</button></div>
+      <p class="note">Bottom ticker kan være theme = all.</p>
+      <div id="bottomEditor"></div>
+      <button onclick="saveRows('bottom')">Gem bottom ticker</button>
+    </div>
+  </section>
+
+  <section id="shows" class="panel">
+    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Tilføj show</button></div>
+    <p class="note">Styrer show-kort på forsiden.</p>
+    <div id="showsEditor"></div>
+    <button onclick="saveRows('shows')">Gem shows</button>
+  </section>
+
+  
+  <section id="showVisuals" class="panel">
+    <div class="panelHead"><h2>🎭 Show grafik på forsiden</h2><button onclick="resetShowVisuals()">Indsæt standard grafik</button></div>
+    <p class="note">Her kan du ændre farver, ikon, tag og stor poster-tekst på show-kortene. Brug CSS gradient, fx <code>linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)</code>.</p>
+    <div id="showVisualsEditor"></div>
+    <button onclick="saveShowVisuals()">Gem show grafik</button>
+  </section>
+
+  <section id="overlayContent" class="panel">
+    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay bokse</h2><button onclick="resetOverlayContent()">Indsæt standard bokse</button></div>
+    <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
+    <div class="twoCol">
+      <div><h3>Box 1 · Venstre top</h3><button onclick="addOverlayItem('box1')">Tilføj Box 1 item</button><div id="box1Editor"></div></div>
+      <div><h3>Box 2 · Højre top</h3><button onclick="addOverlayItem('box2')">Tilføj Box 2 item</button><div id="box2Editor"></div></div>
+      <div><h3>Box 3 · Venstre bund</h3><button onclick="addOverlayItem('box3')">Tilføj Box 3 item</button><div id="box3Editor"></div></div>
+      <div><h3>Box 4 · Højre bund</h3><div class="previewCard"><b>LOCKED</b><p>Twitch chat med profilbillede og emotes. Denne boks skal ikke ændres.</p></div></div>
+    </div>
+    <button onclick="saveOverlayContent()">Gem overlay bokse</button>
+  </section>
+
+  <section id="top20" class="panel">
+    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Tilføj sang</button><button onclick="seedTop20()">Indsæt standard Top 20</button></div></div>
+    <p class="note">Styrer FOLSOE Top 20 på forsiden og overlayets musik-bokse.</p>
+    <div id="top20Editor"></div>
+    <button onclick="saveRows('top20')">Gem Top 20</button>
+  </section>
+
+  
+  <section id="discovery" class="panel">
+    <div class="panelHead"><h2>✨ Dem her har jeg lige opdaget</h2><button onclick="addDiscovery()">Tilføj discovery</button></div>
+    <p class="note">3 ekstra felter til nye tracks/boblere, som vises på forsiden under Top 20.</p>
+    <div id="discoveryEditor"></div>
+    <button onclick="saveDiscovery()">Gem discovery picks</button>
+  </section>
+
+
+  <section id="requests" class="panel">
+    <div class="panelHead"><h2>🎧 Request Manager</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
+    <p class="note">Styrer seneste musikønsker fra !ønske / !request / !Wunsch. Du kan godkende, afvise, fastgøre og slette.</p>
+    <div class="formGrid">
+      <div><label>Bruger</label><input id="reqUser" placeholder="Twitch navn"></div>
+      <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
+      <div><label>Sprog</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
+      <div><label>Show</label><input id="reqShow" placeholder="Fredagsbar"></div>
+    </div>
+    <button onclick="addRequest()">Tilføj request</button>
+    <button onclick="saveRequestList()">Gem ændringer</button>
+    <div id="requestStatsPreview" class="previewGrid"></div>
+    <div id="requestsManager"></div>
+  </section>
+
+
+  
+  <section id="modsManager" class="panel">
+    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Tilføj mod</button></div>
+    <p class="note">Skriv Twitch login. Forsiden henter profilbillede, display name og live/offline status automatisk.</p>
+    <div id="modsEditor"></div>
+    <button onclick="saveMods()">Gem mods</button>
+  </section>
+
+
+  <section id="communityManager" class="panel">
+    <div class="panelHead"><h2>❤️ Community Wall Manager</h2><div><button onclick="addCommunity()">Tilføj community felt</button><button onclick="openApi('/api/community-wall')">Community API</button></div></div>
+    <p class="note">Styrer Community Love på forsiden. Skriv Twitch-navn i User/Login for at hente profilbillede og live-status.</p>
+    <div id="communityEditor"></div>
+    <h3>Community Stats</h3>
+    <div class="formGrid">
+      <div><label>Raids</label><input id="communityRaids" type="number"></div>
+      <div><label>Members</label><input id="communityMembers" type="number"></div>
+      <div><label>Subs fallback</label><input id="communitySubs" type="number"></div>
+      <div><label>Followers fallback</label><input id="communityFollowers" type="number"></div>
+    </div>
+    <button onclick="saveCommunity()">Gem community wall</button>
+  </section>
+
+
+  <section id="nextShowManager" class="panel">
+    <div class="panelHead"><h2>📅 Næste show</h2></div>
+    <p class="note">Styrer Næste show og countdown på forsiden.</p>
+    <div class="formGrid">
+      <div><label>Titel</label><input id="nextShowTitle" placeholder="Fredagsbar"></div>
+      <div><label>Dato/tid</label><input id="nextShowDateTime" type="datetime-local"></div>
+      <div class="wide"><label>Beskrivelse</label><textarea id="nextShowDescription" rows="3"></textarea></div>
+    </div>
+    <button onclick="saveNextShow()">Gem næste show</button>
+  </section>
+
+  <section id="twitch" class="panel">
+    <div class="panelHead"><h2>🟣 Twitch sync</h2><div><button onclick="openApi('/api/twitch-profile')">Profil API</button><button onclick="openApi('/api/homepage')">Homepage API</button></div></div>
+    <p class="note">Kræver Cloudflare secrets: TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL=djfolsoe.</p>
+    <div id="twitchPreview" class="twitchPreview"></div>
+  </section>
 </main>
-</div>
-<script src="assets/js/admin.js?v=8182"></script>
+
+<script src="assets/js/admin.js"></script>
 </body>
 </html>
