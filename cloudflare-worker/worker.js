@@ -6,6 +6,7 @@ const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816.20.1 COMMUNITY WALL PAT
     "communityWall": [{"key": "latestFollower", "label": "Seneste follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Seneste sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Seneste raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Månedens community medlem", "value": "Good vibes only", "active": true, "priority": 5}],
     "communityStats": {"followers": 870, "requests": 0, "raids": 0, "subs": 0, "members": 0},
     "nextShow": {"title": "Fredagsbar", "dateTime": "", "description": "Fest, grin, requests og weekendstemning.", "active": true},
+    "showSchedule": [{"title":"Good Morning Twitch","show":"Good Morning Twitch","theme":"morning","date":"","start":"09:00","end":"12:00","description":"Morgenfrisk - Måske","active":true,"priority":1}],
     "profile": {"name": "DJ FOLSOE", "fallbackAvatar": "", "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.", "genres": ["Trance", "Eurodance", "Retro", "EDM", "Pop", "Nu-Disco"], "mods": [{"name": "Mod Master", "role": "Chat Safety"}, {"name": "Vibe Guardian", "role": "Community"}, {"name": "Request Helper", "role": "Requests"}, {"name": "DJ Support", "role": "Tech & Support"}, {"name": "Good Vibes", "role": "Positivity"}]}, "shows": [{"key": "trance", "title": "Trance Tuesday", "time": "Tirsdag 18:30", "body": "Uplifting trance, emotion and big melodies."}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Torsdag 18:30", "body": "Weekly listening chart and countdown show."}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "1. fredag hver måned 20:00", "body": "Weekend energy, party tracks and community."}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Classic tracks, nostalgia and singalong moments."}, {"key": "morning", "title": "Good Morning Twitch", "time": "Hver dag 07:00", "body": "Coffee, music and the best start of the day."}, {"key": "popup", "title": "PopUp", "time": "Surprise!", "body": "Surprise streams when you least expect it."}], "homepageNews": [{"id": "news1", "active": true, "type": "Seneste show", "title": "Fredagsbar – Tak for en fantastisk aften!", "body": "Se highlights, requests og moments fra seneste show.", "theme": "all", "priority": 1}, {"id": "news2", "active": true, "type": "Top 20 nyt", "title": "Ny Top 20 ude nu", "body": "Se denne uges største hits på FOLSOE Top 20.", "theme": "all", "priority": 2}, {"id": "news3", "active": true, "type": "Request info", "title": "Husk dine requests", "body": "Brug !ønske / !request / !Wunsch i chatten.", "theme": "all", "priority": 3}, {"id": "news4", "active": true, "type": "Community news", "title": "Fællesskabet vokser", "body": "Chat, emotes, follows og god stemning hver stream.", "theme": "all", "priority": 4}, {"id": "news5", "active": true, "type": "DJ Network", "title": "Danske DJs live nu", "body": "Se hvem der er live og find næste raid target.", "theme": "all", "priority": 5}, {"id": "news6", "active": true, "type": "Twitch updates", "title": "Nye emotes unlocked", "body": "Tjek de nye emotes og brug dem i chatten.", "theme": "all", "priority": 6}], "topTickerItems": [{"id": "top_weekend", "active": true, "theme": "weekend", "text": "🎉 WEEKEND VIBES · Broadcast Cloud", "priority": 1}, {"id": "top_morning", "active": true, "theme": "morning", "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes", "priority": 2}, {"id": "top_summer", "active": true, "theme": "summer", "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers", "priority": 3}, {"id": "top_trance", "active": true, "theme": "trance", "text": "💙 TRANCE TUESDAY · Uplifting energy", "priority": 4}], "bottomTickerItems": [{"id": "bottom1", "active": true, "theme": "all", "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud", "priority": 1}, {"id": "bottom2", "active": true, "theme": "all", "text": "FOLLOW DJ FOLSOE · BE ACTIVE IN CHAT · REQUEST YOUR SONG · SHARE THE LOVE", "priority": 2}], "showVisuals": {"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}},
     "overlayContent": {"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "Broadcast Cloud online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}},
     "discoveryPicks": [{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet"}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Lige opdaget og testet i mix"}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kunne blive en stærk bobler"}],
@@ -131,6 +132,104 @@ function overlayState(core) {
     }
   };
 }
+
+async function twitchCommunityEvents(env, core, tw){
+  const wall = core.communityWall || DEFAULT_CORE.communityWall || [];
+  const byKey = key => wall.find(x => String(x.key||x.type||"").toLowerCase() === String(key).toLowerCase()) || {};
+  const fallback = {
+    latestFollower:{displayName:byKey("latestFollower").value || "Twitch community"},
+    latestSub:{displayName:byKey("latestSub").value || "Tak for støtten"},
+    latestRaid:{displayName:byKey("latestRaid").value || "DJ Network love"},
+    source:"fallback"
+  };
+
+  try{
+    if(!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return fallback;
+    const token = String(env.TWITCH_ACCESS_TOKEN).startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
+    const headers = {"Client-ID":env.TWITCH_CLIENT_ID,"Authorization":"Bearer "+token};
+    let userId = tw?.id || "";
+    if(!userId){
+      const login = safeTwitchLogin(core?.twitchChannel || env?.TWITCH_CHANNEL || "djfolsoe", env, core);
+      const uJson = await (await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {headers})).json();
+      userId = uJson?.data?.[0]?.id || "";
+    }
+    if(!userId) return fallback;
+
+    const output = {...fallback, source:"twitch"};
+    try{
+      const fJson = await (await fetch("https://api.twitch.tv/helix/channels/followers?broadcaster_id="+encodeURIComponent(userId)+"&first=1", {headers})).json();
+      const f = fJson?.data?.[0];
+      if(f) output.latestFollower = {displayName:f.user_name || f.user_login || fallback.latestFollower.displayName, userName:f.user_login || "", followedAt:f.followed_at || ""};
+    }catch(e){ output.latestFollower = {...output.latestFollower, error:"followers scope missing"}; }
+
+    try{
+      const sJson = await (await fetch("https://api.twitch.tv/helix/subscriptions?broadcaster_id="+encodeURIComponent(userId)+"&first=1", {headers})).json();
+      const s = sJson?.data?.[0];
+      if(s) output.latestSub = {displayName:s.user_name || s.user_login || fallback.latestSub.displayName, userName:s.user_login || "", tier:s.tier || ""};
+    }catch(e){ output.latestSub = {...output.latestSub, error:"subscriptions scope missing"}; }
+
+    // Twitch Helix has no simple "latest raid" REST endpoint. This stays manual/EventSub-ready.
+    output.latestRaid = fallback.latestRaid;
+    return output;
+  }catch(e){
+    return {...fallback,error:e.message||"twitch community error"};
+  }
+}
+
+
+function parseShowDateTime(item){
+  const date = item?.date || item?.day || "";
+  const start = item?.start || item?.time || "20:00";
+  const raw = item?.dateTime || (date ? (date + "T" + start) : "");
+  const dt = raw ? new Date(raw) : null;
+  return dt && !isNaN(dt) ? dt : null;
+}
+function buildUpcomingShows(core, limit=10){
+  const source = Array.isArray(core.showSchedule) && core.showSchedule.length
+    ? core.showSchedule
+    : (Array.isArray(core.nextShows) && core.nextShows.length ? core.nextShows : [core.nextShow || DEFAULT_CORE.nextShow || {}]);
+
+  const now = new Date();
+  return source
+    .filter(x => x && x.active !== false)
+    .map(x => {
+      const dt = parseShowDateTime(x);
+      return {
+        title: x.title || x.show || "DJ FOLSOE LIVE",
+        show: x.show || x.title || "DJ FOLSOE LIVE",
+        theme: x.theme || "",
+        date: x.date || (dt ? dt.toISOString().slice(0,10) : ""),
+        start: x.start || x.time || "",
+        end: x.end || "",
+        dateTime: x.dateTime || (x.date && (x.start || x.time) ? (x.date + "T" + (x.start || x.time)) : ""),
+        description: x.description || x.body || "",
+        active: x.active !== false,
+        priority: Number(x.priority || 99)
+      };
+    })
+    .filter(x => {
+      const dt = parseShowDateTime(x);
+      return !dt || dt >= now;
+    })
+    .sort((a,b) => {
+      const da = parseShowDateTime(a), db = parseShowDateTime(b);
+      if(da && db) return da - db;
+      if(da && !db) return -1;
+      if(!da && db) return 1;
+      return Number(a.priority||99)-Number(b.priority||99);
+    })
+    .slice(0, limit);
+}
+async function saveShowSchedule(request, env, core){
+  if (!adminOk(request, env)) return json({error:"Unauthorized"},401);
+  const body = await request.json().catch(()=>({}));
+  core.showSchedule = Array.isArray(body.items) ? body.items : [];
+  const upcoming = buildUpcomingShows(core, 10);
+  core.nextShow = upcoming[0] || core.nextShow || {};
+  await putCore(env, core);
+  return json({ok:true,items:core.showSchedule,upcomingShows:upcoming,nextShow:core.nextShow});
+}
+
 async function homepage(env, core) {
   const tw = await twitchChannelFull(env, core);
   const reqPayload = await recentRequestsPayload(env, core);
@@ -167,8 +266,10 @@ async function homepage(env, core) {
     requestStats:reqPayload?.stats||{},
     mods:await enrichMods(env, core),
     communityWall:await enrichCommunityWall(env, core),
+    twitchCommunity:await twitchCommunityEvents(env, core, tw),
     communityStats:buildCommunityStats(core, reqPayload?.stats),
-    nextShow:core.nextShow||DEFAULT_CORE.nextShow||{},
+    nextShow:(buildUpcomingShows(core,1)[0] || core.nextShow || DEFAULT_CORE.nextShow || {}),
+    upcomingShows:buildUpcomingShows(core,10),
     djNetwork:core.djNetwork || [],
     seo:buildSeoPayload(core, lang),
     twitchUpdates:[
@@ -484,6 +585,7 @@ export default {
         return json({ok:true,...themePayload(core),overlay:overlayState(core)});
       }
       if (path === "/api/overlay/v170-state") return json(overlayState(core));
+      if (path === "/api/twitch-community") return json(await twitchCommunityEvents(env, core, await twitchChannelFull(env, core)));
       if (path === "/api/homepage" || path === "/api/site") return json(await homepage(env, core));
       if (path === "/api/twitch-profile") return json(await twitchProfile(env, core));
       if (path === "/api/chat-profile") return json(await twitchProfile(env, {...core, twitchChannel:safeTwitchLogin(url.searchParams.get("login"), env, core)}));
@@ -543,6 +645,11 @@ export default {
       if (path === "/api/next-show") {
         if (request.method === "GET") return json({ok:true,item:core.nextShow||DEFAULT_CORE.nextShow||{}});
         return saveObject(request,env,core,"nextShow");
+      }
+      if (path === "/api/show-schedule") {
+        if (request.method === "GET") return json({ok:true,items:core.showSchedule||[],upcomingShows:buildUpcomingShows(core,10),nextShow:buildUpcomingShows(core,1)[0]||{}});
+        if (request.method === "POST") return saveShowSchedule(request,env,core);
+        return json({error:"Method not allowed"},405);
       }
       if (path === "/api/show-visuals") {
         if (request.method === "GET") return json({ok:true,items:core.showVisuals||DEFAULT_CORE.showVisuals||{}});

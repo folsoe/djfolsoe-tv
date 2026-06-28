@@ -333,19 +333,56 @@ function renderCommunityStats(stats){
   ];
   el.innerHTML=cards.map(c=>`<article class="communityStatCard"><span>${c[0]}</span><b>${c[1]}</b></article>`).join("");
 }
+
+function formatShowDateLine(item){
+  const date = item?.date || (item?.dateTime ? String(item.dateTime).slice(0,10) : "");
+  const start = item?.start || (item?.dateTime ? String(item.dateTime).slice(11,16) : "");
+  const end = item?.end || "";
+  if(!date) return start ? ("Kl. " + start + (end ? " - " + end : "")) : "";
+  const dt = new Date(date + "T" + (start || "00:00"));
+  const dateText = isNaN(dt) ? date : dt.toLocaleDateString("da-DK",{weekday:"long",day:"2-digit",month:"long",year:"numeric"});
+  return `${dateText}${start ? " · kl. " + start : ""}${end ? " - " + end : ""}`;
+}
+function countdownText(item){
+  const raw = item?.dateTime || (item?.date && (item?.start || item?.time) ? item.date + "T" + (item.start || item.time) : "");
+  const dt = raw ? new Date(raw) : null;
+  if(!dt || isNaN(dt)) return "Dato ikke sat endnu";
+  const diff = dt - new Date();
+  if(diff <= 0) return "Showet er i gang eller har været sendt";
+  const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000), m = Math.floor((diff%3600000)/60000);
+  return `${d} dage · ${h} timer · ${m} min`;
+}
+function currentUpcomingShows(){
+  const shows = Array.isArray(state?.upcomingShows) && state.upcomingShows.length ? state.upcomingShows : [state?.nextShow || {}];
+  const now = new Date();
+  return shows.filter(x=>{
+    const raw = x?.dateTime || (x?.date && (x?.start || x?.time) ? x.date + "T" + (x.start || x.time) : "");
+    const dt = raw ? new Date(raw) : null;
+    return !dt || isNaN(dt) || dt >= now;
+  }).slice(0,10);
+}
+let nextShowScrollTimer = null;
+
 function renderNextShow(item){
   const el=q("nextShowCard"); if(!el)return;
-  item=item||{};
-  const dt=item.dateTime?new Date(item.dateTime):null;
-  let countdown="Dato ikke sat endnu";
-  if(dt && !isNaN(dt)){
-    const diff=dt-new Date();
-    if(diff>0){
-      const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000), m=Math.floor((diff%3600000)/60000);
-      countdown=`${d} dage · ${h} timer · ${m} min`;
-    } else countdown="Showet er i gang eller har været sendt";
+  const shows = currentUpcomingShows();
+  let index = 0;
+
+  function draw(){
+    const show = shows[index] || item || {};
+    el.innerHTML = `<div>
+      <span>NÆSTE SHOW ${shows.length > 1 ? "· " + (index+1) + "/" + shows.length : ""}</span>
+      <h3>${show.title || "DJ FOLSOE LIVE"}</h3>
+      <p class="nextShowDate">${formatShowDateLine(show)}</p>
+      <p>${show.description || ""}</p>
+    </div>
+    <strong>${countdownText(show)}</strong>`;
+    index = (index + 1) % Math.max(1, shows.length);
   }
-  el.innerHTML=`<div><span>NÆSTE SHOW</span><h3>${item.title||"DJ FOLSOE LIVE"}</h3><p>${item.description||""}</p></div><strong>${countdown}</strong>`;
+
+  draw();
+  if(nextShowScrollTimer) clearInterval(nextShowScrollTimer);
+  if(shows.length > 1) nextShowScrollTimer = setInterval(draw, 7000);
 }
 
 function upsertMeta(selector, attr, value){

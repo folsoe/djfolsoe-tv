@@ -192,6 +192,18 @@
     <p class="note">Kræver Cloudflare secrets: TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL=djfolsoe.</p>
     <div id="twitchPreview" class="twitchPreview"></div>
   </section>
+
+<section class="adminPanel" id="showScheduleAdminPanel">
+  <div class="panelHead"><h2>Weekly Schedule Engine</h2><span>Næste 10 shows</span></div>
+  <p>Dato-styret showplan. Gamle shows skjules automatisk på forsiden efter dato/starttid.</p>
+  <div class="adminActions" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;">
+    <button type="button" onclick="loadShowScheduleAdmin()">Hent showplan</button>
+    <button type="button" onclick="addShowScheduleRow()">Tilføj show</button>
+    <button type="button" onclick="saveShowScheduleAdmin()">Gem showplan</button>
+  </div>
+  <div id="showScheduleRows"></div>
+</section>
+
 </main>
 
 <script src="assets/js/admin.js?v=8162011"></script>
@@ -225,5 +237,6 @@
 <div id="communityWallEditor"></div>
 <div id="modTeamEditor"></div>
 </div>
+<script src="assets/js/show-schedule-admin.js?v=8162013"></script>
 </body>
 </html>
