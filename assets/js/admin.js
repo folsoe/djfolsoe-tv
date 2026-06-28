@@ -1,4 +1,29 @@
 
+/* ===== V816.20.1.1 ADMIN NULL SAFE PATCH =====
+   Stopper: Cannot set properties of null (setting 'innerHTML')
+*/
+function DJF_el(id){ return document.getElementById(id); }
+function DJF_html(id, value){
+  const el = DJF_el(id);
+  if(!el){ console.warn("[DJF admin] Missing element:", id); return; }
+  el.innerHTML = value || "";
+}
+function DJF_text(id, value){
+  const el = DJF_el(id);
+  if(!el){ console.warn("[DJF admin] Missing text element:", id); return; }
+  el.textContent = value || "";
+}
+function DJF_value(id, value){
+  const el = DJF_el(id);
+  if(!el){ console.warn("[DJF admin] Missing value element:", id); return; }
+  el.value = value || "";
+}
+function DJF_get(id){
+  const el = DJF_el(id);
+  return el ? el.value : "";
+}
+
+
 const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 const THEMES={"fredagsbar": "🍺 FREDAGSBAR", "popup": "⚡ POPUP", "trance": "💙 TRANCE TUESDAY", "retro": "🕹️ RETRO HITS", "eurodance": "💛 EURODANCE", "morning": "☀️ GOOD MORNING TWITCH", "summer": "🌴 SUMMER BEATS", "weekend": "🎉 WEEKEND VIBES"};
 const TOP20_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
@@ -7,16 +32,16 @@ let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discover
 
 document.addEventListener("DOMContentLoaded",()=>{
   ensureAdminPatchDom();
-  document.getElementById("token").value=localStorage.getItem("DJF_ADMIN_TOKEN")||"";
+  DJF_value("token", localStorage.getItem("DJF_ADMIN_TOKEN")||"");
   renderThemes();
   loadAll();
 });
 
 function jump(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});}
-function token(){return localStorage.getItem("DJF_ADMIN_TOKEN")||document.getElementById("token").value||"";}
-function saveToken(){localStorage.setItem("DJF_ADMIN_TOKEN",document.getElementById("token").value.trim());setStatus("✅ Token gemt");loadAll();}
+function token(){return localStorage.getItem("DJF_ADMIN_TOKEN")||DJF_get("token")||"";}
+function saveToken(){localStorage.setItem("DJF_ADMIN_TOKEN",DJF_get("token").trim());setStatus("✅ Token gemt");loadAll();}
 function openApi(path){window.open(API_BASE+path,"_blank");}
-function setStatus(v){document.getElementById("statusBox").textContent=v;}
+function setStatus(v){DJF_text("statusBox", v);}
 
 async function api(path,opt={}){
   opt.headers=Object.assign({"content-type":"application/json","x-admin-token":token()},opt.headers||{});
@@ -28,12 +53,12 @@ async function api(path,opt={}){
 }
 
 function renderThemes(){
-  document.getElementById("themeGrid").innerHTML=Object.entries(THEMES).map(([k,l])=>`<button id="theme_${k}" onclick="setTheme('${k}')">${l}</button>`).join("");
+  DJF_html("themeGrid", Object.entries(THEMES).map(([k,l])=>`<button id="theme_${k}" onclick="setTheme('${k}')">${l}</button>`).join(""));
 }
 function markTheme(k){
   activeTheme=k||activeTheme;
   Object.keys(THEMES).forEach(x=>document.getElementById("theme_"+x)?.classList.toggle("activeThemeBtn",x===activeTheme));
-  document.getElementById("activeTheme").textContent="Aktivt tema: "+activeTheme;
+  DJF_text("activeTheme", "Aktivt tema: "+activeTheme);
 }
 async function setTheme(k){
   try{
@@ -72,20 +97,20 @@ async function loadAll(){
 }
 
 function fillProfile(){
-  document.getElementById("profileName").value=core.profile?.name||home.profile?.name||"DJ FOLSOE";
-  document.getElementById("twitchChannel").value=core.twitchChannel||home.twitch?.login||"djfolsoe";
-  document.getElementById("profileDescription").value=core.profile?.description||home.twitch?.description||"";
-  document.getElementById("profileGenres").value=(core.profile?.genres||home.profile?.genres||[]).join(", ");
+  DJF_value("profileName", core.profile?.name||home.profile?.name||"DJ FOLSOE");
+  DJF_value("twitchChannel", core.twitchChannel||home.twitch?.login||"djfolsoe");
+  DJF_value("profileDescription", core.profile?.description||home.twitch?.description||"");
+  DJF_value("profileGenres", (core.profile?.genres||home.profile?.genres||[]).join(", "));
 }
 
 async function saveProfile(){
   try{
     const profile=Object.assign({},core.profile||{}, {
-      name:document.getElementById("profileName").value.trim()||"DJ FOLSOE",
-      description:document.getElementById("profileDescription").value.trim(),
-      genres:document.getElementById("profileGenres").value.split(",").map(x=>x.trim()).filter(Boolean)
+      name:DJF_get("profileName").trim()||"DJ FOLSOE",
+      description:DJF_get("profileDescription").trim(),
+      genres:DJF_get("profileGenres").split(",").map(x=>x.trim()).filter(Boolean)
     });
-    const twitchChannel=document.getElementById("twitchChannel").value.trim().toLowerCase()||"djfolsoe";
+    const twitchChannel=DJF_get("twitchChannel").trim().toLowerCase()||"djfolsoe";
     await api("/api/core",{method:"POST",body:JSON.stringify({profile,twitchChannel})});
     setStatus("✅ Profil/forside fallback gemt");
     loadAll();
@@ -104,12 +129,12 @@ function row(type,item,i){
 }
 
 function renderEditors(){
-  document.getElementById("newsEditor").innerHTML=newsItems.map((x,i)=>row("news",x,i)).join("");
-  document.getElementById("topEditor").innerHTML=topItems.map((x,i)=>row("top",x,i)).join("");
-  document.getElementById("bottomEditor").innerHTML=bottomItems.map((x,i)=>row("bottom",x,i)).join("");
-  document.getElementById("showsEditor").innerHTML=showsItems.map((x,i)=>row("shows",x,i)).join("");
-  document.getElementById("top20Editor").innerHTML=top20Items.map((x,i)=>row("top20",x,i)).join("");
-  if(document.getElementById("discoveryEditor")) document.getElementById("discoveryEditor").innerHTML=discoveryItems.map((x,i)=>row("discovery",x,i)).join("");
+  DJF_html("newsEditor", newsItems.map((x,i)=>row("news",x,i)).join(""));
+  DJF_html("topEditor", topItems.map((x,i)=>row("top",x,i)).join(""));
+  DJF_html("bottomEditor", bottomItems.map((x,i)=>row("bottom",x,i)).join(""));
+  DJF_html("showsEditor", showsItems.map((x,i)=>row("shows",x,i)).join(""));
+  DJF_html("top20Editor", top20Items.map((x,i)=>row("top20",x,i)).join(""));
+  if(document.getElementById("discoveryEditor")) DJF_html("discoveryEditor", discoveryItems.map((x,i)=>row("discovery",x,i)).join(""));
 }
 
 function collect(){
@@ -149,12 +174,12 @@ function seedTop20(){top20Items=TOP20_SEED.map(x=>Object.assign({},x));renderEdi
 
 
 function renderRequests(){
-  document.getElementById("requestsPreview").innerHTML=(requestItems||[]).slice(0,3).map(x=>`<div class="previewCard"><b>${esc(x.song||x.text||"")}</b><p>${esc(x.user||"Twitch chat")}</p><small>${esc(x.time||"")}</small></div>`).join("");
+  DJF_html("requestsPreview", (requestItems||[]).slice(0,3).map(x=>`<div class="previewCard"><b>${esc(x.song||x.text||"")}</b><p>${esc(x.user||"Twitch chat")}</p><small>${esc(x.time||"")}</small></div>`).join(""));
 }
 
 function renderTwitch(){
   const tw=home?.twitch||{};
-  document.getElementById("twitchPreview").innerHTML=`<div class="previewCard">${tw.avatar?`<img class="twitchAvatar" src="${tw.avatar}">`:""}<h3>${esc(tw.displayName||"DJ FOLSOE")}</h3><p>${esc(tw.description||"")}</p><p><b>Status:</b> ${tw.isLive?"LIVE":"Offline"}</p><p><b>Viewers:</b> ${tw.viewers||0}</p><p><b>Followers:</b> ${tw.followers||0}</p><p><b>Category:</b> ${esc(tw.category||"Music")}</p></div>`;
+  DJF_html("twitchPreview", `<div class="previewCard">${tw.avatar?`<img class="twitchAvatar" src="${tw.avatar}">`:""}<h3>${esc(tw.displayName||"DJ FOLSOE")}</h3><p>${esc(tw.description||"")}</p><p><b>Status:</b> ${tw.isLive?"LIVE":"Offline"}</p><p><b>Viewers:</b> ${tw.viewers||0}</p><p><b>Followers:</b> ${tw.followers||0}</p><p><b>Category:</b> ${esc(tw.category||"Music")}</p></div>`);
 }
 
 async function testAll(){
@@ -386,15 +411,15 @@ async function saveCommunity(){collectCommunity();try{await api('/api/community-
 
 function renderNextShowEditor(){
   if(!document.getElementById('nextShowTitle'))return;
-  document.getElementById('nextShowTitle').value=nextShowItem.title||'';
-  document.getElementById('nextShowDescription').value=nextShowItem.description||'';
+  DJF_value("nextShowTitle", nextShowItem.title||'');
+  DJF_value("nextShowDescription", nextShowItem.description||'');
   if(nextShowItem.dateTime){
     const d=new Date(nextShowItem.dateTime);
-    if(!isNaN(d)) document.getElementById('nextShowDateTime').value=d.toISOString().slice(0,16);
+    if(!isNaN(d)) DJF_value("nextShowDateTime", d.toISOString().slice(0,16));
   }
 }
 async function saveNextShow(){
-  const item={active:true,title:document.getElementById('nextShowTitle').value,description:document.getElementById('nextShowDescription').value,dateTime:document.getElementById('nextShowDateTime').value};
+  const item={active:true,title:DJF_get("nextShowTitle"),description:DJF_get("nextShowDescription"),dateTime:DJF_get("nextShowDateTime")};
   try{await api('/api/next-show',{method:'POST',body:JSON.stringify({item})});setStatus('✅ Næste show gemt');loadEcosystem();}catch(e){setStatus('❌ Næste show fejl: '+e.message);}
 }
 
@@ -402,19 +427,19 @@ let seoItem={"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title
 async function loadSEO(){ try{ const r=await api('/api/seo'); seoItem=r.seo||r; }catch(e){} fillSEO(); }
 function fillSEO(){
   if(!document.getElementById('seoSiteName'))return;
-  document.getElementById('seoSiteName').value=seoItem.siteName||'DJ FOLSOE TV';
-  document.getElementById('seoDomain').value=seoItem.domain||'https://folsoetv.dk';
-  document.getElementById('seoKeywords').value=(seoItem.keywords||[]).join(', ');
-  document.getElementById('seoSameAs').value=(seoItem.sameAs||[]).join('\n');
-  document.getElementById('seoTitleDa').value=seoItem.title?.da||'';
-  document.getElementById('seoTitleEn').value=seoItem.title?.en||'';
-  document.getElementById('seoTitleDe').value=seoItem.title?.de||'';
-  document.getElementById('seoDescDa').value=seoItem.description?.da||'';
-  document.getElementById('seoDescEn').value=seoItem.description?.en||'';
-  document.getElementById('seoDescDe').value=seoItem.description?.de||'';
+  DJF_value("seoSiteName", seoItem.siteName||'DJ FOLSOE TV');
+  DJF_value("seoDomain", seoItem.domain||'https://folsoetv.dk');
+  DJF_value("seoKeywords", (seoItem.keywords||[]).join(', '));
+  DJF_value("seoSameAs", (seoItem.sameAs||[]).join('\n'));
+  DJF_value("seoTitleDa", seoItem.title?.da||'');
+  DJF_value("seoTitleEn", seoItem.title?.en||'');
+  DJF_value("seoTitleDe", seoItem.title?.de||'');
+  DJF_value("seoDescDa", seoItem.description?.da||'');
+  DJF_value("seoDescEn", seoItem.description?.en||'');
+  DJF_value("seoDescDe", seoItem.description?.de||'');
 }
 async function saveSEO(){
-  const seo={...seoItem,siteName:document.getElementById('seoSiteName').value.trim(),domain:document.getElementById('seoDomain').value.trim(),keywords:document.getElementById('seoKeywords').value.split(',').map(x=>x.trim()).filter(Boolean),sameAs:document.getElementById('seoSameAs').value.split(/\n|,/).map(x=>x.trim()).filter(Boolean),title:{da:document.getElementById('seoTitleDa').value,en:document.getElementById('seoTitleEn').value,de:document.getElementById('seoTitleDe').value},description:{da:document.getElementById('seoDescDa').value,en:document.getElementById('seoDescEn').value,de:document.getElementById('seoDescDe').value}};
+  const seo={...seoItem,siteName:DJF_get("seoSiteName").trim(),domain:DJF_get("seoDomain").trim(),keywords:DJF_get("seoKeywords").split(',').map(x=>x.trim()).filter(Boolean),sameAs:DJF_get("seoSameAs").split(/\n|,/).map(x=>x.trim()).filter(Boolean),title:{da:DJF_get("seoTitleDa"),en:DJF_get("seoTitleEn"),de:DJF_get("seoTitleDe")},description:{da:DJF_get("seoDescDa"),en:DJF_get("seoDescEn"),de:DJF_get("seoDescDe")}};
   try{ await api('/api/seo',{method:'POST',body:JSON.stringify(seo)}); setStatus('✅ SEO gemt'); loadSEO(); }catch(e){ setStatus('❌ SEO-fejl: '+e.message); }
 }
 
@@ -472,8 +497,8 @@ function collectRequestManager(){
 async function addRequest(){
   try{
     const body={
-      user:document.getElementById('reqUser').value||'Admin',
-      text:document.getElementById('reqText').value||'!ønske Artist - Title',
+      user:DJF_get("reqUser")||'Admin',
+      text:DJF_get("reqText")||'!ønske Artist - Title',
       language:document.getElementById('reqLang')?.value||'da',
       show:document.getElementById('reqShow')?.value||'DJ FOLSOE LIVE'
     };
@@ -520,10 +545,10 @@ function renderCommunityEditor(){
       <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Slet</button>
     </div>`).join('');
   if(document.getElementById('communityRaids')){
-    document.getElementById('communityRaids').value=communityStatsItem.raids||0;
-    document.getElementById('communityMembers').value=communityStatsItem.members||0;
-    document.getElementById('communitySubs').value=communityStatsItem.subs||0;
-    document.getElementById('communityFollowers').value=communityStatsItem.followers||870;
+    DJF_value("communityRaids", communityStatsItem.raids||0);
+    DJF_value("communityMembers", communityStatsItem.members||0);
+    DJF_value("communitySubs", communityStatsItem.subs||0);
+    DJF_value("communityFollowers", communityStatsItem.followers||870);
   }
 }
 function collectCommunity(){
