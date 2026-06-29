@@ -14,67 +14,9 @@ function englishSiteText(s){
 
 const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 let state=null;
-let lang=localStorage.getItem("djf_home_lang")||"da";
+let lang="en";
 
-const I18N={
-  da:{
-    "nav.home":"Forside","nav.about":"Om mig","nav.shows":"Shows","nav.requests":"Requests","nav.news":"Nyheder","nav.top20":"Top 20",
-    "hero.subtitle":"Music TV fra Danmark","hero.cta.twitch":"Se mig live på Twitch","hero.cta.requests":"Musicønsker","hero.liveData":"Live data",
-    "hero.streamTitle":"Stream title","hero.category":"Category","hero.live":"Live på Twitch","hero.offline":"Offline lige nu",
-    "stats.followers":"Followers","stats.viewers":"Viewers","stats.views":"Views","stats.stream":"Stream",
-    "about.title":"Hvem er DJ FOLSOE?","about.musicTitle":"Music","about.showsTitle":"Shows","about.requestsTitle":"Requests","about.communityTitle":"Community",
-    "about.main":"DJ FOLSOE brings music, chat, requests and Danish DJ culture together in a live broadcast universe.",
-    "about.music":"Trance, Eurodance, Retro, EDM, Pop og Nu-Disco.",
-    "about.shows":"Live DJ med masse af sjov og ballade.",
-    "about.requests":"Du er medbestemmende — musikønsker via !ønske.",
-    "about.community":"Vi har det hylende morsomt og et godt fællesskab.",
-    "shows.title":"Shows","shows.link":"Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend",
-    "requests.title":"Latest musikønsker","requests.link":"Savemer de sidste 3 fra !ønske",
-    "news.title":"Nyheder & opdateringer","news.link":"Latest show · Top20 · Requests · Community · Twitch",
-    "top20.title":"FOLSOE Top 20","top20.link":"Se hele listen →","top20.button":"Se hele Top 20",
-    "mods.title":"Mod-teamet","mods.body":"Mods keep the chat friendly, help new viewers and create a safe community around the stream.",
-    "openTwitch":"Åbn Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Category","title":"Title",
-    "offline":"Offline","live":"Live","ready":"klar","showDefault":"Broadcast Cloud show"
-  },
-  en:{
-    "nav.home":"Home","nav.about":"About me","nav.shows":"Shows","nav.requests":"Requests","nav.news":"News","nav.top20":"Top 20",
-    "hero.subtitle":"Music TV from Denmark","hero.cta.twitch":"Watch me live on Twitch","hero.cta.requests":"Song requests","hero.liveData":"Live data",
-    "hero.streamTitle":"Stream title","hero.category":"Category","hero.live":"Live on Twitch","hero.offline":"Offline right now",
-    "stats.followers":"Followers","stats.viewers":"Viewers","stats.views":"Views","stats.stream":"Stream",
-    "about.title":"Who is DJ FOLSOE?","about.musicTitle":"Music","about.showsTitle":"Shows","about.requestsTitle":"Requests","about.communityTitle":"Community",
-    "about.main":"DJ FOLSOE brings music, chat, requests and Danish DJ culture into a living broadcast universe.",
-    "about.music":"Trance, Eurodance, Retro, EDM, Pop and Nu-Disco.",
-    "about.shows":"Live DJ sets with lots of fun, energy and good chaos.",
-    "about.requests":"You help shape the show — song requests via !request.",
-    "about.community":"We have a hilarious time and a strong community.",
-    "shows.title":"Shows","shows.link":"Trance · Top20 · Friday Bar · Retro · Morning · Popup · Weekend",
-    "requests.title":"Latest song requests","requests.link":"Stores the latest 3 requests from !ønske",
-    "news.title":"News & updates","news.link":"Latest show · Top20 · Requests · Community · Twitch",
-    "top20.title":"FOLSOE Top 20","top20.link":"See full list →","top20.button":"See full Top 20",
-    "mods.title":"Mod team","mods.body":"Mods keep the chat friendly, help new viewers and protect the good vibe around the stream.",
-    "openTwitch":"Open Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Category","title":"Title",
-    "offline":"Offline","live":"Live","ready":"ready","showDefault":"Broadcast Cloud show"
-  },
-  de:{
-    "nav.home":"Startseite","nav.about":"Über mich","nav.shows":"Shows","nav.requests":"Wünsche","nav.news":"News","nav.top20":"Top 20",
-    "hero.subtitle":"Music TV aus Dänemark","hero.cta.twitch":"Live auf Twitch ansehen","hero.cta.requests":"Musicwünsche","hero.liveData":"Live-Daten",
-    "hero.streamTitle":"Stream-Title","hero.category":"Category","hero.live":"Live auf Twitch","hero.offline":"Gerade offline",
-    "stats.followers":"Follower","stats.viewers":"Viewers","stats.views":"Aufrufe","stats.stream":"Stream",
-    "about.title":"Wer ist DJ FOLSOE?","about.musicTitle":"Music","about.showsTitle":"Shows","about.requestsTitle":"Wünsche","about.communityTitle":"Community",
-    "about.main":"DJ FOLSOE verbindet Music, Chat, Musicwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum.",
-    "about.music":"Trance, Eurodance, Retro, EDM, Pop und Nu-Disco.",
-    "about.shows":"Live-DJ-Sets mit viel Spaß, Energie und guter Laune.",
-    "about.requests":"Du bestimmst mit — Musicwünsche über !Wunsch.",
-    "about.community":"Wir haben riesigen Spaß und eine starke Saveeinschaft.",
-    "shows.title":"Shows","shows.link":"Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend",
-    "requests.title":"Neueste Musicwünsche","requests.link":"Speichert die letzten 3 Wünsche von !ønske",
-    "news.title":"News & Updates","news.link":"Letzte Show · Top20 · Wünsche · Community · Twitch",
-    "top20.title":"FOLSOE Top 20","top20.link":"Ganze Liste ansehen →","top20.button":"Ganze Top 20 ansehen",
-    "mods.title":"Mod-Team","mods.body":"Mods halten den Chat freundlich, helfen neuen Viewersn und schützen die gute Stimmung im Stream.",
-    "openTwitch":"Twitch öffnen","status":"Status","viewers":"Viewers","followers":"Follower","category":"Category","title":"Title",
-    "offline":"Offline","live":"Live","ready":"bereit","showDefault":"Broadcast Cloud Show"
-  }
-};
+const I18N={en:{}};
 
 function t(key){return (I18N[lang]&&I18N[lang][key])||I18N.da[key]||key;}
 function q(id){return document.getElementById(id);}
@@ -104,7 +46,7 @@ async function loadHome(){
     const r=await fetch(API_BASE+"/api/homepage?lang="+lang+"&ts="+Date.now(),{cache:"no-store"});
     state=await r.json();
   }catch(e){
-    state={twitch:{displayName:"DJ FOLSOE",description:"DJ FOLSOE er en dansk musikstreamer på Twitch.",isLive:false,viewers:0,followers:870,viewCount:0,liveTitle:"DJ FOLSOE LIVE",category:"Music"},profile:{mods:[]},shows:[],newsCards:[],top20:[],requests:[]};
+    state={twitch:{displayName:"DJ FOLSOE",description:"DJ FOLSOE is a Danish music streamer on Twitch.",isLive:false,viewers:0,followers:870,viewCount:0,liveTitle:"DJ FOLSOE LIVE",category:"Music"},profile:{mods:[]},shows:[],newsCards:[],top20:[],requests:[]};
   }
   render();
   applySEO();
@@ -224,7 +166,7 @@ function renderShows(items){
 
 function renderRequests(items){
   const fallback=[
-    {user:"Chat",song:lang==="de"?"Schreibe !Wunsch Künstler - Title":lang==="en"?"Use !request Artist - Title":"Skriv !ønske Kunstner - Title",time:t("ready"),language:lang,show:"DJ FOLSOE LIVE"},
+    {user:"Chat",song:"Use !request Artist - Title",time:t("ready"),language:lang,show:"DJ FOLSOE LIVE"},
     {user:"Chat",song:"!request Artist - Title",time:t("ready"),language:"en",show:"DJ FOLSOE LIVE"},
     {user:"Chat",song:"!Wunsch Künstler - Title",time:t("ready"),language:"de",show:"DJ FOLSOE LIVE"}
   ];
@@ -235,21 +177,21 @@ function renderRequests(items){
 function renderRequestStats(stats){
   const el=q("requestStatsGrid"); if(!el)return;
   const cards=[
-    {label:lang==="de"?"Heute":lang==="en"?"Today":"I dag",value:stats.today||0},
-    {label:lang==="de"?"Gesamt":lang==="en"?"Total":"I alt",value:stats.total||0},
-    {label:lang==="de"?"Top Künstler":lang==="en"?"Top artist":"Top artist",value:stats.topArtist?.name||"-"},
-    {label:lang==="de"?"Top Wunsch":lang==="en"?"Top requester":"Top requester",value:stats.topRequester?.name||"-"}
+    {label:"Today",value:stats.today||0},
+    {label:"Total",value:stats.total||0},
+    {label:"Top artist",value:stats.topArtist?.name||"-"},
+    {label:"Top requester",value:stats.topRequester?.name||"-"}
   ];
   el.innerHTML=cards.map(c=>`<article class="requestStatCard"><span>${c.label}</span><b>${c.value}</b></article>`).join("");
 }
 
 function renderNews(items,tw){
   const base=[
-    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Latest show",title:tw.liveTitle||"DJ FOLSOE Broadcast Cloud",body:tw.isLive?t("hero.live"):t("hero.offline")},
-    {type:lang==="de"?"Top20 neu":lang==="en"?"Top20 update":"Top20 nyt",title:"FOLSOE Top 20",body:lang==="de"?"Sieh die wöchentlichen Charts.":lang==="en"?"See the weekly chart.":"Se ugens chart og countdown."},
-    {type:"Requests",title:lang==="de"?"Musicwünsche sind offen":lang==="en"?"Song requests are open":"Musicønsker er åbne",body:"!ønske / !request / !Wunsch"},
-    {type:"Community",title:lang==="de"?"Der Chat ist das Herz":lang==="en"?"Chat is the heart":"Chatten er hjertet",body:lang==="de"?"Emotes, Mods und gute Stimmung.":lang==="en"?"Emotes, mods and good vibes.":"Emotes, mods og god stemning."},
-    {type:"Twitch",title:lang==="de"?"Twitch-Updates":lang==="en"?"Twitch updates":"Twitch updates",body:tw.category||"Music"}
+    {type:"Latest show",title:tw.liveTitle||"DJ FOLSOE Broadcast Cloud",body:tw.isLive?t("hero.live"):t("hero.offline")},
+    {type:"Top20 update",title:"FOLSOE Top 20",body:"See the weekly chart."},
+    {type:"Requests",title:"Song requests are open",body:"!request"},
+    {type:"Community",title:"Chat is the heart",body:"Emotes, mods and good vibes."},
+    {type:"Twitch",title:"Twitch updates",body:tw.category||"Music"}
   ];
   const merged=[...base,...items].slice(0,6);
   const icons=["📺","🏆","🎵","💜","💬","📡"];
@@ -264,11 +206,11 @@ function renderDiscovery(items){
   const el=q("discoveryGrid");
   if(!el)return;
   const fallback=[
-    {artist:"Ny artist",title:"Ny sang",genre:"Discovery",note:"Dem her har jeg lige opdaget."},
-    {artist:"Upcoming",title:"Frisk lyd",genre:"New Music",note:"Kan blive en del af næste chart."},
+    {artist:"New artist",title:"New track",genre:"Discovery",note:"New music discoveries."},
+    {artist:"Upcoming",title:"Fresh sound",genre:"New Music",note:"Kan blive en del af næste chart."},
     {artist:"FOLSOE Pick",title:"Lyt med",genre:"Broadcast",note:"Et track der fortjener ekstra kærlighed."}
   ];
-  el.innerHTML=(items&&items.length?items:fallback).slice(0,3).map((x,i)=>`<article class="discoveryCard"><span>DISCOVERY ${i+1}</span><b>${x.artist||""}</b><h3>${x.title||""}</h3><p>${x.genre||""}</p><small>${x.note||"Dem her har jeg lige opdaget."}</small></article>`).join("");
+  el.innerHTML=(items&&items.length?items:fallback).slice(0,3).map((x,i)=>`<article class="discoveryCard"><span>DISCOVERY ${i+1}</span><b>${x.artist||""}</b><h3>${x.title||""}</h3><p>${x.genre||""}</p><small>${x.note||"New music discoveries."}</small></article>`).join("");
 }
 
 
@@ -302,15 +244,15 @@ function renderCommunityWall(items){
       type:"latestFollower",
       label:"Latest follower",
       displayName:follower.displayName || follower.userName || manualBy("latestFollower","Latest follower","Twitch community").value || "Twitch community",
-      value:follower.followedAt ? ("Followed " + new Date(follower.followedAt).toLocaleDateString("da-DK")) : "Hentes fra Twitch når token/scope tillader det",
+      value:follower.followedAt ? ("Followed " + new Date(follower.followedAt).toLocaleDateString("da-DK")) : "Loaded from Twitch when token/scope allows it",
       avatar:follower.avatar || "",
       isLive:false
     },
     {
       type:"latestSub",
       label:"Latest sub",
-      displayName:sub.displayName || sub.userName || manualBy("latestSub","Latest sub","Tak for støtten").value || "Tak for støtten",
-      value:sub.tier ? ("Tier " + sub.tier) : "Hentes fra Twitch når token/scope tillader det",
+      displayName:sub.displayName || sub.userName || manualBy("latestSub","Latest sub","Thanks for the support").value || "Thanks for the support",
+      value:sub.tier ? ("Tier " + sub.tier) : "Loaded from Twitch when token/scope allows it",
       avatar:sub.avatar || "",
       isLive:false
     },
@@ -318,7 +260,7 @@ function renderCommunityWall(items){
       type:"latestRaid",
       label:"Latest raid",
       displayName:raid.displayName || raid.userName || manualBy("latestRaid","Latest raid","DJ Network love").value || "DJ Network love",
-      value:raid.viewers ? (raid.viewers + " viewers") : "Raid udfyldes via Twitch/EventSub eller manuelt",
+      value:raid.viewers ? (raid.viewers + " viewers") : "Raid is shown via Twitch/EventSub or manually",
       avatar:raid.avatar || "",
       isLive:false
     },
