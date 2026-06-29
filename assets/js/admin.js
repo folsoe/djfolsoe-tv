@@ -32,23 +32,59 @@ let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discover
 
 document.addEventListener("DOMContentLoaded",()=>{
   ensureAdminPatchDom();
-  DJF_value("token", localStorage.getItem("DJF_ADMIN_TOKEN")||"");
+  syncTokenFields(localStorage.getItem("DJF_ADMIN_TOKEN")||localStorage.getItem("djf_admin_token")||"");
   renderThemes();
   loadAll();
 });
 
 function jump(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});}
-function token(){return localStorage.getItem("DJF_ADMIN_TOKEN")||DJF_get("token")||"";}
-function saveToken(){localStorage.setItem("DJF_ADMIN_TOKEN",DJF_get("token").trim());setStatus("✅ Token gemt");loadAll();}
+function token(){
+  const ids=["token","adminToken","quickAdminToken","admin_token","ADMIN_TOKEN"];
+  for(const id of ids){
+    const el=document.getElementById(id);
+    if(el && String(el.value||"").trim()){
+      const v=String(el.value||"").trim();
+      localStorage.setItem("DJF_ADMIN_TOKEN",v);
+      localStorage.setItem("djf_admin_token",v);
+      return v;
+    }
+  }
+  return localStorage.getItem("DJF_ADMIN_TOKEN") || localStorage.getItem("djf_admin_token") || "";
+}
+function syncTokenFields(v){
+  v=String(v||localStorage.getItem("DJF_ADMIN_TOKEN")||localStorage.getItem("djf_admin_token")||"").trim();
+  ["token","adminToken","quickAdminToken","admin_token","ADMIN_TOKEN"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && v) el.value=v;
+  });
+  if(v){
+    localStorage.setItem("DJF_ADMIN_TOKEN",v);
+    localStorage.setItem("djf_admin_token",v);
+  }
+}
+function saveToken(){
+  const v=token();
+  syncTokenFields(v);
+  setStatus(v ? "✅ Token gemt og synkroniseret" : "❌ Token mangler");
+  loadAll();
+}
 function openApi(path){window.open(API_BASE+path,"_blank");}
 function setStatus(v){DJF_text("statusBox", v);}
 
 async function api(path,opt={}){
-  opt.headers=Object.assign({"content-type":"application/json","x-admin-token":token()},opt.headers||{});
+  const t=token();
+  opt.headers=Object.assign({"content-type":"application/json"},opt.headers||{});
+  if(t){
+    opt.headers["x-admin-token"]=t;
+    opt.headers["authorization"]="Bearer "+t;
+  }
   const r=await fetch(API_BASE+path,opt);
   const txt=await r.text();
   let j; try{j=JSON.parse(txt);}catch(e){j={raw:txt};}
-  if(!r.ok) throw new Error(txt);
+  if(!r.ok){
+    const detail = j?.error ? JSON.stringify(j,null,2) : txt;
+    throw new Error(detail || ("HTTP "+r.status));
+  }
   return j;
 }
 
@@ -621,18 +657,38 @@ function djfNormalizeThemeKey(k){
 async function setThemeSafe(k){
   k=djfNormalizeThemeKey(k);
   try{
+    syncTokenFields();
     const r=await api("/api/theme",{method:"POST",body:JSON.stringify({theme:k,activeTheme:k})});
     markTheme(r.activeTheme||r.theme?.activeTheme||k);
     setStatus("✅ Tema skiftet til "+(r.activeTheme||r.theme?.activeTheme||k));
   }catch(e){
     let msg=String(e.message||e);
     if(msg.includes("Unauthorized") || msg.includes("401")){
-      msg="Admin token mangler eller er forkert. Sæt token i admin-feltet/localStorage og prøv igen.";
+      const fresh=prompt("Cloudflare Worker afviser token. Indsæt den RIGTIGE ADMIN_TOKEN fra Cloudflare Worker settings:");
+      if(fresh){
+        syncTokenFields(fresh);
+        try{
+          const r=await api("/api/theme",{method:"POST",body:JSON.stringify({theme:k,activeTheme:k})});
+          markTheme(r.activeTheme||r.theme?.activeTheme||k);
+          setStatus("✅ Tema skiftet til "+(r.activeTheme||r.theme?.activeTheme||k));
+          return;
+        }catch(e2){ msg=String(e2.message||e2); }
+      }else{
+        msg="Admin token mangler eller matcher ikke Cloudflare Worker ADMIN_TOKEN.";
+      }
     }
-    if(msg.includes("Unknown theme")){
-      msg="Ukendt tema-key. Brug: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend.";
-    }
+    if(msg.includes("Unknown theme")) msg="Ukendt tema-key. Brug: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend.";
     setStatus("❌ Tema-fejl: "+msg);
     console.error("Theme error",e);
+  }
+}
+
+async function testThemeToken(){
+  try{
+    syncTokenFields();
+    const before=await api("/api/theme");
+    setStatus("✅ Theme API GET OK\nAktivt tema: "+(before.activeTheme||before.theme?.activeTheme||"ukendt")+"\nToken bruges kun ved skift/gem.");
+  }catch(e){
+    setStatus("❌ Theme API test-fejl: "+e.message);
   }
 }
