@@ -473,3 +473,5 @@ function applyShowIdentityTheme(){
   }catch(e){}
 }
 document.addEventListener("DOMContentLoaded",()=>setTimeout(applyShowIdentityTheme,1400));
+
+setTimeout(()=>{ if(window.DJF_applyLang) DJF_applyLang(localStorage.getItem("DJF_LANG")||"en"); }, 1200);

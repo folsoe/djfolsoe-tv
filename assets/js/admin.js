@@ -700,3 +700,5 @@ async function testThemeToken(){
     setStatus("❌ Theme API test-fejl: "+e.message);
   }
 }
+
+setTimeout(()=>{ if(window.DJF_applyLang) DJF_applyLang(localStorage.getItem("DJF_LANG")||"en"); }, 1200);
