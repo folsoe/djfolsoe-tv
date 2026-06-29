@@ -315,9 +315,9 @@ async function saveOverlayContent(){
   collectOverlayContent();
   try{
     await api('/api/overlay-content',{method:'POST',body:JSON.stringify({items:overlayContent})});
-    setStatus('✅ Overlay bokse gemt');
+    setStatus('✅ Overlay boxe gemt');
     loadContentManager();
-  }catch(e){setStatus('❌ Overlay bokse fejl: '+e.message);}
+  }catch(e){setStatus('❌ Overlay boxe fejl: '+e.message);}
 }
 
 function resetOverlayContent(){overlayContent=JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));renderOverlayContent();}
@@ -393,7 +393,7 @@ let nextShowItem={};
 
 async function loadEcosystem(){
   try{ modItems=(await api('/api/mod-team')).items||[]; }catch(e){ modItems=[{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}]; }
-  try{ communityItems=(await api('/api/community-wall')).items||[]; }catch(e){ communityItems=[{"key": "latestFollower", "label": "Latest follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Latest sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Latest raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Månedens community medlem", "value": "Good vibes only", "active": true, "priority": 5}]; }
+  try{ communityItems=(await api('/api/community-wall')).items||[]; }catch(e){ communityItems=[{"key": "latestFollower", "label": "Latest follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Latest sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Latest raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Community member of the month", "value": "Good vibes only", "active": true, "priority": 5}]; }
   try{ nextShowItem=(await api('/api/next-show')).item||{}; }catch(e){ nextShowItem={"title": "Fredagsbar", "dateTime": "", "description": "Fest, grin, requests og weekendstemning.", "active": true}; }
   renderModsEditor();
   renderCommunityEditor();
@@ -701,4 +701,7 @@ async function testThemeToken(){
   }
 }
 
-setTimeout(()=>{ if(window.DJF_applyLang) DJF_applyLang(localStorage.getItem("DJF_LANG")||"en"); }, 1200);
+
+/* V817 GLOBAL EDITION - English only */
+localStorage.setItem("DJF_LANG","en");
+document.documentElement.lang="en";

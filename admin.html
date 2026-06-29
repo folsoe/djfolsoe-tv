@@ -32,7 +32,7 @@
   <button onclick="jump('homepage')">🏠 Forside</button><button onclick="jump('seo')">🔎 SEO</button>
   <button onclick="jump('news')">📰 Nyheder</button>
   <button onclick="jump('tickers')">📡 Tickers</button>
-  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay bokse</button>
+  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay boxe</button>
   <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
   <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Next show</button>
   <button onclick="jump('twitch')">🟣 Twitch</button>
@@ -116,7 +116,7 @@
   </section>
 
   <section id="overlayContent" class="panel">
-    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay bokse</h2><button onclick="resetOverlayContent()">Indsæt standard bokse</button></div>
+    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay boxe</h2><button onclick="resetOverlayContent()">Indsæt standard bokse</button></div>
     <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
     <div class="twoCol">
       <div><h3>Box 1 · Venstre top</h3><button onclick="addOverlayItem('box1')">Tilføj Box 1 item</button><div id="box1Editor"></div></div>
@@ -187,7 +187,7 @@
     <div class="panelHead"><h2>📅 Next show</h2></div>
     <p class="note">Styrer Next show og countdown på forsiden.</p>
     <div class="formGrid">
-      <div><label>Titel</label><input id="nextShowTitle" placeholder="Fredagsbar"></div>
+      <div><label>Title</label><input id="nextShowTitle" placeholder="Fredagsbar"></div>
       <div><label>Date/tid</label><input id="nextShowDateTime" type="datetime-local"></div>
       <div class="wide"><label>Beskrivelse</label><textarea id="nextShowDescription" rows="3"></textarea></div>
     </div>
@@ -245,7 +245,5 @@
 <div id="modTeamEditor"></div>
 </div>
 <script src="assets/js/show-schedule-admin.js?v=8162013"></script>
-
-<script src="assets/js/i18n.js?v=8162020"></script>
 </body>
 </html>

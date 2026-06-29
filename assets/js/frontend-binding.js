@@ -4,7 +4,7 @@
   const FALLBACK = window.DJF_BRAND_FALLBACK || {
     brand: "DJ FOLSOE",
     heroRibbon: { da: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH", en: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH", de: "BROADCAST CLOUD · DJ FOLSOE ON TWITCH" },
-    heroDescription: { da: "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.", en: "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de: "DJ FOLSOE ist ein dänischer Musikstreamer auf Twitch.tv mit Live-DJ-Shows, Musikwünschen, Charts und einer starken Musik-Community." }
+    heroDescription: { da: "DJ FOLSOE er en dansk musikstreamer på Twitch.tv med live DJ-shows, musikønsker, hitlister og et stærkt musikfællesskab.", en: "DJ FOLSOE is a Danish music streamer on Twitch.tv with live DJ shows, song requests, chart countdowns and a strong music community.", de: "DJ FOLSOE ist ein dänischer Musicstreamer auf Twitch.tv mit Live-DJ-Shows, Musicwünschen, Charts und einer starken Music-Community." }
   };
 
   function lang(){

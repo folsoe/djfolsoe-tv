@@ -123,13 +123,13 @@
     {
       "key": "trance",
       "title": "Trance Tuesday",
-      "time": "Tirsdag 18:30",
+      "time": "Tuesday 18:30",
       "body": "Uplifting trance, emotion and big melodies."
     },
     {
       "key": "top20",
       "title": "FOLSOE Top 20",
-      "time": "Torsdag 18:30",
+      "time": "Thursday 18:30",
       "body": "Weekly listening chart and countdown show."
     },
     {
@@ -161,7 +161,7 @@
     {
       "id": "news1",
       "active": true,
-      "type": "Seneste show",
+      "type": "Latest show",
       "title": "Fredagsbar – Tak for en fantastisk aften!",
       "body": "Se highlights, requests og moments fra seneste show.",
       "theme": "all",
@@ -181,7 +181,7 @@
       "active": true,
       "type": "Request info",
       "title": "Husk dine requests",
-      "body": "Brug !ønske / !request / !Wunsch i chatten.",
+      "body": "Use !request in chat.",
       "theme": "all",
       "priority": 3
     },

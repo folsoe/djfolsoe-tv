@@ -858,21 +858,21 @@ body.theme-morning .panel::before{
    Uses /themes/[theme].png
    ========================================================= */
 
-body.theme-fredagsbar{--theme-bg:url("/themes/fredagsbar.png")}
-body.theme-popup{--theme-bg:url("/themes/popup.png")}
-body.theme-trance{--theme-bg:url("/themes/trance.png")}
-body.theme-retro{--theme-bg:url("/themes/retro.png")}
-body.theme-eurodance{--theme-bg:url("/themes/eurodance.png")}
-body.theme-morning{--theme-bg:url("/themes/morning.png")}
-body.theme-summer{--theme-bg:url("/themes/summer.png")}
-body.theme-weekend{--theme-bg:url("/themes/weekend.png")}
-body.theme-chart{--theme-bg:url("/themes/chart.png")}
-body.theme-christmas{--theme-bg:url("/themes/christmas.png")}
-body.theme-danske{--theme-bg:url("/themes/danske.png")}
-body.theme-disco{--theme-bg:url("/themes/disco.png")}
-body.theme-handsup{--theme-bg:url("/themes/handsup.png")}
-body.theme-harddance{--theme-bg:url("/themes/harddance.png")}
-body.theme-halloween{--theme-bg:url("/themes/halloween.png")}
+body.theme-fredagsbar{--theme-bg:url("https://folsoetv.dk/themes/fredagsbar.png")}
+body.theme-popup{--theme-bg:url("https://folsoetv.dk/themes/popup.png")}
+body.theme-trance{--theme-bg:url("https://folsoetv.dk/themes/trance.png")}
+body.theme-retro{--theme-bg:url("https://folsoetv.dk/themes/retro.png")}
+body.theme-eurodance{--theme-bg:url("https://folsoetv.dk/themes/eurodance.png")}
+body.theme-morning{--theme-bg:url("https://folsoetv.dk/themes/morning.png")}
+body.theme-summer{--theme-bg:url("https://folsoetv.dk/themes/summer.png")}
+body.theme-weekend{--theme-bg:url("https://folsoetv.dk/themes/weekend.png")}
+body.theme-chart{--theme-bg:url("https://folsoetv.dk/themes/chart.png")}
+body.theme-christmas{--theme-bg:url("https://folsoetv.dk/themes/christmas.png")}
+body.theme-danske{--theme-bg:url("https://folsoetv.dk/themes/danske.png")}
+body.theme-disco{--theme-bg:url("https://folsoetv.dk/themes/disco.png")}
+body.theme-handsup{--theme-bg:url("https://folsoetv.dk/themes/handsup.png")}
+body.theme-harddance{--theme-bg:url("https://folsoetv.dk/themes/harddance.png")}
+body.theme-halloween{--theme-bg:url("https://folsoetv.dk/themes/halloween.png")}
 
 body[class*="theme-"]::before{
   content:""!important;
@@ -895,3 +895,6 @@ body[class*="theme-"] .hero::before{
   opacity:.38!important;
   filter:saturate(1.18) contrast(1.08)!important;
 }
+
+/* V817 GLOBAL EDITION - language selectors removed */
+.langs,.language,.languageSwitcher,.langSwitch,[data-lang]{display:none!important;}

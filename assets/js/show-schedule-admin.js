@@ -8,13 +8,13 @@ function showScheduleStatus(msg){
 
 function showScheduleRow(item={}, i=0){
   return `<div class="scheduleRow" style="display:grid;grid-template-columns:1.2fr 1fr .8fr .7fr .7fr 1.6fr .45fr;gap:8px;margin:8px 0;align-items:start">
-    <input placeholder="Titel" value="${String(item.title||"").replaceAll('"',"&quot;")}" data-schedule-field="title" data-i="${i}">
+    <input placeholder="Title" value="${String(item.title||"").replaceAll('"',"&quot;")}" data-schedule-field="title" data-i="${i}">
     <input placeholder="Show/tema" value="${String(item.show||"").replaceAll('"',"&quot;")}" data-schedule-field="show" data-i="${i}">
     <input type="date" value="${item.date||""}" data-schedule-field="date" data-i="${i}">
     <input type="time" value="${item.start||""}" data-schedule-field="start" data-i="${i}">
     <input type="time" value="${item.end||""}" data-schedule-field="end" data-i="${i}">
     <input placeholder="Beskrivelse" value="${String(item.description||"").replaceAll('"',"&quot;")}" data-schedule-field="description" data-i="${i}">
-    <button type="button" onclick="removeShowScheduleRow(${i})">Slet</button>
+    <button type="button" onclick="removeShowScheduleRow(${i})">Delete</button>
   </div>`;
 }
 

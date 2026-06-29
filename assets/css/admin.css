@@ -53,3 +53,6 @@ code{color:#2dd4ef}
 /* V816.20 Community Manager */
 .row.v20CommunityRow{grid-template-columns:76px 110px 1fr 1fr 1.3fr 76px 70px 70px}
 @media(max-width:900px){.row.v20CommunityRow{grid-template-columns:1fr}}
+
+/* V817 GLOBAL EDITION - language selectors removed */
+.langs,.language,.languageSwitcher,.langSwitch,[data-lang]{display:none!important;}
