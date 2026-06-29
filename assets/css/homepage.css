@@ -1392,3 +1392,271 @@ footer a{
   .nextShowCard{grid-template-columns:1fr!important}
   .nextShowCard strong{justify-self:start!important;text-align:left!important}
 }
+
+/* =========================================================
+   V817.2 — BBC Radio 1 / MTV Europe 2026 HERO BROADCAST PANEL
+   Fixes all hero overlap and keeps the same site font/style.
+   ========================================================= */
+
+.richHero.hero{
+  min-height:auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr)!important;
+  grid-template-areas:
+    "copy live"
+    "stats stats"!important;
+  gap:26px!important;
+  padding:44px!important;
+  align-items:stretch!important;
+  overflow:hidden!important;
+}
+
+.richHero .heroCopy{
+  grid-area:copy!important;
+  position:relative!important;
+  z-index:3!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:18px!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+
+.richHero .onlineLine{
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-height:24px!important;
+}
+
+.richHero h1{
+  font-family:inherit!important;
+  font-size:clamp(58px,7.4vw,112px)!important;
+  line-height:.86!important;
+  margin:0!important;
+  max-width:100%!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  letter-spacing:-.07em!important;
+}
+
+.richHero #heroSubtitle{
+  font-family:inherit!important;
+  display:block!important;
+  font-size:clamp(30px,3.7vw,54px)!important;
+  line-height:1.02!important;
+  margin:0!important;
+  max-width:100%!important;
+  word-break:normal!important;
+  overflow-wrap:break-word!important;
+}
+
+.richHero .heroMeta{
+  grid-area:auto!important;
+  position:relative!important;
+  z-index:4!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+  margin:2px 0 0!important;
+  width:min(760px,100%)!important;
+  max-width:100%!important;
+}
+
+.richHero .heroMeta div{
+  min-width:0!important;
+  min-height:86px!important;
+  padding:17px 18px!important;
+  border-radius:18px!important;
+  background:rgba(5,8,22,.56)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 30px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(16px)!important;
+}
+
+.richHero .heroMeta span{
+  display:block!important;
+  font-family:inherit!important;
+  color:var(--v817-pink)!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  text-transform:uppercase!important;
+  letter-spacing:.16em!important;
+  margin-bottom:10px!important;
+  white-space:nowrap!important;
+}
+
+.richHero .heroMeta b{
+  display:block!important;
+  font-family:inherit!important;
+  color:#fff!important;
+  font-size:clamp(17px,1.45vw,24px)!important;
+  line-height:1.16!important;
+  font-weight:1000!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  word-break:break-word!important;
+}
+
+.richHero #twitchDescription{
+  font-family:inherit!important;
+  color:rgba(255,255,255,.82)!important;
+  font-size:clamp(17px,1.35vw,22px)!important;
+  line-height:1.5!important;
+  margin:0!important;
+  max-width:820px!important;
+  width:100%!important;
+  overflow-wrap:break-word!important;
+}
+
+.richHero .heroButtons{
+  margin-top:4px!important;
+  position:relative!important;
+  z-index:5!important;
+}
+
+.richHero .liveChatPreview{
+  grid-area:live!important;
+  position:relative!important;
+  z-index:3!important;
+  min-height:100%!important;
+  align-self:stretch!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:16px!important;
+  padding:30px!important;
+  border-radius:34px!important;
+  background:
+    radial-gradient(circle at 0 0,rgba(32,231,255,.20),transparent 30%),
+    radial-gradient(circle at 100% 10%,rgba(255,53,216,.18),transparent 35%),
+    rgba(10,14,28,.62)!important;
+  backdrop-filter:blur(18px)!important;
+}
+
+.richHero .liveChatPreview h3{
+  font-family:inherit!important;
+  font-size:clamp(24px,2.4vw,38px)!important;
+  line-height:1!important;
+  margin:0 0 4px!important;
+  letter-spacing:-.045em!important;
+}
+
+.richHero .chatRows{
+  display:grid!important;
+  gap:0!important;
+}
+
+.richHero .chatRows div{
+  display:grid!important;
+  grid-template-columns:120px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:16px!important;
+  min-height:48px!important;
+  padding:10px 0!important;
+}
+
+.richHero .chatRows b,
+.richHero .chatRows span{
+  min-width:0!important;
+  overflow-wrap:anywhere!important;
+}
+
+.richHero .chatBtn{
+  width:max-content!important;
+  margin-top:8px!important;
+}
+
+.richHero .heroStats{
+  grid-area:stats!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:14px!important;
+  margin-top:2px!important;
+  width:100%!important;
+}
+
+.richHero .heroStats div{
+  min-width:0!important;
+  min-height:78px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:14px 18px!important;
+}
+
+.richHero .heroStats span,
+.richHero .heroStats b{
+  font-family:inherit!important;
+  overflow-wrap:anywhere!important;
+}
+
+.richHero .heroStats b{
+  font-size:clamp(20px,1.8vw,28px)!important;
+  line-height:1.05!important;
+}
+
+@media(max-width:1100px){
+  .richHero.hero{
+    grid-template-columns:1fr!important;
+    grid-template-areas:
+      "copy"
+      "live"
+      "stats"!important;
+    padding:32px!important;
+  }
+
+  .richHero .liveChatPreview{
+    min-height:auto!important;
+  }
+}
+
+@media(max-width:760px){
+  .richHero.hero{
+    padding:24px!important;
+    gap:18px!important;
+  }
+
+  .richHero h1{
+    font-size:clamp(52px,17vw,78px)!important;
+    line-height:.9!important;
+  }
+
+  .richHero #heroSubtitle{
+    font-size:clamp(27px,8.4vw,40px)!important;
+  }
+
+  .richHero .heroMeta{
+    grid-template-columns:1fr!important;
+  }
+
+  .richHero .chatRows div{
+    grid-template-columns:1fr!important;
+    gap:5px!important;
+  }
+
+  .richHero .heroStats{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  .richHero .heroStats div:last-child{
+    grid-column:1/-1!important;
+  }
+
+  .richHero .btn{
+    width:100%!important;
+  }
+
+  .richHero .heroButtons{
+    width:100%!important;
+  }
+}
+
+@media(min-width:1500px){
+  .richHero.hero{
+    grid-template-columns:minmax(0,1.18fr) minmax(420px,.82fr)!important;
+  }
+}
