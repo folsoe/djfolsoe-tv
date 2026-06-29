@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V817.1 Global Admin</title>
+  <title>DJ FOLSOE V816.12 Admin</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -29,9 +29,9 @@
 
 <nav class="adminTabs">
   <button onclick="jump('theme')">🎨 Theme</button>
-  <button onclick="jump('homepage')">🏠 Homepage</button><button onclick="jump('seo')">🔎 SEO</button>
-  <button onclick="jump('news')">📰 News</button>
-  <button onclick="jump('tickers')">📡 Tickers</button>
+  <button onclick="jump('homepage')">🏠 Forside</button><button onclick="jump('seo')">🔎 SEO</button>
+  <button onclick="jump('news')">📰 Nyheder</button>
+  <button onclick="jump('tickers')">📡 Tickers</button><button onclick="jump('socialLinks')">🌐 Socials</button>
   <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay boxe</button>
   <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
   <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Next show</button>
@@ -101,7 +101,7 @@
   </section>
 
   <section id="shows" class="panel">
-    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Add show</button></div>
+    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Tilføj show</button></div>
     <p class="note">Styrer show-kort på forsiden.</p>
     <div id="showsEditor"></div>
     <button onclick="saveRows('shows')">Save shows</button>
@@ -145,9 +145,9 @@
 
   <section id="requests" class="panel">
     <div class="panelHead"><h2>🎧 Request Manager</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
-    <p class="note">Controls the latest song requests from !request. You can approve, reject, pin and delete requests.</p>
+    <p class="note">Styrer seneste musikønsker fra !ønske / !request / !Wunsch. Du kan godkende, afvise, fastgøre og slette.</p>
     <div class="formGrid">
-      <div><label>User</label><input id="reqUser" placeholder="Twitch navn"></div>
+      <div><label>Bruger</label><input id="reqUser" placeholder="Twitch navn"></div>
       <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
       <div><label>Sprog</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
       <div><label>Show</label><input id="reqShow" placeholder="Fredagsbar"></div>
@@ -161,8 +161,8 @@
 
   
   <section id="modsManager" class="panel">
-    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Add mod</button></div>
-    <p class="note">Enter the Twitch login. The homepage automatically loads profile image, display name and live/offline status.</p>
+    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Tilføj mod</button></div>
+    <p class="note">Skriv Twitch login. Forsiden henter profilbillede, display name og live/offline status automatisk.</p>
     <div id="modsEditor"></div>
     <button onclick="saveMods()">Save mods</button>
   </section>
@@ -201,19 +201,34 @@
   </section>
 
 <section class="adminPanel" id="showScheduleAdminPanel">
-  <div class="panelHead"><h2>Weekly Schedule Engine</h2><span>Next 10 shows</span></div>
-  <p>Date-driven show schedule. Past shows are automatically hidden from the homepage after date/start time.</p>
+  <div class="panelHead"><h2>Weekly Schedule Engine</h2><span>Næste 10 shows</span></div>
+  <p>Date-styret showplan. Gamle shows skjules automatisk på forsiden efter dato/starttid.</p>
   <div class="adminActions" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;">
-    <button type="button" onclick="loadShowScheduleAdmin()">Load schedule</button>
-    <button type="button" onclick="addShowScheduleRow()">Add show</button>
+    <button type="button" onclick="loadShowScheduleAdmin()">Hent showplan</button>
+    <button type="button" onclick="addShowScheduleRow()">Tilføj show</button>
     <button type="button" onclick="saveShowScheduleAdmin()">Save showplan</button>
   </div>
   <div id="showScheduleRows"></div>
 </section>
 
+
+<section class="adminPanel" id="socialLinks">
+  <div class="panelHead">
+    <h2>🌐 Social Media Footer</h2>
+    <span>Shown at the bottom of the homepage</span>
+  </div>
+  <p class="note">Edit links and choose which social icons are visible on the homepage footer. Leave URL empty to keep the icon as a placeholder.</p>
+  <div id="socialLinksEditor" class="socialLinksEditor"></div>
+  <div class="adminActions">
+    <button onclick="addSocialLink()">Add custom social</button>
+    <button onclick="saveSocialLinks()">Save social links</button>
+    <button onclick="loadSocialLinks()">Load social links</button>
+  </div>
+</section>
+
 </main>
 
-<script src="assets/js/admin.js?v=8162017"></script>
+<script src="assets/js/admin.js?v=8174"></script>
 
 <div id="djfNullSafeFallbacks" style="display:none">
 <div id="themeGrid"></div>
