@@ -65,7 +65,7 @@ function syncTokenFields(v){
 function saveToken(){
   const v=token();
   syncTokenFields(v);
-  setStatus(v ? "✅ Token gemt og synkroniseret" : "❌ Token mangler");
+  setStatus(v ? "✅ Token saved og synkroniseret" : "❌ Token mangler");
   loadAll();
 }
 function openApi(path){window.open(API_BASE+path,"_blank");}
@@ -94,14 +94,14 @@ function renderThemes(){
 function markTheme(k){
   activeTheme=k||activeTheme;
   Object.keys(THEMES).forEach(x=>document.getElementById("theme_"+x)?.classList.toggle("activeThemeBtn",x===activeTheme));
-  DJF_text("activeTheme", "Aktivt tema: "+activeTheme);
+  DJF_text("activeTheme", "Active theme: "+activeTheme);
 }
 async function setTheme(k){
   try{
     const r=await api("/api/theme",{method:"POST",body:JSON.stringify({theme:k})});
     markTheme(r.activeTheme||k);
-    setStatus("✅ Tema skiftet til "+(r.activeTheme||k));
-  }catch(e){setStatus("❌ Tema-fejl: "+e.message);}
+    setStatus("✅ Theme changed to "+(r.activeTheme||k));
+  }catch(e){setStatus("❌ Theme error: "+e.message);}
 }
 
 async function loadAll(){
@@ -157,11 +157,11 @@ function arr(type){return type==="top"?topItems:type==="bottom"?bottomItems:type
 function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;");}
 
 function row(type,item,i){
-  if(type==="shows") return `<div class="row shows"><div><label>Key</label><input data-t="${type}" data-i="${i}" data-f="key" value="${esc(item.key||'')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Time</label><input data-t="${type}" data-i="${i}" data-f="time" value="${esc(item.time||'')}"/></div><div><label>Body</label><input data-t="${type}" data-i="${i}" data-f="body" value="${esc(item.body||'')}"/></div><button onclick="delRow('${type}',${i})">Slet</button></div>`;
-  if(type==="top20") return `<div class="row top20"><div><label>Rank</label><input data-t="${type}" data-i="${i}" data-f="rank" value="${item.rank||i+1}"/></div><div><label>Artist</label><input data-t="${type}" data-i="${i}" data-f="artist" value="${esc(item.artist||'')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Genre</label><input data-t="${type}" data-i="${i}" data-f="genre" value="${esc(item.genre||'')}"/></div><div><label>Points</label><input data-t="${type}" data-i="${i}" data-f="points" value="${item.points||0}"/></div><button onclick="delRow('${type}',${i})">Slet</button></div>`;
-  if(type==="discovery") return `<div class="row top20"><div><label>Artist</label><input data-t="${type}" data-i="${i}" data-f="artist" value="${esc(item.artist||'')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Genre</label><input data-t="${type}" data-i="${i}" data-f="genre" value="${esc(item.genre||'')}"/></div><div><label>Note</label><input data-t="${type}" data-i="${i}" data-f="note" value="${esc(item.note||'')}"/></div><div><label></label></div><button onclick="delRow('${type}',${i})">Slet</button></div>`;
-  if(type==="news") return `<div class="row news"><div><label>Active</label><select data-t="${type}" data-i="${i}" data-f="active"><option value="true" ${item.active!==false?'selected':''}>Yes</option><option value="false" ${item.active===false?'selected':''}>No</option></select></div><div><label>Type</label><input data-t="${type}" data-i="${i}" data-f="type" value="${esc(item.type||'News')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Body</label><input data-t="${type}" data-i="${i}" data-f="body" value="${esc(item.body||'')}"/></div><div><label>Priority</label><input data-t="${type}" data-i="${i}" data-f="priority" value="${item.priority||99}"/></div><button onclick="delRow('${type}',${i})">Slet</button></div>`;
-  return `<div class="row"><div><label>Active</label><select data-t="${type}" data-i="${i}" data-f="active"><option value="true" ${item.active!==false?'selected':''}>Yes</option><option value="false" ${item.active===false?'selected':''}>No</option></select></div><div><label>Theme</label><input data-t="${type}" data-i="${i}" data-f="theme" value="${esc(item.theme||'all')}"/></div><div><label>Text</label><input data-t="${type}" data-i="${i}" data-f="text" value="${esc(item.text||'')}"/></div><div><label>ID</label><input data-t="${type}" data-i="${i}" data-f="id" value="${esc(item.id||type+Date.now())}"/></div><div><label>Priority</label><input data-t="${type}" data-i="${i}" data-f="priority" value="${item.priority||99}"/></div><button onclick="delRow('${type}',${i})">Slet</button></div>`;
+  if(type==="shows") return `<div class="row shows"><div><label>Key</label><input data-t="${type}" data-i="${i}" data-f="key" value="${esc(item.key||'')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Time</label><input data-t="${type}" data-i="${i}" data-f="time" value="${esc(item.time||'')}"/></div><div><label>Body</label><input data-t="${type}" data-i="${i}" data-f="body" value="${esc(item.body||'')}"/></div><button onclick="delRow('${type}',${i})">Delete</button></div>`;
+  if(type==="top20") return `<div class="row top20"><div><label>Rank</label><input data-t="${type}" data-i="${i}" data-f="rank" value="${item.rank||i+1}"/></div><div><label>Artist</label><input data-t="${type}" data-i="${i}" data-f="artist" value="${esc(item.artist||'')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Genre</label><input data-t="${type}" data-i="${i}" data-f="genre" value="${esc(item.genre||'')}"/></div><div><label>Points</label><input data-t="${type}" data-i="${i}" data-f="points" value="${item.points||0}"/></div><button onclick="delRow('${type}',${i})">Delete</button></div>`;
+  if(type==="discovery") return `<div class="row top20"><div><label>Artist</label><input data-t="${type}" data-i="${i}" data-f="artist" value="${esc(item.artist||'')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Genre</label><input data-t="${type}" data-i="${i}" data-f="genre" value="${esc(item.genre||'')}"/></div><div><label>Note</label><input data-t="${type}" data-i="${i}" data-f="note" value="${esc(item.note||'')}"/></div><div><label></label></div><button onclick="delRow('${type}',${i})">Delete</button></div>`;
+  if(type==="news") return `<div class="row news"><div><label>Active</label><select data-t="${type}" data-i="${i}" data-f="active"><option value="true" ${item.active!==false?'selected':''}>Yes</option><option value="false" ${item.active===false?'selected':''}>No</option></select></div><div><label>Type</label><input data-t="${type}" data-i="${i}" data-f="type" value="${esc(item.type||'News')}"/></div><div><label>Title</label><input data-t="${type}" data-i="${i}" data-f="title" value="${esc(item.title||'')}"/></div><div><label>Body</label><input data-t="${type}" data-i="${i}" data-f="body" value="${esc(item.body||'')}"/></div><div><label>Priority</label><input data-t="${type}" data-i="${i}" data-f="priority" value="${item.priority||99}"/></div><button onclick="delRow('${type}',${i})">Delete</button></div>`;
+  return `<div class="row"><div><label>Active</label><select data-t="${type}" data-i="${i}" data-f="active"><option value="true" ${item.active!==false?'selected':''}>Yes</option><option value="false" ${item.active===false?'selected':''}>No</option></select></div><div><label>Theme</label><input data-t="${type}" data-i="${i}" data-f="theme" value="${esc(item.theme||'all')}"/></div><div><label>Text</label><input data-t="${type}" data-i="${i}" data-f="text" value="${esc(item.text||'')}"/></div><div><label>ID</label><input data-t="${type}" data-i="${i}" data-f="id" value="${esc(item.id||type+Date.now())}"/></div><div><label>Priority</label><input data-t="${type}" data-i="${i}" data-f="priority" value="${item.priority||99}"/></div><button onclick="delRow('${type}',${i})">Delete</button></div>`;
 }
 
 function renderEditors(){
@@ -200,9 +200,9 @@ async function saveRows(type){
   const endpoint=type==="top"?"/api/theme-ticker-top":type==="bottom"?"/api/bottom-ticker":type==="news"?"/api/homepage-news":type==="shows"?"/api/shows":type==="discovery"?"/api/discovery-picks":"/api/top20";
   try{
     await api(endpoint,{method:"POST",body:JSON.stringify({items:arr(type)})});
-    setStatus("✅ Gemt: "+type);
+    setStatus("✅ Savet: "+type);
     loadAll();
-  }catch(e){setStatus("❌ Gem-fejl: "+e.message);}
+  }catch(e){setStatus("❌ Save-fejl: "+e.message);}
 }
 
 function seedTop20(){top20Items=TOP20_SEED.map(x=>Object.assign({},x));renderEditors();}
@@ -254,7 +254,7 @@ function renderShowVisuals(){
       <div><label>Tag</label><input data-sv="${key}" data-f="tag" value="${esc(v.tag||'')}"></div>
       <div><label>Poster tekst</label><input data-sv="${key}" data-f="posterText" value="${esc(v.posterText||'')}"></div>
       <div><label>Gradient</label><input data-sv="${key}" data-f="gradient" value="${esc(v.gradient||'')}"></div>
-      <button onclick="delete showVisuals['${key}'];renderShowVisuals()">Slet</button>
+      <button onclick="delete showVisuals['${key}'];renderShowVisuals()">Delete</button>
     </div>`).join('');
 }
 
@@ -288,7 +288,7 @@ function renderOverlayContent(){
         <div><label>Label</label><input data-oc="${box}" data-i="${i}" data-f="label" value="${esc(v.label||'')}"></div>
         <div><label>Headline</label><input data-oc="${box}" data-i="${i}" data-f="headline" value="${esc(v.headline||'')}"></div>
         <div><label>Body</label><input data-oc="${box}" data-i="${i}" data-f="body" value="${esc(v.body||'')}"></div>
-        <button onclick="overlayArr('${box}').splice(${i},1);renderOverlayContent()">Slet</button>
+        <button onclick="overlayArr('${box}').splice(${i},1);renderOverlayContent()">Delete</button>
       </div>`).join('');
   });
 }
@@ -393,7 +393,7 @@ let nextShowItem={};
 
 async function loadEcosystem(){
   try{ modItems=(await api('/api/mod-team')).items||[]; }catch(e){ modItems=[{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}]; }
-  try{ communityItems=(await api('/api/community-wall')).items||[]; }catch(e){ communityItems=[{"key": "latestFollower", "label": "Seneste follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Seneste sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Seneste raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Månedens community medlem", "value": "Good vibes only", "active": true, "priority": 5}]; }
+  try{ communityItems=(await api('/api/community-wall')).items||[]; }catch(e){ communityItems=[{"key": "latestFollower", "label": "Latest follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Latest sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Latest raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Månedens community medlem", "value": "Good vibes only", "active": true, "priority": 5}]; }
   try{ nextShowItem=(await api('/api/next-show')).item||{}; }catch(e){ nextShowItem={"title": "Fredagsbar", "dateTime": "", "description": "Fest, grin, requests og weekendstemning.", "active": true}; }
   renderModsEditor();
   renderCommunityEditor();
@@ -409,7 +409,7 @@ function renderModsEditor(){
       <div><label>Rolle</label><input data-mod-i="${i}" data-f="role" value="${esc(m.role||'')}"></div>
       <div><label>Beskrivelse</label><input data-mod-i="${i}" data-f="description" value="${esc(m.description||'')}"></div>
       <div><label>Sort</label><input data-mod-i="${i}" data-f="priority" value="${m.priority||i+1}"></div>
-      <button onclick="modItems.splice(${i},1);renderModsEditor()">Slet</button>
+      <button onclick="modItems.splice(${i},1);renderModsEditor()">Delete</button>
     </div>`).join('');
 }
 function collectMods(){
@@ -431,7 +431,7 @@ function renderCommunityEditor(){
       <div><label>Label</label><input data-com-i="${i}" data-f="label" value="${esc(m.label||'')}"></div>
       <div><label>Value</label><input data-com-i="${i}" data-f="value" value="${esc(m.value||'')}"></div>
       <div><label>Sort</label><input data-com-i="${i}" data-f="priority" value="${m.priority||i+1}"></div>
-      <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Slet</button>
+      <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Delete</button>
     </div>`).join('');
 }
 function collectCommunity(){
@@ -456,10 +456,10 @@ function renderNextShowEditor(){
 }
 async function saveNextShow(){
   const item={active:true,title:DJF_get("nextShowTitle"),description:DJF_get("nextShowDescription"),dateTime:DJF_get("nextShowDateTime")};
-  try{await api('/api/next-show',{method:'POST',body:JSON.stringify({item})});setStatus('✅ Næste show gemt');loadEcosystem();}catch(e){setStatus('❌ Næste show fejl: '+e.message);}
+  try{await api('/api/next-show',{method:'POST',body:JSON.stringify({item})});setStatus('✅ Next show gemt');loadEcosystem();}catch(e){setStatus('❌ Next show fejl: '+e.message);}
 }
 
-let seoItem={"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musikstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musikwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]};
+let seoItem={"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musicstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musicwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]};
 async function loadSEO(){ try{ const r=await api('/api/seo'); seoItem=r.seo||r; }catch(e){} fillSEO(); }
 function fillSEO(){
   if(!document.getElementById('seoSiteName'))return;
@@ -516,7 +516,7 @@ function renderRequestManager(){
       <div><label>User</label><input data-req-i="${i}" data-f="user" value="${esc(r.user||'')}"></div>
       <div><label>Song</label><input data-req-i="${i}" data-f="song" value="${esc(r.song||'')}"></div>
       <div><label>Lang</label><input data-req-i="${i}" data-f="language" value="${esc(r.language||'da')}"></div>
-      <button onclick="requestManagerItems.splice(${i},1);renderRequestManager()">Slet</button>
+      <button onclick="requestManagerItems.splice(${i},1);renderRequestManager()">Delete</button>
     </div>`).join('');
 }
 
@@ -578,7 +578,7 @@ function renderCommunityEditor(){
       <div><label>Value</label><input data-com-i="${i}" data-f="value" value="${esc(m.value||'')}"></div>
       <div><label>Pin</label><select data-com-i="${i}" data-f="pinned"><option value="false" ${!m.pinned?'selected':''}>No</option><option value="true" ${m.pinned?'selected':''}>Yes</option></select></div>
       <div><label>Sort</label><input data-com-i="${i}" data-f="priority" value="${m.priority||i+1}"></div>
-      <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Slet</button>
+      <button onclick="communityItems.splice(${i},1);renderCommunityEditor()">Delete</button>
     </div>`).join('');
   if(document.getElementById('communityRaids')){
     DJF_value("communityRaids", communityStatsItem.raids||0);
@@ -625,7 +625,7 @@ function ensureAdminPatchDom(){
     const sec=document.createElement("section");
     sec.id="communityManager";
     sec.className="panel";
-    sec.innerHTML='<div class="panelHead"><h2>❤️ Community Wall Manager</h2><button onclick="addCommunity()">Tilføj community felt</button></div><div id="communityEditor"></div><button onclick="saveCommunity()">Gem community wall</button>';
+    sec.innerHTML='<div class="panelHead"><h2>❤️ Community Wall Manager</h2><button onclick="addCommunity()">Tilføj community felt</button></div><div id="communityEditor"></div><button onclick="saveCommunity()">Save community wall</button>';
     main.appendChild(sec);
   }
   if(!document.getElementById("communityRaids")){
@@ -668,7 +668,7 @@ async function setThemeSafe(k){
     syncTokenFields();
     const r=await api("/api/theme",{method:"POST",body:JSON.stringify({theme:k,activeTheme:k})});
     markTheme(r.activeTheme||r.theme?.activeTheme||k);
-    setStatus("✅ Tema skiftet til "+(r.activeTheme||r.theme?.activeTheme||k));
+    setStatus("✅ Theme changed to "+(r.activeTheme||r.theme?.activeTheme||k));
   }catch(e){
     let msg=String(e.message||e);
     if(msg.includes("Unauthorized") || msg.includes("401")){
@@ -678,7 +678,7 @@ async function setThemeSafe(k){
         try{
           const r=await api("/api/theme",{method:"POST",body:JSON.stringify({theme:k,activeTheme:k})});
           markTheme(r.activeTheme||r.theme?.activeTheme||k);
-          setStatus("✅ Tema skiftet til "+(r.activeTheme||r.theme?.activeTheme||k));
+          setStatus("✅ Theme changed to "+(r.activeTheme||r.theme?.activeTheme||k));
           return;
         }catch(e2){ msg=String(e2.message||e2); }
       }else{
@@ -686,7 +686,7 @@ async function setThemeSafe(k){
       }
     }
     if(msg.includes("Unknown theme")) msg="Ukendt tema-key. Brug: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend.";
-    setStatus("❌ Tema-fejl: "+msg);
+    setStatus("❌ Theme error: "+msg);
     console.error("Theme error",e);
   }
 }
@@ -695,7 +695,7 @@ async function testThemeToken(){
   try{
     syncTokenFields();
     const before=await api("/api/theme");
-    setStatus("✅ Theme API GET OK\nAktivt tema: "+(before.activeTheme||before.theme?.activeTheme||"ukendt")+"\nToken bruges kun ved skift/gem.");
+    setStatus("✅ Theme API GET OK\nActive theme: "+(before.activeTheme||before.theme?.activeTheme||"ukendt")+"\nToken bruges kun ved skift/gem.");
   }catch(e){
     setStatus("❌ Theme API test-fejl: "+e.message);
   }

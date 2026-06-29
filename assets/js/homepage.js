@@ -1,3 +1,17 @@
+
+/* V816.20.1.9 - Website English primary guard */
+function englishSiteText(s){
+  return String(s||"")
+    .replace(/HVEM ER DJ FOLSOE\?/gi,"WHO IS DJ FOLSOE?")
+    .replace(/NÆSTE SHOW/gi,"NEXT SHOW")
+    .replace(/KLASSIKERE DER ALDRIG DØR/gi,"CLASSICS THAT NEVER DIE")
+    .replace(/MUSIKØNSKER/gi,"REQUESTS")
+    .replace(/FØLG PÅ TWITCH/gi,"FOLLOW ON TWITCH")
+    .replace(/SE PÅ TWITCH/gi,"WATCH ON TWITCH")
+    .replace(/SE HELE LISTEN/gi,"SEE FULL CHART")
+    .replace(/SE HELE TOP 20/gi,"SEE FULL TOP 20");
+}
+
 const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 let state=null;
 let lang=localStorage.getItem("djf_home_lang")||"da";
@@ -5,20 +19,20 @@ let lang=localStorage.getItem("djf_home_lang")||"da";
 const I18N={
   da:{
     "nav.home":"Forside","nav.about":"Om mig","nav.shows":"Shows","nav.requests":"Requests","nav.news":"Nyheder","nav.top20":"Top 20",
-    "hero.subtitle":"Music TV fra Danmark","hero.cta.twitch":"Se mig live på Twitch","hero.cta.requests":"Musikønsker","hero.liveData":"Live data",
+    "hero.subtitle":"Music TV fra Danmark","hero.cta.twitch":"Se mig live på Twitch","hero.cta.requests":"Musicønsker","hero.liveData":"Live data",
     "hero.streamTitle":"Stream title","hero.category":"Kategori","hero.live":"Live på Twitch","hero.offline":"Offline lige nu",
     "stats.followers":"Followers","stats.viewers":"Viewers","stats.views":"Views","stats.stream":"Stream",
-    "about.title":"Hvem er DJ FOLSOE?","about.musicTitle":"Musik","about.showsTitle":"Shows","about.requestsTitle":"Requests","about.communityTitle":"Community",
-    "about.main":"DJ FOLSOE samler musik, chat, requests og dansk DJ-kultur i et levende broadcast-univers.",
+    "about.title":"Hvem er DJ FOLSOE?","about.musicTitle":"Music","about.showsTitle":"Shows","about.requestsTitle":"Requests","about.communityTitle":"Community",
+    "about.main":"DJ FOLSOE brings music, chat, requests and Danish DJ culture together in a live broadcast universe.",
     "about.music":"Trance, Eurodance, Retro, EDM, Pop og Nu-Disco.",
     "about.shows":"Live DJ med masse af sjov og ballade.",
     "about.requests":"Du er medbestemmende — musikønsker via !ønske.",
     "about.community":"Vi har det hylende morsomt og et godt fællesskab.",
     "shows.title":"Shows","shows.link":"Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend",
-    "requests.title":"Seneste musikønsker","requests.link":"Gemmer de sidste 3 fra !ønske",
-    "news.title":"Nyheder & opdateringer","news.link":"Seneste show · Top20 · Requests · Community · Twitch",
+    "requests.title":"Latest musikønsker","requests.link":"Savemer de sidste 3 fra !ønske",
+    "news.title":"Nyheder & opdateringer","news.link":"Latest show · Top20 · Requests · Community · Twitch",
     "top20.title":"FOLSOE Top 20","top20.link":"Se hele listen →","top20.button":"Se hele Top 20",
-    "mods.title":"Mod-teamet","mods.body":"Mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.",
+    "mods.title":"Mod-teamet","mods.body":"Mods keep the chat friendly, help new viewers and create a safe community around the stream.",
     "openTwitch":"Åbn Twitch","status":"Status","viewers":"Viewers","followers":"Followers","category":"Kategori","title":"Titel",
     "offline":"Offline","live":"Live","ready":"klar","showDefault":"Broadcast Cloud show"
   },
@@ -43,17 +57,17 @@ const I18N={
   },
   de:{
     "nav.home":"Startseite","nav.about":"Über mich","nav.shows":"Shows","nav.requests":"Wünsche","nav.news":"News","nav.top20":"Top 20",
-    "hero.subtitle":"Music TV aus Dänemark","hero.cta.twitch":"Live auf Twitch ansehen","hero.cta.requests":"Musikwünsche","hero.liveData":"Live-Daten",
+    "hero.subtitle":"Music TV aus Dänemark","hero.cta.twitch":"Live auf Twitch ansehen","hero.cta.requests":"Musicwünsche","hero.liveData":"Live-Daten",
     "hero.streamTitle":"Stream-Titel","hero.category":"Kategorie","hero.live":"Live auf Twitch","hero.offline":"Gerade offline",
     "stats.followers":"Follower","stats.viewers":"Zuschauer","stats.views":"Aufrufe","stats.stream":"Stream",
-    "about.title":"Wer ist DJ FOLSOE?","about.musicTitle":"Musik","about.showsTitle":"Shows","about.requestsTitle":"Wünsche","about.communityTitle":"Community",
-    "about.main":"DJ FOLSOE verbindet Musik, Chat, Musikwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum.",
+    "about.title":"Wer ist DJ FOLSOE?","about.musicTitle":"Music","about.showsTitle":"Shows","about.requestsTitle":"Wünsche","about.communityTitle":"Community",
+    "about.main":"DJ FOLSOE verbindet Music, Chat, Musicwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum.",
     "about.music":"Trance, Eurodance, Retro, EDM, Pop und Nu-Disco.",
     "about.shows":"Live-DJ-Sets mit viel Spaß, Energie und guter Laune.",
-    "about.requests":"Du bestimmst mit — Musikwünsche über !Wunsch.",
-    "about.community":"Wir haben riesigen Spaß und eine starke Gemeinschaft.",
+    "about.requests":"Du bestimmst mit — Musicwünsche über !Wunsch.",
+    "about.community":"Wir haben riesigen Spaß und eine starke Saveeinschaft.",
     "shows.title":"Shows","shows.link":"Trance · Top20 · Fredagsbar · Retro · Morning · Popup · Weekend",
-    "requests.title":"Neueste Musikwünsche","requests.link":"Speichert die letzten 3 Wünsche von !ønske",
+    "requests.title":"Neueste Musicwünsche","requests.link":"Speichert die letzten 3 Wünsche von !ønske",
     "news.title":"News & Updates","news.link":"Letzte Show · Top20 · Wünsche · Community · Twitch",
     "top20.title":"FOLSOE Top 20","top20.link":"Ganze Liste ansehen →","top20.button":"Ganze Top 20 ansehen",
     "mods.title":"Mod-Team","mods.body":"Mods halten den Chat freundlich, helfen neuen Zuschauern und schützen die gute Stimmung im Stream.",
@@ -231,9 +245,9 @@ function renderRequestStats(stats){
 
 function renderNews(items,tw){
   const base=[
-    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Seneste show",title:tw.liveTitle||"DJ FOLSOE Broadcast Cloud",body:tw.isLive?t("hero.live"):t("hero.offline")},
+    {type:lang==="de"?"Letzte Show":lang==="en"?"Latest show":"Latest show",title:tw.liveTitle||"DJ FOLSOE Broadcast Cloud",body:tw.isLive?t("hero.live"):t("hero.offline")},
     {type:lang==="de"?"Top20 neu":lang==="en"?"Top20 update":"Top20 nyt",title:"FOLSOE Top 20",body:lang==="de"?"Sieh die wöchentlichen Charts.":lang==="en"?"See the weekly chart.":"Se ugens chart og countdown."},
-    {type:"Requests",title:lang==="de"?"Musikwünsche sind offen":lang==="en"?"Song requests are open":"Musikønsker er åbne",body:"!ønske / !request / !Wunsch"},
+    {type:"Requests",title:lang==="de"?"Musicwünsche sind offen":lang==="en"?"Song requests are open":"Musicønsker er åbne",body:"!ønske / !request / !Wunsch"},
     {type:"Community",title:lang==="de"?"Der Chat ist das Herz":lang==="en"?"Chat is the heart":"Chatten er hjertet",body:lang==="de"?"Emotes, Mods und gute Stimmung.":lang==="en"?"Emotes, mods and good vibes.":"Emotes, mods og god stemning."},
     {type:"Twitch",title:lang==="de"?"Twitch-Updates":lang==="en"?"Twitch updates":"Twitch updates",body:tw.category||"Music"}
   ];
@@ -286,24 +300,24 @@ function renderCommunityWall(items){
   const used=[
     {
       type:"latestFollower",
-      label:"Seneste follower",
-      displayName:follower.displayName || follower.userName || manualBy("latestFollower","Seneste follower","Twitch community").value || "Twitch community",
+      label:"Latest follower",
+      displayName:follower.displayName || follower.userName || manualBy("latestFollower","Latest follower","Twitch community").value || "Twitch community",
       value:follower.followedAt ? ("Fulgte " + new Date(follower.followedAt).toLocaleDateString("da-DK")) : "Hentes fra Twitch når token/scope tillader det",
       avatar:follower.avatar || "",
       isLive:false
     },
     {
       type:"latestSub",
-      label:"Seneste sub",
-      displayName:sub.displayName || sub.userName || manualBy("latestSub","Seneste sub","Tak for støtten").value || "Tak for støtten",
+      label:"Latest sub",
+      displayName:sub.displayName || sub.userName || manualBy("latestSub","Latest sub","Tak for støtten").value || "Tak for støtten",
       value:sub.tier ? ("Tier " + sub.tier) : "Hentes fra Twitch når token/scope tillader det",
       avatar:sub.avatar || "",
       isLive:false
     },
     {
       type:"latestRaid",
-      label:"Seneste raid",
-      displayName:raid.displayName || raid.userName || manualBy("latestRaid","Seneste raid","DJ Network love").value || "DJ Network love",
+      label:"Latest raid",
+      displayName:raid.displayName || raid.userName || manualBy("latestRaid","Latest raid","DJ Network love").value || "DJ Network love",
       value:raid.viewers ? (raid.viewers + " viewers") : "Raid udfyldes via Twitch/EventSub eller manuelt",
       avatar:raid.avatar || "",
       isLive:false
@@ -347,7 +361,7 @@ function formatShowDateLine(item){
 function countdownText(item){
   const raw = item?.dateTime || (item?.date && (item?.start || item?.time) ? item.date + "T" + (item.start || item.time) : "");
   const dt = raw ? new Date(raw) : null;
-  if(!dt || isNaN(dt)) return "Dato ikke sat endnu";
+  if(!dt || isNaN(dt)) return "Date ikke sat endnu";
   const diff = dt - new Date();
   if(diff <= 0) return "Showet er i gang eller har været sendt";
   const d = Math.floor(diff/86400000), h = Math.floor((diff%86400000)/3600000), m = Math.floor((diff%3600000)/60000);
@@ -372,7 +386,7 @@ function renderNextShow(item){
   function draw(){
     const show = shows[index] || item || {};
     el.innerHTML = `<div>
-      <span>NÆSTE SHOW ${shows.length > 1 ? "· " + (index+1) + "/" + shows.length : ""}</span>
+      <span>NEXT SHOW ${shows.length > 1 ? "· " + (index+1) + "/" + shows.length : ""}</span>
       <h3>${show.title || "DJ FOLSOE LIVE"}</h3>
       <p class="nextShowDate">${formatShowDateLine(show)}</p>
       <p>${show.description || ""}</p>
@@ -455,7 +469,7 @@ function applyShowIdentityTheme(){
     document.body.classList.remove("theme-fredagsbar","theme-popup","theme-trance","theme-retro","theme-eurodance","theme-morning","theme-summer","theme-weekend");
     document.body.classList.add("theme-"+String(key||"weekend").toLowerCase());
     /* V816.20.1.7 homepage background variable */
-    document.documentElement.style.setProperty("--theme-bg", `url("/themes/${String(key||"weekend").toLowerCase()}.png")`);
+    document.documentElement.style.setProperty("--theme-bg", `url("https://folsoetv.dk/themes/${String(key||"weekend").toLowerCase()}.png")`);
   }catch(e){}
 }
 document.addEventListener("DOMContentLoaded",()=>setTimeout(applyShowIdentityTheme,1400));
