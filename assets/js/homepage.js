@@ -454,6 +454,8 @@ function applyShowIdentityTheme(){
     const key = state?.theme?.activeTheme || state?.activeTheme || next.theme || djfShowThemeKeyFromText((next.title||"")+" "+(next.show||"")+" "+(next.description||""));
     document.body.classList.remove("theme-fredagsbar","theme-popup","theme-trance","theme-retro","theme-eurodance","theme-morning","theme-summer","theme-weekend");
     document.body.classList.add("theme-"+String(key||"weekend").toLowerCase());
+    /* V816.20.1.7 homepage background variable */
+    document.documentElement.style.setProperty("--theme-bg", `url("/themes/${String(key||"weekend").toLowerCase()}.png")`);
   }catch(e){}
 }
 document.addEventListener("DOMContentLoaded",()=>setTimeout(applyShowIdentityTheme,1400));
