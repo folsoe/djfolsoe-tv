@@ -53,7 +53,7 @@ async function api(path,opt={}){
 }
 
 function renderThemes(){
-  DJF_html("themeGrid", Object.entries(THEMES).map(([k,l])=>`<button id="theme_${k}" onclick="setTheme('${k}')">${l}</button>`).join(""));
+  DJF_html("themeGrid", Object.entries(THEMES).map(([k,l])=>`<button id="theme_${k}" onclick="setThemeSafe('${k}')">${l}</button>`).join(""));
 }
 function markTheme(k){
   activeTheme=k||activeTheme;
@@ -600,5 +600,39 @@ function ensureAdminPatchDom(){
       box.innerHTML='<div><label>Raids</label><input id="communityRaids" type="number"></div><div><label>Members</label><input id="communityMembers" type="number"></div><div><label>Subs fallback</label><input id="communitySubs" type="number"></div><div><label>Followers fallback</label><input id="communityFollowers" type="number"></div>';
       sec.appendChild(box);
     }
+  }
+}
+
+
+/* ===== V816.20.1.6.1 ADMIN THEME FIX ===== */
+function djfNormalizeThemeKey(k){
+  k=String(k||"").toLowerCase().trim();
+  k=k.replace(/[^\wæøå -]/g,"");
+  if(k.includes("fredag")) return "fredagsbar";
+  if(k.includes("pop")) return "popup";
+  if(k.includes("trance")) return "trance";
+  if(k.includes("retro")) return "retro";
+  if(k.includes("euro")) return "eurodance";
+  if(k.includes("morgen")||k.includes("morning")) return "morning";
+  if(k.includes("summer")||k.includes("sommer")) return "summer";
+  if(k.includes("weekend")) return "weekend";
+  return k || "weekend";
+}
+async function setThemeSafe(k){
+  k=djfNormalizeThemeKey(k);
+  try{
+    const r=await api("/api/theme",{method:"POST",body:JSON.stringify({theme:k,activeTheme:k})});
+    markTheme(r.activeTheme||r.theme?.activeTheme||k);
+    setStatus("✅ Tema skiftet til "+(r.activeTheme||r.theme?.activeTheme||k));
+  }catch(e){
+    let msg=String(e.message||e);
+    if(msg.includes("Unauthorized") || msg.includes("401")){
+      msg="Admin token mangler eller er forkert. Sæt token i admin-feltet/localStorage og prøv igen.";
+    }
+    if(msg.includes("Unknown theme")){
+      msg="Ukendt tema-key. Brug: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend.";
+    }
+    setStatus("❌ Tema-fejl: "+msg);
+    console.error("Theme error",e);
   }
 }
