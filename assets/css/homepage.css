@@ -670,3 +670,185 @@ button.btn.primary{
   .nextShowCard strong{justify-self:start;text-align:left}
   .hero::after{display:none}
 }
+
+/* =========================================================
+   V816.20.1.6 - SHOW IDENTITY SKINS
+   Each show gets its own Music TV 2026 feel.
+   CSS-first. No layout engine changes.
+   ========================================================= */
+
+body.theme-morning{
+  --show-a:#ffd166;--show-b:#ff8a00;--show-c:#fff3b0;--show-ink:#241300;
+}
+body.theme-trance{
+  --show-a:#00f5ff;--show-b:#6147ff;--show-c:#b8f7ff;--show-ink:#020817;
+}
+body.theme-retro{
+  --show-a:#ff2bd6;--show-b:#7c3aed;--show-c:#ffe066;--show-ink:#160218;
+}
+body.theme-eurodance{
+  --show-a:#00e5ff;--show-b:#005dff;--show-c:#ffe600;--show-ink:#021126;
+}
+body.theme-fredagsbar{
+  --show-a:#ffb000;--show-b:#ff2f78;--show-c:#ffd166;--show-ink:#210711;
+}
+body.theme-popup{
+  --show-a:#00f5ff;--show-b:#ff00ea;--show-c:#ffffff;--show-ink:#05091b;
+}
+body.theme-summer{
+  --show-a:#00f5d4;--show-b:#ffb703;--show-c:#fff08a;--show-ink:#03201b;
+}
+body.theme-weekend{
+  --show-a:#ffd166;--show-b:#ff4d6d;--show-c:#00d4ff;--show-ink:#100619;
+}
+
+body.theme-morning{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,209,102,.34),transparent 28%),
+    radial-gradient(circle at 88% 10%,rgba(255,138,0,.20),transparent 32%),
+    linear-gradient(135deg,#160c1c 0%,#241300 48%,#0b1020 100%)!important;
+}
+body.theme-trance{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(0,245,255,.26),transparent 30%),
+    radial-gradient(circle at 85% 10%,rgba(97,71,255,.30),transparent 32%),
+    linear-gradient(135deg,#020817 0%,#071341 48%,#130b2d 100%)!important;
+}
+body.theme-retro{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(255,43,214,.32),transparent 30%),
+    radial-gradient(circle at 90% 8%,rgba(255,224,102,.18),transparent 32%),
+    linear-gradient(135deg,#1b0624 0%,#140b2b 50%,#26031f 100%)!important;
+}
+body.theme-eurodance{
+  background:
+    radial-gradient(circle at 8% 0%,rgba(0,229,255,.28),transparent 30%),
+    radial-gradient(circle at 92% 8%,rgba(255,230,0,.22),transparent 32%),
+    linear-gradient(135deg,#020d22 0%,#062b75 52%,#03162a 100%)!important;
+}
+body.theme-fredagsbar{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(255,176,0,.28),transparent 30%),
+    radial-gradient(circle at 88% 8%,rgba(255,47,120,.25),transparent 32%),
+    linear-gradient(135deg,#210711 0%,#351006 52%,#12061f 100%)!important;
+}
+body.theme-popup{
+  background:
+    radial-gradient(circle at 8% 0%,rgba(0,245,255,.30),transparent 30%),
+    radial-gradient(circle at 90% 8%,rgba(255,0,234,.28),transparent 32%),
+    linear-gradient(135deg,#031625 0%,#280633 52%,#05091b 100%)!important;
+}
+body.theme-summer{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(0,245,212,.30),transparent 30%),
+    radial-gradient(circle at 92% 8%,rgba(255,183,3,.26),transparent 32%),
+    linear-gradient(135deg,#03201b 0%,#23350a 52%,#062534 100%)!important;
+}
+body.theme-weekend{
+  background:
+    radial-gradient(circle at 8% 0%,rgba(255,209,102,.24),transparent 30%),
+    radial-gradient(circle at 92% 8%,rgba(0,212,255,.23),transparent 32%),
+    linear-gradient(135deg,#100619 0%,#23102c 52%,#061b2b 100%)!important;
+}
+
+body[class*="theme-"] .hero,
+body[class*="theme-"] .panel{
+  border-color:color-mix(in srgb,var(--show-a) 38%,rgba(255,255,255,.18))!important;
+}
+
+body[class*="theme-"] .panelHead h2::before{
+  content:"";
+  display:inline-block;
+  width:11px;height:28px;
+  border-radius:999px;
+  margin-right:12px;
+  vertical-align:-4px;
+  background:linear-gradient(180deg,var(--show-a),var(--show-b));
+  box-shadow:0 0 22px color-mix(in srgb,var(--show-a) 60%,transparent);
+}
+
+body[class*="theme-"] .panelHead a,
+body[class*="theme-"] .panelHead span,
+body[class*="theme-"] .chartCard span,
+body[class*="theme-"] .showCard span,
+body[class*="theme-"] .discoveryCard span,
+body[class*="theme-"] .requestCard span,
+body[class*="theme-"] .communityLoveCard span,
+body[class*="theme-"] .modCard span{
+  background:linear-gradient(90deg,var(--show-a),var(--show-b),var(--show-c))!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+}
+
+body[class*="theme-"] .nextShowCard,
+body[class*="theme-"] .feature:hover,
+body[class*="theme-"] .showCard:hover,
+body[class*="theme-"] .chartCard:hover,
+body[class*="theme-"] .communityLoveCard:hover{
+  box-shadow:
+    0 26px 82px rgba(0,0,0,.36),
+    0 0 52px color-mix(in srgb,var(--show-a) 22%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.13)!important;
+}
+
+body.theme-morning .nextShowCard::after{content:"☀️ MORNING TV"; }
+body.theme-trance .nextShowCard::after{content:"💙 TRANCE TRANSMISSION"; }
+body.theme-retro .nextShowCard::after{content:"🕹️ RETRO VISION"; }
+body.theme-eurodance .nextShowCard::after{content:"💛 EURODANCE TV"; }
+body.theme-fredagsbar .nextShowCard::after{content:"🍺 FREDAGSBAR LIVE"; }
+body.theme-popup .nextShowCard::after{content:"⚡ POPUP SIGNAL"; }
+body.theme-summer .nextShowCard::after{content:"🌴 SUMMER FREQUENCY"; }
+body.theme-weekend .nextShowCard::after{content:"🎉 WEEKEND CHANNEL"; }
+
+body[class*="theme-"] .nextShowCard::after{
+  position:absolute;
+  right:22px;
+  bottom:16px;
+  color:rgba(255,255,255,.13);
+  font-size:clamp(24px,3.5vw,54px);
+  font-weight:1000;
+  letter-spacing:-.05em;
+  pointer-events:none;
+}
+
+body[class*="theme-"] .btn.primary,
+body[class*="theme-"] .centerAction .btn,
+body[class*="theme-"] button.btn.primary{
+  background:linear-gradient(135deg,var(--show-a),var(--show-b),var(--show-c))!important;
+  color:var(--show-ink)!important;
+}
+
+body[class*="theme-"] .feature i,
+body[class*="theme-"] .communityIcon,
+body[class*="theme-"] .requestIcon,
+body[class*="theme-"] .discoveryIcon,
+body[class*="theme-"] .showIcon{
+  background:linear-gradient(135deg,var(--show-a),var(--show-b),var(--show-c))!important;
+  color:var(--show-ink)!important;
+}
+
+body.theme-trance .panel::before,
+body.theme-popup .panel::before{
+  opacity:.44!important;
+  background:
+    linear-gradient(115deg,transparent 0 35%,rgba(255,255,255,.09) 35% 36%,transparent 36%),
+    radial-gradient(circle at 0 0,var(--show-a),transparent 28%),
+    radial-gradient(circle at 100% 0,var(--show-b),transparent 28%)!important;
+}
+
+body.theme-retro .panel::before{
+  opacity:.35!important;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 24px),
+    radial-gradient(circle at 0 0,var(--show-a),transparent 28%),
+    radial-gradient(circle at 100% 0,var(--show-b),transparent 28%)!important;
+}
+
+body.theme-summer .panel::before,
+body.theme-morning .panel::before{
+  opacity:.34!important;
+  background:
+    radial-gradient(circle at 10% 0,var(--show-c),transparent 24%),
+    radial-gradient(circle at 100% 0,var(--show-a),transparent 28%)!important;
+}
