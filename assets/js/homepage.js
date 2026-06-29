@@ -147,6 +147,7 @@ function render(){
   renderMods(state.mods||state.profile?.mods||[]);
   renderCommunityWall(state.communityWall||[]);
   renderNextShow(state.nextShow||{});
+  applyShowIdentityTheme();
 }
 
 function showKey(title){
@@ -432,3 +433,27 @@ function ensureCommunityDom(){
     document.getElementById("requests").appendChild(div);
   }
 }
+
+
+/* V816.20.1.6 - Show Identity Skin Bridge */
+function djfShowThemeKeyFromText(txt){
+  const s=String(txt||"").toLowerCase();
+  if(s.includes("trance")) return "trance";
+  if(s.includes("retro")) return "retro";
+  if(s.includes("eurodance")) return "eurodance";
+  if(s.includes("fredagsbar")) return "fredagsbar";
+  if(s.includes("morning")||s.includes("morgen")) return "morning";
+  if(s.includes("summer")||s.includes("sommer")) return "summer";
+  if(s.includes("popup")||s.includes("pop up")) return "popup";
+  if(s.includes("weekend")) return "weekend";
+  return "weekend";
+}
+function applyShowIdentityTheme(){
+  try{
+    const next = state?.nextShow || {};
+    const key = state?.theme?.activeTheme || state?.activeTheme || next.theme || djfShowThemeKeyFromText((next.title||"")+" "+(next.show||"")+" "+(next.description||""));
+    document.body.classList.remove("theme-fredagsbar","theme-popup","theme-trance","theme-retro","theme-eurodance","theme-morning","theme-summer","theme-weekend");
+    document.body.classList.add("theme-"+String(key||"weekend").toLowerCase());
+  }catch(e){}
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(applyShowIdentityTheme,1400));
