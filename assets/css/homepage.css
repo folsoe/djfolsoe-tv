@@ -1660,3 +1660,113 @@ footer a{
     grid-template-columns:minmax(0,1.18fr) minmax(420px,.82fr)!important;
   }
 }
+
+/* =========================================================
+   V817.3 — SOCIAL MEDIA FOOTER
+   Colorful neon/glass footer icons. Admin button hidden from homepage.
+   ========================================================= */
+
+.navCta,
+.adminBtn,
+a[href*="admin.html"].navCta{
+  display:none!important;
+}
+
+footer{
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:center!important;
+  gap:18px!important;
+  padding:26px 24px 28px!important;
+}
+
+footer > span{
+  text-align:center!important;
+}
+
+footer > div:not(.socialFooter){
+  display:flex!important;
+  justify-content:center!important;
+  flex-wrap:wrap!important;
+  gap:18px!important;
+}
+
+.socialFooter{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:18px!important;
+  padding:18px 0 8px!important;
+  flex-wrap:wrap!important;
+}
+
+.social{
+  width:62px!important;
+  height:62px!important;
+  border-radius:18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:29px!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  background:rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(15px)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:
+    0 0 20px rgba(255,0,180,.35),
+    inset 0 1px 0 rgba(255,255,255,.25)!important;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease!important;
+  position:relative!important;
+  overflow:hidden!important;
+}
+
+.social::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:linear-gradient(135deg,rgba(255,255,255,.35),transparent 38%,rgba(255,255,255,.18));
+  transform:rotate(20deg);
+  opacity:.55;
+  pointer-events:none;
+}
+
+.social i{
+  position:relative!important;
+  z-index:2!important;
+  filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))!important;
+}
+
+.social:hover{
+  transform:translateY(-5px) scale(1.08)!important;
+  box-shadow:
+    0 0 34px rgba(0,220,255,.72),
+    0 0 58px rgba(255,53,216,.32),
+    inset 0 1px 0 rgba(255,255,255,.35)!important;
+  filter:saturate(1.15) contrast(1.05)!important;
+}
+
+.social[data-visible="false"]{
+  display:none!important;
+}
+
+.facebook{background:linear-gradient(135deg,#1877f2,#00d4ff)!important;}
+.instagram{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)!important;}
+.tiktok{background:linear-gradient(135deg,#00f2ea,#111,#ff0050)!important;}
+.snapchat{background:linear-gradient(135deg,#fffc00,#ffb000)!important;color:#101010!important;}
+.youtube{background:linear-gradient(135deg,#ff0000,#ff4d4d)!important;}
+.spotify{background:linear-gradient(135deg,#1db954,#00ff99)!important;}
+.discord{background:linear-gradient(135deg,#5865f2,#9b5cff)!important;}
+.twitch{background:linear-gradient(135deg,#9146ff,#ff00aa)!important;}
+
+@media(max-width:760px){
+  .socialFooter{
+    gap:12px!important;
+  }
+  .social{
+    width:54px!important;
+    height:54px!important;
+    font-size:25px!important;
+    border-radius:16px!important;
+  }
+}
