@@ -350,3 +350,323 @@ body::after{
   body::after{display:none}
   .nextShowCard strong{font-size:clamp(22px,7vw,34px)!important}
 }
+
+/* =========================================================
+   V816.20.1.5 - ULTRA EUROPEAN MUSIC TV 2026 SKIN
+   VISUAL ONLY - bigger, brighter, more broadcast
+   ========================================================= */
+
+:root{
+  --ultra-cyan:#00f5ff;
+  --ultra-blue:#3b82ff;
+  --ultra-pink:#ff2bd6;
+  --ultra-orange:#ff9f1c;
+  --ultra-lime:#c6ff00;
+  --ultra-white:#ffffff;
+  --ultra-ink:#050713;
+}
+
+body{
+  background:
+    radial-gradient(circle at 8% 0%,rgba(0,245,255,.24),transparent 25%),
+    radial-gradient(circle at 92% 0%,rgba(255,43,214,.28),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(255,159,28,.14),transparent 36%),
+    linear-gradient(135deg,#050616 0%,#0b1028 44%,#21051f 100%)!important;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.42;
+  background:
+    linear-gradient(115deg,transparent 0 18%,rgba(0,245,255,.10) 18% 19%,transparent 19% 34%,rgba(255,43,214,.11) 34% 35%,transparent 35% 100%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.026) 0 1px,transparent 1px 72px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.020) 0 1px,transparent 1px 9px);
+  mix-blend-mode:screen;
+}
+
+body::after{
+  content:"MUSIC TELEVISION · DJ FOLSOE · LIVE FROM DENMARK";
+  position:fixed;
+  left:50%;
+  bottom:3vh;
+  transform:translateX(-50%);
+  width:150vw;
+  text-align:center;
+  font-size:clamp(42px,8vw,140px);
+  font-weight:1000;
+  letter-spacing:-.055em;
+  color:rgba(255,255,255,.055);
+  pointer-events:none;
+  z-index:0;
+  white-space:nowrap;
+}
+
+.siteShell{
+  background:
+    radial-gradient(circle at 0 0,rgba(0,245,255,.08),transparent 34%),
+    radial-gradient(circle at 100% 0,rgba(255,43,214,.09),transparent 34%),
+    rgba(6,8,22,.78)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:
+    0 50px 150px rgba(0,0,0,.68),
+    0 0 0 1px rgba(0,245,255,.05),
+    inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+
+.topbar{
+  min-height:68px!important;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,.07)),
+    rgba(4,6,18,.72)!important;
+  border-bottom:2px solid rgba(0,245,255,.45)!important;
+  box-shadow:
+    0 18px 60px rgba(0,0,0,.40),
+    0 0 34px rgba(0,245,255,.08)!important;
+}
+
+.brand strong{
+  font-weight:1000!important;
+  letter-spacing:.04em!important;
+  text-transform:uppercase!important;
+}
+
+.brand em{
+  background:linear-gradient(90deg,var(--ultra-pink),var(--ultra-orange));
+  color:#fff!important;
+  padding:3px 7px;
+  border-radius:999px;
+  font-size:10px!important;
+  box-shadow:0 0 18px rgba(255,43,214,.35);
+}
+
+.topbar nav a{
+  position:relative;
+  color:#fff!important;
+  opacity:.88;
+  font-weight:1000!important;
+  letter-spacing:.09em!important;
+}
+
+.topbar nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--ultra-cyan),var(--ultra-pink));
+  transform:scaleX(0);
+  transition:.22s ease;
+}
+
+.topbar nav a:hover::after{ transform:scaleX(1); }
+
+.hero{
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 12% 20%,rgba(0,245,255,.30),transparent 30%),
+    radial-gradient(circle at 80% 18%,rgba(255,43,214,.28),transparent 28%),
+    linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.038)),
+    rgba(10,13,33,.72)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:
+    0 34px 100px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.16)!important;
+}
+
+.hero::after{
+  content:"ON AIR · MUSIC TV · FOLSOETV.DK";
+  position:absolute;
+  right:26px;
+  bottom:22px;
+  color:rgba(255,255,255,.10);
+  font-size:32px;
+  font-weight:1000;
+  letter-spacing:.02em;
+}
+
+.hero h1{
+  font-size:clamp(56px,8vw,118px)!important;
+  line-height:.82!important;
+  color:#fff!important;
+  text-shadow:
+    0 2px 0 rgba(0,0,0,.18),
+    0 0 34px rgba(255,255,255,.22),
+    0 0 72px rgba(255,43,214,.18)!important;
+}
+
+#heroSubtitle{
+  font-size:clamp(26px,3.3vw,44px)!important;
+  background:linear-gradient(90deg,var(--ultra-pink),var(--ultra-cyan),var(--ultra-lime))!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+  letter-spacing:-.025em!important;
+}
+
+#twitchDescription{
+  font-size:clamp(18px,1.35vw,24px)!important;
+  color:rgba(255,255,255,.88)!important;
+  max-width:780px;
+}
+
+.liveChatPreview,
+.heroMeta div,
+.heroStats div{
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.045)),
+    rgba(8,10,25,.62)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 18px 42px rgba(0,0,0,.20)!important;
+}
+
+.panel{
+  border-radius:26px!important;
+  padding:clamp(22px,2vw,34px)!important;
+  background:
+    radial-gradient(circle at 0 0,rgba(0,245,255,.10),transparent 28%),
+    radial-gradient(circle at 100% 0,rgba(255,43,214,.11),transparent 28%),
+    linear-gradient(135deg,rgba(255,255,255,.11),rgba(255,255,255,.030)),
+    rgba(10,13,28,.74)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:
+    0 32px 90px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+
+.panelHead h2{
+  font-size:clamp(26px,2.4vw,42px)!important;
+  letter-spacing:-.055em!important;
+  color:#fff!important;
+  text-transform:uppercase!important;
+}
+
+.panelHead a,
+.panelHead span{
+  background:linear-gradient(90deg,var(--ultra-pink),var(--ultra-cyan));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent!important;
+  font-weight:1000!important;
+  font-size:clamp(12px,1vw,15px)!important;
+}
+
+.feature,
+.showCard,
+.newsCard,
+.chartCard,
+.discoveryCard,
+.requestCard,
+.communityLoveCard,
+.modCard,
+.communityStatCard,
+.nextShowCard{
+  border-radius:20px!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.135),rgba(255,255,255,.045)),
+    rgba(14,18,34,.78)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:
+    0 20px 58px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+
+.feature i,
+.communityIcon,
+.requestIcon,
+.discoveryIcon,
+.showIcon{
+  background:
+    radial-gradient(circle at 30% 20%,#fff,transparent 18%),
+    linear-gradient(135deg,var(--ultra-cyan),var(--ultra-pink),var(--ultra-orange))!important;
+  color:#07101e!important;
+  box-shadow:0 0 28px rgba(255,43,214,.32)!important;
+}
+
+.nextShowCard{
+  min-height:210px!important;
+  display:grid!important;
+  grid-template-columns:1.35fr .75fr!important;
+  align-items:center!important;
+  gap:20px!important;
+  background:
+    radial-gradient(circle at 6% 28%,rgba(255,224,102,.22),transparent 25%),
+    radial-gradient(circle at 88% 30%,rgba(0,245,255,.24),transparent 28%),
+    radial-gradient(circle at 55% 120%,rgba(255,43,214,.18),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.045)),
+    rgba(26,13,44,.78)!important;
+}
+
+.nextShowCard span{
+  display:inline-flex;
+  width:max-content;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,224,102,.15);
+  border:1px solid rgba(255,224,102,.22);
+  color:var(--ultra-yellow)!important;
+  font-weight:1000!important;
+}
+
+.nextShowCard h3{
+  font-size:clamp(40px,4.2vw,76px)!important;
+  line-height:.92!important;
+  letter-spacing:-.055em!important;
+}
+
+.nextShowDate{
+  font-size:clamp(18px,1.5vw,25px)!important;
+  color:#fff!important;
+}
+
+.nextShowCard strong{
+  justify-self:end;
+  text-align:right;
+  font-size:clamp(32px,3.2vw,58px)!important;
+  line-height:1!important;
+  color:var(--ultra-cyan)!important;
+  text-shadow:0 0 28px rgba(0,245,255,.38)!important;
+}
+
+.chartCard b,
+.showCard b,
+.discoveryCard b,
+.requestCard b,
+.communityLoveCard b,
+.modCard b{
+  color:#fff!important;
+  font-size:clamp(17px,1.25vw,23px)!important;
+}
+
+.chartCard span,
+.showCard span,
+.discoveryCard span,
+.requestCard span,
+.communityLoveCard span,
+.modCard span{
+  color:var(--ultra-pink)!important;
+  font-weight:1000!important;
+  letter-spacing:.13em!important;
+}
+
+.btn.primary,
+.centerAction .btn,
+button.btn.primary{
+  background:linear-gradient(135deg,var(--ultra-cyan),var(--ultra-pink),var(--ultra-orange))!important;
+  color:#040613!important;
+  border:0!important;
+  box-shadow:
+    0 20px 55px rgba(255,43,214,.30),
+    0 0 28px rgba(0,245,255,.18)!important;
+}
+
+@media(max-width:900px){
+  .nextShowCard{grid-template-columns:1fr!important}
+  .nextShowCard strong{justify-self:start;text-align:left}
+  .hero::after{display:none}
+}
