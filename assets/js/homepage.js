@@ -1,4 +1,56 @@
 
+/* V817.1.1 - Homepage render hotfix */
+function normalizeHomeState(raw){
+  raw = raw && typeof raw === "object" ? raw : {};
+  const tw = raw.twitch || raw.hero || {};
+  const profile = raw.profile || {};
+  const showFallbacks = [
+    {title:"Trance Tuesday",time:"18:30 CEST",body:"Uplifting and progressive trance.",description:"Big melodies, lights, energy and trance community."},
+    {title:"FOLSOE Countdown",time:"18:30 CEST",body:"The biggest tracks of the week.",description:"The biggest tracks of the week in the FOLSOE Countdown."},
+    {title:"Fredagsbar",time:"19:00 CEST",body:"Friday bar, good vibes and weekend energy.",description:"Drama, laughter, great music and even more drama."},
+    {title:"Retro Hits",time:"Sunday",body:"70s, 80s and 90s classics.",description:"Classics, nostalgia and timeless hits."},
+    {title:"Good Morning Twitch",time:"07:00 CEST",body:"Coffee, music and the best start to the day.",description:"Coffee, positive vibes and a perfect start to the day."},
+    {title:"PopUp",time:"Surprise",body:"Surprise shows when you least expect it.",description:"When you least expect it — we go live."}
+  ];
+
+  raw.twitch = {
+    displayName: tw.displayName || tw.broadcaster_name || "DJ FOLSOE",
+    description: tw.description || profile.description || "DJ FOLSOE is a Music TV and Twitch channel from Denmark with live DJ shows, requests, Top 20 and community.",
+    isLive: !!tw.isLive,
+    viewers: Number(tw.viewers || 0),
+    followers: Number(tw.followers || raw.live?.followers || 870),
+    viewCount: Number(tw.viewCount || tw.views || 0),
+    liveTitle: tw.liveTitle || tw.title || "DJ FOLSOE LIVE",
+    category: tw.category || tw.game || tw.game_name || "Music",
+    avatar: tw.avatar || tw.profileImage || tw.profile_image_url || "",
+    banner: tw.banner || tw.offlineImage || tw.offline_image_url || ""
+  };
+
+  raw.profile = Object.assign({description: raw.twitch.description, mods:[]}, profile);
+  raw.shows = Array.isArray(raw.shows) && raw.shows.length ? raw.shows : showFallbacks;
+  raw.nextShow = raw.nextShow && Object.keys(raw.nextShow).length ? raw.nextShow : {
+    title:"Retro Hits", description:"The best hits from the 70s, 80s and 90s.", date:"2026-07-19", start:"07:00", end:"10:00"
+  };
+  raw.top20 = Array.isArray(raw.top20) && raw.top20.length ? raw.top20 : (raw.chart?.items || [
+    {rank:1,artist:"Armin van Buuren",title:"Whatever It Takes"},
+    {rank:2,artist:"David Guetta",title:"Titanium"},
+    {rank:3,artist:"Calvin Harris",title:"Feel So Close"},
+    {rank:4,artist:"Swedish House Mafia",title:"Don't You Worry Child"},
+    {rank:5,artist:"Avicii",title:"Levels"}
+  ]);
+  raw.discoveryPicks = Array.isArray(raw.discoveryPicks) && raw.discoveryPicks.length ? raw.discoveryPicks : [
+    {artist:"Mau P",title:"The Less I Know The Better",genre:"Discovery",note:"Fresh energy for the chart show."},
+    {artist:"Peggy Gou",title:"Find The Way",genre:"Bubbling under",note:"Fresh house vibe for the stream."},
+    {artist:"Anyma",title:"Hypnotized",genre:"Future hit",note:"A strong candidate for upcoming shows."}
+  ];
+  raw.newsCards = Array.isArray(raw.newsCards) ? raw.newsCards : [];
+  raw.requests = Array.isArray(raw.requests) ? raw.requests : [];
+  raw.mods = Array.isArray(raw.mods) ? raw.mods : (raw.profile?.mods || []);
+  raw.communityWall = Array.isArray(raw.communityWall) ? raw.communityWall : [];
+  return raw;
+}
+
+
 /* V816.20.1.9 - Website English primary guard */
 function englishSiteText(s){
   return String(s||"")
@@ -16,9 +68,22 @@ const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 let state=null;
 let lang="en";
 
-const I18N={en:{}};
-
-function t(key){return (I18N[lang]&&I18N[lang][key])||I18N.da[key]||key;}
+const I18N={
+  en:{
+    "live":"Live","offline":"Offline","ready":"Ready",
+    "hero.live":"Live on Twitch","hero.offline":"Offline right now",
+    "about.main":"DJ FOLSOE brings music, chat, requests and Danish DJ culture together in a live broadcast universe.",
+    "about.music":"Trance, Retro, EDM, Pop and more",
+    "about.shows":"Live DJ shows and themed streams",
+    "about.requests":"Use !request in chat",
+    "about.community":"Chat, mods and Danish DJ culture",
+    "shows.link":"Trance · Countdown · Fredagsbar · Retro · Morning · PopUp · Weekend",
+    "requests.link":"Use !request in chat",
+    "news.link":"Latest show · Requests · Community · Twitch",
+    "top20.link":"See full chart →"
+  }
+};
+function t(key){return (I18N.en&&I18N.en[key])||key;}
 function q(id){return document.getElementById(id);}
 function djfSafeHtml(id, html){
   const el = document.getElementById(id);
@@ -44,12 +109,11 @@ function applyStaticLanguage(){
 async function loadHome(){
   try{
     const r=await fetch(API_BASE+"/api/homepage?lang="+lang+"&ts="+Date.now(),{cache:"no-store"});
-    state=await r.json();
+    state=normalizeHomeState(await r.json());
   }catch(e){
-    state={twitch:{displayName:"DJ FOLSOE",description:"DJ FOLSOE is a Danish music streamer on Twitch.",isLive:false,viewers:0,followers:870,viewCount:0,liveTitle:"DJ FOLSOE LIVE",category:"Music"},profile:{mods:[]},shows:[],newsCards:[],top20:[],requests:[]};
+    state=normalizeHomeState({});
   }
-  render();
-  applySEO();
+  try{ render(); applySEO(); }catch(err){ console.error('Homepage render failed',err); document.body.classList.add('renderError'); }
 }
 
 function render(){
