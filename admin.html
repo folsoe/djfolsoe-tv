@@ -206,7 +206,7 @@
 
 </main>
 
-<script src="assets/js/admin.js?v=8162011"></script>
+<script src="assets/js/admin.js?v=81620161"></script>
 
 <div id="djfNullSafeFallbacks" style="display:none">
 <div id="themeGrid"></div>
@@ -238,5 +238,12 @@
 <div id="modTeamEditor"></div>
 </div>
 <script src="assets/js/show-schedule-admin.js?v=8162013"></script>
+
+<div id="V81620161_token_helper" style="position:fixed;right:18px;bottom:18px;z-index:99999;background:rgba(5,7,18,.92);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.4);color:white;font-family:system-ui">
+  <div style="font-size:11px;font-weight:900;letter-spacing:.12em;color:#ff36e8;margin-bottom:7px">ADMIN TOKEN</div>
+  <input id="quickAdminToken" placeholder="Indsæt token" style="width:180px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#070a16;color:#fff;padding:8px">
+  <button onclick="localStorage.setItem('DJF_ADMIN_TOKEN',document.getElementById('quickAdminToken').value);localStorage.setItem('djf_admin_token',document.getElementById('quickAdminToken').value);alert('Token gemt')" style="border:0;border-radius:999px;padding:8px 10px;font-weight:900;background:linear-gradient(135deg,#22e7ff,#ff35d8);color:#050713">Gem</button>
+</div>
+
 </body>
 </html>
