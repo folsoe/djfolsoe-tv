@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Control Center V918.5</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<header class="adminHero v9185Hero">
+  <div>
+    <span class="kicker">DJ FOLSOE NETWORK V918.5</span>
+    <h1>One Button Control Center</h1>
+    <p>Twitch + Admin feeds the website when offline and the overlay when live. One screen. One publish. One source of truth.</p>
+  </div>
+  <div class="loginCard">
+    <label>ADMIN TOKEN</label>
+    <input id="adminToken" type="password" placeholder="Cloudflare ADMIN_TOKEN">
+    <button onclick="djfSaveSettings()">Save</button>
+  </div>
+</header>
+
+<nav class="adminTabs v9185Tabs">
+  <button onclick="djfOneClick()" class="bigPublish">🚀 ONE CLICK · SYNC + PUBLISH</button>
+  <button onclick="djfPreview()">👁 Preview</button>
+  <button onclick="djfRefresh()">🔄 Refresh Twitch</button>
+  <button onclick="djfOpenWebsite()">🌍 Website</button>
+  <button onclick="djfOpenTwitch()">📺 Twitch</button>
+  <button onclick="djfToggleAdvanced()">⚙ Advanced</button>
+</nav>
+
+<main>
+  <section class="panel v9185Control" id="controlCenter">
+    <div class="panelHead">
+      <div>
+        <h2>🎛️ Control Center</h2>
+        <p class="note">Everything visible on the website and overlay must come from Twitch or this admin screen.</p>
+      </div>
+      <div class="v9185TopActions">
+        <button onclick="djfSaveDraft()">Save draft</button>
+        <button onclick="djfPreview()">Preview</button>
+        <button onclick="djfOneClick()" class="bigPublish">Publish everything</button>
+      </div>
+    </div>
+
+    <div class="v9185StatusStrip">
+      <article><span>Twitch</span><b id="twitchStatus">Checking…</b><small id="twitchTitle">twitch.tv/djfolsoe</small></article>
+      <article><span>Viewers</span><b id="twitchViewers">0</b><small>Live from Twitch</small></article>
+      <article><span>Followers</span><b id="twitchFollowers">—</b><small>Live/fallback</small></article>
+      <article><span>Subs</span><b id="twitchSubs">—</b><small>Token scope/fallback</small></article>
+      <article><span>Ready</span><b id="readyState">Draft</b><small id="lastPublish">Not published yet</small></article>
+    </div>
+
+    <div class="v9185OneGrid">
+      <article class="v9185Card primaryCard">
+        <h3>1 · Broadcast</h3>
+        <label>Current show</label>
+        <select id="currentShow">
+          <option>DJ FOLSOE</option>
+          <option>Good Morning Twitch</option>
+          <option>Trance Tuesday</option>
+          <option>Eurodance</option>
+          <option>Fredagsbar</option>
+          <option>Retro Hits</option>
+          <option>FOLSOE Top 20</option>
+          <option>Pop Up Live</option>
+          <option>Summer Beats</option>
+          <option>Weekend Vibes</option>
+        </select>
+        <label>Theme</label>
+        <select id="theme">
+          <option value="weekend">Weekend</option>
+          <option value="morning">Good Morning</option>
+          <option value="trance">Trance</option>
+          <option value="eurodance">Eurodance</option>
+          <option value="fredagsbar">Fredagsbar</option>
+          <option value="retro">Retro</option>
+          <option value="chart">Top 20</option>
+          <option value="popup">Pop Up</option>
+          <option value="summer">Summer</option>
+          <option value="disco">Disco</option>
+          <option value="handsup">Hands Up</option>
+          <option value="harddance">Hard Dance</option>
+          <option value="danske">Danish Hits</option>
+        </select>
+        <label>Broadcast mode</label>
+        <select id="mode">
+          <option>LIVE SHOW</option>
+          <option>STARTING SOON</option>
+          <option>COUNTDOWN</option>
+          <option>BREAK</option>
+          <option>SPECIAL EVENT</option>
+          <option>AFTER PARTY</option>
+          <option>ENDING</option>
+          <option>OFFLINE</option>
+        </select>
+        <div class="v9185ButtonRow">
+          <button onclick="djfPresetMode('LIVE SHOW')">Go live</button>
+          <button onclick="djfPresetMode('BREAK')">Break</button>
+          <button onclick="djfPresetMode('ENDING')">Ending</button>
+          <button onclick="djfPresetMode('OFFLINE')">Offline</button>
+        </div>
+      </article>
+
+      <article class="v9185Card">
+        <h3>2 · Website + Overlay Text</h3>
+        <label>Top line</label>
+        <input id="eyebrow" value="DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK">
+        <label>Main title</label>
+        <input id="heroTitle" value="DJ FOLSOE">
+        <label>Headline</label>
+        <input id="heroSubtitle" value="Dive into my Twitch world">
+        <label>Description</label>
+        <textarea id="heroText" rows="3">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</textarea>
+        <label>Ticker / info line</label>
+        <input id="ticker" value="LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT · FOLSOE TOP 20 · WEEKLY MUSIC CHART">
+      </article>
+
+      <article class="v9185Card">
+        <h3>3 · Next Show</h3>
+        <label>Next show</label>
+        <input id="nextShowTitle" value="Next DJ FOLSOE Broadcast">
+        <label>Date</label>
+        <input id="nextShowDate" type="date">
+        <label>Time</label>
+        <input id="nextShowTime" type="time">
+        <label>Theme</label>
+        <select id="nextShowTheme">
+          <option value="weekend">Weekend</option><option value="morning">Good Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option>
+        </select>
+        <label>Description</label>
+        <textarea id="nextShowDescription" rows="3">The next show is controlled from admin and appears automatically on website and overlay.</textarea>
+      </article>
+
+      <article class="v9185Card">
+        <h3>4 · Goals + Requests</h3>
+        <label>Follower goal</label>
+        <input id="followerGoal" type="number" value="1000">
+        <label>Manual subs fallback</label>
+        <input id="subs" type="number" value="0">
+        <label>Sub goal</label>
+        <input id="subGoal" type="number" value="100">
+        <label>Request text</label>
+        <input id="requestText" value="Use !request Artist - Title in Twitch chat">
+        <label>Special message</label>
+        <input id="specialMessage" value="">
+      </article>
+    </div>
+
+    <div class="v9185OneClickBox">
+      <div>
+        <span>ONE BUTTON FLOW</span>
+        <h3>Sync Twitch → Save admin → Publish website + overlay</h3>
+        <p>Use this when you want the channel to update everywhere from the same data.</p>
+      </div>
+      <button onclick="djfOneClick()" class="megaButton">ONE CLICK PUBLISH</button>
+    </div>
+
+    <div class="v9185PreviewGrid">
+      <article>
+        <span>Website preview · offline</span>
+        <h3 id="previewWebsiteTitle">DJ FOLSOE</h3>
+        <p id="previewWebsiteSub">Dive into my Twitch world</p>
+        <small id="previewWebsiteNext">Next show · Announced soon</small>
+      </article>
+      <article>
+        <span>Overlay control panel · live</span>
+        <h3 id="previewOverlayTitle">DJ FOLSOE · LIVE SHOW</h3>
+        <p id="previewOverlayStats">Viewers 0 · Followers — · Subs 0/100</p>
+        <small id="previewOverlayTicker">LIVE DJ SHOWS FROM DENMARK</small>
+      </article>
+    </div>
+
+    <pre id="statusBox">V918.5 ready. One click controls website + overlay from Twitch + Admin.</pre>
+  </section>
+
+  <details id="advancedPanel" class="legacyAdvanced">
+    <summary>Advanced / Technical tools</summary>
+    <section class="panel">
+      <h2>⚙️ Technical Settings</h2>
+      <p class="note">Only use this when the API URL or token needs to be changed.</p>
+      <div class="v9185SettingsGrid">
+        <label>Cloudflare Worker API base
+          <input id="apiBase" placeholder="https://djfolsoe-tv-api.sunefolsoe.workers.dev">
+        </label>
+        <label>Admin token
+          <input id="advancedToken" type="password" placeholder="ADMIN_TOKEN">
+        </label>
+      </div>
+      <div class="v9185ButtonRow">
+        <button onclick="djfSaveSettings()">Save settings</button>
+        <button onclick="djfTestApi()">Test API</button>
+        <button onclick="djfOpenApi('/api/health')">Open health</button>
+        <button onclick="djfOpenApi('/api/unified-control')">Open unified data</button>
+      </div>
+      <pre id="advancedStatus">Advanced hidden by default. Old version-modules are no longer part of daily control.</pre>
+    </section>
+  </details>
+</main>
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
