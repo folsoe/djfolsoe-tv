@@ -1833,5 +1833,164 @@ v901PushBurst = function(item){
   }
   window.DJF_V9271_WAKE_DATA=wake;
   setTimeout(wake,800);
-  setInterval(wake,5000);
+  setInterval(wake,15000);
+})();
+
+
+/* =========================================================
+   V927.2 — STABLE TICKER & INFO ROTATION
+   Purpose:
+   - Top ticker is admin-first: core.ticker.text / core.ticker.items.
+   - Bottom ticker is stable community/status data.
+   - The lower info burst stays on screen longer and does not flicker.
+   - This final layer wins over older V900/V927 render intervals.
+   ========================================================= */
+(function(){
+  const V9272_VERSION = 'V927.2 STABLE TICKER & INFO ROTATION';
+  const API = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
+  const ROTATE_MS = 18000;
+  const FETCH_MS = 12000;
+  let coreCache = null;
+  let stableIndex = 0;
+  let lastRotate = 0;
+  let lastTickerKey = '';
+  let lastBurstKey = '';
+
+  function esc2(s){ return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function clean2(v,f=''){ return String(v ?? f ?? '').replace(/\[object Object\]/g,'').trim() || f || ''; }
+  function num2(v,f=0){ v=Number(v); return Number.isFinite(v)?v:f; }
+  function coreOf2(payload){ return (payload && (payload.core || payload.data || payload.broadcastCore)) || payload || {}; }
+  function jsonp2(url, timeoutMs){
+    return new Promise((resolve,reject)=>{
+      const cb='__djfV9272_'+Math.random().toString(36).slice(2);
+      let done=false, script;
+      const timer=setTimeout(()=>{ if(done) return; done=true; cleanup(); reject(new Error('JSONP timeout')); }, timeoutMs||8000);
+      function cleanup(){ try{delete window[cb];}catch(e){window[cb]=undefined;} try{script&&script.remove();}catch(e){} clearTimeout(timer); }
+      window[cb]=function(payload){ if(done) return; done=true; cleanup(); resolve(payload); };
+      script=document.createElement('script');
+      script.async=true;
+      script.src=url+(url.includes('?')?'&':'?')+'callback='+encodeURIComponent(cb)+'&ts='+Date.now();
+      script.onerror=function(){ if(done) return; done=true; cleanup(); reject(new Error('JSONP script load failed')); };
+      document.head.appendChild(script);
+    });
+  }
+  function data2(core){
+    core=coreOf2(core);
+    const tw=core.twitch||{}, show=core.show||{}, hero=core.hero||{}, com=core.community||{}, ticker=core.ticker||{}, next=core.nextShow||{}, overlay=core.overlay||{}, theme=core.theme||{};
+    const followers=num2(tw.followers ?? com.followers,0);
+    const followerGoal=num2(com.followerGoal,1000);
+    const subs=num2(tw.subs ?? com.subs,0);
+    const subGoal=num2(com.subGoal ?? overlay.subGoal,100);
+    const viewers=num2(tw.viewers ?? show.viewers,0);
+    const live=!!(tw.live||tw.isLive||show.live);
+    const themeId=clean2(theme.id||theme.key||overlay.activeTheme||core?.broadcast?.activeTheme||window.DJF_CURRENT_THEME||'weekend').toLowerCase();
+    const themeTitle=clean2(theme.title||({weekend:'Weekend',trance:'Trance Tuesday',eurodance:'Eurodance',fredagsbar:'Fredagsbar',retro:'Retro Hits',popup:'Pop Up Live',morning:'Good Morning Twitch',summer:'Summer'}[themeId])||themeId.toUpperCase());
+    const title=clean2(show.title||show.current||tw.liveTitle||hero.title||overlay.title||'DJ FOLSOE');
+    const description=clean2(show.description||hero.text||com.text||'Live DJ shows, requests and Music TV from Denmark.');
+    const adminTicker=clean2(ticker.text||overlay.infoLine||'');
+    const tickerItems=Array.isArray(ticker.items)?ticker.items.map(x=>clean2(x)).filter(Boolean):[];
+    const requestText=clean2(com.requestText||overlay.requestText||'Use !request Artist - Title in Twitch chat');
+    const special=clean2(com.specialEvent||overlay.specialEvent||'');
+    const nextTitle=clean2(next.show||next.title||'Next DJ FOLSOE Broadcast');
+    const nextTime=clean2(next.timeLabel||next.datetime||next.dateTime||'Announced soon');
+    const top20=Array.isArray(core.top20)?core.top20:[];
+    return {core,tw,show,hero,com,ticker,next,overlay,theme,followers,followerGoal,subs,subGoal,viewers,live,themeId,themeTitle,title,description,adminTicker,tickerItems,requestText,special,nextTitle,nextTime,top20};
+  }
+  function itemHtml(text, cls){
+    text=clean2(text);
+    const parts=text.split('·');
+    const label=parts[0].trim();
+    const rest=parts.slice(1).join('·').trim();
+    return '<span class="tickerItem '+(cls||'white')+'"><b>'+esc2(label)+'</b>'+(rest?'<em>'+esc2(rest)+'</em>':'')+'</span>';
+  }
+  function applyTicker(d){
+    const topEl=document.getElementById('topTickerText');
+    const bottomEl=document.getElementById('bottomTickerText');
+    const top=[];
+    if(d.adminTicker) top.push(d.adminTicker);
+    d.tickerItems.forEach(x=>{ if(!top.includes(x)) top.push(x); });
+    if(d.special) top.unshift('SPECIAL EVENT · '+d.special);
+    if(!top.length) top.push('DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK');
+
+    const toGo=Math.max(0,d.followerGoal-d.followers);
+    const bottom=[
+      `${d.live?'LIVE':'OFFLINE'} · ${d.title} · ${d.viewers} viewers`,
+      `ACTIVE THEME · ${d.themeTitle}`,
+      `FOLLOWER GOAL · ${d.followers}/${d.followerGoal} · ${toGo} TO GO`,
+      `SUB GOAL · ${d.subs}/${d.subGoal}`,
+      `NEXT SHOW · ${d.nextTitle} · ${d.nextTime}`,
+      d.requestText,
+      'FOLLOW DJ FOLSOE ON TWITCH · twitch.tv/djfolsoe'
+    ].filter(Boolean);
+
+    const key=top.join('||')+'##'+bottom.join('||');
+    if(key===lastTickerKey) return;
+    lastTickerKey=key;
+    if(topEl){
+      const html=top.map((x,i)=>itemHtml(x,['cyan','pink','yellow','white'][i%4])).join('<span class="tickerSep">✦</span>');
+      topEl.innerHTML=html+'<span class="tickerSep">✦</span>'+html;
+      document.documentElement.style.setProperty('--topDur', Math.max(55, Math.min(150, top.join('').length/2.2))+'s');
+    }
+    if(bottomEl){
+      const html=bottom.map((x,i)=>itemHtml(x,['station','goal','sub','request','follow','cyan'][i%6])).join('<span class="tickerSep">✦</span>');
+      bottomEl.innerHTML=html+'<span class="tickerSep">✦</span>'+html;
+      document.documentElement.style.setProperty('--bottomDur', Math.max(95, Math.min(230, bottom.join('').length/2.0))+'s');
+    }
+  }
+  function burstLane(d){
+    const top=d.top20[0]||{rank:1,artist:'DJ FOLSOE',title:"This Week's Number One"};
+    const pick=d.top20[1]||top;
+    const toGo=Math.max(0,d.followerGoal-d.followers);
+    const lane=[];
+    if(d.special) lane.push(['SPECIAL EVENT',d.special,d.adminTicker||d.description]);
+    lane.push(['NOW ON AIR',d.title,d.description]);
+    lane.push(['ACTIVE THEME',d.themeTitle,d.themeId]);
+    lane.push(['NEXT SHOW',d.nextTitle,d.nextTime]);
+    lane.push(['LIVE STATUS',`${d.viewers} viewers`,`${d.followers}/${d.followerGoal} followers · ${d.subs}/${d.subGoal} subs`]);
+    lane.push(['FOLLOW JOURNEY',`${d.followers}/${d.followerGoal} followers`,`${toGo} to go · twitch.tv/djfolsoe`]);
+    lane.push(['TOP 20 SPOTLIGHT',`#${clean2(top.rank,'1')} ${clean2(top.artist,'DJ FOLSOE')}`,clean2(top.title,"This Week's Number One")]);
+    lane.push(['FOLSOE PICK',clean2(pick.artist,'Viewer Pick'),clean2(pick.title,'Request of the Week')]);
+    lane.push(['REQUESTS','Request your song',d.requestText]);
+    return lane;
+  }
+  function writeBurst(item){
+    const k=document.getElementById('burstKicker'), t=document.getElementById('burstTitle'), b=document.getElementById('burstBody'), root=document.getElementById('broadcastBurst');
+    if(!root||!item) return;
+    const key=item.join('||');
+    if(key===lastBurstKey) return;
+    lastBurstKey=key;
+    if(k) k.textContent=clean2(item[0]).slice(0,32);
+    if(t) t.textContent=clean2(item[1]).slice(0,44);
+    if(b) b.textContent=clean2(item[2]).slice(0,110);
+    root.classList.remove('burstFlash'); void root.offsetWidth; root.classList.add('burstFlash');
+  }
+  function applyStable(forceRotate=false){
+    if(!coreCache) return;
+    const d=data2(coreCache);
+    applyTicker(d);
+    const now=Date.now();
+    const lane=burstLane(d);
+    if(forceRotate || now-lastRotate>ROTATE_MS){
+      lastRotate=now;
+      const item=lane[stableIndex++ % lane.length] || lane[0];
+      writeBurst(item);
+    }
+    window.DJF_OVERLAY_DATA_VERSION=V9272_VERSION;
+  }
+  async function fetchCore(){
+    try{
+      const payload=await jsonp2(API+'/api/broadcast-jsonp',8000);
+      coreCache=coreOf2(payload);
+      applyStable(false);
+    }catch(e){
+      applyStable(false);
+    }
+  }
+  // Win over older intervals: old code may call renderBurst/renderCards often, but this throttles output.
+  window.renderBurst = function(force){ applyStable(!!force); };
+  window.renderCards = function(){ applyStable(false); };
+  window.DJF_V9272_STABLE_WAKE = function(){ fetchCore(); applyStable(true); };
+  setTimeout(()=>{ fetchCore(); setTimeout(()=>applyStable(true),700); }, 900);
+  setInterval(fetchCore, FETCH_MS);
+  setInterval(()=>applyStable(false), 1000);
 })();
