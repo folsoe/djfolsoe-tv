@@ -143,3 +143,20 @@ code{color:#2dd4ef}
 .v912ActionBar button{font-weight:900}
 .miniNote{font-size:12px;opacity:.72;margin:.35rem 0 0}
 @media(max-width:900px){.v912StudioGrid{grid-template-columns:1fr}.v912EditRow{grid-template-columns:1fr}.v912EditRow button{width:100%}}
+
+
+/* V913 Asset & Theme Upload Manager */
+.v913AssetManager{background:linear-gradient(180deg,rgba(20,30,55,.72),rgba(10,12,30,.70));border-color:rgba(45,212,239,.28)}
+.v913AssetStatus{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.v913AssetStatus div{padding:14px;border-radius:18px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.10)}
+.v913AssetStatus span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#ffd166;font-weight:1000;margin-bottom:6px}
+.v913AssetStatus b{font-size:18px;color:#fff}
+.v913AssetTools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.v913QuickButtons{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.v913ThemeCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:14px 0}
+.v913ThemeCard{padding:14px;border-radius:18px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.11);cursor:pointer}
+.v913ThemeCard.active{outline:3px solid #2dd4ef;box-shadow:0 0 22px rgba(45,212,239,.32)}
+.v913ThemeCard b{display:block;color:#2dd4ef;margin-bottom:6px}
+.v913ThemeCard small{display:block;color:rgba(255,255,255,.65);line-height:1.4;word-break:break-word}
+.v913Missing{color:#ff5b8a!important}.v913Ok{color:#74f2ce!important}
+@media(max-width:900px){.v913AssetTools{grid-template-columns:1fr}}

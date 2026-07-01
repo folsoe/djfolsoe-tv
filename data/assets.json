@@ -1,7 +1,7 @@
 {
-  "version": "V913 Theme Assets",
+  "version": "V913 Asset & Theme Upload Manager",
   "activeTheme": "weekend",
-  "themeLibrary": {
+  "themeAssets": {
     "morning": {
       "key": "morning",
       "title": "GOOD MORNING TWITCH",
@@ -110,5 +110,10 @@
       "logo": "assets/img/dj-folsoe-logo.png",
       "note": "Managed by V913 Asset Manager"
     }
-  }
+  },
+  "globalAssets": {
+    "logo": "assets/img/dj-folsoe-logo.png",
+    "ogImage": "assets/og-dj-folsoe.jpg"
+  },
+  "updatedAt": "2026-07-01T00:00:00.000Z"
 }

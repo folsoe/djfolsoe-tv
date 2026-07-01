@@ -1451,3 +1451,82 @@ async function v912PublishLive(){
 }
 const V912_originalLoadAll=loadAll;loadAll=async function(){await V912_originalLoadAll();setTimeout(()=>{if(document.getElementById('v912ContentStudio')&&!v912ContentStudio)v912LoadStudio();},400);};
 setTimeout(()=>{if(document.getElementById('v912ContentStudio'))v912LoadStudio();},2000);
+
+
+/* ===== V913 Asset & Theme Upload Manager ===== */
+let v913Assets = null;
+let v913Selected = "weekend";
+function v913DefaultAssets(){
+  const keys = Object.keys(typeof THEMES !== 'undefined' ? THEMES : {weekend:'Weekend'});
+  const themeAssets = {};
+  keys.forEach(k=>{
+    themeAssets[k]={key:k,title:String((THEMES&&THEMES[k])||k).replace(/^[^A-Z0-9]+/i,'').trim()||k.toUpperCase(),background:`themes/${k}.png`,heroImage:`themes/${k}-hero.png`,overlayBackground:`themes/${k}.png`,logo:'assets/img/dj-folsoe-logo.png',note:'Managed by V913 Asset Manager'};
+  });
+  return {version:'V913 Asset & Theme Upload Manager',activeTheme:(typeof activeTheme!=='undefined'?activeTheme:'weekend'),themeAssets,globalAssets:{logo:'assets/img/dj-folsoe-logo.png',ogImage:'assets/og-dj-folsoe.jpg'},updatedAt:new Date().toISOString()};
+}
+function v913Set(id,val){const el=document.getElementById(id); if(el)el.value=val||'';}
+function v913Text(id,val){const el=document.getElementById(id); if(el)el.textContent=val||'';}
+function v913Status(msg){v913Text('v913Status',msg);}
+function v913SanitizePath(path){return String(path||'').trim().replace(/^\.\//,'').replace(/\\/g,'/');}
+function v913MissingPath(path){const p=v913SanitizePath(path);return !p || p.includes(' ') || (!p.includes('/') && !p.includes('.'));}
+function v913RenderSelect(){
+  const sel=document.getElementById('v913ThemeSelect'); if(!sel)return;
+  const assets=v913Assets||v913DefaultAssets();
+  const keys=Object.keys(assets.themeAssets||{});
+  sel.innerHTML=keys.map(k=>`<option value="${k}">${(assets.themeAssets[k]?.title||k).toUpperCase()}</option>`).join('');
+  sel.value=v913Selected||assets.activeTheme||keys[0]||'weekend';
+}
+function v913RenderCards(){
+  const host=document.getElementById('v913ThemeCards'); if(!host)return;
+  const assets=v913Assets||v913DefaultAssets();
+  host.innerHTML=Object.keys(assets.themeAssets||{}).map(k=>{
+    const a=assets.themeAssets[k]||{}; const miss=[a.background,a.heroImage,a.overlayBackground,a.logo].some(v913MissingPath);
+    return `<div class="v913ThemeCard ${k===v913Selected?'active':''}" onclick="v913SelectTheme('${k}')"><b>${a.title||k}</b><small>${a.background||'Missing background'}</small><small>${a.overlayBackground||'Missing overlay background'}</small><small class="${miss?'v913Missing':'v913Ok'}">${miss?'Missing/invalid path':'Paths ready'}</small></div>`;
+  }).join('');
+}
+function v913FillForm(){
+  const assets=v913Assets||v913DefaultAssets();
+  const a=(assets.themeAssets||{})[v913Selected]||{};
+  v913Text('v913ActiveTheme',assets.activeTheme||'weekend'); v913Text('v913SelectedTheme',v913Selected); v913Text('v913LastPublish',assets.updatedAt||'Not published');
+  v913Set('v913ThemeTitle',a.title||v913Selected.toUpperCase()); v913Set('v913Background',a.background||`themes/${v913Selected}.png`); v913Set('v913HeroImage',a.heroImage||`themes/${v913Selected}-hero.png`); v913Set('v913OverlayBackground',a.overlayBackground||a.background||`themes/${v913Selected}.png`); v913Set('v913Logo',a.logo||'assets/img/dj-folsoe-logo.png'); v913Set('v913AssetNote',a.note||'');
+  v913CheckAssets(false); v913RenderCards();
+}
+function v913ReadForm(){
+  if(!v913Assets)v913Assets=v913DefaultAssets();
+  v913Assets.themeAssets=v913Assets.themeAssets||{};
+  v913Assets.themeAssets[v913Selected]={key:v913Selected,title:DJF_get('v913ThemeTitle')||v913Selected.toUpperCase(),background:v913SanitizePath(DJF_get('v913Background')),heroImage:v913SanitizePath(DJF_get('v913HeroImage')),overlayBackground:v913SanitizePath(DJF_get('v913OverlayBackground')),logo:v913SanitizePath(DJF_get('v913Logo')),note:DJF_get('v913AssetNote')};
+  v913Assets.activeTheme=v913Selected; v913Assets.updatedAt=new Date().toISOString();
+  return v913Assets;
+}
+function v913SelectTheme(key){v913ReadForm(); v913Selected=key||'weekend'; v913RenderSelect(); v913FillForm();}
+async function v913LoadAssets(){
+  try{const r=await api('/api/asset-manager'); v913Assets=r.assets||v913DefaultAssets(); v913Selected=v913Assets.activeTheme||v913Selected||'weekend'; v913RenderSelect(); v913FillForm(); v913Status('✅ V913 assets loaded.');}
+  catch(e){v913Assets=v913DefaultAssets(); v913RenderSelect(); v913FillForm(); v913Status('⚠️ Loaded local defaults: '+e.message);}
+}
+function v913UseStandardPaths(){
+  const k=v913Selected||'weekend'; v913Set('v913Background',`themes/${k}.png`); v913Set('v913HeroImage',`themes/${k}-hero.png`); v913Set('v913OverlayBackground',`themes/${k}.png`); v913Set('v913Logo','assets/img/dj-folsoe-logo.png'); v913Status('✅ Standard paths inserted. Upload these files to GitHub, then publish.'); v913ReadForm(); v913RenderCards();
+}
+function v913CheckAssets(show=true){
+  const paths=[DJF_get('v913Background'),DJF_get('v913HeroImage'),DJF_get('v913OverlayBackground'),DJF_get('v913Logo')];
+  const missing=paths.filter(v913MissingPath); v913Text('v913AssetCheck',missing.length?`${missing.length} path issue(s)`:'Paths ready');
+  if(show)v913Status(missing.length?'⚠️ Check paths: '+missing.join(', '):'✅ All asset paths look valid.');
+  return missing.length===0;
+}
+function v913ApplyToThemeManager(){
+  const a=v913ReadForm().themeAssets[v913Selected];
+  if(typeof DJF_value==='function'){DJF_value('v907ThemeBg',a.background);DJF_value('v907WebsiteHero',a.heroImage);DJF_value('v907OverlayBg',a.overlayBackground);DJF_value('v907ThemeTitle',a.title);}
+  if(typeof activeTheme!=='undefined')activeTheme=v913Selected;
+  v913Status('✅ Applied to Theme Manager fields. Publish assets to sync website + overlay.');
+}
+function v913ExportAssetMap(){v913ReadForm(); v913Status(JSON.stringify(v913Assets,null,2));}
+async function v913PublishAssets(){
+  try{
+    const payload=v913ReadForm();
+    const r=await api('/api/asset-manager',{method:'POST',body:JSON.stringify(payload)});
+    if(typeof loadAll==='function') await loadAll();
+    v913Assets=r.assets||payload; v913FillForm();
+    v913Status('✅ V913 assets published. Theme paths are now centralized for website + overlay.');
+  }catch(e){v913Status('❌ V913 publish failed: '+e.message);}
+}
+const V913_originalLoadAll=loadAll;loadAll=async function(){await V913_originalLoadAll();setTimeout(()=>{if(document.getElementById('v913AssetManager')&&!v913Assets)v913LoadAssets();},500);};
+setTimeout(()=>{if(document.getElementById('v913AssetManager'))v913LoadAssets();},2200);

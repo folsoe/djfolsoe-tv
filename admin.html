@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V912 Content Studio</title>
+  <title>DJ FOLSOE V913 Asset & Theme Upload Manager</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V912</span>
-    <h1>Daily Control Room · Content Studio</h1>
-    <p>Daily control room plus Content Studio for folsoetv.dk, news, Top 20, goals, ticker and overlay messages.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V913</span>
+    <h1>Daily Control Room · Content Studio · Asset Manager</h1>
+    <p>Daily control room plus Content Studio and Asset Manager for website theme images, overlay backgrounds and Music TV visuals.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -30,6 +30,7 @@
 <nav class="adminTabs">
   <button onclick="jump('v911DailyControl')">🎛️ Daily Control</button>
   <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
+  <button onclick="jump('v913AssetManager')">🗂️ Assets</button>
   <button onclick="jump('oneclick')">🚀 One click</button>
   <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
@@ -169,6 +170,66 @@
       <button onclick="v912LoadDraft()">Load Draft</button>
     </div>
     <pre id="v912Status">V912 Content Studio ready.</pre>
+  </section>
+
+
+  <section id="v913AssetManager" class="panel v913AssetManager">
+    <div class="panelHead">
+      <h2>🗂️ V913 · Asset & Theme Upload Manager</h2>
+      <div>
+        <button onclick="v913LoadAssets()">Load assets</button>
+        <button class="bigPublish" onclick="v913PublishAssets()">APPLY ASSETS + PUBLISH</button>
+      </div>
+    </div>
+    <p class="note">Control all theme image paths from one place. Upload the actual images to GitHub in <code>/themes</code>, then set paths here and publish once. Website and overlay will read the same active theme data. Browser upload to GitHub still requires GitHub API/token, so this version manages the references safely.</p>
+
+    <div class="v913AssetStatus">
+      <div><span>Active theme</span><b id="v913ActiveTheme">Loading</b></div>
+      <div><span>Selected asset</span><b id="v913SelectedTheme">None</b></div>
+      <div><span>Asset check</span><b id="v913AssetCheck">Waiting</b></div>
+      <div><span>Last publish</span><b id="v913LastPublish">Not published</b></div>
+    </div>
+
+    <div class="v913AssetTools">
+      <div>
+        <label>Select theme</label>
+        <select id="v913ThemeSelect" onchange="v913SelectTheme(this.value)"></select>
+      </div>
+      <div>
+        <label>Theme title</label>
+        <input id="v913ThemeTitle" placeholder="WEEKEND VIBES">
+      </div>
+      <div>
+        <label>Background path</label>
+        <input id="v913Background" placeholder="themes/weekend.png">
+      </div>
+      <div>
+        <label>Website hero image</label>
+        <input id="v913HeroImage" placeholder="themes/weekend-hero.png">
+      </div>
+      <div>
+        <label>Overlay background</label>
+        <input id="v913OverlayBackground" placeholder="themes/weekend.png">
+      </div>
+      <div>
+        <label>Logo / channel bug</label>
+        <input id="v913Logo" placeholder="assets/img/dj-folsoe-logo.png">
+      </div>
+      <div class="wide">
+        <label>Asset note</label>
+        <textarea id="v913AssetNote" rows="3" placeholder="Write what this theme is used for."></textarea>
+      </div>
+    </div>
+
+    <div class="v913QuickButtons">
+      <button onclick="v913UseStandardPaths()">Use standard /themes paths</button>
+      <button onclick="v913CheckAssets()">Check missing paths</button>
+      <button onclick="v913ApplyToThemeManager()">Apply to Theme Manager</button>
+      <button onclick="v913ExportAssetMap()">Preview asset map</button>
+    </div>
+
+    <div id="v913ThemeCards" class="v913ThemeCards"></div>
+    <pre id="v913Status">V913 ready. Load assets to begin.</pre>
   </section>
 
   <section id="oneclick" class="panel oneClickPanel">
