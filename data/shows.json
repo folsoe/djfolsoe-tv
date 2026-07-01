@@ -1,0 +1,61 @@
+{
+  "version": "V906",
+  "items": [
+    {
+      "key": "morning",
+      "title": "GOOD MORNING TWITCH",
+      "theme": "morning",
+      "time": "Morning",
+      "description": "Coffee, fresh music and a bright start from Denmark."
+    },
+    {
+      "key": "trance",
+      "title": "TRANCE TUESDAY",
+      "theme": "trance",
+      "time": "Tuesday",
+      "description": "Uplifting trance, emotional melodies and blue laser energy."
+    },
+    {
+      "key": "eurodance",
+      "title": "EURODANCE",
+      "theme": "eurodance",
+      "time": "Special show",
+      "description": "90s and 00s dance energy."
+    },
+    {
+      "key": "fredagsbar",
+      "title": "FREDAGSBAR",
+      "theme": "fredagsbar",
+      "time": "Friday",
+      "description": "Weekend starts here."
+    },
+    {
+      "key": "retro",
+      "title": "RETRO HITS",
+      "theme": "retro",
+      "time": "Sunday",
+      "description": "Classics that refuse to retire."
+    },
+    {
+      "key": "chart",
+      "title": "FOLSOE TOP 20",
+      "theme": "chart",
+      "time": "Weekly",
+      "description": "Weekly countdown and hit radar."
+    },
+    {
+      "key": "popup",
+      "title": "POP UP LIVE",
+      "theme": "popup",
+      "time": "Surprise",
+      "description": "The surprise stream."
+    },
+    {
+      "key": "weekend",
+      "title": "WEEKEND VIBES",
+      "theme": "weekend",
+      "time": "Weekend",
+      "description": "Maximum music and community."
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V905 Central Data Engine</title>
+  <title>DJ FOLSOE V906 One Click Show Control</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,8 +16,8 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V905</span>
-    <h1>Central Data Engine · One Button Control</h1>
+    <span class="kicker">DJ FOLSOE NETWORK V906</span>
+    <h1>One Click Show Control · Admin Broadcast Hub</h1>
     <p>One central admin hub: choose a show, edit once, and publish to website + overlay together.</p>
   </div>
   <div class="loginCard">
@@ -29,6 +29,7 @@
 
 <nav class="adminTabs">
   <button onclick="jump('oneclick')">🚀 One click</button>
+  <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
   <button onclick="jump('theme')">🎨 Themes</button>
   <button onclick="jump('homepage')">🏠 Website</button>
@@ -69,6 +70,41 @@
     <pre id="oneClickStatus">Choose a show preset, then publish.</pre>
   </section>
 
+
+
+
+  <section id="showControl" class="panel v906ShowControl">
+    <div class="panelHead"><h2>🎬 V906 · One Click Show Control</h2><div><button onclick="v906RenderShowControl()">Refresh</button><button class="bigPublish" onclick="v906ActivateSelectedShow(true)">ACTIVATE + PUBLISH</button></div></div>
+    <p class="note">Choose the live show once. V906 fills theme, website hero, overlay boxes, tickers and broadcast status in one click. Box 4 stays locked to Twitch chat.</p>
+    <div id="v906ShowButtons" class="v906ShowButtons"></div>
+    <div class="v906ControlRoom">
+      <div class="v906OnAirCard">
+        <span>Selected broadcast</span>
+        <h3 id="v906SelectedTitle">No show selected</h3>
+        <p id="v906SelectedDesc">Select a show preset.</p>
+        <div id="v906SelectedMeta" class="v906SelectedMeta"></div>
+      </div>
+      <div class="v906QuickActions">
+        <button onclick="v906QuickAction('live')">GO LIVE</button>
+        <button onclick="v906QuickAction('break')">BREAK</button>
+        <button onclick="v906QuickAction('afterparty')">AFTER PARTY</button>
+        <button onclick="v906QuickAction('ending')">ENDING SOON</button>
+        <button onclick="v906QuickAction('offline')">GO OFFLINE</button>
+      </div>
+    </div>
+    <div class="formGrid">
+      <div><label>Broadcast state</label><input id="v906BroadcastState" value="LIVE"></div>
+      <div><label>Selected theme</label><input id="v906Theme" value="weekend"></div>
+      <div class="wide"><label>Twitch title template</label><input id="v906TwitchTitle" placeholder="DJ FOLSOE LIVE · Music TV from Denmark"></div>
+      <div class="wide"><label>Social announcement</label><textarea id="v906SocialText" rows="3" placeholder="Now live on Twitch..."></textarea></div>
+    </div>
+    <div class="quickActions">
+      <button onclick="v906ActivateSelectedShow(false)">Apply selected show locally</button>
+      <button onclick="v906ActivateSelectedShow(true)">Apply + publish now</button>
+      <button onclick="publishEverything()">Publish Everything</button>
+    </div>
+    <pre id="v906Status">V906 ready. Select a show.</pre>
+  </section>
 
   <section id="centralEngine" class="panel centralEnginePanel">
     <div class="panelHead"><h2>🧠 Central Data Engine</h2><div><button onclick="loadCentralEngine()">Load engine</button><button onclick="publishEverything()">Publish all modules</button></div></div>

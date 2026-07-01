@@ -1,0 +1,9 @@
+{
+  "version": "V906",
+  "activeShow": "weekend",
+  "broadcastState": "LIVE",
+  "locked": {
+    "box4": "twitch-chat",
+    "overlayGraphics": "unchanged"
+  }
+}

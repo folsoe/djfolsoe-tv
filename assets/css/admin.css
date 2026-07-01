@@ -67,3 +67,24 @@ code{color:#2dd4ef}
 .liveNowGrid{margin-top:14px}.quickActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.advancedPanel{display:none}.advancedPanel.showAdvanced{display:block}
 .adminTabs{top:48px}.oneClickActive{outline:4px solid #ffd166!important;box-shadow:0 0 30px rgba(255,209,102,.35)!important}
 @media(max-width:900px){.adminTabs{top:0}.bigPublish{width:100%}}
+
+
+/* V905 Central Data Engine */
+.centralEnginePanel{border:1px solid rgba(34,231,255,.28);box-shadow:0 0 38px rgba(34,231,255,.08)}
+.engineGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.engineCard{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);border-radius:18px;padding:14px;min-height:120px}
+.engineCard b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#22e7ff;margin-bottom:10px}
+.engineCard span{display:block;font-size:20px;font-weight:950;color:#fff;margin-bottom:8px}
+.engineCard small{display:block;color:rgba(255,255,255,.7);line-height:1.35}
+#centralEngineOutput{white-space:pre-wrap;max-height:360px;overflow:auto}
+@media(max-width:900px){.engineGrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.engineGrid{grid-template-columns:1fr}}
+
+
+/* ===== V906 ONE CLICK SHOW CONTROL ===== */
+.v906ShowControl{border-color:rgba(34,231,255,.34);box-shadow:0 0 36px rgba(34,231,255,.12)}
+.v906ShowButtons{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0}
+.v906ShowButtons button{min-height:74px;text-align:left;display:flex;flex-direction:column;gap:6px;justify-content:center;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.03));color:#fff;padding:14px;cursor:pointer}
+.v906ShowButtons button b{font-size:14px;letter-spacing:.06em}.v906ShowButtons button span{font-size:12px;color:rgba(255,255,255,.68);text-transform:uppercase}
+.v906ControlRoom{display:grid;grid-template-columns:1.4fr .9fr;gap:14px;margin:14px 0}.v906OnAirCard{border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:18px;background:radial-gradient(circle at top left,rgba(34,231,255,.18),rgba(255,53,216,.08),rgba(255,255,255,.03))}.v906OnAirCard span{font-size:11px;letter-spacing:.18em;color:#22e7ff;text-transform:uppercase}.v906OnAirCard h3{margin:8px 0 4px;font-size:28px}.v906SelectedMeta{margin-top:10px;color:rgba(255,255,255,.72)}.v906QuickActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.v906QuickActions button{border-radius:16px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);color:#fff;font-weight:900;padding:14px;cursor:pointer}.v906QuickActions button:first-child{background:linear-gradient(135deg,#22e7ff,#ff35d8);color:#050713}
+@media(max-width:800px){.v906ControlRoom{grid-template-columns:1fr}.v906QuickActions{grid-template-columns:1fr}}

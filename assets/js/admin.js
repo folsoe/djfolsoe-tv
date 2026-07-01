@@ -18,6 +18,8 @@ function DJF_value(id, value){
   if(!el){ console.warn("[DJF admin] Missing value element:", id); return; }
   el.value = value || "";
 }
+const DJF_val = DJF_value;
+
 function DJF_get(id){
   const el = DJF_el(id);
   return el ? el.value : "";
@@ -824,4 +826,136 @@ loadAll = async function(){
   DJF_val('quickHeadline', firstNews.title||'Live Music TV from Denmark');
   DJF_val('quickMessage', firstNews.body||'Website and overlay controlled from this admin hub.');
   setQuickStatus('Current data loaded. Active theme: '+(activeTheme||'weekend'));
+};
+
+
+/* ===== V905 CENTRAL DATA ENGINE ===== */
+async function loadCentralEngine(){
+  try{
+    const hub = await api('/api/broadcast-hub');
+    const c = hub.core || {};
+    const websiteCount = (c.homepageNews||[]).length + (c.shows||[]).length + (c.top20||[]).length + (c.discoveryPicks||[]).length;
+    const overlayCount = ((c.overlayContent?.box1||[]).length)+((c.overlayContent?.box2||[]).length)+((c.overlayContent?.box3||[]).length);
+    DJF_text('engineWebsite', websiteCount + ' items');
+    DJF_text('engineOverlay', overlayCount + ' box items');
+    DJF_text('engineTheme', c.activeTheme || activeTheme || 'weekend');
+    DJF_text('engineStatus', hub.ok ? 'Online' : 'Check');
+    DJF_text('centralEngineOutput', JSON.stringify({
+      version: hub.version,
+      sourceOfTruth: hub.sourceOfTruth,
+      activeTheme: c.activeTheme,
+      language: c.language,
+      twitchChannel: c.twitchChannel,
+      websiteModules: hub.modules?.website,
+      overlayModules: hub.modules?.overlay,
+      locked: hub.locked
+    }, null, 2));
+    setStatus('✅ Central Data Engine loaded. Website + overlay use the same Broadcast Cloud state.');
+  }catch(e){
+    DJF_text('engineStatus','Error');
+    DJF_text('centralEngineOutput','Central engine error: '+e.message);
+    setStatus('❌ Central engine error: '+e.message);
+  }
+}
+
+const V905_originalPublishEverything = publishEverything;
+publishEverything = async function(){
+  await V905_originalPublishEverything();
+  loadCentralEngine().catch(()=>{});
+};
+
+const V905_originalLoadAll = loadAll;
+loadAll = async function(){
+  await V905_originalLoadAll();
+  loadCentralEngine().catch(()=>{});
+};
+
+
+/* ===== V906 ONE CLICK SHOW CONTROL ===== */
+const V906_SHOWS={
+  morning:{theme:'morning',state:'LIVE',title:'GOOD MORNING TWITCH',desc:'Coffee, fresh music and a bright start from Denmark.',next:'Morning music flow · chat and requests',goal:'870/1000 followers',request:'Requests open · !request',ticker:'☀️ GOOD MORNING TWITCH · Coffee · music · positive energy',social:'DJ FOLSOE is live with Good Morning Twitch — coffee, music and good vibes from Denmark.',twitch:'GOOD MORNING TWITCH ☀️ Live DJ Set · Requests · Denmark'},
+  trance:{theme:'trance',state:'LIVE',title:'TRANCE TUESDAY',desc:'Uplifting trance, emotional melodies and blue laser energy.',next:'Uplifting trance journey',goal:'870/1000 followers',request:'Trance requests welcome',ticker:'💙 TRANCE TUESDAY · Uplifting energy · goosebumps may occur',social:'Trance Tuesday is live on DJ FOLSOE TV — uplifting trance and big melodies.',twitch:'TRANCE TUESDAY 💙 Uplifting Trance · Live from Denmark'},
+  eurodance:{theme:'eurodance',state:'LIVE',title:'EURODANCE',desc:'90s and 00s dance energy with big hooks and maximum nostalgia.',next:'Eurodance anthems and requests',goal:'870/1000 followers',request:'Eurodance requests welcome',ticker:'💛 EURODANCE · 90s/00s anthems · big beats · big hooks',social:'Eurodance is live on DJ FOLSOE TV — 90s and 00s energy all the way.',twitch:'EURODANCE 💛 90s/00s Dance Anthems · Live DJ Set'},
+  fredagsbar:{theme:'fredagsbar',state:'LIVE',title:'FREDAGSBAR',desc:'The weekend starts here with party tracks and community love.',next:'Weekend party mode',goal:'870/1000 followers',request:'Party requests open',ticker:'🍺 FREDAGSBAR · Weekend starts here · party tracks and chat energy',social:'Fredagsbar is open on DJ FOLSOE TV — weekend energy and party tracks.',twitch:'FREDAGSBAR 🍺 Weekend Party · Requests · DJ FOLSOE'},
+  retro:{theme:'retro',state:'LIVE',title:'RETRO HITS',desc:'Classics that refuse to retire — nostalgia, memories and singalong moments.',next:'Retro classics and forgotten gems',goal:'870/1000 followers',request:'Retro requests welcome',ticker:'🕹️ RETRO HITS · Classics that refuse to retire',social:'Retro Hits is live — classic tracks, memories and big singalong energy.',twitch:'RETRO HITS 🕹️ Classics · Requests · Live from Denmark'},
+  chart:{theme:'chart',state:'LIVE',title:'FOLSOE TOP 20',desc:'Weekly countdown, hit radar, new entries and community favourites.',next:'Top 20 countdown',goal:'870/1000 followers',request:'Vote and request your favourites',ticker:'🏆 FOLSOE TOP 20 · Countdown · new entries · hit radar',social:'FOLSOE Top 20 is live — this week’s countdown and hit radar.',twitch:'FOLSOE TOP 20 🏆 Weekly Chart Countdown'},
+  popup:{theme:'popup',state:'LIVE',title:'POP UP LIVE',desc:'The surprise stream that appears when you least expect it.',next:'Surprise music flow',goal:'870/1000 followers',request:'Requests open · surprise me',ticker:'⚡ POP UP LIVE · Surprise stream activated',social:'Pop Up Live is on — DJ FOLSOE is suddenly live from Denmark.',twitch:'POP UP LIVE ⚡ Surprise DJ Stream · Denmark'},
+  weekend:{theme:'weekend',state:'LIVE',title:'WEEKEND VIBES',desc:'Maximum music TV feeling with chat, requests and live DJ power.',next:'Weekend music and community',goal:'870/1000 followers',request:'Weekend bangers welcome',ticker:'🎉 WEEKEND VIBES · Maximum music and community energy',social:'Weekend Vibes is live on DJ FOLSOE TV — music, chat and community.',twitch:'WEEKEND VIBES 🎉 Live DJ Set · Requests · Denmark'}
+};
+let v906SelectedShow='weekend';
+
+function v906Status(msg){ DJF_text('v906Status', msg); }
+function v906RenderShowControl(){
+  const wrap=document.getElementById('v906ShowButtons');
+  if(wrap){
+    wrap.innerHTML=Object.entries(V906_SHOWS).map(([key,p])=>`<button class="${key===v906SelectedShow?'activeThemeBtn':''}" onclick="v906SelectShow('${key}')"><b>${p.title}</b><span>${p.theme}</span></button>`).join('');
+  }
+  v906SelectShow(v906SelectedShow, true);
+}
+function v906SelectShow(key, silent){
+  const p=V906_SHOWS[key]||V906_SHOWS.weekend;
+  v906SelectedShow=key;
+  DJF_text('v906SelectedTitle', p.title);
+  DJF_text('v906SelectedDesc', p.desc);
+  DJF_text('v906SelectedMeta', `Theme: ${p.theme} · State: ${p.state} · Next: ${p.next}`);
+  DJF_value('v906BroadcastState', p.state);
+  DJF_value('v906Theme', p.theme);
+  DJF_value('v906TwitchTitle', p.twitch);
+  DJF_value('v906SocialText', p.social);
+  document.querySelectorAll('#v906ShowButtons button').forEach(btn=>btn.classList.toggle('activeThemeBtn', btn.textContent.toLowerCase().includes(p.title.toLowerCase())));
+  if(!silent) v906Status('Selected '+p.title+'. Press Apply + publish now.');
+}
+function v906ApplyPresetToData(p){
+  activeTheme=p.theme;
+  markTheme(p.theme);
+  DJF_value('quickOnAir',p.title);
+  DJF_value('quickNextShow',p.next);
+  DJF_value('quickFollowerGoal',p.goal);
+  DJF_value('quickRequestLine',p.request);
+  DJF_value('quickHeadline',p.title+' is on air');
+  DJF_value('quickMessage',p.desc);
+  newsItems = newsItems && newsItems.length ? newsItems : [];
+  newsItems[0]={id:'v906-live-now',active:true,type:'Live now',title:p.title+' is live',body:p.desc,theme:'all',priority:1};
+  newsItems[1]={id:'v906-social',active:true,type:'Announcement',title:'Broadcast announcement',body:DJF_get('v906SocialText')||p.social,theme:'all',priority:2};
+  topItems = topItems && topItems.length ? topItems : [];
+  topItems[0]={id:'v906-top-active-show',active:true,theme:p.theme,text:p.ticker,priority:1};
+  bottomItems = bottomItems && bottomItems.length ? bottomItems : [];
+  bottomItems[0]={id:'v906-bottom-active-show',active:true,theme:'all',text:`${p.title} · ${p.goal} · ${p.request} · FOLSOETV.DK`,priority:1};
+  overlayContent = overlayContent || JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));
+  overlayContent.box1=[{active:true,label:'BROADCAST STATUS',headline:DJF_get('v906BroadcastState')||p.state,body:p.title,icon:'📡',priority:1},{active:true,label:'FOLLOW JOURNEY',headline:p.goal,body:'Help the channel grow',icon:'❤️',priority:2}];
+  overlayContent.box2=[{active:true,label:'ON AIR',headline:p.title,body:p.next,icon:'📺',priority:1},{active:true,label:'THEME',headline:p.theme.toUpperCase(),body:p.desc,icon:'🎨',priority:2}];
+  overlayContent.box3=[{active:true,label:'REQUESTS',headline:p.request,body:'Chat controls the music',icon:'🎧',priority:1},{active:true,label:'NEXT',headline:p.next,body:'Stay with the broadcast',icon:'⏭️',priority:2}];
+  overlayContent.box4={locked:'twitch-chat'};
+  renderEditors();
+  renderOverlayContent();
+}
+async function v906ActivateSelectedShow(doPublish){
+  const p=V906_SHOWS[v906SelectedShow]||V906_SHOWS.weekend;
+  v906ApplyPresetToData(p);
+  v906Status('Applied '+p.title+' locally. '+(doPublish?'Publishing now...':'Ready to publish.'));
+  setStatus('✅ V906 applied '+p.title+' to website + overlay fields.');
+  if(doPublish){
+    await publishEverything();
+    v906Status('✅ '+p.title+' activated and published to the central data engine.');
+  }
+}
+function v906QuickAction(mode){
+  const map={
+    live:{state:'LIVE',label:'NOW LIVE',suffix:'We are live now'},
+    break:{state:'BREAK',label:'SHORT BREAK',suffix:'Back in a few minutes'},
+    afterparty:{state:'AFTER PARTY',label:'AFTER PARTY',suffix:'Extra tracks and community vibes'},
+    ending:{state:'ENDING SOON',label:'ENDING SOON',suffix:'Thanks for watching'},
+    offline:{state:'OFFLINE',label:'OFFLINE',suffix:'Next show coming soon'}
+  };
+  const a=map[mode]||map.live;
+  DJF_value('v906BroadcastState', a.state);
+  const p=Object.assign({}, V906_SHOWS[v906SelectedShow]||V906_SHOWS.weekend, {state:a.state, next:a.suffix});
+  v906ApplyPresetToData(p);
+  v906Status('Quick action applied: '+a.label+'. Publish when ready.');
+}
+
+const V906_originalLoadAll = loadAll;
+loadAll = async function(){
+  await V906_originalLoadAll();
+  v906RenderShowControl();
 };
