@@ -199,7 +199,7 @@ function forceThemeBackground(key){
 
 const API_BASE=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
 const DEFAULT_CHANNEL="djfolsoe";
-const OVERLAY_VERSION="V922.3 NO CONSOLE SELF TEST";
+const OVERLAY_VERSION="V922.4 WORKER ONLY BROADCAST CORE";
 let overlayDebug={version:OVERLAY_VERSION,api:API_BASE,lastFetch:null,lastTheme:null,lastError:null,source:null};
 function renderOverlayDebug(){
   try{
@@ -541,12 +541,18 @@ function normalize(j){
 }
 
 function apiCandidates(){
+  // V922.4: Worker-only data source.
+  // Do NOT use static GitHub JSON files like /api/broadcast-core.json,
+  // because they contain static-default/weekend and reset the overlay.
   const bases=[];
   if(API_BASE) bases.push(API_BASE);
   bases.push("https://djfolsoe-tv-api.sunefolsoe.workers.dev");
-  bases.push("https://folsoetv.dk");
   const seen={};
-  return bases.filter(Boolean).map(b=>String(b).replace(/\/$/,"")).filter(b=>!seen[b]&&(seen[b]=1)).flatMap(b=>[b+"/api/broadcast", b+"/assets/data/broadcast-core.json", b+"/api/broadcast-core.json"]);
+  return bases
+    .filter(Boolean)
+    .map(b=>String(b).replace(/\/$/,""))
+    .filter(b=>!seen[b]&&(seen[b]=1))
+    .map(b=>b+"/api/broadcast");
 }
 
 async function fetchFirstCore(){
@@ -583,11 +589,11 @@ async function loadState(){
     overlayDebug.lastTheme=nextTheme;
     overlayDebug.lastError=null;
     overlayDebug.source=result.url;
-    console.log("V922.3 overlay core applied", nextTheme, state?.show?.title, payload);
+    console.log("V922.4 overlay core applied", nextTheme, state?.show?.title, payload);
   }catch(e){
     overlayDebug.lastError=String(e&&e.message?e.message:e);
     overlayDebug.source="API FAILED - keeping current visible state";
-    console.warn("V922.3 broadcast-core fetch failed; keeping current overlay state", e);
+    console.warn("V922.4 broadcast-core fetch failed; keeping current overlay state", e);
     state=state||loadingState();
   }
   applyTheme();
