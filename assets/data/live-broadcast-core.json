@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "version": "V923 Static Proxy Fallback",
+  "schema": "broadcast-core/v2-clean",
+  "source": "static-proxy-fallback",
+  "updatedAt": "2026-07-01T19:30:00.000Z",
+  "theme": { "id": "weekend", "title": "Weekend", "background": "themes/weekend.png" },
+  "show": { "current": "DJ FOLSOE", "title": "DJ FOLSOE", "mode": "OFFLINE", "state": "OFFLINE" },
+  "nextShow": { "title": "Next DJ FOLSOE Broadcast", "show": "Next DJ FOLSOE Broadcast", "datetime": "", "dateTime": "", "timeLabel": "Announced soon", "theme": "Music TV", "description": "The next show is controlled from admin and appears here automatically.", "active": true },
+  "hero": { "eyebrow": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK", "title": "DJ FOLSOE", "subtitle": "Dive into my Twitch world", "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark." },
+  "community": { "followers": 869, "followerGoal": 1000, "subs": 0, "subGoal": 100, "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.", "requestText": "Use !request Artist - Title in Twitch chat", "specialEvent": "" },
+  "ticker": { "text": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY", "items": ["DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY"] },
+  "overlay": { "title": "DJ FOLSOE", "status": "OFFLINE", "infoLine": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY", "requestText": "Use !request Artist - Title in Twitch chat", "specialEvent": "", "subGoal": 100 }
+}

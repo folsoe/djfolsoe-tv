@@ -199,7 +199,7 @@ function forceThemeBackground(key){
 
 const API_BASE=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
 const DEFAULT_CHANNEL="djfolsoe";
-const OVERLAY_VERSION="V922.4 WORKER ONLY BROADCAST CORE";
+const OVERLAY_VERSION="V923 STREAM ELEMENTS JSONP BRIDGE";
 let overlayDebug={version:OVERLAY_VERSION,api:API_BASE,lastFetch:null,lastTheme:null,lastError:null,source:null};
 function renderOverlayDebug(){
   try{
@@ -541,7 +541,7 @@ function normalize(j){
 }
 
 function apiCandidates(){
-  // V922.4: Worker-only data source.
+  // V923: Worker JSONP bridge for StreamElements. Fetch is blocked in some SE browser sources.
   // Do NOT use static GitHub JSON files like /api/broadcast-core.json,
   // because they contain static-default/weekend and reset the overlay.
   const bases=[];
@@ -555,27 +555,50 @@ function apiCandidates(){
     .map(b=>b+"/api/broadcast");
 }
 
+function jsonpLoad(url, timeoutMs=9000){
+  return new Promise((resolve,reject)=>{
+    const cb="djfBroadcastCoreJsonp_"+Date.now()+"_"+Math.floor(Math.random()*99999);
+    const sep=url.includes("?")?"&":"?";
+    const src=url.replace(/\/api\/broadcast(?:\?.*)?$/, "/api/broadcast-jsonp") + sep + "callback=" + encodeURIComponent(cb) + "&ts=" + Date.now();
+    let done=false;
+    const timer=setTimeout(()=>{
+      if(done) return; done=true; cleanup(); reject(new Error("JSONP timeout"));
+    }, timeoutMs);
+    function cleanup(){
+      clearTimeout(timer);
+      try{ delete window[cb]; }catch(e){ window[cb]=undefined; }
+      const el=document.getElementById(cb); if(el&&el.parentNode) el.parentNode.removeChild(el);
+    }
+    window[cb]=function(payload){
+      if(done) return; done=true; cleanup(); resolve(payload);
+    };
+    const script=document.createElement("script");
+    script.id=cb;
+    script.async=true;
+    script.src=src;
+    script.onerror=function(){ if(done) return; done=true; cleanup(); reject(new Error("JSONP script failed")); };
+    document.head.appendChild(script);
+  });
+}
+
 async function fetchFirstCore(){
   const urls=apiCandidates();
   let lastErr="";
   for(const baseUrl of urls){
-    const url=baseUrl+(baseUrl.includes("?")?"&":"?")+"ts="+Date.now();
     try{
-      overlayDebug.source=url.replace(/\?ts=.*/,"");
+      overlayDebug.source=baseUrl.replace(/\?.*/,"")+" via JSONP";
       renderOverlayDebug();
-      const r=await fetch(url,{cache:"no-store",mode:"cors",headers:{"cache-control":"no-cache","pragma":"no-cache","accept":"application/json"}});
-      if(!r.ok) throw new Error("HTTP "+r.status);
-      const payload=await r.json();
+      const payload=await jsonpLoad(baseUrl);
       const core=pickCorePayload(payload);
-      if(!core || typeof core !== "object") throw new Error("No core JSON");
-      return {payload,url:baseUrl};
+      if(!core || typeof core !== "object") throw new Error("No core JSONP payload");
+      return {payload,url:baseUrl+" via JSONP"};
     }catch(e){
       lastErr=(baseUrl+" → "+(e&&e.message?e.message:String(e))).slice(0,220);
       overlayDebug.lastError=lastErr;
       renderOverlayDebug();
     }
   }
-  throw new Error(lastErr || "No API candidates worked");
+  throw new Error(lastErr || "No JSONP API candidates worked");
 }
 
 async function loadState(){
@@ -589,11 +612,11 @@ async function loadState(){
     overlayDebug.lastTheme=nextTheme;
     overlayDebug.lastError=null;
     overlayDebug.source=result.url;
-    console.log("V922.4 overlay core applied", nextTheme, state?.show?.title, payload);
+    console.log("V923 overlay JSONP core applied", nextTheme, state?.show?.title, payload);
   }catch(e){
     overlayDebug.lastError=String(e&&e.message?e.message:e);
     overlayDebug.source="API FAILED - keeping current visible state";
-    console.warn("V922.4 broadcast-core fetch failed; keeping current overlay state", e);
+    console.warn("V923 broadcast-core JSONP failed; keeping current overlay state", e);
     state=state||loadingState();
   }
   applyTheme();

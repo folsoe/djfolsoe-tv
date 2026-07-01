@@ -1,8 +1,8 @@
-// DJ FOLSOE NETWORK V920 - BROADCAST CORE CLEANUP
+// DJ FOLSOE NETWORK V923 - STREAM ELEMENTS JSONP BRIDGE
 // Lightweight Cloudflare Worker. Stores one clean broadcast-core and returns compatibility aliases.
-// Endpoints: GET /api/health, GET /api/broadcast, POST /api/publish, GET /api/twitch
+// Endpoints: GET /api/health, GET /api/broadcast, GET /api/broadcast-jsonp, POST /api/publish, GET /api/twitch
 
-const VERSION = 'V920 Broadcast Core Cleanup';
+const VERSION = 'V923 StreamElements JSONP Bridge';
 const SCHEMA = 'broadcast-core/v2-clean';
 const KEY = 'broadcast-core';
 const CORS_HEADERS = {
@@ -20,6 +20,17 @@ function json(data, status = 200) {
     status,
     headers: { ...CORS_HEADERS, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }
   });
+}
+
+function js(data, status = 200) {
+  return new Response(data, {
+    status,
+    headers: { ...CORS_HEADERS, 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-store' }
+  });
+}
+function safeCallbackName(v) {
+  const name = String(v || 'djfBroadcastCoreCallback').replace(/[^a-zA-Z0-9_$\.]/g, '');
+  return name || 'djfBroadcastCoreCallback';
 }
 function cleanPath(pathname) { return pathname.replace(/\/+$/, '') || '/'; }
 function authOk(request, env) {
@@ -164,7 +175,7 @@ function compatibility(core) {
       controlPanel: { title: core.overlay.title || core.show.current, status: core.overlay.status || core.show.state, theme: core.theme.id, viewers: core.show.viewers || 0, followers, subs, subGoal: core.community.subGoal, nextShow: core.nextShow, infoLine: core.overlay.infoLine || tickerText, requestText: core.overlay.requestText, specialEvent: core.overlay.specialEvent },
       updatedAt: core.updatedAt
     },
-    bottomTickerItems: [{ id:'v920-main-ticker', active:true, theme:'all', text:tickerText, priority:1 }]
+    bottomTickerItems: [{ id:'v921-main-ticker', active:true, theme:'all', text:tickerText, priority:1 }]
   };
 }
 async function kvGet(env) {
@@ -203,15 +214,20 @@ async function handle(request, env) {
   const url = new URL(request.url);
   const path = cleanPath(url.pathname);
   if (path === '/api/health' || path === '/api/health-check') {
-    return json({ ok:true, version:VERSION, schema:SCHEMA, worker:'djfolsoe-tv-api', endpoints:['/api/health','/api/broadcast','/api/publish','/api/twitch'], hasKV:!!env.BROADCAST_CORE, memoryUpdatedAt:MEMORY_UPDATED_AT, checkedAt:new Date().toISOString() });
+    return json({ ok:true, version:VERSION, schema:SCHEMA, worker:'djfolsoe-tv-api', endpoints:['/api/health','/api/broadcast','/api/broadcast-jsonp','/api/publish','/api/twitch'], hasKV:!!env.BROADCAST_CORE, memoryUpdatedAt:MEMORY_UPDATED_AT, checkedAt:new Date().toISOString() });
   }
   if (path === '/api/twitch' || path === '/api/twitch-profile') return json(await getTwitch(env));
-  if (path === '/api/broadcast' || path === '/api/unified-control' || path === '/api/website-portal') {
+  if (path === '/api/broadcast' || path === '/api/unified-control' || path === '/api/website-portal' || path === '/api/broadcast-jsonp') {
     const stored = await getStoredCore(env);
     const twitch = url.searchParams.get('twitch') === '0' ? null : await getTwitch(env);
     const core = normalizeCore(stored, twitch, env);
     const compat = compatibility(core);
-    return json({ ok:true, version:VERSION, schema:SCHEMA, storage: MEMORY_CORE ? 'memory' : (env.BROADCAST_CORE ? 'kv-or-default' : 'memory-default'), core, data: core, twitch: core.twitch, ...compat, overlay: compat.overlayHub, updatedAt: core.updatedAt });
+    const payload = { ok:true, version:VERSION, schema:SCHEMA, storage: MEMORY_CORE ? 'memory' : (env.BROADCAST_CORE ? 'kv-or-default' : 'memory-default'), core, data: core, twitch: core.twitch, ...compat, overlay: compat.overlayHub, updatedAt: core.updatedAt };
+    if (path === '/api/broadcast-jsonp') {
+      const cb = safeCallbackName(url.searchParams.get('callback'));
+      return js(`${cb}(${JSON.stringify(payload)});`);
+    }
+    return json(payload);
   }
   if (path === '/api/publish' && request.method === 'POST') {
     if (!authOk(request, env)) return json({ ok:false, error:'Unauthorized' }, 401);
