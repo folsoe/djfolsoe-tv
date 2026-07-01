@@ -1,4 +1,4 @@
-/* DJ FOLSOE NETWORK V918.9 · BROADCAST CORE ENGINE */
+/* DJ FOLSOE NETWORK V919 · BROADCAST CORE SYNC */
 const DEFAULT_API_BASE = 'https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const TWITCH_URL = 'https://www.twitch.tv/djfolsoe';
 const WEBSITE_URL = 'https://folsoetv.dk';
@@ -61,9 +61,9 @@ function buildPayload(){
       {kicker:'LIVE CHAT',title:'Twitch chat',text:'Chat and community are shown in the live overlay.'}
     ]
   };
-  const broadcast = {version:'V918.9 Broadcast Core Engine',mode,broadcastState:mode,activeShow:show,activeShowTitle:show,activeTheme:theme,live:twitchData.isLive || mode==='LIVE SHOW',viewers:Number(twitchData.viewers||0),followers,streamTitle:twitchData.liveTitle || `${show} · DJ FOLSOE Twitch music streamer from Denmark`,updatedAt:new Date().toISOString()};
+  const broadcast = {version:'V919 Broadcast Core Sync',mode,broadcastState:mode,activeShow:show,activeShowTitle:show,activeTheme:theme,live:twitchData.isLive || mode==='LIVE SHOW',viewers:Number(twitchData.viewers||0),followers,streamTitle:twitchData.liveTitle || `${show} · DJ FOLSOE Twitch music streamer from Denmark`,updatedAt:new Date().toISOString()};
   const homepage = {
-    version:'V918.9 Broadcast Core Engine',
+    version:'V919 Broadcast Core Sync',
     hero:{eyebrow:val('eyebrow','DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK'),title,subtitle,text,background:`themes/${theme}.png`},
     ticker:[ticker],nextShow,
     sectionTitles:{nextKicker:'NEXT SHOW',nextTitle:'Next DJ FOLSOE Broadcast',showsKicker:'FEATURED SHOWS',showsTitle:'Your favorite show',aboutKicker:'DISCOVER DJ FOLSOE',aboutTitle:'Music TV, Twitch and Danish DJ energy'},
@@ -78,8 +78,8 @@ function buildPayload(){
     aboutText:'DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.',
     top20:[{rank:1,artist:'DJ FOLSOE',title:"This Week's Number One",status:'ADMIN CONTROLLED'},{rank:2,artist:'Viewer Pick',title:'Request of the Week',status:'COMMUNITY'},{rank:3,artist:'Future Hit',title:'Discovery Track',status:'NEW'}]
   };
-  const overlayHub = {version:'V918.9 Broadcast Core Engine',state:mode,activeShow:show,activeTheme:theme,ticker,controlPanel:{title:show,status:mode,theme,viewers:Number(twitchData.viewers||0),followers,subs,subGoal:Number(val('subGoal',100)),nextShow,infoLine:ticker,requestText:community.requestText,specialEvent:community.specialEvent},updatedAt:new Date().toISOString()};
-  return {version:'V918.9 Broadcast Core Engine',activeTheme:theme,language:'en',homepage,website:{title:'DJ FOLSOE',description:text,primaryLanguage:'en'},broadcast,nextShow,overlayHub,community,bottomTickerItems:[{id:'v9185-main-ticker',active:true,theme:'all',text:ticker,priority:1}],updatedAt:new Date().toISOString()};
+  const overlayHub = {version:'V919 Broadcast Core Sync',state:mode,activeShow:show,activeTheme:theme,ticker,controlPanel:{title:show,status:mode,theme,viewers:Number(twitchData.viewers||0),followers,subs,subGoal:Number(val('subGoal',100)),nextShow,infoLine:ticker,requestText:community.requestText,specialEvent:community.specialEvent},updatedAt:new Date().toISOString()};
+  return {version:'V919 Broadcast Core Sync',activeTheme:theme,language:'en',homepage,website:{title:'DJ FOLSOE',description:text,primaryLanguage:'en'},broadcast,nextShow,overlayHub,community,bottomTickerItems:[{id:'v9185-main-ticker',active:true,theme:'all',text:ticker,priority:1}],updatedAt:new Date().toISOString()};
 }
 function djfPreview(){
   const p=buildPayload();
@@ -135,3 +135,39 @@ async function djfTestApi(){
 function bindAutoPreview(){ ['currentShow','theme','mode','eyebrow','heroTitle','heroSubtitle','heroText','ticker','nextShowTitle','nextShowDate','nextShowTime','nextShowTheme','nextShowDescription','followerGoal','subs','subGoal','requestText','specialMessage'].forEach(id=>$(id)?.addEventListener('input',djfPreview)); $('currentShow')?.addEventListener('change',()=>{ const m=SHOW_THEME_MAP[val('currentShow')]; if(m) setValue('theme',m); djfPreview(); }); }
 function restoreSettings(){ setValue('apiBase',apiBase()); setValue('adminToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); setValue('advancedToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); const draft=localStorage.getItem('DJF_V9189_DRAFT'); if(draft){ try{ hydrateFromCore(JSON.parse(draft)); }catch{} } const last=localStorage.getItem('DJF_V9189_LAST_PUBLISH'); if(last) set('lastPublish','Last publish: '+new Date(last).toLocaleString()); }
 document.addEventListener('DOMContentLoaded',()=>{ restoreSettings(); bindAutoPreview(); renderTwitch(); djfPreview(); setTimeout(djfRefresh,450); });
+
+async function djfVerifySync(){
+  const res = await getJson('/api/broadcast?t=' + Date.now(), null);
+  if(!res || !res.ok){ status('⚠️ Published, but verify sync could not read /api/broadcast.', 'bad'); return null; }
+  const core = res.core || res.data || res;
+  const storage = res.storage || (res.hasKV ? 'kv' : 'broadcast-core');
+  set('readyState', 'Synced');
+  set('lastPublish', core.updatedAt || res.updatedAt || new Date().toISOString());
+  return core;
+}
+async function djfLoadFromCore(){
+  status('🔄 Loading broadcast-core…');
+  const res = await getJson('/api/broadcast?t=' + Date.now(), null);
+  if(!res || !res.ok){ status('❌ Could not load broadcast-core.', 'bad'); return; }
+  const core = res.core || res.data || res;
+  const b = core.broadcast || {};
+  const h = (core.homepage && core.homepage.hero) || {};
+  const c = core.community || {};
+  const n = core.nextShow || (core.homepage && core.homepage.nextShow) || {};
+  setValue('currentShow', b.activeShow || b.activeShowTitle || 'DJ FOLSOE');
+  setValue('theme', b.activeTheme || core.activeTheme || 'weekend');
+  setValue('mode', b.mode || b.broadcastState || 'OFFLINE');
+  setValue('eyebrow', h.eyebrow);
+  setValue('heroTitle', h.title);
+  setValue('heroSubtitle', h.subtitle);
+  setValue('heroText', h.text);
+  setValue('ticker', ((core.homepage&&core.homepage.ticker)||[]).join('  •  '));
+  setValue('nextShowTitle', n.title || n.show);
+  setValue('nextShowTheme', n.theme);
+  setValue('nextShowDescription', n.description);
+  setValue('subGoal', c.subGoal);
+  setValue('followerGoal', c.followerGoal);
+  setValue('requestText', c.requestText);
+  djfPreview();
+  status('✅ Broadcast-core loaded into admin.');
+}

@@ -1,9 +1,10 @@
-// DJ FOLSOE NETWORK V918.9 · BROADCAST CORE ENGINE
+// DJ FOLSOE NETWORK V919 · BROADCAST CORE SYNC
 const $ = (id) => document.getElementById(id);
 const API_BASE = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
 let portal = {};
 let nextDate = null;
 let twitchTimer = null;
+let lastCoreStamp = '';
 
 async function readJson(url, fallback){
   try{ const r = await fetch(url, {cache:'no-store'}); if(r.ok) return await r.json(); }catch(e){}
@@ -30,11 +31,11 @@ async function loadPortal(){
 }
 async function refreshTwitchAndCore(){
   const core = await readJson(API_BASE + '/api/broadcast?t=' + Date.now(), null);
-  if(core){ portal = deepMerge(portal, core.core || core.data || core); normalizeCore(); renderPortal(); }
+  if(core){ const nextCore = core.core || core.data || core; const stamp = nextCore.updatedAt || core.updatedAt || JSON.stringify(nextCore.broadcast||{}); if(stamp !== lastCoreStamp){ lastCoreStamp = stamp; portal = deepMerge(portal, nextCore); normalizeCore(); renderPortal(); } }
 }
 function startPolling(){
   if(twitchTimer) clearInterval(twitchTimer);
-  twitchTimer = setInterval(refreshTwitchAndCore, 30000);
+  twitchTimer = setInterval(refreshTwitchAndCore, 15000);
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) refreshTwitchAndCore(); });
 }
 function normalizeCore(){

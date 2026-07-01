@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "version": "V918.9 Broadcast Core Engine",
+  "version": "V919 Broadcast Core Sync",
   "schema": "broadcast-core/v1",
   "source": "static-fallback",
   "activeTheme": "weekend",
@@ -174,5 +174,5 @@
       }
     ]
   },
-  "updatedAt": "2026-07-01T00:00:00.000Z"
+  "updatedAt": "2026-07-01T19:00:00.000Z"
 }

@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V918.9 - BROADCAST CORE ENGINE
+// DJ FOLSOE NETWORK V919 - BROADCAST CORE SYNC
 // Lightweight Cloudflare Worker: one master broadcast-core for admin, website and overlay.
 // Endpoints:
 // GET  /api/health
@@ -6,7 +6,7 @@
 // POST /api/publish
 // GET  /api/twitch
 
-const VERSION = 'V918.9 Broadcast Core Engine';
+const VERSION = 'V919 Broadcast Core Sync';
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -274,21 +274,21 @@ export default {
       const path = cleanPath(url.pathname);
 
       if (path === '/' || path === '/api' || path === '/api/health' || path === '/api/health-check') {
-        return json({ ok: true, ready: true, status: 'ok', worker: 'djfolsoe-tv-api', version: VERSION, checkedAt: new Date().toISOString(), hasKV: !!env.BROADCAST_CORE, message: 'Broadcast Core Engine is running.' });
+        return json({ ok: true, ready: true, status: 'ok', worker: 'djfolsoe-tv-api', version: VERSION, checkedAt: new Date().toISOString(), hasKV: !!env.BROADCAST_CORE, message: 'Broadcast Core Sync is running.' });
       }
 
       if (path === '/api/twitch' || path === '/api/twitch-profile') {
         return json(await getTwitch(env));
       }
 
-      if (path === '/api/broadcast' || path === '/api/broadcast-core' || path === '/api/unified-control' || path === '/api/website-portal' || path === '/api/overlay-hub' || path === '/api/homepage') {
+      if (path === '/api/broadcast' || path === '/api/broadcast-core' || path === '/api/core' || path === '/api/sync' || path === '/api/export' || path === '/api/unified-control' || path === '/api/website-portal' || path === '/api/overlay-hub' || path === '/api/homepage') {
         const stored = await getStoredCore(env);
         const twitch = await getTwitch(env);
         const core = mergeCore(stored, twitch);
         return json({ ok: true, version: VERSION, core, twitch, data: core, updatedAt: core.updatedAt });
       }
 
-      if (path === '/api/publish' || path === '/api/save' || path === '/api/unified-control/publish') {
+      if (path === '/api/publish' || path === '/api/save' || path === '/api/sync' || path === '/api/import' || path === '/api/unified-control/publish') {
         if (request.method !== 'POST') return json({ ok: false, error: 'POST required', version: VERSION }, 405);
         if (!authOk(request, env)) return json({ ok: false, error: 'Unauthorized: ADMIN_TOKEN does not match', version: VERSION }, 401);
         const body = await readBody(request);
@@ -299,7 +299,7 @@ export default {
         MEMORY_CORE = core;
         MEMORY_UPDATED_AT = core.updatedAt;
         const savedToKV = await kvPut(env, core);
-        return json({ ok: true, saved: true, savedToKV, savedInMemory: true, version: VERSION, updatedAt: core.updatedAt, core, data: core });
+        return json({ ok: true, saved: true, synced: true, savedToKV, savedInMemory: true, storage: savedToKV ? 'kv' : 'memory-fallback', warning: savedToKV ? null : 'KV binding BROADCAST_CORE is not connected; data may reset when Worker restarts.', version: VERSION, updatedAt: core.updatedAt, core, data: core });
       }
 
       return json({ ok: false, status: 404, version: VERSION, path, message: 'Endpoint not found.' }, 404);
