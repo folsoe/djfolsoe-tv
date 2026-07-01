@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V914 Live Preview</title>
+  <title>DJ FOLSOE V915 Publish Safety</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V913</span>
-    <h1>Daily Control Room · Content Studio · Asset Manager · Live Preview</h1>
-    <p>Daily control room plus Content Studio, Asset Manager and Live Preview before publishing to website and overlay.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V915</span>
+    <h1>Daily Control Room · Content Studio · Asset Manager · Live Preview · Publish Safety</h1>
+    <p>Daily control room plus Content Studio, Asset Manager, Live Preview and safer publishing with backup/restore.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -32,6 +32,7 @@
   <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
   <button onclick="jump('v913AssetManager')">🗂️ Assets</button>
   <button onclick="jump('v914LivePreview')">👁️ Live Preview</button>
+  <button onclick="jump('v915PublishSafety')">🛟 Publish Safety</button>
   <button onclick="jump('oneclick')">🚀 One click</button>
   <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
@@ -275,6 +276,42 @@
       <marquee id="v914TickerText">Welcome to DJ FOLSOE NETWORK · Music TV live from Denmark</marquee>
     </div>
     <pre id="v914Status">V914 preview ready. Press Refresh preview before publishing.</pre>
+  </section>
+
+
+
+  <section id="v915PublishSafety" class="panel v915SafetyPanel">
+    <div class="panelHead">
+      <h2>🛟 V915 · Publish Safety & Backup</h2>
+      <div>
+        <button onclick="v915LoadSafety()">Load safety status</button>
+        <button onclick="v915BackupCurrent()">Backup current</button>
+        <button class="bigPublish" onclick="v915SafePublish()">SAFE PUBLISH LIVE</button>
+      </div>
+    </div>
+    <p class="note">Safer publish workflow for daily use. Create a backup before publishing, restore the last snapshot if something looks wrong, and get warnings when there are unsaved changes.</p>
+
+    <div class="v915SafetyStrip">
+      <div><span>Draft status</span><b id="v915DraftState">Clean</b></div>
+      <div><span>Last backup</span><b id="v915LastBackup">Not loaded</b></div>
+      <div><span>Backups stored</span><b id="v915BackupCount">0</b></div>
+      <div><span>Safety mode</span><b id="v915SafetyMode">Confirmation on</b></div>
+    </div>
+
+    <div class="v915FlowGrid">
+      <button onclick="v915SaveDraft()">💾 Save Draft</button>
+      <button onclick="v914RefreshPreview();v915SetStatus('✅ Preview refreshed before publish.')">👁️ Preview</button>
+      <button onclick="v915BackupCurrent()">📦 Backup Current</button>
+      <button onclick="v915SafePublish()">🚀 Publish Live Safely</button>
+      <button onclick="v915RestoreLast()">↩️ Restore Last</button>
+      <button onclick="v915ResetDraft()">🧹 Reset Draft</button>
+    </div>
+
+    <div class="v915BackupBox">
+      <h3>Latest snapshot</h3>
+      <pre id="v915SnapshotPreview">No snapshot loaded yet.</pre>
+    </div>
+    <pre id="v915Status">V915 ready. Use Safe Publish to backup before going live.</pre>
   </section>
 
   <section id="oneclick" class="panel oneClickPanel">

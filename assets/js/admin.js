@@ -1578,3 +1578,96 @@ function v914RefreshPreview(){
 }));
 const V914_originalLoadAll=loadAll;loadAll=async function(){await V914_originalLoadAll();setTimeout(v914RefreshPreview,750);};
 setTimeout(v914RefreshPreview,2600);
+
+/* ===== V915 PUBLISH SAFETY & BACKUP SYSTEM ===== */
+let v915Dirty=false;
+const V915_DRAFT_KEY='DJF_V915_ADMIN_DRAFT';
+function v915SetStatus(msg){DJF_text('v915Status',msg);}
+function v915MarkDirty(){v915Dirty=true;document.body.classList.add('v915Dirty');DJF_text('v915DraftState','Unsaved changes');}
+function v915MarkClean(){v915Dirty=false;document.body.classList.remove('v915Dirty');DJF_text('v915DraftState','Clean');}
+function v915Snapshot(){
+  let preview={};
+  try{preview=typeof v914Pick==='function'?v914Pick():{};}catch(e){}
+  return {
+    version:'V915 Publish Safety snapshot',
+    activeTheme: typeof activeTheme!=='undefined'?activeTheme:'weekend',
+    preview,
+    core: typeof core!=='undefined'?core:null,
+    homepage: typeof home!=='undefined'?home:null,
+    overlayContent: typeof overlayContent!=='undefined'?overlayContent:null,
+    topTickerItems: typeof topItems!=='undefined'?topItems:[],
+    bottomTickerItems: typeof bottomItems!=='undefined'?bottomItems:[],
+    createdAt:new Date().toISOString()
+  };
+}
+function v915RenderSnapshot(snapshot){
+  DJF_text('v915SnapshotPreview',JSON.stringify(snapshot||v915Snapshot(),null,2).slice(0,9000));
+}
+function v915SaveDraft(){
+  const snap=v915Snapshot();
+  localStorage.setItem(V915_DRAFT_KEY,JSON.stringify(snap));
+  v915RenderSnapshot(snap);v915MarkClean();
+  v915SetStatus('✅ Draft saved locally. Nothing has been published yet.');
+}
+function v915ResetDraft(){
+  localStorage.removeItem(V915_DRAFT_KEY);v915MarkClean();v915RenderSnapshot(v915Snapshot());
+  v915SetStatus('✅ Draft reset. Current loaded data is still untouched.');
+}
+async function v915LoadSafety(){
+  try{
+    const r=await api('/api/publish-safety');
+    const backups=r.backups||[];
+    DJF_text('v915BackupCount',String(backups.length));
+    DJF_text('v915LastBackup',backups[0]?.createdAt||'No backup yet');
+    v915RenderSnapshot(r.lastSnapshot||backups[0]||v915Snapshot());
+    v915SetStatus('✅ Publish safety loaded.');
+  }catch(e){
+    const local=localStorage.getItem(V915_DRAFT_KEY);
+    if(local){try{v915RenderSnapshot(JSON.parse(local));}catch(_){}}
+    v915SetStatus('⚠️ Could not load worker safety state: '+e.message);
+  }
+}
+async function v915BackupCurrent(){
+  try{
+    const snap=v915Snapshot();
+    const r=await api('/api/publish-safety',{method:'POST',body:JSON.stringify({action:'backup',snapshot:snap})});
+    DJF_text('v915BackupCount',String((r.backups||[]).length));
+    DJF_text('v915LastBackup',r.backups?.[0]?.createdAt||snap.createdAt);
+    v915RenderSnapshot(snap);
+    v915SetStatus('✅ Backup created before publish.');
+    return true;
+  }catch(e){v915SetStatus('❌ Backup failed: '+e.message);return false;}
+}
+async function v915RestoreLast(){
+  if(!confirm('Restore last published backup into the live data engine?')) return;
+  try{
+    const r=await api('/api/publish-safety',{method:'POST',body:JSON.stringify({action:'restore-last'})});
+    v915RenderSnapshot(r.restored||r.lastSnapshot||{});
+    v915MarkClean();
+    if(typeof loadAll==='function') await loadAll();
+    v915SetStatus('✅ Last backup restored. Check website/overlay preview before publishing again.');
+  }catch(e){v915SetStatus('❌ Restore failed: '+e.message);}
+}
+async function v915SafePublish(){
+  if(v915Dirty && !confirm('You have unsaved changes. Save draft and continue with safe publish?')) return;
+  v915SaveDraft();
+  const ok=await v915BackupCurrent();
+  if(!ok && !confirm('Backup failed. Publish anyway?')) return;
+  if(!confirm('Publish live now to website + overlay? Box 4 stays locked to Twitch chat.')) return;
+  if(typeof V915_originalPublishEverything==='function') await V915_originalPublishEverything();
+  v915MarkClean();
+  v915SetStatus('✅ Safe publish complete. Backup was created before publish.');
+  setTimeout(v915LoadSafety,900);
+}
+['input','change','keyup'].forEach(evt=>document.addEventListener(evt,function(e){
+  if(e.target && e.target.matches('input,textarea,select')) v915MarkDirty();
+}));
+window.addEventListener('beforeunload',function(e){if(v915Dirty){e.preventDefault();e.returnValue='Unsaved admin changes';}});
+const V915_originalPublishEverything=publishEverything;
+publishEverything=async function(){
+  if(!confirm('Publish everything live now? V915 recommends Safe Publish when editing important content.')) return;
+  await V915_originalPublishEverything();
+  v915MarkClean();
+};
+const V915_originalLoadAll=loadAll;loadAll=async function(){await V915_originalLoadAll();setTimeout(v915LoadSafety,700);};
+setTimeout(()=>{if(document.getElementById('v915PublishSafety')){v915RenderSnapshot(v915Snapshot());v915LoadSafety();}},3200);

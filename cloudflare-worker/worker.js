@@ -1037,6 +1037,49 @@ export default {
         if (request.method === "GET") return json({ok:true,items:core.discoveryPicks||DEFAULT_CORE.discoveryPicks||[]});
         return saveDiscoveryPicks(request, env, core);
       }
+
+      if (path === "/api/publish-safety") {
+        core.publishSafety = core.publishSafety || {version:"V915 Publish Safety & Backup System",backups:[],lastSnapshot:null,updatedAt:null};
+        if (request.method === "GET") {
+          return json({ok:true,version:"V915 Publish Safety & Backup System",backups:core.publishSafety.backups||[],lastSnapshot:core.publishSafety.lastSnapshot||null,locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]});
+        }
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        const action = String(body.action||"backup");
+        if (action === "backup") {
+          const snapshot = body.snapshot || {core,createdAt:new Date().toISOString()};
+          const backup = Object.assign({}, snapshot, {id:"v915-"+Date.now(),createdAt:new Date().toISOString()});
+          core.publishSafety.backups = [backup].concat(core.publishSafety.backups||[]).slice(0,10);
+          core.publishSafety.lastSnapshot = backup;
+          core.publishSafety.updatedAt = backup.createdAt;
+          await putCore(env, core);
+          return json({ok:true,message:"Backup created",backups:core.publishSafety.backups,lastSnapshot:core.publishSafety.lastSnapshot});
+        }
+        if (action === "restore-last") {
+          const backup = (core.publishSafety.backups||[])[0] || core.publishSafety.lastSnapshot;
+          if (!backup) return json({error:"No backup available"},404);
+          if (backup.core && typeof backup.core === "object") {
+            const safety = core.publishSafety;
+            core = Object.assign({}, backup.core, {publishSafety:safety, updatedAt:new Date().toISOString()});
+          } else {
+            if (backup.activeTheme) core.activeTheme = backup.activeTheme;
+            if (backup.overlayContent) core.overlayContent = backup.overlayContent;
+            if (Array.isArray(backup.topTickerItems)) core.topTickerItems = backup.topTickerItems;
+            if (Array.isArray(backup.bottomTickerItems)) core.bottomTickerItems = backup.bottomTickerItems;
+            core.updatedAt = new Date().toISOString();
+          }
+          await putCore(env, core);
+          return json({ok:true,message:"Last backup restored",restored:backup});
+        }
+        if (action === "reset") {
+          core.publishSafety = {version:"V915 Publish Safety & Backup System",backups:[],lastSnapshot:null,updatedAt:new Date().toISOString()};
+          await putCore(env, core);
+          return json({ok:true,message:"Publish safety reset",backups:[]});
+        }
+        return json({error:"Unknown safety action",action},400);
+      }
+
       if (path === "/api/sync-all") {
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
         if (request.method !== "POST") return json({error:"Method not allowed"},405);

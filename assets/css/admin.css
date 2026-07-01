@@ -185,3 +185,16 @@ code{color:#2dd4ef}
 .v914TickerPreview span{white-space:nowrap;color:#ffd166;font-weight:1000;font-size:11px;letter-spacing:.14em}
 .v914TickerPreview marquee{font-weight:800;color:#fff}
 @media(max-width:900px){.v914PreviewGrid{grid-template-columns:1fr}.v914WebsitePreview h3{font-size:30px}.v914OverlayTop{display:block}.v914OverlayTop b{display:block;margin-top:6px}}
+
+/* ===== V915 PUBLISH SAFETY & BACKUP ===== */
+.v915SafetyPanel{border:1px solid rgba(255,214,102,.32);box-shadow:0 0 34px rgba(255,214,102,.10), inset 0 0 28px rgba(255,255,255,.035)}
+.v915SafetyStrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.v915SafetyStrip div{padding:14px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13)}
+.v915SafetyStrip span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.62);margin-bottom:6px}
+.v915SafetyStrip b{font-size:16px;color:#fff}
+.v915FlowGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:14px 0 18px}
+.v915FlowGrid button{min-height:58px;font-weight:900;border-radius:16px;background:linear-gradient(135deg,rgba(255,214,102,.96),rgba(34,231,255,.92));color:#07101b;border:0;box-shadow:0 12px 30px rgba(34,231,255,.12)}
+.v915BackupBox{border-radius:20px;border:1px solid rgba(255,255,255,.14);background:rgba(4,7,18,.62);padding:16px;margin-top:12px}
+.v915BackupBox h3{margin-top:0}.v915BackupBox pre{max-height:240px;overflow:auto;white-space:pre-wrap}
+body.v915Dirty #v915DraftState{color:#ffd666} body.v915Dirty .bigPublish{box-shadow:0 0 0 2px rgba(255,214,102,.45),0 18px 38px rgba(255,214,102,.13)}
+@media(max-width:900px){.v915SafetyStrip{grid-template-columns:repeat(2,1fr)}.v915FlowGrid{grid-template-columns:repeat(2,1fr)}}
