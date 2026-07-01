@@ -435,7 +435,7 @@ function broadcastCoreToOverlayState(core){
     topbarNews:[`${mode} · ${showTitle} · ${meta.title}`],
     footerTicker:[tickerText, specialEvent].filter(Boolean),
     chart:{items:top20.map(x=>({rank:x.rank,artist:x.artist,title:x.title,status:x.status}))},
-    live:{followers,followersGoal,viewers,subs,subGoal},
+    live:{followers,followersGoal:followerGoal,viewers,subs,subGoal},
     show:{title:showTitle,description},
     twitchCommunity:{},
     twitchChat:{channel:DEFAULT_CHANNEL},
@@ -612,11 +612,11 @@ async function loadState(){
     overlayDebug.lastTheme=nextTheme;
     overlayDebug.lastError=null;
     overlayDebug.source=result.url;
-    console.log("V923 overlay JSONP core applied", nextTheme, state?.show?.title, payload);
+    console.log("V924.2 overlay JSONP core applied", nextTheme, state?.show?.title, payload);
   }catch(e){
     overlayDebug.lastError=String(e&&e.message?e.message:e);
     overlayDebug.source="API FAILED - keeping current visible state";
-    console.warn("V923 broadcast-core JSONP failed; keeping current overlay state", e);
+    console.warn("V924.2 broadcast-core JSONP failed; keeping current overlay state", e);
     state=state||loadingState();
   }
   applyTheme();
