@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V816.12 Admin</title>
+  <title>DJ FOLSOE V903 Admin Hub</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V816.12</span>
+    <span class="kicker">DJ FOLSOE NETWORK V903</span>
     <h1>Broadcast Control Center</h1>
-    <p>Ét panel til hjemmeside, overlay, Twitch-data, tickers, shows, Top 20, requests og sprog.</p>
+    <p>One control hub for website, admin, overlay, Twitch data, tickers, shows, Top 20, requests and language.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -29,10 +29,10 @@
 
 <nav class="adminTabs">
   <button onclick="jump('theme')">🎨 Theme</button>
-  <button onclick="jump('homepage')">🏠 Forside</button><button onclick="jump('seo')">🔎 SEO</button>
-  <button onclick="jump('news')">📰 Nyheder</button>
-  <button onclick="jump('tickers')">📡 Tickers</button><button onclick="jump('socialLinks')">🌐 Socials</button>
-  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show grafik</button><button onclick="jump('overlayContent')">📦 Overlay boxe</button>
+  <button onclick="jump('homepage')">🏠 Homepage</button><button onclick="jump('seo')">🔎 SEO</button>
+  <button onclick="jump('news')">📰 News</button>
+  <button onclick="jump('tickers')">📡 Tickers</button>
+  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show graphics</button><button onclick="jump('overlayContent')">📦 Overlay boxes</button>
   <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
   <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Next show</button>
   <button onclick="jump('twitch')">🟣 Twitch</button>
@@ -40,8 +40,8 @@
 
 <main>
   <section id="status" class="panel statusPanel">
-    <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Load data</button><button onclick="testAll()">Test alt</button></div></div>
-    <pre id="statusBox">Klar. Indsæt token og tryk Load data.</pre>
+    <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Load data</button><button onclick="publishEverything()">Publish everything</button><button onclick="testAll()">Test all</button></div></div>
+    <pre id="statusBox">Ready. Add token and press Load data.</pre>
   </section>
 
   
@@ -61,7 +61,7 @@
 
   <section id="theme" class="panel">
     <div class="panelHead"><h2>🎨 Theme Engine til overlay</h2><button onclick="openApi('/api/theme')">Test theme API</button></div>
-    <p class="note">Theme changes overlay colors and active show look. Website graphics stay untouched.</p>
+    <p class="note">One click changes the active theme background for both website and StreamElements overlay. The images are included in /themes, so you do not need to upload every background separately.</p>
     <div id="themeGrid" class="themeGrid"></div>
     <pre id="activeTheme">Active theme: loading</pre>
   </section>
@@ -82,18 +82,18 @@
     <div class="panelHead"><h2>📰 Homepage news/cards</h2><button onclick="addRow('news')">Add news</button></div>
     <p class="note">Shown as cards on the front page: Latest show, Top20 nyt, Requests, Community, Twitch updates osv.</p>
     <div id="newsEditor"></div>
-    <button onclick="saveRows('news')">Save nyheder</button>
+    <button onclick="saveRows('news')">Save news</button>
   </section>
 
   <section id="tickers" class="panel twoCol">
     <div>
-      <div class="panelHead"><h2>📡 Top ticker overlay</h2><button onclick="addRow('top')">Tilføj</button></div>
+      <div class="panelHead"><h2>📡 Top ticker overlay</h2><button onclick="addRow('top')">Add</button></div>
       <p class="note">Top ticker kan være theme-specifik. Fx theme = weekend.</p>
       <div id="topEditor"></div>
       <button onclick="saveRows('top')">Save top ticker</button>
     </div>
     <div>
-      <div class="panelHead"><h2>📻 Bottom ticker overlay</h2><button onclick="addRow('bottom')">Tilføj</button></div>
+      <div class="panelHead"><h2>📻 Bottom ticker overlay</h2><button onclick="addRow('bottom')">Add</button></div>
       <p class="note">Bottom ticker kan være theme = all.</p>
       <div id="bottomEditor"></div>
       <button onclick="saveRows('bottom')">Save bottom ticker</button>
@@ -101,7 +101,7 @@
   </section>
 
   <section id="shows" class="panel">
-    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Tilføj show</button></div>
+    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Add show</button></div>
     <p class="note">Styrer show-kort på forsiden.</p>
     <div id="showsEditor"></div>
     <button onclick="saveRows('shows')">Save shows</button>
@@ -109,26 +109,26 @@
 
   
   <section id="showVisuals" class="panel">
-    <div class="panelHead"><h2>🎭 Show grafik på forsiden</h2><button onclick="resetShowVisuals()">Indsæt standard grafik</button></div>
+    <div class="panelHead"><h2>🎭 Show graphics på forsiden</h2><button onclick="resetShowVisuals()">Indsæt standard grafik</button></div>
     <p class="note">Her kan du ændre farver, ikon, tag og stor poster-tekst på show-kortene. Brug CSS gradient, fx <code>linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)</code>.</p>
     <div id="showVisualsEditor"></div>
     <button onclick="saveShowVisuals()">Save show grafik</button>
   </section>
 
   <section id="overlayContent" class="panel">
-    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay boxe</h2><button onclick="resetOverlayContent()">Indsæt standard bokse</button></div>
+    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay boxes</h2><button onclick="resetOverlayContent()">Insert default boxes</button></div>
     <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
     <div class="twoCol">
-      <div><h3>Box 1 · Venstre top</h3><button onclick="addOverlayItem('box1')">Tilføj Box 1 item</button><div id="box1Editor"></div></div>
-      <div><h3>Box 2 · Højre top</h3><button onclick="addOverlayItem('box2')">Tilføj Box 2 item</button><div id="box2Editor"></div></div>
-      <div><h3>Box 3 · Venstre bund</h3><button onclick="addOverlayItem('box3')">Tilføj Box 3 item</button><div id="box3Editor"></div></div>
+      <div><h3>Box 1 · Top left</h3><button onclick="addOverlayItem('box1')">Add Box 1 item</button><div id="box1Editor"></div></div>
+      <div><h3>Box 2 · Top right</h3><button onclick="addOverlayItem('box2')">Add Box 2 item</button><div id="box2Editor"></div></div>
+      <div><h3>Box 3 · Bottom left</h3><button onclick="addOverlayItem('box3')">Add Box 3 item</button><div id="box3Editor"></div></div>
       <div><h3>Box 4 · Højre bund</h3><div class="previewCard"><b>LOCKED</b><p>Twitch chat med profilbillede og emotes. Denne boks skal ikke ændres.</p></div></div>
     </div>
     <button onclick="saveOverlayContent()">Save overlay bokse</button>
   </section>
 
   <section id="top20" class="panel">
-    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Tilføj sang</button><button onclick="seedTop20()">Indsæt standard Top 20</button></div></div>
+    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Add sang</button><button onclick="seedTop20()">Indsæt standard Top 20</button></div></div>
     <p class="note">Styrer FOLSOE Top 20 på forsiden og overlayets musik-bokse.</p>
     <div id="top20Editor"></div>
     <button onclick="saveRows('top20')">Save Top 20</button>
@@ -136,7 +136,7 @@
 
   
   <section id="discovery" class="panel">
-    <div class="panelHead"><h2>✨ Dem her har jeg lige opdaget</h2><button onclick="addDiscovery()">Tilføj discovery</button></div>
+    <div class="panelHead"><h2>✨ Dem her har jeg lige opdaget</h2><button onclick="addDiscovery()">Add discovery</button></div>
     <p class="note">3 ekstra felter til nye tracks/boblere, som vises på forsiden under Top 20.</p>
     <div id="discoveryEditor"></div>
     <button onclick="saveDiscovery()">Save discovery picks</button>
@@ -145,14 +145,14 @@
 
   <section id="requests" class="panel">
     <div class="panelHead"><h2>🎧 Request Manager</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
-    <p class="note">Styrer seneste musikønsker fra !ønske / !request / !Wunsch. Du kan godkende, afvise, fastgøre og slette.</p>
+    <p class="note">Controls the latest song requests from !request. You can approve, reject, pin and delete requests.</p>
     <div class="formGrid">
-      <div><label>Bruger</label><input id="reqUser" placeholder="Twitch navn"></div>
+      <div><label>User</label><input id="reqUser" placeholder="Twitch name"></div>
       <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
-      <div><label>Sprog</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
+      <div><label>Language</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
       <div><label>Show</label><input id="reqShow" placeholder="Fredagsbar"></div>
     </div>
-    <button onclick="addRequest()">Tilføj request</button>
+    <button onclick="addRequest()">Add request</button>
     <button onclick="saveRequestList()">Save ændringer</button>
     <div id="requestStatsPreview" class="previewGrid"></div>
     <div id="requestsManager"></div>
@@ -161,15 +161,15 @@
 
   
   <section id="modsManager" class="panel">
-    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Tilføj mod</button></div>
-    <p class="note">Skriv Twitch login. Forsiden henter profilbillede, display name og live/offline status automatisk.</p>
+    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Add mod</button></div>
+    <p class="note">Enter the Twitch login. The homepage automatically loads profile image, display name and live/offline status.</p>
     <div id="modsEditor"></div>
     <button onclick="saveMods()">Save mods</button>
   </section>
 
 
   <section id="communityManager" class="panel">
-    <div class="panelHead"><h2>❤️ Community Wall Manager</h2><div><button onclick="addCommunity()">Tilføj community felt</button><button onclick="openApi('/api/community-wall')">Community API</button></div></div>
+    <div class="panelHead"><h2>❤️ Community Wall Manager</h2><div><button onclick="addCommunity()">Add community felt</button><button onclick="openApi('/api/community-wall')">Community API</button></div></div>
     <p class="note">Styrer Community Love på forsiden. Skriv Twitch-navn i User/Login for at hente profilbillede og live-status.</p>
     <div id="communityEditor"></div>
     <h3>Community Stats</h3>
@@ -201,34 +201,19 @@
   </section>
 
 <section class="adminPanel" id="showScheduleAdminPanel">
-  <div class="panelHead"><h2>Weekly Schedule Engine</h2><span>Næste 10 shows</span></div>
-  <p>Date-styret showplan. Gamle shows skjules automatisk på forsiden efter dato/starttid.</p>
+  <div class="panelHead"><h2>Weekly Schedule Engine</h2><span>Next 10 shows</span></div>
+  <p>Date-driven show schedule. Past shows are automatically hidden from the homepage after date/start time.</p>
   <div class="adminActions" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;">
-    <button type="button" onclick="loadShowScheduleAdmin()">Hent showplan</button>
-    <button type="button" onclick="addShowScheduleRow()">Tilføj show</button>
+    <button type="button" onclick="loadShowScheduleAdmin()">Load schedule</button>
+    <button type="button" onclick="addShowScheduleRow()">Add show</button>
     <button type="button" onclick="saveShowScheduleAdmin()">Save showplan</button>
   </div>
   <div id="showScheduleRows"></div>
 </section>
 
-
-<section class="adminPanel" id="socialLinks">
-  <div class="panelHead">
-    <h2>🌐 Social Media Footer</h2>
-    <span>Shown at the bottom of the homepage</span>
-  </div>
-  <p class="note">Edit links and choose which social icons are visible on the homepage footer. Leave URL empty to keep the icon as a placeholder.</p>
-  <div id="socialLinksEditor" class="socialLinksEditor"></div>
-  <div class="adminActions">
-    <button onclick="addSocialLink()">Add custom social</button>
-    <button onclick="saveSocialLinks()">Save social links</button>
-    <button onclick="loadSocialLinks()">Load social links</button>
-  </div>
-</section>
-
 </main>
 
-<script src="assets/js/admin.js?v=8174"></script>
+<script src="assets/js/admin.js?v=8162017"></script>
 
 <div id="djfNullSafeFallbacks" style="display:none">
 <div id="themeGrid"></div>

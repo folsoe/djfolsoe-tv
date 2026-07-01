@@ -1,7 +1,7 @@
 {
   "version": "DJ FOLSOE NETWORK V816 BROADCAST OS",
   "activeTheme": "weekend",
-  "language": "da",
+  "language": "en",
   "twitchChannel": "djfolsoe",
   "themes": {
     "fredagsbar": {
@@ -87,7 +87,7 @@
   "profile": {
     "name": "DJ FOLSOE",
     "fallbackAvatar": "",
-    "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.",
+    "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, song requests, Top 20, community og dansk DJ-kultur.",
     "genres": [
       "Trance",
       "Eurodance",
