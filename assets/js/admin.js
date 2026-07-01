@@ -654,7 +654,7 @@ function djfNormalizeThemeKey(k){
   
   if(k.includes("chart")||k.includes("top20")||k.includes("top 20")) return "chart";
   if(k.includes("christmas")||k.includes("jul")) return "christmas";
-  if(k.includes("Danish")) return "Danishe";
+  if(k.includes("danish")||k.includes("danske")) return "danske";
   if(k.includes("disco")) return "disco";
   if(k.includes("hands")) return "handsup";
   if(k.includes("harddance")||k.includes("hard dance")||k.includes("hardstyle")) return "harddance";
@@ -757,3 +757,71 @@ function readOverlayContent(){
   });
   overlayContent.box4={locked:'twitch-chat'};
 }
+
+
+/* ===== V904 ONE BUTTON CONTROL ===== */
+const V904_PRESETS={
+  morning:{theme:'morning',onAir:'GOOD MORNING TWITCH',next:'Fresh morning vibes · coffee and music',headline:'Good Morning Twitch is on air',message:'Start the day with fresh music, chat energy and live DJ vibes from Denmark.',goal:'870/1000 followers',request:'Requests open · !request'},
+  trance:{theme:'trance',onAir:'TRANCE TUESDAY',next:'Uplifting trance and emotional melodies',headline:'Trance Tuesday live from Denmark',message:'Blue lasers, big melodies and pure uplifting energy on DJ FOLSOE TV.',goal:'870/1000 followers',request:'Requests open · trance requests welcome'},
+  chart:{theme:'chart',onAir:'FOLSOE TOP 20',next:'Weekly chart countdown show',headline:'FOLSOE Top 20 is live',message:'The weekly countdown with hit radar, new entries and community favourites.',goal:'870/1000 followers',request:'Vote, request and follow the chart'},
+  fredagsbar:{theme:'fredagsbar',onAir:'FREDAGSBAR',next:'Weekend starts here',headline:'Fredagsbar is open',message:'Weekend energy, party tracks and community love from DJ FOLSOE TV.',goal:'870/1000 followers',request:'Requests open · party tracks welcome'},
+  retro:{theme:'retro',onAir:'RETRO HITS',next:'Classics that refuse to retire',headline:'Retro Hits on DJ FOLSOE TV',message:'Back to the classics with nostalgic hits, singalong moments and big memories.',goal:'870/1000 followers',request:'Requests open · retro favourites welcome'},
+  eurodance:{theme:'eurodance',onAir:'EURODANCE',next:'90s and 00s dance energy',headline:'Eurodance live on DJ FOLSOE TV',message:'Big beats, big hooks and maximum 90s/00s dance energy.',goal:'870/1000 followers',request:'Requests open · Eurodance anthems welcome'},
+  popup:{theme:'popup',onAir:'POP UP LIVE',next:'Surprise stream activated',headline:'Pop Up stream is live',message:'The stream that appears when you least expect it. Say hi in chat and join the moment.',goal:'870/1000 followers',request:'Requests open · surprise me'},
+  weekend:{theme:'weekend',onAir:'WEEKEND VIBES',next:'Maximum music and community',headline:'Weekend Vibes on DJ FOLSOE TV',message:'High-energy music TV feeling with chat, requests, community and live DJ power.',goal:'870/1000 followers',request:'Requests open · weekend bangers welcome'}
+};
+
+function toggleAdvanced(){
+  document.querySelectorAll('.advancedPanel').forEach(x=>x.classList.toggle('showAdvanced'));
+}
+function setQuickStatus(msg){ const el=document.getElementById('oneClickStatus'); if(el) el.textContent=msg; }
+function quickShow(key){
+  const p=V904_PRESETS[key]||V904_PRESETS.weekend;
+  activeTheme=p.theme;
+  markTheme(p.theme);
+  DJF_val('quickOnAir',p.onAir);
+  DJF_val('quickNextShow',p.next);
+  DJF_val('quickFollowerGoal',p.goal);
+  DJF_val('quickRequestLine',p.request);
+  DJF_val('quickHeadline',p.headline);
+  DJF_val('quickMessage',p.message);
+  document.querySelectorAll('.quickGrid button').forEach(btn=>btn.classList.remove('oneClickActive'));
+  const btn=[...document.querySelectorAll('.quickGrid button')].find(b=>b.textContent.toLowerCase().includes(key==='fredagsbar'?'fredagsbar':key));
+  if(btn) btn.classList.add('oneClickActive');
+  setQuickStatus('Preset loaded: '+p.onAir+' · theme '+p.theme+'. Press Apply + publish now.');
+}
+function applyQuickFields(){
+  const onAir=DJF_get('quickOnAir').trim()||'DJ FOLSOE LIVE';
+  const next=DJF_get('quickNextShow').trim()||'Next show loading';
+  const goal=DJF_get('quickFollowerGoal').trim()||'870/1000 followers';
+  const req=DJF_get('quickRequestLine').trim()||'Requests open · !request';
+  const headline=DJF_get('quickHeadline').trim()||onAir;
+  const message=DJF_get('quickMessage').trim()||'Live music TV from Denmark.';
+  newsItems = newsItems && newsItems.length ? newsItems : [];
+  newsItems[0]={id:'news-live-now',active:true,type:'Live now',title:headline,body:message,theme:'all',priority:1};
+  topItems = topItems && topItems.length ? topItems : [];
+  topItems[0]={id:'top-live-now',active:true,theme:activeTheme||'weekend',text:'📺 '+onAir+' · '+message,priority:1};
+  bottomItems = bottomItems && bottomItems.length ? bottomItems : [];
+  bottomItems[0]={id:'bottom-live-now',active:true,theme:'all',text:'FOLLOW DJ FOLSOE · '+goal+' · '+req+' · FOLSOETV.DK',priority:1};
+  overlayContent = overlayContent || JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));
+  overlayContent.box1=[{active:true,label:'FOLLOW JOURNEY',headline:goal,body:'Help DJ FOLSOE grow',icon:'📡',priority:1}];
+  overlayContent.box2=[{active:true,label:'ON AIR',headline:onAir,body:next,icon:'📺',priority:1}];
+  overlayContent.box3=[{active:true,label:'REQUESTS',headline:req,body:'Chat controls the music',icon:'🎧',priority:1}];
+  overlayContent.box4={locked:'twitch-chat'};
+  renderEditors(); renderOverlayContent();
+  setQuickStatus('Quick fields applied locally. Press Publish Everything to update website + overlay.');
+  setStatus('✅ Quick fields applied. Ready to publish.');
+}
+
+const V904_originalLoadAll = loadAll;
+loadAll = async function(){
+  await V904_originalLoadAll();
+  const firstNews=(newsItems||[])[0]||{};
+  DJF_val('quickOnAir', ((overlayContent?.box2||[])[0]?.headline)||'DJ FOLSOE LIVE');
+  DJF_val('quickNextShow', ((overlayContent?.box2||[])[0]?.body)||'Next show loading');
+  DJF_val('quickFollowerGoal', ((overlayContent?.box1||[])[0]?.headline)||'870/1000 followers');
+  DJF_val('quickRequestLine', ((overlayContent?.box3||[])[0]?.headline)||'Requests open · !request');
+  DJF_val('quickHeadline', firstNews.title||'Live Music TV from Denmark');
+  DJF_val('quickMessage', firstNews.body||'Website and overlay controlled from this admin hub.');
+  setQuickStatus('Current data loaded. Active theme: '+(activeTheme||'weekend'));
+};

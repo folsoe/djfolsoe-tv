@@ -56,3 +56,14 @@ code{color:#2dd4ef}
 
 /* V817 GLOBAL EDITION - language selectors removed */
 .langs,.language,.languageSwitcher,.langSwitch,[data-lang]{display:none!important;}
+
+
+/* V904 One Button Control */
+.oneClickPanel{background:linear-gradient(135deg,rgba(255,209,102,.16),rgba(45,212,239,.12),rgba(236,72,153,.12));border:1px solid rgba(255,255,255,.18)}
+.bigPublish{font-size:18px;padding:16px 26px;background:linear-gradient(135deg,#ffed9a,#22e7ff,#ff35d8);box-shadow:0 0 34px rgba(34,231,255,.24)}
+.quickGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:18px 0}
+.quickGrid button{width:100%;min-height:68px;text-align:left;font-size:16px;border-radius:20px;background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.quickGrid button:hover{background:linear-gradient(135deg,rgba(255,241,199,.94),rgba(45,212,239,.90));color:#061018}
+.liveNowGrid{margin-top:14px}.quickActions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.advancedPanel{display:none}.advancedPanel.showAdvanced{display:block}
+.adminTabs{top:48px}.oneClickActive{outline:4px solid #ffd166!important;box-shadow:0 0 30px rgba(255,209,102,.35)!important}
+@media(max-width:900px){.adminTabs{top:0}.bigPublish{width:100%}}
