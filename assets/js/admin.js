@@ -1,5 +1,6 @@
 /* DJ FOLSOE NETWORK V918.5 · ONE BUTTON CONTROL CENTER */
 const DEFAULT_API_BASE = 'https://djfolsoe-tv-api.sunefolsoe.workers.dev';
+const SAME_ORIGIN_API_BASE = window.location.origin;
 const TWITCH_URL = 'https://www.twitch.tv/djfolsoe';
 const WEBSITE_URL = 'https://folsoetv.dk';
 const SHOW_THEME_MAP = {
@@ -10,14 +11,52 @@ const $ = (id)=>document.getElementById(id);
 const val = (id, fallback='')=>($(id)?.value ?? fallback);
 const set = (id, value)=>{ const el=$(id); if(el) el.textContent = value ?? ''; };
 const setValue = (id, value)=>{ const el=$(id); if(el && value !== undefined && value !== null) el.value = value; };
-function apiBase(){ return (localStorage.getItem('DJF_API_BASE') || window.DJF_API_BASE || DEFAULT_API_BASE).replace(/\/$/,''); }
+
+function apiCandidates(){
+  const saved = localStorage.getItem('DJF_API_BASE');
+  const manual = val('apiBase');
+  const list = [manual, saved, window.DJF_API_BASE, SAME_ORIGIN_API_BASE, DEFAULT_API_BASE]
+    .filter(Boolean).map(x=>String(x).replace(/\/$/,''));
+  return [...new Set(list)];
+}
+function apiBase(){ return apiCandidates()[0] || SAME_ORIGIN_API_BASE; }
+async function fetchWithTimeout(url, options={}, ms=9000){
+  const ctrl = new AbortController();
+  const timer = setTimeout(()=>ctrl.abort(), ms);
+  try{ return await fetch(url, Object.assign({}, options, {signal:ctrl.signal})); }
+  finally{ clearTimeout(timer); }
+}
+async function discoverApiBase(){
+  const paths = ['/api/health','/api/health-check','/api/unified-control'];
+  for(const base of apiCandidates()){
+    for(const path of paths){
+      try{
+        const r = await fetchWithTimeout(base+path+'?ping='+Date.now(), {cache:'no-store',headers:headers()}, 6000);
+        if(r && (r.ok || r.status===401 || r.status===405)){
+          localStorage.setItem('DJF_API_BASE', base);
+          setValue('apiBase', base);
+          return base;
+        }
+      }catch(e){}
+    }
+  }
+  return apiBase();
+}
+
 function token(){ return (localStorage.getItem('DJF_ADMIN_TOKEN') || val('adminToken') || val('advancedToken') || '').trim(); }
 function headers(){ const h={'content-type':'application/json'}; const t=token(); if(t){ h['x-admin-token']=t; h['authorization']='Bearer '+t; } return h; }
 async function getJson(path, fallback=null){
-  try{ const r=await fetch(apiBase()+path,{cache:'no-store',headers:headers()}); const txt=await r.text(); let data={}; try{data=JSON.parse(txt)}catch{data={raw:txt}}; if(!r.ok) throw new Error(data.error||data.message||r.statusText); return data; }catch(e){ return fallback; }
+  try{ const base = await discoverApiBase(); const r=await fetchWithTimeout(base+path,{cache:'no-store',headers:headers()},9000); const txt=await r.text(); let data={}; try{data=JSON.parse(txt)}catch{data={raw:txt}}; if(!r.ok) throw new Error(data.error||data.message||r.statusText); return data; }catch(e){ return fallback; }
 }
 async function postJson(path, body){
-  const r=await fetch(apiBase()+path,{method:'POST',cache:'no-store',headers:headers(),body:JSON.stringify(body)});
+  const base = await discoverApiBase();
+  let r;
+  try{
+    r=await fetchWithTimeout(base+path,{method:'POST',cache:'no-store',mode:'cors',headers:headers(),body:JSON.stringify(body)},12000);
+  }catch(e){
+    const tried = apiCandidates().join('  |  ');
+    throw new Error('Could not reach API/Worker. Tried: '+tried+'. Open Advanced and set API base to your working Worker URL or route /api through folsoetv.dk. Original error: '+e.message);
+  }
   const txt=await r.text(); let data={}; try{data=JSON.parse(txt)}catch{data={raw:txt}};
   if(!r.ok) throw new Error(data.error || data.message || txt || ('HTTP '+r.status));
   return data;
@@ -127,7 +166,8 @@ async function djfOneClick(){
   }catch(e){ set('readyState','API ERROR'); status('❌ One click failed: '+e.message+'\n\nCheck Advanced → API base, ADMIN_TOKEN and Cloudflare Worker deploy.', 'bad'); }
 }
 async function djfTestApi(){
-  djfSaveSettings(); status('Testing API…');
+  djfSaveSettings(); status('Testing API and auto-detecting best route…');
+  await discoverApiBase();
   const health = await getJson('/api/health?t='+Date.now(), null) || await getJson('/api/health-check?t='+Date.now(), null);
   const msg = health ? JSON.stringify(health,null,2) : '❌ API could not be reached. Open /api/health directly and check Cloudflare Worker/CORS.';
   set('advancedStatus', msg); status(health ? '✅ API test OK.' : '❌ API test failed.', health ? 'ok' : 'bad');
