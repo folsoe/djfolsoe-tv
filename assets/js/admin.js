@@ -1,4 +1,4 @@
-/* DJ FOLSOE NETWORK V918.5 · ONE BUTTON CONTROL CENTER */
+/* DJ FOLSOE NETWORK V918.9 · BROADCAST CORE ENGINE */
 const DEFAULT_API_BASE = 'https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const TWITCH_URL = 'https://www.twitch.tv/djfolsoe';
 const WEBSITE_URL = 'https://folsoetv.dk';
@@ -61,9 +61,9 @@ function buildPayload(){
       {kicker:'LIVE CHAT',title:'Twitch chat',text:'Chat and community are shown in the live overlay.'}
     ]
   };
-  const broadcast = {version:'V918.5 One Button Control Center',mode,broadcastState:mode,activeShow:show,activeShowTitle:show,activeTheme:theme,live:twitchData.isLive || mode==='LIVE SHOW',viewers:Number(twitchData.viewers||0),followers,streamTitle:twitchData.liveTitle || `${show} · DJ FOLSOE Twitch music streamer from Denmark`,updatedAt:new Date().toISOString()};
+  const broadcast = {version:'V918.9 Broadcast Core Engine',mode,broadcastState:mode,activeShow:show,activeShowTitle:show,activeTheme:theme,live:twitchData.isLive || mode==='LIVE SHOW',viewers:Number(twitchData.viewers||0),followers,streamTitle:twitchData.liveTitle || `${show} · DJ FOLSOE Twitch music streamer from Denmark`,updatedAt:new Date().toISOString()};
   const homepage = {
-    version:'V918.5 One Button Control Center',
+    version:'V918.9 Broadcast Core Engine',
     hero:{eyebrow:val('eyebrow','DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK'),title,subtitle,text,background:`themes/${theme}.png`},
     ticker:[ticker],nextShow,
     sectionTitles:{nextKicker:'NEXT SHOW',nextTitle:'Next DJ FOLSOE Broadcast',showsKicker:'FEATURED SHOWS',showsTitle:'Your favorite show',aboutKicker:'DISCOVER DJ FOLSOE',aboutTitle:'Music TV, Twitch and Danish DJ energy'},
@@ -78,8 +78,8 @@ function buildPayload(){
     aboutText:'DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.',
     top20:[{rank:1,artist:'DJ FOLSOE',title:"This Week's Number One",status:'ADMIN CONTROLLED'},{rank:2,artist:'Viewer Pick',title:'Request of the Week',status:'COMMUNITY'},{rank:3,artist:'Future Hit',title:'Discovery Track',status:'NEW'}]
   };
-  const overlayHub = {version:'V918.5 One Button Control Center',state:mode,activeShow:show,activeTheme:theme,ticker,controlPanel:{title:show,status:mode,theme,viewers:Number(twitchData.viewers||0),followers,subs,subGoal:Number(val('subGoal',100)),nextShow,infoLine:ticker,requestText:community.requestText,specialEvent:community.specialEvent},updatedAt:new Date().toISOString()};
-  return {version:'V918.5 One Button Control Center',activeTheme:theme,language:'en',homepage,website:{title:'DJ FOLSOE',description:text,primaryLanguage:'en'},broadcast,nextShow,overlayHub,community,bottomTickerItems:[{id:'v9185-main-ticker',active:true,theme:'all',text:ticker,priority:1}],updatedAt:new Date().toISOString()};
+  const overlayHub = {version:'V918.9 Broadcast Core Engine',state:mode,activeShow:show,activeTheme:theme,ticker,controlPanel:{title:show,status:mode,theme,viewers:Number(twitchData.viewers||0),followers,subs,subGoal:Number(val('subGoal',100)),nextShow,infoLine:ticker,requestText:community.requestText,specialEvent:community.specialEvent},updatedAt:new Date().toISOString()};
+  return {version:'V918.9 Broadcast Core Engine',activeTheme:theme,language:'en',homepage,website:{title:'DJ FOLSOE',description:text,primaryLanguage:'en'},broadcast,nextShow,overlayHub,community,bottomTickerItems:[{id:'v9185-main-ticker',active:true,theme:'all',text:ticker,priority:1}],updatedAt:new Date().toISOString()};
 }
 function djfPreview(){
   const p=buildPayload();
@@ -88,11 +88,11 @@ function djfPreview(){
   set('readyState','Preview OK'); status('👁 Preview updated. Same data will publish to website and overlay.');
   return p;
 }
-function djfSaveDraft(){ const p=buildPayload(); localStorage.setItem('DJF_V9185_DRAFT',JSON.stringify(p)); set('readyState','Draft saved'); status('✅ Draft saved locally.'); return p; }
+function djfSaveDraft(){ const p=buildPayload(); localStorage.setItem('DJF_V9189_DRAFT',JSON.stringify(p)); set('readyState','Draft saved'); status('✅ Draft saved locally.'); return p; }
 async function djfRefresh(){
   status('🔄 Refreshing Twitch + admin data…');
-  const u = await getJson('/api/unified-control?t='+Date.now(), null);
-  const tw = await getJson('/api/twitch-profile?live=1&t='+Date.now(), null);
+  const u = await getJson('/api/broadcast?t='+Date.now(), null) || await getJson('/api/unified-control?t='+Date.now(), null);
+  const tw = await getJson('/api/twitch?live=1&t='+Date.now(), null) || await getJson('/api/twitch-profile?live=1&t='+Date.now(), null);
   if(tw && (tw.ok || tw.isLive !== undefined)) twitchData = Object.assign(twitchData, tw);
   else if(u?.twitch) twitchData = Object.assign(twitchData, u.twitch);
   hydrateFromCore(u?.core || u || null);
@@ -119,8 +119,8 @@ async function djfOneClick(){
     set('readyState','Publishing…'); status('🚀 One click started: Twitch sync → Admin data → Website + Overlay publish…');
     await djfRefresh();
     const p = buildPayload();
-    const r = await postJson('/api/unified-control', p);
-    localStorage.setItem('DJF_V9185_LAST_PUBLISH', new Date().toISOString());
+    const r = await postJson('/api/publish', p);
+    localStorage.setItem('DJF_V9189_LAST_PUBLISH', new Date().toISOString());
     set('readyState','LIVE SYNC OK'); set('lastPublish', new Date().toLocaleString());
     status('✅ ONE CLICK COMPLETE. Website + overlay now use the same Twitch/Admin data.');
     return r;
@@ -128,10 +128,10 @@ async function djfOneClick(){
 }
 async function djfTestApi(){
   djfSaveSettings(); status('Testing API…');
-  const health = await getJson('/api/health?t='+Date.now(), null) || await getJson('/api/health-check?t='+Date.now(), null);
+  const health = await getJson('/api/health?t='+Date.now(), null) || await getJson('/api/broadcast?t='+Date.now(), null) || await getJson('/api/health-check?t='+Date.now(), null);
   const msg = health ? JSON.stringify(health,null,2) : '❌ API could not be reached. Open /api/health directly and check Cloudflare Worker/CORS.';
   set('advancedStatus', msg); status(health ? '✅ API test OK.' : '❌ API test failed.', health ? 'ok' : 'bad');
 }
 function bindAutoPreview(){ ['currentShow','theme','mode','eyebrow','heroTitle','heroSubtitle','heroText','ticker','nextShowTitle','nextShowDate','nextShowTime','nextShowTheme','nextShowDescription','followerGoal','subs','subGoal','requestText','specialMessage'].forEach(id=>$(id)?.addEventListener('input',djfPreview)); $('currentShow')?.addEventListener('change',()=>{ const m=SHOW_THEME_MAP[val('currentShow')]; if(m) setValue('theme',m); djfPreview(); }); }
-function restoreSettings(){ setValue('apiBase',apiBase()); setValue('adminToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); setValue('advancedToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); const draft=localStorage.getItem('DJF_V9185_DRAFT'); if(draft){ try{ hydrateFromCore(JSON.parse(draft)); }catch{} } const last=localStorage.getItem('DJF_V9185_LAST_PUBLISH'); if(last) set('lastPublish','Last publish: '+new Date(last).toLocaleString()); }
+function restoreSettings(){ setValue('apiBase',apiBase()); setValue('adminToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); setValue('advancedToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); const draft=localStorage.getItem('DJF_V9189_DRAFT'); if(draft){ try{ hydrateFromCore(JSON.parse(draft)); }catch{} } const last=localStorage.getItem('DJF_V9189_LAST_PUBLISH'); if(last) set('lastPublish','Last publish: '+new Date(last).toLocaleString()); }
 document.addEventListener('DOMContentLoaded',()=>{ restoreSettings(); bindAutoPreview(); renderTwitch(); djfPreview(); setTimeout(djfRefresh,450); });
