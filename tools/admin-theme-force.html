@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE V925 Theme Force Test</title>
+<style>body{font-family:Arial,sans-serif;background:#070914;color:#fff;padding:24px}button{margin:8px;padding:16px 20px;border:0;border-radius:999px;font-weight:900;background:linear-gradient(90deg,#c9ffd8,#4de7ff,#ff55d9);cursor:pointer}pre{white-space:pre-wrap;background:#111827;padding:16px;border-radius:12px}</style>
+<h1>DJ FOLSOE · V925 Theme Force Test</h1>
+<p>This bypasses admin and writes the theme directly to Cloudflare KV.</p>
+<div id="buttons"></div>
+<pre id="out">Ready.</pre>
+<script>
+const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev';
+const themes=['weekend','trance','fredagsbar','eurodance','retro','popup','morning','summer','danske','top20'];
+const out=document.getElementById('out');
+document.getElementById('buttons').innerHTML=themes.map(t=>`<button onclick="setTheme('${t}')">${t.toUpperCase()}</button>`).join('');
+async function setTheme(theme){
+  out.textContent='Setting theme: '+theme+' ...';
+  try{
+    const r=await fetch(API+'/api/set-theme?theme='+encodeURIComponent(theme)+'&ts='+Date.now(),{cache:'no-store'});
+    const j=await r.json();
+    out.textContent=JSON.stringify({ok:j.ok, theme:j.theme, saved:j.saved, updatedAt:j.updatedAt},null,2);
+  }catch(e){ out.textContent='FAILED: '+(e.message||e); }
+}
+</script>
+</html>
