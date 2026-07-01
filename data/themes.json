@@ -1,5 +1,66 @@
 {
-  "version": "V906",
+  "version": "V907 Theme Manager 1.0",
   "activeTheme": "weekend",
-  "note": "Theme files stay in /themes. V906 only controls active theme key."
+  "themeLibrary": {
+    "morning": {
+      "key": "morning",
+      "title": "GOOD MORNING TWITCH",
+      "background": "themes/morning.png"
+    },
+    "trance": {
+      "key": "trance",
+      "title": "TRANCE TUESDAY",
+      "background": "themes/trance.png"
+    },
+    "eurodance": {
+      "key": "eurodance",
+      "title": "EURODANCE",
+      "background": "themes/eurodance.png"
+    },
+    "fredagsbar": {
+      "key": "fredagsbar",
+      "title": "FREDAGSBAR",
+      "background": "themes/fredagsbar.png"
+    },
+    "retro": {
+      "key": "retro",
+      "title": "RETRO HITS",
+      "background": "themes/retro.png"
+    },
+    "chart": {
+      "key": "chart",
+      "title": "FOLSOE TOP 20",
+      "background": "themes/chart.png"
+    },
+    "popup": {
+      "key": "popup",
+      "title": "POP UP LIVE",
+      "background": "themes/popup.png"
+    },
+    "summer": {
+      "key": "summer",
+      "title": "SUMMER BEATS",
+      "background": "themes/summer.png"
+    },
+    "weekend": {
+      "key": "weekend",
+      "title": "WEEKEND VIBES",
+      "background": "themes/weekend.png"
+    },
+    "danske": {
+      "key": "danske",
+      "title": "DANISH HITS",
+      "background": "themes/danske.png"
+    },
+    "disco": {
+      "key": "disco",
+      "title": "DISCO HITS",
+      "background": "themes/disco.png"
+    },
+    "handsup": {
+      "key": "handsup",
+      "title": "HANDS UP",
+      "background": "themes/handsup.png"
+    }
+  }
 }

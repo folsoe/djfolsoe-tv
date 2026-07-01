@@ -959,3 +959,94 @@ loadAll = async function(){
   await V906_originalLoadAll();
   v906RenderShowControl();
 };
+
+
+/* ===== V907 THEME MANAGER 1.0 ===== */
+const V907_THEME_LIBRARY={
+  morning:{emoji:'☀️',title:'GOOD MORNING TWITCH',desc:'Bright morning mood, coffee energy and clean daylight broadcast look.',bg:'themes/morning.png',primary:'#ffb000',secondary:'#ff5a00',hero:'Good Morning Twitch is live from Denmark',ticker:'☀️ GOOD MORNING TWITCH · Coffee · music · positive energy'},
+  trance:{emoji:'💙',title:'TRANCE TUESDAY',desc:'Blue lasers, uplifting trance and high-emotion music TV energy.',bg:'themes/trance.png',primary:'#00e5ff',secondary:'#7b2fff',hero:'Trance Tuesday live on DJ FOLSOE TV',ticker:'💙 TRANCE TUESDAY · Uplifting energy · goosebumps may occur'},
+  eurodance:{emoji:'💛',title:'EURODANCE',desc:'90s and 00s dance energy with bright stage power.',bg:'themes/eurodance.png',primary:'#00f0ff',secondary:'#005dff',hero:'Eurodance live on DJ FOLSOE TV',ticker:'💛 EURODANCE · 90s/00s anthems · big beats · big hooks'},
+  fredagsbar:{emoji:'🍺',title:'FREDAGSBAR',desc:'Weekend bar mood, party tracks and community love.',bg:'themes/fredagsbar.png',primary:'#ffb000',secondary:'#ff2f78',hero:'Fredagsbar is open',ticker:'🍺 FREDAGSBAR · Weekend starts here · party tracks and chat energy'},
+  retro:{emoji:'🕹️',title:'RETRO HITS',desc:'Nostalgia, classics and retro music TV colours.',bg:'themes/retro.png',primary:'#ff2bd6',secondary:'#7b2fff',hero:'Retro Hits on DJ FOLSOE TV',ticker:'🕹️ RETRO HITS · Classics that refuse to retire'},
+  chart:{emoji:'🏆',title:'FOLSOE TOP 20',desc:'Countdown show, hit radar and weekly chart energy.',bg:'themes/chart.png',primary:'#00f5ff',secondary:'#ff2bd6',hero:'FOLSOE Top 20 is live',ticker:'🏆 FOLSOE TOP 20 · Countdown · new entries · hit radar'},
+  popup:{emoji:'⚡',title:'POP UP LIVE',desc:'Fast surprise-stream signal with electric motion.',bg:'themes/popup.png',primary:'#00d4ff',secondary:'#ff00ea',hero:'Pop Up stream is live',ticker:'⚡ POP UP LIVE · Surprise stream activated'},
+  summer:{emoji:'🌴',title:'SUMMER BEATS',desc:'Sunshine, warm air and bright summer broadcast mood.',bg:'themes/summer.png',primary:'#00f5d4',secondary:'#ffb703',hero:'Summer Beats live from Denmark',ticker:'🌴 SUMMER BEATS · Sunshine · requests · summer energy'},
+  weekend:{emoji:'🎉',title:'WEEKEND VIBES',desc:'Maximum music and community energy for weekend streams.',bg:'themes/weekend.png',primary:'#ffd166',secondary:'#ff4d6d',hero:'Weekend Vibes on DJ FOLSOE TV',ticker:'🎉 WEEKEND VIBES · Maximum music and community energy'},
+  danske:{emoji:'🇩🇰',title:'DANISH HITS',desc:'Danish hits and local music TV feeling.',bg:'themes/danske.png',primary:'#ff2b2b',secondary:'#ffffff',hero:'Danish Hits on DJ FOLSOE TV',ticker:'🇩🇰 DANISH HITS · Danish music · live from Denmark'},
+  disco:{emoji:'🪩',title:'DISCO HITS',desc:'Mirrorballs, nu-disco and dancefloor glow.',bg:'themes/disco.png',primary:'#ff2bd6',secondary:'#ffd166',hero:'Disco Hits live on DJ FOLSOE TV',ticker:'🪩 DISCO HITS · Mirrorball energy · dancefloor classics'},
+  handsup:{emoji:'🙌',title:'HANDS UP',desc:'High-energy hands up, hard dance and peak-time power.',bg:'themes/handsup.png',primary:'#00e5ff',secondary:'#ff2bd6',hero:'Hands Up live on DJ FOLSOE TV',ticker:'🙌 HANDS UP · High energy · big drops · requests open'}
+};
+let v907SelectedTheme=activeTheme||'weekend';
+function v907ThemeStatus(msg){DJF_text('v907ThemeStatus',msg);}
+function v907RenderThemeManager(){
+  const wrap=DJF_el('v907ThemeCards'); if(!wrap) return;
+  const coreThemes=(core&&core.themes)||{};
+  wrap.innerHTML=Object.entries(V907_THEME_LIBRARY).map(([key,t])=>{
+    const merged=Object.assign({},t,coreThemes[key]||{});
+    const bg=merged.bgImage||merged.background||merged.bg;
+    return `<button class="${key===v907SelectedTheme?'activeThemeBtn':''}" onclick="v907SelectTheme('${key}')"><b>${t.emoji} ${merged.title||t.title}</b><span>${key}</span><small>${bg||'themes/'+key+'.png'}</small></button>`;
+  }).join('');
+  v907SelectTheme(v907SelectedTheme,false);
+}
+function v907SelectTheme(key,announce=true){
+  v907SelectedTheme=key||'weekend';
+  const base=V907_THEME_LIBRARY[v907SelectedTheme]||V907_THEME_LIBRARY.weekend;
+  const merged=Object.assign({},base,(core&&core.themes&&core.themes[v907SelectedTheme])||{});
+  const bg=merged.bgImage||merged.background||merged.bg||('themes/'+v907SelectedTheme+'.png');
+  DJF_text('v907ThemeTitle',(merged.emoji||base.emoji)+' '+(merged.title||base.title));
+  DJF_text('v907ThemeDesc',merged.desc||base.desc);
+  DJF_text('v907ThemePath','Background path: '+bg);
+  DJF_value('v907ThemeKey',v907SelectedTheme);
+  DJF_value('v907ThemeBg',bg);
+  DJF_value('v907ThemePrimary',merged.primary||base.primary);
+  DJF_value('v907ThemeSecondary',merged.secondary||base.secondary);
+  DJF_value('v907HeroLine',merged.hero||base.hero);
+  DJF_value('v907TickerLine',merged.ticker||base.ticker);
+  document.querySelectorAll('.v907ThemeCards button').forEach(b=>b.classList.remove('activeThemeBtn'));
+  const btn=[...document.querySelectorAll('.v907ThemeCards button')].find(b=>b.textContent.toLowerCase().includes(v907SelectedTheme));
+  if(btn) btn.classList.add('activeThemeBtn');
+  if(announce) v907ThemeStatus('Selected '+v907SelectedTheme+'. Press Apply + publish now.');
+}
+async function v907ApplyTheme(publish){
+  const key=(DJF_get('v907ThemeKey')||v907SelectedTheme||activeTheme||'weekend').toLowerCase();
+  const base=V907_THEME_LIBRARY[key]||V907_THEME_LIBRARY.weekend;
+  const bg=DJF_get('v907ThemeBg')||base.bg;
+  const primary=DJF_get('v907ThemePrimary')||base.primary;
+  const secondary=DJF_get('v907ThemeSecondary')||base.secondary;
+  const hero=DJF_get('v907HeroLine')||base.hero;
+  const ticker=DJF_get('v907TickerLine')||base.ticker;
+  activeTheme=key; v907SelectedTheme=key; markTheme(key);
+  core=core||{}; core.themes=core.themes||{};
+  core.themes[key]=Object.assign({},core.themes[key]||{},base,{bgImage:bg,background:bg,primary,secondary,hero,ticker});
+  newsItems=newsItems&&newsItems.length?newsItems:[];
+  newsItems[0]=Object.assign({id:'v907-theme-hero',active:true,type:'Active theme',priority:1,theme:'all'},newsItems[0]||{},{title:hero,body:(base.desc||'Theme controlled from admin')});
+  topItems=topItems&&topItems.length?topItems:[];
+  topItems[0]={id:'v907-theme-top',active:true,theme:key,text:ticker,priority:1};
+  overlayContent=overlayContent||JSON.parse(JSON.stringify(DEFAULT_OVERLAY_CONTENT));
+  overlayContent.box2=[{active:true,label:'ON AIR THEME',headline:(base.title||key).toUpperCase(),body:'Background: '+bg,icon:base.emoji||'🎨',priority:1}].concat((overlayContent.box2||[]).slice(1));
+  renderEditors(); renderOverlayContent(); v907RenderThemeManager();
+  v907ThemeStatus('Theme '+key+' applied locally. Background path: '+bg);
+  try{
+    await api('/api/theme-manager',{method:'POST',body:JSON.stringify({key,theme:core.themes[key]})});
+  }catch(e){ console.warn('Theme manager save skipped:',e.message); }
+  if(publish){
+    await publishEverything();
+    v907ThemeStatus('✅ Theme '+key+' published to website + overlay. Background: '+bg);
+  }
+}
+function v907OpenThemeFolderGuide(){
+  v907ThemeStatus('Theme folder guide:\n\n/themes/weekend.png\n/themes/morning.png\n/themes/trance.png\n/themes/eurodance.png\n/themes/fredagsbar.png\n/themes/retro.png\n/themes/chart.png\n/themes/popup.png\n/themes/summer.png\n\nUpload the image once to GitHub in /themes, then activate it here from admin.');
+}
+
+const V907_originalLoadAll = loadAll;
+loadAll = async function(){
+  await V907_originalLoadAll();
+  v907SelectedTheme=activeTheme||v907SelectedTheme||'weekend';
+  v907RenderThemeManager();
+};
+
+const V907_originalPublishEverything = publishEverything;
+publishEverything = async function(){
+  await V907_originalPublishEverything();
+  v907RenderThemeManager();
+};

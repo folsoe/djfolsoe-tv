@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V906 One Click Show Control</title>
+  <title>DJ FOLSOE V907 Theme Manager 1.0</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,8 +16,8 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V906</span>
-    <h1>One Click Show Control · Admin Broadcast Hub</h1>
+    <span class="kicker">DJ FOLSOE NETWORK V907</span>
+    <h1>Theme Manager 1.0 · One Click Broadcast Hub</h1>
     <p>One central admin hub: choose a show, edit once, and publish to website + overlay together.</p>
   </div>
   <div class="loginCard">
@@ -32,6 +32,7 @@
   <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
   <button onclick="jump('theme')">🎨 Themes</button>
+  <button onclick="jump('v907ThemeManager')">🖼️ Theme Manager</button>
   <button onclick="jump('homepage')">🏠 Website</button>
   <button onclick="jump('overlayContent')">📦 Overlay boxes</button>
   <button onclick="jump('top20')">🏆 Top 20</button>
@@ -143,6 +144,36 @@
     <p class="note">One click changes the active background for both website and StreamElements overlay. Theme images live in /themes and travel with the GitHub upload.</p>
     <div id="themeGrid" class="themeGrid"></div>
     <pre id="activeTheme">Active theme: loading</pre>
+  </section>
+
+
+
+  <section id="v907ThemeManager" class="panel v907ThemeManager">
+    <div class="panelHead"><h2>🖼️ V907 · Theme Manager 1.0</h2><div><button onclick="v907RenderThemeManager()">Refresh</button><button class="bigPublish" onclick="v907ApplyTheme(true)">APPLY THEME + PUBLISH</button></div></div>
+    <p class="note">Choose one broadcast theme in admin. V907 keeps the theme key, background path, website mood and overlay background synchronized. Upload theme images once in <code>/themes</code> and activate them from here.</p>
+    <div id="v907ThemeCards" class="v907ThemeCards"></div>
+    <div class="v907ThemeEditor">
+      <div class="v907Preview">
+        <span>Selected theme</span>
+        <h3 id="v907ThemeTitle">No theme selected</h3>
+        <p id="v907ThemeDesc">Select a theme card above.</p>
+        <small id="v907ThemePath">Background path: —</small>
+      </div>
+      <div class="formGrid">
+        <div><label>Theme key</label><input id="v907ThemeKey" readonly></div>
+        <div><label>Background image path</label><input id="v907ThemeBg" placeholder="themes/weekend.png"></div>
+        <div><label>Primary color</label><input id="v907ThemePrimary" placeholder="#22e7ff"></div>
+        <div><label>Secondary color</label><input id="v907ThemeSecondary" placeholder="#ff35d8"></div>
+        <div class="wide"><label>Website hero line</label><input id="v907HeroLine" placeholder="Live Music TV from Denmark"></div>
+        <div class="wide"><label>Overlay top ticker</label><input id="v907TickerLine" placeholder="Theme ticker text"></div>
+      </div>
+    </div>
+    <div class="quickActions">
+      <button onclick="v907ApplyTheme(false)">Apply locally</button>
+      <button onclick="v907ApplyTheme(true)">Apply + publish now</button>
+      <button onclick="v907OpenThemeFolderGuide()">Show folder guide</button>
+    </div>
+    <pre id="v907ThemeStatus">V907 ready. Select a theme.</pre>
   </section>
 
   <section id="homepage" class="panel">
