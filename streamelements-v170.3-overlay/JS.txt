@@ -1,5 +1,5 @@
 
-/* DJ FOLSOE NETWORK V922.2 · FORCE BROADCAST CORE OVERLAY */
+/* DJ FOLSOE NETWORK V922.3 · NO CONSOLE OVERLAY SELF TEST */
 function englishTickerText(s){
   return String(s||"")
     .replace(/RETRO HITS\s*·?\s*KLASSIKERE DER ALDRIG DØR/gi,"RETRO HITS · CLASSICS THAT NEVER DIE")
@@ -170,7 +170,8 @@ function twitchTickerPack(){
 
 /* V816.20.1.7.3 - FORCE OBS BACKGROUND */
 function forceThemeBackground(key){
-  key = String(key || "weekend").toLowerCase();
+  key = String(key || "").toLowerCase();
+  if(!key || key === "loading"){ return; }
   const bg = "https://folsoetv.dk/themes/" + key + ".png";
   const root = document.getElementById("djfV170Reborn");
   if(!root) return;
@@ -198,7 +199,7 @@ function forceThemeBackground(key){
 
 const API_BASE=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
 const DEFAULT_CHANNEL="djfolsoe";
-const OVERLAY_VERSION="V922.2 FORCE BROADCAST CORE";
+const OVERLAY_VERSION="V922.3 NO CONSOLE SELF TEST";
 let overlayDebug={version:OVERLAY_VERSION,api:API_BASE,lastFetch:null,lastTheme:null,lastError:null,source:null};
 function renderOverlayDebug(){
   try{
@@ -206,15 +207,15 @@ function renderOverlayDebug(){
     if(!el){
       el=document.createElement("div");
       el.id="djfOverlayDebugBadge";
-      el.style.cssText="position:fixed;left:12px;bottom:12px;z-index:999999;padding:8px 10px;border:1px solid rgba(255,255,255,.25);border-radius:10px;background:rgba(0,0,0,.62);color:#fff;font:700 11px/1.35 Arial,sans-serif;letter-spacing:.04em;pointer-events:none;max-width:380px";
+      el.style.cssText="position:fixed;left:12px;bottom:12px;z-index:999999;padding:10px 12px;border:2px solid rgba(98,236,255,.9);border-radius:12px;background:rgba(0,0,0,.82);color:#fff;font:800 12px/1.45 Arial,sans-serif;letter-spacing:.04em;pointer-events:none;max-width:520px;box-shadow:0 0 28px rgba(98,236,255,.35)";
       document.body.appendChild(el);
     }
     el.innerHTML=`${overlayDebug.version}<br>API: ${overlayDebug.api}<br>THEME: ${overlayDebug.lastTheme||"?"}<br>SOURCE: ${overlayDebug.source||"?"}<br>${overlayDebug.lastError?"ERROR: "+overlayDebug.lastError:"OK: "+(overlayDebug.lastFetch||"")}`;
   }catch(e){}
 }
-function hideOverlayDebugAfter(ms=25000){ setTimeout(()=>{ const el=document.getElementById("djfOverlayDebugBadge"); if(el) el.style.opacity="0.18"; }, ms); }
+function hideOverlayDebugAfter(ms=25000){ /* V922.3: keep visible because user cannot use console */ }
 
-let state=fallbackState();
+let state=loadingState();
 let tick=0;
 let lastTheme="";
 let chatQueue=[];
@@ -458,6 +459,20 @@ function broadcastCoreToOverlayState(core){
   });
 }
 
+function loadingState(){
+  return {
+    theme:{activeTheme:"loading",theme:{key:"loading",title:"LOADING BROADCAST CORE",emoji:"📡",desc:"Waiting for admin data",primary:"#62ecff",secondary:"#ff4bd8",accent:"#ffe36e",bgImage:""}},
+    visual:{primary:"#62ecff",secondary:"#ff4bd8",accent:"#ffe36e",title:"LOADING BROADCAST CORE",emoji:"📡",mood:"Waiting for /api/broadcast"},
+    topbarNews:["LOADING BROADCAST CORE · WAITING FOR API"],
+    footerTicker:["LOADING BROADCAST CORE · IF THIS STAYS VISIBLE THE OVERLAY CANNOT REACH THE API"],
+    chart:{items:[]},
+    live:{followers:0,followersGoal:1000,viewers:0,subs:0,subGoal:100},
+    show:{title:"LOADING BROADCAST CORE",description:"Waiting for admin / Twitch data"},
+    twitchChat:{channel:DEFAULT_CHANNEL},
+    motion:{lanes:{box1:[{label:"API",headline:"Loading broadcast-core",body:"Waiting for Worker",icon:"📡"}],box2:[{label:"THEME",headline:"Not loaded yet",body:"No fallback weekend",icon:"🎨"}],box3:[{label:"STATUS",headline:"Waiting",body:"If this remains, API is blocked",icon:"⚠️"}]}}
+  };
+}
+
 function fallbackState(){
   return {
     theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"Broadcast Cloud",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
@@ -525,26 +540,55 @@ function normalize(j){
   return s;
 }
 
+function apiCandidates(){
+  const bases=[];
+  if(API_BASE) bases.push(API_BASE);
+  bases.push("https://djfolsoe-tv-api.sunefolsoe.workers.dev");
+  bases.push("https://folsoetv.dk");
+  const seen={};
+  return bases.filter(Boolean).map(b=>String(b).replace(/\/$/,"")).filter(b=>!seen[b]&&(seen[b]=1)).flatMap(b=>[b+"/api/broadcast", b+"/assets/data/broadcast-core.json", b+"/api/broadcast-core.json"]);
+}
+
+async function fetchFirstCore(){
+  const urls=apiCandidates();
+  let lastErr="";
+  for(const baseUrl of urls){
+    const url=baseUrl+(baseUrl.includes("?")?"&":"?")+"ts="+Date.now();
+    try{
+      overlayDebug.source=url.replace(/\?ts=.*/,"");
+      renderOverlayDebug();
+      const r=await fetch(url,{cache:"no-store",mode:"cors",headers:{"cache-control":"no-cache","pragma":"no-cache","accept":"application/json"}});
+      if(!r.ok) throw new Error("HTTP "+r.status);
+      const payload=await r.json();
+      const core=pickCorePayload(payload);
+      if(!core || typeof core !== "object") throw new Error("No core JSON");
+      return {payload,url:baseUrl};
+    }catch(e){
+      lastErr=(baseUrl+" → "+(e&&e.message?e.message:String(e))).slice(0,220);
+      overlayDebug.lastError=lastErr;
+      renderOverlayDebug();
+    }
+  }
+  throw new Error(lastErr || "No API candidates worked");
+}
+
 async function loadState(){
   try{
-    const url=API_BASE+"/api/broadcast?ts="+Date.now();
-    const r=await fetch(url,{cache:"no-store",mode:"cors",headers:{"cache-control":"no-cache","pragma":"no-cache"}});
-    if(!r.ok) throw new Error("broadcast endpoint HTTP "+r.status);
-    const payload=await r.json();
+    const result=await fetchFirstCore();
+    const payload=result.payload;
     const nextState=broadcastCoreToOverlayState(payload);
     const nextTheme=(nextState.theme&&nextState.theme.activeTheme)||"unknown";
     state=nextState;
     overlayDebug.lastFetch=new Date().toLocaleTimeString();
     overlayDebug.lastTheme=nextTheme;
     overlayDebug.lastError=null;
-    overlayDebug.source="/api/broadcast";
-    console.log("V922.2 overlay core applied", nextTheme, state?.show?.title, payload);
+    overlayDebug.source=result.url;
+    console.log("V922.3 overlay core applied", nextTheme, state?.show?.title, payload);
   }catch(e){
-    // Important: do NOT reset to weekend when API fails. Keep the latest visible state.
     overlayDebug.lastError=String(e&&e.message?e.message:e);
-    overlayDebug.source="kept-current-state";
-    console.warn("V922.2 broadcast-core fetch failed; keeping current overlay state", e);
-    state=state||fallbackState();
+    overlayDebug.source="API FAILED - keeping current visible state";
+    console.warn("V922.3 broadcast-core fetch failed; keeping current overlay state", e);
+    state=state||loadingState();
   }
   applyTheme();
   renderAll();
