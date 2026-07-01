@@ -1,10 +1,11 @@
-// DJ FOLSOE NETWORK V923 - STREAM ELEMENTS JSONP BRIDGE
+// DJ FOLSOE NETWORK V924 - PERSISTENT BROADCAST CORE
 // Lightweight Cloudflare Worker. Stores one clean broadcast-core and returns compatibility aliases.
 // Endpoints: GET /api/health, GET /api/broadcast, GET /api/broadcast-jsonp, POST /api/publish, GET /api/twitch
 
-const VERSION = 'V923 StreamElements JSONP Bridge';
+const VERSION = 'V924 Persistent Broadcast Core';
 const SCHEMA = 'broadcast-core/v2-clean';
 const KEY = 'broadcast-core';
+const KV_BINDING_NAMES = ['BROADCAST_CORE','DJF_BROADCAST_CORE','BROADCAST_KV'];
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -33,6 +34,13 @@ function safeCallbackName(v) {
   return name || 'djfBroadcastCoreCallback';
 }
 function cleanPath(pathname) { return pathname.replace(/\/+$/, '') || '/'; }
+function getKV(env){
+  for (const name of KV_BINDING_NAMES) {
+    const kv = env && env[name];
+    if (kv && typeof kv.get === 'function' && typeof kv.put === 'function') return { name, kv };
+  }
+  return { name: null, kv: null };
+}
 function authOk(request, env) {
   if (!env.ADMIN_TOKEN) return true;
   const header = request.headers.get('x-admin-token') || '';
@@ -175,18 +183,37 @@ function compatibility(core) {
       controlPanel: { title: core.overlay.title || core.show.current, status: core.overlay.status || core.show.state, theme: core.theme.id, viewers: core.show.viewers || 0, followers, subs, subGoal: core.community.subGoal, nextShow: core.nextShow, infoLine: core.overlay.infoLine || tickerText, requestText: core.overlay.requestText, specialEvent: core.overlay.specialEvent },
       updatedAt: core.updatedAt
     },
-    bottomTickerItems: [{ id:'v921-main-ticker', active:true, theme:'all', text:tickerText, priority:1 }]
+    bottomTickerItems: [{ id:'v924-main-ticker', active:true, theme:'all', text:tickerText, priority:1 }]
   };
 }
 async function kvGet(env) {
-  try { if (env.BROADCAST_CORE?.get) { const raw = await env.BROADCAST_CORE.get(KEY); if (raw) return JSON.parse(raw); } } catch (_) {}
+  try {
+    const { kv } = getKV(env);
+    if (kv) {
+      const raw = await kv.get(KEY);
+      if (raw) return JSON.parse(raw);
+    }
+  } catch (e) {
+    console.log('KV get failed', e && e.message ? e.message : e);
+  }
   return null;
 }
 async function kvPut(env, core) {
-  try { if (env.BROADCAST_CORE?.put) { await env.BROADCAST_CORE.put(KEY, JSON.stringify(core)); return true; } } catch (_) {}
+  try {
+    const { kv } = getKV(env);
+    if (kv) {
+      await kv.put(KEY, JSON.stringify(core));
+      return true;
+    }
+  } catch (e) {
+    console.log('KV put failed', e && e.message ? e.message : e);
+  }
   return false;
 }
-async function getStoredCore(env) { return MEMORY_CORE || await kvGet(env) || defaultCore(env); }
+async function getStoredCore(env) {
+  // KV is source of truth when configured. Memory is only a same-isolate fallback.
+  return await kvGet(env) || MEMORY_CORE || defaultCore(env);
+}
 async function getTwitch(env) {
   const now = Date.now();
   if (TWITCH_CACHE.data && now - TWITCH_CACHE.at < 30000) return TWITCH_CACHE.data;
@@ -213,8 +240,16 @@ async function handle(request, env) {
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS_HEADERS });
   const url = new URL(request.url);
   const path = cleanPath(url.pathname);
-  if (path === '/api/health' || path === '/api/health-check') {
-    return json({ ok:true, version:VERSION, schema:SCHEMA, worker:'djfolsoe-tv-api', endpoints:['/api/health','/api/broadcast','/api/broadcast-jsonp','/api/publish','/api/twitch'], hasKV:!!env.BROADCAST_CORE, memoryUpdatedAt:MEMORY_UPDATED_AT, checkedAt:new Date().toISOString() });
+  if (path === '/api/health' || path === '/api/health-check' || path === '/api/persistence') {
+    const kvInfo = getKV(env);
+    return json({
+      ok:true, version:VERSION, schema:SCHEMA, worker:'djfolsoe-tv-api',
+      endpoints:['/api/health','/api/persistence','/api/broadcast','/api/broadcast-jsonp','/api/publish','/api/twitch'],
+      persistent: !!kvInfo.kv, hasKV: !!kvInfo.kv, kvBinding: kvInfo.name, requiredKVBinding:'BROADCAST_CORE',
+      storage: kvInfo.kv ? 'cloudflare-kv' : 'memory-only',
+      warning: kvInfo.kv ? null : 'No KV binding found. Publish works only in memory until you add a Cloudflare KV binding named BROADCAST_CORE.',
+      memoryUpdatedAt:MEMORY_UPDATED_AT, checkedAt:new Date().toISOString()
+    });
   }
   if (path === '/api/twitch' || path === '/api/twitch-profile') return json(await getTwitch(env));
   if (path === '/api/broadcast' || path === '/api/unified-control' || path === '/api/website-portal' || path === '/api/broadcast-jsonp') {
@@ -222,7 +257,7 @@ async function handle(request, env) {
     const twitch = url.searchParams.get('twitch') === '0' ? null : await getTwitch(env);
     const core = normalizeCore(stored, twitch, env);
     const compat = compatibility(core);
-    const payload = { ok:true, version:VERSION, schema:SCHEMA, storage: MEMORY_CORE ? 'memory' : (env.BROADCAST_CORE ? 'kv-or-default' : 'memory-default'), core, data: core, twitch: core.twitch, ...compat, overlay: compat.overlayHub, updatedAt: core.updatedAt };
+    const payload = { ok:true, version:VERSION, schema:SCHEMA, storage: getKV(env).kv ? 'cloudflare-kv' : (MEMORY_CORE ? 'memory' : 'memory-default'), persistent: !!getKV(env).kv, core, data: core, twitch: core.twitch, ...compat, overlay: compat.overlayHub, updatedAt: core.updatedAt };
     if (path === '/api/broadcast-jsonp') {
       const cb = safeCallbackName(url.searchParams.get('callback'));
       return js(`${cb}(${JSON.stringify(payload)});`);
@@ -238,7 +273,7 @@ async function handle(request, env) {
     core.updatedAt = new Date().toISOString();
     MEMORY_CORE = core; MEMORY_UPDATED_AT = core.updatedAt;
     const stored = await kvPut(env, core);
-    return json({ ok:true, version:VERSION, schema:SCHEMA, stored, storage: stored ? 'kv' : 'memory', core, data: core, twitch: core.twitch, ...compatibility(core), updatedAt: core.updatedAt });
+    return json({ ok:true, version:VERSION, schema:SCHEMA, stored, persistent: stored, storage: stored ? 'cloudflare-kv' : 'memory-only', warning: stored ? null : 'No KV binding found. Add BROADCAST_CORE binding for persistent publish.', core, data: core, twitch: core.twitch, ...compatibility(core), updatedAt: core.updatedAt });
   }
   return json({ ok:false, error:'Not found', version:VERSION, path }, 404);
 }

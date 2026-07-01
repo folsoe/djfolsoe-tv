@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "version": "V920 Broadcast Core Cleanup",
+  "version": "V924 Persistent Broadcast Core",
   "schema": "broadcast-core/v2-clean",
   "source": "static-default",
   "updatedAt": "2026-07-01T19:20:00.000Z",
@@ -63,7 +63,9 @@
   },
   "ticker": {
     "text": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY",
-    "items": ["DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY"]
+    "items": [
+      "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY"
+    ]
   },
   "overlay": {
     "title": "DJ FOLSOE",
@@ -74,16 +76,61 @@
     "subGoal": 100
   },
   "top20": [
-    { "rank": 1, "artist": "DJ FOLSOE", "title": "This Week's Number One", "status": "ADMIN CONTROLLED" },
-    { "rank": 2, "artist": "Viewer Pick", "title": "Request of the Week", "status": "COMMUNITY" },
-    { "rank": 3, "artist": "Future Hit", "title": "Discovery Track", "status": "NEW" }
+    {
+      "rank": 1,
+      "artist": "DJ FOLSOE",
+      "title": "This Week's Number One",
+      "status": "ADMIN CONTROLLED"
+    },
+    {
+      "rank": 2,
+      "artist": "Viewer Pick",
+      "title": "Request of the Week",
+      "status": "COMMUNITY"
+    },
+    {
+      "rank": 3,
+      "artist": "Future Hit",
+      "title": "Discovery Track",
+      "status": "NEW"
+    }
   ],
   "featuredShows": [
-    { "time": "Morning", "title": "Good Morning Twitch", "description": "Bright morning mood, coffee, chat and fresh music.", "color": "#ffe36e" },
-    { "time": "Tuesday", "title": "Trance Tuesday", "description": "Melodic trance, energy and emotional peak-time sound.", "color": "#62ecff" },
-    { "time": "Special", "title": "Eurodance", "description": "90s and 00s dance classics with full Music TV nostalgia.", "color": "#ff4bd8" },
-    { "time": "Friday", "title": "Fredagsbar", "description": "Weekend mode, party classics and Danish Friday energy.", "color": "#6cffb5" },
-    { "time": "Sunday", "title": "Retro Hits", "description": "70s, 80s and 90s memories with viewer favourites.", "color": "#ffe36e" },
-    { "time": "Surprise", "title": "Pop Up Live", "description": "The stream that appears when you least expect it.", "color": "#ffffff" }
+    {
+      "time": "Morning",
+      "title": "Good Morning Twitch",
+      "description": "Bright morning mood, coffee, chat and fresh music.",
+      "color": "#ffe36e"
+    },
+    {
+      "time": "Tuesday",
+      "title": "Trance Tuesday",
+      "description": "Melodic trance, energy and emotional peak-time sound.",
+      "color": "#62ecff"
+    },
+    {
+      "time": "Special",
+      "title": "Eurodance",
+      "description": "90s and 00s dance classics with full Music TV nostalgia.",
+      "color": "#ff4bd8"
+    },
+    {
+      "time": "Friday",
+      "title": "Fredagsbar",
+      "description": "Weekend mode, party classics and Danish Friday energy.",
+      "color": "#6cffb5"
+    },
+    {
+      "time": "Sunday",
+      "title": "Retro Hits",
+      "description": "70s, 80s and 90s memories with viewer favourites.",
+      "color": "#ffe36e"
+    },
+    {
+      "time": "Surprise",
+      "title": "Pop Up Live",
+      "description": "The stream that appears when you least expect it.",
+      "color": "#ffffff"
+    }
   ]
 }

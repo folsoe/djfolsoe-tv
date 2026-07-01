@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V920 · BROADCAST CORE CLEANUP
+// DJ FOLSOE NETWORK V921 · ADMIN FIELD MAPPING
 const $ = (id) => document.getElementById(id);
 const API_BASE = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
 let portal = {};
@@ -39,7 +39,7 @@ function startPolling(){
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) refreshTwitchAndCore(); });
 }
 function normalizeCore(){
-  // V920 accepts clean broadcast-core/v2 and also old V919 compatibility payloads.
+  // V921 accepts clean broadcast-core/v2 and also old V919 compatibility payloads.
   const old = portal || {};
   const b = old.broadcast || {};
   const hp = old.homepage || {};

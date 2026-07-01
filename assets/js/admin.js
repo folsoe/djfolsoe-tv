@@ -1,4 +1,4 @@
-/* DJ FOLSOE NETWORK V922.1 · ONE CLICK NO-RESET FIX */
+/* DJ FOLSOE NETWORK V921 · BROADCAST CORE CLEANUP */
 const DEFAULT_API_BASE = 'https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const TWITCH_URL = 'https://www.twitch.tv/djfolsoe';
 const WEBSITE_URL = 'https://folsoetv.dk';
@@ -216,26 +216,17 @@ function renderTwitch(){
   set('twitchStatus', twitchData.isLive ? 'LIVE' : 'OFFLINE'); $('twitchStatus')?.classList.toggle('ok',!!twitchData.isLive);
   set('twitchTitle', twitchData.liveTitle || 'twitch.tv/djfolsoe'); set('twitchViewers', Number(twitchData.viewers||0)); set('twitchFollowers', twitchData.followers ?? '—'); set('twitchSubs', twitchData.subs ?? val('subs',0));
 }
-async function djfSyncTwitchOnly(){
-  const tw = await getJson('/api/twitch?live=1&t='+Date.now(), null);
-  if(tw && (tw.ok || tw.isLive !== undefined)) twitchData = Object.assign(twitchData, tw);
-  renderTwitch();
-  return twitchData;
-}
 async function djfOneClick(){
   try{
     djfSaveSettings();
-    set('readyState','Publishing…'); status('🚀 One click started: Twitch sync → Admin fields → Website + Overlay publish…');
-    // IMPORTANT V922.1: Do NOT call djfRefresh() here.
-    // djfRefresh() loads the old server core and overwrites the fields you just selected,
-    // which made the overlay jump back to the old weekend/default theme.
-    await djfSyncTwitchOnly();
+    set('readyState','Publishing…'); status('🚀 One click started: Twitch sync → Mapped broadcast-core → Website + Overlay publish…');
+    await djfRefresh();
     validateMappedFields();
     const p = buildPayload();
     const r = await postJson('/api/publish', p);
     localStorage.setItem('DJF_V921_LAST_PUBLISH', new Date().toISOString());
     set('readyState','CLEAN CORE SYNC OK'); set('lastPublish', new Date().toLocaleString());
-    status('✅ V922.1 COMPLETE. Website + overlay are published from the current admin fields — no reset to old weekend/default core.');
+    status('✅ V921 COMPLETE. Website + overlay are published from the mapped admin fields.');
     return r;
   }catch(e){ set('readyState','API ERROR'); status('❌ One click failed: '+e.message+'\n\nCheck Advanced → API base, ADMIN_TOKEN and Cloudflare Worker deploy.', 'bad'); }
 }

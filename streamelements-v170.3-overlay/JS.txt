@@ -199,7 +199,7 @@ function forceThemeBackground(key){
 
 const API_BASE=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
 const DEFAULT_CHANNEL="djfolsoe";
-const OVERLAY_VERSION="V923 STREAM ELEMENTS JSONP BRIDGE";
+const OVERLAY_VERSION="V924 PERSISTENT BROADCAST CORE";
 let overlayDebug={version:OVERLAY_VERSION,api:API_BASE,lastFetch:null,lastTheme:null,lastError:null,source:null};
 function renderOverlayDebug(){
   try{
