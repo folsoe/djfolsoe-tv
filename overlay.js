@@ -1,5 +1,5 @@
 
-/* DJ FOLSOE NETWORK V922.1 · OVERLAY CORE FORCE SYNC */
+/* DJ FOLSOE NETWORK V922.2 · FORCE BROADCAST CORE OVERLAY */
 function englishTickerText(s){
   return String(s||"")
     .replace(/RETRO HITS\s*·?\s*KLASSIKERE DER ALDRIG DØR/gi,"RETRO HITS · CLASSICS THAT NEVER DIE")
@@ -196,8 +196,23 @@ function forceThemeBackground(key){
   document.documentElement.style.setProperty("--theme-bg-url", bg);
 }
 
-const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+const API_BASE=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
 const DEFAULT_CHANNEL="djfolsoe";
+const OVERLAY_VERSION="V922.2 FORCE BROADCAST CORE";
+let overlayDebug={version:OVERLAY_VERSION,api:API_BASE,lastFetch:null,lastTheme:null,lastError:null,source:null};
+function renderOverlayDebug(){
+  try{
+    let el=document.getElementById("djfOverlayDebugBadge");
+    if(!el){
+      el=document.createElement("div");
+      el.id="djfOverlayDebugBadge";
+      el.style.cssText="position:fixed;left:12px;bottom:12px;z-index:999999;padding:8px 10px;border:1px solid rgba(255,255,255,.25);border-radius:10px;background:rgba(0,0,0,.62);color:#fff;font:700 11px/1.35 Arial,sans-serif;letter-spacing:.04em;pointer-events:none;max-width:380px";
+      document.body.appendChild(el);
+    }
+    el.innerHTML=`${overlayDebug.version}<br>API: ${overlayDebug.api}<br>THEME: ${overlayDebug.lastTheme||"?"}<br>SOURCE: ${overlayDebug.source||"?"}<br>${overlayDebug.lastError?"ERROR: "+overlayDebug.lastError:"OK: "+(overlayDebug.lastFetch||"")}`;
+  }catch(e){}
+}
+function hideOverlayDebugAfter(ms=25000){ setTimeout(()=>{ const el=document.getElementById("djfOverlayDebugBadge"); if(el) el.style.opacity="0.18"; }, ms); }
 
 let state=fallbackState();
 let tick=0;
@@ -512,31 +527,34 @@ function normalize(j){
 
 async function loadState(){
   try{
-    // V922: primary source is the same broadcast-core used by website/admin.
-    const r=await fetch(API_BASE+"/api/broadcast?ts="+Date.now(),{cache:"no-store", headers:{"cache-control":"no-cache"}});
+    const url=API_BASE+"/api/broadcast?ts="+Date.now();
+    const r=await fetch(url,{cache:"no-store",mode:"cors",headers:{"cache-control":"no-cache","pragma":"no-cache"}});
     if(!r.ok) throw new Error("broadcast endpoint HTTP "+r.status);
     const payload=await r.json();
-    state=broadcastCoreToOverlayState(payload);
-    console.log("V922.1 overlay core applied", state?.theme?.activeTheme, state?.show?.title);
+    const nextState=broadcastCoreToOverlayState(payload);
+    const nextTheme=(nextState.theme&&nextState.theme.activeTheme)||"unknown";
+    state=nextState;
+    overlayDebug.lastFetch=new Date().toLocaleTimeString();
+    overlayDebug.lastTheme=nextTheme;
+    overlayDebug.lastError=null;
+    overlayDebug.source="/api/broadcast";
+    console.log("V922.2 overlay core applied", nextTheme, state?.show?.title, payload);
   }catch(e){
-    console.log("V922 broadcast-core fallback",e);
-    try{
-      // Legacy fallback only if the new endpoint is unavailable.
-      const r2=await fetch(API_BASE+"/api/overlay/v170-state?ts="+Date.now(),{cache:"no-store"});
-      if(!r2.ok) throw new Error("legacy overlay endpoint HTTP "+r2.status);
-      state=normalize(await r2.json());
-    }catch(e2){
-      console.log("V922 legacy fallback",e2);
-      state=normalize(state||fallbackState());
-    }
+    // Important: do NOT reset to weekend when API fails. Keep the latest visible state.
+    overlayDebug.lastError=String(e&&e.message?e.message:e);
+    overlayDebug.source="kept-current-state";
+    console.warn("V922.2 broadcast-core fetch failed; keeping current overlay state", e);
+    state=state||fallbackState();
   }
   applyTheme();
   renderAll();
   connectChat();
+  renderOverlayDebug();
+  hideOverlayDebugAfter();
 }
-
 function applyTheme(){
   const key=(state.theme&&state.theme.activeTheme)||"weekend";
+  overlayDebug.lastTheme=key;
   if(key!==lastTheme){
     document.body.className="theme-"+key;
     forceThemeBackground(key);
