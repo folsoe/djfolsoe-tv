@@ -1,0 +1,43 @@
+{
+  "version": "V908 Website 2.0",
+  "hero": {
+    "eyebrow": "DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK",
+    "title": "DJ FOLSOE LIVE",
+    "subtitle": "Modern Twitch Music TV anno 2026",
+    "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
+    "background": "themes/weekend.png"
+  },
+  "ticker": [
+    "LIVE DJ SHOWS FROM DENMARK",
+    "REQUEST A SONG IN TWITCH CHAT",
+    "FOLSOE TOP 20 · WEEKLY MUSIC CHART",
+    "TRANCE · EURODANCE · RETRO · FREDAGSBAR · POPUP"
+  ],
+  "nextShow": {
+    "title": "Next DJ FOLSOE broadcast",
+    "datetime": "",
+    "timeLabel": "Announced soon",
+    "theme": "Music TV",
+    "description": "The next show is controlled from admin and appears here automatically."
+  },
+  "featuredShows": [
+    {"title":"Good Morning Twitch","time":"Morning","description":"Bright morning mood, coffee, chat and fresh music.","theme":"morning","color":"#ffd66b"},
+    {"title":"Trance Tuesday","time":"Tuesday","description":"Melodic trance, energy and emotional peak-time sound.","theme":"trance","color":"#69e7ff"},
+    {"title":"Eurodance","time":"Special","description":"90s and 00s dance classics with full Music TV nostalgia.","theme":"eurodance","color":"#ff4fd8"},
+    {"title":"Fredagsbar","time":"Friday","description":"Weekend mode, party classics and Danish Friday energy.","theme":"fredagsbar","color":"#65ffb4"},
+    {"title":"Retro Hits","time":"Sunday","description":"70s, 80s and 90s memories with viewer favourites.","theme":"retro","color":"#ffd66b"},
+    {"title":"Pop Up Live","time":"Surprise","description":"The stream that appears when you least expect it.","theme":"popup","color":"#ffffff"}
+  ],
+  "aboutText": "DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.",
+  "infoCards": [
+    {"kicker":"STUDIO","title":"Broadcast setup","text":"OBS, StreamElements, admin control and theme engine working as one system."},
+    {"kicker":"MUSIC","title":"Many show moods","text":"Trance, Eurodance, Retro, EDM, Fredagsbar, Morning and Pop Up shows."},
+    {"kicker":"CHAT","title":"Viewer participation","text":"Requests, shoutouts, channel points, goals and community moments."},
+    {"kicker":"NETWORK","title":"Danish DJ culture","text":"A modern Music TV portal connected to Twitch and future DJ network features."}
+  ],
+  "top20": [
+    {"rank":1,"artist":"DJ FOLSOE","title":"This Week's Number One","status":"ADMIN CONTROLLED"},
+    {"rank":2,"artist":"Viewer Pick","title":"Request of the Week","status":"COMMUNITY"},
+    {"rank":3,"artist":"Future Hit","title":"Discovery Track","status":"NEW"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "version": "V908 Website 2.0",
+  "title": "DJ FOLSOE TV",
+  "description": "A modern Music TV and Twitch portal from Denmark.",
+  "primaryLanguage": "en",
+  "sections": ["hero", "nextShow", "featuredShows", "about", "top20", "community", "requests"],
+  "locked": {
+    "overlayGraphics": "unchanged",
+    "box4": "twitch-chat"
+  }
+}

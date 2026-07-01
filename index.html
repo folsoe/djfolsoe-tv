@@ -3,139 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE TV · Music TV From Denmark</title>
-  <meta name="description" content="DJ FOLSOE TV is a modern Music TV and Twitch channel from Denmark featuring live DJ shows, Trance Tuesday, FOLSOE Countdown, Retro Hits, requests, community and music discovery.">
-  <meta name="keywords" content="DJ FOLSOE, DJ Folsoe Twitch, Music TV Denmark, Twitch DJ, live DJ shows, Trance Tuesday, FOLSOE Countdown, Retro Hits, Eurodance">
+  <title>DJ FOLSOE TV · Music TV Portal</title>
+  <meta name="description" content="DJ FOLSOE TV is a modern Danish Music TV and Twitch portal with live DJ shows, requests, Top 20, community and broadcast energy from Denmark.">
+  <meta name="keywords" content="DJ FOLSOE, folsoetv, Twitch DJ, Music TV Denmark, Trance Tuesday, Eurodance, Fredagsbar, Retro Hits, DJ Folsoe live">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://folsoetv.dk/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="DJ FOLSOE TV">
-  <meta property="og:title" content="DJ FOLSOE TV · Music TV From Denmark">
-  <meta property="og:description" content="Live DJ shows, Top 20, requests, community and Music TV energy from Denmark.">
+  <meta property="og:title" content="DJ FOLSOE TV · Music TV Portal">
+  <meta property="og:description" content="Live DJ shows, Twitch community, chart countdowns and Music TV energy from Denmark.">
   <meta property="og:url" content="https://folsoetv.dk/">
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="DJ FOLSOE TV · Music TV From Denmark">
-  <meta name="twitter:description" content="Live DJ shows, Top 20, requests, community and Music TV energy from Denmark.">
-  <meta name="twitter:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
-  <link rel="stylesheet" href="assets/css/homepage.css?v=8171">
-  <script id="seoSchema" type="application/ld+json"></script>
+  <link rel="stylesheet" href="assets/css/site.css?v=908">
 </head>
-<body class="globalEdition">
-  <div class="pageShell">
-    <header class="siteNav">
-      <a class="navBrand" href="#top"><span class="brandOrb"></span><strong>DJ FOLSOE TV</strong><em id="navLive">LIVE</em></a>
-      <nav class="desktopNav">
-        <a href="#top">Home</a>
-        <a href="#nextShow">Next show</a>
-        <a href="#about">Who is DJ FOLSOE?</a>
-        <a href="#shows">Shows</a>
-        <a href="#top20">Top 20</a>
-        <a href="#requests">Requests</a>
-        <a href="#communityWall">Community</a>
+<body>
+  <div class="tvShell">
+    <header class="tvNav">
+      <a class="brand" href="#top"><span class="brandMark">TV</span><strong>DJ FOLSOE</strong><em id="navState">LOADING</em></a>
+      <nav>
+        <a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#about">DJ FOLSOE</a><a href="#community">Community</a>
       </nav>
-      <a class="navCta" href="admin.html?v=8171">Admin</a>
+      <a class="watchBtn" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch Twitch</a>
     </header>
 
     <main id="top">
-      <section class="hero richHero">
-        <div id="heroBanner" class="heroBanner"></div>
-        <div class="heroProfile">
-          <div class="avatarRing"><img id="twitchAvatar" alt="DJ FOLSOE Twitch profile"><div id="avatarFallback">DJ</div></div>
-          <div id="heroLivePill" class="avatarLive">OFFLINE</div>
+      <section id="live" class="heroPortal">
+        <div class="heroBg" id="heroThemeBg"></div>
+        <div class="heroContent">
+          <p class="eyebrow" id="heroEyebrow">MUSIC TV FROM DENMARK</p>
+          <h1 id="heroTitle">DJ FOLSOE LIVE</h1>
+          <h2 id="heroSubtitle">One channel. Live shows. Community energy.</h2>
+          <p id="heroText">Modern live DJ shows, requests, chart countdowns and retro music television vibes from Denmark.</p>
+          <div class="heroActions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live</a><a class="secondary" href="#requests">Request a song</a></div>
         </div>
-        <div class="heroCopy">
-          <div class="onlineLine"><span id="liveDot"></span><b id="heroStatusMini">Loading Twitch...</b></div>
-          <h1>DJ FOLSOE</h1>
-          <h2 id="heroSubtitle">Music TV from Denmark</h2>
-          <p id="twitchDescription">Loading Twitch bio...</p>
-          <div class="heroButtons">
-            <a class="btn primary" href="https://twitch.tv/djfolsoe" target="_blank">Watch live on Twitch</a>
-            <a class="btn ghost" href="#requests">Request a song</a>
+        <aside class="livePanel">
+          <div class="livePill" id="livePill">OFFLINE</div>
+          <h3 id="currentShow">Current broadcast</h3>
+          <p id="streamTitle">Loading broadcast data...</p>
+          <div class="metricGrid">
+            <div><span>Viewers</span><b id="metricViewers">0</b></div>
+            <div><span>Followers</span><b id="metricFollowers">0</b></div>
+            <div><span>Sub goal</span><b id="metricSubGoal">0 / 0</b></div>
+            <div><span>Theme</span><b id="metricTheme">Default</b></div>
           </div>
-        </div>
-        <aside class="liveChatPreview">
-          <h3>Live broadcast data</h3>
-          <div class="chatRows">
-            <div><b>Status:</b><span id="sideStatus">Loading</span></div>
-            <div><b>Viewers:</b><span id="sideViewers">0</span></div>
-            <div><b>Followers:</b><span id="sideFollowers">0</span></div>
-            <div><b>Category:</b><span id="sideCategory">Music</span></div>
-            <div><b>Title:</b><span id="sideTitle">DJ FOLSOE</span></div>
-          </div>
-          <a class="btn primary chatBtn" href="https://twitch.tv/djfolsoe" target="_blank">Open Twitch</a>
         </aside>
-        <div class="heroMeta">
-          <div><span>Stream title</span><b id="streamTitle">Loading...</b></div>
-          <div><span>Category</span><b id="streamCategory">Music</b></div>
-        </div>
-        <div class="heroStats">
-          <div><span>Followers</span><b id="statFollowers">0</b></div>
-          <div><span>Viewers</span><b id="statOnline">0</b></div>
-          <div><span>Views</span><b id="statViews">0</b></div>
-          <div><span>Stream</span><b id="statLive">Offline</b></div>
-          <div><span>Category</span><b id="statCategory">Music</b></div>
-        </div>
       </section>
 
-      <section id="nextShow" class="panel nextShowPanel featuredPanel">
-        <div class="panelHead"><h2>Next show</h2><a href="#shows">Full schedule</a></div>
-        <div id="nextShowCard" class="nextShowCard"></div>
+      <section class="tickerStrip"><span>ON AIR</span><marquee id="topTicker">Loading DJ FOLSOE broadcast ticker...</marquee></section>
+
+      <section id="next" class="portalPanel nextBroadcast">
+        <div class="panelHead"><p>NEXT BROADCAST</p><h2 id="nextTitle">Next show</h2></div>
+        <div class="nextGrid"><div><span>Starts</span><b id="nextTime">TBA</b></div><div><span>Countdown</span><b id="nextCountdown">--:--:--</b></div><div><span>Theme</span><b id="nextTheme">Music TV</b></div></div>
+        <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
       </section>
 
-      <section id="about" class="panel aboutPanel">
-        <div class="panelHead"><h2>Who is DJ FOLSOE?</h2><span>Music · Community · Live TV</span></div>
-        <p id="aboutText">DJ FOLSOE brings music, chat, requests and Danish DJ culture together in a live broadcast universe.</p>
-        <div class="featureGrid">
-          <div class="feature"><i>🎵</i><b>Music</b><span id="aboutMusic">Trance, Retro, EDM, Pop and more</span></div>
-          <div class="feature"><i>📺</i><b>Shows</b><span id="aboutShows">Live DJ shows and themed streams</span></div>
-          <div class="feature"><i>🎙️</i><b>Requests</b><span id="aboutRequests">Use !request in chat</span></div>
-          <div class="feature"><i>💜</i><b>Community</b><span id="aboutCommunity">Chat, mods and Danish DJ culture</span></div>
-        </div>
+      <section id="shows" class="portalPanel">
+        <div class="panelHead"><p>FEATURED SHOWS</p><h2>Choose your broadcast mood</h2></div>
+        <div class="showCards" id="showCards"></div>
       </section>
 
-      <section id="network" class="panel modPanel">
-        <div class="panelHead"><h2>Mod team</h2><span>Community crew</span></div>
-        <p>Mods keep the chat friendly, help new viewers, and create a safe community around the stream.</p>
-        <div id="modsGrid" class="modsGrid"></div>
+      <section id="about" class="portalPanel splitPanel">
+        <div><p class="sectionKicker">DISCOVER DJ FOLSOE</p><h2>Music TV, Twitch and Danish DJ energy</h2><p id="aboutText">DJ FOLSOE brings live DJ shows, community, requests, hitlists and Twitch interaction together as a modern Music TV channel.</p></div>
+        <div class="infoCards" id="infoCards"></div>
       </section>
 
-      <section id="shows" class="panel">
-        <div class="panelHead"><h2>Shows</h2><a href="#shows">Trance · Countdown · Fredagsbar · Retro · Morning · PopUp · Weekend</a></div>
-        <div id="showsGrid" class="showGrid"></div>
+      <section id="top20" class="portalPanel">
+        <div class="panelHead"><p>FOLSOE TOP 20</p><h2>Weekly listening chart</h2></div>
+        <div class="chartList" id="chartList"></div>
       </section>
 
-      <section id="top20" class="panel">
-        <div class="panelHead"><h2>FOLSOE Top 20</h2><a href="#top20" onclick="toggleChart()">See full chart →</a></div>
-        <div id="chartGrid" class="chartGrid"></div>
-        <div class="centerAction"><button class="btn primary" onclick="toggleChart()">See full Top 20</button></div>
+      <section id="community" class="portalPanel splitPanel">
+        <div><p class="sectionKicker">LIVE COMMUNITY</p><h2>Chat, requests, subs and followers</h2><p id="communityText">Everything starts in the Twitch chat. Join the show, request music and be part of the broadcast.</p></div>
+        <div class="communityWall" id="communityWall"></div>
       </section>
 
-      <section id="discovery" class="panel discoveryPanel">
-        <div class="panelHead"><h2>Music discovery</h2><a href="#discovery">New picks and future hits</a></div>
-        <div id="discoveryGrid" class="discoveryGrid"></div>
-      </section>
-
-      <section id="requests" class="panel">
-        <div class="panelHead"><h2>Live request wall</h2><a href="#requests">Use !request in chat</a></div>
-        <div id="requestsGrid" class="requestsGrid"></div>
-        <div id="requestStatsGrid" class="requestStatsGrid"></div>
-      </section>
-
-      <section id="communityWall" class="panel communityWallPanel">
-        <div class="panelHead"><h2>Community love</h2><a href="#communityWall">Latest follower · Latest subscriber · Latest raid</a></div>
-        <div id="communityWallGrid" class="communityWallGrid"></div>
-        <div id="communityStatsGrid" class="communityStatsGrid"></div>
-      </section>
-
-      <section id="news" class="panel">
-        <div class="panelHead"><h2>News & updates</h2><a href="#news">Latest show · Requests · Community · Twitch</a></div>
-        <div id="newsGrid" class="newsGrid"></div>
+      <section id="requests" class="portalPanel requestPanel">
+        <div class="panelHead"><p>REQUEST WALL</p><h2>Want a song on air?</h2></div>
+        <p>Use <b>!request Artist - Title</b> in Twitch chat. Danish and German commands can also be added in StreamElements.</p>
+        <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch chat</a>
       </section>
     </main>
-
-    <footer><span>© 2026 DJ FOLSOE TV</span><div><a href="#shows">Shows</a><a href="#requests">Requests</a><a href="#top20">Top 20</a></div></footer>
   </div>
-  <script src="assets/js/homepage.js?v=8171"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/site.js?v=908"></script>
 </body>
 </html>

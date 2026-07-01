@@ -693,12 +693,37 @@ export default {
         if (request.method !== "POST") return json({error:"Method not allowed"},405);
         const body = await request.json().catch(()=>({}));
         const patch = body.core || body;
-        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary"];
+        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast"];
         for (const key of allowed) if (Object.prototype.hasOwnProperty.call(patch,key)) core[key] = patch[key];
         core.language = "en";
         await putCore(env, core);
         return json({ok:true,message:"Central Data Engine saved",version:VERSION,core});
       }
+      if (path === "/api/website-portal") {
+        if (request.method === "GET") {
+          ensureThemeBackgrounds(core);
+          return json({
+            ok:true,
+            version:"V908 Website 2.0",
+            homepage: core.homepage || {},
+            website: core.website || {title:"DJ FOLSOE TV", primaryLanguage:"en"},
+            community: core.community || {},
+            broadcast: core.broadcast || {broadcastState:core.station?.live?"LIVE":"OFFLINE", activeShow:core.activeTheme || "weekend", streamTitle:core.station?.streamTitle || "DJ FOLSOE · Music TV from Denmark", viewers:core.station?.viewers || 0},
+            themes: {activeTheme:core.activeTheme, themeLibrary:core.themeLibrary || core.themes || {}}
+          });
+        }
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        if (body.homepage) core.homepage = body.homepage;
+        if (body.website) core.website = Object.assign({primaryLanguage:"en"}, body.website);
+        if (body.community) core.community = body.community;
+        core.language = "en";
+        core.updatedAt = new Date().toISOString();
+        await putCore(env, core);
+        return json({ok:true,version:"V908 Website 2.0",message:"Website portal published",homepage:core.homepage,website:core.website,community:core.community});
+      }
+
       if (path === "/api/core") {
         if (request.method === "GET") return json(core);
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);

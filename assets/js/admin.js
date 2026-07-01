@@ -1050,3 +1050,106 @@ publishEverything = async function(){
   await V907_originalPublishEverything();
   v907RenderThemeManager();
 };
+
+/* DJ FOLSOE NETWORK V908 · Website 2.0 Music TV Portal */
+const V908_DEFAULT_HOMEPAGE = {
+  version:'V908 Website 2.0',
+  hero:{eyebrow:'DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK',title:'DJ FOLSOE LIVE',subtitle:'Modern Twitch Music TV anno 2026',text:'Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.',background:'themes/weekend.png'},
+  ticker:['LIVE DJ SHOWS FROM DENMARK','REQUEST A SONG IN TWITCH CHAT','FOLSOE TOP 20 · WEEKLY MUSIC CHART','TRANCE · EURODANCE · RETRO · FREDAGSBAR · POPUP'],
+  nextShow:{title:'Next DJ FOLSOE broadcast',datetime:'',timeLabel:'Announced soon',theme:'Music TV',description:'The next show is controlled from admin and appears here automatically.'},
+  featuredShows:[
+    {title:'Good Morning Twitch',time:'Morning',description:'Bright morning mood, coffee, chat and fresh music.',theme:'morning',color:'#ffd66b'},
+    {title:'Trance Tuesday',time:'Tuesday',description:'Melodic trance, energy and emotional peak-time sound.',theme:'trance',color:'#69e7ff'},
+    {title:'Eurodance',time:'Special',description:'90s and 00s dance classics with full Music TV nostalgia.',theme:'eurodance',color:'#ff4fd8'},
+    {title:'Fredagsbar',time:'Friday',description:'Weekend mode, party classics and Danish Friday energy.',theme:'fredagsbar',color:'#65ffb4'},
+    {title:'Retro Hits',time:'Sunday',description:'70s, 80s and 90s memories with viewer favourites.',theme:'retro',color:'#ffd66b'},
+    {title:'Pop Up Live',time:'Surprise',description:'The stream that appears when you least expect it.',theme:'popup',color:'#ffffff'}
+  ],
+  aboutText:'DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.',
+  infoCards:[
+    {kicker:'STUDIO',title:'Broadcast setup',text:'OBS, StreamElements, admin control and theme engine working as one system.'},
+    {kicker:'MUSIC',title:'Many show moods',text:'Trance, Eurodance, Retro, EDM, Fredagsbar, Morning and Pop Up shows.'},
+    {kicker:'CHAT',title:'Viewer participation',text:'Requests, shoutouts, channel points, goals and community moments.'},
+    {kicker:'NETWORK',title:'Danish DJ culture',text:'A modern Music TV portal connected to Twitch and future DJ network features.'}
+  ],
+  top20:[
+    {rank:1,artist:'DJ FOLSOE',title:"This Week's Number One",status:'ADMIN CONTROLLED'},
+    {rank:2,artist:'Viewer Pick',title:'Request of the Week',status:'COMMUNITY'},
+    {rank:3,artist:'Future Hit',title:'Discovery Track',status:'NEW'}
+  ]
+};
+const V908_DEFAULT_COMMUNITY = {version:'V908 Community Portal',followers:0,subs:0,subGoal:100,text:'Join the Twitch chat, request music and be part of the DJ FOLSOE broadcast community.',wall:[{kicker:'FOLLOWERS',title:'Follower journey',text:'Follower goals can be updated from admin.'},{kicker:'SUBS',title:'Sub journey',text:'Subs help develop the technical setup and new broadcast features.'},{kicker:'REQUESTS',title:'Song requests',text:'Use !request Artist - Title in Twitch chat.'},{kicker:'CHAT',title:'Twitch chat',text:'Overlay box 4 stays locked to Twitch chat.'}]};
+function v908PortalStatus(msg){const el=document.getElementById('v908PortalStatus'); if(el) el.textContent=msg;}
+async function v908FetchJson(url, fallback){try{const r=await fetch(url,{cache:'no-store'}); if(r.ok)return await r.json();}catch(e){} return fallback;}
+async function v908LoadWebsitePortal(){
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  let pkg = base ? await v908FetchJson(base+'/api/website-portal', null) : null;
+  if(!pkg) pkg = {homepage: await v908FetchJson('data/homepage.json', V908_DEFAULT_HOMEPAGE), community: await v908FetchJson('data/community.json', V908_DEFAULT_COMMUNITY)};
+  const h = pkg.homepage || V908_DEFAULT_HOMEPAGE, c = pkg.community || V908_DEFAULT_COMMUNITY;
+  document.getElementById('v908HeroEyebrow').value = h.hero?.eyebrow || '';
+  document.getElementById('v908HeroTitle').value = h.hero?.title || '';
+  document.getElementById('v908HeroSubtitle').value = h.hero?.subtitle || '';
+  document.getElementById('v908HeroBackground').value = h.hero?.background || '';
+  document.getElementById('v908HeroText').value = h.hero?.text || '';
+  document.getElementById('v908NextTitle').value = h.nextShow?.title || '';
+  document.getElementById('v908NextTimeLabel').value = h.nextShow?.timeLabel || '';
+  document.getElementById('v908NextDatetime').value = h.nextShow?.datetime || '';
+  document.getElementById('v908NextTheme').value = h.nextShow?.theme || '';
+  document.getElementById('v908NextDescription').value = h.nextShow?.description || '';
+  document.getElementById('v908Ticker').value = (h.ticker||[]).join('\n');
+  document.getElementById('v908Followers').value = c.followers || 0;
+  document.getElementById('v908Subs').value = c.subs || 0;
+  document.getElementById('v908SubGoal').value = c.subGoal || 100;
+  document.getElementById('v908CommunityText').value = c.text || '';
+  v908PortalStatus('V908 Website Portal loaded. Edit and press PUBLISH WEBSITE 2.0.');
+}
+function v908CollectWebsitePortal(){
+  const homepage = JSON.parse(JSON.stringify(V908_DEFAULT_HOMEPAGE));
+  homepage.hero.eyebrow = document.getElementById('v908HeroEyebrow').value || homepage.hero.eyebrow;
+  homepage.hero.title = document.getElementById('v908HeroTitle').value || homepage.hero.title;
+  homepage.hero.subtitle = document.getElementById('v908HeroSubtitle').value || homepage.hero.subtitle;
+  homepage.hero.background = document.getElementById('v908HeroBackground').value || homepage.hero.background;
+  homepage.hero.text = document.getElementById('v908HeroText').value || homepage.hero.text;
+  homepage.nextShow.title = document.getElementById('v908NextTitle').value || homepage.nextShow.title;
+  homepage.nextShow.timeLabel = document.getElementById('v908NextTimeLabel').value || homepage.nextShow.timeLabel;
+  homepage.nextShow.datetime = document.getElementById('v908NextDatetime').value || '';
+  homepage.nextShow.theme = document.getElementById('v908NextTheme').value || homepage.nextShow.theme;
+  homepage.nextShow.description = document.getElementById('v908NextDescription').value || homepage.nextShow.description;
+  homepage.ticker = (document.getElementById('v908Ticker').value || '').split('\n').map(x=>x.trim()).filter(Boolean);
+  const community = JSON.parse(JSON.stringify(V908_DEFAULT_COMMUNITY));
+  community.followers = Number(document.getElementById('v908Followers').value || 0);
+  community.subs = Number(document.getElementById('v908Subs').value || 0);
+  community.subGoal = Number(document.getElementById('v908SubGoal').value || 100);
+  community.text = document.getElementById('v908CommunityText').value || community.text;
+  const website = {version:'V908 Website 2.0',title:'DJ FOLSOE TV',description:homepage.hero.text,primaryLanguage:'en',sections:['hero','nextShow','featuredShows','about','top20','community','requests'],locked:{overlayGraphics:'unchanged',box4:'twitch-chat'}};
+  return {version:'V908 Website 2.0',homepage,website,community,updatedAt:new Date().toISOString()};
+}
+async function v908PublishWebsitePortal(){
+  const pkg = v908CollectWebsitePortal();
+  localStorage.setItem('djf_v908_website_portal', JSON.stringify(pkg));
+  const base=(window.DJF_API_BASE||'').replace(/\/$/,'');
+  if(base){
+    try{
+      const r=await fetch(base+'/api/website-portal',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(pkg)});
+      if(!r.ok) throw new Error('Cloudflare rejected website portal update');
+      v908PortalStatus('V908 Website 2.0 published to Cloudflare KV. Homepage + admin are now using the same portal package. Overlay graphics unchanged. Box 4 locked.');
+      return;
+    }catch(e){v908PortalStatus('Local save done, but cloud publish failed: '+e.message);return;}
+  }
+  v908PortalStatus('V908 Website 2.0 saved locally. Configure DJF_API_BASE for Cloudflare publishing.');
+}
+function v908PresetPortal(mode){
+  const presets={
+    live:{title:'DJ FOLSOE LIVE',subtitle:'Live now on Twitch',eyebrow:'ON AIR · MUSIC TV FROM DENMARK',ticker:['LIVE NOW ON TWITCH','REQUEST A SONG IN CHAT','FOLLOW DJ FOLSOE FOR THE NEXT SHOW']},
+    next:{title:'NEXT DJ FOLSOE BROADCAST',subtitle:'The next show is getting ready',eyebrow:'COMING UP NEXT',ticker:['NEXT SHOW ANNOUNCED SOON','FOLLOW THE CHANNEL','JOIN THE MUSIC TV COMMUNITY']},
+    community:{title:'DJ FOLSOE COMMUNITY',subtitle:'Chat, requests, subs and follower journey',eyebrow:'COMMUNITY BROADCAST',ticker:['BE ACTIVE IN CHAT','REQUEST MUSIC','SUBS HELP BUILD THE TECHNICAL SETUP']},
+    top20:{title:'FOLSOE TOP 20',subtitle:'Weekly music chart countdown',eyebrow:'CHART SHOW MODE',ticker:['FOLSOE TOP 20','NEW ENTRIES','HIGHEST CLIMBER','VIEWER PICK OF THE WEEK']}
+  }[mode];
+  if(!presets) return;
+  document.getElementById('v908HeroTitle').value=presets.title;
+  document.getElementById('v908HeroSubtitle').value=presets.subtitle;
+  document.getElementById('v908HeroEyebrow').value=presets.eyebrow;
+  document.getElementById('v908Ticker').value=presets.ticker.join('\n');
+  v908PortalStatus('Preset applied: '+mode+'. Press PUBLISH WEBSITE 2.0 to send it live.');
+}
+setTimeout(()=>{ if(document.getElementById('v908WebsitePortal')) v908LoadWebsitePortal(); }, 800);

@@ -1,0 +1,13 @@
+{
+  "version": "V908 Community Portal",
+  "followers": 0,
+  "subs": 0,
+  "subGoal": 100,
+  "text": "Join the Twitch chat, request music and be part of the DJ FOLSOE broadcast community.",
+  "wall": [
+    {"kicker":"FOLLOWERS","title":"Follower journey","text":"Follower goals can be updated from admin."},
+    {"kicker":"SUBS","title":"Sub journey","text":"Subs help develop the technical setup and new broadcast features."},
+    {"kicker":"REQUESTS","title":"Song requests","text":"Use !request Artist - Title in Twitch chat."},
+    {"kicker":"CHAT","title":"Twitch chat","text":"Overlay box 4 stays locked to Twitch chat."}
+  ]
+}
