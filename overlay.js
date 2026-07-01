@@ -2468,3 +2468,72 @@ v901PushBurst = function(item){
   setInterval(fetchCore,10000);
   setInterval(forceTopTicker,900);
 })();
+
+/* =========================================================
+   V928.1 — COMMUNITY & TOP20 ENGINE
+   Adds Top 20 + Mods back into the live info burst without
+   touching the locked theme engine or top ticker hard lock.
+   ========================================================= */
+(function(){
+  const VERSION='V928.1 COMMUNITY & TOP20 ENGINE';
+  const API=(window.DJF_API_BASE||'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/,'');
+  let core=null, seq=0, idx=0, lastKey='';
+  const defaults={mods:{title:'DJ FOLSOE COMMUNITY CREW',subtitle:'The people keeping the chat, music and vibes alive',groups:[{label:'HEAD MODS',names:['DJCosmoDK','DJKesseDK']},{label:'COMMUNITY MODS',names:['Danishdjjk']},{label:'MUSIC TEAM',names:['DJ FOLSOE community']},{label:'VIP SUPPORTERS',names:['Everyone in chat']} ]}};
+  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function clean(v,f=''){return String(v==null?f:v).replace(/\s+/g,' ').trim();}
+  function pick(p){return (p&&typeof p==='object'&&(p.core||p.data||p.broadcastCore))||p||{};}
+  function jsonp(url, timeout=8000){return new Promise((resolve,reject)=>{const cb='djfV9281_'+Date.now()+'_'+(seq++); const s=document.createElement('script'); const t=setTimeout(()=>{done();reject(new Error('jsonp timeout'));},timeout); function done(){clearTimeout(t);try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode)s.parentNode.removeChild(s);} window[cb]=d=>{done();resolve(d);}; s.onerror=()=>{done();reject(new Error('jsonp failed'));}; s.src=url+(url.includes('?')?'&':'?')+'callback='+encodeURIComponent(cb)+'&ts='+Date.now(); document.head.appendChild(s);});}
+  function modsList(c){const m=c.mods||defaults.mods; const groups=Array.isArray(m.groups)?m.groups:defaults.mods.groups; return groups.flatMap(g=>(g.names||[]).map(n=>({label:g.label||'MOD TEAM',name:n}))).filter(x=>x.name);}
+  function latestEvent(type){try{return (window.djfTickerEvents&&window.djfTickerEvents[type])||'';}catch(e){return ''}}
+  function lane(){
+    const c=pick(core||window.DJF_LAST_BROADCAST_CORE||{});
+    const top=Array.isArray(c.top20)?c.top20:[];
+    const mods=modsList(c);
+    const tw=c.twitch||{}, com=c.community||{}, next=c.nextShow||{}, theme=c.theme||{}, show=c.show||{};
+    const followers=Number(tw.followers??com.followers??0)||0, fgoal=Number(com.followerGoal??1000)||1000;
+    const subs=Number(tw.subs??com.subs??0)||0, sgoal=Number(com.subGoal??100)||100;
+    const items=[];
+    items.push({k:'NOW ON AIR',t:clean(show.title||show.current||'DJ FOLSOE'),b:clean(theme.title||'Music TV')+' · '+clean(theme.id||'theme')});
+    top.slice(0,20).forEach(x=>items.push({k:'FOLSOE TOP 20 #'+(x.rank||'?'),t:clean(x.artist,'Artist'),b:clean(x.title,'Title')+(x.status?' · '+clean(x.status):'')}));
+    if(top[0]) items.push({k:'THIS WEEK\'S NUMBER ONE',t:clean(top[0].artist),b:clean(top[0].title)});
+    mods.forEach(m=>items.push({k:m.label,t:clean(m.name),b:'Thanks for keeping the DJ FOLSOE community alive'}));
+    items.push({k:'FOLLOWER JOURNEY',t:`${followers}/${fgoal} followers`,b:`${Math.max(0,fgoal-followers)} to go · follow DJ FOLSOE on Twitch`});
+    items.push({k:'SUB JOURNEY',t:`${subs}/${sgoal} subs`,b:'Subs help build better shows, graphics and community tools'});
+    items.push({k:'NEXT SHOW',t:clean(next.show||next.title,'Next DJ FOLSOE Broadcast'),b:clean(next.timeLabel||next.datetime||next.dateTime,'Announced soon')});
+    items.push({k:'REQUESTS',t:'Requests are open',b:clean(com.requestText||c.overlay?.requestText,'Use !request Artist - Title in chat')});
+    const lf=latestEvent('latestFollower'), ls=latestEvent('latestSub'), lb=latestEvent('latestBits'), lr=latestEvent('latestRaid');
+    if(lf) items.push({k:'LATEST FOLLOWER',t:lf,b:'Welcome to the DJ FOLSOE community'});
+    if(ls) items.push({k:'LATEST SUBSCRIBER',t:ls,b:'Subscriber love on the broadcast'});
+    if(lb) items.push({k:'LATEST CHEER',t:lb,b:'Bits energy on the show'});
+    if(lr) items.push({k:'LATEST RAID',t:lr,b:'DJ network love · welcome raiders'});
+    return items.filter(x=>x.t||x.b);
+  }
+  function writeBurst(force=false){
+    const root=document.getElementById('broadcastBurst'), k=document.getElementById('burstKicker'), t=document.getElementById('burstTitle'), b=document.getElementById('burstBody');
+    if(!root||!k||!t||!b) return;
+    const items=lane(); if(!items.length) return;
+    idx=(idx+1)%items.length; const item=items[idx];
+    const key=item.k+'|'+item.t+'|'+item.b;
+    if(!force && key===lastKey) return; lastKey=key;
+    k.textContent=item.k; t.textContent=item.t; b.textContent=item.b;
+    root.classList.remove('burstFlash'); void root.offsetWidth; root.classList.add('burstFlash');
+    window.DJF_COMMUNITY_TOP20_VERSION=VERSION;
+  }
+  function writeBottomTicker(){
+    const el=document.getElementById('bottomTickerText'); if(!el) return;
+    const c=pick(core||window.DJF_LAST_BROADCAST_CORE||{});
+    const top=Array.isArray(c.top20)?c.top20:[]; const mods=modsList(c).slice(0,5).map(x=>x.name).join(' · ');
+    const com=c.community||{}, tw=c.twitch||{};
+    const parts=[];
+    if(top[0]) parts.push(`TOP 20 #1 · ${clean(top[0].artist)} - ${clean(top[0].title)}`);
+    if(mods) parts.push(`MOD TEAM · ${mods}`);
+    parts.push(`FOLLOWERS · ${tw.followers||com.followers||0}/${com.followerGoal||1000}`);
+    parts.push(`SUB GOAL · ${com.subs||0}/${com.subGoal||100}`);
+    parts.push(clean(com.requestText||c.overlay?.requestText,'REQUESTS · Use !request Artist - Title'));
+    const html=parts.map((p,i)=>`<span class="tickerItem ${['cyan','pink','yellow','white'][i%4]}"><b>${esc(p.split('·')[0].trim())}</b><em>${esc(p.split('·').slice(1).join('·').trim())}</em></span>`).join('<span class="tickerSep">✦</span>');
+    el.innerHTML=html+'<span class="tickerSep">✦</span>'+html;
+    document.documentElement.style.setProperty('--bottomDur','125s');
+  }
+  async function fetchCore(){try{core=pick(await jsonp(API+'/api/broadcast-jsonp')); window.DJF_LAST_BROADCAST_CORE=core; writeBurst(true); writeBottomTicker();}catch(e){}}
+  setTimeout(fetchCore,700); setInterval(fetchCore,10000); setInterval(()=>writeBurst(false),11000); setInterval(writeBottomTicker,15000);
+})();
