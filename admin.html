@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V917 Go Live Assistant</title>
+  <title>DJ FOLSOE V918 Unified Control Center</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -14,43 +14,119 @@
   <button type="button" onclick="testThemeToken()" style="border:0;border-radius:999px;padding:8px 12px;font-weight:900;background:linear-gradient(135deg,#fff3b0,#22e7ff);color:#050713">Test theme API</button>
 </div>
 
-<header class="adminHero">
+<header class="adminHero v918Hero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V917</span>
-    <h1>Go Live Assistant · Daily Control Room · Health Check · Content Studio · Asset Manager · Live Preview · Publish Safety</h1>
-    <p>Go Live Assistant with checklist, daily control room, system health checks, Content Studio, Asset Manager, Live Preview and safer publishing with backup/restore.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V918</span>
+    <h1>Unified Control Center</h1>
+    <p>One simple admin screen. Twitch + Admin data feeds the website when offline and the overlay when live.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
-    <input id="token" placeholder="Indsæt ADMIN_TOKEN">
+    <input id="token" placeholder="Paste ADMIN_TOKEN">
     <button onclick="saveToken()">Save token</button>
   </div>
 </header>
 
-<nav class="adminTabs">
-  <button onclick="jump('v917GoLiveAssistant')">🚦 Go Live Assistant</button>
-  <button onclick="jump('v911DailyControl')">🎛️ Daily Control</button>
-  <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
-  <button onclick="jump('v913AssetManager')">🗂️ Assets</button>
-  <button onclick="jump('v914LivePreview')">👁️ Live Preview</button>
-  <button onclick="jump('v916HealthCheck')">🟢 Health Check</button>
-  <button onclick="jump('v915PublishSafety')">🛟 Publish Safety</button>
-  <button onclick="jump('oneclick')">🚀 One click</button>
-  <button onclick="jump('showControl')">🎬 Show control</button>
-  <button onclick="jump('centralEngine')">🧠 Central engine</button>
-  <button onclick="jump('theme')">🎨 Themes</button>
-  <button onclick="jump('v907ThemeManager')">🖼️ Theme Manager</button>
-    <button onclick="jump('v908WebsitePortal')">🌐 Website 2.0</button>
-  <button onclick="jump('homepage')">🏠 Website</button>
-  <button onclick="jump('v910BroadcastSystem')">📡 Broadcast System</button>
-  <button onclick="jump('v909OverlayHub')">📺 Overlay Hub</button>
-  <button onclick="jump('overlayContent')">📦 Overlay boxes</button>
-  <button onclick="jump('top20')">🏆 Top 20</button>
-  <button onclick="jump('shows')">📺 Shows</button>
+<nav class="adminTabs v918Tabs">
+  <button onclick="jump('v918UnifiedControl')">🎛️ Control Center</button>
+  <button onclick="v918RefreshAll()">🔄 Refresh Twitch + Admin</button>
+  <button onclick="v918PreviewAll()">👁️ Preview</button>
+  <button class="bigPublish" onclick="v918PublishEverything()">🚀 Publish Everything</button>
   <button onclick="toggleAdvanced()">⚙️ Advanced</button>
 </nav>
 
 <main>
+
+  <section id="v918UnifiedControl" class="panel v918ControlCenter">
+    <div class="panelHead">
+      <div>
+        <h2>🎛️ V918 · Unified Control Center</h2>
+        <p class="note">The rule is simple: <b>Twitch + Admin = one data source</b>. Website is the offline channel page. Overlay is the live channel output.</p>
+      </div>
+      <div class="v918TopActions">
+        <button onclick="v918SaveDraft()">Save Draft</button>
+        <button onclick="v918PreviewAll()">Preview</button>
+        <button class="bigPublish" onclick="v918PublishEverything()">Publish Everything</button>
+      </div>
+    </div>
+
+    <div class="v918StatusStrip">
+      <article><span>Twitch</span><b id="v918TwitchState">Checking…</b><small id="v918TwitchDetails">twitch.tv/djfolsoe</small></article>
+      <article><span>Viewers</span><b id="v918Viewers">—</b><small>Live from Twitch</small></article>
+      <article><span>Followers</span><b id="v918Followers">—</b><small>Live from Twitch / fallback</small></article>
+      <article><span>Subs</span><b id="v918Subs">—</b><small>Requires Twitch scope</small></article>
+      <article><span>Output</span><b id="v918OutputMode">Website + Overlay</b><small>Same central data</small></article>
+    </div>
+
+    <div class="v918Grid">
+      <article class="v918Card">
+        <h3>1 · Broadcast</h3>
+        <label>Current show</label>
+        <select id="v918CurrentShow">
+          <option>DJ FOLSOE</option><option>Good Morning Twitch</option><option>Trance Tuesday</option><option>Eurodance</option><option>Fredagsbar</option><option>Retro Hits</option><option>FOLSOE Top 20</option><option>Pop Up Live</option><option>Summer Beats</option><option>Weekend Vibes</option>
+        </select>
+        <label>Theme</label>
+        <select id="v918Theme"><option value="weekend">Weekend</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option></select>
+        <label>Broadcast mode</label>
+        <select id="v918Mode"><option>LIVE</option><option>STARTING SOON</option><option>COUNTDOWN</option><option>BREAK</option><option>SPECIAL EVENT</option><option>AFTER PARTY</option><option>ENDING</option><option>OFFLINE</option></select>
+        <div class="v918ButtonRow"><button onclick="v918QuickMode('LIVE')">Go Live</button><button onclick="v918QuickMode('BREAK')">Break</button><button onclick="v918QuickMode('ENDING')">Ending</button><button onclick="v918QuickMode('OFFLINE')">Offline</button></div>
+      </article>
+
+      <article class="v918Card">
+        <h3>2 · Website + Overlay Text</h3>
+        <label>Main headline</label><input id="v918HeroTitle" value="DJ FOLSOE">
+        <label>Sub headline</label><input id="v918HeroSubtitle" value="Dive into my Twitch world">
+        <label>Description</label><textarea id="v918HeroText" rows="4">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</textarea>
+        <label>Ticker / Info line</label><input id="v918Ticker" value="LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT · FOLLOW DJ FOLSOE">
+        <label>Community message</label><input id="v918CommunityMessage" value="Follow, chat, request music and be part of the DJ FOLSOE Twitch world.">
+      </article>
+
+      <article class="v918Card">
+        <h3>3 · Next Show</h3>
+        <label>Next show title</label><input id="v918NextTitle" value="Next DJ FOLSOE Broadcast">
+        <label>Date</label><input id="v918NextDate" type="date">
+        <label>Time</label><input id="v918NextTime" type="time">
+        <label>Next show theme</label><select id="v918NextTheme"><option value="weekend">Weekend</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option></select>
+        <label>Description</label><textarea id="v918NextDescription" rows="3">The next show is controlled from admin and appears on both website and overlay.</textarea>
+      </article>
+
+      <article class="v918Card">
+        <h3>4 · Goals</h3>
+        <label>Follower goal</label><input id="v918FollowerGoal" type="number" value="1000">
+        <label>Subs</label><input id="v918SubsManual" type="number" value="0">
+        <label>Sub goal</label><input id="v918SubGoal" type="number" value="100">
+        <label>Request text</label><input id="v918RequestText" value="Use !request in Twitch chat">
+        <label>Special event</label><input id="v918SpecialEvent" value="">
+      </article>
+    </div>
+
+    <div class="v918PreviewGrid">
+      <article class="v918WebsitePreview">
+        <span>Website preview · offline channel page</span>
+        <h3 id="v918PreviewTitle">DJ FOLSOE</h3>
+        <p id="v918PreviewSub">Dive into my Twitch world</p>
+        <small id="v918PreviewNext">Next DJ FOLSOE Broadcast · Announced soon</small>
+      </article>
+      <article class="v918OverlayPreview">
+        <span>Overlay preview · live control panel</span>
+        <h3 id="v918OverlayTitle">DJ FOLSOE · LIVE</h3>
+        <p id="v918OverlayLine">Viewers — · Followers — · Subs —</p>
+        <small id="v918OverlayTicker">LIVE DJ SHOWS FROM DENMARK</small>
+      </article>
+    </div>
+
+    <div class="v918PublishBar">
+      <button onclick="v918RefreshAll()">Refresh Twitch + Admin</button>
+      <button onclick="v918SaveDraft()">Save Draft</button>
+      <button onclick="v918PreviewAll()">Preview</button>
+      <button class="bigPublish" onclick="v918PublishEverything()">Publish Everything</button>
+    </div>
+    <pre id="v918Status">V918 ready. One Control Center controls website + overlay from the same data.</pre>
+  </section>
+
+  <details id="legacyAdvanced" class="legacyAdvanced">
+    <summary>Advanced / Technical tools from V904–V917</summary>
+
 
 
   <section id="v917GoLiveAssistant" class="panel v917GoLivePanel">
@@ -61,7 +137,7 @@
         <button class="bigPublish" onclick="v917StartBroadcastSetup()">START BROADCAST SETUP</button>
       </div>
     </div>
-    <p class="note">Use this before stream. It guides you through show, theme, website, overlay, preview, backup, publish and Twitch launch. It does not change overlay graphics. Box 4 remains Twitch chat.</p>
+    <p class="note">Use this before stream. It guides you through show, theme, website, overlay, preview, backup, publish and Twitch launch. It does not change overlay graphics. Twitch chat remains protected.</p>
 
     <div class="v917LaunchBanner" id="v917LaunchBanner">
       <span>LAUNCH STATUS</span>
@@ -124,7 +200,7 @@
         <button class="bigPublish" onclick="v916RunHealthCheck(true)">CHECK + READY SIGNAL</button>
       </div>
     </div>
-    <p class="note">Check whether the website, overlay data, theme assets and worker/API are ready before you go live. This does not change the overlay graphics. Box 4 remains Twitch chat.</p>
+    <p class="note">Check whether the website, overlay data, theme assets and worker/API are ready before you go live. This does not change the overlay graphics. Twitch chat remains protected.</p>
 
     <div class="v916ReadyBanner" id="v916ReadyBanner">
       <span>READY STATUS</span>
@@ -135,10 +211,10 @@
     <div class="v916HealthGrid">
       <article id="v916CardApi"><span>Worker / API</span><b id="v916ApiStatus">Waiting</b><small id="v916ApiDetail">/api/health-check</small></article>
       <article id="v916CardWebsite"><span>Website data</span><b id="v916WebsiteStatus">Waiting</b><small id="v916WebsiteDetail">Hero, homepage and website portal</small></article>
-      <article id="v916CardOverlay"><span>Overlay data</span><b id="v916OverlayStatus">Waiting</b><small id="v916OverlayDetail">Box 1-3, ticker and overlay hub</small></article>
+      <article id="v916CardOverlay"><span>Overlay data</span><b id="v916OverlayStatus">Waiting</b><small id="v916OverlayDetail">Overlay Control Panel, ticker and overlay hub</small></article>
       <article id="v916CardTheme"><span>Theme assets</span><b id="v916ThemeStatus">Waiting</b><small id="v916ThemeDetail">Active theme and image paths</small></article>
       <article id="v916CardPublish"><span>Last publish</span><b id="v916PublishStatus">Waiting</b><small id="v916PublishDetail">Updated timestamp / backup status</small></article>
-      <article id="v916CardLocks"><span>Locked areas</span><b>Protected</b><small>Overlay graphics · Box 4 chat · single logo · V901 timing</small></article>
+      <article id="v916CardLocks"><span>Locked areas</span><b>Protected</b><small>Overlay graphics · Twitch chat · single logo · V901 timing</small></article>
     </div>
 
     <div class="v916ChecklistBox">
@@ -163,7 +239,7 @@
         <button class="bigPublish" onclick="v911PublishNow()">ONE TAP · PUBLISH NOW</button>
       </div>
     </div>
-    <p class="note">Use this as the daily front desk. Pick the current broadcast mode, adjust the visible text if needed, then publish once. Website hero, ticker and overlay boxes 1-3 stay in sync. Box 4 remains Twitch chat.</p>
+    <p class="note">Use this as the daily front desk. Pick the current broadcast mode, adjust the visible text if needed, then publish once. Website hero, ticker and overlay boxes 1-3 stay in sync. Twitch chat remains protected.</p>
 
     <div class="v911StatusStrip">
       <div><span>Live status</span><b id="v911LiveStatus">Loading</b></div>
@@ -394,7 +470,7 @@
         <button class="bigPublish" onclick="v914RefreshPreview();publishEverything()">PREVIEW + PUBLISH</button>
       </div>
     </div>
-    <p class="note">Preview the current admin output before publishing. This does not change the locked overlay layout — it only previews website hero, active theme, ticker and overlay box 1-3 content.</p>
+    <p class="note">Preview the current admin output before publishing. This does not change the locked overlay layout — it only previews website hero, active theme, ticker and overlay Overlay Control Panel content.</p>
 
     <div class="v914PreviewGrid">
       <div class="v914WebsitePreview">
@@ -535,7 +611,7 @@
     <p class="note">V905 makes one data engine the source of truth. Admin writes the content once, then website and overlay read from the same Broadcast Cloud state.</p>
     <div class="engineGrid">
       <div class="engineCard"><b>Website</b><span id="engineWebsite">Waiting</span><small>Homepage, shows, news, Top 20 and discovery picks.</small></div>
-      <div class="engineCard"><b>Overlay</b><span id="engineOverlay">Waiting</span><small>Theme, top ticker, bottom ticker and box 1-3. Box 4 stays Twitch chat.</small></div>
+      <div class="engineCard"><b>Overlay</b><span id="engineOverlay">Waiting</span><small>Theme, top ticker, bottom ticker and Overlay Control Panel. Box 4 stays Twitch chat.</small></div>
       <div class="engineCard"><b>Theme</b><span id="engineTheme">Waiting</span><small>Active background from /themes, controlled from admin.</small></div>
       <div class="engineCard"><b>Status</b><span id="engineStatus">Waiting</span><small>One click publish keeps all modules in sync.</small></div>
     </div>
@@ -660,7 +736,7 @@
         <button class="bigPublish" onclick="v910PublishBroadcastSystem()">PUBLISH BROADCAST MODE</button>
       </div>
     </div>
-    <p class="note">Professional Music TV control layer. Pick a broadcast mode and V910 prepares website hero, overlay box 1-3, ticker, lower-third and intro/outro text. Overlay graphics, Box 4 and the left TV bug stay locked.</p>
+    <p class="note">Professional Music TV control layer. Pick a broadcast mode and V910 prepares website hero, overlay Overlay Control Panel, ticker, lower-third and intro/outro text. Overlay graphics, Box 4 and the left TV bug stay locked.</p>
 
     <div class="quickGrid v910ModeGrid">
       <button onclick="v910Mode('live')">🔴 LIVE SHOW</button>
@@ -773,7 +849,7 @@
   </section>
 
   <section id="overlayContent" class="panel advancedPanel">
-    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay boxes</h2><button onclick="resetOverlayContent()">Insert default boxes</button></div>
+    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay output</h2><button onclick="resetOverlayContent()">Insert default boxes</button></div>
     <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
     <div class="twoCol">
       <div><h3>Box 1 · Top left</h3><button onclick="addOverlayItem('box1')">Add Box 1 item</button><div id="box1Editor"></div></div>
@@ -868,6 +944,7 @@
   <div id="showScheduleRows"></div>
 </section>
 
+  </details>
 </main>
 
 <script src="assets/js/admin.js?v=8162017"></script>

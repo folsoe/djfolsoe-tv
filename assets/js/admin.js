@@ -1822,3 +1822,75 @@ async function v917PublishLaunch(){
 const V917_originalJump=jump;jump=function(id){if(id==='v914LivePreview')localStorage.setItem('DJF_V917_PREVIEW_SEEN','yes');return V917_originalJump(id);};
 const V917_originalLoadAll=loadAll;loadAll=async function(){await V917_originalLoadAll();setTimeout(v917RefreshAssistant,1200);};
 setTimeout(()=>{if(document.getElementById('v917GoLiveAssistant'))v917RefreshAssistant();},4200);
+
+
+/* V918 Unified Control Center */
+const V918_API = (window.DJF_API_BASE || '').replace(/\/$/, '');
+const v918$ = (id)=>document.getElementById(id);
+let v918Twitch = {};
+function v918Token(){ return (localStorage.getItem('DJF_ADMIN_TOKEN') || localStorage.getItem('adminToken') || v918$('token')?.value || '').trim(); }
+async function v918Json(url, opts={}){
+  const headers = Object.assign({'content-type':'application/json'}, opts.headers||{});
+  const token = v918Token(); if(token) headers['x-admin-token']=token;
+  const r = await fetch(V918_API + url, Object.assign({cache:'no-store', headers}, opts));
+  const text = await r.text(); let data={}; try{data=JSON.parse(text)}catch(e){data={raw:text}};
+  if(!r.ok) throw new Error(data.error || data.message || r.statusText || 'Request failed');
+  return data;
+}
+function v918NextDateTime(){ const d=v918$('v918NextDate')?.value||''; const t=v918$('v918NextTime')?.value||''; return d && t ? `${d}T${t}` : ''; }
+function v918BuildPayload(){
+  const title=v918$('v918HeroTitle')?.value || 'DJ FOLSOE';
+  const subtitle=v918$('v918HeroSubtitle')?.value || 'Dive into my Twitch world';
+  const text=v918$('v918HeroText')?.value || '';
+  const ticker=v918$('v918Ticker')?.value || '';
+  const currentShow=v918$('v918CurrentShow')?.value || 'DJ FOLSOE';
+  const activeTheme=v918$('v918Theme')?.value || 'weekend';
+  const mode=v918$('v918Mode')?.value || 'OFFLINE';
+  const nextDt=v918NextDateTime();
+  const nextShow={title:v918$('v918NextTitle')?.value || 'Next DJ FOLSOE Broadcast',show:v918$('v918NextTitle')?.value || 'Next DJ FOLSOE Broadcast',datetime:nextDt,dateTime:nextDt,timeLabel:nextDt ? new Date(nextDt).toLocaleString('en-GB',{weekday:'short',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : 'Announced soon',theme:v918$('v918NextTheme')?.value || activeTheme,description:v918$('v918NextDescription')?.value || ''};
+  const community={followers:v918Twitch.followers, subs:Number(v918$('v918SubsManual')?.value || v918Twitch.subs || 0), subGoal:Number(v918$('v918SubGoal')?.value || 100), followerGoal:Number(v918$('v918FollowerGoal')?.value || 1000), text:v918$('v918CommunityMessage')?.value || '', requestText:v918$('v918RequestText')?.value || '', specialEvent:v918$('v918SpecialEvent')?.value || ''};
+  return {activeTheme,nextShow,homepage:{version:'V918 Unified Control Center',hero:{eyebrow:'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK',title,subtitle,text,background:`themes/${activeTheme}.png`},ticker:[ticker],nextShow,sectionTitles:{nextKicker:'NEXT SHOW',nextTitle:'Next DJ FOLSOE Broadcast',showsKicker:'FEATURED SHOWS',showsTitle:'Your favorite show'}},website:{title:'DJ FOLSOE',description:text,primaryLanguage:'en'},broadcast:{version:'V918 Unified Control Center',broadcastState:mode,mode,activeShow:currentShow,activeTheme,streamTitle:`${currentShow} · DJ FOLSOE Twitch music streamer from Denmark`,viewers:Number(v918Twitch.viewers||0),live:mode==='LIVE',updatedAt:new Date().toISOString()},overlayHub:{version:'V918 Unified Control Center',state:mode,activeShow:currentShow,activeTheme,ticker,controlPanel:{title:currentShow,status:mode,viewers:Number(v918Twitch.viewers||0),followers:v918Twitch.followers,subs:community.subs,subGoal:community.subGoal,nextShow,infoLine:ticker,requestText:community.requestText,specialEvent:community.specialEvent},updatedAt:new Date().toISOString()},community,bottomTickerItems:[{id:'v918-unified-ticker',active:true,theme:'all',text:ticker,priority:1}],language:'en'};
+}
+function v918ApplyToFields(data){
+  const h=data?.homepage?.hero||{}; const b=data?.broadcast||{}; const c=data?.community||{}; const n=data?.nextShow || data?.homepage?.nextShow || {};
+  if(v918$('v918HeroTitle')) v918$('v918HeroTitle').value=h.title||'DJ FOLSOE';
+  if(v918$('v918HeroSubtitle')) v918$('v918HeroSubtitle').value=h.subtitle||'Dive into my Twitch world';
+  if(v918$('v918HeroText')) v918$('v918HeroText').value=h.text||data?.website?.description||'';
+  if(v918$('v918Ticker')) v918$('v918Ticker').value=(data?.homepage?.ticker||data?.bottomTickerItems?.map(x=>x.text)||[])[0]||'';
+  if(v918$('v918CurrentShow')) v918$('v918CurrentShow').value=b.activeShow||'DJ FOLSOE';
+  if(v918$('v918Theme')) v918$('v918Theme').value=data?.activeTheme||b.activeTheme||'weekend';
+  if(v918$('v918Mode')) v918$('v918Mode').value=b.broadcastState||b.mode||'OFFLINE';
+  if(v918$('v918NextTitle')) v918$('v918NextTitle').value=n.title||n.show||'Next DJ FOLSOE Broadcast';
+  const dt=n.datetime||n.dateTime||''; if(dt){ const [d,t='']=dt.split('T'); if(v918$('v918NextDate')) v918$('v918NextDate').value=d||''; if(v918$('v918NextTime')) v918$('v918NextTime').value=t.slice(0,5)||''; }
+  if(v918$('v918NextTheme')) v918$('v918NextTheme').value=n.theme||data?.activeTheme||'weekend';
+  if(v918$('v918NextDescription')) v918$('v918NextDescription').value=n.description||'';
+  if(v918$('v918SubGoal')) v918$('v918SubGoal').value=c.subGoal||100; if(v918$('v918SubsManual')) v918$('v918SubsManual').value=c.subs||0; if(v918$('v918FollowerGoal')) v918$('v918FollowerGoal').value=c.followerGoal||1000;
+  if(v918$('v918CommunityMessage')) v918$('v918CommunityMessage').value=c.text||''; if(v918$('v918RequestText')) v918$('v918RequestText').value=c.requestText||'Use !request in Twitch chat'; if(v918$('v918SpecialEvent')) v918$('v918SpecialEvent').value=c.specialEvent||'';
+}
+async function v918RefreshAll(){
+  try{
+    const [hub,tw]=await Promise.all([v918Json('/api/broadcast-hub'), v918Json('/api/twitch-profile?live=1&t='+Date.now()).catch(()=>({ok:false}))]);
+    v918Twitch=tw||{}; v918ApplyToFields(hub.core||{}); v918RenderTwitch(); v918PreviewAll();
+    v918$('v918Status').textContent='✅ Refreshed Twitch + Admin central data.';
+  }catch(e){ if(v918$('v918Status')) v918$('v918Status').textContent='⚠️ Refresh failed: '+e.message; }
+}
+function v918RenderTwitch(){
+  if(v918$('v918TwitchState')) v918$('v918TwitchState').textContent=v918Twitch.isLive?'LIVE':'OFFLINE';
+  if(v918$('v918TwitchDetails')) v918$('v918TwitchDetails').textContent=v918Twitch.liveTitle || 'twitch.tv/djfolsoe';
+  if(v918$('v918Viewers')) v918$('v918Viewers').textContent=v918Twitch.viewers ?? '0';
+  if(v918$('v918Followers')) v918$('v918Followers').textContent=v918Twitch.followers ?? '—';
+  if(v918$('v918Subs')) v918$('v918Subs').textContent=v918Twitch.subs ?? v918$('v918SubsManual')?.value ?? '—';
+}
+function v918PreviewAll(){ const p=v918BuildPayload(); if(v918$('v918PreviewTitle')) v918$('v918PreviewTitle').textContent=p.homepage.hero.title; if(v918$('v918PreviewSub')) v918$('v918PreviewSub').textContent=p.homepage.hero.subtitle; if(v918$('v918PreviewNext')) v918$('v918PreviewNext').textContent=`${p.nextShow.title} · ${p.nextShow.timeLabel}`; if(v918$('v918OverlayTitle')) v918$('v918OverlayTitle').textContent=`${p.broadcast.activeShow} · ${p.broadcast.mode}`; if(v918$('v918OverlayLine')) v918$('v918OverlayLine').textContent=`Viewers ${p.broadcast.viewers||0} · Followers ${p.community.followers ?? '—'} · Subs ${p.community.subs||0}/${p.community.subGoal||100}`; if(v918$('v918OverlayTicker')) v918$('v918OverlayTicker').textContent=p.overlayHub.ticker; if(v918$('v918Status')) v918$('v918Status').textContent='👁️ Preview updated. Same data will feed website + overlay.'; }
+function v918QuickMode(mode){ if(v918$('v918Mode')) v918$('v918Mode').value=mode; v918PreviewAll(); }
+function v918SaveDraft(){ const p=v918BuildPayload(); localStorage.setItem('DJF_V918_DRAFT', JSON.stringify(p)); if(v918$('v918Status')) v918$('v918Status').textContent='✅ Draft saved locally in this browser.'; }
+async function v918PublishEverything(){
+  const p=v918BuildPayload();
+  if(!confirm('Publish this to website + overlay from the Unified Control Center?')) return;
+  try{
+    await v918Json('/api/unified-control',{method:'POST',body:JSON.stringify(p)}).catch(async()=>await v918Json('/api/broadcast-hub',{method:'POST',body:JSON.stringify({core:p})}));
+    localStorage.setItem('DJF_V918_LAST_PUBLISH', new Date().toISOString());
+    if(v918$('v918Status')) v918$('v918Status').textContent='✅ Published. Website and overlay now use the same central data.';
+  }catch(e){ if(v918$('v918Status')) v918$('v918Status').textContent='❌ Publish failed: '+e.message; }
+}
+document.addEventListener('DOMContentLoaded',()=>{ if(document.getElementById('v918UnifiedControl')){ setTimeout(v918RefreshAll,500); ['v918CurrentShow','v918Theme','v918Mode','v918HeroTitle','v918HeroSubtitle','v918HeroText','v918Ticker','v918NextTitle','v918NextDate','v918NextTime','v918NextTheme','v918NextDescription','v918SubsManual','v918SubGoal','v918FollowerGoal','v918CommunityMessage','v918RequestText','v918SpecialEvent'].forEach(id=>{ const el=document.getElementById(id); if(el) el.addEventListener('input',v918PreviewAll); }); }});

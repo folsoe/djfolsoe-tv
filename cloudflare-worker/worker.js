@@ -8,7 +8,7 @@ const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816.20.1 COMMUNITY WALL PAT
     "nextShow": {"title": "Fredagsbar", "dateTime": "", "description": "Fest, grin, requests og weekendstemning.", "active": true},
     "showSchedule": [{"title":"Good Morning Twitch","show":"Good Morning Twitch","theme":"morning","date":"","start":"09:00","end":"12:00","description":"Fresh morning vibes — maybe","active":true,"priority":1}],
     "profile": {"name": "DJ FOLSOE", "fallbackAvatar": "", "description": "DJ FOLSOE er en dansk musikstreamer på Twitch med live DJ-shows, musikønsker, Top 20, fællesskab og dansk DJ-kultur.", "genres": ["Trance", "Eurodance", "Retro", "EDM", "Pop", "Nu-Disco"], "mods": [{"name": "Mod Master", "role": "Chat Safety"}, {"name": "Vibe Guardian", "role": "Community"}, {"name": "Request Helper", "role": "Requests"}, {"name": "DJ Support", "role": "Tech & Support"}, {"name": "Good Vibes", "role": "Positivity"}]}, "shows": [{"key": "trance", "title": "Trance Tuesday", "time": "Tuesday 18:30", "body": "Uplifting trance, emotion and big melodies."}, {"key": "top20", "title": "FOLSOE Top 20", "time": "Thursday 18:30", "body": "Weekly listening chart and countdown show."}, {"key": "fredagsbar", "title": "Fredagsbar", "time": "1. fredag hver måned 20:00", "body": "Weekend energy, party tracks and community."}, {"key": "retro", "title": "Retro Hits", "time": "Søndag 20:00", "body": "Classic tracks, nostalgia and singalong moments."}, {"key": "morning", "title": "Good Morning Twitch", "time": "Hver dag 07:00", "body": "Coffee, music and the best start of the day."}, {"key": "popup", "title": "PopUp", "time": "Surprise!", "body": "Surprise streams when you least expect it."}], "homepageNews": [{"id": "news1", "active": true, "type": "Latest show", "title": "Fredagsbar — thanks for an amazing night!", "body": "Watch highlights, requests and moments from the latest show.", "theme": "all", "priority": 1}, {"id": "news2", "active": true, "type": "Top 20 nyt", "title": "Ny Top 20 ude nu", "body": "Se denne uges største hits på FOLSOE Top 20.", "theme": "all", "priority": 2}, {"id": "news3", "active": true, "type": "Request info", "title": "Husk dine requests", "body": "Use !request in chat.", "theme": "all", "priority": 3}, {"id": "news4", "active": true, "type": "Community news", "title": "Fællesskabet vokser", "body": "Chat, emotes, follows og god stemning hver stream.", "theme": "all", "priority": 4}, {"id": "news5", "active": true, "type": "DJ Network", "title": "Danske DJs live nu", "body": "Se hvem der er live og find næste raid target.", "theme": "all", "priority": 5}, {"id": "news6", "active": true, "type": "Twitch updates", "title": "Nye emotes unlocked", "body": "Tjek de nye emotes og brug dem i chatten.", "theme": "all", "priority": 6}], "topTickerItems": [{"id": "top_weekend", "active": true, "theme": "weekend", "text": "🎉 WEEKEND VIBES · Broadcast Cloud", "priority": 1}, {"id": "top_morning", "active": true, "theme": "morning", "text": "☀️ GOOD MORNING TWITCH · Coffee, music and good vibes", "priority": 2}, {"id": "top_summer", "active": true, "theme": "summer", "text": "🌴 SUMMER BEATS · Summer 2026 · sunshine and bangers", "priority": 3}, {"id": "top_trance", "active": true, "theme": "trance", "text": "💙 TRANCE TUESDAY · Uplifting energy", "priority": 4}], "bottomTickerItems": [{"id": "bottom1", "active": true, "theme": "all", "text": "TOP20 · REQUESTS · DJ NETWORK · NEWS · COMMUNITY · DJ FOLSOE Broadcast Cloud", "priority": 1}, {"id": "bottom2", "active": true, "theme": "all", "text": "FOLLOW DJ FOLSOE · JOIN THE CHAT · REQUEST YOUR SONG · SHARE THE LOVE", "priority": 2}], "showVisuals": {"trance": {"gradient": "linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)", "icon": "💙", "tag": "TRANCE", "posterText": "TRANCE TUESDAY"}, "top20": {"gradient": "linear-gradient(135deg,#31004f,#ec4899,#f59e0b)", "icon": "🏆", "tag": "CHART", "posterText": "FOLSOE TOP 20"}, "fredagsbar": {"gradient": "linear-gradient(135deg,#431407,#f97316,#facc15)", "icon": "🍺", "tag": "FRIDAY", "posterText": "FREDAGSBAR"}, "retro": {"gradient": "linear-gradient(135deg,#111827,#7c3aed,#ec4899)", "icon": "🕹️", "tag": "RETRO", "posterText": "RETRO HITS"}, "morning": {"gradient": "linear-gradient(135deg,#7c2d12,#f59e0b,#fde68a)", "icon": "☀️", "tag": "MORNING", "posterText": "GOOD MORNING TWITCH"}, "popup": {"gradient": "linear-gradient(135deg,#052e2b,#00f5d4,#16a34a)", "icon": "⚡", "tag": "POPUP", "posterText": "POPUP"}, "weekend": {"gradient": "linear-gradient(135deg,#0f172a,#2563eb,#ec4899,#facc15)", "icon": "🎉", "tag": "WEEKEND", "posterText": "WEEKEND"}},
-    "overlayContent": {"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "Broadcast Cloud online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "box4": {"locked": "twitch-chat"}},
+    "overlayContent": {"box1": [{"active": true, "label": "FOLLOW JOURNEY", "headline": "870/1000 followers", "body": "Help DJ FOLSOE grow", "icon": "📡", "priority": 1}, {"active": true, "label": "LIVE STATUS", "headline": "0 viewers", "body": "Broadcast Cloud online", "icon": "👁️", "priority": 2}], "box2": [{"active": true, "label": "PROGRAM", "headline": "DJ FOLSOE LIVE", "body": "Active show and theme", "icon": "📺", "priority": 1}, {"active": true, "label": "ACTIVE THEME", "headline": "Theme Engine", "body": "Controlled from admin", "icon": "🎨", "priority": 2}], "box3": [{"active": true, "label": "TOP 20", "headline": "FOLSOE Chart", "body": "Weekly Listening Chart", "icon": "🎵", "priority": 1}, {"active": true, "label": "REQUESTS", "headline": "Requests open", "body": "!ønske / !request / !Wunsch", "icon": "🎧", "priority": 2}], "twitchChat": {"locked": "twitch-chat"}},
     "discoveryPicks": [{"artist": "Mau P", "title": "The Less I Know The Better", "genre": "Dance", "note": "Ny energi til chart-showet"}, {"artist": "Peggy Gou", "title": "Find The Way", "genre": "House", "note": "Lige opdaget og testet i mix"}, {"artist": "Anyma", "title": "Hypnotized", "genre": "Melodic Techno", "note": "Kunne blive en stærk bobler"}],
     "top20": [{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}]};
 const I18N = {"da": {"nav.home": "Forside", "nav.shows": "Shows", "nav.top20": "Top 20", "nav.news": "Nyheder", "nav.community": "Community", "nav.network": "DJ Network", "nav.about": "Om mig", "hero.subtitle": "Music TV fra Danmark", "hero.cta.twitch": "Se mig live på Twitch", "hero.cta.follow": "Follow mig", "hero.live": "Live på Twitch", "hero.offline": "Offline lige nu", "chat.title": "Live chat", "chat.open": "Åbn chat på Twitch", "about.title": "Hvem er DJ FOLSOE?", "about.body": "DJ FOLSOE brings music, chat, requests and Danish DJ culture together in a live broadcast universe. Kanalen blander radioenergi, TV-grafik og fællesskab på Twitch.", "shows.title": "Shows", "shows.all": "Se alle shows →", "news.title": "Nyheder & opdateringer", "news.all": "Se alle nyheder →", "top20.title": "FOLSOE Top 20", "top20.full": "Se hele listen →", "top20.button": "Se hele Top 20", "community.title": "Fællesskab & stats", "mods.title": "Mod-teamet", "mods.body": "Vores mods holder chatten god, hjælper nye seere og skaber den trygge stemning omkring streamen.", "cta.title": "Klar til næste show?", "cta.body": "Follow kanalen på Twitch, så du aldrig går glip af et show.", "cta.button": "Follow mig på Twitch"}, "en": {"nav.home": "Home", "nav.shows": "Shows", "nav.top20": "Top 20", "nav.news": "News", "nav.community": "Community", "nav.network": "DJ Network", "nav.about": "About", "hero.subtitle": "Music TV from Denmark", "hero.cta.twitch": "Watch me live on Twitch", "hero.cta.follow": "Follow me", "hero.live": "Live on Twitch", "hero.offline": "Offline right now", "chat.title": "Live chat", "chat.open": "Open chat on Twitch", "about.title": "Who is DJ FOLSOE?", "about.body": "DJ FOLSOE brings music, chat, requests and Danish DJ culture into a living broadcast universe. The channel blends radio energy, TV graphics and community on Twitch.", "shows.title": "Shows", "shows.all": "See all shows →", "news.title": "News & updates", "news.all": "See all news →", "top20.title": "FOLSOE Top 20", "top20.full": "See full list →", "top20.button": "See full Top 20", "community.title": "Community & stats", "mods.title": "Mod team", "mods.body": "Mods keep chat friendly, help new viewers and protect the good vibe around the stream.", "cta.title": "Ready for the next show?", "cta.body": "Follow the channel on Twitch so you never miss a show.", "cta.button": "Follow me on Twitch"}, "de": {"nav.home": "Start", "nav.shows": "Shows", "nav.top20": "Top 20", "nav.news": "News", "nav.community": "Community", "nav.network": "DJ Network", "nav.about": "Über mich", "hero.subtitle": "Music TV aus Dänemark", "hero.cta.twitch": "Live auf Twitch ansehen", "hero.cta.follow": "Folgen", "hero.live": "Live auf Twitch", "hero.offline": "Gerade offline", "chat.title": "Live Chat", "chat.open": "Chat auf Twitch öffnen", "about.title": "Wer ist DJ FOLSOE?", "about.body": "DJ FOLSOE verbindet Music, Chat, Musicwünsche und dänische DJ-Kultur in einem lebendigen Broadcast-Universum. Der Kanal kombiniert Radio-Energie, TV-Grafik und Community auf Twitch.", "shows.title": "Shows", "shows.all": "Alle Shows →", "news.title": "News & Updates", "news.all": "Alle News →", "top20.title": "FOLSOE Top 20", "top20.full": "Ganze Liste →", "top20.button": "Top 20 ansehen", "community.title": "Community & Stats", "mods.title": "Mod-Team", "mods.body": "Mods halten den Chat freundlich, helfen neuen Viewersn und schützen die gute Stimmung im Stream.", "cta.title": "Bereit für die nächste Show?", "cta.body": "Folge dem Kanal auf Twitch, damit du keine Show verpasst.", "cta.button": "Auf Twitch folgen"}};
@@ -711,6 +711,23 @@ export default {
     try {
       const core = await getCore(env);
       if (path === "/" || path === "/api") return json({ok:true,version:VERSION});
+
+      if (path === "/api/unified-control") {
+        if (request.method === "GET") {
+          const tw = await twitchProfile(env, core).catch(()=>({ok:false}));
+          return json({ok:true,version:"V918 Unified Control Center",core,twitch:tw,rule:"Twitch + Admin feeds website offline and overlay live",locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]});
+        }
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        const allowed = ["activeTheme","language","homepage","website","broadcast","nextShow","overlayHub","community","bottomTickerItems","topTickerItems","themes","themeLibrary"];
+        for (const key of allowed) if (Object.prototype.hasOwnProperty.call(body,key)) core[key] = body[key];
+        core.language = "en";
+        core.updatedAt = new Date().toISOString();
+        core.unifiedControl = {version:"V918 Unified Control Center",updatedAt:core.updatedAt,source:"admin",outputs:["website","overlay"]};
+        await putCore(env, core);
+        return json({ok:true,version:"V918 Unified Control Center",message:"Unified data published to website and overlay",core});
+      }
       if (path === "/api/broadcast-hub") {
         if (request.method === "GET") {
           return json({
@@ -723,7 +740,7 @@ export default {
               overlay:["activeTheme","topTickerItems","bottomTickerItems","overlayContent"],
               admin:["oneClickPresets","oneClickShowControl","quickActions","syncAll","themeEngine"]
             },
-            locked:["overlay graphics/layout","box4 twitch chat","DJ network","V901 burst timing fix","single logo top-left"]
+            locked:["overlay graphics/layout","Twitch chat protected","DJ network","V901 burst timing fix","single logo top-left"]
           });
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
@@ -905,7 +922,7 @@ export default {
             ok:true,
             version:"V913 Asset & Theme Upload Manager",
             assets: core.assetManager || {version:"V913 Asset & Theme Upload Manager",activeTheme:core.activeTheme||"weekend",themeAssets:themeSource,globalAssets:{logo:"assets/img/dj-folsoe-logo.png",ogImage:"assets/og-dj-folsoe.jpg"},updatedAt:core.updatedAt||new Date().toISOString()},
-            locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]
+            locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]
           });
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
@@ -952,7 +969,7 @@ export default {
             overlay:{box1:{headline:(core.overlayContent?.box1||[])[0]?.headline || "LIVE SHOW",body:(core.overlayContent?.box1||[])[0]?.body || "Broadcast Cloud online"},box2:{headline:(core.overlayContent?.box2||[])[0]?.headline || "DJ FOLSOE LIVE",body:(core.overlayContent?.box2||[])[0]?.body || "Active show and theme"},box3:{headline:(core.overlayContent?.box3||[])[0]?.headline || "Requests open",body:(core.overlayContent?.box3||[])[0]?.body || "!request in chat"}},
             updatedAt:core.updatedAt || new Date().toISOString()
           };
-          return json({ok:true,version:"V912 Content Studio",contentStudio:studio,locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]});
+          return json({ok:true,version:"V912 Content Studio",contentStudio:studio,locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]});
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
         if (request.method !== "POST") return json({error:"Method not allowed"},405);
@@ -971,7 +988,7 @@ export default {
         core.overlayContent.box1 = [{active:true,label:"BROADCAST",headline:studio.overlay?.box1?.headline || "LIVE SHOW",body:studio.overlay?.box1?.body || "Broadcast Cloud online",icon:"📡",priority:1}];
         core.overlayContent.box2 = [{active:true,label:"ON AIR",headline:studio.overlay?.box2?.headline || "DJ FOLSOE LIVE",body:studio.overlay?.box2?.body || "Active show and theme",icon:"📺",priority:1}];
         core.overlayContent.box3 = [{active:true,label:"COMMUNITY",headline:studio.overlay?.box3?.headline || "Requests open",body:studio.overlay?.box3?.body || "!request in chat",icon:"🎧",priority:1}];
-        core.overlayContent.box4 = {locked:"twitch-chat"};
+        core.overlayContent.twitchChat = {locked:"twitch-chat"};
         core.overlayHub = Object.assign({}, core.overlayHub||{}, {version:"V912 from Content Studio",ticker:core.bottomTickerItems[0].text,overlayContent:core.overlayContent,updatedAt:now});
         core.broadcastSystem = Object.assign({}, core.broadcastSystem||{}, {version:"V912 Content Studio Sync",hero:{headline:core.homepage.heroHeadline,message:core.homepage.heroMessage},ticker:core.bottomTickerItems[0].text,overlayContent:core.overlayContent,updatedAt:now});
         core.language = "en";
@@ -999,9 +1016,9 @@ export default {
               introText: core.broadcast?.introText || "Welcome to DJ FOLSOE LIVE.",
               outroText: core.broadcast?.outroText || "Thanks for watching DJ FOLSOE LIVE.",
               socialText: core.broadcast?.socialText || "DJ FOLSOE is live now on Twitch.",
-              overlayContent: core.overlayContent || DEFAULT_CORE.overlayContent || {box4:{locked:"twitch-chat"}}
+              overlayContent: core.overlayContent || DEFAULT_CORE.overlayContent || {twitchChat:{locked:"twitch-chat"}}
             },
-            locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]
+            locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]
           });
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
@@ -1022,7 +1039,7 @@ export default {
           overlayContent: body.overlayContent || core.overlayContent || DEFAULT_CORE.overlayContent || {},
           updatedAt:new Date().toISOString()
         };
-        bs.overlayContent.box4 = {locked:"twitch-chat"};
+        bs.overlayContent.twitchChat = {locked:"twitch-chat"};
         core.broadcastSystem = bs;
         core.overlayContent = bs.overlayContent;
         core.overlayHub = Object.assign({}, core.overlayHub||{}, {version:"V910 from Broadcast System", state:bs.mode, activeShow:bs.activeShow, activeTheme:bs.activeTheme, ticker:bs.ticker, overlayContent:bs.overlayContent, updatedAt:bs.updatedAt});
@@ -1046,9 +1063,9 @@ export default {
               activeShow: core.broadcast?.activeShow || core.station?.streamTitle || "DJ FOLSOE LIVE",
               activeTheme: core.activeTheme || "weekend",
               ticker: (core.bottomTickerItems||[])[0]?.text || "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE",
-              overlayContent: core.overlayContent || DEFAULT_CORE.overlayContent || {box4:{locked:"twitch-chat"}}
+              overlayContent: core.overlayContent || DEFAULT_CORE.overlayContent || {twitchChat:{locked:"twitch-chat"}}
             },
-            locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]
+            locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]
           });
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
@@ -1063,7 +1080,7 @@ export default {
           overlayContent: body.overlayContent || core.overlayContent || DEFAULT_CORE.overlayContent || {},
           updatedAt:new Date().toISOString()
         };
-        hub.overlayContent.box4 = {locked:"twitch-chat"};
+        hub.overlayContent.twitchChat = {locked:"twitch-chat"};
         core.overlayHub = hub;
         core.overlayContent = hub.overlayContent;
         core.activeTheme = hub.activeTheme;
@@ -1096,6 +1113,7 @@ export default {
         const themeKey = activeTheme(core);
         const theme = (core.themes || {})[themeKey] || (core.themeLibrary || {})[themeKey] || null;
         const homepageData = core.homepage || {};
+        const overlayControl = core.overlayHub?.controlPanel || core.overlayControlPanel || {};
         const overlayData = core.overlayContent || {};
         const box1 = overlayData.box1 || {};
         const box2 = overlayData.box2 || {};
@@ -1105,23 +1123,21 @@ export default {
         if (theme && !String(theme.bgImage || theme.background || theme.backgroundPath || "").trim()) warnings.push("Active theme has no background path.");
         if (!theme) warnings.push("Active theme is not found in theme library.");
         if (!String(homepageData.heroHeadline || core.broadcast?.hero?.headline || core.broadcast?.streamTitle || "").trim()) warnings.push("Website hero headline is empty.");
-        if (!String(box1.headline || box1.title || "").trim()) warnings.push("Overlay box 1 headline is empty.");
-        if (!String(box2.headline || box2.title || "").trim()) warnings.push("Overlay box 2 headline is empty.");
-        if (!String(box3.headline || box3.title || "").trim()) warnings.push("Overlay box 3 headline is empty.");
+        if (!String(overlayControl.title || core.overlayHub?.activeShow || core.broadcast?.activeShow || "").trim()) warnings.push("Overlay Control Panel title/status is empty.");
         if (!tickerItems.length) warnings.push("No ticker messages found.");
         checks.api = {state:"ok",label:"OK",detail:"Worker online · " + VERSION};
         checks.website = {state:String(homepageData.heroHeadline || core.broadcast?.streamTitle || "").trim()?"ok":"warn",label:String(homepageData.heroHeadline || core.broadcast?.streamTitle || "").trim()?"OK":"WARNING",detail:"Homepage / website portal data checked"};
-        checks.overlay = {state:(String(box1.headline || box1.title || "").trim() && String(box2.headline || box2.title || "").trim() && String(box3.headline || box3.title || "").trim())?"ok":"warn",label:(String(box1.headline || box1.title || "").trim() && String(box2.headline || box2.title || "").trim() && String(box3.headline || box3.title || "").trim())?"OK":"WARNING",detail:"Overlay box 1-3 checked · Box 4 locked to Twitch chat"};
+        checks.overlay = {state:(String(box1.headline || box1.title || "").trim() && String(box2.headline || box2.title || "").trim() && String(box3.headline || box3.title || "").trim())?"ok":"warn",label:(String(box1.headline || box1.title || "").trim() && String(box2.headline || box2.title || "").trim() && String(box3.headline || box3.title || "").trim())?"OK":"WARNING",detail:"Overlay Overlay Control Panel checked · Twitch chat locked to Twitch chat"};
         checks.theme = {state:(theme && String(theme.bgImage || theme.background || theme.backgroundPath || "").trim())?"ok":"warn",label:(theme && String(theme.bgImage || theme.background || theme.backgroundPath || "").trim())?"OK":"WARNING",detail:"Active theme: " + themeKey};
         checks.publish = {state:core.updatedAt?"ok":"warn",label:core.updatedAt?"OK":"CHECK",detail:core.updatedAt || "No updatedAt timestamp found"};
-        checks.locks = {state:"ok",label:"PROTECTED",detail:"Overlay graphics/layout · Box 4 · single logo · V901 timing fix"};
-        return json({ok:true,version:"V916 Admin Status & Health Check",ready:warnings.length===0,checkedAt:new Date().toISOString(),source:"cloudflare-worker",checks,warnings,locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]});
+        checks.locks = {state:"ok",label:"PROTECTED",detail:"Overlay graphics/layout · Twitch chat · single logo · V901 timing fix"};
+        return json({ok:true,version:"V916 Admin Status & Health Check",ready:warnings.length===0,checkedAt:new Date().toISOString(),source:"cloudflare-worker",checks,warnings,locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]});
       }
 
       if (path === "/api/publish-safety") {
         core.publishSafety = core.publishSafety || {version:"V915 Publish Safety & Backup System",backups:[],lastSnapshot:null,updatedAt:null};
         if (request.method === "GET") {
-          return json({ok:true,version:"V915 Publish Safety & Backup System",backups:core.publishSafety.backups||[],lastSnapshot:core.publishSafety.lastSnapshot||null,locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]});
+          return json({ok:true,version:"V915 Publish Safety & Backup System",backups:core.publishSafety.backups||[],lastSnapshot:core.publishSafety.lastSnapshot||null,locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]});
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
         if (request.method !== "POST") return json({error:"Method not allowed"},405);

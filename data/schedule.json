@@ -1,0 +1,13 @@
+{
+  "version": "V918 Unified Control Center",
+  "nextShow": {
+    "title": "Next DJ FOLSOE Broadcast",
+    "show": "Next DJ FOLSOE Broadcast",
+    "datetime": "",
+    "dateTime": "",
+    "timeLabel": "Announced soon",
+    "theme": "weekend",
+    "description": "The next show is controlled from admin and appears on both website and overlay."
+  },
+  "upcomingShows": []
+}

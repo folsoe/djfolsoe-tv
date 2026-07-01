@@ -1,42 +1,27 @@
 {
-  "version": "V910 Overlay Output",
-  "state": "LIVE SHOW",
-  "activeShow": "DJ FOLSOE LIVE",
-  "activeTheme": "weekend",
-  "ticker": "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · FOLSOETV.DK",
-  "overlayContent": {
-    "box1": [
-      {
-        "active": true,
-        "label": "BROADCAST",
-        "headline": "LIVE SHOW",
-        "body": "DJ FOLSOE is live from Denmark",
-        "icon": "📡",
-        "priority": 1
-      }
-    ],
-    "box2": [
-      {
-        "active": true,
-        "label": "ON AIR",
-        "headline": "DJ FOLSOE LIVE",
-        "body": "Modern Music TV on Twitch",
-        "icon": "📺",
-        "priority": 1
-      }
-    ],
-    "box3": [
-      {
-        "active": true,
-        "label": "REQUESTS",
-        "headline": "Requests open",
-        "body": "Use !request Artist - Title in Twitch chat",
-        "icon": "🎧",
-        "priority": 1
-      }
-    ],
-    "box4": {
-      "locked": "twitch-chat"
-    }
+  "version": "V918 Unified Control Center",
+  "overlayControlPanel": {
+    "title": "DJ FOLSOE",
+    "status": "OFFLINE",
+    "viewers": 0,
+    "followers": null,
+    "subs": 0,
+    "subGoal": 100,
+    "nextShow": {
+      "title": "Next DJ FOLSOE Broadcast",
+      "show": "Next DJ FOLSOE Broadcast",
+      "datetime": "",
+      "dateTime": "",
+      "timeLabel": "Announced soon",
+      "theme": "weekend",
+      "description": "The next show is controlled from admin and appears on both website and overlay."
+    },
+    "infoLine": "LIVE DJ SHOWS FROM DENMARK \u00b7 REQUEST A SONG IN TWITCH CHAT \u00b7 FOLLOW DJ FOLSOE",
+    "requestText": "Use !request in Twitch chat",
+    "specialEvent": ""
+  },
+  "locked": {
+    "overlayGraphics": "unchanged",
+    "twitchChat": "protected"
   }
 }
