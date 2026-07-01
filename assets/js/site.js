@@ -17,9 +17,18 @@ async function loadPortal(){
   const localThemes = await readJson('data/themes.json', {}) || {};
   let cloud = {};
   let twitch = {};
-  cloud = await readJson(API_ROOT + '/api/website-portal', {});
+  let computedHomepage = {};
+  let schedule = {};
+  cloud = await readJson(API_ROOT + '/api/website-portal?t=' + Date.now(), {});
+  computedHomepage = await readJson(API_ROOT + '/api/homepage?t=' + Date.now(), {});
+  schedule = await readJson(API_ROOT + '/api/show-schedule?t=' + Date.now(), {});
   twitch = await readJson(API_ROOT + '/api/twitch-profile?live=1&t=' + Date.now(), {});
   portal = deepMerge({homepage:localHomepage, website:localWebsite, community:localCommunity, broadcast:localBroadcast, themes:localThemes}, cloud || {});
+  const apiNextShow = normalizeNextShow(schedule.nextShow || computedHomepage.nextShow || cloud.nextShow || cloud?.homepage?.nextShow || portal?.homepage?.nextShow || {});
+  portal.homepage = Object.assign({}, portal.homepage || {}, {
+    nextShow: apiNextShow,
+    upcomingShows: schedule.upcomingShows || computedHomepage.upcomingShows || portal.homepage?.upcomingShows || []
+  });
   portal.twitch = twitch || {};
   if(portal.twitch && portal.twitch.ok){
     portal.broadcast = Object.assign({}, portal.broadcast || {}, {
@@ -59,6 +68,27 @@ function startTwitchLivePolling(){
   if(twitchTimer) clearInterval(twitchTimer);
   twitchTimer = setInterval(refreshTwitchLive, 30000);
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) refreshTwitchLive(); });
+}
+function normalizeNextShow(raw){
+  const x = raw || {};
+  const dateTime = x.datetime || x.dateTime || (x.date && (x.start || x.time) ? `${x.date}T${x.start || x.time}` : '');
+  const title = x.title || x.show || 'Next DJ FOLSOE Broadcast';
+  const startLabel = x.timeLabel || x.start || x.time || (dateTime ? formatNextDateLabel(dateTime) : 'Announced soon');
+  return {
+    title,
+    show: x.show || title,
+    datetime: dateTime || '',
+    dateTime: dateTime || '',
+    timeLabel: startLabel,
+    theme: x.theme || 'Music TV',
+    description: x.description || x.body || 'The next show is controlled from admin and appears here automatically.',
+    active: x.active !== false
+  };
+}
+function formatNextDateLabel(dateTime){
+  const d = new Date(dateTime);
+  if(!dateTime || isNaN(d.getTime())) return 'Announced soon';
+  return d.toLocaleString('en-GB', {weekday:'short', day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
 }
 function deepMerge(a,b){
   const out = Array.isArray(a) ? [...a] : {...(a||{})};
@@ -102,7 +132,7 @@ function renderPortal(){
   if($('showsTitle')) $('showsTitle').textContent = sectionTitles.showsTitle || 'Your favorite show';
   if($('aboutKicker')) $('aboutKicker').textContent = sectionTitles.aboutKicker || 'DISCOVER DJ FOLSOE';
   if($('aboutTitle')) $('aboutTitle').textContent = sectionTitles.aboutTitle || 'Music TV, Twitch and Danish DJ energy';
-  const next = homepage.nextShow || {};
+  const next = normalizeNextShow(homepage.nextShow || portal.nextShow || {});
   $('nextTitle').textContent = sectionTitles.nextTitle || next.title || 'Next DJ FOLSOE Broadcast';
   $('nextTime').textContent = next.timeLabel || next.datetime || 'TBA';
   $('nextTheme').textContent = next.theme || theme.title || 'Music TV';

@@ -331,6 +331,22 @@ function buildUpcomingShows(core, limit=10){
     })
     .slice(0, limit);
 }
+
+function normalizeWebsiteNextShow(item){
+  item = item || {};
+  const dt = item.datetime || item.dateTime || (item.date && (item.start || item.time) ? (item.date + "T" + (item.start || item.time)) : "");
+  return {
+    title: item.title || item.show || "Next DJ FOLSOE Broadcast",
+    show: item.show || item.title || "DJ FOLSOE LIVE",
+    theme: item.theme || "Music TV",
+    datetime: dt || "",
+    dateTime: dt || "",
+    timeLabel: item.timeLabel || item.start || item.time || (dt ? dt : "Announced soon"),
+    description: item.description || item.body || "The next show is controlled from admin and appears here automatically.",
+    active: item.active !== false
+  };
+}
+
 async function saveShowSchedule(request, env, core){
   if (!adminOk(request, env)) return json({error:"Unauthorized"},401);
   const body = await request.json().catch(()=>({}));
@@ -724,12 +740,21 @@ export default {
         if (request.method === "GET") {
           ensureThemeBackgrounds(core);
           const tw = await twitchProfile(env, core);
+          const computedHomepage = await homepage(env, core);
+          const next = normalizeWebsiteNextShow(buildUpcomingShows(core,1)[0] || core.nextShow || DEFAULT_CORE.nextShow || {});
+          const upcoming = buildUpcomingShows(core,10).map(normalizeWebsiteNextShow);
           const baseCommunity = core.community || {};
           const baseBroadcast = core.broadcast || {broadcastState:core.station?.live?"LIVE":"OFFLINE", activeShow:core.activeTheme || "weekend", streamTitle:core.station?.streamTitle || "DJ FOLSOE · Twitch music streamer from Denmark", viewers:core.station?.viewers || 0};
+          const homepageOut = Object.assign({}, computedHomepage || {}, core.homepage || {}, {
+            nextShow: next,
+            upcomingShows: upcoming
+          });
           return json({
             ok:true,
-            version:"V917.2 Twitch Live Sync",
-            homepage: core.homepage || {},
+            version:"V917.3 Next Show Sync",
+            homepage: homepageOut,
+            nextShow: next,
+            upcomingShows: upcoming,
             website: core.website || {title:"DJ FOLSOE TV", primaryLanguage:"en"},
             community: Object.assign({}, baseCommunity, {followers:tw.followers ?? baseCommunity.followers, subs:tw.subs ?? baseCommunity.subs, subGoal:tw.subGoal ?? baseCommunity.subGoal}),
             broadcast: Object.assign({}, baseBroadcast, {live:tw.isLive, broadcastState:tw.isLive?"LIVE":baseBroadcast.broadcastState, viewers:tw.viewers || 0, streamTitle:tw.liveTitle || baseBroadcast.streamTitle}),
