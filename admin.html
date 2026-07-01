@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE Control Center V921</title>
+  <title>DJ FOLSOE Control Center V928.2</title>
   <link rel="stylesheet" href="assets/css/admin.css">
-</head>
+<style>
+.top20Editor{display:grid;gap:8px;max-height:560px;overflow:auto;padding-right:4px}.top20Row{display:grid;grid-template-columns:44px 1fr 1fr .75fr;gap:8px;align-items:center}.top20Row b{color:#fff;opacity:.9}.wideCard{grid-column:span 2}@media(max-width:900px){.wideCard{grid-column:span 1}.top20Row{grid-template-columns:38px 1fr}.top20Row input{min-width:0}}
+</style></head>
 <body>
 <header class="adminHero v9185Hero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V921</span>
-    <h1>Admin Field Mapping</h1>
-    <p>One simple field in admin now controls the matching field on both the website and the live overlay.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V928.2</span>
+    <h1>Broadcast Content Manager</h1>
+    <p>Edit Top 20 and Mods directly in admin. The same broadcast-core drives website and overlay.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN TOKEN</label>
@@ -155,20 +157,27 @@
         <input id="specialMessage" value="">
       </article>
 
-      <article class="v9185Card">
-        <h3>5 · Top 20 Quick Edit</h3>
-        <label>#1 Artist</label>
-        <input id="top1Artist" value="DJ FOLSOE">
-        <label>#1 Title</label>
-        <input id="top1Title" value="This Week's Number One">
-        <label>#2 Artist</label>
-        <input id="top2Artist" value="Viewer Pick">
-        <label>#2 Title</label>
-        <input id="top2Title" value="Request of the Week">
-        <label>#3 Artist</label>
-        <input id="top3Artist" value="Future Hit">
-        <label>#3 Title</label>
-        <input id="top3Title" value="Discovery Track">
+      <article class="v9185Card wideCard">
+        <h3>5 · Top 20 Content Manager</h3>
+        <p class="note">Edit the full Top 20 here. It publishes to core.top20 and is used by website + overlay.</p>
+        <div id="top20FullEditor" class="top20Editor"></div>
+      </article>
+
+      <article class="v9185Card wideCard">
+        <h3>6 · Mods / Community Crew</h3>
+        <p class="note">Write your real mods here. One name per line. Nothing is hardcoded.</p>
+        <label>Section title</label>
+        <input id="modsTitle" value="DJ FOLSOE COMMUNITY CREW">
+        <label>Subtitle</label>
+        <input id="modsSubtitle" value="The people keeping the chat, music and vibes alive">
+        <label>Head mods</label>
+        <textarea id="modsHead" rows="4" placeholder="One mod per line"></textarea>
+        <label>Community mods</label>
+        <textarea id="modsCommunity" rows="4" placeholder="One mod per line"></textarea>
+        <label>Music team</label>
+        <textarea id="modsMusic" rows="3" placeholder="One name per line"></textarea>
+        <label>VIP supporters</label>
+        <textarea id="modsVip" rows="3" placeholder="One name per line"></textarea>
       </article>
     </div>
 

@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "version": "V924 Persistent Broadcast Core",
+  "version": "V928.1 Community & Top20 Engine",
   "schema": "broadcast-core/v2-clean",
   "source": "static-default",
   "updatedAt": "2026-07-01T19:20:00.000Z",
@@ -132,5 +132,49 @@
       "description": "The stream that appears when you least expect it.",
       "color": "#ffffff"
     }
-  ]
+  ],
+  "fieldMapping": {
+    "show.current": "admin.currentShow",
+    "show.mode": "admin.mode",
+    "theme.id": "admin.theme",
+    "hero.title": "admin.heroTitle",
+    "hero.subtitle": "admin.heroSubtitle",
+    "ticker.text": "admin.ticker",
+    "nextShow.show": "admin.nextShowTitle",
+    "nextShow.datetime": "admin.nextShowDate+admin.nextShowTime",
+    "community.followerGoal": "admin.followerGoal",
+    "community.subGoal": "admin.subGoal",
+    "overlay": "derived from same admin fields"
+  },
+  "mods": {
+    "title": "DJ FOLSOE COMMUNITY CREW",
+    "subtitle": "The people keeping the chat, music and vibes alive",
+    "groups": [
+      {
+        "label": "HEAD MODS",
+        "names": [
+          "DJCosmoDK",
+          "DJKesseDK"
+        ]
+      },
+      {
+        "label": "COMMUNITY MODS",
+        "names": [
+          "Danishdjjk"
+        ]
+      },
+      {
+        "label": "MUSIC TEAM",
+        "names": [
+          "DJ FOLSOE community"
+        ]
+      },
+      {
+        "label": "VIP SUPPORTERS",
+        "names": [
+          "Everyone in chat"
+        ]
+      }
+    ]
+  }
 }

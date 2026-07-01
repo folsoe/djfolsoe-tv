@@ -8,7 +8,7 @@
    GET  /api/twitch
 */
 
-const VERSION = 'V925 Direct Theme Switch Panic Fix';
+const VERSION = 'V928.1 Community & Top20 Engine';
 const SCHEMA = 'broadcast-core/v2-clean';
 const CORE_KEY = 'broadcast-core:live';
 
@@ -153,6 +153,17 @@ function defaultCore(twitch = {}) {
       specialEvent: '',
       subGoal: 100
     },
+
+    mods: {
+      title: 'DJ FOLSOE COMMUNITY CREW',
+      subtitle: 'The people keeping the chat, music and vibes alive',
+      groups: [
+        { label: 'HEAD MODS', names: ['DJCosmoDK','DJKesseDK'] },
+        { label: 'COMMUNITY MODS', names: ['Danishdjjk'] },
+        { label: 'MUSIC TEAM', names: ['DJ FOLSOE community'] },
+        { label: 'VIP SUPPORTERS', names: ['Everyone in chat'] }
+      ]
+    },
     top20: [
       { rank: 1, artist: 'DJ FOLSOE', title: "This Week's Number One", status: 'ADMIN CONTROLLED' },
       { rank: 2, artist: 'Viewer Pick', title: 'Request of the Week', status: 'COMMUNITY' },
@@ -188,6 +199,7 @@ function mergeCore(input, twitch) {
     ticker: { ...base.ticker, ...(incoming.ticker || {}) },
     overlay: { ...base.overlay, ...(incoming.overlay || {}) },
     top20: Array.isArray(incoming.top20) ? incoming.top20 : base.top20,
+    mods: incoming.mods && typeof incoming.mods === 'object' ? { ...base.mods, ...incoming.mods, groups: Array.isArray(incoming.mods.groups) ? incoming.mods.groups : base.mods.groups } : base.mods,
     featuredShows: Array.isArray(incoming.featuredShows) ? incoming.featuredShows : base.featuredShows
   };
   const followers = Number(merged.twitch.followers ?? merged.community.followers ?? 0) || 0;
@@ -309,8 +321,10 @@ function compatibility(core) {
       sectionTitles: { nextKicker: 'NEXT SHOW', nextTitle: 'Next DJ FOLSOE Broadcast', showsKicker: 'FEATURED SHOWS', showsTitle: 'Your favorite show', aboutKicker: 'DISCOVER DJ FOLSOE', aboutTitle: 'Music TV, Twitch and Danish DJ energy' },
       featuredShows: core.featuredShows || [],
       aboutText: core.community?.text || core.hero?.text || '',
-      top20: core.top20 || []
+      top20: core.top20 || [],
+      mods: core.mods || {}
     },
+    mods: core.mods || {},
     website: { title: core.hero?.title || 'DJ FOLSOE', description: core.hero?.text || '', primaryLanguage: 'en' },
     overlayHub: {
       version: VERSION,
@@ -354,6 +368,7 @@ function compatibility(core) {
       },
       updatedAt: core.updatedAt
     },
+    mods: core.mods || {},
     updatedAt: core.updatedAt
   };
 }
