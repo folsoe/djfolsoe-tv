@@ -3610,3 +3610,275 @@ v901PushBurst = function(item){
   window.addEventListener('resize',refresh);
   window.DJF_CHAT_COLUMN_VERSION=VERSION;
 })();
+
+/* =========================================================
+   V929.7 — Chat Layout Rebuild
+   Rebuilds the Twitch chat as a readable broadcast chat column.
+   - no loose/duplicate avatar
+   - one avatar per message
+   - stacked username + message
+   - auto line count from available height
+   - mobile/TV readable typography
+   ========================================================= */
+(function(){
+  const VERSION='V929.7 CHAT LAYOUT REBUILD';
+  function $id(id){return document.getElementById(id);} 
+  function htmlEsc(s){try{return esc(s);}catch(e){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}}
+  function safeClip(s,n){try{return clip(s,n);}catch(e){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s;}}
+  function cleanLogin(v){return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'').slice(0,30)||'chat';}
+  function cleanChat(v){
+    let s=String(v||'');
+    if(typeof djfCleanChatText==='function') s=djfCleanChatText(s);
+    s=s.replace(/^[:@][^\s]+\s+/,'');
+    s=s.replace(/\bPRIVMSG\s+#?djfolsoe\s*:?/ig,'');
+    s=s.replace(/\bdjfolsoe\.tmi\.twitch\.tv\b/ig,'');
+    s=s.replace(/\s+/g,' ').trim();
+    return s;
+  }
+  function injectCss(){
+    let st=$id('djfV9297ChatCss');
+    if(st) return;
+    st=document.createElement('style');
+    st.id='djfV9297ChatCss';
+    st.textContent=`
+      :root{--djf-chat-top:64px;--djf-chat-right:42px;--djf-chat-width:455px;--djf-chat-bottom-safe:205px;}
+
+      /* remove old loose avatar/header artefacts */
+      #chatAvatarImg,#chatAvatarFallback,
+      #box4 > .avatar,#box4 > .chatAvatar,#box4 .chatAvatarWrap,#box4 .avatarWrap{
+        display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;overflow:hidden!important;
+      }
+
+      #box4{
+        position:absolute!important;
+        right:var(--djf-chat-right)!important;
+        top:var(--djf-chat-top)!important;
+        bottom:var(--djf-chat-bottom-safe)!important;
+        width:var(--djf-chat-width)!important;
+        max-width:var(--djf-chat-width)!important;
+        height:auto!important;
+        min-height:0!important;
+        box-sizing:border-box!important;
+        padding:30px 18px 18px 22px!important;
+        overflow:hidden!important;
+        display:flex!important;
+        flex-direction:column!important;
+        justify-content:flex-start!important;
+        align-items:stretch!important;
+      }
+
+      #box4::before{pointer-events:none!important;}
+      #box4 #chatUser{
+        display:block!important;
+        position:relative!important;
+        margin:0 0 12px 0!important;
+        padding:0!important;
+        max-width:100%!important;
+        overflow:visible!important;
+        white-space:nowrap!important;
+        text-overflow:clip!important;
+        font:1000 16px/1.05 Arial,Helvetica,sans-serif!important;
+        letter-spacing:.09em!important;
+        color:#ffe36e!important;
+        text-shadow:0 2px 12px rgba(0,0,0,.95),0 0 14px rgba(255,227,110,.38)!important;
+        text-transform:uppercase!important;
+      }
+      #box4 #chatUser::before{content:'LIVE TWITCH CHAT';}
+      #box4 #chatUser{font-size:0!important;}
+      #box4 #chatUser::before{font-size:16px!important;}
+
+      #box4 #chatMessage{
+        display:block!important;
+        position:relative!important;
+        flex:1 1 auto!important;
+        min-height:0!important;
+        width:100%!important;
+        max-width:100%!important;
+        overflow:hidden!important;
+        padding:0!important;
+        margin:0!important;
+        line-height:1!important;
+      }
+
+      #box4 .chatStack{
+        display:flex!important;
+        flex-direction:column!important;
+        justify-content:flex-start!important;
+        gap:8px!important;
+        width:100%!important;
+        height:100%!important;
+        max-height:100%!important;
+        overflow:hidden!important;
+        box-sizing:border-box!important;
+      }
+
+      #box4 .chatLine{
+        display:grid!important;
+        grid-template-columns:42px minmax(0,1fr)!important;
+        grid-template-areas:'avatar content'!important;
+        align-items:start!important;
+        column-gap:11px!important;
+        min-height:48px!important;
+        padding:7px 10px!important;
+        border-radius:15px!important;
+        background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,.055))!important;
+        border:1px solid rgba(255,255,255,.16)!important;
+        box-shadow:0 6px 18px rgba(0,0,0,.18), inset 0 0 18px rgba(255,255,255,.045)!important;
+        box-sizing:border-box!important;
+        overflow:hidden!important;
+        transform:none!important;
+      }
+
+      #box4 .chatLineAvatar{
+        grid-area:avatar!important;
+        width:38px!important;height:38px!important;
+        border-radius:50%!important;
+        display:grid!important;place-items:center!important;
+        overflow:hidden!important;
+        flex:0 0 38px!important;
+        background:linear-gradient(135deg,var(--c,#62ecff),var(--b,#ff4bd8))!important;
+        box-shadow:0 0 18px rgba(98,236,255,.65), inset 0 0 0 2px rgba(255,255,255,.24)!important;
+        color:#fff!important;
+        font:1000 17px/1 Arial,Helvetica,sans-serif!important;
+      }
+      #box4 .chatLineAvatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;}
+
+      #box4 .chatContent{
+        grid-area:content!important;
+        min-width:0!important;
+        max-width:100%!important;
+        display:flex!important;
+        flex-direction:column!important;
+        gap:3px!important;
+        overflow:hidden!important;
+        transform:none!important;
+      }
+
+      #box4 .chatLineUser{
+        display:block!important;
+        font:1000 13.8px/1.05 Arial,Helvetica,sans-serif!important;
+        color:#ffe36e!important;
+        letter-spacing:.05em!important;
+        text-transform:uppercase!important;
+        text-shadow:0 2px 10px rgba(0,0,0,.96),0 0 10px rgba(255,227,110,.30)!important;
+        white-space:nowrap!important;
+        overflow:hidden!important;
+        text-overflow:ellipsis!important;
+        max-width:100%!important;
+      }
+
+      #box4 .chatLineText{
+        display:block!important;
+        font:950 15.8px/1.16 Arial,Helvetica,sans-serif!important;
+        color:#fff!important;
+        text-shadow:0 2px 12px rgba(0,0,0,.95),0 0 9px rgba(255,255,255,.18)!important;
+        white-space:normal!important;
+        word-break:break-word!important;
+        overflow-wrap:anywhere!important;
+        max-height:38px!important;
+        overflow:hidden!important;
+      }
+
+      #box4 .chatEmote{width:25px!important;height:25px!important;vertical-align:-6px!important;margin:0 2px!important;}
+      #box4 .chatUnicodeEmoji{font-size:23px!important;line-height:1!important;vertical-align:-4px!important;}
+
+      @media (max-height:820px){
+        :root{--djf-chat-top:58px;--djf-chat-width:430px;--djf-chat-right:34px;--djf-chat-bottom-safe:190px;}
+        #box4{padding:28px 15px 15px 19px!important;}
+        #box4 .chatStack{gap:7px!important;}
+        #box4 .chatLine{grid-template-columns:38px minmax(0,1fr)!important;min-height:43px!important;padding:6px 9px!important;column-gap:10px!important;}
+        #box4 .chatLineAvatar{width:34px!important;height:34px!important;font-size:16px!important;}
+        #box4 .chatLineUser{font-size:12.8px!important;}
+        #box4 .chatLineText{font-size:14.6px!important;max-height:34px!important;}
+      }
+    `;
+    document.head.appendChild(st);
+  }
+
+  function bottomSafe(){
+    let safe=190;
+    try{
+      const burst=$id('broadcastBurst');
+      const bottom=$id('bottomTicker')||$id('bottomTickerText');
+      if(burst){const r=burst.getBoundingClientRect(); if(r.top>0) safe=Math.max(safe, window.innerHeight-r.top+22);}
+      if(bottom){const r=bottom.getBoundingClientRect(); if(r.top>0) safe=Math.max(safe, window.innerHeight-r.top+18);}
+    }catch(e){}
+    return Math.min(Math.max(safe,180),270);
+  }
+  function capacity(){
+    let h=520;
+    try{
+      const box=$id('box4');
+      const msg=$id('chatMessage');
+      if(msg) h=msg.getBoundingClientRect().height;
+      else if(box) h=box.getBoundingClientRect().height-58;
+    }catch(e){}
+    const row=58;
+    return Math.max(5,Math.min(10,Math.floor(h/row)));
+  }
+  function initial(v){return (String(v||'C').trim().slice(0,1).toUpperCase()||'C');}
+  function avatarHtml(item,idx){
+    const user=String(item.user||item.login||'CHAT');
+    const login=cleanLogin(item.login||item.user||'');
+    const cached=(typeof profileCache==='object' && login && profileCache[login]) ? profileCache[login] : '';
+    if(cached) return `<span class="chatLineAvatar" data-login="${htmlEsc(login)}"><img src="${htmlEsc(cached)}" alt=""></span>`;
+    setTimeout(async()=>{
+      try{
+        if(typeof getAvatar!=='function' || !login) return;
+        const av=await getAvatar(login);
+        if(!av) return;
+        document.querySelectorAll(`.chatLineAvatar[data-login="${login}"]`).forEach(el=>{el.innerHTML=`<img src="${htmlEsc(av)}" alt="">`;});
+      }catch(e){}
+    },90+idx*25);
+    return `<span class="chatLineAvatar" data-login="${htmlEsc(login)}">${htmlEsc(initial(user))}</span>`;
+  }
+  function renderStack(){
+    injectCss();
+    const box=$id('box4');
+    const el=$id('chatMessage');
+    const userHead=$id('chatUser');
+    if(userHead) userHead.textContent='';
+    document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottomSafe()+'px');
+    if(!el) return;
+    const cap=capacity();
+    const fallback=[{user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'}];
+    let source=(Array.isArray(chatQueue)&&chatQueue.length?chatQueue:fallback).slice(-cap).reverse();
+    source=source.filter(item=>cleanChat(item.text||item.message||'').length || item.html);
+    if(!source.length) source=fallback;
+    el.innerHTML=`<div class="chatStack">${source.map((item,idx)=>{
+      const user=safeClip(item.user||item.displayName||item.login||'CHAT',24);
+      const raw=cleanChat(item.text||item.message||'');
+      const body=item.html || (typeof chatHTML==='function'?chatHTML(raw,item.data||{}):htmlEsc(raw));
+      return `<div class="chatLine">${avatarHtml(item,idx)}<span class="chatContent"><span class="chatLineUser">${htmlEsc(user)}</span><span class="chatLineText">${body||' '}</span></span></div>`;
+    }).join('')}</div>`;
+  }
+  function addItem(item){
+    item=item||{};
+    item.login=cleanLogin(item.login||item.user||item.displayName||'chat');
+    item.user=item.user||item.displayName||item.login||'CHAT';
+    item.text=cleanChat(item.text||item.message||'');
+    if(!item.text && !item.html) return;
+    if(!Array.isArray(chatQueue)) chatQueue=[];
+    const key=(item.user||'')+'|'+(item.text||item.html||'');
+    if(chatQueue.slice(-3).some(x=>((x.user||'')+'|'+(x.text||x.html||''))===key)) return;
+    chatQueue.push(item);
+    chatQueue=chatQueue.slice(-14);
+    chatLive=true;
+    renderStack();
+    try{const card=$id('box4'); if(card){card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');}}catch(e){}
+  }
+
+  renderChatStack=renderStack;
+  showChat=async function(item){addItem(item);};
+  pushChat=function(item){addItem(item);};
+  renderChatWaiting=function(){
+    if(Array.isArray(chatQueue)&&chatQueue.length){renderStack(); return;}
+    addItem({user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'});
+  };
+
+  function refresh(){injectCss();document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottomSafe()+'px');if(Array.isArray(chatQueue)) chatQueue=chatQueue.slice(-14);renderStack();}
+  injectCss();
+  setTimeout(refresh,150);setTimeout(refresh,700);setTimeout(refresh,1600);setInterval(refresh,4500);
+  window.addEventListener('resize',refresh);
+  window.DJF_CHAT_LAYOUT_VERSION=VERSION;
+})();
