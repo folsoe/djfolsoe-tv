@@ -1279,3 +1279,62 @@ function v910Fill(data){data=data||{};const p=data.broadcastSystem||data;v910Set
 async function v910LoadBroadcastSystem(){try{const r=await api('/api/broadcast-system');v910Fill(r.broadcastSystem||r);v910Status('✅ V910 Broadcast System loaded.');}catch(e){v910Mode('live');v910Status('⚠️ Cloud data not available. Local LIVE SHOW preset loaded: '+e.message);}}
 async function v910PublishBroadcastSystem(){const payload=v910Collect();activeTheme=payload.activeTheme;markTheme(activeTheme);overlayContent=payload.overlayContent;bottomItems=bottomItems||[];bottomItems[0]={id:'v910-broadcast-ticker',active:true,theme:'all',text:payload.ticker,priority:1};core=core||{};core.broadcast=Object.assign({},core.broadcast||{},{mode:payload.mode,broadcastState:payload.mode,activeShow:payload.activeShow,activeTheme:payload.activeTheme,lowerThird:payload.lowerThird,badge:payload.badge});core.homepage=Object.assign({},core.homepage||{},{heroHeadline:payload.hero.headline,heroMessage:payload.hero.message,activeShow:payload.activeShow,broadcastMode:payload.mode});renderOverlayContent();renderEditors();try{await api('/api/broadcast-system',{method:'POST',body:JSON.stringify(payload)});v910Status('✅ V910 published. Broadcast mode, website hero, ticker and overlay box 1-3 are synced.');setStatus('✅ V910 Broadcast System published.');}catch(e){v910Status('❌ V910 publish failed: '+e.message);setStatus('❌ V910 publish failed: '+e.message);}}
 const V910_originalLoadAll=loadAll;loadAll=async function(){await V910_originalLoadAll();if(document.getElementById('v910BroadcastSystem')) v910Fill({});};setTimeout(()=>{if(document.getElementById('v910BroadcastSystem')) v910LoadBroadcastSystem();},1500);
+
+
+/* DJ FOLSOE NETWORK V911 · Daily Control Room */
+function v911Text(id,value){const el=document.getElementById(id);if(el)el.textContent=value||'';}
+function v911Set(id,value){const el=document.getElementById(id);if(el)el.value=value||'';}
+function v911Get(id){const el=document.getElementById(id);return el?String(el.value||'').trim():'';}
+function v911Status(msg){const el=document.getElementById('v911Status');if(el)el.textContent=msg;}
+function v911FirstOverlayHeadline(box, fallback){try{return ((overlayContent||{})[box]||[])[0]?.headline || fallback;}catch(e){return fallback;}}
+function v911RefreshDaily(){
+  const mode=(core&&core.broadcast&&(core.broadcast.broadcastState||core.broadcast.mode)) || v910Get?.('v910Mode') || 'LIVE SHOW';
+  const show=(core&&core.broadcast&&core.broadcast.activeShow) || v910Get?.('v910ActiveShow') || 'DJ FOLSOE LIVE';
+  const theme=(activeTheme || (core&&core.broadcast&&core.broadcast.activeTheme) || 'weekend');
+  v911Text('v911LiveStatus', mode);
+  v911Text('v911ActiveShow', show);
+  v911Text('v911ActiveTheme', theme);
+  v911Text('v911LastPublish', localStorage.getItem('DJF_V911_LAST_PUBLISH') || 'Not published yet');
+  v911Set('v911NowOnAir', show);
+  v911Set('v911HeroHeadline', (core&&core.homepage&&core.homepage.heroHeadline) || v910Get?.('v910HeroHeadline') || 'Live Music TV from Denmark');
+  v911Set('v911HeroMessage', (core&&core.homepage&&core.homepage.heroMessage) || v910Get?.('v910HeroMessage') || 'Modern Music TV on Twitch.');
+  v911Set('v911Box1', v911FirstOverlayHeadline('box1','LIVE SHOW'));
+  v911Set('v911Box2', v911FirstOverlayHeadline('box2','DJ FOLSOE LIVE'));
+  v911Set('v911Box3', v911FirstOverlayHeadline('box3','Requests open'));
+  v911Set('v911Ticker', ((bottomItems||[])[0]?.text) || v910Get?.('v910Ticker') || 'LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE');
+  v911Status('✅ Daily Control Room refreshed.');
+}
+function v911ApplyQuickEdit(){
+  const show=v911Get('v911NowOnAir')||'DJ FOLSOE LIVE';
+  const hero=v911Get('v911HeroHeadline')||'Live Music TV from Denmark';
+  const message=v911Get('v911HeroMessage')||'Modern Music TV on Twitch.';
+  const ticker=v911Get('v911Ticker')||'LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE';
+  core=core||{}; core.broadcast=Object.assign({},core.broadcast||{},{activeShow:show}); core.homepage=Object.assign({},core.homepage||{},{heroHeadline:hero,heroMessage:message,activeShow:show});
+  if(typeof v910Set==='function'){
+    v910Set('v910ActiveShow',show); v910Set('v910HeroHeadline',hero); v910Set('v910HeroMessage',message); v910Set('v910Ticker',ticker);
+    v910Set('v910Box1Headline',v911Get('v911Box1')||'LIVE SHOW'); v910Set('v910Box2Headline',v911Get('v911Box2')||show); v910Set('v910Box3Headline',v911Get('v911Box3')||'Requests open');
+  }
+  overlayContent=overlayContent||{};
+  ['box1','box2','box3'].forEach((box,i)=>{overlayContent[box]=overlayContent[box]||[{active:true,label:['BROADCAST','ON AIR','COMMUNITY'][i],headline:'',body:'',icon:['📡','📺','🎧'][i],priority:1}]; overlayContent[box][0].headline=v911Get('v911Box'+(i+1))||overlayContent[box][0].headline;});
+  bottomItems=bottomItems||[]; bottomItems[0]=Object.assign({},bottomItems[0]||{id:'v911-daily-ticker',active:true,theme:'all',priority:1},{text:ticker});
+  if(typeof renderOverlayContent==='function') renderOverlayContent();
+  if(typeof renderEditors==='function') renderEditors();
+  v911RefreshDaily(); v911Status('✅ Quick edit applied locally. Press ONE TAP · PUBLISH NOW to send it live.');
+}
+function v911OneTap(mode){
+  if(typeof v910Mode==='function') v910Mode(mode);
+  v911RefreshDaily();
+  v911Status('✅ '+String(mode).toUpperCase()+' preset loaded. Press ONE TAP · PUBLISH NOW when ready.');
+}
+async function v911PublishNow(){
+  v911ApplyQuickEdit();
+  try{
+    if(typeof v910PublishBroadcastSystem==='function') await v910PublishBroadcastSystem();
+    else if(typeof publishEverything==='function') await publishEverything();
+    const stamp=new Date().toLocaleString(); localStorage.setItem('DJF_V911_LAST_PUBLISH',stamp); v911Text('v911LastPublish',stamp);
+    v911Status('✅ V911 one tap publish complete. Website, ticker and overlay box 1-3 are synced.');
+    if(typeof setStatus==='function') setStatus('✅ V911 Daily Control Room published.');
+  }catch(e){v911Status('❌ V911 publish failed: '+e.message); if(typeof setStatus==='function') setStatus('❌ V911 publish failed: '+e.message);}
+}
+const V911_originalLoadAll=loadAll;loadAll=async function(){await V911_originalLoadAll();setTimeout(v911RefreshDaily,250);};
+setTimeout(()=>{if(document.getElementById('v911DailyControl')) v911RefreshDaily();},1800);

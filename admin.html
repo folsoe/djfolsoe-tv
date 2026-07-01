@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V910 Music TV Broadcast System</title>
+  <title>DJ FOLSOE V911 Daily Control Room</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V910</span>
-    <h1>Music TV Broadcast System · Control Room</h1>
-    <p>One central admin hub: choose a show, edit once, and publish to website + overlay together.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V911</span>
+    <h1>Daily Control Room · One Tap Broadcast Admin</h1>
+    <p>Daily control room for folsoetv.dk and overlay output. Use the big buttons first; open Advanced only when needed.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -28,6 +28,7 @@
 </header>
 
 <nav class="adminTabs">
+  <button onclick="jump('v911DailyControl')">🎛️ Daily Control</button>
   <button onclick="jump('oneclick')">🚀 One click</button>
   <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
@@ -44,6 +45,59 @@
 </nav>
 
 <main>
+
+  <section id="v911DailyControl" class="panel v911ControlRoom">
+    <div class="panelHead">
+      <h2>🎛️ V911 · Daily Control Room</h2>
+      <div>
+        <button onclick="v911RefreshDaily()">Refresh view</button>
+        <button class="bigPublish" onclick="v911PublishNow()">ONE TAP · PUBLISH NOW</button>
+      </div>
+    </div>
+    <p class="note">Use this as the daily front desk. Pick the current broadcast mode, adjust the visible text if needed, then publish once. Website hero, ticker and overlay boxes 1-3 stay in sync. Box 4 remains Twitch chat.</p>
+
+    <div class="v911StatusStrip">
+      <div><span>Live status</span><b id="v911LiveStatus">Loading</b></div>
+      <div><span>Active show</span><b id="v911ActiveShow">DJ FOLSOE LIVE</b></div>
+      <div><span>Active theme</span><b id="v911ActiveTheme">weekend</b></div>
+      <div><span>Last publish</span><b id="v911LastPublish">Not published yet</b></div>
+    </div>
+
+    <div class="v911OneTapGrid">
+      <button onclick="v911OneTap('live')">🔴 Go Live</button>
+      <button onclick="v911OneTap('starting')">🟣 Starting Soon</button>
+      <button onclick="v911OneTap('countdown')">⏱️ Countdown</button>
+      <button onclick="v911OneTap('break')">☕ Break</button>
+      <button onclick="v911OneTap('special')">✨ Special Event</button>
+      <button onclick="v911OneTap('afterparty')">🎉 After Party</button>
+      <button onclick="v911OneTap('ending')">🏁 Ending Soon</button>
+      <button onclick="v911OneTap('offline')">⚫ Offline</button>
+    </div>
+
+    <div class="v911QuickEdit">
+      <div class="v911NowCard">
+        <h3>Today’s Broadcast</h3>
+        <label>Now on air</label><input id="v911NowOnAir" placeholder="DJ FOLSOE LIVE">
+        <label>Website headline</label><input id="v911HeroHeadline" placeholder="Live Music TV from Denmark">
+        <label>Website message</label><textarea id="v911HeroMessage" rows="4" placeholder="What should the front page say right now?"></textarea>
+      </div>
+      <div class="v911NowCard">
+        <h3>Overlay Output</h3>
+        <label>Box 1 headline</label><input id="v911Box1" placeholder="LIVE SHOW">
+        <label>Box 2 headline</label><input id="v911Box2" placeholder="DJ FOLSOE LIVE">
+        <label>Box 3 headline</label><input id="v911Box3" placeholder="Requests open">
+        <label>Ticker</label><textarea id="v911Ticker" rows="3" placeholder="LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"></textarea>
+      </div>
+    </div>
+
+    <div class="v911ActionBar">
+      <button onclick="v911ApplyQuickEdit()">Apply quick edit</button>
+      <button onclick="v911ApplyQuickEdit();v911PublishNow()">Apply + publish</button>
+      <button onclick="toggleAdvanced()">Show / hide Advanced</button>
+    </div>
+    <pre id="v911Status">V911 ready. Choose a mode or update today’s text.</pre>
+  </section>
+
 
   <section id="oneclick" class="panel oneClickPanel">
     <div class="panelHead"><h2>🚀 One Button Control</h2><div><button class="bigPublish" onclick="publishEverything()">PUBLISH EVERYTHING</button></div></div>
