@@ -1,123 +1,35 @@
 {
   "ok": true,
-  "version": "V919 Broadcast Core Sync",
-  "schema": "broadcast-core/v1",
-  "source": "static-fallback",
-  "activeTheme": "weekend",
-  "language": "en",
+  "version": "V920 Broadcast Core Cleanup",
+  "schema": "broadcast-core/v2-clean",
+  "source": "static-default",
+  "updatedAt": "2026-07-01T19:20:00.000Z",
   "twitch": {
+    "ok": true,
+    "source": "static-default",
     "channel": "djfolsoe",
+    "displayName": "DJFolsoe",
+    "userId": "756562979",
+    "profileImage": "https://static-cdn.jtvnw.net/jtv_user_pictures/b759d05a-f6ea-41e5-b9e0-f834ad3d0eb3-profile_image-300x300.png",
     "isLive": false,
-    "viewers": 0,
-    "followers": null,
-    "subs": 0,
-    "liveTitle": "DJ FOLSOE",
-    "category": "Music"
-  },
-  "broadcast": {
-    "mode": "OFFLINE",
-    "broadcastState": "OFFLINE",
-    "activeShow": "DJ FOLSOE",
-    "activeShowTitle": "DJ FOLSOE",
-    "activeTheme": "weekend",
     "live": false,
     "viewers": 0,
-    "followers": null,
-    "streamTitle": "DJ FOLSOE · Twitch music streamer from Denmark"
-  },
-  "homepage": {
-    "hero": {
-      "eyebrow": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK",
-      "title": "DJ FOLSOE",
-      "subtitle": "Dive into my Twitch world",
-      "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
-      "background": "themes/weekend.png"
-    },
-    "ticker": [
-      "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY"
-    ],
-    "nextShow": {
-      "title": "Next DJ FOLSOE Broadcast",
-      "show": "Next DJ FOLSOE Broadcast",
-      "datetime": "",
-      "dateTime": "",
-      "timeLabel": "Announced soon",
-      "theme": "Music TV",
-      "description": "The next show is controlled from admin and appears here automatically.",
-      "active": true
-    },
-    "sectionTitles": {
-      "nextKicker": "NEXT SHOW",
-      "nextTitle": "Next DJ FOLSOE Broadcast",
-      "showsKicker": "FEATURED SHOWS",
-      "showsTitle": "Your favorite show",
-      "aboutKicker": "DISCOVER DJ FOLSOE",
-      "aboutTitle": "Music TV, Twitch and Danish DJ energy"
-    },
-    "featuredShows": [
-      {
-        "time": "Morning",
-        "title": "Good Morning Twitch",
-        "description": "Bright morning mood, coffee, chat and fresh music.",
-        "color": "#ffe36e"
-      },
-      {
-        "time": "Tuesday",
-        "title": "Trance Tuesday",
-        "description": "Melodic trance, energy and emotional peak-time sound.",
-        "color": "#62ecff"
-      },
-      {
-        "time": "Special",
-        "title": "Eurodance",
-        "description": "90s and 00s dance classics with full Music TV nostalgia.",
-        "color": "#ff4bd8"
-      },
-      {
-        "time": "Friday",
-        "title": "Fredagsbar",
-        "description": "Weekend mode, party classics and Danish Friday energy.",
-        "color": "#6cffb5"
-      },
-      {
-        "time": "Sunday",
-        "title": "Retro Hits",
-        "description": "70s, 80s and 90s memories with viewer favourites.",
-        "color": "#ffe36e"
-      },
-      {
-        "time": "Surprise",
-        "title": "Pop Up Live",
-        "description": "The stream that appears when you least expect it.",
-        "color": "#ffffff"
-      }
-    ],
-    "aboutText": "DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.",
-    "top20": [
-      {
-        "rank": 1,
-        "artist": "DJ FOLSOE",
-        "title": "This Week's Number One",
-        "status": "ADMIN CONTROLLED"
-      },
-      {
-        "rank": 2,
-        "artist": "Viewer Pick",
-        "title": "Request of the Week",
-        "status": "COMMUNITY"
-      },
-      {
-        "rank": 3,
-        "artist": "Future Hit",
-        "title": "Discovery Track",
-        "status": "NEW"
-      }
-    ]
-  },
-  "website": {
+    "followers": 869,
+    "subs": null,
+    "liveTitle": "DJ FOLSOE",
     "title": "DJ FOLSOE",
-    "description": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
-    "primaryLanguage": "en"
+    "category": "Music",
+    "startedAt": null,
+    "checkedAt": "2026-07-01T19:20:00.000Z"
+  },
+  "show": {
+    "current": "DJ FOLSOE",
+    "title": "DJ FOLSOE",
+    "mode": "OFFLINE",
+    "state": "OFFLINE",
+    "live": false,
+    "viewers": 0,
+    "streamTitle": "DJ FOLSOE"
   },
   "nextShow": {
     "title": "Next DJ FOLSOE Broadcast",
@@ -129,50 +41,49 @@
     "description": "The next show is controlled from admin and appears here automatically.",
     "active": true
   },
-  "overlayHub": {
-    "state": "OFFLINE",
-    "activeShow": "DJ FOLSOE",
-    "activeTheme": "weekend",
-    "ticker": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK",
-    "controlPanel": {
-      "title": "DJ FOLSOE",
-      "status": "OFFLINE",
-      "theme": "weekend",
-      "viewers": 0,
-      "followers": null,
-      "subs": 0,
-      "subGoal": 100
-    }
+  "theme": {
+    "id": "weekend",
+    "title": "Weekend",
+    "background": "themes/weekend.png"
+  },
+  "hero": {
+    "eyebrow": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK",
+    "title": "DJ FOLSOE",
+    "subtitle": "Dive into my Twitch world",
+    "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark."
   },
   "community": {
-    "followers": null,
+    "followers": 869,
+    "followerGoal": 1000,
     "subs": 0,
     "subGoal": 100,
-    "followerGoal": 1000,
+    "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
+    "requestText": "Use !request Artist - Title in Twitch chat",
+    "specialEvent": ""
+  },
+  "ticker": {
+    "text": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY",
+    "items": ["DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY"]
+  },
+  "overlay": {
+    "title": "DJ FOLSOE",
+    "status": "OFFLINE",
+    "infoLine": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY",
     "requestText": "Use !request Artist - Title in Twitch chat",
     "specialEvent": "",
-    "wall": [
-      {
-        "kicker": "FOLLOWERS",
-        "title": "Follower journey",
-        "text": "Goal: 1000 followers"
-      },
-      {
-        "kicker": "SUBS",
-        "title": "Sub journey",
-        "text": "0/100 subs"
-      },
-      {
-        "kicker": "REQUESTS",
-        "title": "Song requests",
-        "text": "Use !request Artist - Title in Twitch chat"
-      },
-      {
-        "kicker": "LIVE CHAT",
-        "title": "Twitch chat",
-        "text": "Chat and community are shown in the live overlay."
-      }
-    ]
+    "subGoal": 100
   },
-  "updatedAt": "2026-07-01T19:00:00.000Z"
+  "top20": [
+    { "rank": 1, "artist": "DJ FOLSOE", "title": "This Week's Number One", "status": "ADMIN CONTROLLED" },
+    { "rank": 2, "artist": "Viewer Pick", "title": "Request of the Week", "status": "COMMUNITY" },
+    { "rank": 3, "artist": "Future Hit", "title": "Discovery Track", "status": "NEW" }
+  ],
+  "featuredShows": [
+    { "time": "Morning", "title": "Good Morning Twitch", "description": "Bright morning mood, coffee, chat and fresh music.", "color": "#ffe36e" },
+    { "time": "Tuesday", "title": "Trance Tuesday", "description": "Melodic trance, energy and emotional peak-time sound.", "color": "#62ecff" },
+    { "time": "Special", "title": "Eurodance", "description": "90s and 00s dance classics with full Music TV nostalgia.", "color": "#ff4bd8" },
+    { "time": "Friday", "title": "Fredagsbar", "description": "Weekend mode, party classics and Danish Friday energy.", "color": "#6cffb5" },
+    { "time": "Sunday", "title": "Retro Hits", "description": "70s, 80s and 90s memories with viewer favourites.", "color": "#ffe36e" },
+    { "time": "Surprise", "title": "Pop Up Live", "description": "The stream that appears when you least expect it.", "color": "#ffffff" }
+  ]
 }

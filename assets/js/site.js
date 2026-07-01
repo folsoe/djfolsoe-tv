@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V919 · BROADCAST CORE SYNC
+// DJ FOLSOE NETWORK V920 · BROADCAST CORE CLEANUP
 const $ = (id) => document.getElementById(id);
 const API_BASE = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
 let portal = {};
@@ -39,21 +39,40 @@ function startPolling(){
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) refreshTwitchAndCore(); });
 }
 function normalizeCore(){
-  portal.homepage = portal.homepage || {};
-  portal.broadcast = portal.broadcast || {};
-  portal.community = portal.community || {};
-  portal.overlayHub = portal.overlayHub || portal.overlay || {};
-  portal.nextShow = normalizeNextShow(portal.nextShow || portal.homepage.nextShow || {});
-  portal.homepage.nextShow = portal.nextShow;
+  // V920 accepts clean broadcast-core/v2 and also old V919 compatibility payloads.
+  const old = portal || {};
+  const b = old.broadcast || {};
+  const hp = old.homepage || {};
+  const heroOld = hp.hero || {};
+  const ov = old.overlay || old.overlayHub || {};
+  const cp = ov.controlPanel || {};
+  const showTitle = old.show?.current || old.show?.title || b.activeShow || b.activeShowTitle || cp.title || 'DJ FOLSOE';
+  const mode = old.show?.mode || old.show?.state || b.mode || b.broadcastState || ov.state || cp.status || 'OFFLINE';
+  const themeId = old.theme?.id || old.activeTheme || b.activeTheme || ov.activeTheme || cp.theme || 'weekend';
+  const tickerText = old.ticker?.text || (Array.isArray(hp.ticker) ? hp.ticker.join(' · ') : '') || ov.ticker || cp.infoLine || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK';
+  portal.twitch = old.twitch || {};
+  portal.show = { current: showTitle, title: showTitle, mode, state: mode, live: !!old.show?.live || !!b.live, viewers: old.show?.viewers ?? b.viewers ?? cp.viewers ?? 0, streamTitle: old.show?.streamTitle || b.streamTitle || showTitle };
+  portal.theme = { id: themeId, title: old.theme?.title || String(themeId).replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase()), background: old.theme?.background || heroOld.background || `themes/${themeId}.png` };
+  portal.hero = { eyebrow:'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK', title:'DJ FOLSOE', subtitle:'Dive into my Twitch world', text:'Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.', ...heroOld, ...(old.hero||{}) };
+  portal.community = { followers:null, followerGoal:1000, subs:0, subGoal:100, requestText:'Use !request Artist - Title in Twitch chat', specialEvent:'', ...(old.community||{}) };
+  portal.nextShow = normalizeNextShow(old.nextShow || hp.nextShow || cp.nextShow || {});
+  portal.ticker = { text: tickerText, items: old.ticker?.items || (tickerText ? [tickerText] : []) };
+  portal.featuredShows = old.featuredShows || hp.featuredShows || [];
+  portal.top20 = old.top20 || hp.top20 || [];
+  portal.overlay = { title: showTitle, status: mode, infoLine: tickerText, requestText: portal.community.requestText, specialEvent: portal.community.specialEvent, ...(old.overlay && !old.overlay.controlPanel ? old.overlay : {}) };
   const tw = portal.twitch || {};
   if(tw.ok || tw.isLive !== undefined){
-    portal.broadcast.viewers = Number(tw.viewers || portal.broadcast.viewers || 0);
-    portal.broadcast.live = !!tw.isLive || !!tw.live;
-    portal.broadcast.broadcastState = portal.broadcast.live ? 'LIVE' : (portal.broadcast.broadcastState || portal.broadcast.mode || 'OFFLINE');
-    portal.broadcast.streamTitle = tw.liveTitle || tw.title || portal.broadcast.streamTitle;
+    portal.show.viewers = Number(tw.viewers || portal.show.viewers || 0);
+    portal.show.live = !!tw.isLive || !!tw.live;
+    portal.show.state = portal.show.live ? 'LIVE' : portal.show.state;
+    portal.show.streamTitle = tw.liveTitle || tw.title || portal.show.streamTitle;
     portal.community.followers = tw.followers ?? portal.community.followers;
     portal.community.subs = tw.subs ?? portal.community.subs;
   }
+  // Backward aliases for existing DOM render code
+  portal.broadcast = { activeShow: portal.show.current, activeShowTitle: portal.show.title, mode: portal.show.mode, broadcastState: portal.show.state, activeTheme: portal.theme.id, live: portal.show.live, viewers: portal.show.viewers, streamTitle: portal.show.streamTitle };
+  portal.homepage = { hero: {...portal.hero, background: portal.theme.background}, ticker: portal.ticker.items.length ? portal.ticker.items : [portal.ticker.text], nextShow: portal.nextShow, featuredShows: portal.featuredShows, top20: portal.top20, sectionTitles:{nextKicker:'NEXT SHOW',nextTitle:'Next DJ FOLSOE Broadcast',showsKicker:'FEATURED SHOWS',showsTitle:'Your favorite show',aboutKicker:'DISCOVER DJ FOLSOE',aboutTitle:'Music TV, Twitch and Danish DJ energy'}, aboutText: old.homepage?.aboutText || 'DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.'};
+  portal.overlayHub = { ticker: portal.ticker.text, controlPanel: { title: portal.show.current, status: portal.show.state, theme: portal.theme.id, viewers: portal.show.viewers, followers: portal.community.followers, subs: portal.community.subs, subGoal: portal.community.subGoal, nextShow: portal.nextShow, infoLine: portal.ticker.text, requestText: portal.community.requestText, specialEvent: portal.community.specialEvent } };
 }
 function normalizeNextShow(raw){
   const x = raw || {};
