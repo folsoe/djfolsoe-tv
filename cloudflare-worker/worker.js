@@ -1,5 +1,5 @@
 
-const VERSION = "DJ FOLSOE NETWORK V816.20.1 COMMUNITY WALL PATCH";
+const VERSION = "DJ FOLSOE NETWORK V902 ADMIN HUB BASE";
 const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816.20.1 COMMUNITY WALL PATCH", "activeTheme": "weekend", "language": "da", "twitchChannel": "djfolsoe", "themes": {"fredagsbar": {"emoji": "🍺", "title": "FREDAGSBAR", "desc": "Weekend starts here · live from Denmark", "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166", "bg": "linear-gradient(135deg,#341007,#22051e)"}, "popup": {"emoji": "⚡", "title": "POPUP", "desc": "You never know when DJ FOLSOE goes live", "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff", "bg": "linear-gradient(135deg,#061c2a,#2b0631)"}, "trance": {"emoji": "💙", "title": "TRANCE TUESDAY", "desc": "Uplifting energy · goosebumps may occur", "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff", "bg": "linear-gradient(135deg,#031525,#170935)"}, "retro": {"emoji": "🕹️", "title": "RETRO HITS", "desc": "Classics that refuse to retire", "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166", "bg": "linear-gradient(135deg,#230821,#15112a)"}, "eurodance": {"emoji": "💛", "title": "EURODANCE", "desc": "Big beats · big hooks · 90s/00s survived", "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600", "bg": "linear-gradient(135deg,#031b2a,#081d52)"}, "morning": {"emoji": "☀️", "title": "GOOD MORNING TWITCH", "desc": "Coffee, music and good vibes", "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8", "bg": "linear-gradient(135deg,#2b1300,#1c1021)"}, "summer": {"emoji": "🌴", "title": "SUMMER BEATS", "desc": "Summer 2026 · sunshine and bangers", "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a", "bg": "linear-gradient(135deg,#052b2a,#372105)"}, "weekend": {"emoji": "🎉", "title": "WEEKEND VIBES", "desc": "Maximum music and community", "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff", "bg": "linear-gradient(135deg,#23102c,#061b2b)"}}, "station": {"followers": 870, "followersGoal": 1000, "subs": 0, "viewers": 0, "category": "Music"}, "requestSettings": {"enabled":true,"keep":100,"visible":3},
     "seo": {"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musicstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musicwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]},
     "modTeam": [{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}],
@@ -324,9 +324,11 @@ async function homepage(env, core) {
   const tw = await twitchChannelFull(env, core);
   const reqPayload = await recentRequestsPayload(env, core);
   const reqs = reqPayload.items;
-  const lang = core.language || "da";
+  const lang = core.language || "en";
   return {
-    ok:true, version:VERSION, language:lang, i18n:I18N?.[lang] || I18N?.da || {},
+    ok:true, version:VERSION, language:lang, i18n:I18N?.[lang] || I18N?.en || I18N?.da || {},
+    activeTheme:activeTheme(core),
+    theme:themePayload(core),
     twitch:tw,
     hero:{
       title:"DJ FOLSOE",
@@ -393,7 +395,7 @@ function v8162MotionLanes(core, state){
   const show = Array.isArray(core.shows) && core.shows[0] ? core.shows[0] : {};
   const top = top20[0] || {};
   const pick = top20[1] || top || {};
-  return {
+  const defaults = {
     box1:[
       {label:"FOLLOW JOURNEY", headline:`${live.followers||870}/${live.followersGoal||1000} followers`, body:`${Math.max(0,(live.followersGoal||1000)-(live.followers||870))} to go · ${live.viewers||0} viewers`, icon:"📡"},
       {label:"LIVE STATUS", headline:`${live.viewers||0} viewers`, body:"Broadcast Cloud · Twitch Music TV", icon:"👁️"},
@@ -411,6 +413,20 @@ function v8162MotionLanes(core, state){
       {label:"REQUESTS", headline:"Requests open", body:"Use !request, !ønske or !Wunsch in chat", icon:"🎧"}
     ]
   };
+  const fromAdmin = core.overlayContent || {};
+  const normalizeLane = (key) => {
+    const lane = Array.isArray(fromAdmin[key]) ? fromAdmin[key]
+      .filter(x => x && x.active !== false)
+      .sort((a,b)=>Number(a.priority||99)-Number(b.priority||99))
+      .map(x => ({
+        label:String(x.label||"INFO").toUpperCase(),
+        headline:String(x.headline||x.title||""),
+        body:String(x.body||""),
+        icon:x.icon||"📺"
+      })) : [];
+    return lane.length ? lane : defaults[key];
+  };
+  return {box1:normalizeLane("box1"), box2:normalizeLane("box2"), box3:normalizeLane("box3")};
 }
 
 
@@ -761,6 +777,28 @@ export default {
       if (path === "/api/discovery-picks") {
         if (request.method === "GET") return json({ok:true,items:core.discoveryPicks||DEFAULT_CORE.discoveryPicks||[]});
         return saveDiscoveryPicks(request, env, core);
+      }
+      if (path === "/api/sync-all") {
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        if (body.theme) {
+          ensureThemeBackgrounds(core);
+          const key = String(body.theme).toLowerCase();
+          if (core.themes?.[key]) core.activeTheme = key;
+        }
+        if (body.profile) core.profile = Object.assign({}, core.profile||{}, body.profile);
+        if (body.twitchChannel) core.twitchChannel = safeTwitchLogin(body.twitchChannel, env, core);
+        if (Array.isArray(body.homepageNews)) core.homepageNews = body.homepageNews;
+        if (Array.isArray(body.shows)) core.shows = body.shows;
+        if (Array.isArray(body.top20)) core.top20 = body.top20;
+        if (Array.isArray(body.discoveryPicks)) core.discoveryPicks = body.discoveryPicks;
+        if (body.overlayContent) core.overlayContent = body.overlayContent;
+        if (Array.isArray(body.topTickerItems)) core.topTickerItems = body.topTickerItems;
+        if (Array.isArray(body.bottomTickerItems)) core.bottomTickerItems = body.bottomTickerItems;
+        if (body.language) core.language = "en";
+        await putCore(env, core);
+        return json({ok:true,message:"Broadcast hub synchronized",activeTheme:core.activeTheme,theme:themePayload(core),homepage:await homepage(env, core),overlay:overlayState(core)});
       }
       if (path === "/api/top20") {
         if (request.method === "GET") return json({ok:true,items:core.top20||[]});
