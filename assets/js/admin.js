@@ -1,4 +1,4 @@
-/* DJ FOLSOE NETWORK V928.2 · BROADCAST CONTENT MANAGER */
+/* DJ FOLSOE NETWORK V928.3 · ADMIN SAVE/PUBLISH LOCK FIX */
 const DEFAULT_API_BASE = 'https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const TWITCH_URL = 'https://www.twitch.tv/djfolsoe';
 const WEBSITE_URL = 'https://folsoetv.dk';
@@ -250,20 +250,61 @@ function renderTwitch(){
   set('twitchStatus', twitchData.isLive ? 'LIVE' : 'OFFLINE'); $('twitchStatus')?.classList.toggle('ok',!!twitchData.isLive);
   set('twitchTitle', twitchData.liveTitle || 'twitch.tv/djfolsoe'); set('twitchViewers', Number(twitchData.viewers||0)); set('twitchFollowers', twitchData.followers ?? '—'); set('twitchSubs', twitchData.subs ?? val('subs',0));
 }
+async function djfSyncTwitchOnly(){
+  const tw = await getJson('/api/twitch?live=1&t='+Date.now(), null);
+  if(tw && (tw.ok || tw.isLive !== undefined)){
+    twitchData = Object.assign(twitchData, tw);
+    renderTwitch();
+    return tw;
+  }
+  return null;
+}
+
 async function djfOneClick(){
   try{
     djfSaveSettings();
-    set('readyState','Publishing…'); status('🚀 One click started: Twitch sync → Mapped broadcast-core → Website + Overlay publish…');
-    await djfRefresh();
     validateMappedFields();
+    set('readyState','Publishing…');
+    status('🚀 Publishing exactly what is visible in admin. No reload. No reset.');
+
+    // IMPORTANT V928.3:
+    // Do NOT call djfRefresh() here. It loads old KV data and overwrites your edits
+    // before publishing. Only sync Twitch numbers, then build payload from visible fields.
+    await djfSyncTwitchOnly();
+
     const p = buildPayload();
+    localStorage.setItem('DJF_V9283_LAST_PAYLOAD', JSON.stringify(p));
+    localStorage.setItem('DJF_V9283_DRAFT', JSON.stringify(p));
+
     const r = await postJson('/api/publish', p);
     localStorage.setItem('DJF_V921_LAST_PUBLISH', new Date().toISOString());
-    set('readyState','CLEAN CORE SYNC OK'); set('lastPublish', new Date().toLocaleString());
-    status('✅ V921 COMPLETE. Website + overlay are published from the mapped admin fields.');
+    localStorage.setItem('DJF_V9283_LAST_PUBLISH', new Date().toISOString());
+
+    const verify = await getJson('/api/broadcast?t='+Date.now(), null);
+    const vc = normalizeCore(verify);
+    const wantedTheme = p.theme?.id;
+    const savedTheme = vc?.theme?.id;
+    const okTheme = !wantedTheme || wantedTheme === savedTheme;
+
+    set('readyState', okTheme ? 'PUBLISHED OK' : 'PUBLISHED - CHECK THEME');
+    set('lastPublish', new Date().toLocaleString());
+    status(okTheme
+      ? `✅ Published. Theme saved as ${savedTheme}. Top20 + Mods included.`
+      : `⚠️ Published, but verify says theme=${savedTheme}, expected=${wantedTheme}.`, okTheme ? 'ok' : 'warn');
     return r;
-  }catch(e){ set('readyState','API ERROR'); status('❌ One click failed: '+e.message+'\n\nCheck Advanced → API base, ADMIN_TOKEN and Cloudflare Worker deploy.', 'bad'); }
+  }catch(e){
+    set('readyState','API ERROR');
+    status('❌ One click failed: '+e.message+'\n\nV928.3 does not reload old core before publish. Check API base, ADMIN_TOKEN and Worker deploy.', 'bad');
+  }
 }
+
+function djfSaveContentDraft(){
+  const p = buildPayload();
+  localStorage.setItem('DJF_V9283_DRAFT', JSON.stringify(p));
+  status('✅ Content draft saved locally: theme, Top20, mods, goals and text.');
+  return p;
+}
+
 async function djfTestApi(){
   djfSaveSettings(); status('Testing API…');
   const health = await getJson('/api/health?t='+Date.now(), null) || await getJson('/api/broadcast?t='+Date.now(), null);
@@ -271,7 +312,7 @@ async function djfTestApi(){
   set('advancedStatus', msg); status(health ? '✅ API test OK.' : '❌ API test failed.', health ? 'ok' : 'bad');
 }
 function bindAutoPreview(){ renderTop20Editor(); const dynamicIds = Array.from({length:20},(_,i)=>i+1).flatMap(rank=>[`top${rank}Artist`,`top${rank}Title`,`top${rank}Status`]); ['currentShow','theme','mode','eyebrow','heroTitle','heroSubtitle','heroText','ticker','nextShowTitle','nextShowDate','nextShowTime','nextShowTheme','nextShowDescription','followerGoal','subs','subGoal','requestText','specialMessage','modsTitle','modsSubtitle','modsHead','modsCommunity','modsMusic','modsVip',...dynamicIds].forEach(id=>$(id)?.addEventListener('input',djfPreview)); $('currentShow')?.addEventListener('change',()=>{ const m=SHOW_THEME_MAP[val('currentShow')]; if(m) setValue('theme',m); djfPreview(); }); }
-function restoreSettings(){ setValue('apiBase',apiBase()); setValue('adminToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); setValue('advancedToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); const draft=localStorage.getItem('DJF_V921_DRAFT') || localStorage.getItem('DJF_V9189_DRAFT'); if(draft){ try{ hydrateFromCore(normalizeCore(JSON.parse(draft))); }catch{} } const last=localStorage.getItem('DJF_V921_LAST_PUBLISH') || localStorage.getItem('DJF_V9189_LAST_PUBLISH'); if(last) set('lastPublish','Last publish: '+new Date(last).toLocaleString()); }
+function restoreSettings(){ setValue('apiBase',apiBase()); setValue('adminToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); setValue('advancedToken',localStorage.getItem('DJF_ADMIN_TOKEN')||''); const draft=localStorage.getItem('DJF_V9283_DRAFT') || localStorage.getItem('DJF_V921_DRAFT') || localStorage.getItem('DJF_V9189_DRAFT'); if(draft){ try{ hydrateFromCore(normalizeCore(JSON.parse(draft))); }catch{} } const last=localStorage.getItem('DJF_V921_LAST_PUBLISH') || localStorage.getItem('DJF_V9189_LAST_PUBLISH'); if(last) set('lastPublish','Last publish: '+new Date(last).toLocaleString()); }
 async function djfVerifySync(){
   const res = await getJson('/api/broadcast?t=' + Date.now(), null);
   if(!res || !res.ok){ status('⚠️ Published, but verify sync could not read /api/broadcast.', 'bad'); return null; }
@@ -289,4 +330,4 @@ async function djfLoadFromCore(){
   djfPreview();
   status('✅ V921 mapped broadcast-core loaded into admin. Fields now control website + overlay.');
 }
-document.addEventListener('DOMContentLoaded',()=>{ renderTop20Editor(); restoreSettings(); bindAutoPreview(); renderTwitch(); djfPreview(); setTimeout(djfRefresh,450); });
+document.addEventListener('DOMContentLoaded',()=>{ renderTop20Editor(); restoreSettings(); bindAutoPreview(); renderTwitch(); djfPreview(); status('✅ V928.3 loaded. Edit fields and publish; admin will not reload old core unless you press Load Core/Refresh.'); });
