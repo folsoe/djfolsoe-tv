@@ -1,34 +1,31 @@
 {
-  "version": "V918 Unified Control Center",
-  "language": "en",
+  "version": "DJ FOLSOE NETWORK V918.5 ONE BUTTON CONTROL CENTER",
   "activeTheme": "weekend",
-  "twitchChannel": "djfolsoe",
+  "language": "en",
   "homepage": {
-    "version": "V918 Unified Control Center",
+    "version": "V918.5 One Button Control Center",
     "hero": {
-      "eyebrow": "DJ FOLSOE TWITCH \u00b7 MUSIC STREAMER FROM DENMARK",
+      "eyebrow": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK",
       "title": "DJ FOLSOE",
       "subtitle": "Dive into my Twitch world",
       "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
       "background": "themes/weekend.png"
     },
-    "ticker": [
-      "LIVE DJ SHOWS FROM DENMARK \u00b7 REQUEST A SONG IN TWITCH CHAT \u00b7 FOLLOW DJ FOLSOE"
-    ],
+    "ticker": ["LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT · FOLSOE TOP 20 · WEEKLY MUSIC CHART"],
     "sectionTitles": {
       "nextKicker": "NEXT SHOW",
       "nextTitle": "Next DJ FOLSOE Broadcast",
       "showsKicker": "FEATURED SHOWS",
-      "showsTitle": "Your favorite show"
+      "showsTitle": "Your favorite show",
+      "aboutKicker": "DISCOVER DJ FOLSOE",
+      "aboutTitle": "Music TV, Twitch and Danish DJ energy"
     }
   },
   "broadcast": {
-    "version": "V918 Unified Control Center",
-    "broadcastState": "OFFLINE",
     "mode": "OFFLINE",
+    "broadcastState": "OFFLINE",
     "activeShow": "DJ FOLSOE",
     "activeTheme": "weekend",
-    "streamTitle": "DJ FOLSOE \u00b7 Twitch music streamer from Denmark",
     "live": false,
     "viewers": 0
   },
@@ -39,22 +36,23 @@
     "dateTime": "",
     "timeLabel": "Announced soon",
     "theme": "weekend",
-    "description": "The next show is controlled from admin and appears on both website and overlay."
+    "description": "The next show is controlled from admin and appears automatically on website and overlay.",
+    "active": true
   },
   "overlayHub": {
-    "version": "V918 Unified Control Center",
+    "version": "V918.5 One Button Control Center",
     "state": "OFFLINE",
     "activeShow": "DJ FOLSOE",
     "activeTheme": "weekend",
-    "ticker": "LIVE DJ SHOWS FROM DENMARK \u00b7 REQUEST A SONG IN TWITCH CHAT \u00b7 FOLLOW DJ FOLSOE",
+    "ticker": "LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT",
     "controlPanel": {
       "title": "DJ FOLSOE",
       "status": "OFFLINE",
+      "theme": "weekend",
       "viewers": 0,
       "followers": null,
       "subs": 0,
-      "subGoal": 100,
-      "infoLine": "LIVE DJ SHOWS FROM DENMARK \u00b7 REQUEST A SONG IN TWITCH CHAT \u00b7 FOLLOW DJ FOLSOE"
+      "subGoal": 100
     }
   },
   "community": {
@@ -62,22 +60,8 @@
     "subs": 0,
     "subGoal": 100,
     "followerGoal": 1000,
-    "text": "Follow, chat, request music and be part of the DJ FOLSOE Twitch world.",
-    "requestText": "Use !request in Twitch chat",
+    "requestText": "Use !request Artist - Title in Twitch chat",
     "specialEvent": ""
   },
-  "website": {
-    "title": "DJ FOLSOE",
-    "description": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
-    "primaryLanguage": "en"
-  },
-  "bottomTickerItems": [
-    {
-      "id": "v918-unified-ticker",
-      "active": true,
-      "theme": "all",
-      "text": "LIVE DJ SHOWS FROM DENMARK \u00b7 REQUEST A SONG IN TWITCH CHAT \u00b7 FOLLOW DJ FOLSOE",
-      "priority": 1
-    }
-  ]
+  "updatedAt": "2026-07-01T18:00:00.000Z"
 }

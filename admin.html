@@ -3,981 +3,201 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V918 Unified Control Center</title>
+  <title>DJ FOLSOE Control Center V918.5</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
-<div id="V81620162_token_banner" style="position:sticky;top:0;z-index:99999;background:rgba(5,7,18,.96);border-bottom:1px solid rgba(255,255,255,.16);padding:10px 18px;color:#fff;font-family:system-ui;display:flex;gap:10px;align-items:center;justify-content:flex-end">
-  <b style="color:#ff36e8;font-size:11px;letter-spacing:.14em">ADMIN TOKEN</b>
-  <input id="quickAdminToken" placeholder="Same token as Cloudflare ADMIN_TOKEN" style="width:280px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#070a16;color:#fff;padding:8px">
-  <button type="button" onclick="syncTokenFields(document.getElementById('quickAdminToken').value);setStatus('✅ Token synchronized')" style="border:0;border-radius:999px;padding:8px 12px;font-weight:900;background:linear-gradient(135deg,#22e7ff,#ff35d8);color:#050713">Sync token</button>
-  <button type="button" onclick="testThemeToken()" style="border:0;border-radius:999px;padding:8px 12px;font-weight:900;background:linear-gradient(135deg,#fff3b0,#22e7ff);color:#050713">Test theme API</button>
-</div>
-
-<header class="adminHero v918Hero">
+<header class="adminHero v9185Hero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V918</span>
-    <h1>Unified Control Center</h1>
-    <p>One simple admin screen. Twitch + Admin data feeds the website when offline and the overlay when live.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V918.5</span>
+    <h1>One Button Control Center</h1>
+    <p>Twitch + Admin feeds the website when offline and the overlay when live. One screen. One publish. One source of truth.</p>
   </div>
   <div class="loginCard">
-    <label>ADMIN_TOKEN</label>
-    <input id="token" placeholder="Paste ADMIN_TOKEN">
-    <button onclick="saveToken()">Save token</button>
+    <label>ADMIN TOKEN</label>
+    <input id="adminToken" type="password" placeholder="Cloudflare ADMIN_TOKEN">
+    <button onclick="djfSaveSettings()">Save</button>
   </div>
 </header>
 
-<nav class="adminTabs v918Tabs">
-  <button onclick="jump('v918UnifiedControl')">🎛️ Control Center</button>
-  <button onclick="v918RefreshAll()">🔄 Refresh Twitch + Admin</button>
-  <button onclick="v918PreviewAll()">👁️ Preview</button>
-  <button class="bigPublish" onclick="v918PublishEverything()">🚀 Publish Everything</button>
-  <button onclick="toggleAdvanced()">⚙️ Advanced</button>
+<nav class="adminTabs v9185Tabs">
+  <button onclick="djfOneClick()" class="bigPublish">🚀 ONE CLICK · SYNC + PUBLISH</button>
+  <button onclick="djfPreview()">👁 Preview</button>
+  <button onclick="djfRefresh()">🔄 Refresh Twitch</button>
+  <button onclick="djfOpenWebsite()">🌍 Website</button>
+  <button onclick="djfOpenTwitch()">📺 Twitch</button>
+  <button onclick="djfToggleAdvanced()">⚙ Advanced</button>
 </nav>
 
 <main>
-
-  <section id="v918UnifiedControl" class="panel v918ControlCenter">
+  <section class="panel v9185Control" id="controlCenter">
     <div class="panelHead">
       <div>
-        <h2>🎛️ V918 · Unified Control Center</h2>
-        <p class="note">The rule is simple: <b>Twitch + Admin = one data source</b>. Website is the offline channel page. Overlay is the live channel output.</p>
+        <h2>🎛️ Control Center</h2>
+        <p class="note">Everything visible on the website and overlay must come from Twitch or this admin screen.</p>
       </div>
-      <div class="v918TopActions">
-        <button onclick="v918SaveDraft()">Save Draft</button>
-        <button onclick="v918PreviewAll()">Preview</button>
-        <button class="bigPublish" onclick="v918PublishEverything()">Publish Everything</button>
+      <div class="v9185TopActions">
+        <button onclick="djfSaveDraft()">Save draft</button>
+        <button onclick="djfPreview()">Preview</button>
+        <button onclick="djfOneClick()" class="bigPublish">Publish everything</button>
       </div>
     </div>
 
-    <div class="v918StatusStrip">
-      <article><span>Twitch</span><b id="v918TwitchState">Checking…</b><small id="v918TwitchDetails">twitch.tv/djfolsoe</small></article>
-      <article><span>Viewers</span><b id="v918Viewers">—</b><small>Live from Twitch</small></article>
-      <article><span>Followers</span><b id="v918Followers">—</b><small>Live from Twitch / fallback</small></article>
-      <article><span>Subs</span><b id="v918Subs">—</b><small>Requires Twitch scope</small></article>
-      <article><span>Output</span><b id="v918OutputMode">Website + Overlay</b><small>Same central data</small></article>
+    <div class="v9185StatusStrip">
+      <article><span>Twitch</span><b id="twitchStatus">Checking…</b><small id="twitchTitle">twitch.tv/djfolsoe</small></article>
+      <article><span>Viewers</span><b id="twitchViewers">0</b><small>Live from Twitch</small></article>
+      <article><span>Followers</span><b id="twitchFollowers">—</b><small>Live/fallback</small></article>
+      <article><span>Subs</span><b id="twitchSubs">—</b><small>Token scope/fallback</small></article>
+      <article><span>Ready</span><b id="readyState">Draft</b><small id="lastPublish">Not published yet</small></article>
     </div>
 
-    <div class="v918Grid">
-      <article class="v918Card">
+    <div class="v9185OneGrid">
+      <article class="v9185Card primaryCard">
         <h3>1 · Broadcast</h3>
         <label>Current show</label>
-        <select id="v918CurrentShow">
-          <option>DJ FOLSOE</option><option>Good Morning Twitch</option><option>Trance Tuesday</option><option>Eurodance</option><option>Fredagsbar</option><option>Retro Hits</option><option>FOLSOE Top 20</option><option>Pop Up Live</option><option>Summer Beats</option><option>Weekend Vibes</option>
+        <select id="currentShow">
+          <option>DJ FOLSOE</option>
+          <option>Good Morning Twitch</option>
+          <option>Trance Tuesday</option>
+          <option>Eurodance</option>
+          <option>Fredagsbar</option>
+          <option>Retro Hits</option>
+          <option>FOLSOE Top 20</option>
+          <option>Pop Up Live</option>
+          <option>Summer Beats</option>
+          <option>Weekend Vibes</option>
         </select>
         <label>Theme</label>
-        <select id="v918Theme"><option value="weekend">Weekend</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option></select>
+        <select id="theme">
+          <option value="weekend">Weekend</option>
+          <option value="morning">Good Morning</option>
+          <option value="trance">Trance</option>
+          <option value="eurodance">Eurodance</option>
+          <option value="fredagsbar">Fredagsbar</option>
+          <option value="retro">Retro</option>
+          <option value="chart">Top 20</option>
+          <option value="popup">Pop Up</option>
+          <option value="summer">Summer</option>
+          <option value="disco">Disco</option>
+          <option value="handsup">Hands Up</option>
+          <option value="harddance">Hard Dance</option>
+          <option value="danske">Danish Hits</option>
+        </select>
         <label>Broadcast mode</label>
-        <select id="v918Mode"><option>LIVE</option><option>STARTING SOON</option><option>COUNTDOWN</option><option>BREAK</option><option>SPECIAL EVENT</option><option>AFTER PARTY</option><option>ENDING</option><option>OFFLINE</option></select>
-        <div class="v918ButtonRow"><button onclick="v918QuickMode('LIVE')">Go Live</button><button onclick="v918QuickMode('BREAK')">Break</button><button onclick="v918QuickMode('ENDING')">Ending</button><button onclick="v918QuickMode('OFFLINE')">Offline</button></div>
-      </article>
-
-      <article class="v918Card">
-        <h3>2 · Website + Overlay Text</h3>
-        <label>Main headline</label><input id="v918HeroTitle" value="DJ FOLSOE">
-        <label>Sub headline</label><input id="v918HeroSubtitle" value="Dive into my Twitch world">
-        <label>Description</label><textarea id="v918HeroText" rows="4">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</textarea>
-        <label>Ticker / Info line</label><input id="v918Ticker" value="LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT · FOLLOW DJ FOLSOE">
-        <label>Community message</label><input id="v918CommunityMessage" value="Follow, chat, request music and be part of the DJ FOLSOE Twitch world.">
-      </article>
-
-      <article class="v918Card">
-        <h3>3 · Next Show</h3>
-        <label>Next show title</label><input id="v918NextTitle" value="Next DJ FOLSOE Broadcast">
-        <label>Date</label><input id="v918NextDate" type="date">
-        <label>Time</label><input id="v918NextTime" type="time">
-        <label>Next show theme</label><select id="v918NextTheme"><option value="weekend">Weekend</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option></select>
-        <label>Description</label><textarea id="v918NextDescription" rows="3">The next show is controlled from admin and appears on both website and overlay.</textarea>
-      </article>
-
-      <article class="v918Card">
-        <h3>4 · Goals</h3>
-        <label>Follower goal</label><input id="v918FollowerGoal" type="number" value="1000">
-        <label>Subs</label><input id="v918SubsManual" type="number" value="0">
-        <label>Sub goal</label><input id="v918SubGoal" type="number" value="100">
-        <label>Request text</label><input id="v918RequestText" value="Use !request in Twitch chat">
-        <label>Special event</label><input id="v918SpecialEvent" value="">
-      </article>
-    </div>
-
-    <div class="v918PreviewGrid">
-      <article class="v918WebsitePreview">
-        <span>Website preview · offline channel page</span>
-        <h3 id="v918PreviewTitle">DJ FOLSOE</h3>
-        <p id="v918PreviewSub">Dive into my Twitch world</p>
-        <small id="v918PreviewNext">Next DJ FOLSOE Broadcast · Announced soon</small>
-      </article>
-      <article class="v918OverlayPreview">
-        <span>Overlay preview · live control panel</span>
-        <h3 id="v918OverlayTitle">DJ FOLSOE · LIVE</h3>
-        <p id="v918OverlayLine">Viewers — · Followers — · Subs —</p>
-        <small id="v918OverlayTicker">LIVE DJ SHOWS FROM DENMARK</small>
-      </article>
-    </div>
-
-    <div class="v918PublishBar">
-      <button onclick="v918RefreshAll()">Refresh Twitch + Admin</button>
-      <button onclick="v918SaveDraft()">Save Draft</button>
-      <button onclick="v918PreviewAll()">Preview</button>
-      <button class="bigPublish" onclick="v918PublishEverything()">Publish Everything</button>
-    </div>
-    <pre id="v918Status">V918 ready. One Control Center controls website + overlay from the same data.</pre>
-  </section>
-
-  <details id="legacyAdvanced" class="legacyAdvanced">
-    <summary>Advanced / Technical tools from V904–V917</summary>
-
-
-
-  <section id="v917GoLiveAssistant" class="panel v917GoLivePanel">
-    <div class="panelHead">
-      <h2>🚦 V917 · Launch Checklist & Go Live Assistant</h2>
-      <div>
-        <button onclick="v917RefreshAssistant()">Refresh checklist</button>
-        <button class="bigPublish" onclick="v917StartBroadcastSetup()">START BROADCAST SETUP</button>
-      </div>
-    </div>
-    <p class="note">Use this before stream. It guides you through show, theme, website, overlay, preview, backup, publish and Twitch launch. It does not change overlay graphics. Twitch chat remains protected.</p>
-
-    <div class="v917LaunchBanner" id="v917LaunchBanner">
-      <span>LAUNCH STATUS</span>
-      <b id="v917LaunchText">Run checklist</b>
-      <small id="v917LaunchSub">No launch check has been performed yet.</small>
-    </div>
-
-    <div class="v917SetupGrid">
-      <article>
-        <span>Step 1</span><b>Choose show</b>
-        <select id="v917ShowSelect">
-          <option value="live">DJ FOLSOE LIVE</option>
-          <option value="starting">Starting Soon</option>
-          <option value="countdown">Countdown</option>
-          <option value="break">Break</option>
-          <option value="special">Special Event</option>
-          <option value="afterparty">After Party</option>
-          <option value="ending">Ending Soon</option>
-          <option value="offline">Offline</option>
-        </select>
-        <button onclick="v917ApplyShowPreset()">Apply show preset</button>
-      </article>
-      <article>
-        <span>Step 2</span><b>Choose theme</b>
-        <select id="v917ThemeSelect"></select>
-        <button onclick="v917ApplyThemeChoice()">Apply theme</button>
-      </article>
-      <article>
-        <span>Step 3</span><b>Open quick checks</b>
-        <button onclick="jump('v914LivePreview');v914RefreshPreview&&v914RefreshPreview()">Preview website/overlay</button>
-        <button onclick="v916RunHealthCheck&&v916RunHealthCheck(true)">Run health check</button>
-      </article>
-      <article>
-        <span>Step 4</span><b>Launch links</b>
-        <button onclick="window.open('https://www.twitch.tv/djfolsoe','_blank')">Open Twitch channel</button>
-        <button onclick="window.open('https://dashboard.twitch.tv','_blank')">Open Twitch dashboard</button>
-      </article>
-    </div>
-
-    <div class="v917ChecklistBox">
-      <h3>Go Live checklist</h3>
-      <div id="v917Checklist" class="v917Checklist"></div>
-    </div>
-
-    <div class="v917ActionBar">
-      <button onclick="v917RefreshAssistant()">1 · Check now</button>
-      <button onclick="v914RefreshPreview&&v914RefreshPreview()">2 · Preview</button>
-      <button onclick="v915BackupCurrent&&v915BackupCurrent()">3 · Backup</button>
-      <button class="bigPublish" onclick="v917PublishLaunch()">4 · Publish live</button>
-      <button onclick="window.open('https://www.twitch.tv/djfolsoe','_blank')">5 · Go to Twitch</button>
-    </div>
-    <pre id="v917Status">V917 ready. Run checklist before stream.</pre>
-  </section>
-
-  <section id="v916HealthCheck" class="panel v916HealthPanel">
-    <div class="panelHead">
-      <h2>🟢 V916 · Admin Status & Health Check</h2>
-      <div>
-        <button onclick="v916RunHealthCheck()">Run health check</button>
-        <button class="bigPublish" onclick="v916RunHealthCheck(true)">CHECK + READY SIGNAL</button>
-      </div>
-    </div>
-    <p class="note">Check whether the website, overlay data, theme assets and worker/API are ready before you go live. This does not change the overlay graphics. Twitch chat remains protected.</p>
-
-    <div class="v916ReadyBanner" id="v916ReadyBanner">
-      <span>READY STATUS</span>
-      <b id="v916ReadyText">Run health check</b>
-      <small id="v916ReadySub">No live check has been performed yet.</small>
-    </div>
-
-    <div class="v916HealthGrid">
-      <article id="v916CardApi"><span>Worker / API</span><b id="v916ApiStatus">Waiting</b><small id="v916ApiDetail">/api/health-check</small></article>
-      <article id="v916CardWebsite"><span>Website data</span><b id="v916WebsiteStatus">Waiting</b><small id="v916WebsiteDetail">Hero, homepage and website portal</small></article>
-      <article id="v916CardOverlay"><span>Overlay data</span><b id="v916OverlayStatus">Waiting</b><small id="v916OverlayDetail">Overlay Control Panel, ticker and overlay hub</small></article>
-      <article id="v916CardTheme"><span>Theme assets</span><b id="v916ThemeStatus">Waiting</b><small id="v916ThemeDetail">Active theme and image paths</small></article>
-      <article id="v916CardPublish"><span>Last publish</span><b id="v916PublishStatus">Waiting</b><small id="v916PublishDetail">Updated timestamp / backup status</small></article>
-      <article id="v916CardLocks"><span>Locked areas</span><b>Protected</b><small>Overlay graphics · Twitch chat · single logo · V901 timing</small></article>
-    </div>
-
-    <div class="v916ChecklistBox">
-      <h3>Warnings / checklist</h3>
-      <ul id="v916Warnings"><li>Run health check to scan the system.</li></ul>
-    </div>
-
-    <div class="v916ActionBar">
-      <button onclick="v916RunHealthCheck()">Refresh status</button>
-      <button onclick="v914RefreshPreview&&v914RefreshPreview()">Refresh live preview</button>
-      <button onclick="v915BackupCurrent&&v915BackupCurrent()">Backup current</button>
-      <button onclick="v911PublishNow&&v911PublishNow()">Publish from control room</button>
-    </div>
-    <pre id="v916Status">V916 ready. Run health check before going live.</pre>
-  </section>
-
-  <section id="v911DailyControl" class="panel v911ControlRoom">
-    <div class="panelHead">
-      <h2>🎛️ V911 · Daily Control Room</h2>
-      <div>
-        <button onclick="v911RefreshDaily()">Refresh view</button>
-        <button class="bigPublish" onclick="v911PublishNow()">ONE TAP · PUBLISH NOW</button>
-      </div>
-    </div>
-    <p class="note">Use this as the daily front desk. Pick the current broadcast mode, adjust the visible text if needed, then publish once. Website hero, ticker and overlay boxes 1-3 stay in sync. Twitch chat remains protected.</p>
-
-    <div class="v911StatusStrip">
-      <div><span>Live status</span><b id="v911LiveStatus">Loading</b></div>
-      <div><span>Active show</span><b id="v911ActiveShow">DJ FOLSOE LIVE</b></div>
-      <div><span>Active theme</span><b id="v911ActiveTheme">weekend</b></div>
-      <div><span>Last publish</span><b id="v911LastPublish">Not published yet</b></div>
-    </div>
-
-    <div class="v911OneTapGrid">
-      <button onclick="v911OneTap('live')">🔴 Go Live</button>
-      <button onclick="v911OneTap('starting')">🟣 Starting Soon</button>
-      <button onclick="v911OneTap('countdown')">⏱️ Countdown</button>
-      <button onclick="v911OneTap('break')">☕ Break</button>
-      <button onclick="v911OneTap('special')">✨ Special Event</button>
-      <button onclick="v911OneTap('afterparty')">🎉 After Party</button>
-      <button onclick="v911OneTap('ending')">🏁 Ending Soon</button>
-      <button onclick="v911OneTap('offline')">⚫ Offline</button>
-    </div>
-
-    <div class="v911QuickEdit">
-      <div class="v911NowCard">
-        <h3>Today’s Broadcast</h3>
-        <label>Now on air</label><input id="v911NowOnAir" placeholder="DJ FOLSOE LIVE">
-        <label>Website headline</label><input id="v911HeroHeadline" placeholder="Live Music TV from Denmark">
-        <label>Website message</label><textarea id="v911HeroMessage" rows="4" placeholder="What should the front page say right now?"></textarea>
-      </div>
-      <div class="v911NowCard">
-        <h3>Overlay Output</h3>
-        <label>Box 1 headline</label><input id="v911Box1" placeholder="LIVE SHOW">
-        <label>Box 2 headline</label><input id="v911Box2" placeholder="DJ FOLSOE LIVE">
-        <label>Box 3 headline</label><input id="v911Box3" placeholder="Requests open">
-        <label>Ticker</label><textarea id="v911Ticker" rows="3" placeholder="LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"></textarea>
-      </div>
-    </div>
-
-    <div class="v911ActionBar">
-      <button onclick="v911ApplyQuickEdit()">Apply quick edit</button>
-      <button onclick="v911ApplyQuickEdit();v911PublishNow()">Apply + publish</button>
-      <button onclick="toggleAdvanced()">Show / hide Advanced</button>
-    </div>
-    <pre id="v911Status">V911 ready. Choose a mode or update today’s text.</pre>
-  </section>
-
-
-
-
-
-  <section id="v908WebsitePortal" class="panel">
-    <div class="panelHead">
-      <h2>🌐 Website Text Control</h2>
-      <div>
-        <button onclick="v908LoadWebsitePortal()">Load website</button>
-        <button class="bigPublish" onclick="v908PublishWebsitePortal()">PUBLISH WEBSITE TEXT</button>
-      </div>
-    </div>
-    <p class="note">Controls the text you marked on the frontpage screenshots: hero headline, next show title, favourite show title and the Discover DJ FOLSOE section.</p>
-    <div class="formGrid">
-      <div class="wide"><label>Top line / eyebrow</label><input id="v908HeroEyebrow" placeholder="DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK"></div>
-      <div><label>Main title</label><input id="v908HeroTitle" placeholder="DJ FOLSOE"></div>
-      <div><label>Hero subtitle</label><input id="v908HeroSubtitle" placeholder="Dive into my Twitch world"></div>
-      <div class="wide"><label>Hero text</label><textarea id="v908HeroText" rows="3"></textarea></div>
-      <div class="wide"><label>Hero background path</label><input id="v908HeroBackground" placeholder="themes/weekend.png"></div>
-    </div>
-    <h3>Next show section</h3>
-    <div class="formGrid">
-      <div><label>Small label</label><input id="v908NextKicker" placeholder="NEXT SHOW"></div>
-      <div><label>Large title</label><input id="v908NextTitle" placeholder="Next DJ FOLSOE Broadcast"></div>
-      <div><label>Starts label</label><input id="v908NextTimeLabel" placeholder="Announced soon"></div>
-      <div><label>Date/time</label><input id="v908NextDatetime" type="datetime-local"></div>
-      <div><label>Theme</label><input id="v908NextTheme" placeholder="Music TV"></div>
-      <div class="wide"><label>Description</label><textarea id="v908NextDescription" rows="3"></textarea></div>
-    </div>
-    <h3>Frontpage headings</h3>
-    <div class="formGrid">
-      <div><label>Featured shows label</label><input id="v908ShowsKicker" placeholder="FEATURED SHOWS"></div>
-      <div><label>Featured shows title</label><input id="v908ShowsTitle" placeholder="Your favorite show"></div>
-      <div><label>About label</label><input id="v908AboutKicker" placeholder="DISCOVER DJ FOLSOE"></div>
-      <div><label>About title</label><input id="v908AboutTitle" placeholder="Music TV, Twitch and Danish DJ energy"></div>
-      <div class="wide"><label>About text</label><textarea id="v908AboutText" rows="3"></textarea></div>
-    </div>
-    <h3>Ticker + manual community fallback</h3>
-    <div class="formGrid">
-      <div class="wide"><label>Ticker lines</label><textarea id="v908Ticker" rows="4"></textarea></div>
-      <div><label>Followers fallback</label><input id="v908Followers" type="number" placeholder="0"></div>
-      <div><label>Subs fallback</label><input id="v908Subs" type="number" placeholder="0"></div>
-      <div><label>Sub goal</label><input id="v908SubGoal" type="number" placeholder="100"></div>
-      <div class="wide"><label>Community text</label><textarea id="v908CommunityText" rows="3"></textarea></div>
-    </div>
-    <pre id="v908PortalStatus">Website Text Control ready.</pre>
-  </section>
-
-  <section id="v912ContentStudio" class="panel v912ContentStudio">
-    <div class="panelHead">
-      <h2>✍️ V912 · Content Studio</h2>
-      <div>
-        <button onclick="v912LoadStudio()">Load content</button>
-        <button onclick="v912SaveDraft()">Save draft</button>
-        <button class="bigPublish" onclick="v912PublishLive()">PUBLISH LIVE</button>
-      </div>
-    </div>
-    <p class="note">Edit the visible content from one place. Save Draft keeps your work in the browser. Publish Live sends website content, news, Top 20, goals, ticker and overlay messages to the Central Data Engine.</p>
-
-    <div class="v912StudioGrid">
-      <div class="v912StudioCard wide">
-        <h3>Frontpage Hero</h3>
-        <label>Hero headline</label><input id="v912HeroHeadline" placeholder="Live Music TV from Denmark">
-        <label>Hero message</label><textarea id="v912HeroMessage" rows="4" placeholder="Main frontpage text"></textarea>
-        <label>Next broadcast</label><input id="v912NextBroadcast" placeholder="Trance Tuesday · 18:30">
-      </div>
-      <div class="v912StudioCard">
-        <h3>Community Goals</h3>
-        <label>Follower goal</label><input id="v912FollowerGoal" placeholder="870 / 1000 followers">
-        <label>Sub goal</label><input id="v912SubGoal" placeholder="0 / 25 subs">
-        <label>Request message</label><input id="v912RequestMessage" placeholder="Requests open · !request">
-      </div>
-      <div class="v912StudioCard">
-        <h3>Ticker</h3>
-        <label>Top ticker</label><textarea id="v912TopTicker" rows="3" placeholder="Short message at the top"></textarea>
-        <label>Bottom ticker</label><textarea id="v912BottomTicker" rows="3" placeholder="Main running ticker"></textarea>
-      </div>
-    </div>
-
-    <div class="v912StudioGrid">
-      <div class="v912StudioCard wide">
-        <h3>News & Updates</h3>
-        <div id="v912NewsEditor" class="v912ListEditor"></div>
-        <button onclick="v912AddNews()">Add news item</button>
-      </div>
-      <div class="v912StudioCard wide">
-        <h3>Featured Shows</h3>
-        <div id="v912ShowsEditor" class="v912ListEditor"></div>
-        <button onclick="v912AddShow()">Add show</button>
-      </div>
-    </div>
-
-    <div class="v912StudioGrid">
-      <div class="v912StudioCard wide">
-        <h3>Top 20 Quick Editor</h3>
-        <textarea id="v912Top20Text" rows="12" placeholder="1; Artist; Title; Genre; Points"></textarea>
-        <p class="miniNote">Format per line: rank; artist; title; genre; points</p>
-      </div>
-      <div class="v912StudioCard wide">
-        <h3>Overlay Messages</h3>
-        <label>Box 1 headline</label><input id="v912Box1Headline" placeholder="LIVE SHOW">
-        <label>Box 1 body</label><input id="v912Box1Body" placeholder="Broadcast Cloud online">
-        <label>Box 2 headline</label><input id="v912Box2Headline" placeholder="DJ FOLSOE LIVE">
-        <label>Box 2 body</label><input id="v912Box2Body" placeholder="Active show and theme">
-        <label>Box 3 headline</label><input id="v912Box3Headline" placeholder="Requests open">
-        <label>Box 3 body</label><input id="v912Box3Body" placeholder="!request in chat">
-      </div>
-    </div>
-
-    <div class="v912ActionBar">
-      <button onclick="v912ApplyLocally()">Apply locally</button>
-      <button onclick="v912SaveDraft()">Save Draft</button>
-      <button onclick="v912PublishLive()">Publish Live</button>
-      <button onclick="v912LoadDraft()">Load Draft</button>
-    </div>
-    <pre id="v912Status">V912 Content Studio ready.</pre>
-  </section>
-
-
-  <section id="v913AssetManager" class="panel v913AssetManager">
-    <div class="panelHead">
-      <h2>🗂️ V913 · Asset & Theme Upload Manager</h2>
-      <div>
-        <button onclick="v913LoadAssets()">Load assets</button>
-        <button class="bigPublish" onclick="v913PublishAssets()">APPLY ASSETS + PUBLISH</button>
-      </div>
-    </div>
-    <p class="note">Control all theme image paths from one place. Upload the actual images to GitHub in <code>/themes</code>, then set paths here and publish once. Website and overlay will read the same active theme data. Browser upload to GitHub still requires GitHub API/token, so this version manages the references safely.</p>
-
-    <div class="v913AssetStatus">
-      <div><span>Active theme</span><b id="v913ActiveTheme">Loading</b></div>
-      <div><span>Selected asset</span><b id="v913SelectedTheme">None</b></div>
-      <div><span>Asset check</span><b id="v913AssetCheck">Waiting</b></div>
-      <div><span>Last publish</span><b id="v913LastPublish">Not published</b></div>
-    </div>
-
-    <div class="v913AssetTools">
-      <div>
-        <label>Select theme</label>
-        <select id="v913ThemeSelect" onchange="v913SelectTheme(this.value)"></select>
-      </div>
-      <div>
-        <label>Theme title</label>
-        <input id="v913ThemeTitle" placeholder="WEEKEND VIBES">
-      </div>
-      <div>
-        <label>Background path</label>
-        <input id="v913Background" placeholder="themes/weekend.png">
-      </div>
-      <div>
-        <label>Website hero image</label>
-        <input id="v913HeroImage" placeholder="themes/weekend-hero.png">
-      </div>
-      <div>
-        <label>Overlay background</label>
-        <input id="v913OverlayBackground" placeholder="themes/weekend.png">
-      </div>
-      <div>
-        <label>Logo / channel bug</label>
-        <input id="v913Logo" placeholder="assets/img/dj-folsoe-logo.png">
-      </div>
-      <div class="wide">
-        <label>Asset note</label>
-        <textarea id="v913AssetNote" rows="3" placeholder="Write what this theme is used for."></textarea>
-      </div>
-    </div>
-
-    <div class="v913QuickButtons">
-      <button onclick="v913UseStandardPaths()">Use standard /themes paths</button>
-      <button onclick="v913CheckAssets()">Check missing paths</button>
-      <button onclick="v913ApplyToThemeManager()">Apply to Theme Manager</button>
-      <button onclick="v913ExportAssetMap()">Preview asset map</button>
-    </div>
-
-    <div id="v913ThemeCards" class="v913ThemeCards"></div>
-    <pre id="v913Status">V913 ready. Load assets to begin.</pre>
-  </section>
-
-
-  <section id="v914LivePreview" class="panel v914LivePreview">
-    <div class="panelHead">
-      <h2>👁️ V914 · Website/Admin Live Preview</h2>
-      <div>
-        <button onclick="v914RefreshPreview()">Refresh preview</button>
-        <button class="bigPublish" onclick="v914RefreshPreview();publishEverything()">PREVIEW + PUBLISH</button>
-      </div>
-    </div>
-    <p class="note">Preview the current admin output before publishing. This does not change the locked overlay layout — it only previews website hero, active theme, ticker and overlay Overlay Control Panel content.</p>
-
-    <div class="v914PreviewGrid">
-      <div class="v914WebsitePreview">
-        <div class="v914PreviewBadge" id="v914ThemeBadge">THEME PREVIEW</div>
-        <h3 id="v914HeroTitle">DJ FOLSOE LIVE</h3>
-        <p id="v914HeroText">Live Music TV from Denmark</p>
-        <div class="v914HeroMeta">
-          <span id="v914NowOnAir">ON AIR</span>
-          <span id="v914NextShow">NEXT SHOW</span>
-          <span id="v914Goal">COMMUNITY GOAL</span>
-        </div>
-        <small id="v914AssetPath">No background selected</small>
-      </div>
-
-      <div class="v914OverlayPreview">
-        <div class="v914OverlayTop">
-          <span>OVERLAY OUTPUT PREVIEW</span>
-          <b>BOX 4 LOCKED: TWITCH CHAT</b>
-        </div>
-        <div class="v914OverlayBoxes">
-          <article><span>BOX 1</span><b id="v914Box1Title">STATUS</b><p id="v914Box1Body">Broadcast cloud online</p></article>
-          <article><span>BOX 2</span><b id="v914Box2Title">SHOW INFO</b><p id="v914Box2Body">Current show information</p></article>
-          <article><span>BOX 3</span><b id="v914Box3Title">COMMUNITY</b><p id="v914Box3Body">Goals and viewer journey</p></article>
-        </div>
-      </div>
-    </div>
-
-    <div class="v914TickerPreview">
-      <span>LIVE TICKER</span>
-      <marquee id="v914TickerText">Welcome to DJ FOLSOE NETWORK · Music TV live from Denmark</marquee>
-    </div>
-    <pre id="v914Status">V914 preview ready. Press Refresh preview before publishing.</pre>
-  </section>
-
-
-
-  <section id="v915PublishSafety" class="panel v915SafetyPanel">
-    <div class="panelHead">
-      <h2>🛟 V915 · Publish Safety & Backup</h2>
-      <div>
-        <button onclick="v915LoadSafety()">Load safety status</button>
-        <button onclick="v915BackupCurrent()">Backup current</button>
-        <button class="bigPublish" onclick="v915SafePublish()">SAFE PUBLISH LIVE</button>
-      </div>
-    </div>
-    <p class="note">Safer publish workflow for daily use. Create a backup before publishing, restore the last snapshot if something looks wrong, and get warnings when there are unsaved changes.</p>
-
-    <div class="v915SafetyStrip">
-      <div><span>Draft status</span><b id="v915DraftState">Clean</b></div>
-      <div><span>Last backup</span><b id="v915LastBackup">Not loaded</b></div>
-      <div><span>Backups stored</span><b id="v915BackupCount">0</b></div>
-      <div><span>Safety mode</span><b id="v915SafetyMode">Confirmation on</b></div>
-    </div>
-
-    <div class="v915FlowGrid">
-      <button onclick="v915SaveDraft()">💾 Save Draft</button>
-      <button onclick="v914RefreshPreview();v915SetStatus('✅ Preview refreshed before publish.')">👁️ Preview</button>
-      <button onclick="v915BackupCurrent()">📦 Backup Current</button>
-      <button onclick="v915SafePublish()">🚀 Publish Live Safely</button>
-      <button onclick="v915RestoreLast()">↩️ Restore Last</button>
-      <button onclick="v915ResetDraft()">🧹 Reset Draft</button>
-    </div>
-
-    <div class="v915BackupBox">
-      <h3>Latest snapshot</h3>
-      <pre id="v915SnapshotPreview">No snapshot loaded yet.</pre>
-    </div>
-    <pre id="v915Status">V915 ready. Use Safe Publish to backup before going live.</pre>
-  </section>
-
-  <section id="oneclick" class="panel oneClickPanel">
-    <div class="panelHead"><h2>🚀 One Button Control</h2><div><button class="bigPublish" onclick="publishEverything()">PUBLISH EVERYTHING</button></div></div>
-    <p class="note">Daily workflow: select the show/theme below, update the few important fields, then press Publish Everything. Website, overlay state, tickers and active background are synchronized together.</p>
-    <div class="quickGrid">
-      <button onclick="quickShow('morning')">☀️ Good Morning Twitch</button>
-      <button onclick="quickShow('trance')">💙 Trance Tuesday</button>
-      <button onclick="quickShow('chart')">🏆 Chart Show</button>
-      <button onclick="quickShow('fredagsbar')">🍺 Fredagsbar</button>
-      <button onclick="quickShow('retro')">🕹️ Retro Hits</button>
-      <button onclick="quickShow('eurodance')">💛 Eurodance</button>
-      <button onclick="quickShow('popup')">⚡ Pop Up</button>
-      <button onclick="quickShow('weekend')">🎉 Weekend Vibes</button>
-    </div>
-    <div class="formGrid liveNowGrid">
-      <div><label>Now on air</label><input id="quickOnAir" placeholder="DJ FOLSOE LIVE"></div>
-      <div><label>Next show</label><input id="quickNextShow" placeholder="Next show / time"></div>
-      <div><label>Follower goal</label><input id="quickFollowerGoal" placeholder="870/1000 followers"></div>
-      <div><label>Request line</label><input id="quickRequestLine" placeholder="Requests open · !request"></div>
-      <div class="wide"><label>Website headline</label><input id="quickHeadline" placeholder="Live Music TV from Denmark"></div>
-      <div class="wide"><label>Website message</label><textarea id="quickMessage" rows="3" placeholder="What should the front page say right now?"></textarea></div>
-    </div>
-    <div class="quickActions">
-      <button onclick="applyQuickFields()">Apply quick fields</button>
-      <button onclick="applyQuickFields();publishEverything()">Apply + publish now</button>
-      <button onclick="loadAll()">Reload current data</button>
-    </div>
-    <pre id="oneClickStatus">Choose a show preset, then publish.</pre>
-  </section>
-
-
-
-
-  <section id="showControl" class="panel v906ShowControl">
-    <div class="panelHead"><h2>🎬 V906 · One Click Show Control</h2><div><button onclick="v906RenderShowControl()">Refresh</button><button class="bigPublish" onclick="v906ActivateSelectedShow(true)">ACTIVATE + PUBLISH</button></div></div>
-    <p class="note">Choose the live show once. V906 fills theme, website hero, overlay boxes, tickers and broadcast status in one click. Box 4 stays locked to Twitch chat.</p>
-    <div id="v906ShowButtons" class="v906ShowButtons"></div>
-    <div class="v906ControlRoom">
-      <div class="v906OnAirCard">
-        <span>Selected broadcast</span>
-        <h3 id="v906SelectedTitle">No show selected</h3>
-        <p id="v906SelectedDesc">Select a show preset.</p>
-        <div id="v906SelectedMeta" class="v906SelectedMeta"></div>
-      </div>
-      <div class="v906QuickActions">
-        <button onclick="v906QuickAction('live')">GO LIVE</button>
-        <button onclick="v906QuickAction('break')">BREAK</button>
-        <button onclick="v906QuickAction('afterparty')">AFTER PARTY</button>
-        <button onclick="v906QuickAction('ending')">ENDING SOON</button>
-        <button onclick="v906QuickAction('offline')">GO OFFLINE</button>
-      </div>
-    </div>
-    <div class="formGrid">
-      <div><label>Broadcast state</label><input id="v906BroadcastState" value="LIVE"></div>
-      <div><label>Selected theme</label><input id="v906Theme" value="weekend"></div>
-      <div class="wide"><label>Twitch title template</label><input id="v906TwitchTitle" placeholder="DJ FOLSOE LIVE · Music TV from Denmark"></div>
-      <div class="wide"><label>Social announcement</label><textarea id="v906SocialText" rows="3" placeholder="Now live on Twitch..."></textarea></div>
-    </div>
-    <div class="quickActions">
-      <button onclick="v906ActivateSelectedShow(false)">Apply selected show locally</button>
-      <button onclick="v906ActivateSelectedShow(true)">Apply + publish now</button>
-      <button onclick="publishEverything()">Publish Everything</button>
-    </div>
-    <pre id="v906Status">V906 ready. Select a show.</pre>
-  </section>
-
-  <section id="centralEngine" class="panel centralEnginePanel">
-    <div class="panelHead"><h2>🧠 Central Data Engine</h2><div><button onclick="loadCentralEngine()">Load engine</button><button onclick="publishEverything()">Publish all modules</button></div></div>
-    <p class="note">V905 makes one data engine the source of truth. Admin writes the content once, then website and overlay read from the same Broadcast Cloud state.</p>
-    <div class="engineGrid">
-      <div class="engineCard"><b>Website</b><span id="engineWebsite">Waiting</span><small>Homepage, shows, news, Top 20 and discovery picks.</small></div>
-      <div class="engineCard"><b>Overlay</b><span id="engineOverlay">Waiting</span><small>Theme, top ticker, bottom ticker and Overlay Control Panel. Box 4 stays Twitch chat.</small></div>
-      <div class="engineCard"><b>Theme</b><span id="engineTheme">Waiting</span><small>Active background from /themes, controlled from admin.</small></div>
-      <div class="engineCard"><b>Status</b><span id="engineStatus">Waiting</span><small>One click publish keeps all modules in sync.</small></div>
-    </div>
-    <pre id="centralEngineOutput">Press Load engine to see the current central state.</pre>
-  </section>
-
-  <section id="status" class="panel statusPanel">
-    <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Load data</button><button onclick="publishEverything()">Publish everything</button><button onclick="testAll()">Test all</button></div></div>
-    <pre id="statusBox">Ready. Add token and press Load data.</pre>
-  </section>
-
-  
-  <section id="seo" class="panel advancedPanel">
-    <div class="panelHead"><h2>🔎 SEO Broadcast Engine</h2><div><button onclick="openApi('/api/seo')">Test SEO API</button><button onclick="openApi('/sitemap.xml')">Sitemap</button><button onclick="openApi('/robots.txt')">Robots</button></div></div>
-    <p class="note">Styrer Google metadata, OpenGraph, Twitter cards, schema.org, sitemap og søgeord.</p>
-    <div class="formGrid">
-      <div><label>Site name</label><input id="seoSiteName"></div><div><label>Domain</label><input id="seoDomain"></div>
-      <div class="wide"><label>Keywords / søgeord</label><textarea id="seoKeywords" rows="3"></textarea></div>
-      <div class="wide"><label>SameAs links</label><textarea id="seoSameAs" rows="2"></textarea></div>
-      <div><label>Title DA</label><input id="seoTitleDa"></div><div><label>Title EN</label><input id="seoTitleEn"></div><div><label>Title DE</label><input id="seoTitleDe"></div>
-      <div class="wide"><label>Description DA</label><textarea id="seoDescDa" rows="2"></textarea></div>
-      <div class="wide"><label>Description EN</label><textarea id="seoDescEn" rows="2"></textarea></div>
-      <div class="wide"><label>Description DE</label><textarea id="seoDescDe" rows="2"></textarea></div>
-    </div><button onclick="saveSEO()">Save SEO</button>
-  </section>
-
-  <section id="theme" class="panel">
-    <div class="panelHead"><h2>🎨 Theme Engine</h2><button onclick="openApi('/api/theme')">Test theme API</button></div>
-    <p class="note">One click changes the active background for both website and StreamElements overlay. Theme images live in /themes and travel with the GitHub upload.</p>
-    <div id="themeGrid" class="themeGrid"></div>
-    <pre id="activeTheme">Active theme: loading</pre>
-  </section>
-
-
-
-  <section id="v907ThemeManager" class="panel v907ThemeManager">
-    <div class="panelHead"><h2>🖼️ V907 · Theme Manager 1.0</h2><div><button onclick="v907RenderThemeManager()">Refresh</button><button class="bigPublish" onclick="v907ApplyTheme(true)">APPLY THEME + PUBLISH</button></div></div>
-    <p class="note">Choose one broadcast theme in admin. V907 keeps the theme key, background path, website mood and overlay background synchronized. Upload theme images once in <code>/themes</code> and activate them from here.</p>
-    <div id="v907ThemeCards" class="v907ThemeCards"></div>
-    <div class="v907ThemeEditor">
-      <div class="v907Preview">
-        <span>Selected theme</span>
-        <h3 id="v907ThemeTitle">No theme selected</h3>
-        <p id="v907ThemeDesc">Select a theme card above.</p>
-        <small id="v907ThemePath">Background path: —</small>
-      </div>
-      <div class="formGrid">
-        <div><label>Theme key</label><input id="v907ThemeKey" readonly></div>
-        <div><label>Background image path</label><input id="v907ThemeBg" placeholder="themes/weekend.png"></div>
-        <div><label>Primary color</label><input id="v907ThemePrimary" placeholder="#22e7ff"></div>
-        <div><label>Secondary color</label><input id="v907ThemeSecondary" placeholder="#ff35d8"></div>
-        <div class="wide"><label>Website hero line</label><input id="v907HeroLine" placeholder="Live Music TV from Denmark"></div>
-        <div class="wide"><label>Overlay top ticker</label><input id="v907TickerLine" placeholder="Theme ticker text"></div>
-      </div>
-    </div>
-    <div class="quickActions">
-      <button onclick="v907ApplyTheme(false)">Apply locally</button>
-      <button onclick="v907ApplyTheme(true)">Apply + publish now</button>
-      <button onclick="v907OpenThemeFolderGuide()">Show folder guide</button>
-    </div>
-    <pre id="v907ThemeStatus">V907 ready. Select a theme.</pre>
-  </section>
-
-  <section id="homepage" class="panel">
-    <div class="panelHead"><h2>🏠 Website content</h2><button onclick="openApi('/api/homepage')">Test homepage API</button></div>
-    <p class="note">The front page loads Twitch profile, banner, bio, live status, viewers, followers, stream title and category. Here you can save fallback profile content.</p>
-    <div class="formGrid">
-      <div><label>Profile name</label><input id="profileName" value="DJ FOLSOE"></div>
-      <div><label>Twitch channel</label><input id="twitchChannel" value="djfolsoe"></div>
-      <div class="wide"><label>Fallback bio</label><textarea id="profileDescription" rows="4"></textarea></div>
-      <div class="wide"><label>Genres, comma-separated</label><input id="profileGenres"></div>
-    </div>
-    <div class="buttons"><button onclick="saveProfile()">Save profile/front page</button></div>
-  </section>
-
-  <section id="news" class="panel advancedPanel">
-    <div class="panelHead"><h2>📰 Homepage news/cards</h2><button onclick="addRow('news')">Add news</button></div>
-    <p class="note">Shown as cards on the front page: Latest show, Top20 nyt, Requests, Community, Twitch updates osv.</p>
-    <div id="newsEditor"></div>
-    <button onclick="saveRows('news')">Save news</button>
-  </section>
-
-  <section id="tickers" class="panel advancedPanel twoCol">
-    <div>
-      <div class="panelHead"><h2>📡 Top ticker overlay</h2><button onclick="addRow('top')">Add</button></div>
-      <p class="note">Top ticker kan være theme-specifik. Fx theme = weekend.</p>
-      <div id="topEditor"></div>
-      <button onclick="saveRows('top')">Save top ticker</button>
-    </div>
-    <div>
-      <div class="panelHead"><h2>📻 Bottom ticker overlay</h2><button onclick="addRow('bottom')">Add</button></div>
-      <p class="note">Bottom ticker kan være theme = all.</p>
-      <div id="bottomEditor"></div>
-      <button onclick="saveRows('bottom')">Save bottom ticker</button>
-    </div>
-  </section>
-
-  <section id="shows" class="panel">
-    <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Add show</button></div>
-    <p class="note">Controls the show cards on the front page.</p>
-    <div id="showsEditor"></div>
-    <button onclick="saveRows('shows')">Save shows</button>
-  </section>
-
-  
-  <section id="showVisuals" class="panel advancedPanel">
-    <div class="panelHead"><h2>🎭 Show graphics på forsiden</h2><button onclick="resetShowVisuals()">Insert default graphics</button></div>
-    <p class="note">Advanced show-card design. Change colours, icon, tag and poster text. Use CSS gradients, e.g. <code>linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)</code>.</p>
-    <div id="showVisualsEditor"></div>
-    <button onclick="saveShowVisuals()">Save show grafik</button>
-  </section>
-
-
-
-
-
-  <section id="v910BroadcastSystem" class="panel v910Panel">
-    <div class="panelHead">
-      <h2>📡 V910 · Music TV Broadcast System</h2>
-      <div>
-        <button onclick="v910LoadBroadcastSystem()">Load</button>
-        <button class="bigPublish" onclick="v910PublishBroadcastSystem()">PUBLISH BROADCAST MODE</button>
-      </div>
-    </div>
-    <p class="note">Professional Music TV control layer. Pick a broadcast mode and V910 prepares website hero, overlay Overlay Control Panel, ticker, lower-third and intro/outro text. Overlay graphics, Box 4 and the left TV bug stay locked.</p>
-
-    <div class="quickGrid v910ModeGrid">
-      <button onclick="v910Mode('live')">🔴 LIVE SHOW</button>
-      <button onclick="v910Mode('starting')">🟣 STARTING SOON</button>
-      <button onclick="v910Mode('countdown')">⏱️ COUNTDOWN</button>
-      <button onclick="v910Mode('break')">☕ BREAK</button>
-      <button onclick="v910Mode('special')">✨ SPECIAL EVENT</button>
-      <button onclick="v910Mode('afterparty')">🎉 AFTER PARTY</button>
-      <button onclick="v910Mode('ending')">🏁 ENDING</button>
-      <button onclick="v910Mode('offline')">⚫ OFFLINE</button>
-    </div>
-
-    <div class="formGrid v910BroadcastGrid">
-      <div><label>Broadcast mode</label><select id="v910Mode"><option>LIVE SHOW</option><option>STARTING SOON</option><option>COUNTDOWN</option><option>BREAK</option><option>SPECIAL EVENT</option><option>AFTER PARTY</option><option>ENDING</option><option>OFFLINE</option></select></div>
-      <div><label>Active show</label><input id="v910ActiveShow" placeholder="DJ FOLSOE LIVE"></div>
-      <div><label>Active theme</label><input id="v910ActiveTheme" placeholder="weekend"></div>
-      <div><label>On-air badge</label><input id="v910Badge" placeholder="LIVE FROM DENMARK"></div>
-      <div class="wide"><label>Website hero headline</label><input id="v910HeroHeadline" placeholder="Live Music TV from Denmark"></div>
-      <div class="wide"><label>Website hero message</label><textarea id="v910HeroMessage" rows="3" placeholder="What should folsoetv.dk say right now?"></textarea></div>
-      <div class="wide"><label>Lower-third message</label><input id="v910LowerThird" placeholder="DJ FOLSOE LIVE · Requests open · Follow the channel"></div>
-      <div class="wide"><label>Top / bottom ticker</label><textarea id="v910Ticker" rows="3" placeholder="LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"></textarea></div>
-    </div>
-
-    <div class="threeCol v910Cards">
-      <div class="v910Card"><h3>Intro text</h3><textarea id="v910Intro" rows="5" placeholder="Welcome to DJ FOLSOE LIVE..."></textarea></div>
-      <div class="v910Card"><h3>Outro text</h3><textarea id="v910Outro" rows="5" placeholder="Thanks for watching..."></textarea></div>
-      <div class="v910Card"><h3>Social / Discord text</h3><textarea id="v910Social" rows="5" placeholder="DJ FOLSOE is live now..."></textarea></div>
-    </div>
-
-    <div class="threeCol v910Cards">
-      <div class="v910Card"><h3>Overlay Box 1</h3><input id="v910Box1Label" placeholder="BROADCAST"><input id="v910Box1Headline" placeholder="LIVE SHOW"><textarea id="v910Box1Body" rows="3"></textarea></div>
-      <div class="v910Card"><h3>Overlay Box 2</h3><input id="v910Box2Label" placeholder="ON AIR"><input id="v910Box2Headline" placeholder="DJ FOLSOE LIVE"><textarea id="v910Box2Body" rows="3"></textarea></div>
-      <div class="v910Card"><h3>Overlay Box 3</h3><input id="v910Box3Label" placeholder="COMMUNITY"><input id="v910Box3Headline" placeholder="Requests open"><textarea id="v910Box3Body" rows="3"></textarea></div>
-    </div>
-
-    <div class="v910LockedBox"><b>Locked</b><span>Box 4 = Twitch chat · Overlay graphics untouched · One DJ FOLSOE logo only.</span></div>
-    <pre id="v910Status">V910 Broadcast System ready. Choose a mode and publish.</pre>
-  </section>
-
-  <section id="v909OverlayHub" class="panel v909Panel advancedPanel">
-    <div class="panelHead">
-      <h2>📺 V909 · Overlay Hub</h2>
-      <div>
-        <button onclick="v909LoadOverlayHub()">Load</button>
-        <button class="bigPublish" onclick="v909PublishOverlayHub()">PUBLISH OVERLAY HUB</button>
-      </div>
-    </div>
-    <p class="note">One clear overlay control room. This changes only the controllable output for box 1, box 2 and box 3. Box 4 stays locked to Twitch chat. Overlay graphics, layout and logo are untouched.</p>
-
-    <div class="quickGrid v909QuickGrid">
-      <button onclick="v909Preset('live')">🔴 LIVE</button>
-      <button onclick="v909Preset('break')">☕ BREAK</button>
-      <button onclick="v909Preset('ending')">🏁 ENDING SOON</button>
-      <button onclick="v909Preset('offline')">⚫ OFFLINE</button>
-      <button onclick="v909Preset('goals')">📈 GOALS</button>
-      <button onclick="v909Preset('requests')">🎧 REQUESTS</button>
-      <button onclick="v909Preset('top20')">🏆 TOP 20</button>
-      <button onclick="v909Preset('community')">❤️ COMMUNITY</button>
-    </div>
-
-    <div class="threeCol v909Cards">
-      <div class="v909BoxCard">
-        <h3>Box 1 · Status / Goals</h3>
-        <label>Label</label><input id="v909Box1Label" placeholder="BROADCAST STATUS">
-        <label>Headline</label><input id="v909Box1Headline" placeholder="LIVE NOW">
-        <label>Body</label><textarea id="v909Box1Body" rows="3" placeholder="DJ FOLSOE is live from Denmark"></textarea>
-        <label>Icon</label><input id="v909Box1Icon" placeholder="📡">
-      </div>
-      <div class="v909BoxCard">
-        <h3>Box 2 · On Air / Next</h3>
-        <label>Label</label><input id="v909Box2Label" placeholder="ON AIR">
-        <label>Headline</label><input id="v909Box2Headline" placeholder="DJ FOLSOE LIVE">
-        <label>Body</label><textarea id="v909Box2Body" rows="3" placeholder="Next show and active theme"></textarea>
-        <label>Icon</label><input id="v909Box2Icon" placeholder="📺">
-      </div>
-      <div class="v909BoxCard">
-        <h3>Box 3 · Community / Music</h3>
-        <label>Label</label><input id="v909Box3Label" placeholder="REQUESTS">
-        <label>Headline</label><input id="v909Box3Headline" placeholder="Requests open">
-        <label>Body</label><textarea id="v909Box3Body" rows="3" placeholder="Use !request Artist - Title"></textarea>
-        <label>Icon</label><input id="v909Box3Icon" placeholder="🎧">
-      </div>
-    </div>
-
-    <div class="v909LockedBox">
-      <b>Box 4 is locked</b>
-      <span>Twitch chat, profile images and emotes remain untouched.</span>
-    </div>
-
-    <div class="grid2">
-      <div>
-        <label>Overlay ticker line</label>
-        <textarea id="v909Ticker" rows="3" placeholder="LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"></textarea>
-      </div>
-      <div>
-        <label>Broadcast state</label>
-        <select id="v909State">
-          <option>LIVE</option>
+        <select id="mode">
+          <option>LIVE SHOW</option>
+          <option>STARTING SOON</option>
+          <option>COUNTDOWN</option>
           <option>BREAK</option>
-          <option>ENDING SOON</option>
-          <option>OFFLINE</option>
+          <option>SPECIAL EVENT</option>
           <option>AFTER PARTY</option>
+          <option>ENDING</option>
+          <option>OFFLINE</option>
         </select>
-        <label>Active show</label><input id="v909ActiveShow" placeholder="DJ FOLSOE LIVE">
-        <label>Active theme</label><input id="v909ActiveTheme" placeholder="weekend">
+        <div class="v9185ButtonRow">
+          <button onclick="djfPresetMode('LIVE SHOW')">Go live</button>
+          <button onclick="djfPresetMode('BREAK')">Break</button>
+          <button onclick="djfPresetMode('ENDING')">Ending</button>
+          <button onclick="djfPresetMode('OFFLINE')">Offline</button>
+        </div>
+      </article>
+
+      <article class="v9185Card">
+        <h3>2 · Website + Overlay Text</h3>
+        <label>Top line</label>
+        <input id="eyebrow" value="DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK">
+        <label>Main title</label>
+        <input id="heroTitle" value="DJ FOLSOE">
+        <label>Headline</label>
+        <input id="heroSubtitle" value="Dive into my Twitch world">
+        <label>Description</label>
+        <textarea id="heroText" rows="3">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</textarea>
+        <label>Ticker / info line</label>
+        <input id="ticker" value="LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT · FOLSOE TOP 20 · WEEKLY MUSIC CHART">
+      </article>
+
+      <article class="v9185Card">
+        <h3>3 · Next Show</h3>
+        <label>Next show</label>
+        <input id="nextShowTitle" value="Next DJ FOLSOE Broadcast">
+        <label>Date</label>
+        <input id="nextShowDate" type="date">
+        <label>Time</label>
+        <input id="nextShowTime" type="time">
+        <label>Theme</label>
+        <select id="nextShowTheme">
+          <option value="weekend">Weekend</option><option value="morning">Good Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option>
+        </select>
+        <label>Description</label>
+        <textarea id="nextShowDescription" rows="3">The next show is controlled from admin and appears automatically on website and overlay.</textarea>
+      </article>
+
+      <article class="v9185Card">
+        <h3>4 · Goals + Requests</h3>
+        <label>Follower goal</label>
+        <input id="followerGoal" type="number" value="1000">
+        <label>Manual subs fallback</label>
+        <input id="subs" type="number" value="0">
+        <label>Sub goal</label>
+        <input id="subGoal" type="number" value="100">
+        <label>Request text</label>
+        <input id="requestText" value="Use !request Artist - Title in Twitch chat">
+        <label>Special message</label>
+        <input id="specialMessage" value="">
+      </article>
+    </div>
+
+    <div class="v9185OneClickBox">
+      <div>
+        <span>ONE BUTTON FLOW</span>
+        <h3>Sync Twitch → Save admin → Publish website + overlay</h3>
+        <p>Use this when you want the channel to update everywhere from the same data.</p>
       </div>
+      <button onclick="djfOneClick()" class="megaButton">ONE CLICK PUBLISH</button>
     </div>
 
-    <pre id="v909Status">V909 Overlay Hub ready. Load current overlay data or choose a preset.</pre>
-  </section>
-
-  <section id="overlayContent" class="panel advancedPanel">
-    <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay output</h2><button onclick="resetOverlayContent()">Insert default boxes</button></div>
-    <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
-    <div class="twoCol">
-      <div><h3>Box 1 · Top left</h3><button onclick="addOverlayItem('box1')">Add Box 1 item</button><div id="box1Editor"></div></div>
-      <div><h3>Box 2 · Top right</h3><button onclick="addOverlayItem('box2')">Add Box 2 item</button><div id="box2Editor"></div></div>
-      <div><h3>Box 3 · Bottom left</h3><button onclick="addOverlayItem('box3')">Add Box 3 item</button><div id="box3Editor"></div></div>
-      <div><h3>Box 4 · Bottom right</h3><div class="previewCard"><b>LOCKED</b><p>Twitch chat med profilbillede og emotes. This box is locked and should not be changed.</p></div></div>
+    <div class="v9185PreviewGrid">
+      <article>
+        <span>Website preview · offline</span>
+        <h3 id="previewWebsiteTitle">DJ FOLSOE</h3>
+        <p id="previewWebsiteSub">Dive into my Twitch world</p>
+        <small id="previewWebsiteNext">Next show · Announced soon</small>
+      </article>
+      <article>
+        <span>Overlay control panel · live</span>
+        <h3 id="previewOverlayTitle">DJ FOLSOE · LIVE SHOW</h3>
+        <p id="previewOverlayStats">Viewers 0 · Followers — · Subs 0/100</p>
+        <small id="previewOverlayTicker">LIVE DJ SHOWS FROM DENMARK</small>
+      </article>
     </div>
-    <button onclick="saveOverlayContent()">Save overlay boxes</button>
+
+    <pre id="statusBox">V918.5 ready. One click controls website + overlay from Twitch + Admin.</pre>
   </section>
 
-  <section id="top20" class="panel">
-    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Add track</button><button onclick="seedTop20()">Insert default Top 20</button></div></div>
-    <p class="note">Controls FOLSOE Top 20 on the website and music boxes in the overlay.</p>
-    <div id="top20Editor"></div>
-    <button onclick="saveRows('top20')">Save Top 20</button>
-  </section>
-
-  
-  <section id="discovery" class="panel advancedPanel">
-    <div class="panelHead"><h2>✨ Dem her har jeg lige opdaget</h2><button onclick="addDiscovery()">Add discovery</button></div>
-    <p class="note">3 ekstra felter til nye tracks/boblere, som vises på forsiden under Top 20.</p>
-    <div id="discoveryEditor"></div>
-    <button onclick="saveDiscovery()">Save discovery picks</button>
-  </section>
-
-
-  <section id="requests" class="panel advancedPanel">
-    <div class="panelHead"><h2>🎧 Request Manager</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
-    <p class="note">Controls the latest song requests from !request. You can approve, reject, pin and delete requests.</p>
-    <div class="formGrid">
-      <div><label>User</label><input id="reqUser" placeholder="Twitch name"></div>
-      <div><label>Request</label><input id="reqText" placeholder="!ønske Artist - Title"></div>
-      <div><label>Language</label><select id="reqLang"><option value="da">DA</option><option value="en">EN</option><option value="de">DE</option></select></div>
-      <div><label>Show</label><input id="reqShow" placeholder="Fredagsbar"></div>
-    </div>
-    <button onclick="addRequest()">Add request</button>
-    <button onclick="saveRequestList()">Save ændringer</button>
-    <div id="requestStatsPreview" class="previewGrid"></div>
-    <div id="requestsManager"></div>
-  </section>
-
-
-  
-  <section id="modsManager" class="panel advancedPanel">
-    <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Add mod</button></div>
-    <p class="note">Enter the Twitch login. The homepage automatically loads profile image, display name and live/offline status.</p>
-    <div id="modsEditor"></div>
-    <button onclick="saveMods()">Save mods</button>
-  </section>
-
-
-  <section id="communityManager" class="panel advancedPanel">
-    <div class="panelHead"><h2>❤️ Community Wall Manager</h2><div><button onclick="addCommunity()">Add community felt</button><button onclick="openApi('/api/community-wall')">Community API</button></div></div>
-    <p class="note">Styrer Community Love på forsiden. Skriv Twitch-navn i User/Login for at hente profilbillede og live-status.</p>
-    <div id="communityEditor"></div>
-    <h3>Community Stats</h3>
-    <div class="formGrid">
-      <div><label>Raids</label><input id="communityRaids" type="number"></div>
-      <div><label>Members</label><input id="communityMembers" type="number"></div>
-      <div><label>Subs fallback</label><input id="communitySubs" type="number"></div>
-      <div><label>Followers fallback</label><input id="communityFollowers" type="number"></div>
-    </div>
-    <button onclick="saveCommunity()">Save community wall</button>
-  </section>
-
-
-  <section id="nextShowManager" class="panel advancedPanel">
-    <div class="panelHead"><h2>📅 Next show</h2></div>
-    <p class="note">Styrer Next show og countdown på forsiden.</p>
-    <div class="formGrid">
-      <div><label>Title</label><input id="nextShowTitle" placeholder="Fredagsbar"></div>
-      <div><label>Date/tid</label><input id="nextShowDateTime" type="datetime-local"></div>
-      <div class="wide"><label>Beskrivelse</label><textarea id="nextShowDescription" rows="3"></textarea></div>
-    </div>
-    <button onclick="saveNextShow()">Save næste show</button>
-  </section>
-
-  <section id="twitch" class="panel advancedPanel">
-    <div class="panelHead"><h2>🟣 Twitch sync</h2><div><button onclick="openApi('/api/twitch-profile')">Profil API</button><button onclick="openApi('/api/homepage')">Homepage API</button></div></div>
-    <p class="note">Kræver Cloudflare secrets: TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL=djfolsoe.</p>
-    <div id="twitchPreview" class="twitchPreview"></div>
-  </section>
-
-<section class="adminPanel" id="showScheduleAdminPanel">
-  <div class="panelHead"><h2>Weekly Schedule Engine</h2><span>Next 10 shows</span></div>
-  <p>Date-driven show schedule. Past shows are automatically hidden from the homepage after date/start time.</p>
-  <div class="adminActions" style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;">
-    <button type="button" onclick="loadShowScheduleAdmin()">Load schedule</button>
-    <button type="button" onclick="addShowScheduleRow()">Add show</button>
-    <button type="button" onclick="saveShowScheduleAdmin()">Save showplan</button>
-  </div>
-  <div id="showScheduleRows"></div>
-</section>
-
+  <details id="advancedPanel" class="legacyAdvanced">
+    <summary>Advanced / Technical tools</summary>
+    <section class="panel">
+      <h2>⚙️ Technical Settings</h2>
+      <p class="note">Only use this when the API URL or token needs to be changed.</p>
+      <div class="v9185SettingsGrid">
+        <label>Cloudflare Worker API base
+          <input id="apiBase" placeholder="https://djfolsoe-tv-api.sunefolsoe.workers.dev">
+        </label>
+        <label>Admin token
+          <input id="advancedToken" type="password" placeholder="ADMIN_TOKEN">
+        </label>
+      </div>
+      <div class="v9185ButtonRow">
+        <button onclick="djfSaveSettings()">Save settings</button>
+        <button onclick="djfTestApi()">Test API</button>
+        <button onclick="djfOpenApi('/api/health')">Open health</button>
+        <button onclick="djfOpenApi('/api/unified-control')">Open unified data</button>
+      </div>
+      <pre id="advancedStatus">Advanced hidden by default. Old version-modules are no longer part of daily control.</pre>
+    </section>
   </details>
 </main>
 
-<script src="assets/js/admin.js?v=8162017"></script>
-
-<div id="djfNullSafeFallbacks" style="display:none">
-<div id="themeGrid"></div>
-<div id="themePreview"></div>
-<div id="topTickerEditor"></div>
-<div id="bottomTickerEditor"></div>
-<div id="newsEditor"></div>
-<div id="showsEditor"></div>
-<div id="showVisualsPreview"></div>
-<div id="showVisualsEditor"></div>
-<div id="top20Editor"></div>
-<div id="discoveryEditor"></div>
-<div id="requestsEditor"></div>
-<div id="requestsPreview"></div>
-<div id="requestStats"></div>
-<div id="modsEditor"></div>
-<div id="communityEditor"></div>
-<div id="nextShowEditor"></div>
-<div id="overlayContentEditor"></div>
-<div id="seoEditor"></div>
-<div id="status"></div>
-<div id="adminStatus"></div>
-<div id="homepagePreview"></div>
-<div id="twitchPreview"></div>
-<div id="profilePreview"></div>
-<div id="chartGrid"></div>
-<div id="discoveryGrid"></div>
-<div id="communityWallEditor"></div>
-<div id="modTeamEditor"></div>
-</div>
-<script src="assets/js/show-schedule-admin.js?v=8162013"></script>
+<script src="assets/js/admin.js"></script>
 </body>
 </html>

@@ -145,7 +145,7 @@ function renderPortal(){
   $('aboutText').textContent = homepage.aboutText || $('aboutText').textContent;
   const chart = homepage.top20 || [];
   $('chartList').innerHTML = chart.slice(0,10).map((x,i)=>`<div class="chartRow"><i>#${x.rank||i+1}</i><strong>${escapeHtml(x.artist||'Artist')} - ${escapeHtml(x.title||'Title')}</strong><em>${escapeHtml(x.status||'')}</em></div>`).join('');
-  const wall = community.wall || [{title:'Followers',text:String(community.followers||'Growing every stream')},{title:'Subs',text:`${community.subs||0}/${community.subGoal||100}`},{title:'Requests',text:'Use !request in chat'},{title:'Chat',text:'Box 4 remains Twitch chat'}];
+  const wall = community.wall || [{title:'Followers',text:String(community.followers||'Growing every stream')},{title:'Subs',text:`${community.subs||0}/${community.subGoal||100}`},{title:'Requests',text:'Use !request in chat'},{title:'Twitch chat',text:'Chat and community are shown in the live overlay.'}];
   $('communityWall').innerHTML = wall.map(w=>`<div><span>${escapeHtml(w.kicker||'COMMUNITY')}</span><b>${escapeHtml(w.title||'')}</b><p>${escapeHtml(w.text||'')}</p></div>`).join('');
   $('communityText').textContent = community.text || $('communityText').textContent;
 }

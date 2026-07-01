@@ -1,5 +1,5 @@
 
-const VERSION = "DJ FOLSOE NETWORK V916 HEALTH CHECK";
+const VERSION = "DJ FOLSOE NETWORK V918.5 ONE BUTTON CONTROL CENTER";
 const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816.20.1 COMMUNITY WALL PATCH", "activeTheme": "weekend", "language": "en", "twitchChannel": "djfolsoe", "themes": {"fredagsbar": {"emoji": "🍺", "title": "FREDAGSBAR", "desc": "Weekend starts here · live from Denmark", "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166", "bg": "linear-gradient(135deg,#341007,#22051e)"}, "popup": {"emoji": "⚡", "title": "POPUP", "desc": "You never know when DJ FOLSOE goes live", "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff", "bg": "linear-gradient(135deg,#061c2a,#2b0631)"}, "trance": {"emoji": "💙", "title": "TRANCE TUESDAY", "desc": "Uplifting energy · goosebumps may occur", "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff", "bg": "linear-gradient(135deg,#031525,#170935)"}, "retro": {"emoji": "🕹️", "title": "RETRO HITS", "desc": "Classics that refuse to retire", "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166", "bg": "linear-gradient(135deg,#230821,#15112a)"}, "eurodance": {"emoji": "💛", "title": "EURODANCE", "desc": "Big beats · big hooks · 90s/00s survived", "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600", "bg": "linear-gradient(135deg,#031b2a,#081d52)"}, "morning": {"emoji": "☀️", "title": "GOOD MORNING TWITCH", "desc": "Coffee, music and good vibes", "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8", "bg": "linear-gradient(135deg,#2b1300,#1c1021)"}, "summer": {"emoji": "🌴", "title": "SUMMER BEATS", "desc": "Summer 2026 · sunshine and bangers", "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a", "bg": "linear-gradient(135deg,#052b2a,#372105)"}, "weekend": {"emoji": "🎉", "title": "WEEKEND VIBES", "desc": "Maximum music and community", "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff", "bg": "linear-gradient(135deg,#23102c,#061b2b)"}}, "station": {"followers": 870, "followersGoal": 1000, "subs": 0, "viewers": 0, "category": "Music"}, "requestSettings": {"enabled":true,"keep":100,"visible":3},
     "seo": {"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musicstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musicwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]},
     "modTeam": [{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}],
@@ -715,7 +715,7 @@ export default {
       if (path === "/api/unified-control") {
         if (request.method === "GET") {
           const tw = await twitchProfile(env, core).catch(()=>({ok:false}));
-          return json({ok:true,version:"V918 Unified Control Center",core,twitch:tw,rule:"Twitch + Admin feeds website offline and overlay live",locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]});
+          return json({ok:true,version:"V918.5 One Button Control Center",core,twitch:tw,rule:"Twitch + Admin feeds website offline and overlay live",locked:["overlay graphics/layout","Twitch chat protected","single logo top-left","V901 burst timing fix"]});
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
         if (request.method !== "POST") return json({error:"Method not allowed"},405);
@@ -724,9 +724,9 @@ export default {
         for (const key of allowed) if (Object.prototype.hasOwnProperty.call(body,key)) core[key] = body[key];
         core.language = "en";
         core.updatedAt = new Date().toISOString();
-        core.unifiedControl = {version:"V918 Unified Control Center",updatedAt:core.updatedAt,source:"admin",outputs:["website","overlay"]};
+        core.unifiedControl = {version:"V918.5 One Button Control Center",updatedAt:core.updatedAt,source:"admin",outputs:["website","overlay"]};
         await putCore(env, core);
-        return json({ok:true,version:"V918 Unified Control Center",message:"Unified data published to website and overlay",core});
+        return json({ok:true,version:"V918.5 One Button Control Center",message:"Unified data published to website and overlay",core});
       }
       if (path === "/api/broadcast-hub") {
         if (request.method === "GET") {
@@ -1114,20 +1114,18 @@ export default {
         const theme = (core.themes || {})[themeKey] || (core.themeLibrary || {})[themeKey] || null;
         const homepageData = core.homepage || {};
         const overlayControl = core.overlayHub?.controlPanel || core.overlayControlPanel || {};
-        const overlayData = core.overlayContent || {};
-        const box1 = overlayData.box1 || {};
-        const box2 = overlayData.box2 || {};
-        const box3 = overlayData.box3 || {};
         const tickerItems = [].concat(core.topTickerItems || [], core.bottomTickerItems || []);
+        const heroTitle = homepageData?.hero?.title || homepageData.heroHeadline || core.broadcast?.hero?.headline || core.broadcast?.streamTitle || "";
+        const overlayTitle = overlayControl.title || core.overlayHub?.activeShow || core.broadcast?.activeShow || "";
         if (!themeKey) warnings.push("No active theme selected.");
         if (theme && !String(theme.bgImage || theme.background || theme.backgroundPath || "").trim()) warnings.push("Active theme has no background path.");
         if (!theme) warnings.push("Active theme is not found in theme library.");
-        if (!String(homepageData.heroHeadline || core.broadcast?.hero?.headline || core.broadcast?.streamTitle || "").trim()) warnings.push("Website hero headline is empty.");
-        if (!String(overlayControl.title || core.overlayHub?.activeShow || core.broadcast?.activeShow || "").trim()) warnings.push("Overlay Control Panel title/status is empty.");
-        if (!tickerItems.length) warnings.push("No ticker messages found.");
+        if (!String(heroTitle).trim()) warnings.push("Website hero headline is empty.");
+        if (!String(overlayTitle).trim()) warnings.push("Unified overlay control panel title/status is empty.");
+        if (!tickerItems.length && !(homepageData.ticker || []).length) warnings.push("No ticker messages found.");
         checks.api = {state:"ok",label:"OK",detail:"Worker online · " + VERSION};
-        checks.website = {state:String(homepageData.heroHeadline || core.broadcast?.streamTitle || "").trim()?"ok":"warn",label:String(homepageData.heroHeadline || core.broadcast?.streamTitle || "").trim()?"OK":"WARNING",detail:"Homepage / website portal data checked"};
-        checks.overlay = {state:(String(box1.headline || box1.title || "").trim() && String(box2.headline || box2.title || "").trim() && String(box3.headline || box3.title || "").trim())?"ok":"warn",label:(String(box1.headline || box1.title || "").trim() && String(box2.headline || box2.title || "").trim() && String(box3.headline || box3.title || "").trim())?"OK":"WARNING",detail:"Overlay Overlay Control Panel checked · Twitch chat locked to Twitch chat"};
+        checks.website = {state:String(heroTitle).trim()?"ok":"warn",label:String(heroTitle).trim()?"OK":"WARNING",detail:"Homepage / website portal data checked"};
+        checks.overlay = {state:String(overlayTitle).trim()?"ok":"warn",label:String(overlayTitle).trim()?"OK":"WARNING",detail:"Unified overlay control panel checked · Twitch chat protected"};
         checks.theme = {state:(theme && String(theme.bgImage || theme.background || theme.backgroundPath || "").trim())?"ok":"warn",label:(theme && String(theme.bgImage || theme.background || theme.backgroundPath || "").trim())?"OK":"WARNING",detail:"Active theme: " + themeKey};
         checks.publish = {state:core.updatedAt?"ok":"warn",label:core.updatedAt?"OK":"CHECK",detail:core.updatedAt || "No updatedAt timestamp found"};
         checks.locks = {state:"ok",label:"PROTECTED",detail:"Overlay graphics/layout · Twitch chat · single logo · V901 timing fix"};
