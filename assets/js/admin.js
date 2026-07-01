@@ -1338,3 +1338,116 @@ async function v911PublishNow(){
 }
 const V911_originalLoadAll=loadAll;loadAll=async function(){await V911_originalLoadAll();setTimeout(v911RefreshDaily,250);};
 setTimeout(()=>{if(document.getElementById('v911DailyControl')) v911RefreshDaily();},1800);
+
+
+/* =========================
+   V912 CONTENT STUDIO
+   ========================= */
+let v912ContentStudio = null;
+function v912Status(msg){const el=document.getElementById('v912Status'); if(el) el.textContent=msg;}
+function v912Set(id,v){const el=document.getElementById(id); if(el) el.value=v||'';}
+function v912Get(id){const el=document.getElementById(id); return el?String(el.value||'').trim():'';}
+function v912DefaultStudio(){
+  return {
+    version:'V912 Content Studio',
+    hero:{headline:'Live Music TV from Denmark',message:'DJ FOLSOE brings Twitch, music requests, Top 20 and community together in one live broadcast universe.',nextBroadcast:'Next broadcast announced soon'},
+    goals:{followers:'870 / 1000 followers',subs:'0 / 25 subs',requests:'Requests open · !request'},
+    ticker:{top:'DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK',bottom:'LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · JOIN THE CHAT'},
+    news:[
+      {type:'Broadcast update',title:'DJ FOLSOE LIVE is ready',body:'Follow the channel and join the chat for the next show.'},
+      {type:'Community',title:'Requests are part of the show',body:'Use !request in chat when requests are open.'}
+    ],
+    shows:[
+      {title:'Good Morning Twitch',time:'Morning',body:'Coffee, good vibes and fresh music.'},
+      {title:'Trance Tuesday',time:'Tuesday',body:'Uplifting trance and big melodies.'},
+      {title:'Fredagsbar',time:'Friday',body:'Weekend energy and party tracks.'}
+    ],
+    top20: (typeof top20Items!=='undefined' && top20Items && top20Items.length ? top20Items : TOP20_SEED || []).slice(0,20),
+    overlay:{
+      box1:{headline:'LIVE SHOW',body:'Broadcast Cloud online'},
+      box2:{headline:'DJ FOLSOE LIVE',body:'Active show and theme'},
+      box3:{headline:'Requests open',body:'!request in chat'}
+    },
+    updatedAt:new Date().toISOString()
+  };
+}
+function v912RenderList(kind,items){
+  const host=document.getElementById(kind==='news'?'v912NewsEditor':'v912ShowsEditor'); if(!host)return;
+  host.innerHTML=(items||[]).map((it,i)=>`<div class="v912EditRow">
+    <div><input data-v912="${kind}-${i}-title" value="${DJF_escapeHtml(it.title||'')}" placeholder="Title"><input data-v912="${kind}-${i}-meta" value="${DJF_escapeHtml(it.type||it.time||'')}" placeholder="Type / time"></div>
+    <textarea rows="3" data-v912="${kind}-${i}-body" placeholder="Body">${DJF_escapeHtml(it.body||'')}</textarea>
+    <button onclick="v912RemoveItem('${kind}',${i})">×</button>
+  </div>`).join('');
+}
+function v912ReadList(kind){
+  const arr=(v912ContentStudio?.[kind]||[]).map((old,i)=>{
+    const title=document.querySelector(`[data-v912="${kind}-${i}-title"]`)?.value||'';
+    const meta=document.querySelector(`[data-v912="${kind}-${i}-meta"]`)?.value||'';
+    const body=document.querySelector(`[data-v912="${kind}-${i}-body"]`)?.value||'';
+    return kind==='news'?{active:true,type:meta||'News',title,body,theme:'all',priority:i+1}:{key:(title||'show').toLowerCase().replace(/[^a-z0-9]+/g,'-'),title,time:meta,body,active:true,priority:i+1};
+  }).filter(x=>x.title||x.body);
+  return arr;
+}
+function v912Top20ToText(items){return (items||[]).map((x,i)=>`${x.rank||i+1}; ${x.artist||''}; ${x.title||''}; ${x.genre||''}; ${x.points||''}`).join('\n');}
+function v912ParseTop20(txt){return String(txt||'').split(/\n+/).map((line,i)=>{
+  const p=line.split(';').map(s=>s.trim()); if(!p[1]&&!p[2])return null;
+  return {rank:Number(p[0])||i+1,artist:p[1]||'',title:p[2]||'',genre:p[3]||'Music',points:Number(p[4])||Math.max(100-i,1)};
+}).filter(Boolean).slice(0,20);}
+function v912FillForm(data){
+  v912ContentStudio=data||v912DefaultStudio(); const d=v912ContentStudio;
+  v912Set('v912HeroHeadline',d.hero?.headline); v912Set('v912HeroMessage',d.hero?.message); v912Set('v912NextBroadcast',d.hero?.nextBroadcast);
+  v912Set('v912FollowerGoal',d.goals?.followers); v912Set('v912SubGoal',d.goals?.subs); v912Set('v912RequestMessage',d.goals?.requests);
+  v912Set('v912TopTicker',d.ticker?.top); v912Set('v912BottomTicker',d.ticker?.bottom);
+  v912Set('v912Top20Text',v912Top20ToText(d.top20));
+  v912Set('v912Box1Headline',d.overlay?.box1?.headline); v912Set('v912Box1Body',d.overlay?.box1?.body);
+  v912Set('v912Box2Headline',d.overlay?.box2?.headline); v912Set('v912Box2Body',d.overlay?.box2?.body);
+  v912Set('v912Box3Headline',d.overlay?.box3?.headline); v912Set('v912Box3Body',d.overlay?.box3?.body);
+  v912RenderList('news',d.news||[]); v912RenderList('shows',d.shows||[]);
+}
+function v912ReadForm(){
+  if(!v912ContentStudio)v912ContentStudio=v912DefaultStudio();
+  v912ContentStudio.hero={headline:v912Get('v912HeroHeadline'),message:v912Get('v912HeroMessage'),nextBroadcast:v912Get('v912NextBroadcast')};
+  v912ContentStudio.goals={followers:v912Get('v912FollowerGoal'),subs:v912Get('v912SubGoal'),requests:v912Get('v912RequestMessage')};
+  v912ContentStudio.ticker={top:v912Get('v912TopTicker'),bottom:v912Get('v912BottomTicker')};
+  v912ContentStudio.news=v912ReadList('news'); v912ContentStudio.shows=v912ReadList('shows');
+  v912ContentStudio.top20=v912ParseTop20(v912Get('v912Top20Text'));
+  v912ContentStudio.overlay={box1:{headline:v912Get('v912Box1Headline'),body:v912Get('v912Box1Body')},box2:{headline:v912Get('v912Box2Headline'),body:v912Get('v912Box2Body')},box3:{headline:v912Get('v912Box3Headline'),body:v912Get('v912Box3Body')}};
+  v912ContentStudio.updatedAt=new Date().toISOString();
+  return v912ContentStudio;
+}
+async function v912LoadStudio(){
+  try{const r=await api('/api/content-studio'); v912FillForm(r.contentStudio||v912DefaultStudio()); v912Status('✅ Content Studio loaded.');}
+  catch(e){v912FillForm(v912DefaultStudio()); v912Status('⚠️ Loaded local defaults: '+e.message);}
+}
+function v912SaveDraft(){const d=v912ReadForm(); localStorage.setItem('DJF_V912_CONTENT_DRAFT',JSON.stringify(d)); v912Status('✅ Draft saved in this browser.');}
+function v912LoadDraft(){try{const d=JSON.parse(localStorage.getItem('DJF_V912_CONTENT_DRAFT')||'null'); if(d){v912FillForm(d); v912Status('✅ Draft loaded.');}else v912Status('No draft saved yet.');}catch(e){v912Status('❌ Draft could not be loaded.');}}
+function v912AddNews(){if(!v912ContentStudio)v912ContentStudio=v912DefaultStudio();v912ContentStudio.news=v912ReadList('news');v912ContentStudio.news.push({type:'News',title:'New update',body:'Write the update here.'});v912RenderList('news',v912ContentStudio.news);}
+function v912AddShow(){if(!v912ContentStudio)v912ContentStudio=v912DefaultStudio();v912ContentStudio.shows=v912ReadList('shows');v912ContentStudio.shows.push({title:'New show',time:'Time',body:'Show description.'});v912RenderList('shows',v912ContentStudio.shows);}
+function v912RemoveItem(kind,i){if(!v912ContentStudio)v912ContentStudio=v912DefaultStudio();v912ContentStudio[kind]=v912ReadList(kind);v912ContentStudio[kind].splice(i,1);v912RenderList(kind,v912ContentStudio[kind]);}
+function v912ApplyLocally(){
+  const d=v912ReadForm();
+  if(typeof DJF_value==='function'){DJF_value('quickHeadline',d.hero.headline);DJF_value('quickMessage',d.hero.message);DJF_value('v911HeroHeadline',d.hero.headline);DJF_value('v911HeroMessage',d.hero.message);DJF_value('v911Ticker',d.ticker.bottom);}
+  if(typeof topItems!=='undefined') topItems=[{id:'v912-top-ticker',active:true,theme:'all',text:d.ticker.top,priority:1}];
+  if(typeof bottomItems!=='undefined') bottomItems=[{id:'v912-bottom-ticker',active:true,theme:'all',text:d.ticker.bottom,priority:1}];
+  if(typeof newsItems!=='undefined') newsItems=d.news;
+  if(typeof showsItems!=='undefined') showsItems=d.shows;
+  if(typeof top20Items!=='undefined') top20Items=d.top20;
+  if(typeof overlayContent!=='undefined'){
+    overlayContent=overlayContent||{};
+    overlayContent.box1=[{active:true,label:'BROADCAST',headline:d.overlay.box1.headline,body:d.overlay.box1.body,icon:'📡',priority:1}];
+    overlayContent.box2=[{active:true,label:'ON AIR',headline:d.overlay.box2.headline,body:d.overlay.box2.body,icon:'📺',priority:1}];
+    overlayContent.box3=[{active:true,label:'COMMUNITY',headline:d.overlay.box3.headline,body:d.overlay.box3.body,icon:'🎧',priority:1}];
+    overlayContent.box4={locked:'twitch-chat'};
+  }
+  v912Status('✅ Applied locally. Use Publish Live to send it to website and overlay.');
+}
+async function v912PublishLive(){
+  try{
+    v912ApplyLocally(); const d=v912ReadForm();
+    const r=await api('/api/content-studio',{method:'POST',body:JSON.stringify(d)});
+    if(typeof loadAll==='function') await loadAll();
+    v912Status('✅ V912 published live. Website, news, Top 20, goals, ticker and overlay messages are synced.');
+  }catch(e){v912Status('❌ V912 publish failed: '+e.message);}
+}
+const V912_originalLoadAll=loadAll;loadAll=async function(){await V912_originalLoadAll();setTimeout(()=>{if(document.getElementById('v912ContentStudio')&&!v912ContentStudio)v912LoadStudio();},400);};
+setTimeout(()=>{if(document.getElementById('v912ContentStudio'))v912LoadStudio();},2000);

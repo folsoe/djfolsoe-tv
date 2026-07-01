@@ -1,5 +1,5 @@
 
-const VERSION = "DJ FOLSOE NETWORK V907 THEME MANAGER 1.0";
+const VERSION = "DJ FOLSOE NETWORK V912 CONTENT STUDIO";
 const DEFAULT_CORE = {"version": "DJ FOLSOE NETWORK V816.20.1 COMMUNITY WALL PATCH", "activeTheme": "weekend", "language": "en", "twitchChannel": "djfolsoe", "themes": {"fredagsbar": {"emoji": "🍺", "title": "FREDAGSBAR", "desc": "Weekend starts here · live from Denmark", "primary": "#ffb000", "secondary": "#ff2f78", "accent": "#ffd166", "bg": "linear-gradient(135deg,#341007,#22051e)"}, "popup": {"emoji": "⚡", "title": "POPUP", "desc": "You never know when DJ FOLSOE goes live", "primary": "#00d4ff", "secondary": "#ff00ea", "accent": "#ffffff", "bg": "linear-gradient(135deg,#061c2a,#2b0631)"}, "trance": {"emoji": "💙", "title": "TRANCE TUESDAY", "desc": "Uplifting energy · goosebumps may occur", "primary": "#00e5ff", "secondary": "#7b2fff", "accent": "#b8f7ff", "bg": "linear-gradient(135deg,#031525,#170935)"}, "retro": {"emoji": "🕹️", "title": "RETRO HITS", "desc": "Classics that refuse to retire", "primary": "#ff2bd6", "secondary": "#7b2fff", "accent": "#ffd166", "bg": "linear-gradient(135deg,#230821,#15112a)"}, "eurodance": {"emoji": "💛", "title": "EURODANCE", "desc": "Big beats · big hooks · 90s/00s survived", "primary": "#00f0ff", "secondary": "#005dff", "accent": "#ffe600", "bg": "linear-gradient(135deg,#031b2a,#081d52)"}, "morning": {"emoji": "☀️", "title": "GOOD MORNING TWITCH", "desc": "Coffee, music and good vibes", "primary": "#ffb000", "secondary": "#ff5a00", "accent": "#fff1a8", "bg": "linear-gradient(135deg,#2b1300,#1c1021)"}, "summer": {"emoji": "🌴", "title": "SUMMER BEATS", "desc": "Summer 2026 · sunshine and bangers", "primary": "#00f5d4", "secondary": "#ffb703", "accent": "#fff08a", "bg": "linear-gradient(135deg,#052b2a,#372105)"}, "weekend": {"emoji": "🎉", "title": "WEEKEND VIBES", "desc": "Maximum music and community", "primary": "#ffd166", "secondary": "#ff4d6d", "accent": "#00d4ff", "bg": "linear-gradient(135deg,#23102c,#061b2b)"}}, "station": {"followers": 870, "followersGoal": 1000, "subs": 0, "viewers": 0, "category": "Music"}, "requestSettings": {"enabled":true,"keep":100,"visible":3},
     "seo": {"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musicstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musicwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]},
     "modTeam": [{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}],
@@ -693,7 +693,7 @@ export default {
         if (request.method !== "POST") return json({error:"Method not allowed"},405);
         const body = await request.json().catch(()=>({}));
         const patch = body.core || body;
-        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast","overlayHub","broadcastSystem"];
+        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast","overlayHub","broadcastSystem","contentStudio"];
         for (const key of allowed) if (Object.prototype.hasOwnProperty.call(patch,key)) core[key] = patch[key];
         core.language = "en";
         await putCore(env, core);
@@ -838,6 +838,47 @@ export default {
         return json({ok:true,items:core.showVisuals});
       }
 
+
+      if (path === "/api/content-studio") {
+        if (request.method === "GET") {
+          const studio = core.contentStudio || {
+            version:"V912 Content Studio",
+            hero:{headline:core.homepage?.heroHeadline || "Live Music TV from Denmark",message:core.homepage?.heroMessage || "Modern Music TV on Twitch.",nextBroadcast:core.nextShow?.title || "Next broadcast announced soon"},
+            goals:{followers:String(core.station?.followers || 870)+" / "+String(core.station?.followersGoal || 1000)+" followers",subs:String(core.station?.subs || 0)+" / 25 subs",requests:"Requests open · !request"},
+            ticker:{top:(core.topTickerItems||[])[0]?.text || "DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK",bottom:(core.bottomTickerItems||[])[0]?.text || "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"},
+            news:core.homepageNews || [],
+            shows:core.shows || [],
+            top20:core.top20 || [],
+            overlay:{box1:{headline:(core.overlayContent?.box1||[])[0]?.headline || "LIVE SHOW",body:(core.overlayContent?.box1||[])[0]?.body || "Broadcast Cloud online"},box2:{headline:(core.overlayContent?.box2||[])[0]?.headline || "DJ FOLSOE LIVE",body:(core.overlayContent?.box2||[])[0]?.body || "Active show and theme"},box3:{headline:(core.overlayContent?.box3||[])[0]?.headline || "Requests open",body:(core.overlayContent?.box3||[])[0]?.body || "!request in chat"}},
+            updatedAt:core.updatedAt || new Date().toISOString()
+          };
+          return json({ok:true,version:"V912 Content Studio",contentStudio:studio,locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]});
+        }
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        const now = new Date().toISOString();
+        const studio = Object.assign({version:"V912 Content Studio"}, body, {updatedAt:now});
+        core.contentStudio = studio;
+        core.homepage = Object.assign({}, core.homepage||{}, {heroHeadline:studio.hero?.headline || "Live Music TV from Denmark", heroMessage:studio.hero?.message || "Modern Music TV on Twitch.", nextBroadcast:studio.hero?.nextBroadcast || "", updatedAt:now});
+        if (Array.isArray(studio.news)) core.homepageNews = studio.news.map((x,i)=>Object.assign({active:true,theme:"all",priority:i+1},x));
+        if (Array.isArray(studio.shows)) core.shows = studio.shows.map((x,i)=>Object.assign({active:true,priority:i+1},x));
+        if (Array.isArray(studio.top20)) core.top20 = studio.top20.slice(0,20);
+        core.station = Object.assign({}, core.station||{}, {followerGoalText:studio.goals?.followers || "", subGoalText:studio.goals?.subs || "", requestMessage:studio.goals?.requests || ""});
+        core.topTickerItems = [{id:"v912-content-top",active:true,theme:"all",text:studio.ticker?.top || "DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK",priority:1}];
+        core.bottomTickerItems = [{id:"v912-content-bottom",active:true,theme:"all",text:studio.ticker?.bottom || "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE",priority:1}];
+        core.overlayContent = core.overlayContent || {};
+        core.overlayContent.box1 = [{active:true,label:"BROADCAST",headline:studio.overlay?.box1?.headline || "LIVE SHOW",body:studio.overlay?.box1?.body || "Broadcast Cloud online",icon:"📡",priority:1}];
+        core.overlayContent.box2 = [{active:true,label:"ON AIR",headline:studio.overlay?.box2?.headline || "DJ FOLSOE LIVE",body:studio.overlay?.box2?.body || "Active show and theme",icon:"📺",priority:1}];
+        core.overlayContent.box3 = [{active:true,label:"COMMUNITY",headline:studio.overlay?.box3?.headline || "Requests open",body:studio.overlay?.box3?.body || "!request in chat",icon:"🎧",priority:1}];
+        core.overlayContent.box4 = {locked:"twitch-chat"};
+        core.overlayHub = Object.assign({}, core.overlayHub||{}, {version:"V912 from Content Studio",ticker:core.bottomTickerItems[0].text,overlayContent:core.overlayContent,updatedAt:now});
+        core.broadcastSystem = Object.assign({}, core.broadcastSystem||{}, {version:"V912 Content Studio Sync",hero:{headline:core.homepage.heroHeadline,message:core.homepage.heroMessage},ticker:core.bottomTickerItems[0].text,overlayContent:core.overlayContent,updatedAt:now});
+        core.language = "en";
+        core.updatedAt = now;
+        await putCore(env, core);
+        return json({ok:true,version:"V912 Content Studio",message:"Content Studio published",contentStudio:studio});
+      }
 
       if (path === "/api/broadcast-system") {
         if (request.method === "GET") {

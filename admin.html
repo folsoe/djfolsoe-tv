@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V911 Daily Control Room</title>
+  <title>DJ FOLSOE V912 Content Studio</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V911</span>
-    <h1>Daily Control Room · One Tap Broadcast Admin</h1>
-    <p>Daily control room for folsoetv.dk and overlay output. Use the big buttons first; open Advanced only when needed.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V912</span>
+    <h1>Daily Control Room · Content Studio</h1>
+    <p>Daily control room plus Content Studio for folsoetv.dk, news, Top 20, goals, ticker and overlay messages.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -29,6 +29,7 @@
 
 <nav class="adminTabs">
   <button onclick="jump('v911DailyControl')">🎛️ Daily Control</button>
+  <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
   <button onclick="jump('oneclick')">🚀 One click</button>
   <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
@@ -98,6 +99,77 @@
     <pre id="v911Status">V911 ready. Choose a mode or update today’s text.</pre>
   </section>
 
+
+
+  <section id="v912ContentStudio" class="panel v912ContentStudio">
+    <div class="panelHead">
+      <h2>✍️ V912 · Content Studio</h2>
+      <div>
+        <button onclick="v912LoadStudio()">Load content</button>
+        <button onclick="v912SaveDraft()">Save draft</button>
+        <button class="bigPublish" onclick="v912PublishLive()">PUBLISH LIVE</button>
+      </div>
+    </div>
+    <p class="note">Edit the visible content from one place. Save Draft keeps your work in the browser. Publish Live sends website content, news, Top 20, goals, ticker and overlay messages to the Central Data Engine.</p>
+
+    <div class="v912StudioGrid">
+      <div class="v912StudioCard wide">
+        <h3>Frontpage Hero</h3>
+        <label>Hero headline</label><input id="v912HeroHeadline" placeholder="Live Music TV from Denmark">
+        <label>Hero message</label><textarea id="v912HeroMessage" rows="4" placeholder="Main frontpage text"></textarea>
+        <label>Next broadcast</label><input id="v912NextBroadcast" placeholder="Trance Tuesday · 18:30">
+      </div>
+      <div class="v912StudioCard">
+        <h3>Community Goals</h3>
+        <label>Follower goal</label><input id="v912FollowerGoal" placeholder="870 / 1000 followers">
+        <label>Sub goal</label><input id="v912SubGoal" placeholder="0 / 25 subs">
+        <label>Request message</label><input id="v912RequestMessage" placeholder="Requests open · !request">
+      </div>
+      <div class="v912StudioCard">
+        <h3>Ticker</h3>
+        <label>Top ticker</label><textarea id="v912TopTicker" rows="3" placeholder="Short message at the top"></textarea>
+        <label>Bottom ticker</label><textarea id="v912BottomTicker" rows="3" placeholder="Main running ticker"></textarea>
+      </div>
+    </div>
+
+    <div class="v912StudioGrid">
+      <div class="v912StudioCard wide">
+        <h3>News & Updates</h3>
+        <div id="v912NewsEditor" class="v912ListEditor"></div>
+        <button onclick="v912AddNews()">Add news item</button>
+      </div>
+      <div class="v912StudioCard wide">
+        <h3>Featured Shows</h3>
+        <div id="v912ShowsEditor" class="v912ListEditor"></div>
+        <button onclick="v912AddShow()">Add show</button>
+      </div>
+    </div>
+
+    <div class="v912StudioGrid">
+      <div class="v912StudioCard wide">
+        <h3>Top 20 Quick Editor</h3>
+        <textarea id="v912Top20Text" rows="12" placeholder="1; Artist; Title; Genre; Points"></textarea>
+        <p class="miniNote">Format per line: rank; artist; title; genre; points</p>
+      </div>
+      <div class="v912StudioCard wide">
+        <h3>Overlay Messages</h3>
+        <label>Box 1 headline</label><input id="v912Box1Headline" placeholder="LIVE SHOW">
+        <label>Box 1 body</label><input id="v912Box1Body" placeholder="Broadcast Cloud online">
+        <label>Box 2 headline</label><input id="v912Box2Headline" placeholder="DJ FOLSOE LIVE">
+        <label>Box 2 body</label><input id="v912Box2Body" placeholder="Active show and theme">
+        <label>Box 3 headline</label><input id="v912Box3Headline" placeholder="Requests open">
+        <label>Box 3 body</label><input id="v912Box3Body" placeholder="!request in chat">
+      </div>
+    </div>
+
+    <div class="v912ActionBar">
+      <button onclick="v912ApplyLocally()">Apply locally</button>
+      <button onclick="v912SaveDraft()">Save Draft</button>
+      <button onclick="v912PublishLive()">Publish Live</button>
+      <button onclick="v912LoadDraft()">Load Draft</button>
+    </div>
+    <pre id="v912Status">V912 Content Studio ready.</pre>
+  </section>
 
   <section id="oneclick" class="panel oneClickPanel">
     <div class="panelHead"><h2>🚀 One Button Control</h2><div><button class="bigPublish" onclick="publishEverything()">PUBLISH EVERYTHING</button></div></div>

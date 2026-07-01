@@ -1,0 +1,62 @@
+{
+  "version": "V912 Content Studio",
+  "hero": {
+    "headline": "Live Music TV from Denmark",
+    "message": "DJ FOLSOE brings Twitch, music requests, Top 20 and community together in one live broadcast universe.",
+    "nextBroadcast": "Next broadcast announced soon"
+  },
+  "goals": {
+    "followers": "870 / 1000 followers",
+    "subs": "0 / 25 subs",
+    "requests": "Requests open · !request"
+  },
+  "ticker": {
+    "top": "DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK",
+    "bottom": "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · JOIN THE CHAT"
+  },
+  "news": [
+    {
+      "type": "Broadcast update",
+      "title": "DJ FOLSOE LIVE is ready",
+      "body": "Follow the channel and join the chat for the next show."
+    },
+    {
+      "type": "Community",
+      "title": "Requests are part of the show",
+      "body": "Use !request in chat when requests are open."
+    }
+  ],
+  "shows": [
+    {
+      "title": "Good Morning Twitch",
+      "time": "Morning",
+      "body": "Coffee, good vibes and fresh music."
+    },
+    {
+      "title": "Trance Tuesday",
+      "time": "Tuesday",
+      "body": "Uplifting trance and big melodies."
+    },
+    {
+      "title": "Fredagsbar",
+      "time": "Friday",
+      "body": "Weekend energy and party tracks."
+    }
+  ],
+  "top20": [],
+  "overlay": {
+    "box1": {
+      "headline": "LIVE SHOW",
+      "body": "Broadcast Cloud online"
+    },
+    "box2": {
+      "headline": "DJ FOLSOE LIVE",
+      "body": "Active show and theme"
+    },
+    "box3": {
+      "headline": "Requests open",
+      "body": "!request in chat"
+    }
+  },
+  "updatedAt": "2026-07-01T00:00:00.000Z"
+}
