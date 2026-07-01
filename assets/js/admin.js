@@ -1054,9 +1054,10 @@ publishEverything = async function(){
 /* DJ FOLSOE NETWORK V908 · Website 2.0 Music TV Portal */
 const V908_DEFAULT_HOMEPAGE = {
   version:'V908 Website 2.0',
-  hero:{eyebrow:'DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK',title:'DJ FOLSOE LIVE',subtitle:'Modern Twitch Music TV anno 2026',text:'Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.',background:'themes/weekend.png'},
+  hero:{eyebrow:'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK',title:'DJ FOLSOE',subtitle:'Dive into my Twitch world',text:'Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.',background:'themes/weekend.png'},
   ticker:['LIVE DJ SHOWS FROM DENMARK','REQUEST A SONG IN TWITCH CHAT','FOLSOE TOP 20 · WEEKLY MUSIC CHART','TRANCE · EURODANCE · RETRO · FREDAGSBAR · POPUP'],
-  nextShow:{title:'Next DJ FOLSOE broadcast',datetime:'',timeLabel:'Announced soon',theme:'Music TV',description:'The next show is controlled from admin and appears here automatically.'},
+  nextShow:{title:'Next DJ FOLSOE Broadcast',datetime:'',timeLabel:'Announced soon',theme:'Music TV',description:'The next show is controlled from admin and appears here automatically.'},
+  sectionTitles:{nextKicker:'NEXT SHOW',nextTitle:'Next DJ FOLSOE Broadcast',showsKicker:'FEATURED SHOWS',showsTitle:'Your favorite show',aboutKicker:'DISCOVER DJ FOLSOE',aboutTitle:'Music TV, Twitch and Danish DJ energy'},
   featuredShows:[
     {title:'Good Morning Twitch',time:'Morning',description:'Bright morning mood, coffee, chat and fresh music.',theme:'morning',color:'#ffd66b'},
     {title:'Trance Tuesday',time:'Tuesday',description:'Melodic trance, energy and emotional peak-time sound.',theme:'trance',color:'#69e7ff'},
@@ -1096,6 +1097,13 @@ async function v908LoadWebsitePortal(){
   document.getElementById('v908NextDatetime').value = h.nextShow?.datetime || '';
   document.getElementById('v908NextTheme').value = h.nextShow?.theme || '';
   document.getElementById('v908NextDescription').value = h.nextShow?.description || '';
+  const st = h.sectionTitles || {};
+  if(document.getElementById('v908NextKicker')) document.getElementById('v908NextKicker').value = st.nextKicker || 'NEXT SHOW';
+  if(document.getElementById('v908ShowsKicker')) document.getElementById('v908ShowsKicker').value = st.showsKicker || 'FEATURED SHOWS';
+  if(document.getElementById('v908ShowsTitle')) document.getElementById('v908ShowsTitle').value = st.showsTitle || 'Your favorite show';
+  if(document.getElementById('v908AboutKicker')) document.getElementById('v908AboutKicker').value = st.aboutKicker || 'DISCOVER DJ FOLSOE';
+  if(document.getElementById('v908AboutTitle')) document.getElementById('v908AboutTitle').value = st.aboutTitle || 'Music TV, Twitch and Danish DJ energy';
+  if(document.getElementById('v908AboutText')) document.getElementById('v908AboutText').value = h.aboutText || '';
   document.getElementById('v908Ticker').value = (h.ticker||[]).join('\n');
   document.getElementById('v908Followers').value = c.followers || 0;
   document.getElementById('v908Subs').value = c.subs || 0;
@@ -1115,6 +1123,15 @@ function v908CollectWebsitePortal(){
   homepage.nextShow.datetime = document.getElementById('v908NextDatetime').value || '';
   homepage.nextShow.theme = document.getElementById('v908NextTheme').value || homepage.nextShow.theme;
   homepage.nextShow.description = document.getElementById('v908NextDescription').value || homepage.nextShow.description;
+  homepage.sectionTitles = {
+    nextKicker: document.getElementById('v908NextKicker')?.value || 'NEXT SHOW',
+    nextTitle: document.getElementById('v908NextTitle')?.value || 'Next DJ FOLSOE Broadcast',
+    showsKicker: document.getElementById('v908ShowsKicker')?.value || 'FEATURED SHOWS',
+    showsTitle: document.getElementById('v908ShowsTitle')?.value || 'Your favorite show',
+    aboutKicker: document.getElementById('v908AboutKicker')?.value || 'DISCOVER DJ FOLSOE',
+    aboutTitle: document.getElementById('v908AboutTitle')?.value || 'Music TV, Twitch and Danish DJ energy'
+  };
+  homepage.aboutText = document.getElementById('v908AboutText')?.value || homepage.aboutText;
   homepage.ticker = (document.getElementById('v908Ticker').value || '').split('\n').map(x=>x.trim()).filter(Boolean);
   const community = JSON.parse(JSON.stringify(V908_DEFAULT_COMMUNITY));
   community.followers = Number(document.getElementById('v908Followers').value || 0);

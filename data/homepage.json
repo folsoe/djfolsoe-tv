@@ -1,9 +1,9 @@
 {
-  "version": "V910 Homepage Sync",
+  "version": "V917.1 Website Text Control",
   "hero": {
-    "eyebrow": "DJ FOLSOE NETWORK · MUSIC TV FROM DENMARK",
-    "title": "DJ FOLSOE LIVE",
-    "subtitle": "Modern Twitch Music TV anno 2026",
+    "eyebrow": "DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK",
+    "title": "DJ FOLSOE",
+    "subtitle": "Dive into my Twitch world",
     "text": "Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.",
     "background": "themes/weekend.png"
   },
@@ -107,8 +107,12 @@
       "status": "NEW"
     }
   ],
-  "heroHeadline": "Live Music TV from Denmark",
-  "heroMessage": "DJ FOLSOE is live with modern Music TV energy, requests, community and the best tracks on Twitch.",
-  "activeShow": "DJ FOLSOE LIVE",
-  "broadcastMode": "LIVE SHOW"
+  "sectionTitles": {
+    "nextKicker": "NEXT SHOW",
+    "nextTitle": "Next DJ FOLSOE Broadcast",
+    "showsKicker": "FEATURED SHOWS",
+    "showsTitle": "Your favorite show",
+    "aboutKicker": "DISCOVER DJ FOLSOE",
+    "aboutTitle": "Music TV, Twitch and Danish DJ energy"
+  }
 }

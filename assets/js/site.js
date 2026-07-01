@@ -14,8 +14,24 @@ async function loadPortal(){
   const localBroadcast = await readJson('data/broadcast.json', {}) || {};
   const localThemes = await readJson('data/themes.json', {}) || {};
   let cloud = {};
-  if(API_BASE){ cloud = await readJson(API_BASE + '/api/website-portal', {}); }
+  let twitch = {};
+  if(API_BASE){
+    cloud = await readJson(API_BASE + '/api/website-portal', {});
+    twitch = await readJson(API_BASE + '/api/twitch-profile', {});
+  }
   portal = deepMerge({homepage:localHomepage, website:localWebsite, community:localCommunity, broadcast:localBroadcast, themes:localThemes}, cloud || {});
+  portal.twitch = twitch || {};
+  if(portal.twitch && portal.twitch.ok){
+    portal.broadcast = Object.assign({}, portal.broadcast || {}, {
+      viewers: portal.twitch.viewers || 0,
+      live: !!portal.twitch.isLive,
+      broadcastState: portal.twitch.isLive ? 'LIVE' : (portal.broadcast?.broadcastState || 'OFFLINE'),
+      streamTitle: portal.twitch.liveTitle || portal.broadcast?.streamTitle
+    });
+    portal.community = Object.assign({}, portal.community || {}, {
+      followers: portal.twitch.followers ?? portal.community?.followers
+    });
+  }
   renderPortal();
   tickCountdown();
   setInterval(tickCountdown, 1000);
@@ -40,24 +56,30 @@ function renderPortal(){
   const broadcast = portal.broadcast || {};
   const theme = pickTheme();
   const hero = homepage.hero || {};
+  const sectionTitles = homepage.sectionTitles || {};
   const live = broadcast.live || broadcast.broadcastState === 'LIVE';
   $('heroThemeBg').style.backgroundImage = `url('${hero.background || theme.background || 'themes/weekend.png'}')`;
   $('navState').textContent = live ? 'LIVE' : (broadcast.broadcastState || 'OFFLINE');
   $('livePill').textContent = live ? 'LIVE NOW' : (broadcast.broadcastState || 'OFFLINE');
   $('livePill').style.color = live ? 'var(--green)' : 'var(--gold)';
-  $('heroEyebrow').textContent = hero.eyebrow || 'MUSIC TV FROM DENMARK';
-  $('heroTitle').textContent = hero.title || 'DJ FOLSOE LIVE';
-  $('heroSubtitle').textContent = hero.subtitle || 'One channel. Live shows. Community energy.';
+  $('heroEyebrow').textContent = hero.eyebrow || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK';
+  $('heroTitle').textContent = hero.title || 'DJ FOLSOE';
+  $('heroSubtitle').textContent = hero.subtitle || 'Dive into my Twitch world';
   $('heroText').textContent = hero.text || website.description || 'Modern live DJ shows, requests, chart countdowns and retro music television vibes from Denmark.';
   $('currentShow').textContent = broadcast.currentShowTitle || broadcast.activeShowTitle || theme.title || 'Current broadcast';
-  $('streamTitle').textContent = broadcast.streamTitle || hero.streamTitle || 'DJ FOLSOE · Music TV from Denmark';
+  $('streamTitle').textContent = broadcast.streamTitle || hero.streamTitle || 'DJ FOLSOE · Twitch music streamer from Denmark';
   $('metricViewers').textContent = broadcast.viewers || 0;
-  $('metricFollowers').textContent = community.followers || broadcast.followers || '—';
+  $('metricFollowers').textContent = community.followers ?? broadcast.followers ?? '—';
   $('metricSubGoal').textContent = `${community.subs || 0} / ${community.subGoal || 100}`;
   $('metricTheme').textContent = theme.title || 'Music TV';
   $('topTicker').textContent = (homepage.ticker || []).join('  •  ') || 'DJ FOLSOE LIVE • REQUESTS • TOP 20 • MUSIC TV FROM DENMARK';
+  if($('nextKicker')) $('nextKicker').textContent = sectionTitles.nextKicker || 'NEXT SHOW';
+  if($('showsKicker')) $('showsKicker').textContent = sectionTitles.showsKicker || 'FEATURED SHOWS';
+  if($('showsTitle')) $('showsTitle').textContent = sectionTitles.showsTitle || 'Your favorite show';
+  if($('aboutKicker')) $('aboutKicker').textContent = sectionTitles.aboutKicker || 'DISCOVER DJ FOLSOE';
+  if($('aboutTitle')) $('aboutTitle').textContent = sectionTitles.aboutTitle || 'Music TV, Twitch and Danish DJ energy';
   const next = homepage.nextShow || {};
-  $('nextTitle').textContent = next.title || 'Next broadcast';
+  $('nextTitle').textContent = sectionTitles.nextTitle || next.title || 'Next DJ FOLSOE Broadcast';
   $('nextTime').textContent = next.timeLabel || next.datetime || 'TBA';
   $('nextTheme').textContent = next.theme || theme.title || 'Music TV';
   $('nextDescription').textContent = next.description || 'Upcoming DJ FOLSOE show will appear here from admin.';

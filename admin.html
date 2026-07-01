@@ -209,6 +209,52 @@
 
 
 
+
+
+  <section id="v908WebsitePortal" class="panel">
+    <div class="panelHead">
+      <h2>🌐 Website Text Control</h2>
+      <div>
+        <button onclick="v908LoadWebsitePortal()">Load website</button>
+        <button class="bigPublish" onclick="v908PublishWebsitePortal()">PUBLISH WEBSITE TEXT</button>
+      </div>
+    </div>
+    <p class="note">Controls the text you marked on the frontpage screenshots: hero headline, next show title, favourite show title and the Discover DJ FOLSOE section.</p>
+    <div class="formGrid">
+      <div class="wide"><label>Top line / eyebrow</label><input id="v908HeroEyebrow" placeholder="DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK"></div>
+      <div><label>Main title</label><input id="v908HeroTitle" placeholder="DJ FOLSOE"></div>
+      <div><label>Hero subtitle</label><input id="v908HeroSubtitle" placeholder="Dive into my Twitch world"></div>
+      <div class="wide"><label>Hero text</label><textarea id="v908HeroText" rows="3"></textarea></div>
+      <div class="wide"><label>Hero background path</label><input id="v908HeroBackground" placeholder="themes/weekend.png"></div>
+    </div>
+    <h3>Next show section</h3>
+    <div class="formGrid">
+      <div><label>Small label</label><input id="v908NextKicker" placeholder="NEXT SHOW"></div>
+      <div><label>Large title</label><input id="v908NextTitle" placeholder="Next DJ FOLSOE Broadcast"></div>
+      <div><label>Starts label</label><input id="v908NextTimeLabel" placeholder="Announced soon"></div>
+      <div><label>Date/time</label><input id="v908NextDatetime" type="datetime-local"></div>
+      <div><label>Theme</label><input id="v908NextTheme" placeholder="Music TV"></div>
+      <div class="wide"><label>Description</label><textarea id="v908NextDescription" rows="3"></textarea></div>
+    </div>
+    <h3>Frontpage headings</h3>
+    <div class="formGrid">
+      <div><label>Featured shows label</label><input id="v908ShowsKicker" placeholder="FEATURED SHOWS"></div>
+      <div><label>Featured shows title</label><input id="v908ShowsTitle" placeholder="Your favorite show"></div>
+      <div><label>About label</label><input id="v908AboutKicker" placeholder="DISCOVER DJ FOLSOE"></div>
+      <div><label>About title</label><input id="v908AboutTitle" placeholder="Music TV, Twitch and Danish DJ energy"></div>
+      <div class="wide"><label>About text</label><textarea id="v908AboutText" rows="3"></textarea></div>
+    </div>
+    <h3>Ticker + manual community fallback</h3>
+    <div class="formGrid">
+      <div class="wide"><label>Ticker lines</label><textarea id="v908Ticker" rows="4"></textarea></div>
+      <div><label>Followers fallback</label><input id="v908Followers" type="number" placeholder="0"></div>
+      <div><label>Subs fallback</label><input id="v908Subs" type="number" placeholder="0"></div>
+      <div><label>Sub goal</label><input id="v908SubGoal" type="number" placeholder="100"></div>
+      <div class="wide"><label>Community text</label><textarea id="v908CommunityText" rows="3"></textarea></div>
+    </div>
+    <pre id="v908PortalStatus">Website Text Control ready.</pre>
+  </section>
+
   <section id="v912ContentStudio" class="panel v912ContentStudio">
     <div class="panelHead">
       <h2>✍️ V912 · Content Studio</h2>
