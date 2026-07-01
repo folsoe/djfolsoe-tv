@@ -693,7 +693,7 @@ export default {
         if (request.method !== "POST") return json({error:"Method not allowed"},405);
         const body = await request.json().catch(()=>({}));
         const patch = body.core || body;
-        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast"];
+        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast","overlayHub"];
         for (const key of allowed) if (Object.prototype.hasOwnProperty.call(patch,key)) core[key] = patch[key];
         core.language = "en";
         await putCore(env, core);
@@ -836,6 +836,46 @@ export default {
         core.showVisuals = body.items || body.showVisuals || {};
         await putCore(env,core);
         return json({ok:true,items:core.showVisuals});
+      }
+
+      if (path === "/api/overlay-hub") {
+        if (request.method === "GET") {
+          return json({
+            ok:true,
+            version:"V909 Overlay Hub",
+            overlayHub: core.overlayHub || {
+              state: core.broadcast?.broadcastState || (core.station?.live?"LIVE":"OFFLINE"),
+              activeShow: core.broadcast?.activeShow || core.station?.streamTitle || "DJ FOLSOE LIVE",
+              activeTheme: core.activeTheme || "weekend",
+              ticker: (core.bottomTickerItems||[])[0]?.text || "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE",
+              overlayContent: core.overlayContent || DEFAULT_CORE.overlayContent || {box4:{locked:"twitch-chat"}}
+            },
+            locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]
+          });
+        }
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        const hub = {
+          version:"V909 Overlay Hub",
+          state:String(body.state||"LIVE"),
+          activeShow:String(body.activeShow||"DJ FOLSOE LIVE"),
+          activeTheme:String(body.activeTheme||core.activeTheme||"weekend"),
+          ticker:String(body.ticker||"LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"),
+          overlayContent: body.overlayContent || core.overlayContent || DEFAULT_CORE.overlayContent || {},
+          updatedAt:new Date().toISOString()
+        };
+        hub.overlayContent.box4 = {locked:"twitch-chat"};
+        core.overlayHub = hub;
+        core.overlayContent = hub.overlayContent;
+        core.activeTheme = hub.activeTheme;
+        core.broadcast = Object.assign({}, core.broadcast||{}, {broadcastState:hub.state, activeShow:hub.activeShow, activeTheme:hub.activeTheme, updatedAt:hub.updatedAt});
+        core.bottomTickerItems = Array.isArray(core.bottomTickerItems) ? core.bottomTickerItems : [];
+        core.bottomTickerItems[0] = {id:"v909-overlay-hub-ticker",active:true,theme:"all",text:hub.ticker,priority:1};
+        core.language = "en";
+        core.updatedAt = hub.updatedAt;
+        await putCore(env, core);
+        return json({ok:true,version:"V909 Overlay Hub",message:"Overlay Hub published",overlayHub:hub});
       }
       if (path === "/api/overlay-content") {
         if (request.method === "GET") return json({ok:true,items:core.overlayContent||DEFAULT_CORE.overlayContent||{}});

@@ -1153,3 +1153,109 @@ function v908PresetPortal(mode){
   v908PortalStatus('Preset applied: '+mode+'. Press PUBLISH WEBSITE 2.0 to send it live.');
 }
 setTimeout(()=>{ if(document.getElementById('v908WebsitePortal')) v908LoadWebsitePortal(); }, 800);
+
+
+/* DJ FOLSOE NETWORK V909 · Overlay Hub */
+const V909_DEFAULT_OVERLAY_HUB = {
+  version:'V909 Overlay Hub',
+  state:'LIVE',
+  activeShow:'DJ FOLSOE LIVE',
+  activeTheme:'weekend',
+  ticker:'LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · FOLSOETV.DK',
+  overlayContent:{
+    box1:[{active:true,label:'BROADCAST STATUS',headline:'LIVE NOW',body:'DJ FOLSOE is live from Denmark',icon:'📡',priority:1}],
+    box2:[{active:true,label:'ON AIR',headline:'DJ FOLSOE LIVE',body:'Modern Music TV on Twitch',icon:'📺',priority:1}],
+    box3:[{active:true,label:'REQUESTS',headline:'Requests open',body:'Use !request Artist - Title in Twitch chat',icon:'🎧',priority:1}],
+    box4:{locked:'twitch-chat'}
+  }
+};
+function v909Status(msg){const el=document.getElementById('v909Status'); if(el) el.textContent=msg;}
+function v909Set(id,val){const el=document.getElementById(id); if(el) el.value=val||'';}
+function v909Get(id){const el=document.getElementById(id); return el?String(el.value||'').trim():'';}
+function v909First(box, fallback){
+  const arr=(overlayContent&&Array.isArray(overlayContent[box]))?overlayContent[box]:[];
+  return Object.assign({}, fallback||{}, arr[0]||{});
+}
+function v909FillForm(pkg){
+  pkg=pkg||{};
+  const oc=pkg.overlayContent||overlayContent||V909_DEFAULT_OVERLAY_HUB.overlayContent;
+  const b1=(oc.box1||[])[0]||V909_DEFAULT_OVERLAY_HUB.overlayContent.box1[0];
+  const b2=(oc.box2||[])[0]||V909_DEFAULT_OVERLAY_HUB.overlayContent.box2[0];
+  const b3=(oc.box3||[])[0]||V909_DEFAULT_OVERLAY_HUB.overlayContent.box3[0];
+  v909Set('v909State', pkg.state||core?.broadcast?.broadcastState||'LIVE');
+  v909Set('v909ActiveShow', pkg.activeShow||core?.broadcast?.activeShow||b2.headline||'DJ FOLSOE LIVE');
+  v909Set('v909ActiveTheme', pkg.activeTheme||activeTheme||'weekend');
+  v909Set('v909Ticker', pkg.ticker||((bottomItems||[])[0]?.text)||V909_DEFAULT_OVERLAY_HUB.ticker);
+  [['Box1',b1],['Box2',b2],['Box3',b3]].forEach(([name,b])=>{
+    v909Set('v909'+name+'Label',b.label);
+    v909Set('v909'+name+'Headline',b.headline);
+    v909Set('v909'+name+'Body',b.body);
+    v909Set('v909'+name+'Icon',b.icon);
+  });
+}
+function v909CollectOverlayHub(){
+  const box=(n)=>[{active:true,label:v909Get(`v909Box${n}Label`),headline:v909Get(`v909Box${n}Headline`),body:v909Get(`v909Box${n}Body`),icon:v909Get(`v909Box${n}Icon`)||'📺',priority:1}];
+  const payload={
+    version:'V909 Overlay Hub',
+    state:v909Get('v909State')||'LIVE',
+    activeShow:v909Get('v909ActiveShow')||'DJ FOLSOE LIVE',
+    activeTheme:v909Get('v909ActiveTheme')||activeTheme||'weekend',
+    ticker:v909Get('v909Ticker')||V909_DEFAULT_OVERLAY_HUB.ticker,
+    overlayContent:{box1:box(1),box2:box(2),box3:box(3),box4:{locked:'twitch-chat'}},
+    updatedAt:new Date().toISOString()
+  };
+  return payload;
+}
+async function v909LoadOverlayHub(){
+  try{
+    let pkg=null;
+    try{ pkg=await api('/api/overlay-hub'); }catch(e){ pkg=null; }
+    const data=pkg?.overlayHub||pkg||{};
+    if(data.overlayContent) overlayContent=data.overlayContent;
+    v909FillForm(data);
+    renderOverlayContent();
+    v909Status('✅ V909 Overlay Hub loaded. Box 4 remains locked to Twitch chat.');
+  }catch(e){
+    v909FillForm(V909_DEFAULT_OVERLAY_HUB);
+    v909Status('⚠️ Loaded local defaults because cloud data was not available: '+e.message);
+  }
+}
+function v909Preset(mode){
+  const presets={
+    live:{state:'LIVE',theme:activeTheme||'weekend',show:'DJ FOLSOE LIVE',ticker:'LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · FOLSOETV.DK',b1:['BROADCAST STATUS','LIVE NOW','DJ FOLSOE is live from Denmark','📡'],b2:['ON AIR','DJ FOLSOE LIVE','Modern Music TV on Twitch','📺'],b3:['REQUESTS','Requests open','Use !request Artist - Title in Twitch chat','🎧']},
+    break:{state:'BREAK',theme:activeTheme||'weekend',show:'SHORT BREAK',ticker:'SHORT BREAK · BACK IN A FEW MINUTES · STAY IN CHAT',b1:['BROADCAST STATUS','SHORT BREAK','Back in a few minutes','☕'],b2:['ON AIR','Break mode','Music returns shortly','📺'],b3:['CHAT','Stay in chat','Requests are still welcome','💬']},
+    ending:{state:'ENDING SOON',theme:activeTheme||'weekend',show:'ENDING SOON',ticker:'ENDING SOON · THANKS FOR WATCHING · FOLLOW FOR THE NEXT SHOW',b1:['BROADCAST STATUS','ENDING SOON','Thanks for watching DJ FOLSOE','🏁'],b2:['NEXT','Next broadcast soon','Follow so you never miss a show','⏭️'],b3:['COMMUNITY','Thank you','Love to chat, subs, followers and raiders','❤️']},
+    offline:{state:'OFFLINE',theme:activeTheme||'weekend',show:'OFFLINE',ticker:'OFFLINE · NEXT SHOW COMING SOON · FOLLOW DJ FOLSOE',b1:['BROADCAST STATUS','OFFLINE','Next show coming soon','⚫'],b2:['NEXT SHOW','Announced soon','Watch folsoetv.dk for updates','📅'],b3:['FOLLOW','Follow DJ FOLSOE','Never miss the next broadcast','❤️']},
+    goals:{state:'LIVE',theme:activeTheme||'weekend',show:'FOLLOWER JOURNEY',ticker:'FOLLOWER JOURNEY · SUB GOAL · HELP BUILD THE BROADCAST',b1:['FOLLOW JOURNEY','870/1000 followers','Help DJ FOLSOE reach the next goal','📈'],b2:['SUB JOURNEY','Subs support the setup','Every sub helps develop the technical broadcast','⭐'],b3:['COMMUNITY','Be part of it','Follow, chat, request and share the stream','❤️']},
+    requests:{state:'LIVE',theme:activeTheme||'weekend',show:'REQUEST MODE',ticker:'REQUESTS OPEN · USE !REQUEST ARTIST - TITLE · CHAT CONTROLS THE MUSIC',b1:['REQUEST MODE','Requests open','Chat helps shape the music','🎧'],b2:['HOW TO REQUEST','!request Artist - Title','Write your music wish in Twitch chat','⌨️'],b3:['NOW PLAYING','Viewer energy','Your request can be next','🎵']},
+    top20:{state:'LIVE',theme:'chart',show:'FOLSOE TOP 20',ticker:'FOLSOE TOP 20 · WEEKLY CHART · VIEWER PICK · NEW ENTRIES',b1:['CHART SHOW','FOLSOE TOP 20','Weekly Music TV countdown','🏆'],b2:['COUNTDOWN','Top 20 is running','Biggest tracks, Danish picks and new discoveries','📊'],b3:['VIEWER PICK','Chat decides energy','Vote, request and react live','🎧']},
+    community:{state:'LIVE',theme:activeTheme||'weekend',show:'COMMUNITY MODE',ticker:'COMMUNITY MODE · SHOUTOUTS · LOVE TO CHAT · FOLLOW DJ FOLSOE',b1:['COMMUNITY','Chat is the show','Be active and send love','❤️'],b2:['SHOUTOUTS','Danish DJ Network','Support the people who support the music','📣'],b3:['THANK YOU','Followers · Subs · Raids','You build this Music TV channel','🙏']}
+  };
+  const p=presets[mode]||presets.live;
+  v909Set('v909State',p.state); v909Set('v909ActiveShow',p.show); v909Set('v909ActiveTheme',p.theme); v909Set('v909Ticker',p.ticker);
+  [p.b1,p.b2,p.b3].forEach((b,i)=>{const n=i+1; v909Set(`v909Box${n}Label`,b[0]); v909Set(`v909Box${n}Headline`,b[1]); v909Set(`v909Box${n}Body`,b[2]); v909Set(`v909Box${n}Icon`,b[3]);});
+  v909Status('Preset applied: '+mode+'. Press PUBLISH OVERLAY HUB to update overlay + central data.');
+}
+async function v909PublishOverlayHub(){
+  const payload=v909CollectOverlayHub();
+  overlayContent=payload.overlayContent;
+  activeTheme=payload.activeTheme;
+  markTheme(activeTheme);
+  bottomItems=bottomItems||[];
+  bottomItems[0]={id:'v909-overlay-hub-ticker',active:true,theme:'all',text:payload.ticker,priority:1};
+  renderOverlayContent(); renderEditors();
+  try{
+    await api('/api/overlay-hub',{method:'POST',body:JSON.stringify(payload)});
+    v909Status('✅ V909 Overlay Hub published. Box 1-3 updated, ticker synced, Box 4 locked to Twitch chat.');
+    setStatus('✅ V909 Overlay Hub published to Broadcast Cloud.');
+  }catch(e){
+    v909Status('❌ Publish failed: '+e.message);
+    setStatus('❌ V909 publish failed: '+e.message);
+  }
+}
+const V909_originalLoadAll = loadAll;
+loadAll = async function(){
+  await V909_originalLoadAll();
+  if(document.getElementById('v909OverlayHub')) v909FillForm({overlayContent,activeTheme,state:core?.broadcast?.broadcastState,activeShow:core?.broadcast?.activeShow,ticker:(bottomItems||[])[0]?.text});
+};
+setTimeout(()=>{ if(document.getElementById('v909OverlayHub')) v909LoadOverlayHub(); }, 1200);

@@ -1,0 +1,42 @@
+{
+  "version": "V909 Overlay Hub",
+  "state": "LIVE",
+  "activeShow": "DJ FOLSOE LIVE",
+  "activeTheme": "weekend",
+  "ticker": "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · FOLSOETV.DK",
+  "overlayContent": {
+    "box1": [
+      {
+        "active": true,
+        "label": "BROADCAST STATUS",
+        "headline": "LIVE NOW",
+        "body": "DJ FOLSOE is live from Denmark",
+        "icon": "📡",
+        "priority": 1
+      }
+    ],
+    "box2": [
+      {
+        "active": true,
+        "label": "ON AIR",
+        "headline": "DJ FOLSOE LIVE",
+        "body": "Modern Music TV on Twitch",
+        "icon": "📺",
+        "priority": 1
+      }
+    ],
+    "box3": [
+      {
+        "active": true,
+        "label": "REQUESTS",
+        "headline": "Requests open",
+        "body": "Use !request Artist - Title in Twitch chat",
+        "icon": "🎧",
+        "priority": 1
+      }
+    ],
+    "box4": {
+      "locked": "twitch-chat"
+    }
+  }
+}

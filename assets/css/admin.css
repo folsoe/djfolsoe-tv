@@ -100,3 +100,17 @@ code{color:#2dd4ef}
 @media(max-width:900px){.v907ThemeEditor{grid-template-columns:1fr}}
 /* V908 Website 2.0 Music TV Portal */
 .v908Panel{border-color:rgba(105,231,255,.32)!important;background:linear-gradient(135deg,rgba(105,231,255,.10),rgba(255,79,216,.07),rgba(255,255,255,.04))!important}.v908PortalGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.v908PortalGrid .wide{grid-column:1/-1}.v908PortalGrid label{display:block;margin:0 0 7px;font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.70)}.v908PortalGrid input,.v908PortalGrid textarea{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(0,0,0,.28);color:#fff;padding:12px 14px;font:inherit}.v908QuickPortal{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.v908QuickPortal button{border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.10);color:#fff;padding:11px 14px;font-weight:900;cursor:pointer}#v908PortalStatus{white-space:pre-wrap;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);padding:14px;color:#bff6ff}@media(max-width:800px){.v908PortalGrid{grid-template-columns:1fr}}
+
+
+/* DJ FOLSOE NETWORK V909 · Overlay Hub */
+.v909Panel{border:1px solid rgba(86,215,255,.35);box-shadow:0 0 40px rgba(86,215,255,.10), inset 0 0 34px rgba(255,255,255,.035)}
+.v909QuickGrid{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));margin:14px 0 18px}
+.v909QuickGrid button{font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.threeCol.v909Cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+.v909BoxCard{padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.14)}
+.v909BoxCard h3{margin-top:0;color:#fff;text-transform:uppercase;letter-spacing:.06em}
+.v909BoxCard textarea,.v909BoxCard input,#v909Ticker{width:100%;box-sizing:border-box}
+.v909LockedBox{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.22)}
+.v909LockedBox b{color:#7dd3fc;text-transform:uppercase;letter-spacing:.08em}
+#v909Status{white-space:pre-wrap;min-height:54px;border-left:4px solid rgba(86,215,255,.75)}
+@media(max-width:1000px){.threeCol.v909Cards{grid-template-columns:1fr}.v909LockedBox{display:block}}

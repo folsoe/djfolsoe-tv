@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V908 Website 2.0</title>
+  <title>DJ FOLSOE V909 Overlay Hub</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V908</span>
+    <span class="kicker">DJ FOLSOE NETWORK V909</span>
     <h1>Website 2.0 · Music TV Portal Control</h1>
     <p>One central admin hub: choose a show, edit once, and publish to website + overlay together.</p>
   </div>
@@ -35,6 +35,7 @@
   <button onclick="jump('v907ThemeManager')">🖼️ Theme Manager</button>
     <button onclick="jump('v908WebsitePortal')">🌐 Website 2.0</button>
   <button onclick="jump('homepage')">🏠 Website</button>
+  <button onclick="jump('v909OverlayHub')">📺 Overlay Hub</button>
   <button onclick="jump('overlayContent')">📦 Overlay boxes</button>
   <button onclick="jump('top20')">🏆 Top 20</button>
   <button onclick="jump('shows')">📺 Shows</button>
@@ -226,7 +227,81 @@
     <button onclick="saveShowVisuals()">Save show grafik</button>
   </section>
 
-  <section id="overlayContent" class="panel">
+
+
+  <section id="v909OverlayHub" class="panel v909Panel">
+    <div class="panelHead">
+      <h2>📺 V909 · Overlay Hub</h2>
+      <div>
+        <button onclick="v909LoadOverlayHub()">Load</button>
+        <button class="bigPublish" onclick="v909PublishOverlayHub()">PUBLISH OVERLAY HUB</button>
+      </div>
+    </div>
+    <p class="note">One clear overlay control room. This changes only the controllable output for box 1, box 2 and box 3. Box 4 stays locked to Twitch chat. Overlay graphics, layout and logo are untouched.</p>
+
+    <div class="quickGrid v909QuickGrid">
+      <button onclick="v909Preset('live')">🔴 LIVE</button>
+      <button onclick="v909Preset('break')">☕ BREAK</button>
+      <button onclick="v909Preset('ending')">🏁 ENDING SOON</button>
+      <button onclick="v909Preset('offline')">⚫ OFFLINE</button>
+      <button onclick="v909Preset('goals')">📈 GOALS</button>
+      <button onclick="v909Preset('requests')">🎧 REQUESTS</button>
+      <button onclick="v909Preset('top20')">🏆 TOP 20</button>
+      <button onclick="v909Preset('community')">❤️ COMMUNITY</button>
+    </div>
+
+    <div class="threeCol v909Cards">
+      <div class="v909BoxCard">
+        <h3>Box 1 · Status / Goals</h3>
+        <label>Label</label><input id="v909Box1Label" placeholder="BROADCAST STATUS">
+        <label>Headline</label><input id="v909Box1Headline" placeholder="LIVE NOW">
+        <label>Body</label><textarea id="v909Box1Body" rows="3" placeholder="DJ FOLSOE is live from Denmark"></textarea>
+        <label>Icon</label><input id="v909Box1Icon" placeholder="📡">
+      </div>
+      <div class="v909BoxCard">
+        <h3>Box 2 · On Air / Next</h3>
+        <label>Label</label><input id="v909Box2Label" placeholder="ON AIR">
+        <label>Headline</label><input id="v909Box2Headline" placeholder="DJ FOLSOE LIVE">
+        <label>Body</label><textarea id="v909Box2Body" rows="3" placeholder="Next show and active theme"></textarea>
+        <label>Icon</label><input id="v909Box2Icon" placeholder="📺">
+      </div>
+      <div class="v909BoxCard">
+        <h3>Box 3 · Community / Music</h3>
+        <label>Label</label><input id="v909Box3Label" placeholder="REQUESTS">
+        <label>Headline</label><input id="v909Box3Headline" placeholder="Requests open">
+        <label>Body</label><textarea id="v909Box3Body" rows="3" placeholder="Use !request Artist - Title"></textarea>
+        <label>Icon</label><input id="v909Box3Icon" placeholder="🎧">
+      </div>
+    </div>
+
+    <div class="v909LockedBox">
+      <b>Box 4 is locked</b>
+      <span>Twitch chat, profile images and emotes remain untouched.</span>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <label>Overlay ticker line</label>
+        <textarea id="v909Ticker" rows="3" placeholder="LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"></textarea>
+      </div>
+      <div>
+        <label>Broadcast state</label>
+        <select id="v909State">
+          <option>LIVE</option>
+          <option>BREAK</option>
+          <option>ENDING SOON</option>
+          <option>OFFLINE</option>
+          <option>AFTER PARTY</option>
+        </select>
+        <label>Active show</label><input id="v909ActiveShow" placeholder="DJ FOLSOE LIVE">
+        <label>Active theme</label><input id="v909ActiveTheme" placeholder="weekend">
+      </div>
+    </div>
+
+    <pre id="v909Status">V909 Overlay Hub ready. Load current overlay data or choose a preset.</pre>
+  </section>
+
+  <section id="overlayContent" class="panel advancedPanel">
     <div class="panelHead"><h2>📦 Broadcast Content Manager · Overlay boxes</h2><button onclick="resetOverlayContent()">Insert default boxes</button></div>
     <p class="note">Box 1, 2 og 3 kan rotere indhold. Box 4 er låst til Twitch chat. Dette er til overlayet — hjemmesiden røres ikke.</p>
     <div class="twoCol">

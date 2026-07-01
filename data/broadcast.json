@@ -1,7 +1,9 @@
 {
-  "version": "V906",
-  "activeShow": "weekend",
+  "version": "V909 Broadcast State",
   "broadcastState": "LIVE",
+  "activeShow": "DJ FOLSOE LIVE",
+  "activeTheme": "weekend",
+  "overlayHubEnabled": true,
   "locked": {
     "box4": "twitch-chat",
     "overlayGraphics": "unchanged"
