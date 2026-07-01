@@ -1,5 +1,5 @@
 
-/* V816.20.1.8.5 - English broadcast ticker text */
+/* DJ FOLSOE NETWORK V922.1 · OVERLAY CORE FORCE SYNC */
 function englishTickerText(s){
   return String(s||"")
     .replace(/RETRO HITS\s*·?\s*KLASSIKERE DER ALDRIG DØR/gi,"RETRO HITS · CLASSICS THAT NEVER DIE")
@@ -358,6 +358,91 @@ function clip(v,max){v=String(v||"").trim();return v.length>max?v.slice(0,Math.m
 function esc(s){return String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 function safeArr(a,b){return Array.isArray(a)&&a.length?a:b;}
 
+
+
+/* V922 - Website & Overlay Renderer Sync
+   Reads the same broadcast-core as the website/admin.
+   This keeps the visual overlay layout intact, but prevents it from falling back to old standard data.
+*/
+function pickCorePayload(payload){
+  if(!payload || typeof payload !== 'object') return null;
+  return payload.core || payload.data || payload.broadcastCore || payload;
+}
+
+function themeMeta(id){
+  const key=String(id||'weekend').toLowerCase();
+  const map={
+    weekend:['WEEKEND','🎉','#00d4ff','#ff4d6d','#ffd166'],
+    trance:['TRANCE TUESDAY','💙','#62ecff','#8b5cf6','#ffffff'],
+    eurodance:['EURODANCE','⚡','#ff4bd8','#62ecff','#ffe36e'],
+    fredagsbar:['FREDAGSBAR','🍻','#6cffb5','#ffd166','#ff4d6d'],
+    retro:['RETRO HITS','🪩','#ffe36e','#ff4bd8','#ffffff'],
+    popup:['POP UP LIVE','🚨','#ffffff','#ff4d6d','#62ecff'],
+    morning:['GOOD MORNING TWITCH','☕','#ffe36e','#6cffb5','#ffffff'],
+    summer:['SUMMER','☀️','#ffe36e','#62ecff','#ff4d6d']
+  };
+  const v=map[key]||map.weekend;
+  return {key,title:v[0],emoji:v[1],primary:v[2],secondary:v[3],accent:v[4],mood:v[0]};
+}
+
+function broadcastCoreToOverlayState(core){
+  const fb=fallbackState();
+  core=pickCorePayload(core)||{};
+  const tw=core.twitch||{};
+  const show=core.show||{};
+  const next=core.nextShow||{};
+  const theme=core.theme||{};
+  const hero=core.hero||{};
+  const community=core.community||{};
+  const ticker=core.ticker||{};
+  const overlay=core.overlay||{};
+  const top20=Array.isArray(core.top20)?core.top20:[];
+  const themeId=(theme.id||theme.key||core.activeTheme||'weekend').toLowerCase();
+  const meta=themeMeta(themeId);
+  const followers=Number(tw.followers ?? community.followers ?? 0) || 0;
+  const followerGoal=Number(community.followerGoal ?? 1000) || 1000;
+  const subs=Number(tw.subs ?? community.subs ?? 0) || 0;
+  const subGoal=Number(community.subGoal ?? overlay.subGoal ?? 100) || 100;
+  const viewers=Number(tw.viewers ?? show.viewers ?? 0) || 0;
+  const live=!!(tw.live || tw.isLive || show.live);
+  const mode=String(show.mode || show.state || overlay.status || (live?'LIVE':'OFFLINE')).toUpperCase();
+  const showTitle=show.title || show.current || tw.liveTitle || hero.title || overlay.title || 'DJ FOLSOE';
+  const description=hero.text || community.text || 'Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.';
+  const tickerText=ticker.text || overlay.infoLine || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY';
+  const nextLabel=next.show || next.title || 'Next DJ FOLSOE Broadcast';
+  const nextTime=next.timeLabel || next.datetime || next.dateTime || 'Announced soon';
+  const requestText=community.requestText || overlay.requestText || 'Use !request Artist - Title in Twitch chat';
+  const specialEvent=community.specialEvent || overlay.specialEvent || '';
+  return normalize({
+    theme:{activeTheme:themeId,theme:{key:themeId,title:meta.title,emoji:meta.emoji,desc:meta.mood,bgImage:theme.background||('https://folsoetv.dk/themes/'+themeId+'.png')}},
+    visual:{primary:meta.primary,secondary:meta.secondary,accent:meta.accent,title:meta.title,emoji:meta.emoji,mood:theme.title||meta.mood},
+    topbarNews:[`${mode} · ${showTitle} · ${meta.title}`],
+    footerTicker:[tickerText, specialEvent].filter(Boolean),
+    chart:{items:top20.map(x=>({rank:x.rank,artist:x.artist,title:x.title,status:x.status}))},
+    live:{followers,followersGoal,viewers,subs,subGoal},
+    show:{title:showTitle,description},
+    twitchCommunity:{},
+    twitchChat:{channel:DEFAULT_CHANNEL},
+    motion:{lanes:{
+      box1:[
+        {label:'LIVE STATUS',headline:live ? `${viewers} viewers` : 'OFFLINE',body:`${followers}/${followerGoal} followers · ${subs}/${subGoal} subs`,icon: live ? '🔴' : '⚫'},
+        {label:'FOLLOWER GOAL',headline:`${followers}/${followerGoal} followers`,body:`${Math.max(0,followerGoal-followers)} to go · twitch.tv/djfolsoe`,icon:'📡'},
+        {label:'COMMUNITY',headline:`${subs}/${subGoal} subs`,body:requestText,icon:'💜'}
+      ],
+      box2:[
+        {label:'CURRENT SHOW',headline:showTitle,body:description,icon:'📺'},
+        {label:'NEXT SHOW',headline:nextLabel,body:nextTime,icon:'⏭️'},
+        {label:'THEME',headline:`${meta.emoji} ${theme.title||meta.title}`,body:themeId,icon:'🎨'}
+      ],
+      box3:[
+        ...(top20.length?top20.slice(0,2).map(x=>({label:x.rank?`TOP 20 #${x.rank}`:'TOP 20',headline:x.artist||'DJ FOLSOE',body:x.title||'',icon:'🎵'})):[]),
+        {label:'REQUESTS',headline:'Requests open',body:requestText,icon:'🎧'},
+        {label:'INFO',headline:overlay.title||showTitle,body:overlay.infoLine||tickerText,icon:'✨'}
+      ]
+    }}
+  });
+}
+
 function fallbackState(){
   return {
     theme:{activeTheme:"weekend",theme:{key:"weekend",title:"WEEKEND VIBES",emoji:"🎉",desc:"Broadcast Cloud",primary:"#00d4ff",secondary:"#ff4d6d",accent:"#ffd166"}},
@@ -427,11 +512,23 @@ function normalize(j){
 
 async function loadState(){
   try{
-    const r=await fetch(API_BASE+"/api/overlay/v170-state?ts="+Date.now(),{cache:"no-store"});
-    state=normalize(await r.json());
+    // V922: primary source is the same broadcast-core used by website/admin.
+    const r=await fetch(API_BASE+"/api/broadcast?ts="+Date.now(),{cache:"no-store", headers:{"cache-control":"no-cache"}});
+    if(!r.ok) throw new Error("broadcast endpoint HTTP "+r.status);
+    const payload=await r.json();
+    state=broadcastCoreToOverlayState(payload);
+    console.log("V922.1 overlay core applied", state?.theme?.activeTheme, state?.show?.title);
   }catch(e){
-    console.log("V816.3 API fallback",e);
-    state=normalize(state||fallbackState());
+    console.log("V922 broadcast-core fallback",e);
+    try{
+      // Legacy fallback only if the new endpoint is unavailable.
+      const r2=await fetch(API_BASE+"/api/overlay/v170-state?ts="+Date.now(),{cache:"no-store"});
+      if(!r2.ok) throw new Error("legacy overlay endpoint HTTP "+r2.status);
+      state=normalize(await r2.json());
+    }catch(e2){
+      console.log("V922 legacy fallback",e2);
+      state=normalize(state||fallbackState());
+    }
   }
   applyTheme();
   renderAll();
@@ -1176,30 +1273,3 @@ v901PushBurst = function(item){
   v9012LastChange = 0;
   renderBurst(true);
 };
-
-/* =========================================================
-   V903 - Admin controlled Music TV output
-   The visual overlay stays clean: Box4 remains Twitch chat.
-   Admin controls the rotating broadcast burst via overlayContent box1-box3.
-   ========================================================= */
-function v903AdminLane(){
-  const lanes = state?.motion?.lanes || {};
-  const all = []
-    .concat(Array.isArray(lanes.box1)?lanes.box1:[])
-    .concat(Array.isArray(lanes.box2)?lanes.box2:[])
-    .concat(Array.isArray(lanes.box3)?lanes.box3:[]);
-  const usable = all.filter(x=>x && (x.headline||x.title||x.body||x.label));
-  if(usable.length) return usable;
-  return v9001InfoLane();
-}
-function renderCards(){
-  const lane=v903AdminLane();
-  const i=tick++;
-  const item=lane[i%lane.length]||{};
-  const kicker=q('burstKicker'), title=q('burstTitle'), body=q('burstBody');
-  if(kicker) kicker.textContent=clip(String(item.label||'BROADCAST').toUpperCase(),28);
-  if(title) title.textContent=clip(item.headline||item.title||'DJ FOLSOE TV',44);
-  if(body) body.textContent=clip(item.body||'Music TV from Denmark',120);
-  const burst=q('broadcastBurst');
-  if(burst){burst.classList.remove('burstRestart','eventMode','hypeMode'); void burst.offsetWidth; burst.classList.add('burstRestart');}
-}

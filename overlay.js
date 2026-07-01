@@ -1,5 +1,5 @@
 
-/* V816.20.1.8.5 - English broadcast ticker text */
+/* DJ FOLSOE NETWORK V922.1 · OVERLAY CORE FORCE SYNC */
 function englishTickerText(s){
   return String(s||"")
     .replace(/RETRO HITS\s*·?\s*KLASSIKERE DER ALDRIG DØR/gi,"RETRO HITS · CLASSICS THAT NEVER DIE")
@@ -513,10 +513,11 @@ function normalize(j){
 async function loadState(){
   try{
     // V922: primary source is the same broadcast-core used by website/admin.
-    const r=await fetch(API_BASE+"/api/broadcast?ts="+Date.now(),{cache:"no-store"});
+    const r=await fetch(API_BASE+"/api/broadcast?ts="+Date.now(),{cache:"no-store", headers:{"cache-control":"no-cache"}});
     if(!r.ok) throw new Error("broadcast endpoint HTTP "+r.status);
     const payload=await r.json();
     state=broadcastCoreToOverlayState(payload);
+    console.log("V922.1 overlay core applied", state?.theme?.activeTheme, state?.show?.title);
   }catch(e){
     console.log("V922 broadcast-core fallback",e);
     try{
