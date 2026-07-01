@@ -26,7 +26,16 @@ function DJF_get(id){
 }
 
 
-const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+const DJF_WORKER_FALLBACK="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+function DJF_apiBases(){
+  const saved=(localStorage.getItem("DJF_API_BASE")||localStorage.getItem("djf_api_base")||"").trim().replace(/\/$/,"");
+  const win=(window.DJF_API_BASE||"").trim().replace(/\/$/,"");
+  const origin=(location.protocol.startsWith("http")?location.origin:"").replace(/\/$/,"");
+  const bases=[];
+  [saved,win,origin,DJF_WORKER_FALLBACK].forEach(b=>{ if(b && !bases.includes(b)) bases.push(b); });
+  return bases;
+}
+let API_BASE=DJF_apiBases()[0] || DJF_WORKER_FALLBACK;
 const THEMES={"fredagsbar": "🍺 FREDAGSBAR", "popup": "⚡ POPUP", "trance": "💙 TRANCE TUESDAY", "retro": "🕹️ RETRO HITS", "eurodance": "💛 EURODANCE", "morning": "☀️ GOOD MORNING TWITCH", "summer": "🌴 SUMMER BEATS", "weekend": "🎉 WEEKEND VIBES", "chart": "📊 THE CHART SHOW", "christmas": "🎄 CHRISTMAS MUSIC", "danske": "🇩🇰 DANISH HITS", "disco": "🪩 DISCO HITS", "handsup": "🙌 HANDS UP", "harddance": "🔥 HARD DANCE", "halloween": "🎃 HALLOWEEN HARD DANCE"};
 const TOP20_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
 let core=null, home=null, activeTheme="weekend";
@@ -75,19 +84,29 @@ function setStatus(v){DJF_text("statusBox", v);}
 
 async function api(path,opt={}){
   const t=token();
-  opt.headers=Object.assign({"content-type":"application/json"},opt.headers||{});
-  if(t){
-    opt.headers["x-admin-token"]=t;
-    opt.headers["authorization"]="Bearer "+t;
+  const bases=DJF_apiBases();
+  let lastError=null;
+  for(const base of bases){
+    try{
+      const requestOpt=Object.assign({},opt);
+      requestOpt.headers=Object.assign({"content-type":"application/json"},opt.headers||{});
+      if(t){
+        requestOpt.headers["x-admin-token"]=t;
+        requestOpt.headers["authorization"]="Bearer "+t;
+      }
+      const r=await fetch(base+path,Object.assign({cache:"no-store"},requestOpt));
+      const txt=await r.text();
+      let j; try{j=JSON.parse(txt);}catch(e){j={raw:txt};}
+      if(!r.ok){
+        const detail = j?.error ? JSON.stringify(j,null,2) : txt;
+        throw new Error(detail || ("HTTP "+r.status));
+      }
+      API_BASE=base;
+      localStorage.setItem("DJF_API_BASE",base);
+      return j;
+    }catch(e){ lastError=e; }
   }
-  const r=await fetch(API_BASE+path,opt);
-  const txt=await r.text();
-  let j; try{j=JSON.parse(txt);}catch(e){j={raw:txt};}
-  if(!r.ok){
-    const detail = j?.error ? JSON.stringify(j,null,2) : txt;
-    throw new Error(detail || ("HTTP "+r.status));
-  }
-  return j;
+  throw lastError || new Error("API could not be reached");
 }
 
 function renderThemes(){
@@ -1731,13 +1750,22 @@ async function v916RunHealthCheck(showReady){
   const local=v916LocalHealth();
   v916RenderHealth(local);
   try{
-    const r=await api('/api/health-check');
+    let r=null;
+    try{ r=await api('/api/health-check'); }
+    catch(firstErr){
+      try{ r=await api('/api/health'); }
+      catch(secondErr){ throw new Error(firstErr.message || secondErr.message || 'Failed to fetch'); }
+    }
     const merged=Object.assign({},local,r,{warnings:[...(r.warnings||[]),...(local.warnings||[])]});
     merged.ready=!!(r.ready && local.ready && merged.warnings.length===0);
+    if(merged.checks&&merged.checks.api){ merged.checks.api.detail=(merged.checks.api.detail||'Worker online')+' · '+API_BASE; }
     v916RenderHealth(merged);
     if(showReady) setStatus(merged.ready?'✅ V916 Ready to go live.':'⚠️ V916 found warnings before going live.');
   }catch(e){
-    local.checks.api={state:'bad',label:'ERROR',detail:e.message}; local.ready=false; local.warnings.unshift('Worker/API health endpoint could not be reached: '+e.message); v916RenderHealth(local);
+    local.checks.api={state:'bad',label:'ERROR',detail:'Could not reach API. Check Cloudflare Worker redeploy and route: '+(DJF_apiBases().join(' → '))+' · '+e.message};
+    local.ready=false;
+    local.warnings.unshift('Worker/API health endpoint could not be reached. Redeploy cloudflare-worker/worker.js and check that /api/health-check opens.');
+    v916RenderHealth(local);
   }
 }
 const V916_originalLoadAll=loadAll;loadAll=async function(){await V916_originalLoadAll();setTimeout(()=>{if(document.getElementById('v916HealthCheck'))v916RunHealthCheck();},900);};
@@ -1825,7 +1853,7 @@ setTimeout(()=>{if(document.getElementById('v917GoLiveAssistant'))v917RefreshAss
 
 
 /* V918 Unified Control Center */
-const V918_API = (window.DJF_API_BASE || '').replace(/\/$/, '');
+const V918_API = (window.DJF_API_BASE || localStorage.getItem('DJF_API_BASE') || API_BASE || '').replace(/\/$/, '');
 const v918$ = (id)=>document.getElementById(id);
 let v918Twitch = {};
 function v918Token(){ return (localStorage.getItem('DJF_ADMIN_TOKEN') || localStorage.getItem('adminToken') || v918$('token')?.value || '').trim(); }

@@ -1106,7 +1106,7 @@ export default {
       }
 
 
-      if (path === "/api/health-check") {
+      if (path === "/api/health" || path === "/api/health-check") {
         ensureThemeBackgrounds(core);
         const warnings = [];
         const checks = {};
