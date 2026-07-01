@@ -199,21 +199,13 @@ function forceThemeBackground(key){
 
 const API_BASE=(window.DJF_API_BASE||"https://djfolsoe-tv-api.sunefolsoe.workers.dev").replace(/\/$/,"");
 const DEFAULT_CHANNEL="djfolsoe";
-const OVERLAY_VERSION="V924 PERSISTENT BROADCAST CORE";
+const OVERLAY_VERSION="V926.2 CLEAN NO DEBUG";
+const DJF_SHOW_DEBUG=false;
 let overlayDebug={version:OVERLAY_VERSION,api:API_BASE,lastFetch:null,lastTheme:null,lastError:null,source:null};
 function renderOverlayDebug(){
-  try{
-    let el=document.getElementById("djfOverlayDebugBadge");
-    if(!el){
-      el=document.createElement("div");
-      el.id="djfOverlayDebugBadge";
-      el.style.cssText="position:fixed;left:12px;bottom:12px;z-index:999999;padding:10px 12px;border:2px solid rgba(98,236,255,.9);border-radius:12px;background:rgba(0,0,0,.82);color:#fff;font:800 12px/1.45 Arial,sans-serif;letter-spacing:.04em;pointer-events:none;max-width:520px;box-shadow:0 0 28px rgba(98,236,255,.35)";
-      document.body.appendChild(el);
-    }
-    el.innerHTML=`${overlayDebug.version}<br>API: ${overlayDebug.api}<br>THEME: ${overlayDebug.lastTheme||"?"}<br>SOURCE: ${overlayDebug.source||"?"}<br>${overlayDebug.lastError?"ERROR: "+overlayDebug.lastError:"OK: "+(overlayDebug.lastFetch||"")}`;
-  }catch(e){}
+  try{ const el=document.getElementById("djfOverlayDebugBadge"); if(el) el.remove(); }catch(e){}
 }
-function hideOverlayDebugAfter(ms=25000){ /* V922.3: keep visible because user cannot use console */ }
+function hideOverlayDebugAfter(ms=25000){ try{ const el=document.getElementById("djfOverlayDebugBadge"); if(el) el.remove(); }catch(e){} }
 
 let state=loadingState();
 let tick=0;
@@ -1372,7 +1364,7 @@ v901PushBurst = function(item){
    This bypasses the old V813/V900 theme renderer that could stay on weekend.
    ========================================================= */
 (function(){
-  const V926_VERSION = 'V926 THEME ENGINE REWRITE';
+  const V926_VERSION = 'V926.2 CLEAN NO DEBUG';
   const V926_API = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
   const V926_THEME_URLS = {
     weekend: 'https://folsoetv.dk/themes/weekend.png',
@@ -1463,45 +1455,46 @@ v901PushBurst = function(item){
     return {root, layer};
   }
   function bringContentAbove(root){
+    // V926.1: only keep known overlay layers above the background.
+    // Do not assign z-index to every child, because that can freeze old animations/layouts.
     try{
-      const children = Array.from((root || document.body).children || []);
-      children.forEach(el => {
-        if(el.id === 'djfThemeEngineV926' || el.id === 'themeBgLayer') return;
-        if(el.style && getComputedStyle(el).position === 'static') el.style.position = 'relative';
-        if(el.style && (!el.style.zIndex || Number(el.style.zIndex) < 1)) el.style.zIndex = '2';
+      ['topTicker','topTickerText','bottomTicker','bottomTickerText','broadcastBurst','box4','djfOverlayDebugBadge'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){
+          if(getComputedStyle(el).position === 'static') el.style.position='relative';
+          el.style.zIndex = id==='djfOverlayDebugBadge' ? '999999' : '5';
+        }
       });
     }catch(e){}
   }
+
   function updateExistingThemeLabels(theme, payload){
-    const meta = V926_META[theme] || V926_META.weekend;
-    const core = pickPayload(payload || {});
-    const showTitle = core?.show?.title || core?.show?.current || core?.overlay?.title || 'DJ FOLSOE';
-    const tickerText = core?.ticker?.text || core?.overlay?.infoLine || `${meta[0]} · DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK`;
-    const candidates = [
-      'topTickerText', 'bottomTickerText', 'burstTitle', 'burstKicker',
-      'box1Title', 'box2Title', 'box3Title'
-    ];
-    candidates.forEach(id => {
-      const el = document.getElementById(id);
-      if(!el) return;
-      if(id === 'topTickerText') el.textContent = `${meta[0]} · ${showTitle} · BROADCAST CORE LIVE`;
-      if(id === 'bottomTickerText') el.textContent = tickerText;
-      if(id === 'burstKicker') el.textContent = meta[0];
-      if(id === 'burstTitle') el.textContent = showTitle;
-    });
-  }
-  function renderDebug(theme, source){
+    // V926.1: do not overwrite ticker/burst DOM manually.
+    // The original render engines must stay alive and render their own HTML/animations.
     try{
-      let el = document.getElementById('djfOverlayDebugBadge');
-      if(!el){
-        el = document.createElement('div');
-        el.id = 'djfOverlayDebugBadge';
-        document.body.appendChild(el);
-      }
-      el.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:999999;padding:8px 10px;border:1px solid rgba(98,236,255,.85);border-radius:10px;background:rgba(0,0,0,.70);color:#fff;font:800 11px/1.35 Arial,sans-serif;letter-spacing:.04em;pointer-events:none;max-width:460px;box-shadow:0 0 18px rgba(98,236,255,.35)';
-      el.innerHTML = `${V926_VERSION}<br>API: ${V926_API}<br>THEME: ${theme}<br>SOURCE: ${source}<br>${lastError ? 'ERROR: ' + lastError : 'OK: theme applied'}`;
+      const meta = V926_META[theme] || V926_META.weekend;
+      document.documentElement.style.setProperty('--djf-theme-title', meta[0]);
     }catch(e){}
   }
+
+  function wakeOriginalOverlay(payload){
+    // V926.1: theme rewrite must not kill the original broadcast/ticker/chat engines.
+    try{
+      if(payload && typeof broadcastCoreToOverlayState === 'function'){
+        state = broadcastCoreToOverlayState(payload);
+      }
+    }catch(e){ console.log('V926.1 state wake failed', e); }
+    try{ if(typeof renderTickers === 'function') renderTickers(); }catch(e){}
+    try{ if(typeof renderCards === 'function') renderCards(); }catch(e){}
+    try{ if(typeof renderBurst === 'function') renderBurst(false); }catch(e){}
+    try{ if(typeof renderAll === 'function') renderAll(); }catch(e){}
+    try{ if(typeof connectChat === 'function') connectChat(); }catch(e){}
+  }
+
+  function renderDebug(theme, source){
+    try{ const el=document.getElementById('djfV926Debug'); if(el) el.remove(); }catch(e){}
+  }
+
   function applyV926Theme(theme, payload, source){
     theme = normalizeTheme(theme);
     const url = themeUrl(theme, payload);
@@ -1534,6 +1527,7 @@ v901PushBurst = function(item){
     }catch(e){}
     bringContentAbove(root);
     updateExistingThemeLabels(theme, payload);
+    wakeOriginalOverlay(payload);
     lastApplied = theme;
     window.DJF_CURRENT_THEME = theme;
     window.DJF_THEME_ENGINE_VERSION = V926_VERSION;
@@ -1589,4 +1583,255 @@ v901PushBurst = function(item){
   window.DJF_V926_RELOAD_THEME = loadAndApply;
   setTimeout(loadAndApply, 250);
   setInterval(loadAndApply, 5000);
+})();
+
+/* =========================================================
+   V927 — OVERLAY DATA WAKE UP
+   Purpose: keep V926 theme switching, but wake the visible overlay data.
+   Uses the already loaded broadcast-core state from JSONP.
+   No debug panel. No worker/admin changes.
+   ========================================================= */
+(function(){
+  const V927_VERSION = 'V927 OVERLAY DATA WAKE UP';
+  function clean(v,fallback=''){
+    try{ return String(tickerClean ? tickerClean(v) : (v ?? fallback)).trim() || fallback; }
+    catch(e){ return String(v ?? fallback).trim() || fallback; }
+  }
+  function upper(v,fallback=''){
+    return clean(v,fallback).toUpperCase();
+  }
+  function getState(){ return (typeof state !== 'undefined' && state) ? state : {}; }
+  function liveData(){
+    const s=getState();
+    const l=s.live||{};
+    return {
+      viewers:Number(l.viewers||0),
+      followers:Number(l.followers||0),
+      followersGoal:Number(l.followersGoal||1000),
+      subs:Number(l.subs||0),
+      subGoal:Number(l.subGoal||100)
+    };
+  }
+  function showData(){
+    const s=getState();
+    const show=s.show||{};
+    const visual=s.visual||{};
+    return {
+      title: clean(show.title || visual.title || 'DJ FOLSOE'),
+      description: clean(show.description || visual.mood || 'Live DJ shows, requests and Music TV from Denmark'),
+      themeTitle: clean(visual.title || (s.theme&&s.theme.theme&&s.theme.theme.title) || 'MUSIC TV'),
+      themeKey: clean((s.theme&&s.theme.activeTheme) || window.DJF_CURRENT_THEME || 'music-tv')
+    };
+  }
+  function chartItems(){
+    const s=getState();
+    return (s.chart && Array.isArray(s.chart.items)) ? s.chart.items : [];
+  }
+  function tickerBaseParts(){
+    const s=getState();
+    const l=liveData();
+    const sh=showData();
+    const toGo=Math.max(0,l.followersGoal-l.followers);
+    const base=[];
+    (s.topbarNews||[]).forEach(x=>base.push(clean(x)));
+    if(!base.length) base.push(`${sh.themeTitle} · ${sh.title}`);
+    return base.filter(Boolean).map(englishTickerText);
+  }
+  function bottomTickerParts(){
+    const s=getState();
+    const l=liveData();
+    const sh=showData();
+    const toGo=Math.max(0,l.followersGoal-l.followers);
+    const parts=[];
+    (s.footerTicker||[]).forEach(x=>parts.push(clean(x)));
+    parts.push(`FOLLOWER GOAL · ${l.followers}/${l.followersGoal} · ${toGo} TO GO`);
+    parts.push(`SUB GOAL · ${l.subs}/${l.subGoal}`);
+    parts.push('REQUEST YOUR SONG · !request Artist - Title');
+    parts.push('FOLLOW DJ FOLSOE ON TWITCH · twitch.tv/djfolsoe');
+    return parts.filter(Boolean).map(englishTickerText);
+  }
+
+  // Override ticker renderer so top and bottom tickers wake up from broadcast-core.
+  if(typeof renderTickers === 'function'){
+    renderTickers = function(){
+      try{
+        const topParts = tickerParts(tickerBaseParts());
+        const bottomParts = tickerParts(bottomTickerParts());
+        const topKey = topParts.join('||');
+        const bottomKey = bottomParts.join('||');
+        const topEl = q('topTickerText');
+        const bottomEl = q('bottomTickerText');
+        if(topEl && topKey !== lastTopTickerKey){
+          const topHtml = renderTickerHtml(topParts);
+          topEl.innerHTML = topHtml + `<span class="tickerSep">✦</span>` + topHtml;
+          document.documentElement.style.setProperty('--topDur', Math.max(28,Math.min(95,topKey.length/4.1))+'s');
+          lastTopTickerKey = topKey;
+        }
+        if(bottomEl && bottomKey !== lastBottomTickerKey){
+          const bottomHtml = renderTickerHtml(bottomParts);
+          bottomEl.innerHTML = bottomHtml + `<span class="tickerSep">✦</span>` + bottomHtml;
+          document.documentElement.style.setProperty('--bottomDur', Math.max(70,Math.min(190,bottomKey.length/4.0))+'s');
+          lastBottomTickerKey = bottomKey;
+        }
+      }catch(e){ console.log('V927 renderTickers failed', e); }
+    };
+  }
+
+  // Override the visible broadcast burst lane so lower-right/near-bottom output follows broadcast-core.
+  window.v927BurstLane = function(){
+    const s=getState();
+    const l=liveData();
+    const sh=showData();
+    const c=chartItems();
+    const top=c[0]||{rank:1,artist:'DJ FOLSOE',title:'This Week\'s Number One'};
+    const pick=c[1]||top;
+    const next = (s.motion && s.motion.lanes && s.motion.lanes.box2 && s.motion.lanes.box2.find(x=>String(x.label||'').toUpperCase().includes('NEXT'))) || null;
+    const toGo=Math.max(0,l.followersGoal-l.followers);
+    const req = (s.footerTicker||[]).find(x=>String(x).toUpperCase().includes('REQUEST')) || 'Use !request Artist - Title in chat';
+    return [
+      {kicker:'NOW ON AIR',title:sh.title,body:sh.description},
+      {kicker:'ACTIVE THEME',title:sh.themeTitle,body:sh.themeKey},
+      {kicker:'LIVE STATUS',title:`${l.viewers} viewers`,body:`${l.followers}/${l.followersGoal} followers · ${l.subs}/${l.subGoal} subs`},
+      {kicker:'FOLLOW JOURNEY',title:`${l.followers}/${l.followersGoal} followers`,body:`${toGo} to go · follow twitch.tv/djfolsoe`},
+      {kicker:'NEXT SHOW',title:clean(next&&next.headline,'Next DJ FOLSOE Broadcast'),body:clean(next&&next.body,'Announced soon')},
+      {kicker:'TOP 20 SPOTLIGHT',title:'#'+clean(top.rank,'1')+' '+clean(top.artist,'DJ FOLSOE'),body:clean(top.title,'This Week\'s Number One')},
+      {kicker:'FOLSOE PICK',title:clean(pick.artist,'Viewer Pick'),body:clean(pick.title,'Request of the Week')},
+      {kicker:'REQUESTS',title:'Request your song',body:clean(req,'Use !request Artist - Title in chat')}
+    ];
+  };
+
+  if(typeof renderBurst === 'function'){
+    renderBurst = function(){
+      try{
+        const lane=window.v927BurstLane();
+        const item=lane[(typeof tick !== 'undefined' ? tick : 0) % lane.length] || lane[0];
+        const k=q('burstKicker'), t=q('burstTitle'), b=q('burstBody'), root=q('broadcastBurst');
+        if(!root) return;
+        if(k) k.textContent=clip(item.kicker||'BROADCAST',32);
+        if(t) t.textContent=clip(item.title||'',42);
+        if(b) b.textContent=clip(item.body||'',96);
+        root.classList.remove('burstFlash');
+        void root.offsetWidth;
+        root.classList.add('burstFlash');
+      }catch(e){ console.log('V927 renderBurst failed', e); }
+    };
+  }
+  if(typeof renderCards === 'function'){
+    renderCards = function(){
+      try{ if(typeof renderBurst === 'function') renderBurst(); }catch(e){}
+    };
+  }
+
+  window.DJF_OVERLAY_DATA_VERSION = V927_VERSION;
+  window.DJF_V927_WAKE_DATA = function(){
+    try{ renderTickers(); }catch(e){}
+    try{ renderCards(); }catch(e){}
+    try{ if(typeof renderChatWaiting==='function') renderChatWaiting(); }catch(e){}
+  };
+  setTimeout(window.DJF_V927_WAKE_DATA, 600);
+  setInterval(window.DJF_V927_WAKE_DATA, 7000);
+})();
+
+/* =========================================================
+   V927.1 — DIRECT OVERLAY DATA WAKE FIX
+   Purpose: V927 theme works, but visible data may still be driven by old renderers.
+   This runs after everything else and writes the live broadcast-core directly to
+   the existing ticker + broadcast burst DOM. No debug box. No layout changes.
+   ========================================================= */
+(function(){
+  const V9271_VERSION = 'V927.1 DIRECT OVERLAY DATA WAKE FIX';
+  const API = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
+  let cache = null;
+  let idx = 0;
+  function escHtml(s){ return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function clean(s,f=''){ return String(s ?? f ?? '').trim() || f || ''; }
+  function num(v,f=0){ v=Number(v); return Number.isFinite(v)?v:f; }
+  function coreOf(payload){ return (payload && (payload.core || payload.data || payload.broadcastCore)) || payload || {}; }
+  function jsonp(url, timeoutMs){
+    return new Promise((resolve,reject)=>{
+      const cb='__djfV9271_'+Math.random().toString(36).slice(2);
+      let done=false;
+      const timer=setTimeout(()=>{ if(done) return; done=true; cleanup(); reject(new Error('JSONP timeout')); }, timeoutMs||8000);
+      function cleanup(){ try{delete window[cb];}catch(e){window[cb]=undefined;} try{script.remove();}catch(e){} clearTimeout(timer); }
+      window[cb]=function(payload){ if(done) return; done=true; cleanup(); resolve(payload); };
+      const script=document.createElement('script');
+      script.async=true;
+      script.src=url+(url.includes('?')?'&':'?')+'callback='+encodeURIComponent(cb)+'&ts='+Date.now();
+      script.onerror=function(){ if(done) return; done=true; cleanup(); reject(new Error('JSONP script load failed')); };
+      document.head.appendChild(script);
+    });
+  }
+  function themeId(core){
+    const t=core.theme||{}, o=core.overlay||{}, op=o.controlPanel||{}, b=core.broadcast||{};
+    return clean(t.id||t.key||o.activeTheme||o.theme||op.theme||b.activeTheme||core.activeTheme||window.DJF_CURRENT_THEME||'weekend').toLowerCase();
+  }
+  function themeTitle(id, core){
+    const title=(core.theme&&core.theme.title)||'';
+    const map={weekend:'WEEKEND',trance:'TRANCE TUESDAY',eurodance:'EURODANCE',fredagsbar:'FREDAGSBAR',retro:'RETRO HITS',popup:'POP UP LIVE',morning:'GOOD MORNING TWITCH',summer:'SUMMER'};
+    return clean(title || map[id] || id.toUpperCase());
+  }
+  function data(core){
+    const tw=core.twitch||{}, show=core.show||{}, hero=core.hero||{}, com=core.community||{}, ticker=core.ticker||{}, next=core.nextShow||{}, overlay=core.overlay||{};
+    const id=themeId(core);
+    const followers=num(tw.followers ?? com.followers,0);
+    const followerGoal=num(com.followerGoal,1000);
+    const subs=num(tw.subs ?? com.subs,0);
+    const subGoal=num(com.subGoal ?? overlay.subGoal,100);
+    const viewers=num(tw.viewers ?? show.viewers,0);
+    const live=!!(tw.live||tw.isLive||show.live);
+    const title=clean(show.title||show.current||tw.liveTitle||hero.title||overlay.title||'DJ FOLSOE');
+    const description=clean(show.description||hero.text||com.text||'Live DJ shows, requests and Music TV from Denmark.');
+    const tick=clean(ticker.text||overlay.infoLine||'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK · REQUEST A SONG · TOP 20 · LIVE COMMUNITY');
+    const req=clean(com.requestText||overlay.requestText||'Use !request Artist - Title in Twitch chat');
+    const nextTitle=clean(next.show||next.title||'Next DJ FOLSOE Broadcast');
+    const nextTime=clean(next.timeLabel||next.datetime||next.dateTime||'Announced soon');
+    const top20=Array.isArray(core.top20)?core.top20:[];
+    return {id,theme:themeTitle(id,core),followers,followerGoal,subs,subGoal,viewers,live,title,description,tick,req,nextTitle,nextTime,top20,special:clean(com.specialEvent||overlay.specialEvent||'')};
+  }
+  function tickerItem(text,cls){ return '<span class="tickerItem '+(cls||'white')+'"><b>'+escHtml(text.split('·')[0].trim())+'</b>'+(text.includes('·')?'<em>'+escHtml(text.split('·').slice(1).join('·').trim())+'</em>':'')+'</span>'; }
+  function renderTickersDirect(d){
+    const topEl=document.getElementById('topTickerText');
+    const bottomEl=document.getElementById('bottomTickerText');
+    const top=[`${d.live?'LIVE':'OFFLINE'} · ${d.title}`,`ACTIVE THEME · ${d.theme}`,`VIEWERS · ${d.viewers}`];
+    const bottom=[d.tick,`FOLLOWER GOAL · ${d.followers}/${d.followerGoal} · ${Math.max(0,d.followerGoal-d.followers)} TO GO`,`SUB GOAL · ${d.subs}/${d.subGoal}`,d.req,'FOLLOW DJ FOLSOE ON TWITCH · twitch.tv/djfolsoe'].filter(Boolean);
+    if(topEl){ const html=top.map((x,i)=>tickerItem(x,['cyan','pink','yellow'][i%3])).join('<span class="tickerSep">✦</span>'); topEl.innerHTML=html+'<span class="tickerSep">✦</span>'+html; }
+    if(bottomEl){ const html=bottom.map((x,i)=>tickerItem(x,['station','goal','sub','request','follow'][i%5])).join('<span class="tickerSep">✦</span>'); bottomEl.innerHTML=html+'<span class="tickerSep">✦</span>'+html; }
+  }
+  function renderBurstDirect(d){
+    const k=document.getElementById('burstKicker'), t=document.getElementById('burstTitle'), b=document.getElementById('burstBody'), root=document.getElementById('broadcastBurst');
+    if(!root) return;
+    const top=d.top20&&d.top20[0]||{rank:1,artist:'DJ FOLSOE',title:"This Week's Number One"};
+    const pick=d.top20&&d.top20[1]||top;
+    const lane=[
+      ['NOW ON AIR',d.title,d.description],
+      ['ACTIVE THEME',d.theme,d.id],
+      ['LIVE STATUS',`${d.viewers} viewers`,`${d.followers}/${d.followerGoal} followers · ${d.subs}/${d.subGoal} subs`],
+      ['NEXT SHOW',d.nextTitle,d.nextTime],
+      ['FOLLOW JOURNEY',`${d.followers}/${d.followerGoal} followers`,`${Math.max(0,d.followerGoal-d.followers)} to go · twitch.tv/djfolsoe`],
+      ['TOP 20 SPOTLIGHT',`#${top.rank||1} ${clean(top.artist,'DJ FOLSOE')}`,clean(top.title,"This Week's Number One")],
+      ['FOLSOE PICK',clean(pick.artist,'Viewer Pick'),clean(pick.title,'Request of the Week')],
+      ['REQUESTS','Request your song',d.req]
+    ];
+    if(d.special) lane.unshift(['SPECIAL EVENT',d.special,d.tick]);
+    const item=lane[idx++ % lane.length];
+    if(k) k.textContent=item[0].slice(0,32);
+    if(t) t.textContent=item[1].slice(0,42);
+    if(b) b.textContent=item[2].slice(0,96);
+    root.classList.remove('burstFlash'); void root.offsetWidth; root.classList.add('burstFlash');
+  }
+  async function wake(){
+    try{
+      const payload=await jsonp(API+'/api/broadcast-jsonp',8000);
+      cache=coreOf(payload);
+      const d=data(cache);
+      renderTickersDirect(d);
+      renderBurstDirect(d);
+      window.DJF_OVERLAY_DATA_VERSION=V9271_VERSION;
+    }catch(e){
+      if(cache){ const d=data(cache); renderTickersDirect(d); renderBurstDirect(d); }
+    }
+  }
+  window.DJF_V9271_WAKE_DATA=wake;
+  setTimeout(wake,800);
+  setInterval(wake,5000);
 })();
