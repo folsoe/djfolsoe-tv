@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V903 Admin Hub</title>
+  <title>DJ FOLSOE V904 One Button Control</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V903</span>
-    <h1>Broadcast Control Center</h1>
-    <p>One control hub for website, admin, overlay, Twitch data, tickers, shows, Top 20, requests and language.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V904</span>
+    <h1>One Button Broadcast Control</h1>
+    <p>Simple daily control hub: choose a show, press one button, and website + overlay update together.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -28,24 +28,52 @@
 </header>
 
 <nav class="adminTabs">
-  <button onclick="jump('theme')">🎨 Theme</button>
-  <button onclick="jump('homepage')">🏠 Homepage</button><button onclick="jump('seo')">🔎 SEO</button>
-  <button onclick="jump('news')">📰 News</button>
-  <button onclick="jump('tickers')">📡 Tickers</button>
-  <button onclick="jump('shows')">📺 Shows</button><button onclick="jump('showVisuals')">🎭 Show graphics</button><button onclick="jump('overlayContent')">📦 Overlay boxes</button>
-  <button onclick="jump('top20')">🏆 Top 20</button><button onclick="jump('discovery')">✨ Discovery</button>
-  <button onclick="jump('requests')">🎧 Requests</button><button onclick="jump('modsManager')">👥 Mods</button><button onclick="jump('communityManager')">❤️ Community</button><button onclick="jump('nextShowManager')">📅 Next show</button>
-  <button onclick="jump('twitch')">🟣 Twitch</button>
+  <button onclick="jump('oneclick')">🚀 One click</button>
+  <button onclick="jump('theme')">🎨 Themes</button>
+  <button onclick="jump('homepage')">🏠 Website</button>
+  <button onclick="jump('overlayContent')">📦 Overlay boxes</button>
+  <button onclick="jump('top20')">🏆 Top 20</button>
+  <button onclick="jump('shows')">📺 Shows</button>
+  <button onclick="toggleAdvanced()">⚙️ Advanced</button>
 </nav>
 
 <main>
+
+  <section id="oneclick" class="panel oneClickPanel">
+    <div class="panelHead"><h2>🚀 One Button Control</h2><div><button class="bigPublish" onclick="publishEverything()">PUBLISH EVERYTHING</button></div></div>
+    <p class="note">Daily workflow: select the show/theme below, update the few important fields, then press Publish Everything. Website, overlay state, tickers and active background are synchronized together.</p>
+    <div class="quickGrid">
+      <button onclick="quickShow('morning')">☀️ Good Morning Twitch</button>
+      <button onclick="quickShow('trance')">💙 Trance Tuesday</button>
+      <button onclick="quickShow('chart')">🏆 Chart Show</button>
+      <button onclick="quickShow('fredagsbar')">🍺 Fredagsbar</button>
+      <button onclick="quickShow('retro')">🕹️ Retro Hits</button>
+      <button onclick="quickShow('eurodance')">💛 Eurodance</button>
+      <button onclick="quickShow('popup')">⚡ Pop Up</button>
+      <button onclick="quickShow('weekend')">🎉 Weekend Vibes</button>
+    </div>
+    <div class="formGrid liveNowGrid">
+      <div><label>Now on air</label><input id="quickOnAir" placeholder="DJ FOLSOE LIVE"></div>
+      <div><label>Next show</label><input id="quickNextShow" placeholder="Next show / time"></div>
+      <div><label>Follower goal</label><input id="quickFollowerGoal" placeholder="870/1000 followers"></div>
+      <div><label>Request line</label><input id="quickRequestLine" placeholder="Requests open · !request"></div>
+      <div class="wide"><label>Website headline</label><input id="quickHeadline" placeholder="Live Music TV from Denmark"></div>
+      <div class="wide"><label>Website message</label><textarea id="quickMessage" rows="3" placeholder="What should the front page say right now?"></textarea></div>
+    </div>
+    <div class="quickActions">
+      <button onclick="applyQuickFields()">Apply quick fields</button>
+      <button onclick="applyQuickFields();publishEverything()">Apply + publish now</button>
+      <button onclick="loadAll()">Reload current data</button>
+    </div>
+    <pre id="oneClickStatus">Choose a show preset, then publish.</pre>
+  </section>
   <section id="status" class="panel statusPanel">
     <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Load data</button><button onclick="publishEverything()">Publish everything</button><button onclick="testAll()">Test all</button></div></div>
     <pre id="statusBox">Ready. Add token and press Load data.</pre>
   </section>
 
   
-  <section id="seo" class="panel">
+  <section id="seo" class="panel advancedPanel">
     <div class="panelHead"><h2>🔎 SEO Broadcast Engine</h2><div><button onclick="openApi('/api/seo')">Test SEO API</button><button onclick="openApi('/sitemap.xml')">Sitemap</button><button onclick="openApi('/robots.txt')">Robots</button></div></div>
     <p class="note">Styrer Google metadata, OpenGraph, Twitter cards, schema.org, sitemap og søgeord.</p>
     <div class="formGrid">
@@ -60,8 +88,8 @@
   </section>
 
   <section id="theme" class="panel">
-    <div class="panelHead"><h2>🎨 Theme Engine til overlay</h2><button onclick="openApi('/api/theme')">Test theme API</button></div>
-    <p class="note">One click changes the active theme background for both website and StreamElements overlay. The images are included in /themes, so you do not need to upload every background separately.</p>
+    <div class="panelHead"><h2>🎨 Theme Engine</h2><button onclick="openApi('/api/theme')">Test theme API</button></div>
+    <p class="note">One click changes the active background for both website and StreamElements overlay. Theme images live in /themes and travel with the GitHub upload.</p>
     <div id="themeGrid" class="themeGrid"></div>
     <pre id="activeTheme">Active theme: loading</pre>
   </section>
@@ -78,14 +106,14 @@
     <div class="buttons"><button onclick="saveProfile()">Save profile/front page</button></div>
   </section>
 
-  <section id="news" class="panel">
+  <section id="news" class="panel advancedPanel">
     <div class="panelHead"><h2>📰 Homepage news/cards</h2><button onclick="addRow('news')">Add news</button></div>
     <p class="note">Shown as cards on the front page: Latest show, Top20 nyt, Requests, Community, Twitch updates osv.</p>
     <div id="newsEditor"></div>
     <button onclick="saveRows('news')">Save news</button>
   </section>
 
-  <section id="tickers" class="panel twoCol">
+  <section id="tickers" class="panel advancedPanel twoCol">
     <div>
       <div class="panelHead"><h2>📡 Top ticker overlay</h2><button onclick="addRow('top')">Add</button></div>
       <p class="note">Top ticker kan være theme-specifik. Fx theme = weekend.</p>
@@ -102,15 +130,15 @@
 
   <section id="shows" class="panel">
     <div class="panelHead"><h2>📺 Shows</h2><button onclick="addRow('shows')">Add show</button></div>
-    <p class="note">Styrer show-kort på forsiden.</p>
+    <p class="note">Controls the show cards on the front page.</p>
     <div id="showsEditor"></div>
     <button onclick="saveRows('shows')">Save shows</button>
   </section>
 
   
-  <section id="showVisuals" class="panel">
-    <div class="panelHead"><h2>🎭 Show graphics på forsiden</h2><button onclick="resetShowVisuals()">Indsæt standard grafik</button></div>
-    <p class="note">Her kan du ændre farver, ikon, tag og stor poster-tekst på show-kortene. Brug CSS gradient, fx <code>linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)</code>.</p>
+  <section id="showVisuals" class="panel advancedPanel">
+    <div class="panelHead"><h2>🎭 Show graphics på forsiden</h2><button onclick="resetShowVisuals()">Insert default graphics</button></div>
+    <p class="note">Advanced show-card design. Change colours, icon, tag and poster text. Use CSS gradients, e.g. <code>linear-gradient(135deg,#160a5c,#6417ff,#00d4ff)</code>.</p>
     <div id="showVisualsEditor"></div>
     <button onclick="saveShowVisuals()">Save show grafik</button>
   </section>
@@ -122,20 +150,20 @@
       <div><h3>Box 1 · Top left</h3><button onclick="addOverlayItem('box1')">Add Box 1 item</button><div id="box1Editor"></div></div>
       <div><h3>Box 2 · Top right</h3><button onclick="addOverlayItem('box2')">Add Box 2 item</button><div id="box2Editor"></div></div>
       <div><h3>Box 3 · Bottom left</h3><button onclick="addOverlayItem('box3')">Add Box 3 item</button><div id="box3Editor"></div></div>
-      <div><h3>Box 4 · Højre bund</h3><div class="previewCard"><b>LOCKED</b><p>Twitch chat med profilbillede og emotes. Denne boks skal ikke ændres.</p></div></div>
+      <div><h3>Box 4 · Bottom right</h3><div class="previewCard"><b>LOCKED</b><p>Twitch chat med profilbillede og emotes. This box is locked and should not be changed.</p></div></div>
     </div>
-    <button onclick="saveOverlayContent()">Save overlay bokse</button>
+    <button onclick="saveOverlayContent()">Save overlay boxes</button>
   </section>
 
   <section id="top20" class="panel">
-    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Add sang</button><button onclick="seedTop20()">Indsæt standard Top 20</button></div></div>
-    <p class="note">Styrer FOLSOE Top 20 på forsiden og overlayets musik-bokse.</p>
+    <div class="panelHead"><h2>🏆 Top 20</h2><div><button onclick="addRow('top20')">Add track</button><button onclick="seedTop20()">Insert default Top 20</button></div></div>
+    <p class="note">Controls FOLSOE Top 20 on the website and music boxes in the overlay.</p>
     <div id="top20Editor"></div>
     <button onclick="saveRows('top20')">Save Top 20</button>
   </section>
 
   
-  <section id="discovery" class="panel">
+  <section id="discovery" class="panel advancedPanel">
     <div class="panelHead"><h2>✨ Dem her har jeg lige opdaget</h2><button onclick="addDiscovery()">Add discovery</button></div>
     <p class="note">3 ekstra felter til nye tracks/boblere, som vises på forsiden under Top 20.</p>
     <div id="discoveryEditor"></div>
@@ -143,7 +171,7 @@
   </section>
 
 
-  <section id="requests" class="panel">
+  <section id="requests" class="panel advancedPanel">
     <div class="panelHead"><h2>🎧 Request Manager</h2><div><button onclick="openApi('/api/requests')">Requests API</button><button onclick="openApi('/api/request-stats')">Stats API</button></div></div>
     <p class="note">Controls the latest song requests from !request. You can approve, reject, pin and delete requests.</p>
     <div class="formGrid">
@@ -160,7 +188,7 @@
 
 
   
-  <section id="modsManager" class="panel">
+  <section id="modsManager" class="panel advancedPanel">
     <div class="panelHead"><h2>👥 Mod Team Manager</h2><button onclick="addMod()">Add mod</button></div>
     <p class="note">Enter the Twitch login. The homepage automatically loads profile image, display name and live/offline status.</p>
     <div id="modsEditor"></div>
@@ -168,7 +196,7 @@
   </section>
 
 
-  <section id="communityManager" class="panel">
+  <section id="communityManager" class="panel advancedPanel">
     <div class="panelHead"><h2>❤️ Community Wall Manager</h2><div><button onclick="addCommunity()">Add community felt</button><button onclick="openApi('/api/community-wall')">Community API</button></div></div>
     <p class="note">Styrer Community Love på forsiden. Skriv Twitch-navn i User/Login for at hente profilbillede og live-status.</p>
     <div id="communityEditor"></div>
@@ -183,7 +211,7 @@
   </section>
 
 
-  <section id="nextShowManager" class="panel">
+  <section id="nextShowManager" class="panel advancedPanel">
     <div class="panelHead"><h2>📅 Next show</h2></div>
     <p class="note">Styrer Next show og countdown på forsiden.</p>
     <div class="formGrid">
@@ -194,7 +222,7 @@
     <button onclick="saveNextShow()">Save næste show</button>
   </section>
 
-  <section id="twitch" class="panel">
+  <section id="twitch" class="panel advancedPanel">
     <div class="panelHead"><h2>🟣 Twitch sync</h2><div><button onclick="openApi('/api/twitch-profile')">Profil API</button><button onclick="openApi('/api/homepage')">Homepage API</button></div></div>
     <p class="note">Kræver Cloudflare secrets: TWITCH_CLIENT_ID, TWITCH_ACCESS_TOKEN, TWITCH_CHANNEL=djfolsoe.</p>
     <div id="twitchPreview" class="twitchPreview"></div>

@@ -1,5 +1,5 @@
 {
-  "version": "DJ FOLSOE NETWORK V816 BROADCAST OS",
+  "version": "DJ FOLSOE NETWORK V904 ONE BUTTON CONTROL",
   "activeTheme": "weekend",
   "language": "da",
   "twitchChannel": "djfolsoe",
@@ -135,19 +135,19 @@
     {
       "key": "fredagsbar",
       "title": "Fredagsbar",
-      "time": "1. fredag hver måned 20:00",
+      "time": "First Friday every month 20:00",
       "body": "Weekend energy, party tracks and community."
     },
     {
       "key": "retro",
       "title": "Retro Hits",
-      "time": "Søndag 20:00",
+      "time": "Sunday 20:00",
       "body": "Classic tracks, nostalgia and singalong moments."
     },
     {
       "key": "morning",
       "title": "Good Morning Twitch",
-      "time": "Hver dag 07:00",
+      "time": "Every day 07:00",
       "body": "Coffee, music and the best start of the day."
     },
     {
@@ -171,8 +171,8 @@
       "id": "news2",
       "active": true,
       "type": "Top 20 nyt",
-      "title": "Ny Top 20 ude nu",
-      "body": "Se denne uges største hits på FOLSOE Top 20.",
+      "title": "New Top 20 is out now",
+      "body": "See this week’s biggest tracks on FOLSOE Top 20.",
       "theme": "all",
       "priority": 2
     },
@@ -180,7 +180,7 @@
       "id": "news3",
       "active": true,
       "type": "Request info",
-      "title": "Husk dine requests",
+      "title": "Remember your requests",
       "body": "Use !request in chat.",
       "theme": "all",
       "priority": 3
@@ -189,8 +189,8 @@
       "id": "news4",
       "active": true,
       "type": "Community news",
-      "title": "Fællesskabet vokser",
-      "body": "Chat, emotes, follows og god stemning hver stream.",
+      "title": "The community is growing",
+      "body": "Chat, emotes, follows and good vibes every stream.",
       "theme": "all",
       "priority": 4
     },
@@ -198,8 +198,8 @@
       "id": "news5",
       "active": true,
       "type": "DJ Network",
-      "title": "Danske DJs live nu",
-      "body": "Se hvem der er live og find næste raid target.",
+      "title": "Danish DJs live now",
+      "body": "See who is live and find the next raid target.",
       "theme": "all",
       "priority": 5
     },
@@ -207,8 +207,8 @@
       "id": "news6",
       "active": true,
       "type": "Twitch updates",
-      "title": "Nye emotes unlocked",
-      "body": "Tjek de nye emotes og brug dem i chatten.",
+      "title": "New emotes unlocked",
+      "body": "Check the new emotes and use them in chat.",
       "theme": "all",
       "priority": 6
     }
