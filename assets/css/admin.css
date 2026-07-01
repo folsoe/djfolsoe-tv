@@ -56,6 +56,3 @@ code{color:#2dd4ef}
 
 /* V817 GLOBAL EDITION - language selectors removed */
 .langs,.language,.languageSwitcher,.langSwitch,[data-lang]{display:none!important;}
-
-/* V817.4 social admin */
-.socialLinksEditor input{background:#080b18;color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:9px}.socialLinksEditor button{border:0;border-radius:999px;padding:9px 12px;font-weight:900;background:linear-gradient(135deg,#22e7ff,#ff35d8);color:#050713}

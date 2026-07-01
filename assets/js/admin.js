@@ -25,7 +25,7 @@ function DJF_get(id){
 
 
 const API_BASE="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
-const THEMES={"fredagsbar": "🍺 FREDAGSBAR", "popup": "⚡ POPUP", "trance": "💙 TRANCE TUESDAY", "retro": "🕹️ RETRO HITS", "eurodance": "💛 EURODANCE", "morning": "☀️ GOOD MORNING TWITCH", "summer": "🌴 SUMMER BEATS", "weekend": "🎉 WEEKEND VIBES", "chart": "📊 THE CHART SHOW", "christmas": "🎄 CHRISTMAS MUSIC", "danske": "🇩🇰 DANSKE HITS", "disco": "🪩 DISCO HITS", "handsup": "🙌 HANDS UP", "harddance": "🔥 HARD DANCE", "halloween": "🎃 HALLOWEEN HARD DANCE"};
+const THEMES={"fredagsbar": "🍺 FREDAGSBAR", "popup": "⚡ POPUP", "trance": "💙 TRANCE TUESDAY", "retro": "🕹️ RETRO HITS", "eurodance": "💛 EURODANCE", "morning": "☀️ GOOD MORNING TWITCH", "summer": "🌴 SUMMER BEATS", "weekend": "🎉 WEEKEND VIBES", "chart": "📊 THE CHART SHOW", "christmas": "🎄 CHRISTMAS MUSIC", "danske": "🇩🇰 DANISH HITS", "disco": "🪩 DISCO HITS", "handsup": "🙌 HANDS UP", "harddance": "🔥 HARD DANCE", "halloween": "🎃 HALLOWEEN HARD DANCE"};
 const TOP20_SEED=[{"rank": 1, "artist": "Axwell & Bonn", "title": "Whatever Turns You On", "genre": "Dance", "points": 92}, {"rank": 2, "artist": "Hugel, David Guetta", "title": "Shine", "genre": "Dance", "points": 90}, {"rank": 3, "artist": "Calvin Harris", "title": "Satisfy", "genre": "Dance", "points": 88}, {"rank": 4, "artist": "Rune Rask, Hampenberg, The Minds of 99", "title": "Under Din Sne", "genre": "Bootleg Remix", "points": 87}, {"rank": 5, "artist": "Svenstrup & Vendelboe x DJ Encore", "title": "Udødelige", "genre": "Dance", "points": 86}, {"rank": 6, "artist": "Armin Van Buuren", "title": "Dream A Little Dream", "genre": "Trance", "points": 85}, {"rank": 7, "artist": "Lost Frequencies", "title": "Live It All", "genre": "Dance Pop", "points": 84}, {"rank": 8, "artist": "David Guetta, Alok", "title": "Run Run River", "genre": "Progressive EDM", "points": 83}, {"rank": 9, "artist": "Anyma", "title": "Bad Angel", "genre": "Melodic Techno", "points": 82}, {"rank": 10, "artist": "Bebe Rexha", "title": "New Religion", "genre": "Pop Dance", "points": 81}, {"rank": 11, "artist": "RAYE", "title": "Where Is My Husband!", "genre": "Pop", "points": 80}, {"rank": 12, "artist": "Tiësto", "title": "Lethal Industry 2026", "genre": "Trance", "points": 79}, {"rank": 13, "artist": "Purple Disco Machine", "title": "Beat Fantasy", "genre": "Nu-Disco", "points": 78}, {"rank": 14, "artist": "Meduza", "title": "Another World", "genre": "House", "points": 77}, {"rank": 15, "artist": "Dua Lipa", "title": "Physical Reloaded", "genre": "Pop Dance", "points": 76}, {"rank": 16, "artist": "Topic", "title": "Tonight", "genre": "Dance", "points": 75}, {"rank": 17, "artist": "Robin Schulz", "title": "Only Way Is Up", "genre": "Dance Pop", "points": 74}, {"rank": 18, "artist": "Jax Jones", "title": "Never Be Lonely", "genre": "House", "points": 73}, {"rank": 19, "artist": "Ofenbach", "title": "Overdrive", "genre": "Dance", "points": 72}, {"rank": 20, "artist": "Swedish House Mafia", "title": "Ray Of Solar", "genre": "EDM", "points": 71}];
 let core=null, home=null, activeTheme="weekend";
 let topItems=[],bottomItems=[],newsItems=[],showsItems=[],top20Items=[],discoveryItems=[],requestItems=[];
@@ -65,7 +65,7 @@ function syncTokenFields(v){
 function saveToken(){
   const v=token();
   syncTokenFields(v);
-  setStatus(v ? "✅ Token saved og synkroniseret" : "❌ Token mangler");
+  setStatus(v ? "✅ Token saved and synchronized" : "❌ Token missing");
   loadAll();
 }
 function openApi(path){window.open(API_BASE+path,"_blank");}
@@ -128,7 +128,7 @@ async function loadAll(){
     renderTwitch();
     loadDiscovery();
     loadContentManager();
-    setStatus("✅ Data hentet fra Broadcast Cloud\n"+new Date().toLocaleString("da-DK"));
+    setStatus("✅ Data loaded from Broadcast Cloud\n"+new Date().toLocaleString("en-GB"));
   }catch(e){setStatus("❌ Load-fejl: "+e.message);}
 }
 
@@ -148,7 +148,7 @@ async function saveProfile(){
     });
     const twitchChannel=DJF_get("twitchChannel").trim().toLowerCase()||"djfolsoe";
     await api("/api/core",{method:"POST",body:JSON.stringify({profile,twitchChannel})});
-    setStatus("✅ Profil/forside fallback gemt");
+    setStatus("✅ Profile and front page fallback saved");
     loadAll();
   }catch(e){setStatus("❌ Profil-fejl: "+e.message);}
 }
@@ -392,7 +392,7 @@ let communityItems=[];
 let nextShowItem={};
 
 async function loadEcosystem(){
-  try{ modItems=(await api('/api/mod-team')).items||[]; }catch(e){ modItems=[{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Hjælper med musikønsker og chat-flow.", "active": true, "priority": 3}]; }
+  try{ modItems=(await api('/api/mod-team')).items||[]; }catch(e){ modItems=[{"login": "djcosmodk", "role": "Chat Safety", "description": "Holder styr på chatten og den gode stemning.", "active": true, "priority": 1}, {"login": "djkessedk", "role": "Community", "description": "Hjælper nye seere og bakker DJ-fællesskabet op.", "active": true, "priority": 2}, {"login": "requesthelper", "role": "Requests", "description": "Helps with song requests and chat flow.", "active": true, "priority": 3}]; }
   try{ communityItems=(await api('/api/community-wall')).items||[]; }catch(e){ communityItems=[{"key": "latestFollower", "label": "Latest follower", "value": "Twitch community", "active": true, "priority": 1}, {"key": "latestSub", "label": "Latest sub", "value": "Tak for støtten", "active": true, "priority": 2}, {"key": "latestRaid", "label": "Latest raid", "value": "DJ Network love", "active": true, "priority": 3}, {"key": "topRequester", "label": "Top requester", "value": "Chatten bestemmer", "active": true, "priority": 4}, {"key": "memberOfMonth", "label": "Community member of the month", "value": "Good vibes only", "active": true, "priority": 5}]; }
   try{ nextShowItem=(await api('/api/next-show')).item||{}; }catch(e){ nextShowItem={"title": "Fredagsbar", "dateTime": "", "description": "Fest, grin, requests og weekendstemning.", "active": true}; }
   renderModsEditor();
@@ -459,7 +459,7 @@ async function saveNextShow(){
   try{await api('/api/next-show',{method:'POST',body:JSON.stringify({item})});setStatus('✅ Next show gemt');loadEcosystem();}catch(e){setStatus('❌ Next show fejl: '+e.message);}
 }
 
-let seoItem={"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": {"da": "DJ FOLSOE | Dansk Twitch DJ, Dance Music & Music Streams Denmark", "en": "DJ FOLSOE | Danish Twitch DJ, Dance Music & Music Streams Denmark", "de": "DJ FOLSOE | Dänischer Twitch DJ, Dance Music & Music Streams Denmark"}, "description": {"da": "DJ FOLSOE er en dansk Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musicstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musicwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]};
+let seoItem={"siteName": "DJ FOLSOE TV", "domain": "https://folsoetv.dk", "title": "DJ FOLSOE TV | Music TV From Denmark", "description_old": {"da": "DJ FOLSOE er en Danish Twitch DJ og musikstreamer med live DJ-shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, requests og community.", "en": "DJ FOLSOE is a Danish Twitch DJ and music streamer with live DJ shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, song requests and community.", "de": "DJ FOLSOE ist ein dänischer Twitch-DJ und Musicstreamer mit Live-DJ-Shows, Top 20, Trance Tuesday, Eurodance, Retro Hits, Musicwünschen und Community."}, "keywords": ["DJ FOLSOE", "DJ Folsoe Twitch", "Danish Twitch DJ", "dance music streams Denmark", "music streams Denmark", "Twitch music streamer Denmark", "Eurodance Twitch", "Trance DJ Denmark"], "sameAs": ["https://twitch.tv/djfolsoe"], "image": "https://folsoetv.dk/assets/og-dj-folsoe.jpg", "showPages": [{"slug": "trance-tuesday", "title": "Trance Tuesday", "description": "Uplifting trance music show live from Denmark with DJ FOLSOE."}, {"slug": "fredagsbar", "title": "Fredagsbar", "description": "Weekend party, dance music, requests and community live on Twitch."}, {"slug": "folsoe-top20", "title": "FOLSOE Top 20", "description": "Weekly Top 20 music chart and countdown show with DJ FOLSOE."}, {"slug": "retro-hits", "title": "Retro Hits", "description": "Classic retro hits, Eurodance, 90s and 00s music streams from Denmark."}, {"slug": "good-morning-twitch", "title": "Good Morning Twitch", "description": "Morning music, coffee and good vibes with DJ FOLSOE."}, {"slug": "popup", "title": "PopUp", "description": "Surprise live DJ streams when you least expect it."}, {"slug": "weekend", "title": "Weekend", "description": "Weekend music streams with dance, Eurodance, Trance and community."}]};
 async function loadSEO(){ try{ const r=await api('/api/seo'); seoItem=r.seo||r; }catch(e){} fillSEO(); }
 function fillSEO(){
   if(!document.getElementById('seoSiteName'))return;
@@ -625,7 +625,7 @@ function ensureAdminPatchDom(){
     const sec=document.createElement("section");
     sec.id="communityManager";
     sec.className="panel";
-    sec.innerHTML='<div class="panelHead"><h2>❤️ Community Wall Manager</h2><button onclick="addCommunity()">Tilføj community felt</button></div><div id="communityEditor"></div><button onclick="saveCommunity()">Save community wall</button>';
+    sec.innerHTML='<div class="panelHead"><h2>❤️ Community Wall Manager</h2><button onclick="addCommunity()">Add community felt</button></div><div id="communityEditor"></div><button onclick="saveCommunity()">Save community wall</button>';
     main.appendChild(sec);
   }
   if(!document.getElementById("communityRaids")){
@@ -654,7 +654,7 @@ function djfNormalizeThemeKey(k){
   
   if(k.includes("chart")||k.includes("top20")||k.includes("top 20")) return "chart";
   if(k.includes("christmas")||k.includes("jul")) return "christmas";
-  if(k.includes("dansk")) return "danske";
+  if(k.includes("Danish")) return "Danishe";
   if(k.includes("disco")) return "disco";
   if(k.includes("hands")) return "handsup";
   if(k.includes("harddance")||k.includes("hard dance")||k.includes("hardstyle")) return "harddance";
@@ -685,7 +685,7 @@ async function setThemeSafe(k){
         msg="Admin token mangler eller matcher ikke Cloudflare Worker ADMIN_TOKEN.";
       }
     }
-    if(msg.includes("Unknown theme")) msg="Ukendt tema-key. Brug: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend.";
+    if(msg.includes("Unknown theme")) msg="Unknown theme key. Brug: fredagsbar, popup, trance, retro, eurodance, morning, summer, weekend.";
     setStatus("❌ Theme error: "+msg);
     console.error("Theme error",e);
   }
@@ -706,57 +706,54 @@ async function testThemeToken(){
 localStorage.setItem("DJF_LANG","en");
 document.documentElement.lang="en";
 
-
-/* V817.4 - Social Media Admin Manager */
-let socialLinks = [
-  {key:"facebook", label:"Facebook", icon:"fab fa-facebook-f", url:"#", visible:true},
-  {key:"instagram", label:"Instagram", icon:"fab fa-instagram", url:"#", visible:true},
-  {key:"tiktok", label:"TikTok", icon:"fab fa-tiktok", url:"#", visible:true},
-  {key:"snapchat", label:"Snapchat", icon:"fab fa-snapchat-ghost", url:"#", visible:true},
-  {key:"youtube", label:"YouTube", icon:"fab fa-youtube", url:"#", visible:true},
-  {key:"spotify", label:"Spotify", icon:"fab fa-spotify", url:"#", visible:true},
-  {key:"discord", label:"Discord", icon:"fab fa-discord", url:"#", visible:true},
-  {key:"twitch", label:"Twitch", icon:"fab fa-twitch", url:"https://twitch.tv/djfolsoe", visible:true}
-];
-
-function renderSocialLinksEditor(){
-  const el=document.getElementById("socialLinksEditor");
-  if(!el) return;
-  el.innerHTML = socialLinks.map((x,i)=>`
-    <div class="socialAdminRow" style="display:grid;grid-template-columns:110px 1fr 1fr 70px 60px;gap:10px;align-items:center;margin:10px 0;padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04)">
-      <input value="${x.key||""}" onchange="socialLinks[${i}].key=this.value" placeholder="key">
-      <input value="${x.label||""}" onchange="socialLinks[${i}].label=this.value" placeholder="Label">
-      <input value="${x.url||""}" onchange="socialLinks[${i}].url=this.value" placeholder="https://...">
-      <label style="display:flex;gap:6px;align-items:center"><input type="checkbox" ${x.visible!==false?"checked":""} onchange="socialLinks[${i}].visible=this.checked"> Show</label>
-      <button onclick="socialLinks.splice(${i},1);renderSocialLinksEditor()">Delete</button>
-      <small style="grid-column:1/-1;color:rgba(255,255,255,.58)">Icon class: <input style="width:260px" value="${x.icon||""}" onchange="socialLinks[${i}].icon=this.value" placeholder="fab fa-facebook-f"></small>
-    </div>
-  `).join("");
-}
-
-function addSocialLink(){
-  socialLinks.push({key:"custom",label:"Custom",icon:"fas fa-link",url:"#",visible:true});
-  renderSocialLinksEditor();
-}
-
-async function loadSocialLinks(){
+async function publishEverything(){
   try{
-    const r=await api("/api/social-links");
-    socialLinks = Array.isArray(r.items) ? r.items : (Array.isArray(r.socialLinks) ? r.socialLinks : socialLinks);
-    renderSocialLinksEditor();
-    setStatus("✅ Social links loaded");
-  }catch(e){
-    renderSocialLinksEditor();
-    setStatus("⚠️ Social links loaded from local fallback");
-  }
+    readEditors();
+    readOverlayContent();
+    const profile={
+      name:DJF_get("profileName").trim()||"DJ FOLSOE",
+      description:DJF_get("profileDescription").trim(),
+      genres:DJF_get("profileGenres").split(",").map(x=>x.trim()).filter(Boolean)
+    };
+    const payload={
+      language:"en",
+      theme:activeTheme||"weekend",
+      profile,
+      twitchChannel:DJF_get("twitchChannel").trim().toLowerCase()||"djfolsoe",
+      homepageNews:newsItems,
+      shows:showsItems,
+      top20:top20Items,
+      discoveryPicks:discoveryItems,
+      overlayContent,
+      topTickerItems:topItems,
+      bottomTickerItems:bottomItems
+    };
+    const res=await api("/api/sync-all",{method:"POST",body:JSON.stringify(payload)});
+    markTheme(res.activeTheme||payload.theme);
+    setStatus("✅ Everything published from Admin Hub\nWebsite + overlay now use theme: "+(res.activeTheme||payload.theme));
+    loadAll();
+  }catch(e){setStatus("❌ Publish error: "+e.message);}
 }
 
-async function saveSocialLinks(){
-  try{
-    await api("/api/social-links",{method:"POST",body:JSON.stringify({items:socialLinks})});
-    setStatus("✅ Social links saved");
-  }catch(e){
-    setStatus("❌ Social links save error: "+e.message);
-  }
+function readEditors(){
+  document.querySelectorAll('[data-t]').forEach(input=>{
+    const type=input.dataset.t, i=Number(input.dataset.i), f=input.dataset.f;
+    if(!arr(type)[i]) arr(type)[i]={};
+    let v=input.value; if(f==='rank'||f==='points'||f==='priority') v=Number(v||0);
+    arr(type)[i][f]=v;
+  });
 }
-document.addEventListener("DOMContentLoaded",()=>setTimeout(loadSocialLinks,1200));
+
+function readOverlayContent(){
+  ['box1','box2','box3'].forEach(box=>{
+    document.querySelectorAll(`[data-ob="${box}"]`).forEach(input=>{
+      const i=Number(input.dataset.i), f=input.dataset.f;
+      if(!overlayContent[box]) overlayContent[box]=[];
+      if(!overlayContent[box][i]) overlayContent[box][i]={};
+      let v=input.type==='checkbox'?input.checked:input.value;
+      if(f==='priority') v=Number(v||99);
+      overlayContent[box][i][f]=v;
+    });
+  });
+  overlayContent.box4={locked:'twitch-chat'};
+}
