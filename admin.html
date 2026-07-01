@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V904 One Button Control</title>
+  <title>DJ FOLSOE V905 Central Data Engine</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V904</span>
-    <h1>One Button Broadcast Control</h1>
-    <p>Simple daily control hub: choose a show, press one button, and website + overlay update together.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V905</span>
+    <h1>Central Data Engine · One Button Control</h1>
+    <p>One central admin hub: choose a show, edit once, and publish to website + overlay together.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -29,6 +29,7 @@
 
 <nav class="adminTabs">
   <button onclick="jump('oneclick')">🚀 One click</button>
+  <button onclick="jump('centralEngine')">🧠 Central engine</button>
   <button onclick="jump('theme')">🎨 Themes</button>
   <button onclick="jump('homepage')">🏠 Website</button>
   <button onclick="jump('overlayContent')">📦 Overlay boxes</button>
@@ -67,6 +68,20 @@
     </div>
     <pre id="oneClickStatus">Choose a show preset, then publish.</pre>
   </section>
+
+
+  <section id="centralEngine" class="panel centralEnginePanel">
+    <div class="panelHead"><h2>🧠 Central Data Engine</h2><div><button onclick="loadCentralEngine()">Load engine</button><button onclick="publishEverything()">Publish all modules</button></div></div>
+    <p class="note">V905 makes one data engine the source of truth. Admin writes the content once, then website and overlay read from the same Broadcast Cloud state.</p>
+    <div class="engineGrid">
+      <div class="engineCard"><b>Website</b><span id="engineWebsite">Waiting</span><small>Homepage, shows, news, Top 20 and discovery picks.</small></div>
+      <div class="engineCard"><b>Overlay</b><span id="engineOverlay">Waiting</span><small>Theme, top ticker, bottom ticker and box 1-3. Box 4 stays Twitch chat.</small></div>
+      <div class="engineCard"><b>Theme</b><span id="engineTheme">Waiting</span><small>Active background from /themes, controlled from admin.</small></div>
+      <div class="engineCard"><b>Status</b><span id="engineStatus">Waiting</span><small>One click publish keeps all modules in sync.</small></div>
+    </div>
+    <pre id="centralEngineOutput">Press Load engine to see the current central state.</pre>
+  </section>
+
   <section id="status" class="panel statusPanel">
     <div class="panelHead"><h2>Status</h2><div><button onclick="loadAll()">Load data</button><button onclick="publishEverything()">Publish everything</button><button onclick="testAll()">Test all</button></div></div>
     <pre id="statusBox">Ready. Add token and press Load data.</pre>
