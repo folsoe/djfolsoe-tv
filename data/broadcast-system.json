@@ -1,9 +1,18 @@
 {
-  "version": "V910 Overlay Output",
-  "state": "LIVE SHOW",
+  "version": "V910 Music TV Broadcast System",
+  "mode": "LIVE SHOW",
   "activeShow": "DJ FOLSOE LIVE",
   "activeTheme": "weekend",
+  "badge": "LIVE FROM DENMARK",
+  "hero": {
+    "headline": "Live Music TV from Denmark",
+    "message": "DJ FOLSOE is live with modern Music TV energy, requests, community and the best tracks on Twitch."
+  },
+  "lowerThird": "DJ FOLSOE LIVE · Requests open · Follow the channel",
   "ticker": "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · FOLSOETV.DK",
+  "introText": "Welcome to DJ FOLSOE LIVE — modern Music TV from Denmark.",
+  "outroText": "Thanks for watching DJ FOLSOE LIVE. Follow the channel and come back for the next broadcast.",
+  "socialText": "DJ FOLSOE is live now on Twitch. Join the music, chat and requests.",
   "overlayContent": {
     "box1": [
       {

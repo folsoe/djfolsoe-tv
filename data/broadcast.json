@@ -1,9 +1,10 @@
 {
-  "version": "V909 Broadcast State",
-  "broadcastState": "LIVE",
+  "version": "V910 Broadcast State",
+  "mode": "LIVE SHOW",
+  "broadcastState": "LIVE SHOW",
   "activeShow": "DJ FOLSOE LIVE",
   "activeTheme": "weekend",
-  "overlayHubEnabled": true,
+  "broadcastSystemEnabled": true,
   "locked": {
     "box4": "twitch-chat",
     "overlayGraphics": "unchanged"

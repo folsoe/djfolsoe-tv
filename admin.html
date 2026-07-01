@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V909 Overlay Hub</title>
+  <title>DJ FOLSOE V910 Music TV Broadcast System</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,8 +16,8 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V909</span>
-    <h1>Website 2.0 · Music TV Portal Control</h1>
+    <span class="kicker">DJ FOLSOE NETWORK V910</span>
+    <h1>Music TV Broadcast System · Control Room</h1>
     <p>One central admin hub: choose a show, edit once, and publish to website + overlay together.</p>
   </div>
   <div class="loginCard">
@@ -35,6 +35,7 @@
   <button onclick="jump('v907ThemeManager')">🖼️ Theme Manager</button>
     <button onclick="jump('v908WebsitePortal')">🌐 Website 2.0</button>
   <button onclick="jump('homepage')">🏠 Website</button>
+  <button onclick="jump('v910BroadcastSystem')">📡 Broadcast System</button>
   <button onclick="jump('v909OverlayHub')">📺 Overlay Hub</button>
   <button onclick="jump('overlayContent')">📦 Overlay boxes</button>
   <button onclick="jump('top20')">🏆 Top 20</button>
@@ -229,7 +230,57 @@
 
 
 
-  <section id="v909OverlayHub" class="panel v909Panel">
+
+
+  <section id="v910BroadcastSystem" class="panel v910Panel">
+    <div class="panelHead">
+      <h2>📡 V910 · Music TV Broadcast System</h2>
+      <div>
+        <button onclick="v910LoadBroadcastSystem()">Load</button>
+        <button class="bigPublish" onclick="v910PublishBroadcastSystem()">PUBLISH BROADCAST MODE</button>
+      </div>
+    </div>
+    <p class="note">Professional Music TV control layer. Pick a broadcast mode and V910 prepares website hero, overlay box 1-3, ticker, lower-third and intro/outro text. Overlay graphics, Box 4 and the left TV bug stay locked.</p>
+
+    <div class="quickGrid v910ModeGrid">
+      <button onclick="v910Mode('live')">🔴 LIVE SHOW</button>
+      <button onclick="v910Mode('starting')">🟣 STARTING SOON</button>
+      <button onclick="v910Mode('countdown')">⏱️ COUNTDOWN</button>
+      <button onclick="v910Mode('break')">☕ BREAK</button>
+      <button onclick="v910Mode('special')">✨ SPECIAL EVENT</button>
+      <button onclick="v910Mode('afterparty')">🎉 AFTER PARTY</button>
+      <button onclick="v910Mode('ending')">🏁 ENDING</button>
+      <button onclick="v910Mode('offline')">⚫ OFFLINE</button>
+    </div>
+
+    <div class="formGrid v910BroadcastGrid">
+      <div><label>Broadcast mode</label><select id="v910Mode"><option>LIVE SHOW</option><option>STARTING SOON</option><option>COUNTDOWN</option><option>BREAK</option><option>SPECIAL EVENT</option><option>AFTER PARTY</option><option>ENDING</option><option>OFFLINE</option></select></div>
+      <div><label>Active show</label><input id="v910ActiveShow" placeholder="DJ FOLSOE LIVE"></div>
+      <div><label>Active theme</label><input id="v910ActiveTheme" placeholder="weekend"></div>
+      <div><label>On-air badge</label><input id="v910Badge" placeholder="LIVE FROM DENMARK"></div>
+      <div class="wide"><label>Website hero headline</label><input id="v910HeroHeadline" placeholder="Live Music TV from Denmark"></div>
+      <div class="wide"><label>Website hero message</label><textarea id="v910HeroMessage" rows="3" placeholder="What should folsoetv.dk say right now?"></textarea></div>
+      <div class="wide"><label>Lower-third message</label><input id="v910LowerThird" placeholder="DJ FOLSOE LIVE · Requests open · Follow the channel"></div>
+      <div class="wide"><label>Top / bottom ticker</label><textarea id="v910Ticker" rows="3" placeholder="LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"></textarea></div>
+    </div>
+
+    <div class="threeCol v910Cards">
+      <div class="v910Card"><h3>Intro text</h3><textarea id="v910Intro" rows="5" placeholder="Welcome to DJ FOLSOE LIVE..."></textarea></div>
+      <div class="v910Card"><h3>Outro text</h3><textarea id="v910Outro" rows="5" placeholder="Thanks for watching..."></textarea></div>
+      <div class="v910Card"><h3>Social / Discord text</h3><textarea id="v910Social" rows="5" placeholder="DJ FOLSOE is live now..."></textarea></div>
+    </div>
+
+    <div class="threeCol v910Cards">
+      <div class="v910Card"><h3>Overlay Box 1</h3><input id="v910Box1Label" placeholder="BROADCAST"><input id="v910Box1Headline" placeholder="LIVE SHOW"><textarea id="v910Box1Body" rows="3"></textarea></div>
+      <div class="v910Card"><h3>Overlay Box 2</h3><input id="v910Box2Label" placeholder="ON AIR"><input id="v910Box2Headline" placeholder="DJ FOLSOE LIVE"><textarea id="v910Box2Body" rows="3"></textarea></div>
+      <div class="v910Card"><h3>Overlay Box 3</h3><input id="v910Box3Label" placeholder="COMMUNITY"><input id="v910Box3Headline" placeholder="Requests open"><textarea id="v910Box3Body" rows="3"></textarea></div>
+    </div>
+
+    <div class="v910LockedBox"><b>Locked</b><span>Box 4 = Twitch chat · Overlay graphics untouched · One DJ FOLSOE logo only.</span></div>
+    <pre id="v910Status">V910 Broadcast System ready. Choose a mode and publish.</pre>
+  </section>
+
+  <section id="v909OverlayHub" class="panel v909Panel advancedPanel">
     <div class="panelHead">
       <h2>📺 V909 · Overlay Hub</h2>
       <div>

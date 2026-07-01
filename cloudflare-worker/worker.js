@@ -693,7 +693,7 @@ export default {
         if (request.method !== "POST") return json({error:"Method not allowed"},405);
         const body = await request.json().catch(()=>({}));
         const patch = body.core || body;
-        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast","overlayHub"];
+        const allowed = ["activeTheme","language","twitchChannel","profile","homepageNews","shows","top20","discoveryPicks","overlayContent","topTickerItems","bottomTickerItems","seo","station","nextShow","showSchedule","showVisuals","themes","themeLibrary","homepage","website","community","broadcast","overlayHub","broadcastSystem"];
         for (const key of allowed) if (Object.prototype.hasOwnProperty.call(patch,key)) core[key] = patch[key];
         core.language = "en";
         await putCore(env, core);
@@ -838,6 +838,63 @@ export default {
         return json({ok:true,items:core.showVisuals});
       }
 
+
+      if (path === "/api/broadcast-system") {
+        if (request.method === "GET") {
+          return json({
+            ok:true,
+            version:"V910 Music TV Broadcast System",
+            broadcastSystem: core.broadcastSystem || {
+              mode: core.broadcast?.mode || core.broadcast?.broadcastState || (core.station?.live?"LIVE SHOW":"OFFLINE"),
+              activeShow: core.broadcast?.activeShow || core.station?.streamTitle || "DJ FOLSOE LIVE",
+              activeTheme: core.activeTheme || "weekend",
+              badge: core.broadcast?.badge || "LIVE FROM DENMARK",
+              hero: {
+                headline: core.homepage?.heroHeadline || "Live Music TV from Denmark",
+                message: core.homepage?.heroMessage || "Modern Music TV on Twitch."
+              },
+              lowerThird: core.broadcast?.lowerThird || "DJ FOLSOE LIVE · Requests open · Follow the channel",
+              ticker: (core.bottomTickerItems||[])[0]?.text || "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE",
+              introText: core.broadcast?.introText || "Welcome to DJ FOLSOE LIVE.",
+              outroText: core.broadcast?.outroText || "Thanks for watching DJ FOLSOE LIVE.",
+              socialText: core.broadcast?.socialText || "DJ FOLSOE is live now on Twitch.",
+              overlayContent: core.overlayContent || DEFAULT_CORE.overlayContent || {box4:{locked:"twitch-chat"}}
+            },
+            locked:["overlay graphics/layout","box4 twitch chat","single logo top-left","V901 burst timing fix"]
+          });
+        }
+        if (!adminOk(request,env)) return json({error:"Unauthorized"},401);
+        if (request.method !== "POST") return json({error:"Method not allowed"},405);
+        const body = await request.json().catch(()=>({}));
+        const bs = {
+          version:"V910 Music TV Broadcast System",
+          mode:String(body.mode||"LIVE SHOW"),
+          activeShow:String(body.activeShow||"DJ FOLSOE LIVE"),
+          activeTheme:String(body.activeTheme||core.activeTheme||"weekend"),
+          badge:String(body.badge||"LIVE FROM DENMARK"),
+          hero: body.hero || {headline:"Live Music TV from Denmark",message:"Modern Music TV on Twitch."},
+          lowerThird:String(body.lowerThird||"DJ FOLSOE LIVE · Requests open · Follow the channel"),
+          ticker:String(body.ticker||"LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE"),
+          introText:String(body.introText||"Welcome to DJ FOLSOE LIVE."),
+          outroText:String(body.outroText||"Thanks for watching DJ FOLSOE LIVE."),
+          socialText:String(body.socialText||"DJ FOLSOE is live now on Twitch."),
+          overlayContent: body.overlayContent || core.overlayContent || DEFAULT_CORE.overlayContent || {},
+          updatedAt:new Date().toISOString()
+        };
+        bs.overlayContent.box4 = {locked:"twitch-chat"};
+        core.broadcastSystem = bs;
+        core.overlayContent = bs.overlayContent;
+        core.overlayHub = Object.assign({}, core.overlayHub||{}, {version:"V910 from Broadcast System", state:bs.mode, activeShow:bs.activeShow, activeTheme:bs.activeTheme, ticker:bs.ticker, overlayContent:bs.overlayContent, updatedAt:bs.updatedAt});
+        core.activeTheme = bs.activeTheme;
+        core.broadcast = Object.assign({}, core.broadcast||{}, {mode:bs.mode,broadcastState:bs.mode,activeShow:bs.activeShow,activeTheme:bs.activeTheme,badge:bs.badge,lowerThird:bs.lowerThird,introText:bs.introText,outroText:bs.outroText,socialText:bs.socialText,updatedAt:bs.updatedAt});
+        core.homepage = Object.assign({}, core.homepage||{}, {heroHeadline:bs.hero.headline,heroMessage:bs.hero.message,activeShow:bs.activeShow,broadcastMode:bs.mode,updatedAt:bs.updatedAt});
+        core.bottomTickerItems = Array.isArray(core.bottomTickerItems) ? core.bottomTickerItems : [];
+        core.bottomTickerItems[0] = {id:"v910-broadcast-ticker",active:true,theme:"all",text:bs.ticker,priority:1};
+        core.language = "en";
+        core.updatedAt = bs.updatedAt;
+        await putCore(env, core);
+        return json({ok:true,version:"V910 Music TV Broadcast System",message:"Broadcast System published",broadcastSystem:bs});
+      }
       if (path === "/api/overlay-hub") {
         if (request.method === "GET") {
           return json({

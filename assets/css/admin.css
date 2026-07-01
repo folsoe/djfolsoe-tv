@@ -114,3 +114,10 @@ code{color:#2dd4ef}
 .v909LockedBox b{color:#7dd3fc;text-transform:uppercase;letter-spacing:.08em}
 #v909Status{white-space:pre-wrap;min-height:54px;border-left:4px solid rgba(86,215,255,.75)}
 @media(max-width:1000px){.threeCol.v909Cards{grid-template-columns:1fr}.v909LockedBox{display:block}}
+
+
+/* DJ FOLSOE NETWORK V910 · Music TV Broadcast System */
+.v910Panel{border:1px solid rgba(255,255,255,.18);box-shadow:0 0 55px rgba(255,54,232,.13), inset 0 0 40px rgba(34,231,255,.07);background:radial-gradient(circle at top left,rgba(255,54,232,.18),transparent 34%),radial-gradient(circle at top right,rgba(34,231,255,.14),transparent 34%),rgba(7,10,22,.78)}
+.v910ModeGrid{grid-template-columns:repeat(auto-fit,minmax(155px,1fr));margin:14px 0 18px}.v910ModeGrid button{font-weight:950;letter-spacing:.07em;text-transform:uppercase;min-height:54px}
+.v910BroadcastGrid .wide{grid-column:1/-1}.threeCol.v910Cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:16px 0}.v910Card{padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,.15);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.035))}.v910Card h3{margin:0 0 10px;text-transform:uppercase;letter-spacing:.08em}.v910Card input,.v910Card textarea,#v910Ticker,#v910HeroMessage{width:100%;box-sizing:border-box;margin-bottom:8px}.v910LockedBox{display:flex;justify-content:space-between;gap:14px;padding:14px 16px;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.16);margin-top:12px}.v910LockedBox b{color:#ff36e8;text-transform:uppercase;letter-spacing:.1em}#v910Status{white-space:pre-wrap;min-height:54px;border-left:4px solid rgba(255,54,232,.78)}
+@media(max-width:1000px){.threeCol.v910Cards{grid-template-columns:1fr}.v910LockedBox{display:block}}

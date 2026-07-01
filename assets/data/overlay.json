@@ -1,6 +1,6 @@
 {
-  "version": "V909 Overlay Hub",
-  "state": "LIVE",
+  "version": "V910 Overlay Output",
+  "state": "LIVE SHOW",
   "activeShow": "DJ FOLSOE LIVE",
   "activeTheme": "weekend",
   "ticker": "LIVE NOW · REQUESTS OPEN · FOLLOW DJ FOLSOE · FOLSOETV.DK",
@@ -8,8 +8,8 @@
     "box1": [
       {
         "active": true,
-        "label": "BROADCAST STATUS",
-        "headline": "LIVE NOW",
+        "label": "BROADCAST",
+        "headline": "LIVE SHOW",
         "body": "DJ FOLSOE is live from Denmark",
         "icon": "📡",
         "priority": 1
