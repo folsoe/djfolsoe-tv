@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V915 Publish Safety</title>
+  <title>DJ FOLSOE V916 Health Check</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V915</span>
-    <h1>Daily Control Room · Content Studio · Asset Manager · Live Preview · Publish Safety</h1>
-    <p>Daily control room plus Content Studio, Asset Manager, Live Preview and safer publishing with backup/restore.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V916</span>
+    <h1>Daily Control Room · Health Check · Content Studio · Asset Manager · Live Preview · Publish Safety</h1>
+    <p>Daily control room plus system health checks, Content Studio, Asset Manager, Live Preview and safer publishing with backup/restore.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -32,6 +32,7 @@
   <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
   <button onclick="jump('v913AssetManager')">🗂️ Assets</button>
   <button onclick="jump('v914LivePreview')">👁️ Live Preview</button>
+  <button onclick="jump('v916HealthCheck')">🟢 Health Check</button>
   <button onclick="jump('v915PublishSafety')">🛟 Publish Safety</button>
   <button onclick="jump('oneclick')">🚀 One click</button>
   <button onclick="jump('showControl')">🎬 Show control</button>
@@ -49,6 +50,46 @@
 </nav>
 
 <main>
+
+
+  <section id="v916HealthCheck" class="panel v916HealthPanel">
+    <div class="panelHead">
+      <h2>🟢 V916 · Admin Status & Health Check</h2>
+      <div>
+        <button onclick="v916RunHealthCheck()">Run health check</button>
+        <button class="bigPublish" onclick="v916RunHealthCheck(true)">CHECK + READY SIGNAL</button>
+      </div>
+    </div>
+    <p class="note">Check whether the website, overlay data, theme assets and worker/API are ready before you go live. This does not change the overlay graphics. Box 4 remains Twitch chat.</p>
+
+    <div class="v916ReadyBanner" id="v916ReadyBanner">
+      <span>READY STATUS</span>
+      <b id="v916ReadyText">Run health check</b>
+      <small id="v916ReadySub">No live check has been performed yet.</small>
+    </div>
+
+    <div class="v916HealthGrid">
+      <article id="v916CardApi"><span>Worker / API</span><b id="v916ApiStatus">Waiting</b><small id="v916ApiDetail">/api/health-check</small></article>
+      <article id="v916CardWebsite"><span>Website data</span><b id="v916WebsiteStatus">Waiting</b><small id="v916WebsiteDetail">Hero, homepage and website portal</small></article>
+      <article id="v916CardOverlay"><span>Overlay data</span><b id="v916OverlayStatus">Waiting</b><small id="v916OverlayDetail">Box 1-3, ticker and overlay hub</small></article>
+      <article id="v916CardTheme"><span>Theme assets</span><b id="v916ThemeStatus">Waiting</b><small id="v916ThemeDetail">Active theme and image paths</small></article>
+      <article id="v916CardPublish"><span>Last publish</span><b id="v916PublishStatus">Waiting</b><small id="v916PublishDetail">Updated timestamp / backup status</small></article>
+      <article id="v916CardLocks"><span>Locked areas</span><b>Protected</b><small>Overlay graphics · Box 4 chat · single logo · V901 timing</small></article>
+    </div>
+
+    <div class="v916ChecklistBox">
+      <h3>Warnings / checklist</h3>
+      <ul id="v916Warnings"><li>Run health check to scan the system.</li></ul>
+    </div>
+
+    <div class="v916ActionBar">
+      <button onclick="v916RunHealthCheck()">Refresh status</button>
+      <button onclick="v914RefreshPreview&&v914RefreshPreview()">Refresh live preview</button>
+      <button onclick="v915BackupCurrent&&v915BackupCurrent()">Backup current</button>
+      <button onclick="v911PublishNow&&v911PublishNow()">Publish from control room</button>
+    </div>
+    <pre id="v916Status">V916 ready. Run health check before going live.</pre>
+  </section>
 
   <section id="v911DailyControl" class="panel v911ControlRoom">
     <div class="panelHead">

@@ -1671,3 +1671,57 @@ publishEverything=async function(){
 };
 const V915_originalLoadAll=loadAll;loadAll=async function(){await V915_originalLoadAll();setTimeout(v915LoadSafety,700);};
 setTimeout(()=>{if(document.getElementById('v915PublishSafety')){v915RenderSnapshot(v915Snapshot());v915LoadSafety();}},3200);
+
+
+/* ===== V916 ADMIN STATUS & HEALTH CHECK ===== */
+function v916Set(id, value){DJF_text(id, value == null ? '' : String(value));}
+function v916Class(id, state){const el=document.getElementById(id); if(!el) return; el.classList.remove('ok','warn','bad'); el.classList.add(state||'warn');}
+function v916SetCard(card,statusId,detailId,state,label,detail){v916Class(card,state);v916Set(statusId,label);v916Set(detailId,detail);}
+function v916Warnings(list){const ul=document.getElementById('v916Warnings'); if(!ul) return; ul.innerHTML=''; (list&&list.length?list:['No warnings. System looks ready.']).forEach(w=>{const li=document.createElement('li'); li.textContent=w; ul.appendChild(li);});}
+function v916LocalHealth(){
+  const warnings=[];
+  const data={ok:true,source:'local-admin',checks:{}};
+  const theme=(typeof activeTheme!=='undefined'?activeTheme:(typeof core!=='undefined'?core.activeTheme:'weekend'))||'weekend';
+  const overlay=(typeof overlayContent!=='undefined'?overlayContent:(typeof core!=='undefined'?core.overlayContent:null))||{};
+  const homepage=(typeof home!=='undefined'?home:(typeof core!=='undefined'?core.homepage:null))||{};
+  const hasBox1=!!(overlay.box1?.headline||overlay.box1?.title||document.getElementById('v911Box1')?.value||document.getElementById('v912Box1Headline')?.value);
+  const hasBox2=!!(overlay.box2?.headline||overlay.box2?.title||document.getElementById('v911Box2')?.value||document.getElementById('v912Box2Headline')?.value);
+  const hasBox3=!!(overlay.box3?.headline||overlay.box3?.title||document.getElementById('v911Box3')?.value||document.getElementById('v912Box3Headline')?.value);
+  const ticker=String(document.getElementById('v911Ticker')?.value||document.getElementById('v912TopTicker')?.value||'').trim();
+  if(!hasBox1) warnings.push('Overlay box 1 has no visible headline.');
+  if(!hasBox2) warnings.push('Overlay box 2 has no visible headline.');
+  if(!hasBox3) warnings.push('Overlay box 3 has no visible headline.');
+  if(!ticker) warnings.push('Ticker text is empty in quick edit / Content Studio.');
+  if(!theme) warnings.push('No active theme selected.');
+  if(!String(homepage.heroHeadline||document.getElementById('v911HeroHeadline')?.value||document.getElementById('v912HeroHeadline')?.value||'').trim()) warnings.push('Website hero headline is empty.');
+  data.checks={api:{state:'warn',label:'LOCAL',detail:'Worker endpoint not reached yet'},website:{state:warnings.some(x=>x.includes('Website'))?'warn':'ok',label:warnings.some(x=>x.includes('Website'))?'WARNING':'OK',detail:'Website hero/homepage data scanned locally'},overlay:{state:(!hasBox1||!hasBox2||!hasBox3)?'warn':'ok',label:(!hasBox1||!hasBox2||!hasBox3)?'WARNING':'OK',detail:'Overlay box 1-3 scanned. Box 4 locked to Twitch chat'},theme:{state:theme?'ok':'warn',label:theme?'OK':'WARNING',detail:'Active theme: '+theme},publish:{state:'warn',label:'CHECK',detail:'Run worker check for latest published timestamp'},locks:{state:'ok',label:'PROTECTED',detail:'Locked areas preserved'}};
+  data.ready=warnings.length===0; data.warnings=warnings; return data;
+}
+function v916RenderHealth(r){
+  const checks=(r&&r.checks)||{}; const warnings=(r&&r.warnings)||[]; const ready=!!(r&&r.ready&&warnings.length===0);
+  v916SetCard('v916CardApi','v916ApiStatus','v916ApiDetail',checks.api?.state||'warn',checks.api?.label||'CHECK',checks.api?.detail||'API status unknown');
+  v916SetCard('v916CardWebsite','v916WebsiteStatus','v916WebsiteDetail',checks.website?.state||'warn',checks.website?.label||'CHECK',checks.website?.detail||'Website status unknown');
+  v916SetCard('v916CardOverlay','v916OverlayStatus','v916OverlayDetail',checks.overlay?.state||'warn',checks.overlay?.label||'CHECK',checks.overlay?.detail||'Overlay status unknown');
+  v916SetCard('v916CardTheme','v916ThemeStatus','v916ThemeDetail',checks.theme?.state||'warn',checks.theme?.label||'CHECK',checks.theme?.detail||'Theme status unknown');
+  v916SetCard('v916CardPublish','v916PublishStatus','v916PublishDetail',checks.publish?.state||'warn',checks.publish?.label||'CHECK',checks.publish?.detail||'Publish status unknown');
+  v916Warnings(warnings);
+  const banner=document.getElementById('v916ReadyBanner'); if(banner){banner.classList.remove('ok','warn','bad'); banner.classList.add(ready?'ok':(warnings.length?'warn':'ok'));}
+  v916Set('v916ReadyText',ready?'READY TO GO LIVE':'CHECK BEFORE GOING LIVE');
+  v916Set('v916ReadySub',ready?'Website, overlay, theme and API checks look OK.':'Warnings found: '+(warnings.length||'API check needed'));
+  v916Set('v916Status',JSON.stringify({ready,warnings,checkedAt:r?.checkedAt||new Date().toISOString(),source:r?.source||'admin'},null,2));
+}
+async function v916RunHealthCheck(showReady){
+  const local=v916LocalHealth();
+  v916RenderHealth(local);
+  try{
+    const r=await api('/api/health-check');
+    const merged=Object.assign({},local,r,{warnings:[...(r.warnings||[]),...(local.warnings||[])]});
+    merged.ready=!!(r.ready && local.ready && merged.warnings.length===0);
+    v916RenderHealth(merged);
+    if(showReady) setStatus(merged.ready?'✅ V916 Ready to go live.':'⚠️ V916 found warnings before going live.');
+  }catch(e){
+    local.checks.api={state:'bad',label:'ERROR',detail:e.message}; local.ready=false; local.warnings.unshift('Worker/API health endpoint could not be reached: '+e.message); v916RenderHealth(local);
+  }
+}
+const V916_originalLoadAll=loadAll;loadAll=async function(){await V916_originalLoadAll();setTimeout(()=>{if(document.getElementById('v916HealthCheck'))v916RunHealthCheck();},900);};
+setTimeout(()=>{if(document.getElementById('v916HealthCheck'))v916RunHealthCheck();},3600);
