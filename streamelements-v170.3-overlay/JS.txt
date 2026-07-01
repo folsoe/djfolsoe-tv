@@ -1364,3 +1364,229 @@ v901PushBurst = function(item){
   v9012LastChange = 0;
   renderBurst(true);
 };
+
+/* =========================================================
+   V926 — THEME ENGINE REWRITE
+   Hard override: reads broadcast-core through JSONP and applies the
+   selected theme background directly to the overlay DOM.
+   This bypasses the old V813/V900 theme renderer that could stay on weekend.
+   ========================================================= */
+(function(){
+  const V926_VERSION = 'V926 THEME ENGINE REWRITE';
+  const V926_API = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
+  const V926_THEME_URLS = {
+    weekend: 'https://folsoetv.dk/themes/weekend.png',
+    trance: 'https://folsoetv.dk/themes/trance.png',
+    eurodance: 'https://folsoetv.dk/themes/eurodance.png',
+    fredagsbar: 'https://folsoetv.dk/themes/fredagsbar.png',
+    retro: 'https://folsoetv.dk/themes/retro.png',
+    popup: 'https://folsoetv.dk/themes/popup.png',
+    morning: 'https://folsoetv.dk/themes/morning.png',
+    summer: 'https://folsoetv.dk/themes/summer.png',
+    danske: 'https://folsoetv.dk/themes/danske.png',
+    danish: 'https://folsoetv.dk/themes/danske.png'
+  };
+  const V926_META = {
+    weekend: ['WEEKEND', '#00d4ff', '#ff4d6d', '#ffd166'],
+    trance: ['TRANCE TUESDAY', '#62ecff', '#8b5cf6', '#ffffff'],
+    eurodance: ['EURODANCE', '#ff4bd8', '#62ecff', '#ffe36e'],
+    fredagsbar: ['FREDAGSBAR', '#6cffb5', '#ffd166', '#ff4d6d'],
+    retro: ['RETRO HITS', '#ffe36e', '#ff4bd8', '#ffffff'],
+    popup: ['POP UP LIVE', '#ffffff', '#ff4d6d', '#62ecff'],
+    morning: ['GOOD MORNING TWITCH', '#ffe36e', '#6cffb5', '#ffffff'],
+    summer: ['SUMMER', '#ffe36e', '#62ecff', '#ff4d6d'],
+    danske: ['DANISH HITS', '#ff4d4d', '#ffffff', '#62ecff'],
+    danish: ['DANISH HITS', '#ff4d4d', '#ffffff', '#62ecff']
+  };
+  let lastApplied = '';
+  let lastPayload = null;
+  let lastError = '';
+
+  function safeText(v){ return String(v == null ? '' : v); }
+  function normalizeTheme(raw){
+    const key = safeText(raw || '').trim().toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/_/g, '-')
+      .replace('trance-tuesday', 'trance')
+      .replace('retro-hits', 'retro')
+      .replace('pop-up-live', 'popup')
+      .replace('good-morning-twitch', 'morning')
+      .replace('danish-hits', 'danske');
+    return V926_THEME_URLS[key] ? key : (key || 'weekend');
+  }
+  function pickPayload(payload){
+    if(!payload || typeof payload !== 'object') return {};
+    return payload.core || payload.data || payload.broadcastCore || payload;
+  }
+  function extractTheme(payload){
+    const core = pickPayload(payload);
+    const theme = core.theme || {};
+    const overlay = core.overlay || {};
+    const overlayPanel = overlay.controlPanel || {};
+    const hub = core.overlayHub || {};
+    const hubPanel = hub.controlPanel || {};
+    const broadcast = core.broadcast || payload.broadcast || {};
+    return normalizeTheme(
+      theme.id || theme.key || theme.title ||
+      overlay.activeTheme || overlay.theme || overlayPanel.theme ||
+      hub.activeTheme || hub.theme || hubPanel.theme ||
+      broadcast.activeTheme || core.activeTheme || payload.activeTheme ||
+      'weekend'
+    );
+  }
+  function themeUrl(theme, payload){
+    const core = pickPayload(payload || {});
+    const bg = core?.theme?.background || core?.homepage?.hero?.background || core?.hero?.background || '';
+    if(bg && /^https?:\/\//i.test(bg)) return bg;
+    if(bg && String(bg).startsWith('themes/')) return 'https://folsoetv.dk/' + bg.replace(/^\//, '');
+    return V926_THEME_URLS[theme] || ('https://folsoetv.dk/themes/' + theme + '.png');
+  }
+  function ensureLayer(){
+    let root = document.getElementById('djfV170Reborn') || document.querySelector('.djfV170Reborn') || document.body;
+    if(root && root !== document.body){
+      try{ root.style.position = root.style.position || 'relative'; root.style.overflow = 'hidden'; }catch(e){}
+    }
+    let layer = document.getElementById('djfThemeEngineV926');
+    if(!layer){
+      layer = document.createElement('div');
+      layer.id = 'djfThemeEngineV926';
+      layer.setAttribute('data-djf-theme-layer', 'v926');
+      const parent = root || document.body;
+      parent.insertBefore(layer, parent.firstChild);
+    }
+    layer.style.cssText = [
+      'position:absolute', 'inset:0', 'z-index:0', 'pointer-events:none',
+      'background-position:center center', 'background-size:cover', 'background-repeat:no-repeat',
+      'opacity:1', 'filter:saturate(1.08) contrast(1.05)',
+      'transition:background-image .35s ease, opacity .35s ease'
+    ].join(';') + ';';
+    return {root, layer};
+  }
+  function bringContentAbove(root){
+    try{
+      const children = Array.from((root || document.body).children || []);
+      children.forEach(el => {
+        if(el.id === 'djfThemeEngineV926' || el.id === 'themeBgLayer') return;
+        if(el.style && getComputedStyle(el).position === 'static') el.style.position = 'relative';
+        if(el.style && (!el.style.zIndex || Number(el.style.zIndex) < 1)) el.style.zIndex = '2';
+      });
+    }catch(e){}
+  }
+  function updateExistingThemeLabels(theme, payload){
+    const meta = V926_META[theme] || V926_META.weekend;
+    const core = pickPayload(payload || {});
+    const showTitle = core?.show?.title || core?.show?.current || core?.overlay?.title || 'DJ FOLSOE';
+    const tickerText = core?.ticker?.text || core?.overlay?.infoLine || `${meta[0]} · DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK`;
+    const candidates = [
+      'topTickerText', 'bottomTickerText', 'burstTitle', 'burstKicker',
+      'box1Title', 'box2Title', 'box3Title'
+    ];
+    candidates.forEach(id => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      if(id === 'topTickerText') el.textContent = `${meta[0]} · ${showTitle} · BROADCAST CORE LIVE`;
+      if(id === 'bottomTickerText') el.textContent = tickerText;
+      if(id === 'burstKicker') el.textContent = meta[0];
+      if(id === 'burstTitle') el.textContent = showTitle;
+    });
+  }
+  function renderDebug(theme, source){
+    try{
+      let el = document.getElementById('djfOverlayDebugBadge');
+      if(!el){
+        el = document.createElement('div');
+        el.id = 'djfOverlayDebugBadge';
+        document.body.appendChild(el);
+      }
+      el.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:999999;padding:8px 10px;border:1px solid rgba(98,236,255,.85);border-radius:10px;background:rgba(0,0,0,.70);color:#fff;font:800 11px/1.35 Arial,sans-serif;letter-spacing:.04em;pointer-events:none;max-width:460px;box-shadow:0 0 18px rgba(98,236,255,.35)';
+      el.innerHTML = `${V926_VERSION}<br>API: ${V926_API}<br>THEME: ${theme}<br>SOURCE: ${source}<br>${lastError ? 'ERROR: ' + lastError : 'OK: theme applied'}`;
+    }catch(e){}
+  }
+  function applyV926Theme(theme, payload, source){
+    theme = normalizeTheme(theme);
+    const url = themeUrl(theme, payload);
+    const meta = V926_META[theme] || V926_META.weekend;
+    const {root, layer} = ensureLayer();
+    const bgValue = `linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.12)), url('${url}')`;
+    layer.style.backgroundImage = bgValue;
+    try{
+      const oldLayer = document.getElementById('themeBgLayer');
+      if(oldLayer && oldLayer !== layer){
+        oldLayer.style.backgroundImage = bgValue;
+        oldLayer.style.opacity = '1';
+      }
+    }catch(e){}
+    try{
+      document.body.className = String(document.body.className || '').replace(/theme-[a-z0-9_-]+/g, '').trim() + ' theme-' + theme;
+      document.documentElement.style.setProperty('--theme-bg-url', url);
+      document.documentElement.style.setProperty('--theme-bg', `url('${url}')`);
+      document.documentElement.style.setProperty('--a', meta[3]);
+      document.documentElement.style.setProperty('--b', meta[2]);
+      document.documentElement.style.setProperty('--c', meta[1]);
+      if(root){
+        root.style.backgroundImage = bgValue;
+        root.style.backgroundPosition = 'center center';
+        root.style.backgroundSize = 'cover';
+        root.style.backgroundRepeat = 'no-repeat';
+        root.style.backgroundColor = 'transparent';
+        root.setAttribute('data-active-theme', theme);
+      }
+    }catch(e){}
+    bringContentAbove(root);
+    updateExistingThemeLabels(theme, payload);
+    lastApplied = theme;
+    window.DJF_CURRENT_THEME = theme;
+    window.DJF_THEME_ENGINE_VERSION = V926_VERSION;
+    renderDebug(theme, source || 'V926 direct apply');
+  }
+  function jsonp(url, timeoutMs){
+    return new Promise((resolve, reject) => {
+      const cb = '__djfV926Jsonp_' + Math.random().toString(36).slice(2);
+      let done = false;
+      const timer = setTimeout(() => {
+        if(done) return;
+        done = true;
+        cleanup();
+        reject(new Error('JSONP timeout'));
+      }, timeoutMs || 8000);
+      function cleanup(){
+        try{ delete window[cb]; }catch(e){ window[cb] = undefined; }
+        try{ script.remove(); }catch(e){}
+        clearTimeout(timer);
+      }
+      window[cb] = function(payload){
+        if(done) return;
+        done = true;
+        cleanup();
+        resolve(payload);
+      };
+      const script = document.createElement('script');
+      script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + encodeURIComponent(cb) + '&ts=' + Date.now();
+      script.async = true;
+      script.onerror = function(){
+        if(done) return;
+        done = true;
+        cleanup();
+        reject(new Error('JSONP script load failed'));
+      };
+      document.head.appendChild(script);
+    });
+  }
+  async function loadAndApply(){
+    try{
+      lastError = '';
+      const payload = await jsonp(V926_API + '/api/broadcast-jsonp', 9000);
+      lastPayload = payload;
+      const theme = extractTheme(payload);
+      applyV926Theme(theme, payload, V926_API + '/api/broadcast-jsonp');
+    }catch(e){
+      lastError = String(e && e.message ? e.message : e);
+      const theme = extractTheme(lastPayload) || lastApplied || window.DJF_CURRENT_THEME || 'weekend';
+      applyV926Theme(theme, lastPayload || {}, 'kept-current-theme');
+    }
+  }
+  window.DJF_V926_FORCE_THEME = function(theme){ applyV926Theme(theme, lastPayload || {}, 'manual window.DJF_V926_FORCE_THEME'); };
+  window.DJF_V926_RELOAD_THEME = loadAndApply;
+  setTimeout(loadAndApply, 250);
+  setInterval(loadAndApply, 5000);
+})();
