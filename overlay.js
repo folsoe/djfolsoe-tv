@@ -1994,3 +1994,186 @@ v901PushBurst = function(item){
   setInterval(fetchCore, FETCH_MS);
   setInterval(()=>applyStable(false), 1000);
 })();
+
+/* =========================================================
+   V927.3 — RICH INFO BURST + THEME TICKER
+   Purpose:
+   - Top ticker becomes theme/show/slogan first.
+   - Info burst gets richer rotation: latest follower/sub/bits/raid, Twitch data, theme, goals, next show, Top 20.
+   - Slower, stable rotation so messages stay visible.
+   ========================================================= */
+(function(){
+  const V9273_VERSION = 'V927.3 RICH INFO BURST + THEME TICKER';
+  const API = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
+  const ROTATE_MS = 22000;
+  const FETCH_MS = 12000;
+  let coreCache = null;
+  let richIndex = 0;
+  let lastRotate = 0;
+  let lastTopKey = '';
+  let lastBottomKey = '';
+  let lastBurstKey = '';
+
+  function esc(s){ return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function clean(v,f=''){ return String(v ?? f ?? '').replace(/\[object Object\]/g,'').trim() || f || ''; }
+  function num(v,f=0){ v=Number(v); return Number.isFinite(v)?v:f; }
+  function coreOf(payload){ return (payload && (payload.core || payload.data || payload.broadcastCore)) || payload || {}; }
+  function themeTitle(id){
+    const map={weekend:'Weekend',trance:'Trance Tuesday',eurodance:'Eurodance',fredagsbar:'Fredagsbar',retro:'Retro Hits',popup:'Pop Up Live',morning:'Good Morning Twitch',summer:'Summer'};
+    return map[String(id||'').toLowerCase()] || clean(id,'Music TV');
+  }
+  function themeSlogan(id){
+    const map={
+      weekend:'Weekend energy, party classics and live community',
+      trance:'Melodic trance, energy and emotional peak-time sound',
+      eurodance:'90s and 00s dance classics with full Music TV nostalgia',
+      fredagsbar:'Friday bar mood, party classics and Danish weekend energy',
+      retro:'Classics that never die from the 70s, 80s and 90s',
+      popup:'The stream that appears when you least expect it',
+      morning:'Coffee, music and good vibes to start the day',
+      summer:'Bright summer mood, vacation energy and feel-good music'
+    };
+    return map[String(id||'').toLowerCase()] || 'Modern Twitch Music TV from Denmark';
+  }
+  function jsonp(url, timeoutMs){
+    return new Promise((resolve,reject)=>{
+      const cb='__djfV9273_'+Math.random().toString(36).slice(2);
+      let done=false, script;
+      const timer=setTimeout(()=>{ if(done) return; done=true; cleanup(); reject(new Error('JSONP timeout')); }, timeoutMs||8000);
+      function cleanup(){ try{delete window[cb];}catch(e){window[cb]=undefined;} try{script&&script.remove();}catch(e){} clearTimeout(timer); }
+      window[cb]=payload=>{ if(done) return; done=true; cleanup(); resolve(payload); };
+      script=document.createElement('script');
+      script.async=true;
+      script.src=url+(url.includes('?')?'&':'?')+'callback='+encodeURIComponent(cb)+'&ts='+Date.now();
+      script.onerror=()=>{ if(done) return; done=true; cleanup(); reject(new Error('JSONP script load failed')); };
+      document.head.appendChild(script);
+    });
+  }
+  function latest(type){
+    const ev=(window.djfTickerEvents||window.djfTickerEvents||{});
+    if(type==='follower') return clean(ev.latestFollower || (window.djfTickerEvents&&window.djfTickerEvents.latestFollower));
+    if(type==='sub') return clean(ev.latestSub || (window.djfTickerEvents&&window.djfTickerEvents.latestSub));
+    if(type==='bits') return clean(ev.latestBits || (window.djfTickerEvents&&window.djfTickerEvents.latestBits));
+    if(type==='raid') return clean(ev.latestRaid || (window.djfTickerEvents&&window.djfTickerEvents.latestRaid));
+    return '';
+  }
+  function data(core){
+    core=coreOf(core);
+    const tw=core.twitch||{}, show=core.show||{}, hero=core.hero||{}, com=core.community||{}, ticker=core.ticker||{}, next=core.nextShow||{}, overlay=core.overlay||{}, theme=core.theme||{};
+    const themeId=clean(theme.id||theme.key||overlay.activeTheme||core?.broadcast?.activeTheme||window.DJF_CURRENT_THEME||'weekend').toLowerCase();
+    const tTitle=clean(theme.title||themeTitle(themeId));
+    const slogan=clean(theme.description||theme.slogan||show.description||hero.text||themeSlogan(themeId));
+    const showTitle=clean(show.title||show.current||tw.liveTitle||hero.title||overlay.title||'DJ FOLSOE');
+    const heroSub=clean(hero.subtitle||'Dive into my Twitch world');
+    const followers=num(tw.followers ?? com.followers,0);
+    const followerGoal=num(com.followerGoal,1000);
+    const subs=num(tw.subs ?? com.subs,0);
+    const subGoal=num(com.subGoal ?? overlay.subGoal,100);
+    const viewers=num(tw.viewers ?? show.viewers,0);
+    const live=!!(tw.live||tw.isLive||show.live);
+    const nextTitle=clean(next.show||next.title||'Next DJ FOLSOE Broadcast');
+    const nextTime=clean(next.timeLabel||next.datetime||next.dateTime||'Announced soon');
+    const requestText=clean(com.requestText||overlay.requestText||'Use !request Artist - Title in Twitch chat');
+    const special=clean(com.specialEvent||overlay.specialEvent||'');
+    const adminTicker=clean(ticker.text||overlay.infoLine||'');
+    const top20=Array.isArray(core.top20)?core.top20:[];
+    const top=top20[0]||{rank:1,artist:'DJ FOLSOE',title:"This Week's Number One",status:'ADMIN CONTROLLED'};
+    const pick=top20[1]||top;
+    return {core,tw,show,hero,com,ticker,next,overlay,theme,themeId,tTitle,slogan,showTitle,heroSub,followers,followerGoal,subs,subGoal,viewers,live,nextTitle,nextTime,requestText,special,adminTicker,top20,top,pick};
+  }
+  function tickerItem(text, cls){
+    text=clean(text); const parts=text.split('·'); const label=parts[0].trim(); const rest=parts.slice(1).join('·').trim();
+    return '<span class="tickerItem '+(cls||'white')+'"><b>'+esc(label)+'</b>'+(rest?'<em>'+esc(rest)+'</em>':'')+'</span>';
+  }
+  function writeTicker(d){
+    const topEl=document.getElementById('topTickerText');
+    const bottomEl=document.getElementById('bottomTickerText');
+    const top = [
+      `${d.tTitle} · ${d.slogan}`,
+      `${d.showTitle} · ${d.heroSub}`,
+      d.special ? `SPECIAL EVENT · ${d.special}` : '',
+      `${d.nextTitle} · ${d.nextTime}`,
+      'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK'
+    ].filter(Boolean);
+    const toGo=Math.max(0,d.followerGoal-d.followers);
+    const bottom=[
+      `${d.live?'LIVE NOW':'OFFLINE'} · ${d.viewers} viewers`,
+      `FOLLOWERS · ${d.followers}/${d.followerGoal} · ${toGo} TO GO`,
+      `SUB GOAL · ${d.subs}/${d.subGoal}`,
+      latest('follower') ? `LATEST FOLLOWER · ${latest('follower')}` : 'LATEST FOLLOWER · WAITING FOR NEXT LIVE FOLLOW',
+      latest('sub') ? `LATEST SUBSCRIBER · ${latest('sub')}` : 'LATEST SUBSCRIBER · WAITING FOR NEXT LIVE SUB',
+      latest('bits') ? `LATEST CHEER · ${latest('bits')}` : 'LATEST CHEER · WAITING FOR NEXT LIVE CHEER',
+      latest('raid') ? `LATEST RAID · ${latest('raid')}` : 'LATEST RAID · WAITING FOR NEXT LIVE RAID',
+      `REQUESTS · ${d.requestText}`,
+      d.adminTicker
+    ].filter(Boolean);
+    const topKey=top.join('||');
+    const bottomKey=bottom.join('||');
+    if(topEl && topKey!==lastTopKey){
+      lastTopKey=topKey;
+      const html=top.map((x,i)=>tickerItem(x,['cyan','pink','yellow','white','station'][i%5])).join('<span class="tickerSep">✦</span>');
+      topEl.innerHTML=html+'<span class="tickerSep">✦</span>'+html;
+      document.documentElement.style.setProperty('--topDur', Math.max(75, Math.min(180, top.join('').length/1.9))+'s');
+    }
+    if(bottomEl && bottomKey!==lastBottomKey){
+      lastBottomKey=bottomKey;
+      const html=bottom.map((x,i)=>tickerItem(x,['goal','sub','cheer','raid','request','follow','station','cyan'][i%8])).join('<span class="tickerSep">✦</span>');
+      bottomEl.innerHTML=html+'<span class="tickerSep">✦</span>'+html;
+      document.documentElement.style.setProperty('--bottomDur', Math.max(110, Math.min(260, bottom.join('').length/1.8))+'s');
+    }
+  }
+  function burstLane(d){
+    const toGo=Math.max(0,d.followerGoal-d.followers);
+    const top=d.top||{};
+    const pick=d.pick||top;
+    return [
+      d.special ? ['SPECIAL EVENT', d.special, d.adminTicker||d.slogan] : null,
+      ['CURRENT SHOW', d.showTitle, d.slogan],
+      ['ACTIVE THEME', d.tTitle, `${d.themeId} · ${d.slogan}`],
+      ['TWITCH STATUS', d.live ? `${d.viewers} viewers live` : 'Offline right now', `${d.followers}/${d.followerGoal} followers · ${d.subs}/${d.subGoal} subs`],
+      ['FOLLOWER JOURNEY', `${d.followers}/${d.followerGoal} followers`, `${toGo} to go · follow DJ FOLSOE on Twitch`],
+      ['SUB JOURNEY', `${d.subs}/${d.subGoal} subs`, 'Subs help build the technical setup and new channel features'],
+      ['LATEST FOLLOWER', latest('follower') || 'Waiting for next follow', 'Thank you for joining the DJ FOLSOE community'],
+      ['LATEST SUBSCRIBER', latest('sub') || 'Waiting for next sub', 'Subscriber love keeps the channel growing'],
+      ['LATEST CHEER', latest('bits') || 'Waiting for next cheer', 'Bits light up the Music TV machine'],
+      ['LATEST RAID', latest('raid') || 'Waiting for next raid', 'DJ network love · welcome raiders'],
+      ['NEXT SHOW', d.nextTitle, d.nextTime],
+      ['REQUESTS', 'Request your song', d.requestText],
+      ['TOP 20 #'+clean(top.rank,'1'), clean(top.artist,'DJ FOLSOE'), clean(top.title,"This Week's Number One")],
+      ['FOLSOE PICK', clean(pick.artist,'Viewer Pick'), clean(pick.title,'Request of the Week')]
+    ].filter(Boolean);
+  }
+  function writeBurst(item){
+    const root=document.getElementById('broadcastBurst'), k=document.getElementById('burstKicker'), t=document.getElementById('burstTitle'), b=document.getElementById('burstBody');
+    if(!root||!item) return;
+    const key=item.join('||');
+    if(key===lastBurstKey) return;
+    lastBurstKey=key;
+    if(k) k.textContent=clean(item[0]).slice(0,34);
+    if(t) t.textContent=clean(item[1]).slice(0,46);
+    if(b) b.textContent=clean(item[2]).slice(0,116);
+    root.classList.remove('burstFlash'); void root.offsetWidth; root.classList.add('burstFlash');
+  }
+  function apply(force=false){
+    if(!coreCache) return;
+    const d=data(coreCache);
+    writeTicker(d);
+    const now=Date.now();
+    if(force || now-lastRotate>ROTATE_MS){
+      lastRotate=now;
+      const lane=burstLane(d);
+      writeBurst(lane[richIndex++ % lane.length] || lane[0]);
+    }
+    window.DJF_OVERLAY_DATA_VERSION=V9273_VERSION;
+  }
+  async function fetchCore(){
+    try{ coreCache=coreOf(await jsonp(API+'/api/broadcast-jsonp',8000)); apply(false); }
+    catch(e){ apply(false); }
+  }
+  window.renderBurst=function(force){ apply(!!force); };
+  window.renderCards=function(){ apply(false); };
+  window.DJF_V9273_RICH_WAKE=function(){ fetchCore(); setTimeout(()=>apply(true),600); };
+  setTimeout(window.DJF_V9273_RICH_WAKE, 800);
+  setInterval(fetchCore, FETCH_MS);
+  setInterval(()=>apply(false), 1000);
+})();
