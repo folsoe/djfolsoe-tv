@@ -1,4 +1,4 @@
-// DJ FOLSOE NETWORK V921 · ADMIN FIELD MAPPING
+// DJ FOLSOE NETWORK V928 · WEBSITE DATA WAKE UP
 const $ = (id) => document.getElementById(id);
 const API_BASE = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
 let portal = {};
@@ -18,11 +18,29 @@ function deepMerge(a,b){
   });
   return out;
 }
+function pickBroadcastCore(payload){
+  if(!payload || typeof payload !== 'object') return null;
+  return payload.core || payload.data || payload.broadcastCore || payload;
+}
+async function loadApiCore(){
+  const apiPayload = await readJson(API_BASE + '/api/broadcast?t=' + Date.now(), null);
+  const core = pickBroadcastCore(apiPayload);
+  if(core && core.schema){
+    core.__source = 'worker-api';
+    return core;
+  }
+  return null;
+}
+async function loadStaticFallback(){
+  // Only used when Worker is unreachable. Static files must never override live worker data.
+  const localCore = await readJson('assets/data/broadcast-core.json?t=' + Date.now(), null) || await readJson('data/broadcast-core.json?t=' + Date.now(), null) || {};
+  const core = pickBroadcastCore(localCore) || {};
+  core.__source = 'static-fallback';
+  return core;
+}
 async function loadPortal(){
-  const localCore = await readJson('data/broadcast-core.json', null) || await readJson('assets/data/broadcast-core.json', null) || {};
-  const apiCore = await readJson(API_BASE + '/api/broadcast?t=' + Date.now(), null) || await readJson(API_BASE + '/api/unified-control?t=' + Date.now(), null) || {};
-  portal = deepMerge(localCore, apiCore.core || apiCore.data || apiCore);
-  if(apiCore.twitch) portal.twitch = apiCore.twitch;
+  const apiCore = await loadApiCore();
+  portal = apiCore || await loadStaticFallback();
   normalizeCore();
   renderPortal();
   tickCountdown();
@@ -30,8 +48,16 @@ async function loadPortal(){
   startPolling();
 }
 async function refreshTwitchAndCore(){
-  const core = await readJson(API_BASE + '/api/broadcast?t=' + Date.now(), null);
-  if(core){ const nextCore = core.core || core.data || core; const stamp = nextCore.updatedAt || core.updatedAt || JSON.stringify(nextCore.broadcast||{}); if(stamp !== lastCoreStamp){ lastCoreStamp = stamp; portal = deepMerge(portal, nextCore); normalizeCore(); renderPortal(); } }
+  const nextCore = await loadApiCore();
+  if(nextCore){
+    const stamp = nextCore.updatedAt || JSON.stringify({theme:nextCore.theme,show:nextCore.show,nextShow:nextCore.nextShow,ticker:nextCore.ticker,community:nextCore.community});
+    if(stamp !== lastCoreStamp){
+      lastCoreStamp = stamp;
+      portal = nextCore;
+      normalizeCore();
+      renderPortal();
+    }
+  }
 }
 function startPolling(){
   if(twitchTimer) clearInterval(twitchTimer);
@@ -87,9 +113,14 @@ function formatNextDateLabel(dateTime){
   return d.toLocaleString('en-GB', {weekday:'short', day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
 }
 function pickTheme(){
-  const active = portal.activeTheme || portal?.broadcast?.activeTheme || 'weekend';
+  const active = portal?.theme?.id || portal.activeTheme || portal?.broadcast?.activeTheme || 'weekend';
   const lib = portal?.themes?.themeLibrary || portal?.themes || {};
-  return lib[active] || {title: String(active || 'Music TV').replace(/-/g,' '), background:`themes/${active}.png`};
+  const fromLib = lib[active] || {};
+  return {
+    id: active,
+    title: portal?.theme?.title || fromLib.title || String(active || 'Music TV').replace(/[-_]/g,' ').replace(/\b\w/g,c=>c.toUpperCase()),
+    background: portal?.theme?.background || fromLib.background || `themes/${active}.png`
+  };
 }
 function renderPortal(){
   const homepage = portal.homepage || {};
@@ -101,6 +132,8 @@ function renderPortal(){
   const sectionTitles = homepage.sectionTitles || {};
   const live = broadcast.live || broadcast.broadcastState === 'LIVE' || broadcast.mode === 'LIVE SHOW';
   if($('heroThemeBg')) $('heroThemeBg').style.backgroundImage = `url('${hero.background || theme.background || 'themes/weekend.png'}')`;
+  document.documentElement.setAttribute('data-djf-theme', theme.id || broadcast.activeTheme || 'weekend');
+  document.documentElement.setAttribute('data-djf-source', portal.__source || 'unknown');
   if($('navState')) $('navState').textContent = live ? 'LIVE' : (broadcast.broadcastState || broadcast.mode || 'OFFLINE');
   if($('livePill')) { $('livePill').textContent = live ? 'LIVE NOW' : (broadcast.broadcastState || broadcast.mode || 'OFFLINE'); $('livePill').style.color = live ? 'var(--green)' : 'var(--gold)'; }
   setText('heroEyebrow', hero.eyebrow || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK');
@@ -113,7 +146,7 @@ function renderPortal(){
   setText('metricFollowers', community.followers ?? broadcast.followers ?? '—');
   setText('metricSubGoal', `${community.subs || 0} / ${community.subGoal || 100}`);
   setText('metricTheme', theme.title || broadcast.activeTheme || portal.activeTheme || 'Music TV');
-  setText('topTicker', (homepage.ticker || []).join('  •  ') || portal?.overlayHub?.ticker || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK');
+  setText('topTicker', portal?.ticker?.text || (homepage.ticker || []).join('  •  ') || portal?.overlayHub?.ticker || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK');
   setText('nextKicker', sectionTitles.nextKicker || 'NEXT SHOW');
   setText('showsKicker', sectionTitles.showsKicker || 'FEATURED SHOWS');
   setText('showsTitle', sectionTitles.showsTitle || 'Your favorite show');
@@ -125,12 +158,12 @@ function renderPortal(){
   setText('nextTheme', next.theme || theme.title || 'Music TV');
   setText('nextDescription', next.description || 'Upcoming DJ FOLSOE show will appear here from admin.');
   nextDate = next.datetime ? new Date(next.datetime) : null;
-  const shows = homepage.featuredShows || [];
+  const shows = portal.featuredShows || homepage.featuredShows || [];
   if($('showCards')) $('showCards').innerHTML = shows.map(s=>`<article class="showCard" style="--accent:${escapeHtml(s.color||'#69e7ff')}"><code>${escapeHtml(s.time||'LIVE')}</code><h3>${escapeHtml(s.title||'Show')}</h3><p>${escapeHtml(s.description||'DJ FOLSOE broadcast show')}</p></article>`).join('');
   const infos = homepage.infoCards || [{title:'Studio',text:'OBS, StreamElements, admin control and theme engine working as one system.'},{title:'Music',text:'Trance, Eurodance, Retro, EDM and Pop Up shows.'},{title:'Chat',text:'Requests, shoutouts, channel points, goals and community moments.'},{title:'Network',text:'A modern Music TV portal connected to Twitch.'}];
   if($('infoCards')) $('infoCards').innerHTML = infos.map(i=>`<div><span>${escapeHtml(i.kicker||'DJ FOLSOE')}</span><b>${escapeHtml(i.title||'Info')}</b><p>${escapeHtml(i.text||'')}</p></div>`).join('');
   setText('aboutText', homepage.aboutText || 'DJ FOLSOE is a Danish Twitch DJ and Music TV project built around live shows, requests, moderators, community and a broadcast look made for TV, mobile and desktop.');
-  const chart = homepage.top20 || [];
+  const chart = portal.top20 || homepage.top20 || [];
   if($('chartList')) $('chartList').innerHTML = chart.slice(0,10).map((x,i)=>`<div class="chartRow"><i>#${x.rank||i+1}</i><strong>${escapeHtml(x.artist||'Artist')} - ${escapeHtml(x.title||'Title')}</strong><em>${escapeHtml(x.status||'')}</em></div>`).join('');
   const wall = community.wall || [{title:'Follower journey',text:String(community.followers||'Growing every stream')},{title:'Sub journey',text:`${community.subs||0}/${community.subGoal||100}`},{title:'Song requests',text:community.requestText||'Use !request in chat'},{title:'Twitch chat',text:'Chat and community are shown in the live overlay.'}];
   if($('communityWall')) $('communityWall').innerHTML = wall.map(w=>`<div><span>${escapeHtml(w.kicker||'COMMUNITY')}</span><b>${escapeHtml(w.title||'')}</b><p>${escapeHtml(w.text||'')}</p></div>`).join('');
