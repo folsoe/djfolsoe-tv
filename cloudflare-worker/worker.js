@@ -172,25 +172,46 @@ async function twitchProfile(env, core, loginOverride) {
   const fallback = {
     ok:false, login, displayName:"DJ FOLSOE", avatar:core.profile?.fallbackAvatar||"",
     description:core.profile?.description || DEFAULT_CORE.profile.description,
-    isLive:false, viewers:0, viewCount:0, game:"Music", liveTitle:""
+    isLive:false, viewers:0, followers:core.community?.followers ?? core.station?.followers ?? 0,
+    subs:core.community?.subs ?? core.station?.subs ?? 0, subGoal:core.community?.subGoal ?? 100,
+    viewCount:0, game:"Music", liveTitle:"", source:"fallback"
   };
   try {
     if (!env.TWITCH_CLIENT_ID || !env.TWITCH_ACCESS_TOKEN) return fallback;
     const token = String(env.TWITCH_ACCESS_TOKEN).startsWith("Bearer ") ? String(env.TWITCH_ACCESS_TOKEN).slice(7) : env.TWITCH_ACCESS_TOKEN;
     const headers = {"Client-ID":env.TWITCH_CLIENT_ID,"Authorization":"Bearer "+token};
-    const uRes = await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {headers});
+    const uRes = await fetch("https://api.twitch.tv/helix/users?login="+encodeURIComponent(login), {headers, cf:{cacheTtl:20,cacheEverything:false}});
     const uJson = await uRes.json();
     const u = uJson?.data?.[0];
     if (!u) return fallback;
-    let stream = null;
+
+    let stream = null, followers = fallback.followers, subs = fallback.subs;
+    let followerScope = "not_checked", subScope = "not_checked";
+
     try {
-      const sRes = await fetch("https://api.twitch.tv/helix/streams?user_login="+encodeURIComponent(login), {headers});
+      const sRes = await fetch("https://api.twitch.tv/helix/streams?user_login="+encodeURIComponent(login), {headers, cf:{cacheTtl:20,cacheEverything:false}});
       stream = (await sRes.json())?.data?.[0] || null;
     } catch(e) {}
+
+    try {
+      const fRes = await fetch("https://api.twitch.tv/helix/channels/followers?broadcaster_id="+encodeURIComponent(u.id)+"&first=1", {headers, cf:{cacheTtl:60,cacheEverything:false}});
+      const fJson = await fRes.json();
+      if (typeof fJson?.total === "number") { followers = fJson.total; followerScope = "ok"; }
+      else followerScope = fJson?.message || "missing moderator:read:followers";
+    } catch(e) { followerScope = "followers unavailable"; }
+
+    try {
+      const subRes = await fetch("https://api.twitch.tv/helix/subscriptions?broadcaster_id="+encodeURIComponent(u.id)+"&first=1", {headers, cf:{cacheTtl:60,cacheEverything:false}});
+      const subJson = await subRes.json();
+      if (typeof subJson?.total === "number") { subs = subJson.total; subScope = "ok"; }
+      else subScope = subJson?.message || "missing channel:read:subscriptions";
+    } catch(e) { subScope = "subscriptions unavailable"; }
+
     return {
       ok:true, login, id:u.id, displayName:u.display_name||"DJ FOLSOE", avatar:u.profile_image_url||"",
       description:u.description||fallback.description, viewCount:u.view_count||0,
-      isLive:!!stream, viewers:stream?.viewer_count||0, game:stream?.game_name||"Music", liveTitle:stream?.title||""
+      isLive:!!stream, viewers:stream?.viewer_count||0, game:stream?.game_name||"Music", liveTitle:stream?.title||"",
+      followers, subs, subGoal:fallback.subGoal, source:"twitch", followerScope, subScope, updatedAt:new Date().toISOString()
     };
   } catch(e) {
     return {...fallback,error:e.message||"Twitch error"};
@@ -702,14 +723,18 @@ export default {
       if (path === "/api/website-portal") {
         if (request.method === "GET") {
           ensureThemeBackgrounds(core);
+          const tw = await twitchProfile(env, core);
+          const baseCommunity = core.community || {};
+          const baseBroadcast = core.broadcast || {broadcastState:core.station?.live?"LIVE":"OFFLINE", activeShow:core.activeTheme || "weekend", streamTitle:core.station?.streamTitle || "DJ FOLSOE · Twitch music streamer from Denmark", viewers:core.station?.viewers || 0};
           return json({
             ok:true,
-            version:"V908 Website 2.0",
+            version:"V917.2 Twitch Live Sync",
             homepage: core.homepage || {},
             website: core.website || {title:"DJ FOLSOE TV", primaryLanguage:"en"},
-            community: core.community || {},
-            broadcast: core.broadcast || {broadcastState:core.station?.live?"LIVE":"OFFLINE", activeShow:core.activeTheme || "weekend", streamTitle:core.station?.streamTitle || "DJ FOLSOE · Music TV from Denmark", viewers:core.station?.viewers || 0},
-            themes: {activeTheme:core.activeTheme, themeLibrary:core.themeLibrary || core.themes || {}}
+            community: Object.assign({}, baseCommunity, {followers:tw.followers ?? baseCommunity.followers, subs:tw.subs ?? baseCommunity.subs, subGoal:tw.subGoal ?? baseCommunity.subGoal}),
+            broadcast: Object.assign({}, baseBroadcast, {live:tw.isLive, broadcastState:tw.isLive?"LIVE":baseBroadcast.broadcastState, viewers:tw.viewers || 0, streamTitle:tw.liveTitle || baseBroadcast.streamTitle}),
+            themes: {activeTheme:core.activeTheme, themeLibrary:core.themeLibrary || core.themes || {}},
+            twitch: tw
           });
         }
         if (!adminOk(request,env)) return json({error:"Unauthorized"},401);

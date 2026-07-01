@@ -1,5 +1,7 @@
 const $ = (id) => document.getElementById(id);
 const API_BASE = (window.DJF_API_BASE || '').replace(/\/$/, '');
+const API_ROOT = API_BASE || '';
+let twitchTimer = null;
 let portal = {};
 let nextDate = null;
 
@@ -15,10 +17,8 @@ async function loadPortal(){
   const localThemes = await readJson('data/themes.json', {}) || {};
   let cloud = {};
   let twitch = {};
-  if(API_BASE){
-    cloud = await readJson(API_BASE + '/api/website-portal', {});
-    twitch = await readJson(API_BASE + '/api/twitch-profile', {});
-  }
+  cloud = await readJson(API_ROOT + '/api/website-portal', {});
+  twitch = await readJson(API_ROOT + '/api/twitch-profile?live=1&t=' + Date.now(), {});
   portal = deepMerge({homepage:localHomepage, website:localWebsite, community:localCommunity, broadcast:localBroadcast, themes:localThemes}, cloud || {});
   portal.twitch = twitch || {};
   if(portal.twitch && portal.twitch.ok){
@@ -35,6 +35,30 @@ async function loadPortal(){
   renderPortal();
   tickCountdown();
   setInterval(tickCountdown, 1000);
+  startTwitchLivePolling();
+}
+async function refreshTwitchLive(){
+  const twitch = await readJson(API_ROOT + '/api/twitch-profile?live=1&t=' + Date.now(), null);
+  if(!twitch || !twitch.ok) return;
+  portal.twitch = twitch;
+  portal.broadcast = Object.assign({}, portal.broadcast || {}, {
+    viewers: Number(twitch.viewers || 0),
+    live: !!twitch.isLive,
+    broadcastState: twitch.isLive ? 'LIVE' : (portal.broadcast?.broadcastState || 'OFFLINE'),
+    streamTitle: twitch.liveTitle || portal.broadcast?.streamTitle,
+    currentShowTitle: twitch.liveTitle || portal.broadcast?.currentShowTitle
+  });
+  portal.community = Object.assign({}, portal.community || {}, {
+    followers: twitch.followers ?? portal.community?.followers,
+    subs: twitch.subs ?? portal.community?.subs,
+    subGoal: portal.community?.subGoal || 100
+  });
+  renderPortal();
+}
+function startTwitchLivePolling(){
+  if(twitchTimer) clearInterval(twitchTimer);
+  twitchTimer = setInterval(refreshTwitchLive, 30000);
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) refreshTwitchLive(); });
 }
 function deepMerge(a,b){
   const out = Array.isArray(a) ? [...a] : {...(a||{})};
