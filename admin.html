@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V913 Asset & Theme Upload Manager</title>
+  <title>DJ FOLSOE V914 Live Preview</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -17,8 +17,8 @@
 <header class="adminHero">
   <div>
     <span class="kicker">DJ FOLSOE NETWORK V913</span>
-    <h1>Daily Control Room · Content Studio · Asset Manager</h1>
-    <p>Daily control room plus Content Studio and Asset Manager for website theme images, overlay backgrounds and Music TV visuals.</p>
+    <h1>Daily Control Room · Content Studio · Asset Manager · Live Preview</h1>
+    <p>Daily control room plus Content Studio, Asset Manager and Live Preview before publishing to website and overlay.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -31,6 +31,7 @@
   <button onclick="jump('v911DailyControl')">🎛️ Daily Control</button>
   <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
   <button onclick="jump('v913AssetManager')">🗂️ Assets</button>
+  <button onclick="jump('v914LivePreview')">👁️ Live Preview</button>
   <button onclick="jump('oneclick')">🚀 One click</button>
   <button onclick="jump('showControl')">🎬 Show control</button>
   <button onclick="jump('centralEngine')">🧠 Central engine</button>
@@ -230,6 +231,50 @@
 
     <div id="v913ThemeCards" class="v913ThemeCards"></div>
     <pre id="v913Status">V913 ready. Load assets to begin.</pre>
+  </section>
+
+
+  <section id="v914LivePreview" class="panel v914LivePreview">
+    <div class="panelHead">
+      <h2>👁️ V914 · Website/Admin Live Preview</h2>
+      <div>
+        <button onclick="v914RefreshPreview()">Refresh preview</button>
+        <button class="bigPublish" onclick="v914RefreshPreview();publishEverything()">PREVIEW + PUBLISH</button>
+      </div>
+    </div>
+    <p class="note">Preview the current admin output before publishing. This does not change the locked overlay layout — it only previews website hero, active theme, ticker and overlay box 1-3 content.</p>
+
+    <div class="v914PreviewGrid">
+      <div class="v914WebsitePreview">
+        <div class="v914PreviewBadge" id="v914ThemeBadge">THEME PREVIEW</div>
+        <h3 id="v914HeroTitle">DJ FOLSOE LIVE</h3>
+        <p id="v914HeroText">Live Music TV from Denmark</p>
+        <div class="v914HeroMeta">
+          <span id="v914NowOnAir">ON AIR</span>
+          <span id="v914NextShow">NEXT SHOW</span>
+          <span id="v914Goal">COMMUNITY GOAL</span>
+        </div>
+        <small id="v914AssetPath">No background selected</small>
+      </div>
+
+      <div class="v914OverlayPreview">
+        <div class="v914OverlayTop">
+          <span>OVERLAY OUTPUT PREVIEW</span>
+          <b>BOX 4 LOCKED: TWITCH CHAT</b>
+        </div>
+        <div class="v914OverlayBoxes">
+          <article><span>BOX 1</span><b id="v914Box1Title">STATUS</b><p id="v914Box1Body">Broadcast cloud online</p></article>
+          <article><span>BOX 2</span><b id="v914Box2Title">SHOW INFO</b><p id="v914Box2Body">Current show information</p></article>
+          <article><span>BOX 3</span><b id="v914Box3Title">COMMUNITY</b><p id="v914Box3Body">Goals and viewer journey</p></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="v914TickerPreview">
+      <span>LIVE TICKER</span>
+      <marquee id="v914TickerText">Welcome to DJ FOLSOE NETWORK · Music TV live from Denmark</marquee>
+    </div>
+    <pre id="v914Status">V914 preview ready. Press Refresh preview before publishing.</pre>
   </section>
 
   <section id="oneclick" class="panel oneClickPanel">

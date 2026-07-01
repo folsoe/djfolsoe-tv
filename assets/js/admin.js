@@ -1530,3 +1530,51 @@ async function v913PublishAssets(){
 }
 const V913_originalLoadAll=loadAll;loadAll=async function(){await V913_originalLoadAll();setTimeout(()=>{if(document.getElementById('v913AssetManager')&&!v913Assets)v913LoadAssets();},500);};
 setTimeout(()=>{if(document.getElementById('v913AssetManager'))v913LoadAssets();},2200);
+
+
+/* ===== V914 LIVE PREVIEW ===== */
+function v914Pick(){
+  const g=(id)=>DJF_get(id)||'';
+  const t=(id)=>{const el=DJF_el(id);return el?el.textContent:''};
+  const activeTheme=(g('v913ThemeSelect')||g('themeSelect')||t('v911ActiveTheme')||'weekend').trim();
+  const heroTitle=g('v912HeroTitle')||g('quickHeadline')||g('heroTitle')||t('v906SelectedTitle')||'DJ FOLSOE LIVE';
+  const heroText=g('v912HeroText')||g('quickMessage')||g('heroText')||'Live Music TV from Denmark';
+  const nowOnAir=g('quickOnAir')||t('v911ActiveShow')||t('v906SelectedTitle')||'ON AIR';
+  const nextShow=g('v912NextBroadcast')||g('quickNextShow')||'Next broadcast coming up';
+  const goal=g('v912GoalPrimary')||g('quickFollowerGoal')||'Community goal active';
+  const ticker=g('v912TickerMessage')||g('tickerMessage')||g('quickRequestLine')||'Welcome to DJ FOLSOE NETWORK · Music TV live from Denmark';
+  const box1Title=g('v909Box1Title')||g('overlayBox1Title')||'STATUS';
+  const box1Body=g('v912Box1Body')||g('v909Box1Body')||g('overlayBox1Body')||'Broadcast cloud online';
+  const box2Title=g('v909Box2Title')||g('overlayBox2Title')||'SHOW INFO';
+  const box2Body=g('v912Box2Body')||g('v909Box2Body')||g('overlayBox2Body')||nextShow;
+  const box3Title=g('v909Box3Title')||g('overlayBox3Title')||'COMMUNITY';
+  const box3Body=g('v912Box3Body')||g('v909Box3Body')||g('overlayBox3Body')||goal;
+  const bg=g('v913Background')||g('v907ThemeBg')||`themes/${activeTheme}.png`;
+  return {activeTheme,heroTitle,heroText,nowOnAir,nextShow,goal,ticker,box1Title,box1Body,box2Title,box2Body,box3Title,box3Body,bg};
+}
+function v914Text(id,value){const el=DJF_el(id);if(el)el.textContent=value||'';}
+function v914RefreshPreview(){
+  const p=v914Pick();
+  v914Text('v914ThemeBadge',(p.activeTheme||'theme').toUpperCase()+' · MUSIC TV PREVIEW');
+  v914Text('v914HeroTitle',p.heroTitle);
+  v914Text('v914HeroText',p.heroText);
+  v914Text('v914NowOnAir',p.nowOnAir);
+  v914Text('v914NextShow',p.nextShow);
+  v914Text('v914Goal',p.goal);
+  v914Text('v914AssetPath','Background: '+p.bg);
+  v914Text('v914Box1Title',p.box1Title);v914Text('v914Box1Body',p.box1Body);
+  v914Text('v914Box2Title',p.box2Title);v914Text('v914Box2Body',p.box2Body);
+  v914Text('v914Box3Title',p.box3Title);v914Text('v914Box3Body',p.box3Body);
+  v914Text('v914TickerText',p.ticker);
+  const preview=DJF_el('v914LivePreview');
+  if(preview && p.bg){preview.style.setProperty('--v914-bg',`url('${p.bg}')`);}
+  v914Text('v914Status','✅ Preview refreshed. Nothing is published until you press Publish. Box 4 remains locked to Twitch chat.');
+  return p;
+}
+['input','change','keyup'].forEach(evt=>document.addEventListener(evt,function(e){
+  if(e.target && e.target.id && /^(v912|v913|v909|quick|overlay|ticker|hero|theme)/.test(e.target.id)){
+    clearTimeout(window.__v914Timer); window.__v914Timer=setTimeout(v914RefreshPreview,180);
+  }
+}));
+const V914_originalLoadAll=loadAll;loadAll=async function(){await V914_originalLoadAll();setTimeout(v914RefreshPreview,750);};
+setTimeout(v914RefreshPreview,2600);
