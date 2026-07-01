@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE V916 Health Check</title>
+  <title>DJ FOLSOE V917 Go Live Assistant</title>
   <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
@@ -16,9 +16,9 @@
 
 <header class="adminHero">
   <div>
-    <span class="kicker">DJ FOLSOE NETWORK V916</span>
-    <h1>Daily Control Room · Health Check · Content Studio · Asset Manager · Live Preview · Publish Safety</h1>
-    <p>Daily control room plus system health checks, Content Studio, Asset Manager, Live Preview and safer publishing with backup/restore.</p>
+    <span class="kicker">DJ FOLSOE NETWORK V917</span>
+    <h1>Go Live Assistant · Daily Control Room · Health Check · Content Studio · Asset Manager · Live Preview · Publish Safety</h1>
+    <p>Go Live Assistant with checklist, daily control room, system health checks, Content Studio, Asset Manager, Live Preview and safer publishing with backup/restore.</p>
   </div>
   <div class="loginCard">
     <label>ADMIN_TOKEN</label>
@@ -28,6 +28,7 @@
 </header>
 
 <nav class="adminTabs">
+  <button onclick="jump('v917GoLiveAssistant')">🚦 Go Live Assistant</button>
   <button onclick="jump('v911DailyControl')">🎛️ Daily Control</button>
   <button onclick="jump('v912ContentStudio')">✍️ Content Studio</button>
   <button onclick="jump('v913AssetManager')">🗂️ Assets</button>
@@ -51,6 +52,69 @@
 
 <main>
 
+
+  <section id="v917GoLiveAssistant" class="panel v917GoLivePanel">
+    <div class="panelHead">
+      <h2>🚦 V917 · Launch Checklist & Go Live Assistant</h2>
+      <div>
+        <button onclick="v917RefreshAssistant()">Refresh checklist</button>
+        <button class="bigPublish" onclick="v917StartBroadcastSetup()">START BROADCAST SETUP</button>
+      </div>
+    </div>
+    <p class="note">Use this before stream. It guides you through show, theme, website, overlay, preview, backup, publish and Twitch launch. It does not change overlay graphics. Box 4 remains Twitch chat.</p>
+
+    <div class="v917LaunchBanner" id="v917LaunchBanner">
+      <span>LAUNCH STATUS</span>
+      <b id="v917LaunchText">Run checklist</b>
+      <small id="v917LaunchSub">No launch check has been performed yet.</small>
+    </div>
+
+    <div class="v917SetupGrid">
+      <article>
+        <span>Step 1</span><b>Choose show</b>
+        <select id="v917ShowSelect">
+          <option value="live">DJ FOLSOE LIVE</option>
+          <option value="starting">Starting Soon</option>
+          <option value="countdown">Countdown</option>
+          <option value="break">Break</option>
+          <option value="special">Special Event</option>
+          <option value="afterparty">After Party</option>
+          <option value="ending">Ending Soon</option>
+          <option value="offline">Offline</option>
+        </select>
+        <button onclick="v917ApplyShowPreset()">Apply show preset</button>
+      </article>
+      <article>
+        <span>Step 2</span><b>Choose theme</b>
+        <select id="v917ThemeSelect"></select>
+        <button onclick="v917ApplyThemeChoice()">Apply theme</button>
+      </article>
+      <article>
+        <span>Step 3</span><b>Open quick checks</b>
+        <button onclick="jump('v914LivePreview');v914RefreshPreview&&v914RefreshPreview()">Preview website/overlay</button>
+        <button onclick="v916RunHealthCheck&&v916RunHealthCheck(true)">Run health check</button>
+      </article>
+      <article>
+        <span>Step 4</span><b>Launch links</b>
+        <button onclick="window.open('https://www.twitch.tv/djfolsoe','_blank')">Open Twitch channel</button>
+        <button onclick="window.open('https://dashboard.twitch.tv','_blank')">Open Twitch dashboard</button>
+      </article>
+    </div>
+
+    <div class="v917ChecklistBox">
+      <h3>Go Live checklist</h3>
+      <div id="v917Checklist" class="v917Checklist"></div>
+    </div>
+
+    <div class="v917ActionBar">
+      <button onclick="v917RefreshAssistant()">1 · Check now</button>
+      <button onclick="v914RefreshPreview&&v914RefreshPreview()">2 · Preview</button>
+      <button onclick="v915BackupCurrent&&v915BackupCurrent()">3 · Backup</button>
+      <button class="bigPublish" onclick="v917PublishLaunch()">4 · Publish live</button>
+      <button onclick="window.open('https://www.twitch.tv/djfolsoe','_blank')">5 · Go to Twitch</button>
+    </div>
+    <pre id="v917Status">V917 ready. Run checklist before stream.</pre>
+  </section>
 
   <section id="v916HealthCheck" class="panel v916HealthPanel">
     <div class="panelHead">

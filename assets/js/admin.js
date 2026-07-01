@@ -1725,3 +1725,83 @@ async function v916RunHealthCheck(showReady){
 }
 const V916_originalLoadAll=loadAll;loadAll=async function(){await V916_originalLoadAll();setTimeout(()=>{if(document.getElementById('v916HealthCheck'))v916RunHealthCheck();},900);};
 setTimeout(()=>{if(document.getElementById('v916HealthCheck'))v916RunHealthCheck();},3600);
+
+
+/* ===== V917 LAUNCH CHECKLIST & GO LIVE ASSISTANT ===== */
+function v917Text(id,v){DJF_text(id, v == null ? '' : String(v));}
+function v917SetStatus(msg){v917Text('v917Status',msg);}
+function v917ThemeOptions(){
+  const sel=document.getElementById('v917ThemeSelect'); if(!sel) return;
+  const current=String((typeof activeTheme!=='undefined'&&activeTheme)||'weekend');
+  sel.innerHTML=Object.entries(THEMES||{}).map(([k,l])=>`<option value="${k}" ${k===current?'selected':''}>${l}</option>`).join('');
+}
+function v917CheckData(){
+  const theme=String((typeof activeTheme!=='undefined'&&activeTheme)||document.getElementById('v917ThemeSelect')?.value||'').trim();
+  const hero=String(document.getElementById('v911HeroHeadline')?.value||document.getElementById('v912HeroHeadline')?.value||document.getElementById('v910HeroHeadline')?.value||'').trim();
+  const ticker=String(document.getElementById('v911Ticker')?.value||document.getElementById('v912BottomTicker')?.value||document.getElementById('v910Ticker')?.value||'').trim();
+  const box1=String(document.getElementById('v911Box1')?.value||document.getElementById('v912Box1Headline')?.value||document.getElementById('v910Box1Headline')?.value||'').trim();
+  const box2=String(document.getElementById('v911Box2')?.value||document.getElementById('v912Box2Headline')?.value||document.getElementById('v910Box2Headline')?.value||'').trim();
+  const box3=String(document.getElementById('v911Box3')?.value||document.getElementById('v912Box3Headline')?.value||document.getElementById('v910Box3Headline')?.value||'').trim();
+  const lastBackup=String(document.getElementById('v915LastBackup')?.textContent||'').trim();
+  const apiStatus=String(document.getElementById('v916ApiStatus')?.textContent||'').trim().toUpperCase();
+  const healthReady=String(document.getElementById('v916ReadyText')?.textContent||'').toUpperCase().includes('READY');
+  return [
+    {key:'show',label:'Show selected',ok:!!(document.getElementById('v917ShowSelect')?.value||document.getElementById('v910ActiveShow')?.value||document.getElementById('v911NowOnAir')?.value),detail:'One Click Show Control / Broadcast mode has a selected show.'},
+    {key:'theme',label:'Theme selected',ok:!!theme,detail:theme?('Active theme: '+theme):'Choose a theme before going live.'},
+    {key:'website',label:'Website ready',ok:!!hero,detail:hero?('Hero: '+hero):'Website hero headline is empty.'},
+    {key:'overlay',label:'Overlay ready',ok:!!(box1&&box2&&box3),detail:(box1&&box2&&box3)?'Overlay box 1-3 have visible headlines. Box 4 is locked to Twitch chat.':'Overlay box 1-3 need headlines.'},
+    {key:'ticker',label:'Ticker ready',ok:!!ticker,detail:ticker?('Ticker: '+ticker.slice(0,90)):'Ticker text is empty.'},
+    {key:'preview',label:'Preview checked',ok:!!localStorage.getItem('DJF_V917_PREVIEW_SEEN'),detail:localStorage.getItem('DJF_V917_PREVIEW_SEEN')?'Preview has been opened in this browser session.':'Open Live Preview before publish.'},
+    {key:'backup',label:'Backup exists',ok:!!(lastBackup && !/no backup|waiting/i.test(lastBackup)),detail:lastBackup||'Create a backup before publish.'},
+    {key:'health',label:'Health check',ok:!!(healthReady||apiStatus==='OK'),detail:healthReady?'Health check says ready.':'Run V916 health check before going live.'}
+  ];
+}
+function v917RenderChecklist(items){
+  const host=document.getElementById('v917Checklist'); if(!host) return;
+  host.innerHTML=(items||[]).map(x=>`<div class="v917CheckItem ${x.ok?'ok':'warn'}"><i>${x.ok?'✅':'⚠️'}</i><div><b>${x.label}</b><small>${x.detail}</small></div></div>`).join('');
+  const ready=(items||[]).every(x=>x.ok);
+  const banner=document.getElementById('v917LaunchBanner'); if(banner){banner.classList.remove('ok','warn','bad'); banner.classList.add(ready?'ok':'warn');}
+  v917Text('v917LaunchText',ready?'READY TO GO LIVE':'CHECK BEFORE LAUNCH');
+  v917Text('v917LaunchSub',ready?'All launch checklist items are ready.':'Missing items: '+(items||[]).filter(x=>!x.ok).map(x=>x.label).join(', '));
+  v917SetStatus(JSON.stringify({ready,checkedAt:new Date().toISOString(),missing:(items||[]).filter(x=>!x.ok).map(x=>x.label)},null,2));
+}
+function v917RefreshAssistant(){v917ThemeOptions();v917RenderChecklist(v917CheckData());}
+function v917ApplyShowPreset(){
+  const mode=document.getElementById('v917ShowSelect')?.value||'live';
+  if(typeof v911OneTap==='function') v911OneTap(mode); else if(typeof v910Mode==='function') v910Mode(mode);
+  localStorage.setItem('DJF_V917_SELECTED_SHOW',mode);
+  setTimeout(v917RefreshAssistant,250);
+  v917SetStatus('✅ Show preset applied: '+mode+'. Continue with preview, backup and publish.');
+}
+function v917ApplyThemeChoice(){
+  const t=document.getElementById('v917ThemeSelect')?.value||'weekend';
+  activeTheme=t; if(typeof markTheme==='function') markTheme(t);
+  if(typeof v910Set==='function') v910Set('v910ActiveTheme',t);
+  localStorage.setItem('DJF_V917_SELECTED_THEME',t);
+  setTimeout(v917RefreshAssistant,250);
+  v917SetStatus('✅ Theme selected locally: '+t+'. Publish to send it live.');
+}
+async function v917StartBroadcastSetup(){
+  v917ApplyShowPreset();
+  v917ApplyThemeChoice();
+  if(typeof v914RefreshPreview==='function'){v914RefreshPreview();localStorage.setItem('DJF_V917_PREVIEW_SEEN','yes');}
+  if(typeof v916RunHealthCheck==='function') await v916RunHealthCheck(true);
+  setTimeout(v917RefreshAssistant,500);
+}
+async function v917PublishLaunch(){
+  v917RefreshAssistant();
+  const checks=v917CheckData();
+  const missing=checks.filter(x=>!x.ok).map(x=>x.label);
+  if(missing.length && !confirm('Checklist has warnings: '+missing.join(', ')+'. Publish anyway?')) return;
+  try{
+    if(typeof v915BackupCurrent==='function') await v915BackupCurrent();
+    if(typeof v915SafePublish==='function') await v915SafePublish();
+    else if(typeof v911PublishNow==='function') await v911PublishNow();
+    else if(typeof publishEverything==='function') await publishEverything();
+    v917SetStatus('✅ V917 launch publish complete. Website + overlay output are synced. Open Twitch when ready.');
+    setTimeout(v917RefreshAssistant,600);
+  }catch(e){v917SetStatus('❌ V917 publish failed: '+e.message);}
+}
+const V917_originalJump=jump;jump=function(id){if(id==='v914LivePreview')localStorage.setItem('DJF_V917_PREVIEW_SEEN','yes');return V917_originalJump(id);};
+const V917_originalLoadAll=loadAll;loadAll=async function(){await V917_originalLoadAll();setTimeout(v917RefreshAssistant,1200);};
+setTimeout(()=>{if(document.getElementById('v917GoLiveAssistant'))v917RefreshAssistant();},4200);
