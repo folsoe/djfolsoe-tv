@@ -2378,3 +2378,93 @@ v901PushBurst = function(item){
   setInterval(fetchCore, FETCH_MS);
   setInterval(write, WRITE_MS);
 })();
+
+/* =========================================================
+   V927.6 — TOP TICKER HARD LOCK
+   Removes ACTIVE THEME / VIEWERS / title spam from the top ticker.
+   Top ticker is now ONLY: Theme title · Theme slogan · show fun line.
+   ========================================================= */
+(function(){
+  const VERSION='V927.6 TOP TICKER HARD LOCK';
+  const API=(window.DJF_API_BASE||'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/,'');
+  let lockedCore=null;
+  let cbSeq=0;
+  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function clean(v,f=''){return String(v==null?f:v).replace(/\s+/g,' ').trim();}
+  function coreOf(p){return (p&&typeof p==='object'&&(p.core||p.data||p.broadcastCore)) || p || {};}
+  function themeTitle(id){return ({weekend:'Weekend',trance:'Trance Tuesday',eurodance:'Eurodance',fredagsbar:'Fredagsbar',retro:'Retro Hits',popup:'Pop Up Live',morning:'Good Morning Twitch',summer:'Summer'}[String(id||'').toLowerCase()]||clean(id,'DJ FOLSOE'));}
+  function themeSlogan(id){return ({
+    weekend:'Weekend energy, party classics and live community',
+    trance:'Melodic trance, big emotions and peak-time energy',
+    eurodance:'90s and 00s dance nostalgia with full Music TV power',
+    fredagsbar:'Friday bar mood, party classics and Danish weekend energy',
+    retro:'Classics that never die',
+    popup:'The stream that appears when you least expect it',
+    morning:'Coffee, music and good vibes',
+    summer:'Summer mood, vacation energy and feel-good music'
+  }[String(id||'').toLowerCase()]||'DJ FOLSOE Twitch Music TV from Denmark');}
+  function funLine(id){return ({
+    weekend:'Turn it up — the weekend has entered the chat',
+    trance:'Hands up, eyes closed, soul open',
+    eurodance:'More boom, more bass, more 90s face',
+    fredagsbar:'Cold drinks, warm basslines, zero adult supervision',
+    retro:'Old songs, new memories, dangerous singalongs',
+    popup:'Surprise stream — blink and you missed the intro',
+    morning:'Coffee first, bassline second, chaos later',
+    summer:'Sunshine, sunglasses and questionable dance moves'
+  }[String(id||'').toLowerCase()]||'Live from Denmark with love, lights and loud music');}
+  function jsonp(url, timeout=8000){
+    return new Promise((resolve,reject)=>{
+      const cb='djfTopTickerLock_'+Date.now()+'_'+(cbSeq++);
+      const s=document.createElement('script');
+      const timer=setTimeout(()=>{cleanup();reject(new Error('jsonp timeout'));},timeout);
+      function cleanup(){clearTimeout(timer); try{delete window[cb];}catch(e){window[cb]=undefined;} if(s.parentNode)s.parentNode.removeChild(s);}
+      window[cb]=data=>{cleanup();resolve(data);};
+      s.onerror=()=>{cleanup();reject(new Error('jsonp failed'));};
+      s.src=url+(url.includes('?')?'&':'?')+'callback='+encodeURIComponent(cb)+'&ts='+Date.now();
+      document.head.appendChild(s);
+    });
+  }
+  function tickerHtml(parts){
+    const html=parts.map((p,i)=>'<span class="tickerItem '+(['cyan','white','pink'][i%3])+'"><b>'+esc(p)+'</b></span>').join('<span class="tickerSep">✦</span>');
+    return html+'<span class="tickerSep">✦</span>'+html;
+  }
+  function partsFromCore(core){
+    core=coreOf(core);
+    const theme=core.theme||{};
+    const show=core.show||{};
+    const hero=core.hero||{};
+    const id=clean(theme.id||theme.key||core?.broadcast?.activeTheme||'weekend').toLowerCase();
+    const title=clean(theme.title||themeTitle(id));
+    const slogan=clean(theme.slogan||theme.description||show.description||themeSlogan(id));
+    const fun=clean(theme.funText||theme.fun||funLine(id));
+    const showText=clean(show.title||show.current||hero.title||'DJ FOLSOE');
+    return [title, slogan, fun, showText].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
+  }
+  function forceTopTicker(){
+    const el=document.getElementById('topTickerText');
+    if(!el) return;
+    const parts=partsFromCore(lockedCore||window.DJF_LAST_BROADCAST_CORE||{});
+    const txt=el.textContent||'';
+    const shouldRewrite = !el.dataset.djfTopLocked || /ACTIVE THEME|VIEWERS|LIVE NOW|OFFLINE ·|followers/i.test(txt);
+    const key=parts.join('|');
+    if(shouldRewrite || el.dataset.djfTopKey!==key){
+      el.dataset.djfTopLocked='true';
+      el.dataset.djfTopKey=key;
+      el.innerHTML=tickerHtml(parts);
+      document.documentElement.style.setProperty('--topDur','82s');
+    }
+    window.DJF_TOP_TICKER_VERSION=VERSION;
+  }
+  async function fetchCore(){
+    try{ lockedCore=coreOf(await jsonp(API+'/api/broadcast-jsonp')); window.DJF_LAST_BROADCAST_CORE=lockedCore; }
+    catch(e){}
+    forceTopTicker();
+  }
+  const oldRenderTickers = window.renderTickers;
+  window.renderTickers=function(){ try{ if(typeof oldRenderTickers==='function') oldRenderTickers(); }catch(e){} forceTopTicker(); };
+  try{ renderTickers = window.renderTickers; }catch(e){}
+  setTimeout(fetchCore,500);
+  setInterval(fetchCore,10000);
+  setInterval(forceTopTicker,900);
+})();
