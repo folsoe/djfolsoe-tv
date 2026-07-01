@@ -10,61 +10,28 @@
     <div id="clockBox">--:--</div>
   </div>
 
-  <div class="centerSafe">CAMERA SAFE AREA</div>
-
-  <div class="sideStack leftStack">
-    <section class="infoCard" id="box1">
-      <header><span id="box1Label">FOLLOW JOURNEY</span><b id="box1Badge">LIVE</b></header>
-      <main>
-        <div class="icon" id="box1Icon">📡</div>
-        <div class="copy">
-          <h2 id="box1Title">Loading…</h2>
-          <p id="box1Body">Loading…</p>
-        </div>
-        <div class="stats" id="box1Stats"></div>
-      </main>
-    </section>
-
-    <section class="infoCard" id="box3">
-      <header><span id="box3Label">MUSIC DESK</span><b id="box3Badge">CHART</b></header>
-      <main>
-        <div class="icon" id="box3Icon">🎵</div>
-        <div class="copy">
-          <h2 id="box3Title">Loading…</h2>
-          <p id="box3Body">Loading…</p>
-        </div>
-        <div class="stats" id="box3Stats"></div>
-      </main>
-    </section>
+  <div class="cleanStage"></div>
+  <div class="broadcastBurst" id="broadcastBurst">
+    <div class="burstKicker" id="burstKicker">BROADCAST</div>
+    <div class="burstTitle" id="burstTitle">DJ FOLSOE TV</div>
+    <div class="burstBody" id="burstBody">Music TV from Denmark</div>
+    <div class="burstLine"></div>
+    <div class="burstFx" id="burstFx"></div>
   </div>
 
-  <div class="sideStack rightStack">
-    <section class="infoCard" id="box2">
-      <header><span id="box2Label">PROGRAM</span><b id="box2Badge">ON AIR</b></header>
-      <main>
-        <div class="icon" id="box2Icon">📺</div>
-        <div class="copy">
-          <h2 id="box2Title">Loading…</h2>
-          <p id="box2Body">Loading…</p>
-        </div>
-        <div class="stats" id="box2Stats"></div>
-      </main>
-    </section>
-
-    <section class="infoCard chatCard" id="box4">
-      <header><span>LIVE TWITCH CHAT</span><b>CHAT</b></header>
-      <main class="chatMain">
-        <div class="avatarWrap">
-          <img id="chatAvatarImg" alt="">
-          <div id="chatAvatarFallback">D</div>
-        </div>
-        <div class="chatCopy">
-          <div id="chatUser">LIVE CHAT</div>
-          <div id="chatMessage">Waiting for Twitch chat…</div>
-        </div>
-      </main>
-    </section>
-  </div>
+  <section class="infoCard angledChatDock" id="box4">
+    <header><span>LIVE TWITCH CHAT</span><b>CHAT</b></header>
+    <main class="chatMain">
+      <div class="avatarWrap">
+        <img id="chatAvatarImg" alt="">
+        <div id="chatAvatarFallback">D</div>
+      </div>
+      <div class="chatCopy">
+        <div id="chatUser">LIVE CHAT</div>
+        <div id="chatMessage">Waiting for Twitch chat…</div>
+      </div>
+    </main>
+  </section>
 
   <div class="bottomTicker">
     <div class="bottomLabel">BROADCAST CLOUD</div>

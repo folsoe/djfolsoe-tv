@@ -75,3 +75,1715 @@ body.theme-summer{--a:#00f5d4;--b:#ffb703;--c:#fff08a}
 body.theme-weekend{--a:#ffd166;--b:#ff4d6d;--c:#00d4ff}
 
 .chatUnicodeEmoji{display:inline-block;font-size:24px;line-height:1;margin:0 3px;transform:translateY(2px);filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
+
+/* =========================================================
+   V816.20.1.4 — EUROPEAN MUSIC TV 2026 OVERLAY SKIN
+   VISUAL ONLY: keeps V170.3 geometry and Theme Engine intact
+   ========================================================= */
+:root{
+  --tv2026-cyan:#22e7ff;
+  --tv2026-pink:#ff35d8;
+  --tv2026-yellow:#ffe066;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,53,216,.20),transparent 25%),
+    radial-gradient(circle at 86% 12%,rgba(34,231,255,.16),transparent 26%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 7px);
+  mix-blend-mode:screen;
+  opacity:.42;
+}
+.tvBug,.stationBug,.logoBug,#logoBug{
+  background:rgba(255,255,255,.70)!important;
+  border:1px solid rgba(255,255,255,.70)!important;
+  box-shadow:0 20px 55px rgba(0,0,0,.28),0 0 36px rgba(34,231,255,.15)!important;
+  color:#06101e!important;
+}
+.topBar,.topTicker,#topTicker{
+  background:rgba(255,255,255,.72)!important;
+  border-bottom:3px solid var(--tv2026-cyan)!important;
+  color:#06101e!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.24)!important;
+}
+.bottomBar,.bottomTicker,#bottomTicker{
+  background:rgba(255,255,255,.76)!important;
+  border-top:4px solid var(--tv2026-cyan)!important;
+  color:#06101e!important;
+  box-shadow:0 -18px 55px rgba(0,0,0,.22)!important;
+}
+.bottomBar *,.bottomTicker *,#bottomTicker *{color:#06101e!important}
+.box,.infoBox,.broadcastBox,.motionBox{
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.038)),rgba(6,13,24,.58)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  box-shadow:0 22px 65px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.10)!important;
+  color:#fff!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.38);
+}
+.box h1,.box h2,.box h3,.infoBox h1,.infoBox h2,.infoBox h3,.broadcastBox h1,.broadcastBox h2,.broadcastBox h3,.motionBox h1,.motionBox h2,.motionBox h3{
+  color:#fff!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.55),0 0 22px rgba(255,255,255,.12)!important;
+}
+.box small,.box label,.infoBox small,.infoBox label,.broadcastBox small,.broadcastBox label,.motionBox small,.motionBox label{
+  color:#fff!important;
+  opacity:1!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.45)!important;
+}
+.chatBox,#chatBox{
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.035)),rgba(8,13,25,.64)!important;
+  border-color:rgba(255,255,255,.22)!important;
+}
+@keyframes tv2026Pulse{
+  0%,100%{filter:drop-shadow(0 0 0 rgba(34,231,255,0))}
+  50%{filter:drop-shadow(0 0 16px rgba(34,231,255,.28))}
+}
+.liveBadge,.onAirBadge,.statusBadge{animation:tv2026Pulse 2.4s ease-in-out infinite}
+
+/* =========================================================
+   V816.20.1.5 - ULTRA MUSIC TV 2026 OVERLAY SKIN
+   CSS ONLY - keeps all StreamElements logic
+   ========================================================= */
+
+:root{
+  --ultra-cyan:#00f5ff;
+  --ultra-pink:#ff2bd6;
+  --ultra-yellow:#ffe066;
+  --ultra-orange:#ff9f1c;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 12% 5%,rgba(0,245,255,.20),transparent 25%),
+    radial-gradient(circle at 90% 8%,rgba(255,43,214,.22),transparent 28%),
+    linear-gradient(115deg,transparent 0 23%,rgba(255,255,255,.08) 23% 24%,transparent 24% 100%);
+  opacity:.44;
+  mix-blend-mode:screen;
+}
+
+.topBar,.topTicker,#topTicker{
+  min-height:64px!important;
+  background:rgba(255,255,255,.78)!important;
+  color:#040613!important;
+  border-bottom:4px solid var(--ultra-cyan)!important;
+  box-shadow:0 22px 65px rgba(0,0,0,.28),0 0 32px rgba(0,245,255,.16)!important;
+  font-weight:1000!important;
+  letter-spacing:.08em!important;
+}
+
+.bottomBar,.bottomTicker,#bottomTicker{
+  min-height:56px!important;
+  background:rgba(255,255,255,.82)!important;
+  color:#040613!important;
+  border-top:4px solid var(--ultra-cyan)!important;
+  box-shadow:0 -22px 65px rgba(0,0,0,.25)!important;
+  font-weight:1000!important;
+}
+
+.bottomBar *,.bottomTicker *,#bottomTicker *,
+.topBar *,.topTicker *,#topTicker *{
+  color:#040613!important;
+}
+
+.tvBug,.stationBug,.logoBug,#logoBug{
+  background:rgba(255,255,255,.78)!important;
+  color:#040613!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:0 20px 55px rgba(0,0,0,.30),0 0 36px rgba(255,43,214,.18)!important;
+}
+
+.box,.infoBox,.broadcastBox,.motionBox{
+  background:
+    radial-gradient(circle at 0 0,rgba(0,245,255,.16),transparent 30%),
+    radial-gradient(circle at 100% 100%,rgba(255,43,214,.18),transparent 32%),
+    linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.050)),
+    rgba(7,12,25,.64)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:
+    0 26px 75px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 0 30px rgba(0,245,255,.08)!important;
+  color:#fff!important;
+}
+
+.box h1,.box h2,.box h3,
+.infoBox h1,.infoBox h2,.infoBox h3,
+.broadcastBox h1,.broadcastBox h2,.broadcastBox h3,
+.motionBox h1,.motionBox h2,.motionBox h3{
+  color:#fff!important;
+  font-weight:1000!important;
+  letter-spacing:-.025em!important;
+  text-shadow:0 3px 14px rgba(0,0,0,.60),0 0 28px rgba(255,255,255,.16)!important;
+}
+
+.box small,.box label,.box p,
+.infoBox small,.infoBox label,.infoBox p,
+.broadcastBox small,.broadcastBox label,.broadcastBox p,
+.motionBox small,.motionBox label,.motionBox p{
+  color:#fff!important;
+  opacity:1!important;
+  text-shadow:0 3px 12px rgba(0,0,0,.65)!important;
+}
+
+.chatBox,#chatBox{
+  background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.045)),rgba(8,13,25,.68)!important;
+  border-color:rgba(255,255,255,.24)!important;
+}
+
+.liveBadge,.onAirBadge,.statusBadge{
+  background:linear-gradient(135deg,var(--ultra-cyan),var(--ultra-pink),var(--ultra-orange))!important;
+  color:#040613!important;
+  font-weight:1000!important;
+  box-shadow:0 0 24px rgba(255,43,214,.38)!important;
+}
+
+/* =========================================================
+   V816.20.1.6 - SHOW IDENTITY SKINS FOR OVERLAY
+   Uses body.theme-[show] already set by existing Theme Engine JS.
+   ========================================================= */
+
+body.theme-morning{--show-a:#ffd166;--show-b:#ff8a00;--show-c:#fff3b0;--show-ink:#241300}
+body.theme-trance{--show-a:#00f5ff;--show-b:#6147ff;--show-c:#b8f7ff;--show-ink:#020817}
+body.theme-retro{--show-a:#ff2bd6;--show-b:#7c3aed;--show-c:#ffe066;--show-ink:#160218}
+body.theme-eurodance{--show-a:#00e5ff;--show-b:#005dff;--show-c:#ffe600;--show-ink:#021126}
+body.theme-fredagsbar{--show-a:#ffb000;--show-b:#ff2f78;--show-c:#ffd166;--show-ink:#210711}
+body.theme-popup{--show-a:#00f5ff;--show-b:#ff00ea;--show-c:#ffffff;--show-ink:#05091b}
+body.theme-summer{--show-a:#00f5d4;--show-b:#ffb703;--show-c:#fff08a;--show-ink:#03201b}
+body.theme-weekend{--show-a:#ffd166;--show-b:#ff4d6d;--show-c:#00d4ff;--show-ink:#100619}
+
+body[class*="theme-"]::after{
+  background:
+    radial-gradient(circle at 10% 8%,color-mix(in srgb,var(--show-a) 30%,transparent),transparent 26%),
+    radial-gradient(circle at 88% 10%,color-mix(in srgb,var(--show-b) 28%,transparent),transparent 30%),
+    linear-gradient(115deg,transparent 0 24%,rgba(255,255,255,.09) 24% 25%,transparent 25% 100%)!important;
+}
+
+body.theme-morning::before{content:"GOOD MORNING TWITCH"}
+body.theme-trance::before{content:"TRANCE TUESDAY"}
+body.theme-retro::before{content:"RETRO HITS"}
+body.theme-eurodance::before{content:"EURODANCE"}
+body.theme-fredagsbar::before{content:"FREDAGSBAR"}
+body.theme-popup::before{content:"POPUP"}
+body.theme-summer::before{content:"SUMMER BEATS"}
+body.theme-weekend::before{content:"WEEKEND VIBES"}
+
+body[class*="theme-"]::before{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) rotate(-8deg);
+  width:160vw;
+  text-align:center;
+  pointer-events:none;
+  z-index:-1;
+  color:rgba(255,255,255,.055);
+  font-size:clamp(90px,14vw,260px);
+  line-height:.8;
+  font-weight:1000;
+  letter-spacing:-.075em;
+  white-space:nowrap;
+}
+
+body[class*="theme-"] .topBar,
+body[class*="theme-"] .topTicker,
+body[class*="theme-"] #topTicker,
+body[class*="theme-"] .bottomBar,
+body[class*="theme-"] .bottomTicker,
+body[class*="theme-"] #bottomTicker{
+  border-color:var(--show-a)!important;
+  box-shadow:
+    0 20px 65px rgba(0,0,0,.30),
+    0 0 34px color-mix(in srgb,var(--show-a) 20%,transparent)!important;
+}
+
+body[class*="theme-"] .tvBug,
+body[class*="theme-"] .stationBug,
+body[class*="theme-"] .logoBug,
+body[class*="theme-"] #logoBug{
+  border-bottom:5px solid var(--show-b)!important;
+}
+
+body[class*="theme-"] .box,
+body[class*="theme-"] .infoBox,
+body[class*="theme-"] .broadcastBox,
+body[class*="theme-"] .motionBox,
+body[class*="theme-"] .chatBox,
+body[class*="theme-"] #chatBox{
+  border-color:color-mix(in srgb,var(--show-a) 36%,rgba(255,255,255,.22))!important;
+  box-shadow:
+    0 26px 78px rgba(0,0,0,.38),
+    0 0 36px color-mix(in srgb,var(--show-a) 14%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+
+body[class*="theme-"] .box::before,
+body[class*="theme-"] .infoBox::before,
+body[class*="theme-"] .broadcastBox::before,
+body[class*="theme-"] .motionBox::before{
+  background:
+    radial-gradient(circle at 0 0,color-mix(in srgb,var(--show-a) 26%,transparent),transparent 34%),
+    radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--show-b) 24%,transparent),transparent 36%)!important;
+}
+
+body[class*="theme-"] .liveBadge,
+body[class*="theme-"] .onAirBadge,
+body[class*="theme-"] .statusBadge{
+  background:linear-gradient(135deg,var(--show-a),var(--show-b),var(--show-c))!important;
+  color:var(--show-ink)!important;
+}
+
+body.theme-trance .box,
+body.theme-trance .broadcastBox,
+body.theme-popup .box,
+body.theme-popup .broadcastBox{
+  backdrop-filter:blur(16px) saturate(1.25);
+}
+
+body.theme-retro .box,
+body.theme-retro .broadcastBox{
+  border-style:solid!important;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 18px),
+    linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.045)),
+    rgba(7,12,25,.64)!important;
+}
+
+body.theme-summer .box,
+body.theme-summer .broadcastBox,
+body.theme-morning .box,
+body.theme-morning .broadcastBox{
+  background:
+    radial-gradient(circle at 8% 10%,color-mix(in srgb,var(--show-c) 20%,transparent),transparent 24%),
+    linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.055)),
+    rgba(7,12,25,.62)!important;
+}
+
+/* =========================================================
+   V816.20.1.7 - THEME BACKGROUNDS IN STREAMELEMENTS OVERLAY
+   Shows /themes/[theme].png when admin changes active theme.
+   ========================================================= */
+
+body.theme-fredagsbar{--theme-bg:url("https://folsoetv.dk/themes/fredagsbar.png")}
+body.theme-popup{--theme-bg:url("https://folsoetv.dk/themes/popup.png")}
+body.theme-trance{--theme-bg:url("https://folsoetv.dk/themes/trance.png")}
+body.theme-retro{--theme-bg:url("https://folsoetv.dk/themes/retro.png")}
+body.theme-eurodance{--theme-bg:url("https://folsoetv.dk/themes/eurodance.png")}
+body.theme-morning{--theme-bg:url("https://folsoetv.dk/themes/morning.png")}
+body.theme-summer{--theme-bg:url("https://folsoetv.dk/themes/summer.png")}
+body.theme-weekend{--theme-bg:url("https://folsoetv.dk/themes/weekend.png")}
+body.theme-chart{--theme-bg:url("https://folsoetv.dk/themes/chart.png")}
+body.theme-christmas{--theme-bg:url("https://folsoetv.dk/themes/christmas.png")}
+body.theme-danske{--theme-bg:url("https://folsoetv.dk/themes/danske.png")}
+body.theme-disco{--theme-bg:url("https://folsoetv.dk/themes/disco.png")}
+body.theme-handsup{--theme-bg:url("https://folsoetv.dk/themes/handsup.png")}
+body.theme-harddance{--theme-bg:url("https://folsoetv.dk/themes/harddance.png")}
+body.theme-halloween{--theme-bg:url("https://folsoetv.dk/themes/halloween.png")}
+
+#djfV170Reborn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.15)),
+    var(--theme-bg) center center / cover no-repeat;
+  opacity:1;
+  filter:saturate(1.08) contrast(1.04);
+}
+
+#djfV170Reborn > *{
+  position:absolute;
+}
+
+.tvBug,.topTicker,.sideStack,.bottomTicker,.centerSafe{
+  z-index:30;
+}
+.tvBug{z-index:60}
+.topTicker{z-index:55}
+.bottomTicker{z-index:55}
+
+body.theme-chart::before{content:"THE CHART SHOW"}
+body.theme-christmas::before{content:"CHRISTMAS MUSIC"}
+body.theme-danske::before{content:"DANSKE HITS"}
+body.theme-disco::before{content:"DISCO HITS"}
+body.theme-handsup::before{content:"HANDS UP"}
+body.theme-harddance::before{content:"HARD DANCE"}
+body.theme-halloween::before{content:"HALLOWEEN HARD DANCE"}
+
+/* =========================================================
+   V816.20.1.7.2 - OBS/StreamElements absolute background fix
+   OBS/SE cannot resolve /themes locally, so force absolute folsoetv.dk URLs.
+   ========================================================= */
+
+#djfV170Reborn{
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.12)),
+    var(--theme-bg) center center / cover no-repeat !important;
+}
+
+#djfV170Reborn::before{
+  z-index:0!important;
+  opacity:1!important;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.10)),
+    var(--theme-bg) center center / cover no-repeat !important;
+}
+
+#djfV170Reborn > *{
+  position:absolute;
+}
+
+.tvBug,.topTicker,.sideStack,.bottomTicker,.centerSafe{
+  position:absolute!important;
+}
+
+/* =========================================================
+   V816.20.1.7.3 - FORCE OBS BACKGROUND LAYER
+   ========================================================= */
+#djfV170Reborn{
+  background-color:transparent!important;
+}
+#themeBgLayer{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+}
+.tvBug,.topTicker,.sideStack,.bottomTicker,.centerSafe{
+  z-index:40!important;
+}
+.tvBug{z-index:70!important}
+.topTicker{z-index:65!important}
+.bottomTicker{z-index:65!important}
+.infoCard,.chatCard,.liveChatCard{
+  position:relative!important;
+}
+
+/* =========================================================
+   V816.20.1.8 - Bottom ticker lower + Twitch info ticker
+   ========================================================= */
+
+.bottomTicker,
+.bottomBar,
+#bottomTicker{
+  bottom:14px!important;
+}
+
+.bottomTicker{
+  height:44px!important;
+  min-height:44px!important;
+}
+
+#bottomTickerText,
+.bottomTickerText{
+  line-height:44px!important;
+  font-size:18px!important;
+  font-weight:1000!important;
+  letter-spacing:.04em!important;
+  white-space:nowrap!important;
+}
+
+.sideStack{
+  bottom:78px!important;
+}
+
+/* =========================================================
+   V816.20.1.8.1 - Smooth multi-color bottom ticker
+   ========================================================= */
+
+.bottomTicker,
+.bottomBar,
+#bottomTicker{
+  bottom:8px!important;
+}
+
+.sideStack{
+  bottom:72px!important;
+}
+
+#bottomTickerText,
+.bottomTickerText{
+  display:inline-block!important;
+  will-change:transform!important;
+  animation:scrollBottom var(--bottomDur,110s) linear infinite!important;
+}
+
+.tickerItem{
+  display:inline-block;
+  margin:0 18px;
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:.055em;
+  text-shadow:0 2px 9px rgba(0,0,0,.35);
+}
+
+.tickerSep{
+  display:inline-block;
+  margin:0 8px;
+  color:#061018;
+  opacity:.65;
+  font-weight:1000;
+}
+
+.tickerItem.cyan{color:#00eaff!important}
+.tickerItem.pink{color:#ff2bd6!important}
+.tickerItem.yellow{color:#ffd166!important}
+.tickerItem.white{color:#061018!important}
+.tickerItem.orange{color:#ff7a1a!important}
+
+.bottomTicker .tickerItem.white,
+#bottomTicker .tickerItem.white{
+  color:#061018!important;
+}
+
+.bottomTicker .tickerSep,
+#bottomTicker .tickerSep{
+  color:#061018!important;
+}
+
+
+/* V816.20.1.8.3 Mobile readable ticker */
+.bottomTicker,
+.bottomBar,
+#bottomTicker{
+  height:58px !important;
+  min-height:58px !important;
+  bottom:4px !important;
+}
+#bottomTickerText,
+.bottomTickerText,
+.tickerItem{
+  font-size:22px !important;
+  line-height:58px !important;
+  font-weight:1000 !important;
+  letter-spacing:.06em !important;
+}
+.tickerSep{
+  font-size:20px !important;
+}
+
+/* =========================================================
+   V816.20.1.8.4 - MUSIC TV 2026 COLOR CODED TICKER
+   ========================================================= */
+
+.bottomTicker,
+.bottomBar,
+#bottomTicker{
+  height:64px!important;
+  min-height:64px!important;
+  bottom:2px!important;
+  border-radius:22px!important;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.88),rgba(255,255,255,.78),rgba(255,255,255,.88))!important;
+  border-top:5px solid var(--c)!important;
+  border-bottom:1px solid rgba(255,255,255,.7)!important;
+}
+
+.bottomMask{
+  top:0!important;
+  bottom:0!important;
+}
+
+#bottomTickerText,
+.bottomTickerText{
+  height:64px!important;
+  line-height:64px!important;
+  font-size:0!important;
+}
+
+.tickerItem{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  height:42px!important;
+  margin:0 20px!important;
+  padding:0 18px!important;
+  border-radius:999px!important;
+  font-size:22px!important;
+  line-height:42px!important;
+  font-weight:1000!important;
+  letter-spacing:.045em!important;
+  text-transform:uppercase!important;
+  color:#061018!important;
+  background:rgba(255,255,255,.42)!important;
+  border:1px solid rgba(0,0,0,.08)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.10)!important;
+  transform:translateY(10px);
+}
+
+.tickerItem b{
+  font-weight:1000!important;
+  color:inherit!important;
+}
+
+.tickerItem em{
+  font-style:normal!important;
+  font-weight:1000!important;
+  opacity:.86!important;
+  color:inherit!important;
+}
+
+.tickerItem.goal{
+  background:linear-gradient(135deg,#00eaff,#b8f7ff)!important;
+  color:#021126!important;
+}
+.tickerItem.follower{
+  background:linear-gradient(135deg,#ff2bd6,#ff9be8)!important;
+  color:#180018!important;
+}
+.tickerItem.sub{
+  background:linear-gradient(135deg,#ffd166,#fff1a8)!important;
+  color:#241300!important;
+}
+.tickerItem.cheer{
+  background:linear-gradient(135deg,#ff7a1a,#ffd166)!important;
+  color:#241000!important;
+}
+.tickerItem.raid{
+  background:linear-gradient(135deg,#7b2fff,#d6c3ff)!important;
+  color:#11002d!important;
+}
+.tickerItem.follow{
+  background:linear-gradient(135deg,#00f5d4,#00eaff)!important;
+  color:#03201b!important;
+}
+.tickerItem.request{
+  background:linear-gradient(135deg,#ffffff,#ffe066)!important;
+  color:#061018!important;
+}
+.tickerItem.station{
+  background:linear-gradient(135deg,#061018,#1b2a44)!important;
+  color:#ffffff!important;
+}
+.tickerItem.chat{
+  background:linear-gradient(135deg,#ffffff,#dff7ff)!important;
+  color:#061018!important;
+}
+
+.tickerSep{
+  display:inline-block!important;
+  transform:translateY(8px)!important;
+  font-size:22px!important;
+  margin:0 6px!important;
+  color:#061018!important;
+  opacity:.48!important;
+  font-weight:1000!important;
+}
+
+.sideStack{
+  bottom:82px!important;
+}
+
+@media(max-width:900px){
+  .tickerItem{
+    font-size:21px!important;
+    height:44px!important;
+    line-height:44px!important;
+  }
+}
+
+/* =========================================================
+   V816.20.1.8.5 - TICKER ALIGNMENT + ENGLISH READABILITY
+   Fixes clipping top/bottom and makes both tickers mobile/TV readable.
+   ========================================================= */
+
+/* TOP TICKER */
+.topTicker,
+.topBar,
+#topTicker{
+  height:68px!important;
+  min-height:68px!important;
+  top:18px!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+}
+
+#topTickerText,
+.topTickerText{
+  height:68px!important;
+  line-height:68px!important;
+  display:inline-block!important;
+  white-space:nowrap!important;
+  font-size:0!important;
+  will-change:transform!important;
+}
+
+.topTicker .tickerItem,
+#topTicker .tickerItem{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  height:42px!important;
+  min-height:42px!important;
+  margin:0 16px!important;
+  padding:0 18px!important;
+  border-radius:999px!important;
+  font-size:22px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.055em!important;
+  transform:translateY(13px)!important;
+  max-width:none!important;
+}
+
+.topTicker .tickerSep,
+#topTicker .tickerSep{
+  display:inline-block!important;
+  font-size:22px!important;
+  line-height:68px!important;
+  transform:translateY(0)!important;
+  margin:0 8px!important;
+  color:#061018!important;
+  opacity:.52!important;
+}
+
+/* BOTTOM TICKER */
+.bottomTicker,
+.bottomBar,
+#bottomTicker{
+  height:72px!important;
+  min-height:72px!important;
+  bottom:2px!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+}
+
+.bottomMask{
+  top:0!important;
+  bottom:0!important;
+}
+
+#bottomTickerText,
+.bottomTickerText{
+  height:72px!important;
+  line-height:72px!important;
+  display:inline-block!important;
+  white-space:nowrap!important;
+  font-size:0!important;
+  will-change:transform!important;
+}
+
+.bottomTicker .tickerItem,
+#bottomTicker .tickerItem,
+.tickerItem{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  height:46px!important;
+  min-height:46px!important;
+  margin:0 18px!important;
+  padding:0 20px!important;
+  border-radius:999px!important;
+  font-size:23px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.05em!important;
+  transform:translateY(13px)!important;
+  max-width:none!important;
+  vertical-align:top!important;
+}
+
+.bottomTicker .tickerSep,
+#bottomTicker .tickerSep,
+.tickerSep{
+  display:inline-block!important;
+  font-size:22px!important;
+  line-height:72px!important;
+  transform:translateY(0)!important;
+  margin:0 8px!important;
+  color:#061018!important;
+  opacity:.52!important;
+  vertical-align:top!important;
+}
+
+/* Keep lower boxes clear of bigger ticker */
+.sideStack{
+  bottom:92px!important;
+}
+
+/* Make text inside badges not clip */
+.tickerItem b,
+.tickerItem em{
+  display:inline-block!important;
+  line-height:1!important;
+  padding-top:1px!important;
+  padding-bottom:0!important;
+}
+
+/* Mobile/TV visibility */
+@media(max-width:900px){
+  .topTicker .tickerItem,
+  #topTicker .tickerItem,
+  .bottomTicker .tickerItem,
+  #bottomTicker .tickerItem,
+  .tickerItem{
+    font-size:24px!important;
+    height:48px!important;
+    min-height:48px!important;
+  }
+}
+
+/* =========================================================
+   V900 - DJ FOLSOE MUSIC TV EUROPE 2026 OVERLAY
+   Topbar, bottom ticker and logo stay locked.
+   4 small boxes replaced by Story / Featured / Community engines.
+   Chat is permanent, larger and locked to the right side.
+   ========================================================= */
+
+.centerSafe{
+  display:none!important;
+}
+
+/* remove old left/right stacks if any old HTML is cached */
+.sideStack.leftStack,
+.sideStack.rightStack{
+  display:none!important;
+}
+
+/* main broadcast stage */
+.broadcastStage{
+  position:absolute!important;
+  left:32px!important;
+  top:142px!important;
+  bottom:104px!important;
+  right:690px!important;
+  z-index:32!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)!important;
+  grid-template-rows:minmax(0,1.18fr) minmax(0,.82fr)!important;
+  gap:22px!important;
+  pointer-events:none!important;
+}
+
+/* chat dock - permanent and much larger */
+.rightChatDock{
+  position:absolute!important;
+  right:28px!important;
+  top:142px!important;
+  bottom:104px!important;
+  width:630px!important;
+  z-index:42!important;
+  pointer-events:none!important;
+}
+
+/* V900 panels */
+.storyPanel{
+  grid-column:1!important;
+  grid-row:1!important;
+}
+
+.featuredPanel{
+  grid-column:2!important;
+  grid-row:1 / span 2!important;
+}
+
+.communityPanel{
+  grid-column:1!important;
+  grid-row:2!important;
+}
+
+.broadcastStage .infoCard,
+.rightChatDock .infoCard{
+  width:100%!important;
+  height:100%!important;
+  border-radius:34px!important;
+  background:
+    radial-gradient(circle at 10% 0%,color-mix(in srgb,var(--c) 24%,transparent),transparent 34%),
+    radial-gradient(circle at 100% 100%,color-mix(in srgb,var(--b) 20%,transparent),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.155),rgba(255,255,255,.045)),
+    rgba(5,9,20,.62)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:
+    0 34px 92px rgba(0,0,0,.45),
+    0 0 42px color-mix(in srgb,var(--c) 18%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.18)!important;
+  backdrop-filter:blur(28px) saturate(175%)!important;
+}
+
+.broadcastStage .infoCard:before,
+.rightChatDock .infoCard:before{
+  width:8px!important;
+}
+
+.broadcastStage .infoCard header,
+.rightChatDock .infoCard header{
+  height:58px!important;
+  padding:18px 24px 0 30px!important;
+}
+
+.broadcastStage .infoCard header span,
+.rightChatDock .infoCard header span{
+  font-size:13px!important;
+  letter-spacing:.18em!important;
+  color:var(--a)!important;
+}
+
+.broadcastStage .infoCard header b,
+.rightChatDock .infoCard header b{
+  font-size:11px!important;
+  padding:7px 12px!important;
+}
+
+/* general panel inner grid */
+.broadcastStage .infoCard main{
+  height:calc(100% - 58px)!important;
+  padding:18px 26px 24px 30px!important;
+  display:grid!important;
+  grid-template-columns:88px minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr) 68px!important;
+  column-gap:22px!important;
+  row-gap:18px!important;
+}
+
+.broadcastStage .icon{
+  width:82px!important;
+  height:82px!important;
+  border-radius:28px!important;
+  font-size:42px!important;
+  align-self:start!important;
+  background:
+    radial-gradient(circle at 30% 20%,#fff,transparent 18%),
+    linear-gradient(135deg,var(--c),var(--b),var(--a))!important;
+  box-shadow:0 0 32px color-mix(in srgb,var(--c) 44%,transparent)!important;
+}
+
+.broadcastStage .copy h2{
+  font-size:clamp(34px,2.5vw,54px)!important;
+  line-height:.92!important;
+  letter-spacing:-.055em!important;
+  max-height:none!important;
+  -webkit-line-clamp:unset!important;
+  text-transform:uppercase!important;
+  color:#fff!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.62),0 0 34px rgba(255,255,255,.12)!important;
+}
+
+.broadcastStage .copy p{
+  margin-top:14px!important;
+  font-size:clamp(20px,1.38vw,28px)!important;
+  line-height:1.18!important;
+  max-height:none!important;
+  -webkit-line-clamp:4!important;
+  color:rgba(255,255,255,.88)!important;
+}
+
+.broadcastStage .stats{
+  grid-column:1 / -1!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:12px!important;
+  height:auto!important;
+}
+
+.broadcastStage .stat{
+  min-width:0!important;
+  height:62px!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.085)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:10px 14px!important;
+}
+
+.broadcastStage .stat span{
+  font-size:10px!important;
+  letter-spacing:.13em!important;
+}
+
+.broadcastStage .stat b{
+  font-size:18px!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+/* featured show gets huge TV graphic treatment */
+.featuredPanel main{
+  grid-template-columns:116px minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr) 92px!important;
+  padding:26px 32px 30px 34px!important;
+}
+
+.featuredPanel .icon{
+  width:106px!important;
+  height:106px!important;
+  border-radius:34px!important;
+  font-size:56px!important;
+}
+
+.featuredPanel .copy h2{
+  font-size:clamp(52px,4.2vw,86px)!important;
+  line-height:.86!important;
+  letter-spacing:-.07em!important;
+}
+
+.featuredPanel .copy p{
+  font-size:clamp(24px,1.8vw,36px)!important;
+  line-height:1.12!important;
+}
+
+.featuredPanel .stats .stat{
+  height:82px!important;
+  border-radius:22px!important;
+}
+
+.featuredPanel .stats .stat b{
+  font-size:24px!important;
+}
+
+/* chat is now the fixed right side engine */
+.rightChatDock .chatCard{
+  border-radius:36px!important;
+  background:
+    radial-gradient(circle at 0 0,color-mix(in srgb,var(--c) 20%,transparent),transparent 32%),
+    radial-gradient(circle at 100% 0,color-mix(in srgb,var(--b) 18%,transparent),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.145),rgba(255,255,255,.048)),
+    rgba(4,8,18,.70)!important;
+}
+
+.rightChatDock .chatCard main.chatMain{
+  height:calc(100% - 58px)!important;
+  padding:28px 30px!important;
+  display:grid!important;
+  grid-template-columns:104px minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  gap:24px!important;
+  align-items:start!important;
+}
+
+.rightChatDock .avatarWrap{
+  width:98px!important;
+  height:98px!important;
+  border-radius:34px!important;
+  padding:4px!important;
+  box-shadow:0 0 32px var(--c),0 0 54px rgba(0,0,0,.44)!important;
+}
+
+.rightChatDock #chatAvatarImg,
+.rightChatDock #chatAvatarFallback{
+  border-radius:30px!important;
+}
+
+.rightChatDock #chatAvatarFallback{
+  font-size:48px!important;
+}
+
+.rightChatDock #chatUser{
+  font-size:28px!important;
+  letter-spacing:.08em!important;
+  line-height:1.05!important;
+  white-space:normal!important;
+  max-height:72px!important;
+}
+
+.rightChatDock #chatMessage{
+  margin-top:18px!important;
+  font-size:30px!important;
+  font-weight:900!important;
+  line-height:1.18!important;
+  color:rgba(255,255,255,.93)!important;
+  max-height:520px!important;
+  overflow:hidden!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:12!important;
+  -webkit-box-orient:vertical!important;
+}
+
+.rightChatDock .chatEmote{
+  height:48px!important;
+}
+
+.rightChatDock .chatEmoji{
+  font-size:44px!important;
+}
+
+/* extra Music TV 2026 atmosphere that does not touch locked bars */
+.broadcastStage:before{
+  content:"MUSIC TV EUROPE 2026";
+  position:absolute;
+  left:0;
+  bottom:-38px;
+  color:rgba(255,255,255,.08);
+  font-size:58px;
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:-.06em;
+  pointer-events:none;
+}
+
+.featuredPanel:after{
+  content:"";
+  position:absolute;
+  right:24px;
+  bottom:24px;
+  width:128px;
+  height:8px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--c),var(--b),var(--a));
+  box-shadow:0 0 24px color-mix(in srgb,var(--c) 45%,transparent);
+  opacity:.82;
+  z-index:3;
+}
+
+/* 16:9 safe scale for smaller OBS canvases */
+@media(max-width:1600px){
+  #djfV170Reborn{
+    transform-origin:top left;
+  }
+}
+
+/* =========================================================
+   V900.1 - CLEAN STAGE + LOWER LEFT SHOW INFO POP + ANGLED CHAT
+   Locked: logo, top ticker, bottom ticker.
+   Middle screen stays clean for background/camera.
+   ========================================================= */
+
+.centerSafe,
+.broadcastStage,
+.rightChatDock,
+.sideStack,
+.leftStack,
+.rightStack,
+#box2,
+#box3{
+  display:none!important;
+}
+
+.cleanStage{
+  position:absolute!important;
+  inset:110px 24px 92px 24px!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+
+/* one single show-info card, lower left above bottom ticker */
+.showInfoPop{
+  position:absolute!important;
+  left:34px!important;
+  bottom:104px!important;
+  width:560px!important;
+  min-height:176px!important;
+  max-height:232px!important;
+  z-index:38!important;
+  transform:translateX(-118%) skewX(-7deg)!important;
+  opacity:0!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 10% 10%,color-mix(in srgb,var(--c) 22%,transparent),transparent 36%),
+    linear-gradient(135deg,rgba(255,255,255,.145),rgba(255,255,255,.042)),
+    rgba(5,8,18,.50)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:
+    0 26px 70px rgba(0,0,0,.42),
+    0 0 34px color-mix(in srgb,var(--c) 26%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.22)!important;
+  backdrop-filter:blur(22px) saturate(160%)!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+  animation:showInfoSlide 12s cubic-bezier(.16,1,.3,1) infinite!important;
+}
+
+.showInfoPop > *{
+  transform:skewX(7deg)!important;
+}
+
+@keyframes showInfoSlide{
+  0%,9%{transform:translateX(-118%) skewX(-7deg);opacity:0}
+  13%,72%{transform:translateX(0) skewX(-7deg);opacity:1}
+  86%,100%{transform:translateX(-118%) skewX(-7deg);opacity:0}
+}
+
+.showInfoPop:before{
+  width:8px!important;
+  background:linear-gradient(180deg,var(--c),var(--b),var(--a))!important;
+}
+.showInfoPop header{
+  height:44px!important;
+  padding:12px 18px 0 24px!important;
+}
+.showInfoPop header span{
+  font-size:12px!important;
+  letter-spacing:.18em!important;
+}
+.showInfoPop header b{
+  font-size:10px!important;
+}
+.showInfoPop main{
+  height:calc(100% - 44px)!important;
+  padding:8px 18px 18px 24px!important;
+  display:grid!important;
+  grid-template-columns:66px minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr) 48px!important;
+  column-gap:16px!important;
+  row-gap:10px!important;
+}
+.showInfoPop .icon{
+  width:62px!important;
+  height:62px!important;
+  border-radius:22px!important;
+  font-size:32px!important;
+}
+.showInfoPop .copy h2{
+  font-size:31px!important;
+  line-height:.95!important;
+  letter-spacing:-.045em!important;
+  max-height:62px!important;
+  -webkit-line-clamp:2!important;
+  text-transform:uppercase!important;
+}
+.showInfoPop .copy p{
+  margin-top:8px!important;
+  font-size:18px!important;
+  line-height:1.16!important;
+  max-height:48px!important;
+  -webkit-line-clamp:2!important;
+}
+.showInfoPop .stats{
+  grid-column:1/-1!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
+}
+.showInfoPop .stat{
+  height:42px!important;
+  border-radius:14px!important;
+  padding:7px 10px!important;
+  background:rgba(255,255,255,.085)!important;
+}
+.showInfoPop .stat span{font-size:9px!important}
+.showInfoPop .stat b{font-size:14px!important}
+
+/* small angled chat dock on right, less dominant, more text lines */
+.angledChatDock{
+  position:absolute!important;
+  right:34px!important;
+  top:180px!important;
+  width:390px!important;
+  height:360px!important;
+  z-index:40!important;
+  border-radius:28px!important;
+  transform:skewX(-6deg)!important;
+  opacity:.82!important;
+  background:
+    radial-gradient(circle at 0 0,color-mix(in srgb,var(--c) 16%,transparent),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.028)),
+    rgba(4,8,18,.36)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:
+    0 24px 62px rgba(0,0,0,.34),
+    0 0 24px color-mix(in srgb,var(--c) 16%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.14)!important;
+  backdrop-filter:blur(18px) saturate(140%)!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+}
+.angledChatDock > *{
+  transform:skewX(6deg)!important;
+}
+.angledChatDock header{
+  height:44px!important;
+  padding:12px 16px 0 22px!important;
+}
+.angledChatDock header span{
+  font-size:11px!important;
+  letter-spacing:.16em!important;
+}
+.angledChatDock header b{
+  font-size:9px!important;
+  padding:5px 9px!important;
+}
+.angledChatDock main.chatMain{
+  height:calc(100% - 44px)!important;
+  padding:16px 18px 18px 22px!important;
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr)!important;
+  grid-template-rows:1fr!important;
+  gap:14px!important;
+  align-items:start!important;
+}
+.angledChatDock .avatarWrap{
+  width:56px!important;
+  height:56px!important;
+  border-radius:20px!important;
+  padding:3px!important;
+  box-shadow:0 0 18px var(--c),0 0 22px rgba(0,0,0,.32)!important;
+}
+.angledChatDock #chatAvatarImg,
+.angledChatDock #chatAvatarFallback{
+  border-radius:17px!important;
+}
+.angledChatDock #chatAvatarFallback{
+  font-size:27px!important;
+}
+.angledChatDock #chatUser{
+  font-size:17px!important;
+  line-height:1.05!important;
+  white-space:normal!important;
+  max-height:42px!important;
+  letter-spacing:.08em!important;
+}
+.angledChatDock #chatMessage{
+  margin-top:10px!important;
+  font-size:18px!important;
+  line-height:1.22!important;
+  font-weight:850!important;
+  color:rgba(255,255,255,.88)!important;
+  max-height:220px!important;
+  overflow:hidden!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:9!important;
+  -webkit-box-orient:vertical!important;
+}
+.angledChatDock .chatEmote{height:30px!important}
+.angledChatDock .chatEmoji{font-size:28px!important}
+
+/* keep chat visually connected with top/bottom angle */
+.angledChatDock:after,
+.showInfoPop:after{
+  opacity:.24!important;
+}
+
+/* On smaller screens keep stage clean and lower visual weight */
+@media(max-width:1500px){
+  .angledChatDock{width:350px!important;height:330px!important;right:26px!important}
+  .showInfoPop{width:510px!important}
+}
+
+/* =========================================================
+   V900.1.1 - CHAT STACK + LOWER ALIGN
+   Chat now shows 3-4 messages at once and sits lower to align with TV.
+   ========================================================= */
+
+.angledChatDock{
+  top:245px!important;
+  height:410px!important;
+  width:410px!important;
+  opacity:.78!important;
+}
+
+.angledChatDock main.chatMain{
+  grid-template-columns:52px minmax(0,1fr)!important;
+  padding:15px 18px 18px 22px!important;
+  gap:12px!important;
+}
+
+.angledChatDock .avatarWrap{
+  width:50px!important;
+  height:50px!important;
+  border-radius:18px!important;
+}
+
+.angledChatDock #chatAvatarImg,
+.angledChatDock #chatAvatarFallback{
+  border-radius:15px!important;
+}
+
+.angledChatDock #chatAvatarFallback{
+  font-size:24px!important;
+}
+
+.angledChatDock #chatUser{
+  font-size:14px!important;
+  line-height:1!important;
+  opacity:.72!important;
+}
+
+.angledChatDock #chatMessage{
+  margin-top:8px!important;
+  max-height:300px!important;
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+  overflow:hidden!important;
+}
+
+.chatStack{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:9px!important;
+  width:100%!important;
+}
+
+.chatLine{
+  min-height:58px!important;
+  padding:8px 10px!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.035))!important;
+  border:1px solid rgba(255,255,255,.105)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+
+.chatLineUser{
+  display:block!important;
+  color:var(--a)!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.10em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+.chatLineText{
+  display:block!important;
+  margin-top:5px!important;
+  color:rgba(255,255,255,.90)!important;
+  font-size:16px!important;
+  line-height:1.18!important;
+  font-weight:850!important;
+  overflow:hidden!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow-wrap:anywhere!important;
+}
+
+.chatLine:first-child{
+  background:linear-gradient(135deg,color-mix(in srgb,var(--c) 18%,rgba(255,255,255,.06)),rgba(255,255,255,.04))!important;
+}
+
+.chatLine .chatEmote{
+  height:24px!important;
+}
+
+.chatLine .chatEmoji{
+  font-size:22px!important;
+}
+
+@media(max-width:1500px){
+  .angledChatDock{
+    top:235px!important;
+    width:370px!important;
+    height:385px!important;
+  }
+  .chatLineText{font-size:15px!important}
+}
+
+/* =========================================================
+   DJ FOLSOE NETWORK V901 — EUROPEAN MUSIC TV BROADCAST
+   Clean middle stage. Logo/top/bottom locked.
+   Chat aligned with TV. All other info becomes broadcast bursts.
+   ========================================================= */
+
+.showInfoPop,
+.broadcastStage,
+.rightChatDock,
+.sideStack,
+.leftStack,
+.rightStack,
+#box1,#box2,#box3{
+  display:none!important;
+}
+
+/* chat slightly higher — aligned with greenscreen TV */
+.angledChatDock{
+  top:184px!important;
+  right:34px!important;
+  width:398px!important;
+  height:405px!important;
+  opacity:.74!important;
+}
+
+/* make chat integrated, not dominant */
+.angledChatDock{
+  background:
+    radial-gradient(circle at 0 0,color-mix(in srgb,var(--c) 14%,transparent),transparent 34%),
+    linear-gradient(135deg,rgba(255,255,255,.085),rgba(255,255,255,.022)),
+    rgba(4,8,18,.30)!important;
+  border:1px solid rgba(255,255,255,.145)!important;
+  box-shadow:
+    0 20px 54px rgba(0,0,0,.28),
+    0 0 18px color-mix(in srgb,var(--c) 12%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.12)!important;
+}
+
+/* Broadcast bursts: bottom right above ticker, no box */
+.broadcastBurst{
+  position:absolute;
+  right:44px;
+  bottom:104px;
+  width:620px;
+  min-height:130px;
+  z-index:44;
+  pointer-events:none;
+  text-align:right;
+  transform:translateX(130px);
+  opacity:0;
+  animation:burstInOut 11s cubic-bezier(.16,1,.3,1) infinite;
+  filter:drop-shadow(0 14px 28px rgba(0,0,0,.56));
+}
+
+.broadcastBurst::before{
+  content:"";
+  position:absolute;
+  right:-18px;
+  top:-10px;
+  width:8px;
+  height:128px;
+  border-radius:999px;
+  background:linear-gradient(180deg,var(--c),var(--b),var(--a));
+  box-shadow:0 0 24px var(--c),0 0 38px var(--b);
+}
+
+.broadcastBurst::after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:-16px;
+  width:100%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--c),var(--b),var(--a));
+  box-shadow:0 0 16px var(--c);
+}
+
+.burstKicker{
+  display:inline-flex;
+  padding:7px 12px;
+  border-radius:999px;
+  color:#041018;
+  font-size:13px;
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  background:linear-gradient(135deg,#fff,var(--a),var(--c));
+  box-shadow:0 0 18px color-mix(in srgb,var(--c) 36%,transparent);
+}
+
+.burstTitle{
+  margin-top:12px;
+  font-size:56px;
+  line-height:.86;
+  font-weight:1000;
+  letter-spacing:-.065em;
+  text-transform:uppercase;
+  color:#fff;
+  text-shadow:
+    0 4px 18px rgba(0,0,0,.75),
+    0 0 26px rgba(255,255,255,.18),
+    0 0 34px color-mix(in srgb,var(--b) 28%,transparent);
+  max-height:100px;
+  overflow:hidden;
+}
+
+.burstBody{
+  margin-top:10px;
+  font-size:25px;
+  line-height:1.12;
+  font-weight:900;
+  color:rgba(255,255,255,.90);
+  text-shadow:0 3px 14px rgba(0,0,0,.82);
+  max-height:58px;
+  overflow:hidden;
+}
+
+.burstLine{
+  position:absolute;
+  right:0;
+  top:50%;
+  width:280px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55));
+  transform:translateX(320px);
+  opacity:.8;
+}
+
+@keyframes burstInOut{
+  0%,7%{opacity:0;transform:translateX(150px) skewX(-6deg)}
+  13%,72%{opacity:1;transform:translateX(0) skewX(-6deg)}
+  86%,100%{opacity:0;transform:translateX(150px) skewX(-6deg)}
+}
+
+.broadcastBurst > *{
+  transform:skewX(6deg);
+}
+
+/* micro particles around burst */
+.broadcastBurst .burstKicker::before{
+  content:"✦";
+  margin-right:10px;
+  color:var(--b);
+}
+
+/* Keep the camera/background area clean */
+.cleanStage{
+  inset:104px 24px 88px 24px!important;
+  background:transparent!important;
+}
+
+/* Slightly tune stacked chat to fit 3-4 messages cleanly */
+.chatLine{
+  min-height:54px!important;
+  padding:7px 10px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.026))!important;
+}
+
+.chatLineText{
+  font-size:15.5px!important;
+  line-height:1.16!important;
+}
+
+@media(max-width:1500px){
+  .broadcastBurst{
+    right:36px;
+    width:540px;
+  }
+  .burstTitle{font-size:48px}
+  .burstBody{font-size:22px}
+  .angledChatDock{
+    top:176px!important;
+    width:360px!important;
+    height:385px!important;
+  }
+}
+
+/* =========================================================
+   V901.1 — LIVE BROADCAST BURST ENGINE
+   StreamElements event takeover + show mode + hype mode.
+   ========================================================= */
+
+.broadcastBurst{
+  animation:burstInOut 11s cubic-bezier(.16,1,.3,1) infinite!important;
+}
+
+.broadcastBurst.eventMode{
+  animation:eventBurstHit 9.5s cubic-bezier(.16,1,.3,1) 1!important;
+}
+
+.broadcastBurst.hypeMode{
+  animation:hypeBurstHit 11s cubic-bezier(.16,1,.3,1) 1!important;
+}
+
+.broadcastBurst.showMode .burstKicker{
+  background:linear-gradient(135deg,var(--c),#fff,var(--a))!important;
+}
+
+.broadcastBurst.eventMode .burstKicker{
+  background:linear-gradient(135deg,#fff,var(--b),var(--a))!important;
+}
+
+.broadcastBurst.hypeMode .burstKicker{
+  background:linear-gradient(135deg,#fff,var(--a),var(--b),var(--c))!important;
+  animation:hypeChip 1.2s ease-in-out infinite!important;
+}
+
+.broadcastBurst.eventMode .burstTitle,
+.broadcastBurst.hypeMode .burstTitle{
+  text-shadow:
+    0 5px 18px rgba(0,0,0,.86),
+    0 0 24px var(--b),
+    0 0 44px var(--c),
+    0 0 72px color-mix(in srgb,var(--a) 50%,transparent)!important;
+}
+
+.burstFx{
+  position:absolute;
+  inset:-40px -30px -30px -90px;
+  pointer-events:none;
+  opacity:0;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(255,255,255,.36),transparent 8%),
+    radial-gradient(circle at 70% 55%,color-mix(in srgb,var(--c) 42%,transparent),transparent 16%),
+    radial-gradient(circle at 96% 76%,color-mix(in srgb,var(--b) 38%,transparent),transparent 15%),
+    linear-gradient(90deg,transparent,color-mix(in srgb,var(--c) 22%,transparent),transparent);
+  mix-blend-mode:screen;
+  filter:blur(.5px);
+}
+
+.broadcastBurst.eventMode .burstFx,
+.broadcastBurst.hypeMode .burstFx{
+  opacity:1;
+  animation:burstFxMove 1.4s ease-in-out infinite;
+}
+
+@keyframes eventBurstHit{
+  0%{opacity:0;transform:translateX(180px) skewX(-6deg) scale(.94)}
+  8%{opacity:1;transform:translateX(-18px) skewX(-6deg) scale(1.04)}
+  14%,78%{opacity:1;transform:translateX(0) skewX(-6deg) scale(1)}
+  100%{opacity:0;transform:translateX(180px) skewX(-6deg) scale(.96)}
+}
+
+@keyframes hypeBurstHit{
+  0%{opacity:0;transform:translateX(220px) skewX(-6deg) scale(.9);filter:saturate(1)}
+  8%{opacity:1;transform:translateX(-24px) skewX(-6deg) scale(1.08);filter:saturate(1.45)}
+  14%,84%{opacity:1;transform:translateX(0) skewX(-6deg) scale(1.02);filter:saturate(1.35)}
+  100%{opacity:0;transform:translateX(220px) skewX(-6deg) scale(.94);filter:saturate(1)}
+}
+
+@keyframes hypeChip{
+  50%{transform:skewX(6deg) scale(1.05);box-shadow:0 0 28px var(--a),0 0 44px var(--b)}
+}
+
+@keyframes burstFxMove{
+  0%,100%{transform:translateX(0);opacity:.55}
+  50%{transform:translateX(-28px);opacity:.95}
+}
+
+/* compact lower-right version for mobile/preview canvases */
+@media(max-width:1500px){
+  .broadcastBurst{bottom:96px!important}
+}
+
+
+/* =========================================================
+   V901.2 — BURST TIMING FIX
+   Animation duration matches JS display timing.
+   ========================================================= */
+
+.broadcastBurst{
+  animation-duration:10.5s!important;
+}
+
+.broadcastBurst.burstRestart{
+  animation:burstInOut 10.5s cubic-bezier(.16,1,.3,1) 1!important;
+}
+
+.broadcastBurst.eventMode{
+  animation:eventBurstHit 10.5s cubic-bezier(.16,1,.3,1) 1!important;
+}
+
+.broadcastBurst.hypeMode{
+  animation:hypeBurstHit 10.5s cubic-bezier(.16,1,.3,1) 1!important;
+}
+
+@keyframes burstInOut{
+  0%,6%{opacity:0;transform:translateX(150px) skewX(-6deg)}
+  12%,78%{opacity:1;transform:translateX(0) skewX(-6deg)}
+  92%,100%{opacity:0;transform:translateX(150px) skewX(-6deg)}
+}
+
+
+/* =========================================================
+   V903 — sharper Music TV 2026 finish, no layout rebuild
+   ========================================================= */
+:root{
+  --djf-sharp-glow:0 0 18px color-mix(in srgb,var(--a) 52%,transparent),0 0 34px color-mix(in srgb,var(--b) 42%,transparent);
+}
+.tvBug,.topTicker,.bottomTicker,.broadcastBurst,.infoCard{
+  backdrop-filter:blur(18px) saturate(1.35)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.35)!important;
+}
+.tvBug{
+  letter-spacing:.08em!important;
+  box-shadow:0 18px 60px rgba(0,0,0,.34),var(--djf-sharp-glow)!important;
+}
+.topTicker,.bottomTicker{
+  border-color:rgba(255,255,255,.18)!important;
+  box-shadow:0 14px 46px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.20)!important;
+}
+.broadcastBurst{
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:0 22px 70px rgba(0,0,0,.42),var(--djf-sharp-glow)!important;
+}
+.burstKicker{letter-spacing:.22em!important;}
+.burstTitle{text-shadow:0 0 20px color-mix(in srgb,var(--a) 60%,transparent)!important;}
+.tickerItem b{letter-spacing:.08em!important;}
