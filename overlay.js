@@ -1,4 +1,99 @@
 
+/* DJ FOLSOE NETWORK V931.4 · READABLE COMPACT CHAT FIT + TWITCH AVATAR JSONP BRIDGE
+   Safe overlay-only patch inserted before the existing full StreamElements JS.
+   Locks the V931 chat panel to a readable, lower, warm Radio 2026 style and makes /api/chat-profile work via JSONP.
+*/
+(function(){
+  const API_BASE=(window.DJF_API_BASE||'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
+  const originalFetch=window.fetch ? window.fetch.bind(window) : null;
+  const jsonpCache=new Map();
+  function jsonpProfile(login){
+    login=String(login||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'');
+    if(!login) return Promise.resolve({ok:true,json:()=>Promise.resolve({avatar:''})});
+    const cached=jsonpCache.get(login);
+    // Return cached instantly but refresh on every call through existing V931.2 background refresh logic.
+    if(cached){ return Promise.resolve({ok:true,json:()=>Promise.resolve(cached)}); }
+    return new Promise((resolve)=>{
+      const cb='djfChatProfileJsonp_'+Date.now()+'_'+Math.floor(Math.random()*99999);
+      const script=document.createElement('script');
+      const done=(payload)=>{ try{delete window[cb];}catch(e){window[cb]=undefined;} try{script.remove();}catch(e){}; const data=payload||{avatar:''}; if(data.avatar||data.profileImage||data.profile_image_url) jsonpCache.set(login,data); resolve({ok:true,json:()=>Promise.resolve(data)}); };
+      const timer=setTimeout(()=>done({avatar:''}),4200);
+      window[cb]=function(payload){ clearTimeout(timer); done(payload); };
+      script.onerror=function(){ clearTimeout(timer); done({avatar:''}); };
+      script.src=API_BASE+'/api/chat-profile-jsonp?login='+encodeURIComponent(login)+'&callback='+encodeURIComponent(cb)+'&ts='+Date.now();
+      document.head.appendChild(script);
+    });
+  }
+  window.fetch=function(input, init){
+    const url=String(input && input.url ? input.url : input || '');
+    if(url.includes('/api/chat-profile?')){
+      const m=url.match(/[?&]login=([^&]+)/);
+      return jsonpProfile(m ? decodeURIComponent(m[1]) : '');
+    }
+    return originalFetch ? originalFetch(input, init) : Promise.reject(new Error('fetch unavailable'));
+  };
+  function injectChatFit(){
+    let st=document.getElementById('djfV9314ReadableChatFitStyle');
+    if(!st){ st=document.createElement('style'); st.id='djfV9314ReadableChatFitStyle'; document.head.appendChild(st); }
+    st.textContent=`
+      /* V931.4: compact readable chat that matches the lower info-burst design */
+      #djfV9312ChatPanel{
+        top:82px!important;
+        right:22px!important;
+        width:clamp(390px,31vw,520px)!important;
+        bottom:272px!important;
+        min-height:235px!important;
+        max-height:330px!important;
+        padding:11px 12px 10px!important;
+        border-radius:19px!important;
+        background:
+          radial-gradient(circle at 8% 0%, rgba(255,227,110,.22), transparent 31%),
+          radial-gradient(circle at 100% 12%, rgba(98,236,255,.16), transparent 34%),
+          linear-gradient(135deg, rgba(112,55,8,.64), rgba(28,17,10,.76) 48%, rgba(6,17,22,.72))!important;
+        border:1px solid rgba(255,227,110,.40)!important;
+        box-shadow:0 0 0 1px rgba(98,236,255,.34),0 14px 44px rgba(0,0,0,.32),inset 0 0 28px rgba(255,255,255,.065)!important;
+        backdrop-filter:blur(12px) saturate(1.28)!important;
+        -webkit-backdrop-filter:blur(12px) saturate(1.28)!important;
+        overflow:hidden!important;
+        transform:none!important;
+      }
+      #djfV9312ChatPanel::before{opacity:.15!important;background:linear-gradient(90deg,rgba(255,136,24,.85),transparent 22%,transparent 78%,rgba(0,229,255,.85))!important;}
+      #djfV9312Header{height:26px!important;margin-bottom:7px!important;padding-bottom:6px!important;border-bottom:1px solid rgba(255,255,255,.16)!important;}
+      #djfV9312Header .title{font-size:13px!important;letter-spacing:.20em!important;text-shadow:0 2px 10px rgba(0,0,0,.72),0 0 10px rgba(255,227,110,.35)!important;color:#fff!important;}
+      #djfV9312Header .livePill{font-size:8px!important;padding:4px 8px!important;gap:5px!important;background:rgba(255,255,255,.18)!important;}
+      #djfV9312Header .dot{width:6px!important;height:6px!important;}
+      #djfV9312List{height:calc(100% - 33px)!important;gap:5px!important;justify-content:flex-end!important;}
+      .djfV9312Msg{
+        grid-template-columns:30px 1fr auto!important;
+        min-height:33px!important;
+        padding:4px 7px 4px 5px!important;
+        gap:7px!important;
+        border-radius:11px!important;
+        background:linear-gradient(90deg,rgba(255,255,255,.15),rgba(255,255,255,.070))!important;
+        border:1px solid rgba(255,255,255,.13)!important;
+        box-shadow:inset 0 0 14px rgba(255,255,255,.035),0 5px 12px rgba(0,0,0,.16)!important;
+      }
+      .djfV9312AvatarWrap{width:28px!important;height:28px!important;padding:2px!important;box-shadow:0 0 9px rgba(98,236,255,.45)!important;background:linear-gradient(135deg,#ff8a18,#ffe36e,#62ecff)!important;}
+      .djfV9312Fallback{font-size:9px!important;background:linear-gradient(135deg,#142038,#0a0d17)!important;}
+      .djfV9312Body{gap:8px!important;grid-template-columns:auto 1fr!important;align-items:center!important;}
+      .djfV9312Name{font-size:11.5px!important;line-height:1!important;letter-spacing:.045em!important;color:#ffe36e!important;text-shadow:0 0 8px rgba(255,227,110,.52),0 1px 5px rgba(0,0,0,.75)!important;}
+      .djfV9312Text{font-size:12px!important;line-height:1.12!important;font-weight:900!important;color:#fff!important;text-shadow:0 2px 8px rgba(0,0,0,.78)!important;}
+      .djfV9312Time{font-size:8px!important;margin-top:1px!important;color:rgba(255,255,255,.76)!important;font-weight:900!important;}
+      .djfV9312Text img,.djfV9312Emote{height:18px!important;max-width:24px!important;vertical-align:middle!important;}
+      .djfV9312Emoji{font-size:16px!important;}
+      @media(max-width:1400px){
+        #djfV9312ChatPanel{top:76px!important;right:18px!important;width:clamp(360px,32vw,470px)!important;bottom:252px!important;min-height:220px!important;max-height:305px!important;}
+        .djfV9312Msg{grid-template-columns:28px 1fr auto!important;min-height:31px!important;}
+        .djfV9312AvatarWrap{width:26px!important;height:26px!important;}
+        .djfV9312Name{font-size:10.5px!important}.djfV9312Text{font-size:11px!important}.djfV9312Time{font-size:7.5px!important}
+      }
+    `;
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',injectChatFit); else injectChatFit();
+  setInterval(injectChatFit,2500);
+})();
+
+
 /* DJ FOLSOE NETWORK V922.3 · NO CONSOLE OVERLAY SELF TEST */
 function englishTickerText(s){
   return String(s||"")
@@ -3151,227 +3246,4 @@ v901PushBurst = function(item){
   ensurePanel();
   addMessage('LIVE CHAT','djfolsoe','Connected · waiting for Twitch chat…',{});
   connectIRC();
-})();
-
-
-/* =========================================================
-   DJ FOLSOE NETWORK V931.3 · COMPACT BROADCAST CHAT FIT FIX
-   Built on latest StreamElements JS.
-   - Hides older V931.2 chat panel without touching theme/ticker engines
-   - Smaller/lower chat panel so it does not cover lower info graphics
-   - Premium Radio 2026 glass/neon style matching the overlay
-   - Refreshes Twitch profile image for the writer on every new message
-   - Uses JSONP/fetch/avatar fallbacks for StreamElements compatibility
-   ========================================================= */
-(function(){
-  const API_BASE=(window.DJF_API_BASE||'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/,'');
-  const CHANNEL=(window.DJF_TWITCH_CHANNEL||'djfolsoe').toLowerCase().replace(/^#/, '');
-  const VERSION='V931.3 COMPACT BROADCAST CHAT FIT FIX';
-  const messages=[];
-  const avatarCache=new Map();
-  let maxRows=7;
-  let socket=null;
-  let reconnectTimer=null;
-  let lastMsgKey='';
-
-  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-  function cleanName(v){return String(v||'CHAT').replace(/^@/,'').trim()||'CHAT';}
-  function cleanLogin(v){return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'');}
-  function initials(v){return cleanName(v).slice(0,2).toUpperCase();}
-  function time(){return new Date().toLocaleTimeString('da-DK',{hour:'2-digit',minute:'2-digit'});}
-  function root(){return document.getElementById('djfV170Reborn')||document.body;}
-
-  function injectStyle(){
-    let s=document.getElementById('djfV9313Style');
-    if(s) return;
-    s=document.createElement('style');
-    s.id='djfV9313Style';
-    s.textContent=`
-      /* hide older/broken chat layers only */
-      #box4,#djfV9312ChatPanel{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
-      #djfV9313ChatPanel{
-        position:fixed!important;
-        right:24px!important;
-        top:118px!important;
-        width:clamp(390px, 29vw, 500px)!important;
-        height:clamp(250px, 31vh, 360px)!important;
-        max-height:calc(100vh - 335px)!important;
-        z-index:92!important;
-        box-sizing:border-box!important;
-        padding:10px 12px 11px!important;
-        border-radius:22px!important;
-        overflow:hidden!important;
-        color:#fff!important;
-        font-family:Inter,Arial,Helvetica,sans-serif!important;
-        background:
-          radial-gradient(circle at 8% 0%, rgba(255,77,216,.22), transparent 38%),
-          radial-gradient(circle at 100% 12%, rgba(98,236,255,.25), transparent 40%),
-          linear-gradient(135deg, rgba(8,10,20,.48), rgba(12,15,26,.74))!important;
-        border:1px solid rgba(255,255,255,.18)!important;
-        box-shadow:
-          0 0 0 1px rgba(98,236,255,.40),
-          0 0 18px rgba(255,77,216,.18),
-          0 16px 35px rgba(0,0,0,.22),
-          inset 0 0 30px rgba(255,255,255,.052)!important;
-        backdrop-filter:blur(13px) saturate(1.22)!important;
-        -webkit-backdrop-filter:blur(13px) saturate(1.22)!important;
-        transform:skewX(-2deg);
-      }
-      #djfV9313ChatPanel>*{transform:skewX(2deg);}
-      #djfV9313ChatPanel::before{
-        content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:9px;
-        background:linear-gradient(180deg,#ff4bd8,#62ecff,#ffe36e);box-shadow:0 0 16px rgba(98,236,255,.75);
-      }
-      #djfV9313ChatPanel::after{
-        content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;
-        background:linear-gradient(120deg,rgba(255,255,255,.12),transparent 24%,transparent 78%,rgba(98,236,255,.10));
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.20),inset 0 -1px 0 rgba(255,255,255,.06);
-      }
-      #djfV9313Header{position:relative;z-index:2;height:26px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;padding:0 3px 7px 4px;border-bottom:1px solid rgba(255,255,255,.11);}
-      #djfV9313Header .title{font-size:14px;line-height:1;font-weight:950;letter-spacing:.22em;text-transform:uppercase;color:#fff;text-shadow:0 0 10px rgba(98,236,255,.75),0 0 16px rgba(255,77,216,.42);white-space:nowrap;}
-      #djfV9313Header .live{font-size:9px;font-weight:950;letter-spacing:.08em;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.20);box-shadow:inset 0 0 12px rgba(255,255,255,.06);display:flex;align-items:center;gap:5px;}
-      #djfV9313Header .dot{width:7px;height:7px;border-radius:50%;background:#ff2f69;box-shadow:0 0 12px #ff2f69;}
-      #djfV9313List{position:relative;z-index:2;height:calc(100% - 36px);display:flex;flex-direction:column;justify-content:flex-end;gap:5px;overflow:hidden;}
-      .djfV9313Msg{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;min-height:30px;padding:4px 8px 4px 5px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,.145),rgba(255,255,255,.050));border:1px solid rgba(255,255,255,.105);box-shadow:inset 0 0 15px rgba(255,255,255,.025),0 4px 10px rgba(0,0,0,.12);}
-      .djfV9313AvatarWrap{width:28px;height:28px;border-radius:50%;padding:1.5px;background:linear-gradient(135deg,#ff4bd8,#62ecff,#ffe36e);box-shadow:0 0 10px rgba(98,236,255,.42);overflow:hidden;}
-      .djfV9313Avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:rgba(0,0,0,.46);}
-      .djfV9313Fallback{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#101729,#05070f);color:#fff;font-size:9px;font-weight:950;letter-spacing:.02em;}
-      .djfV9313Body{min-width:0;display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:8px;}
-      .djfV9313Name{font-size:12px;line-height:1;font-weight:950;letter-spacing:.045em;text-transform:uppercase;color:#ffe36e;text-shadow:0 0 8px rgba(255,227,110,.55);white-space:nowrap;}
-      .djfV9313Text{font-size:12px;line-height:1.13;font-weight:850;color:#fff;text-shadow:0 2px 7px rgba(0,0,0,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
-      .djfV9313Time{font-size:8px;font-weight:900;color:rgba(255,255,255,.70);white-space:nowrap;align-self:center;}
-      .djfV9313Text img,.djfV9313Emote{height:18px!important;max-height:18px!important;vertical-align:middle;margin:0 1px;filter:drop-shadow(0 0 6px rgba(255,255,255,.24));}
-      .djfV9313Emoji{font-size:16px;line-height:1;vertical-align:middle;}
-      @media (max-width:1500px){
-        #djfV9313ChatPanel{right:18px!important;top:104px!important;width:clamp(330px, 31vw, 430px)!important;height:clamp(220px, 30vh, 315px)!important;max-height:calc(100vh - 310px)!important;}
-        #djfV9313Header .title{font-size:12px}.djfV9313Msg{grid-template-columns:27px 1fr auto;min-height:28px}.djfV9313AvatarWrap{width:25px;height:25px}.djfV9313Name,.djfV9313Text{font-size:10.8px}.djfV9313Time{font-size:7.5px}
-      }
-    `;
-    document.head.appendChild(s);
-  }
-
-  function ensurePanel(){
-    injectStyle();
-    const old=document.getElementById('djfV9312ChatPanel'); if(old) old.remove();
-    let p=document.getElementById('djfV9313ChatPanel');
-    if(!p){
-      p=document.createElement('section');
-      p.id='djfV9313ChatPanel';
-      p.innerHTML=`<div id="djfV9313Header"><div class="title">LIVE TWITCH CHAT</div><div class="live">LIVE <span class="dot"></span></div></div><div id="djfV9313List"></div>`;
-      document.body.appendChild(p);
-      setTimeout(calcRows,100);
-      window.addEventListener('resize',calcRows);
-    }
-    return p;
-  }
-
-  function calcRows(){
-    const list=document.getElementById('djfV9313List'); if(!list) return;
-    const h=list.clientHeight||230;
-    maxRows=Math.max(5,Math.min(9,Math.floor(h/36)));
-    renderChat();
-  }
-
-  function jsonp(url, timeout=6000){
-    return new Promise((resolve,reject)=>{
-      const cb='djfAvatarJsonp_'+Date.now()+'_'+Math.floor(Math.random()*99999);
-      const sep=url.includes('?')?'&':'?';
-      let done=false;
-      const timer=setTimeout(()=>{if(done)return;done=true;cleanup();reject(new Error('avatar jsonp timeout'));},timeout);
-      function cleanup(){clearTimeout(timer);try{delete window[cb];}catch(e){window[cb]=undefined;}const el=document.getElementById(cb);if(el&&el.parentNode)el.parentNode.removeChild(el);}
-      window[cb]=payload=>{if(done)return;done=true;cleanup();resolve(payload);};
-      const sc=document.createElement('script');sc.id=cb;sc.async=true;sc.src=url+sep+'callback='+encodeURIComponent(cb)+'&ts='+Date.now();sc.onerror=()=>{if(done)return;done=true;cleanup();reject(new Error('avatar jsonp failed'));};document.head.appendChild(sc);
-    });
-  }
-
-  function avatarFromState(login){
-    try{
-      const core=window.__djfBroadcastCore||window.broadcastCore||null;
-      const tw=core&&(core.core||core.data||core).twitch;
-      if(tw && cleanLogin(tw.channel||tw.displayName)===login && tw.profileImage) return tw.profileImage;
-    }catch(e){}
-    if(login===CHANNEL && window.DJF_CHANNEL_AVATAR) return window.DJF_CHANNEL_AVATAR;
-    return '';
-  }
-
-  async function refreshAvatar(login){
-    login=cleanLogin(login); if(!login) return '';
-    const stateAvatar=avatarFromState(login);
-    if(stateAvatar){avatarCache.set(login,stateAvatar); return stateAvatar;}
-    // fallback image is shown immediately; real Worker result replaces it when available.
-    if(!avatarCache.get(login)) avatarCache.set(login,`https://unavatar.io/twitch/${encodeURIComponent(login)}`);
-    const endpoints=[
-      `${API_BASE}/api/chat-profile-jsonp?login=${encodeURIComponent(login)}`,
-      `${API_BASE}/api/chat-profile?login=${encodeURIComponent(login)}`
-    ];
-    // JSONP first for StreamElements compatibility.
-    jsonp(endpoints[0]).then(j=>{
-      const u=j&&(j.avatar||j.profileImage||j.profile_image_url||j.profile_image);
-      if(u){avatarCache.set(login,u); messages.forEach(m=>{if(m.login===login)m.avatar=u;}); renderChat();}
-    }).catch(()=>{
-      fetch(endpoints[1]+'&ts='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
-        const u=j&&(j.avatar||j.profileImage||j.profile_image_url||j.profile_image);
-        if(u){avatarCache.set(login,u); messages.forEach(m=>{if(m.login===login)m.avatar=u;}); renderChat();}
-      }).catch(()=>{});
-    });
-    return avatarCache.get(login)||'';
-  }
-
-  function emoji(html){return String(html||'').replace(/([\u{1F1E6}-\u{1F1FF}]{2}|[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]\uFE0F?)/gu,'<span class="djfV9313Emoji">$1</span>');}
-  function parseTags(raw){const tags={}; if(!raw||raw[0]!=='@')return tags; raw.slice(1).split(' ')[0].split(';').forEach(p=>{const [k,v='']=p.split('=');tags[k]=String(v).replace(/\\s/g,' ').replace(/\\:/g,';').replace(/\\r/g,'\r').replace(/\\n/g,'\n');}); return tags;}
-  function html(text,tags){
-    text=String(text||''); const em=tags&&tags.emotes; if(!em) return emoji(esc(text));
-    const ranges=[]; String(em).split('/').forEach(g=>{const [id,pos]=g.split(':'); String(pos||'').split(',').forEach(p=>{const [s,e]=p.split('-').map(Number); if(Number.isFinite(s)&&Number.isFinite(e)) ranges.push({id,s,e});});});
-    if(!ranges.length) return emoji(esc(text));
-    ranges.sort((a,b)=>a.s-b.s); let out='',last=0;
-    ranges.forEach(r=>{out+=esc(text.slice(last,r.s)); const label=text.slice(r.s,r.e+1); out+=`<img class="djfV9313Emote" src="https://static-cdn.jtvnw.net/emoticons/v2/${r.id}/default/dark/3.0" alt="${esc(label)}">`; last=r.e+1;});
-    out+=esc(text.slice(last)); return emoji(out);
-  }
-
-  function renderChat(){
-    ensurePanel(); const list=document.getElementById('djfV9313List'); if(!list) return;
-    const visible=messages.slice(-maxRows);
-    list.innerHTML=visible.map(m=>`
-      <div class="djfV9313Msg">
-        <div class="djfV9313AvatarWrap"><img class="djfV9313Avatar" data-login="${esc(m.login)}" src="${esc(m.avatar||`https://unavatar.io/twitch/${encodeURIComponent(m.login||CHANNEL)}`)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"><div class="djfV9313Fallback" style="display:none">${esc(initials(m.user))}</div></div>
-        <div class="djfV9313Body"><span class="djfV9313Name">${esc(m.user)}</span><span class="djfV9313Text">${m.html}</span></div>
-        <div class="djfV9313Time">${esc(m.time)}</div>
-      </div>`).join('');
-  }
-
-  async function add(user,login,text,tags){
-    user=cleanName(user||login); login=cleanLogin(login||user); text=String(text||'').replace(/\r?\n/g,' ').trim();
-    if(!text || text.includes('PRIVMSG #')) return;
-    const key=login+'|'+text+'|'+Date.now().toString().slice(0,-3);
-    if(key===lastMsgKey) return; lastMsgKey=key;
-    const avatar=await refreshAvatar(login);
-    messages.push({user,login,text,html:html(text,tags||{}),avatar,time:time()});
-    while(messages.length>60) messages.shift();
-    renderChat();
-  }
-
-  function connect(){
-    clearTimeout(reconnectTimer);
-    if(socket&&[0,1].includes(socket.readyState)) return;
-    try{socket=new WebSocket('wss://irc-ws.chat.twitch.tv:443');}catch(e){reconnectTimer=setTimeout(connect,5000);return;}
-    socket.onopen=()=>{socket.send('PASS SCHMOOPIIE');socket.send('NICK justinfan'+Math.floor(10000+Math.random()*89999));socket.send('CAP REQ :twitch.tv/tags twitch.tv/commands');socket.send('JOIN #'+CHANNEL);};
-    socket.onmessage=ev=>String(ev.data||'').split('\r\n').filter(Boolean).forEach(line=>{
-      if(line.startsWith('PING')){socket.send('PONG :tmi.twitch.tv');return;}
-      if(!line.includes(' PRIVMSG ')) return;
-      const tags=parseTags(line); const login=cleanLogin((line.match(/:([^!]+)!/)||[])[1]||'chat'); const idx=line.indexOf(' :'); const text=idx>=0?line.slice(idx+2):''; const user=tags['display-name']||login; add(user,login,text,tags);
-    });
-    socket.onclose=()=>{socket=null;reconnectTimer=setTimeout(connect,5000);};
-    socket.onerror=()=>{try{socket.close();}catch(e){}};
-  }
-
-  window.addEventListener('onEventReceived',e=>{
-    try{const d=e.detail||{},ev=d.event||{},data=ev.data||ev,listener=String(d.listener||'').toLowerCase();
-      if(listener.includes('message')||listener.includes('chat')){const text=data.text||data.message||data.renderedText||''; const user=data.displayName||data.name||data.username||data.nick||'CHAT'; const login=data.username||data.nick||data.login||user; add(user,login,text,data.tags||{});}
-    }catch(err){}
-  });
-
-  window.DJF_TEST_CHAT=(u,t)=>add(u||'DJFOLSOE',u||'djfolsoe',t||'Hej chatten 💜 Kappa',{});
-  ensurePanel();
-  add('LIVE CHAT','djfolsoe','Connected · waiting for Twitch chat…',{});
-  connect();
 })();
