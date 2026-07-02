@@ -2888,997 +2888,490 @@ v901PushBurst = function(item){
   setInterval(inject,2500);
   window.DJF_DYNAMIC_EVENT_SIZING='V929.2';
 })();
-
-/* =========================================================
-   V929.3 — CHAT OUTPUT CLEANUP FIX
-   Fixes raw IRC/PRIVMSG lines appearing in chat and prevents
-   duplicated/garbled emote text from filling the chat box.
-   ========================================================= */
+/* DJ FOLSOE NETWORK V931.2 · PREMIUM RADIO 2026 CHAT ENGINE
+   FULL StreamElements JS field version.
+   - Wider + longer, but locked above lower broadcast/info area
+   - Real Twitch profile image per new message via /api/chat-profile?login=
+   - Twitch emotes from IRC tags
+   - Clean Radio 2026 glass/neon look
+*/
 (function(){
-  const VERSION='V929.3 CHAT OUTPUT CLEANUP';
-  function djfCleanChatText(input){
-    let s=String(input||'');
-    if(!s.trim()) return '';
+  const API_BASE = (window.DJF_API_BASE || 'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/, '');
+  const CHANNEL = (window.DJF_TWITCH_CHANNEL || 'djfolsoe').toLowerCase().replace(/^#/, '');
+  const avatarCache = new Map();
+  const chatMessages = [];
+  let maxVisibleMessages = 8;
+  let twitchSocket = null;
+  let reconnectTimer = null;
 
-    // StreamElements/Twitch can sometimes pass full raw IRC lines as text.
-    // Extract only the actual message after PRIVMSG #channel :
-    const priv=s.match(/\sPRIVMSG\s+#?[a-z0-9_]+\s+:(.*)$/i);
-    if(priv && priv[1]) s=priv[1];
+  function esc(s){ return String(s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function cleanName(v){ return String(v||'CHAT').replace(/^@/,'').trim() || 'CHAT'; }
+  function cleanLogin(v){ return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,''); }
+  function initials(name){ return cleanName(name).slice(0,2).toUpperCase(); }
+  function nowTime(){ return new Date().toLocaleTimeString('da-DK',{hour:'2-digit',minute:'2-digit'}); }
 
-    // Also handle rare IRC fragments without leading whitespace.
-    const priv2=s.match(/PRIVMSG\s+#?[a-z0-9_]+\s+:(.*)$/i);
-    if(priv2 && priv2[1]) s=priv2[1];
-
-    // Remove IRC protocol leftovers if they still slip through.
-    s=s.replace(/^:[^\s]+\s+/, '')
-       .replace(/^[^!\s]+![^\s]+\s+/, '')
-       .replace(/\s*@[^\s]+\.tmi\.twitch\.tv\s*/gi,' ')
-       .replace(/\bPRIVMSG\b\s*#?[a-z0-9_]*\s*:*/gi,'')
-       .replace(/\bdjfolsPack\b/gi,'')
-       .replace(/\s+/g,' ')
-       .trim();
-
-    // Drop protocol/system noise completely.
-    if(/^(JOIN|PART|PING|PONG|CAP|USERSTATE|ROOMSTATE|CLEARCHAT|NOTICE)\b/i.test(s)) return '';
-    if(/tmi\.twitch\.tv/i.test(s) && /PRIVMSG|JOIN|USERSTATE|ROOMSTATE/i.test(s)) return '';
-
-    return s;
-  }
-
-  function djfCleanLogin(input){
-    return String(input||'chat').toLowerCase().replace(/^:/,'').split('!')[0].replace(/[^a-z0-9_]/g,'') || 'chat';
-  }
-
-  function djfCompactHtml(html){
-    let h=String(html||'');
-    // If old renderer made raw IRC visible inside HTML, strip it.
-    h=h.replace(/[^<\s]+![^<\s]+@[^<\s]+\.tmi\.twitch\.tv\s+PRIVMSG\s+#?[a-z0-9_]+\s*:?/gi,'');
-    h=h.replace(/\bdjfolsPack\b/gi,'');
-    return h;
-  }
-
-  const oldChatHTML = typeof chatHTML==='function' ? chatHTML : null;
-  if(oldChatHTML){
-    chatHTML = function(text,data){
-      const clean=djfCleanChatText(text);
-      if(!clean) return '';
-      return djfCompactHtml(oldChatHTML(clean,data||{}));
-    };
-  }
-
-  pushChat = function(item){
-    item=item||{};
-    const clean=djfCleanChatText(item.text || item.message || '');
-    if(!clean) return;
-    item.text=clean;
-    item.login=djfCleanLogin(item.login || item.user || 'chat');
-    item.user=String(item.user || item.login || 'CHAT').replace(/^:/,'').split('!')[0].slice(0,24) || 'CHAT';
-    item.html=djfCompactHtml(item.html && !/PRIVMSG|tmi\.twitch\.tv/i.test(String(item.html)) ? item.html : (oldChatHTML ? oldChatHTML(clean,item.data||{}) : esc(clean)));
-
-    const last=chatQueue[chatQueue.length-1];
-    if(last && last.user===item.user && last.text===item.text) return;
-    chatLive=true;
-    chatQueue.push(item);
-    chatQueue=chatQueue.slice(-4);
-    showChat(item);
-  };
-
-  renderChatStack = function(){
-    const el=q('chatMessage');
-    if(!el) return;
-    const items=(chatQueue&&chatQueue.length?chatQueue:[{user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'}]).slice(-4).reverse();
-    el.innerHTML=`<div class="chatStack">${items.map(item=>{
-      const clean=djfCleanChatText(item.text||'');
-      const body=item.html || (oldChatHTML ? oldChatHTML(clean,{}) : esc(clean));
-      return `<div class="chatLine"><span class="chatLineUser">${esc(clip(item.user||'CHAT',22))}</span><span class="chatLineText">${body}</span></div>`;
-    }).join('')}</div>`;
-  };
-
-  showChat = async function(item){
-    chatQueue=chatQueue.slice(-4);
-    renderChatStack();
-    const user=q('chatUser'); if(user) user.textContent=clip(item.user||'CHAT',22);
-    const fb=q('chatAvatarFallback'); if(fb) fb.textContent=(item.user||'C').slice(0,1).toUpperCase();
-    const img=q('chatAvatarImg');
-    if(img && fb){
-      const av=await getAvatar(item.login||item.user);
-      if(av){img.src=av;img.style.display='block';fb.style.display='none';}
-      else{img.style.display='none';fb.style.display='grid';}
-    }
-    const card=q('box4'); if(card){card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');}
-  };
-
-  function injectChatCleanCss(){
-    if(document.getElementById('djfV9293ChatCss')) return;
-    const st=document.createElement('style');
-    st.id='djfV9293ChatCss';
-    st.textContent=`
-      #box4 #chatMessage{overflow:hidden!important;line-height:1.12!important;}
-      #box4 .chatStack{display:flex!important;flex-direction:column!important;gap:8px!important;width:100%!important;max-height:300px!important;overflow:hidden!important;}
-      #box4 .chatLine{display:grid!important;grid-template-columns:auto 1fr!important;gap:8px!important;align-items:start!important;padding:5px 7px!important;border-radius:10px!important;background:rgba(255,255,255,.055)!important;}
-      #box4 .chatLineUser{font-weight:1000!important;color:#ffe36e!important;letter-spacing:.04em!important;white-space:nowrap!important;max-width:118px!important;overflow:hidden!important;text-overflow:ellipsis!important;}
-      #box4 .chatLineText{font-weight:850!important;color:#fff!important;word-break:break-word!important;overflow-wrap:anywhere!important;line-height:1.12!important;max-height:42px!important;overflow:hidden!important;}
-      #box4 .chatEmote{width:24px!important;height:24px!important;vertical-align:-6px!important;margin:0 2px!important;}
-      #box4 .chatUnicodeEmoji{font-size:22px!important;line-height:1!important;vertical-align:-3px!important;}
-    `;
-    document.head.appendChild(st);
-  }
-  injectChatCleanCss();
-  window.DJF_CHAT_CLEANUP_VERSION=VERSION;
-})();
-
-
-/* =========================================================
-   V929.4 — RESPONSIVE CHAT COLUMN
-   - Chat follows the right edge and stops above the lower info/burst area.
-   - Calculates how many chat lines fit in the available height.
-   - Keeps messages readable without raw overflow or tiny clipping.
-   ========================================================= */
-(function(){
-  const VERSION='V929.4 RESPONSIVE CHAT COLUMN';
-
-  function djfChatCapacity(){
-    try{
-      const box=document.getElementById('box4');
-      const msg=document.getElementById('chatMessage');
-      const rect=(box||msg)?.getBoundingClientRect?.();
-      const h=Math.max(220, rect?.height || 520);
-      const reserved=118; // title/header/avatar padding inside chat card
-      const line=58;      // one comfortable chat item incl. gap
-      return Math.max(3, Math.min(8, Math.floor((h-reserved)/line)));
-    }catch(e){ return 5; }
-  }
-
-  function injectResponsiveChatCss(){
-    if(document.getElementById('djfV9294ChatColumnCss')) return;
-    const st=document.createElement('style');
-    st.id='djfV9294ChatColumnCss';
-    st.textContent=`
-      :root{--djf-chat-lines:5;--djf-chat-bottom-safe:250px;--djf-chat-top:138px;--djf-chat-width:420px;}
-
-      /* Make the live chat a real right-side broadcast column */
-      #box4{
-        right:48px!important;
-        top:var(--djf-chat-top)!important;
-        bottom:var(--djf-chat-bottom-safe)!important;
-        width:var(--djf-chat-width)!important;
-        height:auto!important;
-        max-height:none!important;
-        display:flex!important;
-        flex-direction:column!important;
-        overflow:hidden!important;
+  function injectStyle(){
+    if(document.getElementById('djfV9312ChatStyle')) return;
+    const css = document.createElement('style');
+    css.id = 'djfV9312ChatStyle';
+    css.textContent = `
+      #box4{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
+      #djfV9312ChatPanel{
+        position:fixed!important;
+        top:46px!important;
+        right:28px!important;
+        width:clamp(470px, 36vw, 620px)!important;
+        bottom:210px!important;
+        min-height:310px!important;
+        max-height:560px!important;
+        z-index:88!important;
         box-sizing:border-box!important;
-      }
-
-      #box4 #chatMessage{
-        flex:1 1 auto!important;
-        min-height:0!important;
+        padding:14px 16px 12px!important;
+        border-radius:24px!important;
         overflow:hidden!important;
-        line-height:1.16!important;
-        display:block!important;
-        padding-right:2px!important;
-      }
-
-      #box4 .chatStack{
-        height:100%!important;
-        max-height:none!important;
-        display:flex!important;
-        flex-direction:column!important;
-        justify-content:flex-start!important;
-        gap:7px!important;
-        overflow:hidden!important;
-      }
-
-      #box4 .chatLine{
-        display:grid!important;
-        grid-template-columns:minmax(72px,116px) 1fr!important;
-        gap:9px!important;
-        align-items:start!important;
-        min-height:42px!important;
-        padding:7px 9px!important;
-        border-radius:12px!important;
-        background:linear-gradient(90deg,rgba(255,255,255,.105),rgba(255,255,255,.045))!important;
-        box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)!important;
-      }
-
-      #box4 .chatLineUser{
-        font-weight:1000!important;
-        color:#ffe36e!important;
-        letter-spacing:.035em!important;
-        white-space:nowrap!important;
-        overflow:hidden!important;
-        text-overflow:ellipsis!important;
-        max-width:116px!important;
-        font-size:13px!important;
-        line-height:1.15!important;
-      }
-
-      #box4 .chatLineText{
-        font-weight:900!important;
-        color:#fff!important;
-        font-size:14px!important;
-        line-height:1.18!important;
-        word-break:break-word!important;
-        overflow-wrap:anywhere!important;
-        max-height:50px!important;
-        overflow:hidden!important;
-        text-shadow:0 1px 7px rgba(0,0,0,.45)!important;
-      }
-
-      #box4 .chatEmote{width:23px!important;height:23px!important;vertical-align:-6px!important;margin:0 2px!important;}
-      #box4 .chatUnicodeEmoji{font-size:21px!important;line-height:1!important;vertical-align:-3px!important;}
-
-      @media (max-height:760px){
-        :root{--djf-chat-top:112px;--djf-chat-bottom-safe:210px;--djf-chat-width:390px;}
-        #box4 .chatLineText{font-size:13px!important;max-height:43px!important;}
-        #box4 .chatLine{min-height:38px!important;padding:6px 8px!important;}
-      }
-    `;
-    document.head.appendChild(st);
-  }
-
-  const oldPushChat=typeof pushChat==='function'?pushChat:null;
-  if(oldPushChat){
-    pushChat=function(item){
-      oldPushChat(item);
-      const cap=djfChatCapacity();
-      if(Array.isArray(chatQueue)) chatQueue=chatQueue.slice(-cap);
-      document.documentElement.style.setProperty('--djf-chat-lines',String(cap));
-      if(typeof renderChatStack==='function') renderChatStack();
-    };
-  }
-
-  const oldRenderChatStack=typeof renderChatStack==='function'?renderChatStack:null;
-  renderChatStack=function(){
-    const el=document.getElementById('chatMessage');
-    if(!el) return oldRenderChatStack&&oldRenderChatStack();
-    const cap=djfChatCapacity();
-    document.documentElement.style.setProperty('--djf-chat-lines',String(cap));
-    const fallback=[{user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'}];
-    const items=(Array.isArray(chatQueue)&&chatQueue.length?chatQueue:fallback).slice(-cap).reverse();
-    el.innerHTML=`<div class="chatStack">${items.map(item=>{
-      const user=esc(clip(item.user||'CHAT',22));
-      const clean=(typeof djfCleanChatText==='function')?djfCleanChatText(item.text||''):(item.text||'');
-      const body=item.html || (typeof chatHTML==='function'?chatHTML(clean,item.data||{}):esc(clean));
-      return `<div class="chatLine"><span class="chatLineUser">${user}</span><span class="chatLineText">${body}</span></div>`;
-    }).join('')}</div>`;
-  };
-
-  function refreshChatLayout(){
-    injectResponsiveChatCss();
-    const cap=djfChatCapacity();
-    if(Array.isArray(chatQueue)) chatQueue=chatQueue.slice(-cap);
-    renderChatStack();
-  }
-  injectResponsiveChatCss();
-  setTimeout(refreshChatLayout,600);
-  setInterval(refreshChatLayout,5000);
-  window.addEventListener('resize',refreshChatLayout);
-  window.DJF_CHAT_COLUMN_VERSION=VERSION;
-})();
-
-/* =========================================================
-   V929.5 — CHAT COLUMN POLISH + AVATAR LINES
-   - Stops above lower burst/info card.
-   - Uses more vertical room and calculates more lines.
-   - Adds avatar/fallback per chat line.
-   - Makes chat text clearer and visually closer to the rest of the overlay.
-   ========================================================= */
-(function(){
-  const VERSION='V929.5 CHAT COLUMN POLISH';
-
-  function clamp(n,min,max){ return Math.max(min,Math.min(max,n)); }
-
-  function chatSafeBottom(){
-    try{
-      const burst=document.getElementById('broadcastBurst');
-      const bottomTicker=document.getElementById('bottomTicker') || document.getElementById('bottomTickerText');
-      const h=window.innerHeight||1080;
-      let safe=250;
-      if(burst){
-        const r=burst.getBoundingClientRect();
-        if(r && r.top>0) safe=Math.max(safe, h-r.top+26);
-      }
-      if(bottomTicker){
-        const r=bottomTicker.getBoundingClientRect();
-        if(r && r.top>0) safe=Math.max(safe, h-r.top+72);
-      }
-      return clamp(safe,230,360);
-    }catch(e){ return 285; }
-  }
-
-  function chatCapacityV9295(){
-    try{
-      const top=100;
-      const bottom=chatSafeBottom();
-      const h=(window.innerHeight||1080)-top-bottom;
-      const reserved=92;
-      const line=44;
-      return clamp(Math.floor((h-reserved)/line),5,11);
-    }catch(e){ return 8; }
-  }
-
-  function injectChatPolishCss(){
-    const old=document.getElementById('djfV9295ChatPolishCss');
-    if(old) old.remove();
-    const st=document.createElement('style');
-    st.id='djfV9295ChatPolishCss';
-    st.textContent=`
-      :root{--djf-chat-top:96px;--djf-chat-bottom-safe:285px;--djf-chat-width:430px;}
-
-      #box4{
-        right:42px!important;
-        top:var(--djf-chat-top)!important;
-        bottom:var(--djf-chat-bottom-safe)!important;
-        width:var(--djf-chat-width)!important;
-        height:auto!important;
-        max-height:none!important;
-        min-height:360px!important;
-        display:flex!important;
-        flex-direction:column!important;
-        overflow:hidden!important;
-        box-sizing:border-box!important;
-        background:linear-gradient(135deg,rgba(13,20,34,.62),rgba(6,9,18,.42))!important;
+        background:
+          radial-gradient(circle at 8% 0%, rgba(255,77,216,.25), transparent 34%),
+          radial-gradient(circle at 100% 15%, rgba(98,236,255,.22), transparent 38%),
+          linear-gradient(135deg, rgba(8,10,22,.56), rgba(10,13,25,.78))!important;
         border:1px solid rgba(255,255,255,.20)!important;
-        box-shadow:0 18px 54px rgba(0,0,0,.38), inset 0 0 36px rgba(98,236,255,.08)!important;
-        backdrop-filter:blur(10px) saturate(1.24)!important;
-      }
-
-      #box4 #chatMessage{
-        flex:1 1 auto!important;
-        min-height:0!important;
-        overflow:hidden!important;
-        padding:4px 4px 2px 0!important;
-      }
-
-      #box4 .chatStack{
-        height:100%!important;
-        display:flex!important;
-        flex-direction:column!important;
-        justify-content:flex-start!important;
-        gap:7px!important;
-        overflow:hidden!important;
-      }
-
-      #box4 .chatLine{
-        display:grid!important;
-        grid-template-columns:34px minmax(82px,112px) 1fr!important;
-        gap:8px!important;
-        align-items:center!important;
-        min-height:36px!important;
-        padding:6px 9px!important;
-        border-radius:13px!important;
-        background:linear-gradient(90deg,rgba(255,255,255,.15),rgba(255,255,255,.065))!important;
-        box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),0 5px 18px rgba(0,0,0,.16)!important;
-      }
-
-      #box4 .chatLineAvatar{
-        width:31px!important;height:31px!important;border-radius:50%!important;
-        display:grid!important;place-items:center!important;
-        background:linear-gradient(135deg,var(--c,#62ecff),var(--b,#ff4bd8))!important;
-        color:#fff!important;font:1000 15px/1 Arial,sans-serif!important;
-        box-shadow:0 0 16px rgba(98,236,255,.58), inset 0 0 0 2px rgba(255,255,255,.22)!important;
-        overflow:hidden!important;
-      }
-      #box4 .chatLineAvatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;}
-
-      #box4 .chatLineUser{
-        font-weight:1000!important;
-        color:#ffe36e!important;
-        letter-spacing:.035em!important;
-        white-space:nowrap!important;
-        overflow:hidden!important;
-        text-overflow:ellipsis!important;
-        max-width:112px!important;
-        font-size:13px!important;
-        line-height:1!important;
-        text-shadow:0 2px 9px rgba(0,0,0,.55)!important;
-      }
-
-      #box4 .chatLineText{
-        font-weight:950!important;
+        box-shadow:
+          0 0 0 1px rgba(98,236,255,.36),
+          0 0 24px rgba(255,77,216,.26),
+          inset 0 0 36px rgba(255,255,255,.055)!important;
+        backdrop-filter: blur(14px) saturate(1.22)!important;
+        -webkit-backdrop-filter: blur(14px) saturate(1.22)!important;
+        font-family: Inter, Arial, Helvetica, sans-serif!important;
         color:#fff!important;
-        font-size:14px!important;
-        line-height:1.15!important;
-        word-break:break-word!important;
-        overflow-wrap:anywhere!important;
-        max-height:34px!important;
-        overflow:hidden!important;
-        text-shadow:0 2px 10px rgba(0,0,0,.70)!important;
       }
-
-      #box4 .chatEmote{width:22px!important;height:22px!important;vertical-align:-5px!important;margin:0 1px!important;}
-      #box4 .chatUnicodeEmoji{font-size:20px!important;line-height:1!important;vertical-align:-3px!important;}
-
-      @media (max-height:760px){
-        :root{--djf-chat-top:78px;--djf-chat-width:405px;}
-        #box4 .chatLine{grid-template-columns:30px minmax(74px,102px) 1fr!important;min-height:32px!important;padding:5px 8px!important;gap:7px!important;}
-        #box4 .chatLineAvatar{width:28px!important;height:28px!important;font-size:13px!important;}
-        #box4 .chatLineUser{font-size:12px!important;max-width:102px!important;}
-        #box4 .chatLineText{font-size:13px!important;max-height:30px!important;}
+      #djfV9312ChatPanel::before{
+        content:"";position:absolute;inset:0;pointer-events:none;
+        background:linear-gradient(90deg, rgba(255,77,216,.82), transparent 18%, transparent 82%, rgba(98,236,255,.82));
+        opacity:.18;
+      }
+      #djfV9312ChatPanel::after{
+        content:"";position:absolute;inset:0;pointer-events:none;border-radius:24px;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.23), inset 0 -1px 0 rgba(255,255,255,.07);
+      }
+      #djfV9312Header{
+        position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;
+        height:34px;margin:0 0 10px;padding:0 0 9px;border-bottom:1px solid rgba(255,255,255,.13);
+      }
+      #djfV9312Header .title{
+        font-size:18px;line-height:1;font-weight:950;letter-spacing:.20em;text-transform:uppercase;color:#fff;
+        text-shadow:0 0 12px rgba(98,236,255,.72),0 0 18px rgba(255,77,216,.40);
+        white-space:nowrap;
+      }
+      #djfV9312Header .livePill{
+        display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
+        font-weight:950;font-size:12px;letter-spacing:.08em;background:rgba(255,255,255,.13);
+        border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 0 16px rgba(255,255,255,.07);
+      }
+      #djfV9312Header .dot{width:8px;height:8px;border-radius:50%;background:#ff2f69;box-shadow:0 0 12px #ff2f69;}
+      #djfV9312List{
+        position:relative;z-index:2;height:calc(100% - 46px);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;
+      }
+      .djfV9312Msg{
+        display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;
+        min-height:42px;padding:6px 9px 6px 7px;border-radius:14px;
+        background:linear-gradient(90deg, rgba(255,255,255,.14), rgba(255,255,255,.052));
+        border:1px solid rgba(255,255,255,.115);
+        box-shadow:inset 0 0 18px rgba(255,255,255,.030), 0 6px 14px rgba(0,0,0,.13);
+        animation:djfV9312MsgIn .22s ease both;
+      }
+      @keyframes djfV9312MsgIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+      .djfV9312AvatarWrap{width:36px;height:36px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#ff4bd8,#62ecff,#ffe36e);box-shadow:0 0 12px rgba(98,236,255,.38);}
+      .djfV9312Avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:rgba(0,0,0,.45);}
+      .djfV9312Fallback{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;font-weight:950;font-size:13px;background:linear-gradient(135deg,#1b2340,#0b0e1a);color:#fff;}
+      .djfV9312Body{min-width:0;display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:10px;}
+      .djfV9312Name{font-size:15px;line-height:1;font-weight:950;letter-spacing:.045em;text-transform:uppercase;color:#ffe36e;text-shadow:0 0 9px rgba(255,227,110,.55);white-space:nowrap;}
+      .djfV9312Text{font-size:14px;line-height:1.18;font-weight:850;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.70);word-break:break-word;overflow-wrap:anywhere;min-width:0;}
+      .djfV9312Time{font-size:10px;font-weight:850;color:rgba(255,255,255,.68);align-self:start;margin-top:3px;white-space:nowrap;}
+      .djfV9312Text img,.djfV9312Emote{height:22px;vertical-align:middle;margin:0 1px;filter:drop-shadow(0 0 7px rgba(255,255,255,.22));}
+      .djfV9312Emoji{font-size:19px;line-height:1;vertical-align:middle;}
+      @media (max-width:1400px){
+        #djfV9312ChatPanel{width:clamp(390px, 35vw, 520px)!important;right:18px!important;top:42px!important;bottom:185px!important;min-height:280px!important;}
+        #djfV9312Header .title{font-size:15px}.djfV9312Name{font-size:13px}.djfV9312Text{font-size:13px}.djfV9312Msg{grid-template-columns:36px 1fr auto;min-height:38px}.djfV9312AvatarWrap{width:32px;height:32px}
       }
     `;
-    document.head.appendChild(st);
+    document.head.appendChild(css);
   }
 
-  function userInitial(name){ return String(name||'C').trim().slice(0,1).toUpperCase() || 'C'; }
-  function cleanLoginForAvatar(v){
-    return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'').slice(0,30);
+  function ensurePanel(){
+    injectStyle();
+    const old = document.getElementById('box4');
+    if(old) old.style.display = 'none';
+    let panel = document.getElementById('djfV9312ChatPanel');
+    if(panel) return panel;
+    panel = document.createElement('section');
+    panel.id = 'djfV9312ChatPanel';
+    panel.innerHTML = `<div id="djfV9312Header"><div class="title">LIVE TWITCH CHAT</div><div class="livePill">LIVE <span class="dot"></span></div></div><div id="djfV9312List"></div>`;
+    document.body.appendChild(panel);
+    setTimeout(recalculateVisibleMessages, 80);
+    window.addEventListener('resize', recalculateVisibleMessages);
+    return panel;
   }
 
-  function avatarHtml(item,index){
-    const user=String(item.user||item.login||'CHAT');
-    const login=cleanLoginForAvatar(item.login||item.user||'');
-    const cached=(typeof profileCache==='object' && login && profileCache[login]) ? profileCache[login] : '';
-    if(cached) return `<span class="chatLineAvatar"><img src="${esc(cached)}" alt=""></span>`;
-    setTimeout(async()=>{
-      try{
-        if(typeof getAvatar!=='function' || !login) return;
-        const av=await getAvatar(login);
-        if(!av) return;
-        const el=document.querySelector(`.chatLineAvatar[data-login="${login}"]`);
-        if(el) el.innerHTML=`<img src="${esc(av)}" alt="">`;
-      }catch(e){}
-    },60+index*40);
-    return `<span class="chatLineAvatar" data-login="${esc(login)}">${esc(userInitial(user))}</span>`;
+  function recalculateVisibleMessages(){
+    const list = document.getElementById('djfV9312List');
+    if(!list) return;
+    const h = list.clientHeight || 300;
+    maxVisibleMessages = Math.max(5, Math.min(10, Math.floor(h / 51)));
+    renderChat();
   }
 
-  renderChatStack=function(){
-    const el=document.getElementById('chatMessage');
-    if(!el) return;
-    injectChatPolishCss();
-    const bottom=chatSafeBottom();
-    document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottom+'px');
-    const cap=chatCapacityV9295();
-    document.documentElement.style.setProperty('--djf-chat-lines',String(cap));
-    const fallback=[{user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'}];
-    const items=(Array.isArray(chatQueue)&&chatQueue.length?chatQueue:fallback).slice(-cap).reverse();
-    el.innerHTML=`<div class="chatStack">${items.map((item,idx)=>{
-      const user=esc(clip(item.user||'CHAT',20));
-      const clean=(typeof djfCleanChatText==='function')?djfCleanChatText(item.text||''):(item.text||'');
-      const body=item.html || (typeof chatHTML==='function'?chatHTML(clean,item.data||{}):esc(clean));
-      return `<div class="chatLine">${avatarHtml(item,idx)}<span class="chatLineUser">${user}</span><span class="chatLineText">${body}</span></div>`;
-    }).join('')}</div>`;
-  };
+  async function getAvatar(login){
+    login = cleanLogin(login);
+    if(!login) return '';
+    // Uses cache for speed, but refreshes in background on every new message.
+    const cached = avatarCache.get(login) || '';
+    fetch(`${API_BASE}/api/chat-profile?login=${encodeURIComponent(login)}&ts=${Date.now()}`, {cache:'no-store'})
+      .then(r => r.ok ? r.json() : null)
+      .then(j => {
+        const url = (j && (j.avatar || j.profileImage || j.profile_image_url)) || '';
+        if(url && avatarCache.get(login) !== url){
+          avatarCache.set(login, url);
+          chatMessages.forEach(m => { if(m.login === login) m.avatar = url; });
+          renderChat();
+        }
+      })
+      .catch(()=>{});
+    return cached;
+  }
 
-  const oldPush=typeof pushChat==='function'?pushChat:null;
-  if(oldPush){
-    pushChat=function(item){
-      item=item||{};
-      item.login=cleanLoginForAvatar(item.login||item.user||'chat');
-      chatQueue=Array.isArray(chatQueue)?chatQueue:[];
-      chatQueue.push(item);
-      chatQueue=chatQueue.slice(-chatCapacityV9295());
-      chatLive=true;
-      renderChatStack();
-      try{
-        const card=document.getElementById('box4');
-        if(card){card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');}
-      }catch(e){}
+  function renderUnicodeEmoji(html){
+    return String(html||'').replace(/([\u{1F1E6}-\u{1F1FF}]{2}|[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]\uFE0F?)/gu, '<span class="djfV9312Emoji">$1</span>');
+  }
+
+  function parseTwitchEmotes(text, tags){
+    text = String(text||'');
+    const em = tags && tags.emotes;
+    if(!em) return renderUnicodeEmoji(esc(text));
+    const ranges=[];
+    String(em).split('/').forEach(g=>{
+      const [id,pos] = g.split(':');
+      String(pos||'').split(',').forEach(p=>{
+        const [s,e] = p.split('-').map(Number);
+        if(Number.isFinite(s) && Number.isFinite(e)) ranges.push({id,s,e});
+      });
+    });
+    if(!ranges.length) return renderUnicodeEmoji(esc(text));
+    ranges.sort((a,b)=>a.s-b.s);
+    let out='', last=0;
+    ranges.forEach(r=>{
+      out += esc(text.slice(last,r.s));
+      const label = text.slice(r.s, r.e + 1);
+      out += `<img class="djfV9312Emote" src="https://static-cdn.jtvnw.net/emoticons/v2/${r.id}/default/dark/3.0" alt="${esc(label)}">`;
+      last = r.e + 1;
+    });
+    out += esc(text.slice(last));
+    return renderUnicodeEmoji(out);
+  }
+
+  function parseTags(raw){
+    const tags={};
+    if(!raw || raw[0] !== '@') return tags;
+    raw.slice(1).split(' ')[0].split(';').forEach(pair=>{
+      const [k,v=''] = pair.split('=');
+      tags[k] = String(v).replace(/\\s/g,' ').replace(/\\:/g,';').replace(/\\r/g,'\r').replace(/\\n/g,'\n');
+    });
+    return tags;
+  }
+
+  function renderChat(){
+    ensurePanel();
+    const list = document.getElementById('djfV9312List');
+    if(!list) return;
+    const visible = chatMessages.slice(-maxVisibleMessages);
+    list.innerHTML = visible.map(m => `
+      <div class="djfV9312Msg">
+        <div class="djfV9312AvatarWrap">${m.avatar ? `<img class="djfV9312Avatar" src="${esc(m.avatar)}">` : `<div class="djfV9312Fallback">${esc(initials(m.user))}</div>`}</div>
+        <div class="djfV9312Body"><span class="djfV9312Name">${esc(m.user)}</span><span class="djfV9312Text">${m.html}</span></div>
+        <div class="djfV9312Time">${esc(m.time)}</div>
+      </div>`).join('');
+  }
+
+  async function addMessage(user, login, text, tags){
+    user = cleanName(user || login);
+    login = cleanLogin(login || user);
+    const cachedAvatar = await getAvatar(login);
+    chatMessages.push({
+      user,
+      login,
+      text:String(text||''),
+      html: parseTwitchEmotes(text, tags||{}),
+      avatar: cachedAvatar,
+      time: nowTime()
+    });
+    while(chatMessages.length > 40) chatMessages.shift();
+    renderChat();
+  }
+
+  function connectIRC(){
+    clearTimeout(reconnectTimer);
+    if(twitchSocket && [0,1].includes(twitchSocket.readyState)) return;
+    try{ twitchSocket = new WebSocket('wss://irc-ws.chat.twitch.tv:443'); }
+    catch(e){ reconnectTimer = setTimeout(connectIRC, 4000); return; }
+
+    twitchSocket.onopen = () => {
+      twitchSocket.send('PASS SCHMOOPIIE');
+      twitchSocket.send('NICK justinfan' + Math.floor(10000 + Math.random() * 89999));
+      twitchSocket.send('CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership');
+      twitchSocket.send('JOIN #' + CHANNEL);
     };
+
+    twitchSocket.onmessage = ev => String(ev.data||'').split('\r\n').filter(Boolean).forEach(line=>{
+      if(line.startsWith('PING')){ twitchSocket.send('PONG :tmi.twitch.tv'); return; }
+      if(!line.includes(' PRIVMSG ')) return;
+      const tags = parseTags(line);
+      const login = cleanLogin((line.match(/:([^!]+)!/)||[])[1] || 'chat');
+      const msgIndex = line.indexOf(' :');
+      const text = msgIndex >= 0 ? line.slice(msgIndex + 2) : '';
+      const user = tags['display-name'] || login;
+      if(text && !text.includes('PRIVMSG #')) addMessage(user, login, text, tags);
+    });
+
+    twitchSocket.onclose = () => { twitchSocket = null; reconnectTimer = setTimeout(connectIRC, 4500); };
+    twitchSocket.onerror = () => { try{ twitchSocket.close(); }catch(e){} };
   }
 
-  function refresh(){
-    injectChatPolishCss();
-    const bottom=chatSafeBottom();
-    document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottom+'px');
-    if(Array.isArray(chatQueue)) chatQueue=chatQueue.slice(-chatCapacityV9295());
-    renderChatStack();
-  }
-  injectChatPolishCss();
-  setTimeout(refresh,400);
-  setTimeout(refresh,1400);
-  setInterval(refresh,4500);
-  window.addEventListener('resize',refresh);
-  window.DJF_CHAT_COLUMN_VERSION=VERSION;
+  window.addEventListener('onEventReceived', e => {
+    try{
+      const d = e.detail || {}, ev = d.event || {}, data = ev.data || ev, listener = String(d.listener || '').toLowerCase();
+      if(listener.includes('message') || listener.includes('chat')){
+        const text = data.text || data.message || data.renderedText || '';
+        const user = data.displayName || data.name || data.username || data.nick || 'CHAT';
+        const login = data.username || data.nick || data.login || user;
+        if(text) addMessage(user, login, text, data.tags || {});
+      }
+    }catch(err){}
+  });
+
+  window.DJF_TEST_CHAT = (u,t) => addMessage(u || 'DJFOLSOE', u || 'djfolsoe', t || 'Hej chatten 💜 Kappa', {});
+
+  ensurePanel();
+  addMessage('LIVE CHAT','djfolsoe','Connected · waiting for Twitch chat…',{});
+  connectIRC();
 })();
 
-/* =========================================================
-   V929.6 — CHAT FULL HEIGHT MOBILE READABILITY FIX
-   - Removes old floating/top chat avatar that escaped the box.
-   - Extends the chat column down close to the lower broadcast area.
-   - Calculates more visible lines automatically.
-   - Makes usernames/messages clearer for Twitch mobile viewing.
-   ========================================================= */
-(function(){
-  const VERSION='V929.6 CHAT FULL HEIGHT MOBILE READABILITY FIX';
-
-  function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
-
-  function safeBottomV9296(){
-    try{
-      const h=window.innerHeight||1080;
-      const burst=document.getElementById('broadcastBurst');
-      const bottomTicker=document.getElementById('bottomTicker') || document.getElementById('bottomTickerText');
-      let safe=96;
-      if(burst){
-        const r=burst.getBoundingClientRect();
-        if(r && r.top>0 && r.top<h) safe=Math.max(safe, h-r.top+8);
-      }
-      if(bottomTicker){
-        const r=bottomTicker.getBoundingClientRect();
-        if(r && r.top>0 && r.top<h) safe=Math.max(safe, h-r.top+40);
-      }
-      return clamp(safe,82,210);
-    }catch(e){ return 118; }
-  }
-
-  function chatCapacityV9296(){
-    try{
-      const h=window.innerHeight||1080;
-      const top=68;
-      const bottom=safeBottomV9296();
-      const available=h-top-bottom-76;
-      const lineH=(h<780)?34:38;
-      return clamp(Math.floor(available/lineH),7,16);
-    }catch(e){ return 11; }
-  }
-
-  function injectCssV9296(){
-    const old=document.getElementById('djfV9296ChatFullHeightCss');
-    if(old) old.remove();
-    const st=document.createElement('style');
-    st.id='djfV9296ChatFullHeightCss';
-    st.textContent=`
-      :root{--djf-chat-top:64px;--djf-chat-bottom-safe:118px;--djf-chat-width:455px;}
-
-      /* Remove the old single/avatar/header image that jumped outside the edge */
-      #chatAvatarImg,
-      #chatAvatarFallback,
-      #box4 > .avatar,
-      #box4 > .chatAvatar,
-      #box4 .chatAvatarWrap,
-      #box4 .avatarWrap{
-        display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;overflow:hidden!important;
-      }
-
-      #box4{
-        right:34px!important;
-        top:var(--djf-chat-top)!important;
-        bottom:var(--djf-chat-bottom-safe)!important;
-        width:var(--djf-chat-width)!important;
-        height:auto!important;
-        min-height:520px!important;
-        max-height:none!important;
-        overflow:hidden!important;
-        display:flex!important;
-        flex-direction:column!important;
-        box-sizing:border-box!important;
-        padding:28px 18px 18px 24px!important;
-        background:linear-gradient(140deg,rgba(12,18,32,.70),rgba(4,8,15,.48))!important;
-        border:1px solid rgba(255,255,255,.22)!important;
-        box-shadow:0 22px 70px rgba(0,0,0,.42), inset 0 0 42px rgba(98,236,255,.10)!important;
-        backdrop-filter:blur(12px) saturate(1.28)!important;
-      }
-
-      #box4 #chatUser{
-        display:block!important;
-        margin:0 0 8px 0!important;
-        color:#fff!important;
-        font:1000 17px/1.05 Arial,Helvetica,sans-serif!important;
-        letter-spacing:.08em!important;
-        text-shadow:0 2px 12px rgba(0,0,0,.75),0 0 12px rgba(98,236,255,.35)!important;
-      }
-
-      #box4 #chatMessage{
-        flex:1 1 auto!important;
-        min-height:0!important;
-        height:100%!important;
-        overflow:hidden!important;
-        padding:0!important;
-      }
-
-      #box4 .chatStack{
-        height:100%!important;
-        display:flex!important;
-        flex-direction:column!important;
-        justify-content:flex-start!important;
-        gap:8px!important;
-        overflow:hidden!important;
-      }
-
-      #box4 .chatLine{
-        display:grid!important;
-        grid-template-columns:36px minmax(92px,124px) 1fr!important;
-        gap:10px!important;
-        align-items:center!important;
-        min-height:38px!important;
-        padding:6px 10px!important;
-        border-radius:14px!important;
-        background:linear-gradient(90deg,rgba(255,255,255,.19),rgba(255,255,255,.075))!important;
-        box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 7px 20px rgba(0,0,0,.20)!important;
-      }
-
-      #box4 .chatLineAvatar{
-        width:33px!important;height:33px!important;border-radius:50%!important;
-        display:grid!important;place-items:center!important;
-        background:linear-gradient(135deg,var(--c,#62ecff),var(--b,#ff4bd8))!important;
-        color:#fff!important;font:1000 16px/1 Arial,Helvetica,sans-serif!important;
-        box-shadow:0 0 18px rgba(98,236,255,.72), inset 0 0 0 2px rgba(255,255,255,.26)!important;
-        overflow:hidden!important;
-        flex:0 0 auto!important;
-      }
-      #box4 .chatLineAvatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;}
-
-      #box4 .chatLineUser{
-        font:1000 14px/1 Arial,Helvetica,sans-serif!important;
-        color:#ffe36e!important;
-        letter-spacing:.045em!important;
-        text-shadow:0 2px 10px rgba(0,0,0,.85),0 0 10px rgba(255,227,110,.30)!important;
-        white-space:nowrap!important;
-        overflow:hidden!important;
-        text-overflow:ellipsis!important;
-        max-width:124px!important;
-      }
-
-      #box4 .chatLineText{
-        font:950 15px/1.16 Arial,Helvetica,sans-serif!important;
-        color:#fff!important;
-        text-shadow:0 2px 12px rgba(0,0,0,.90),0 0 10px rgba(255,255,255,.18)!important;
-        word-break:break-word!important;
-        overflow-wrap:anywhere!important;
-        max-height:38px!important;
-        overflow:hidden!important;
-      }
-
-      #box4 .chatEmote{width:24px!important;height:24px!important;vertical-align:-6px!important;margin:0 2px!important;}
-      #box4 .chatUnicodeEmoji{font-size:22px!important;line-height:1!important;vertical-align:-4px!important;}
-
-      @media (max-height:800px){
-        :root{--djf-chat-top:58px;--djf-chat-width:430px;}
-        #box4{padding:24px 15px 15px 21px!important;min-height:440px!important;}
-        #box4 .chatStack{gap:6px!important;}
-        #box4 .chatLine{grid-template-columns:32px minmax(80px,108px) 1fr!important;min-height:34px!important;padding:5px 8px!important;gap:8px!important;}
-        #box4 .chatLineAvatar{width:29px!important;height:29px!important;font-size:14px!important;}
-        #box4 .chatLineUser{font-size:12.5px!important;max-width:108px!important;}
-        #box4 .chatLineText{font-size:13.8px!important;max-height:33px!important;}
-      }
-    `;
-    document.head.appendChild(st);
-  }
-
-  function cleanLogin(v){ return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'').slice(0,30); }
-  function initial(v){ return (String(v||'C').trim().slice(0,1).toUpperCase() || 'C'); }
-
-  function avatarHtmlV9296(item,idx){
-    const user=String(item.user||item.login||'CHAT');
-    const login=cleanLogin(item.login||item.user||'');
-    const cached=(typeof profileCache==='object' && login && profileCache[login]) ? profileCache[login] : '';
-    if(cached) return `<span class="chatLineAvatar" data-login="${esc(login)}"><img src="${esc(cached)}" alt=""></span>`;
-    setTimeout(async()=>{
-      try{
-        if(typeof getAvatar!=='function' || !login) return;
-        const av=await getAvatar(login);
-        if(!av) return;
-        document.querySelectorAll(`.chatLineAvatar[data-login="${login}"]`).forEach(el=>{ el.innerHTML=`<img src="${esc(av)}" alt="">`; });
-      }catch(e){}
-    },70+idx*35);
-    return `<span class="chatLineAvatar" data-login="${esc(login)}">${esc(initial(user))}</span>`;
-  }
-
-  function renderStackV9296(){
-    const el=document.getElementById('chatMessage');
-    if(!el) return;
-    injectCssV9296();
-    const bottom=safeBottomV9296();
-    document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottom+'px');
-    const cap=chatCapacityV9296();
-    const fallback=[{user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'}];
-    const items=(Array.isArray(chatQueue)&&chatQueue.length?chatQueue:fallback).slice(-cap).reverse();
-    el.innerHTML=`<div class="chatStack">${items.map((item,idx)=>{
-      const user=esc(clip(item.user||'CHAT',22));
-      const clean=(typeof djfCleanChatText==='function')?djfCleanChatText(item.text||''):(item.text||'');
-      const body=item.html || (typeof chatHTML==='function'?chatHTML(clean,item.data||{}):esc(clean));
-      return `<div class="chatLine">${avatarHtmlV9296(item,idx)}<span class="chatLineUser">${user}</span><span class="chatLineText">${body}</span></div>`;
-    }).join('')}</div>`;
-  }
-
-  renderChatStack=renderStackV9296;
-
-  pushChat=function(item){
-    item=item||{};
-    item.login=cleanLogin(item.login||item.user||'chat');
-    chatQueue=Array.isArray(chatQueue)?chatQueue:[];
-    chatQueue.push(item);
-    chatQueue=chatQueue.slice(-chatCapacityV9296());
-    chatLive=true;
-    renderStackV9296();
-    try{ const card=document.getElementById('box4'); if(card){card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');} }catch(e){}
-  };
-
-  const oldShowChat=typeof showChat==='function'?showChat:null;
-  showChat=async function(item){
-    item=item||{};
-    if(!Array.isArray(chatQueue)) chatQueue=[];
-    if(item.text && !chatQueue.some(x=>x.text===item.text && x.user===item.user)) chatQueue.push(item);
-    chatQueue=chatQueue.slice(-chatCapacityV9296());
-    renderStackV9296();
-  };
-
-  function refresh(){
-    injectCssV9296();
-    document.documentElement.style.setProperty('--djf-chat-bottom-safe',safeBottomV9296()+'px');
-    if(Array.isArray(chatQueue)) chatQueue=chatQueue.slice(-chatCapacityV9296());
-    renderStackV9296();
-  }
-
-  injectCssV9296();
-  setTimeout(refresh,200);
-  setTimeout(refresh,900);
-  setTimeout(refresh,2000);
-  setInterval(refresh,5000);
-  window.addEventListener('resize',refresh);
-  window.DJF_CHAT_COLUMN_VERSION=VERSION;
-})();
 
 /* =========================================================
-   V929.7 — Chat Layout Rebuild
-   Rebuilds the Twitch chat as a readable broadcast chat column.
-   - no loose/duplicate avatar
-   - one avatar per message
-   - stacked username + message
-   - auto line count from available height
-   - mobile/TV readable typography
+   DJ FOLSOE NETWORK V931.3 · COMPACT BROADCAST CHAT FIT FIX
+   Built on latest StreamElements JS.
+   - Hides older V931.2 chat panel without touching theme/ticker engines
+   - Smaller/lower chat panel so it does not cover lower info graphics
+   - Premium Radio 2026 glass/neon style matching the overlay
+   - Refreshes Twitch profile image for the writer on every new message
+   - Uses JSONP/fetch/avatar fallbacks for StreamElements compatibility
    ========================================================= */
 (function(){
-  const VERSION='V929.7 CHAT LAYOUT REBUILD';
-  function $id(id){return document.getElementById(id);} 
-  function htmlEsc(s){try{return esc(s);}catch(e){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}}
-  function safeClip(s,n){try{return clip(s,n);}catch(e){s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s;}}
-  function cleanLogin(v){return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'').slice(0,30)||'chat';}
-  function cleanChat(v){
-    let s=String(v||'');
-    if(typeof djfCleanChatText==='function') s=djfCleanChatText(s);
-    s=s.replace(/^[:@][^\s]+\s+/,'');
-    s=s.replace(/\bPRIVMSG\s+#?djfolsoe\s*:?/ig,'');
-    s=s.replace(/\bdjfolsoe\.tmi\.twitch\.tv\b/ig,'');
-    s=s.replace(/\s+/g,' ').trim();
-    return s;
-  }
-  function injectCss(){
-    let st=$id('djfV9297ChatCss');
-    if(st) return;
-    st=document.createElement('style');
-    st.id='djfV9297ChatCss';
-    st.textContent=`
-      :root{--djf-chat-top:64px;--djf-chat-right:42px;--djf-chat-width:455px;--djf-chat-bottom-safe:205px;}
+  const API_BASE=(window.DJF_API_BASE||'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/,'');
+  const CHANNEL=(window.DJF_TWITCH_CHANNEL||'djfolsoe').toLowerCase().replace(/^#/, '');
+  const VERSION='V931.3 COMPACT BROADCAST CHAT FIT FIX';
+  const messages=[];
+  const avatarCache=new Map();
+  let maxRows=7;
+  let socket=null;
+  let reconnectTimer=null;
+  let lastMsgKey='';
 
-      /* remove old loose avatar/header artefacts */
-      #chatAvatarImg,#chatAvatarFallback,
-      #box4 > .avatar,#box4 > .chatAvatar,#box4 .chatAvatarWrap,#box4 .avatarWrap{
-        display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;overflow:hidden!important;
-      }
+  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function cleanName(v){return String(v||'CHAT').replace(/^@/,'').trim()||'CHAT';}
+  function cleanLogin(v){return String(v||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9_]/g,'');}
+  function initials(v){return cleanName(v).slice(0,2).toUpperCase();}
+  function time(){return new Date().toLocaleTimeString('da-DK',{hour:'2-digit',minute:'2-digit'});}
+  function root(){return document.getElementById('djfV170Reborn')||document.body;}
 
-      #box4{
-        position:absolute!important;
-        right:var(--djf-chat-right)!important;
-        top:var(--djf-chat-top)!important;
-        bottom:var(--djf-chat-bottom-safe)!important;
-        width:var(--djf-chat-width)!important;
-        max-width:var(--djf-chat-width)!important;
-        height:auto!important;
-        min-height:0!important;
+  function injectStyle(){
+    let s=document.getElementById('djfV9313Style');
+    if(s) return;
+    s=document.createElement('style');
+    s.id='djfV9313Style';
+    s.textContent=`
+      /* hide older/broken chat layers only */
+      #box4,#djfV9312ChatPanel{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
+      #djfV9313ChatPanel{
+        position:fixed!important;
+        right:24px!important;
+        top:118px!important;
+        width:clamp(390px, 29vw, 500px)!important;
+        height:clamp(250px, 31vh, 360px)!important;
+        max-height:calc(100vh - 335px)!important;
+        z-index:92!important;
         box-sizing:border-box!important;
-        padding:30px 18px 18px 22px!important;
+        padding:10px 12px 11px!important;
+        border-radius:22px!important;
         overflow:hidden!important;
-        display:flex!important;
-        flex-direction:column!important;
-        justify-content:flex-start!important;
-        align-items:stretch!important;
-      }
-
-      #box4::before{pointer-events:none!important;}
-      #box4 #chatUser{
-        display:block!important;
-        position:relative!important;
-        margin:0 0 12px 0!important;
-        padding:0!important;
-        max-width:100%!important;
-        overflow:visible!important;
-        white-space:nowrap!important;
-        text-overflow:clip!important;
-        font:1000 16px/1.05 Arial,Helvetica,sans-serif!important;
-        letter-spacing:.09em!important;
-        color:#ffe36e!important;
-        text-shadow:0 2px 12px rgba(0,0,0,.95),0 0 14px rgba(255,227,110,.38)!important;
-        text-transform:uppercase!important;
-      }
-      #box4 #chatUser::before{content:'LIVE TWITCH CHAT';}
-      #box4 #chatUser{font-size:0!important;}
-      #box4 #chatUser::before{font-size:16px!important;}
-
-      #box4 #chatMessage{
-        display:block!important;
-        position:relative!important;
-        flex:1 1 auto!important;
-        min-height:0!important;
-        width:100%!important;
-        max-width:100%!important;
-        overflow:hidden!important;
-        padding:0!important;
-        margin:0!important;
-        line-height:1!important;
-      }
-
-      #box4 .chatStack{
-        display:flex!important;
-        flex-direction:column!important;
-        justify-content:flex-start!important;
-        gap:8px!important;
-        width:100%!important;
-        height:100%!important;
-        max-height:100%!important;
-        overflow:hidden!important;
-        box-sizing:border-box!important;
-      }
-
-      #box4 .chatLine{
-        display:grid!important;
-        grid-template-columns:42px minmax(0,1fr)!important;
-        grid-template-areas:'avatar content'!important;
-        align-items:start!important;
-        column-gap:11px!important;
-        min-height:48px!important;
-        padding:7px 10px!important;
-        border-radius:15px!important;
-        background:linear-gradient(90deg,rgba(255,255,255,.14),rgba(255,255,255,.055))!important;
-        border:1px solid rgba(255,255,255,.16)!important;
-        box-shadow:0 6px 18px rgba(0,0,0,.18), inset 0 0 18px rgba(255,255,255,.045)!important;
-        box-sizing:border-box!important;
-        overflow:hidden!important;
-        transform:none!important;
-      }
-
-      #box4 .chatLineAvatar{
-        grid-area:avatar!important;
-        width:38px!important;height:38px!important;
-        border-radius:50%!important;
-        display:grid!important;place-items:center!important;
-        overflow:hidden!important;
-        flex:0 0 38px!important;
-        background:linear-gradient(135deg,var(--c,#62ecff),var(--b,#ff4bd8))!important;
-        box-shadow:0 0 18px rgba(98,236,255,.65), inset 0 0 0 2px rgba(255,255,255,.24)!important;
         color:#fff!important;
-        font:1000 17px/1 Arial,Helvetica,sans-serif!important;
+        font-family:Inter,Arial,Helvetica,sans-serif!important;
+        background:
+          radial-gradient(circle at 8% 0%, rgba(255,77,216,.22), transparent 38%),
+          radial-gradient(circle at 100% 12%, rgba(98,236,255,.25), transparent 40%),
+          linear-gradient(135deg, rgba(8,10,20,.48), rgba(12,15,26,.74))!important;
+        border:1px solid rgba(255,255,255,.18)!important;
+        box-shadow:
+          0 0 0 1px rgba(98,236,255,.40),
+          0 0 18px rgba(255,77,216,.18),
+          0 16px 35px rgba(0,0,0,.22),
+          inset 0 0 30px rgba(255,255,255,.052)!important;
+        backdrop-filter:blur(13px) saturate(1.22)!important;
+        -webkit-backdrop-filter:blur(13px) saturate(1.22)!important;
+        transform:skewX(-2deg);
       }
-      #box4 .chatLineAvatar img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;}
-
-      #box4 .chatContent{
-        grid-area:content!important;
-        min-width:0!important;
-        max-width:100%!important;
-        display:flex!important;
-        flex-direction:column!important;
-        gap:3px!important;
-        overflow:hidden!important;
-        transform:none!important;
+      #djfV9313ChatPanel>*{transform:skewX(2deg);}
+      #djfV9313ChatPanel::before{
+        content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;border-radius:9px;
+        background:linear-gradient(180deg,#ff4bd8,#62ecff,#ffe36e);box-shadow:0 0 16px rgba(98,236,255,.75);
       }
-
-      #box4 .chatLineUser{
-        display:block!important;
-        font:1000 13.8px/1.05 Arial,Helvetica,sans-serif!important;
-        color:#ffe36e!important;
-        letter-spacing:.05em!important;
-        text-transform:uppercase!important;
-        text-shadow:0 2px 10px rgba(0,0,0,.96),0 0 10px rgba(255,227,110,.30)!important;
-        white-space:nowrap!important;
-        overflow:hidden!important;
-        text-overflow:ellipsis!important;
-        max-width:100%!important;
+      #djfV9313ChatPanel::after{
+        content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;
+        background:linear-gradient(120deg,rgba(255,255,255,.12),transparent 24%,transparent 78%,rgba(98,236,255,.10));
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.20),inset 0 -1px 0 rgba(255,255,255,.06);
       }
-
-      #box4 .chatLineText{
-        display:block!important;
-        font:950 15.8px/1.16 Arial,Helvetica,sans-serif!important;
-        color:#fff!important;
-        text-shadow:0 2px 12px rgba(0,0,0,.95),0 0 9px rgba(255,255,255,.18)!important;
-        white-space:normal!important;
-        word-break:break-word!important;
-        overflow-wrap:anywhere!important;
-        max-height:38px!important;
-        overflow:hidden!important;
-      }
-
-      #box4 .chatEmote{width:25px!important;height:25px!important;vertical-align:-6px!important;margin:0 2px!important;}
-      #box4 .chatUnicodeEmoji{font-size:23px!important;line-height:1!important;vertical-align:-4px!important;}
-
-      @media (max-height:820px){
-        :root{--djf-chat-top:58px;--djf-chat-width:430px;--djf-chat-right:34px;--djf-chat-bottom-safe:190px;}
-        #box4{padding:28px 15px 15px 19px!important;}
-        #box4 .chatStack{gap:7px!important;}
-        #box4 .chatLine{grid-template-columns:38px minmax(0,1fr)!important;min-height:43px!important;padding:6px 9px!important;column-gap:10px!important;}
-        #box4 .chatLineAvatar{width:34px!important;height:34px!important;font-size:16px!important;}
-        #box4 .chatLineUser{font-size:12.8px!important;}
-        #box4 .chatLineText{font-size:14.6px!important;max-height:34px!important;}
+      #djfV9313Header{position:relative;z-index:2;height:26px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;padding:0 3px 7px 4px;border-bottom:1px solid rgba(255,255,255,.11);}
+      #djfV9313Header .title{font-size:14px;line-height:1;font-weight:950;letter-spacing:.22em;text-transform:uppercase;color:#fff;text-shadow:0 0 10px rgba(98,236,255,.75),0 0 16px rgba(255,77,216,.42);white-space:nowrap;}
+      #djfV9313Header .live{font-size:9px;font-weight:950;letter-spacing:.08em;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.20);box-shadow:inset 0 0 12px rgba(255,255,255,.06);display:flex;align-items:center;gap:5px;}
+      #djfV9313Header .dot{width:7px;height:7px;border-radius:50%;background:#ff2f69;box-shadow:0 0 12px #ff2f69;}
+      #djfV9313List{position:relative;z-index:2;height:calc(100% - 36px);display:flex;flex-direction:column;justify-content:flex-end;gap:5px;overflow:hidden;}
+      .djfV9313Msg{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;min-height:30px;padding:4px 8px 4px 5px;border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,.145),rgba(255,255,255,.050));border:1px solid rgba(255,255,255,.105);box-shadow:inset 0 0 15px rgba(255,255,255,.025),0 4px 10px rgba(0,0,0,.12);}
+      .djfV9313AvatarWrap{width:28px;height:28px;border-radius:50%;padding:1.5px;background:linear-gradient(135deg,#ff4bd8,#62ecff,#ffe36e);box-shadow:0 0 10px rgba(98,236,255,.42);overflow:hidden;}
+      .djfV9313Avatar{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:rgba(0,0,0,.46);}
+      .djfV9313Fallback{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#101729,#05070f);color:#fff;font-size:9px;font-weight:950;letter-spacing:.02em;}
+      .djfV9313Body{min-width:0;display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:8px;}
+      .djfV9313Name{font-size:12px;line-height:1;font-weight:950;letter-spacing:.045em;text-transform:uppercase;color:#ffe36e;text-shadow:0 0 8px rgba(255,227,110,.55);white-space:nowrap;}
+      .djfV9313Text{font-size:12px;line-height:1.13;font-weight:850;color:#fff;text-shadow:0 2px 7px rgba(0,0,0,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+      .djfV9313Time{font-size:8px;font-weight:900;color:rgba(255,255,255,.70);white-space:nowrap;align-self:center;}
+      .djfV9313Text img,.djfV9313Emote{height:18px!important;max-height:18px!important;vertical-align:middle;margin:0 1px;filter:drop-shadow(0 0 6px rgba(255,255,255,.24));}
+      .djfV9313Emoji{font-size:16px;line-height:1;vertical-align:middle;}
+      @media (max-width:1500px){
+        #djfV9313ChatPanel{right:18px!important;top:104px!important;width:clamp(330px, 31vw, 430px)!important;height:clamp(220px, 30vh, 315px)!important;max-height:calc(100vh - 310px)!important;}
+        #djfV9313Header .title{font-size:12px}.djfV9313Msg{grid-template-columns:27px 1fr auto;min-height:28px}.djfV9313AvatarWrap{width:25px;height:25px}.djfV9313Name,.djfV9313Text{font-size:10.8px}.djfV9313Time{font-size:7.5px}
       }
     `;
-    document.head.appendChild(st);
+    document.head.appendChild(s);
   }
 
-  function bottomSafe(){
-    let safe=190;
+  function ensurePanel(){
+    injectStyle();
+    const old=document.getElementById('djfV9312ChatPanel'); if(old) old.remove();
+    let p=document.getElementById('djfV9313ChatPanel');
+    if(!p){
+      p=document.createElement('section');
+      p.id='djfV9313ChatPanel';
+      p.innerHTML=`<div id="djfV9313Header"><div class="title">LIVE TWITCH CHAT</div><div class="live">LIVE <span class="dot"></span></div></div><div id="djfV9313List"></div>`;
+      document.body.appendChild(p);
+      setTimeout(calcRows,100);
+      window.addEventListener('resize',calcRows);
+    }
+    return p;
+  }
+
+  function calcRows(){
+    const list=document.getElementById('djfV9313List'); if(!list) return;
+    const h=list.clientHeight||230;
+    maxRows=Math.max(5,Math.min(9,Math.floor(h/36)));
+    renderChat();
+  }
+
+  function jsonp(url, timeout=6000){
+    return new Promise((resolve,reject)=>{
+      const cb='djfAvatarJsonp_'+Date.now()+'_'+Math.floor(Math.random()*99999);
+      const sep=url.includes('?')?'&':'?';
+      let done=false;
+      const timer=setTimeout(()=>{if(done)return;done=true;cleanup();reject(new Error('avatar jsonp timeout'));},timeout);
+      function cleanup(){clearTimeout(timer);try{delete window[cb];}catch(e){window[cb]=undefined;}const el=document.getElementById(cb);if(el&&el.parentNode)el.parentNode.removeChild(el);}
+      window[cb]=payload=>{if(done)return;done=true;cleanup();resolve(payload);};
+      const sc=document.createElement('script');sc.id=cb;sc.async=true;sc.src=url+sep+'callback='+encodeURIComponent(cb)+'&ts='+Date.now();sc.onerror=()=>{if(done)return;done=true;cleanup();reject(new Error('avatar jsonp failed'));};document.head.appendChild(sc);
+    });
+  }
+
+  function avatarFromState(login){
     try{
-      const burst=$id('broadcastBurst');
-      const bottom=$id('bottomTicker')||$id('bottomTickerText');
-      if(burst){const r=burst.getBoundingClientRect(); if(r.top>0) safe=Math.max(safe, window.innerHeight-r.top+22);}
-      if(bottom){const r=bottom.getBoundingClientRect(); if(r.top>0) safe=Math.max(safe, window.innerHeight-r.top+18);}
+      const core=window.__djfBroadcastCore||window.broadcastCore||null;
+      const tw=core&&(core.core||core.data||core).twitch;
+      if(tw && cleanLogin(tw.channel||tw.displayName)===login && tw.profileImage) return tw.profileImage;
     }catch(e){}
-    return Math.min(Math.max(safe,180),270);
-  }
-  function capacity(){
-    let h=520;
-    try{
-      const box=$id('box4');
-      const msg=$id('chatMessage');
-      if(msg) h=msg.getBoundingClientRect().height;
-      else if(box) h=box.getBoundingClientRect().height-58;
-    }catch(e){}
-    const row=58;
-    return Math.max(5,Math.min(10,Math.floor(h/row)));
-  }
-  function initial(v){return (String(v||'C').trim().slice(0,1).toUpperCase()||'C');}
-  function avatarHtml(item,idx){
-    const user=String(item.user||item.login||'CHAT');
-    const login=cleanLogin(item.login||item.user||'');
-    const cached=(typeof profileCache==='object' && login && profileCache[login]) ? profileCache[login] : '';
-    if(cached) return `<span class="chatLineAvatar" data-login="${htmlEsc(login)}"><img src="${htmlEsc(cached)}" alt=""></span>`;
-    setTimeout(async()=>{
-      try{
-        if(typeof getAvatar!=='function' || !login) return;
-        const av=await getAvatar(login);
-        if(!av) return;
-        document.querySelectorAll(`.chatLineAvatar[data-login="${login}"]`).forEach(el=>{el.innerHTML=`<img src="${htmlEsc(av)}" alt="">`;});
-      }catch(e){}
-    },90+idx*25);
-    return `<span class="chatLineAvatar" data-login="${htmlEsc(login)}">${htmlEsc(initial(user))}</span>`;
-  }
-  function renderStack(){
-    injectCss();
-    const box=$id('box4');
-    const el=$id('chatMessage');
-    const userHead=$id('chatUser');
-    if(userHead) userHead.textContent='';
-    document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottomSafe()+'px');
-    if(!el) return;
-    const cap=capacity();
-    const fallback=[{user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'}];
-    let source=(Array.isArray(chatQueue)&&chatQueue.length?chatQueue:fallback).slice(-cap).reverse();
-    source=source.filter(item=>cleanChat(item.text||item.message||'').length || item.html);
-    if(!source.length) source=fallback;
-    el.innerHTML=`<div class="chatStack">${source.map((item,idx)=>{
-      const user=safeClip(item.user||item.displayName||item.login||'CHAT',24);
-      const raw=cleanChat(item.text||item.message||'');
-      const body=item.html || (typeof chatHTML==='function'?chatHTML(raw,item.data||{}):htmlEsc(raw));
-      return `<div class="chatLine">${avatarHtml(item,idx)}<span class="chatContent"><span class="chatLineUser">${htmlEsc(user)}</span><span class="chatLineText">${body||' '}</span></span></div>`;
-    }).join('')}</div>`;
-  }
-  function addItem(item){
-    item=item||{};
-    item.login=cleanLogin(item.login||item.user||item.displayName||'chat');
-    item.user=item.user||item.displayName||item.login||'CHAT';
-    item.text=cleanChat(item.text||item.message||'');
-    if(!item.text && !item.html) return;
-    if(!Array.isArray(chatQueue)) chatQueue=[];
-    const key=(item.user||'')+'|'+(item.text||item.html||'');
-    if(chatQueue.slice(-3).some(x=>((x.user||'')+'|'+(x.text||x.html||''))===key)) return;
-    chatQueue.push(item);
-    chatQueue=chatQueue.slice(-14);
-    chatLive=true;
-    renderStack();
-    try{const card=$id('box4'); if(card){card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');}}catch(e){}
+    if(login===CHANNEL && window.DJF_CHANNEL_AVATAR) return window.DJF_CHANNEL_AVATAR;
+    return '';
   }
 
-  renderChatStack=renderStack;
-  showChat=async function(item){addItem(item);};
-  pushChat=function(item){addItem(item);};
-  renderChatWaiting=function(){
-    if(Array.isArray(chatQueue)&&chatQueue.length){renderStack(); return;}
-    addItem({user:'LIVE CHAT',login:'djfolsoe',text:'Waiting for Twitch chat…'});
-  };
+  async function refreshAvatar(login){
+    login=cleanLogin(login); if(!login) return '';
+    const stateAvatar=avatarFromState(login);
+    if(stateAvatar){avatarCache.set(login,stateAvatar); return stateAvatar;}
+    // fallback image is shown immediately; real Worker result replaces it when available.
+    if(!avatarCache.get(login)) avatarCache.set(login,`https://unavatar.io/twitch/${encodeURIComponent(login)}`);
+    const endpoints=[
+      `${API_BASE}/api/chat-profile-jsonp?login=${encodeURIComponent(login)}`,
+      `${API_BASE}/api/chat-profile?login=${encodeURIComponent(login)}`
+    ];
+    // JSONP first for StreamElements compatibility.
+    jsonp(endpoints[0]).then(j=>{
+      const u=j&&(j.avatar||j.profileImage||j.profile_image_url||j.profile_image);
+      if(u){avatarCache.set(login,u); messages.forEach(m=>{if(m.login===login)m.avatar=u;}); renderChat();}
+    }).catch(()=>{
+      fetch(endpoints[1]+'&ts='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{
+        const u=j&&(j.avatar||j.profileImage||j.profile_image_url||j.profile_image);
+        if(u){avatarCache.set(login,u); messages.forEach(m=>{if(m.login===login)m.avatar=u;}); renderChat();}
+      }).catch(()=>{});
+    });
+    return avatarCache.get(login)||'';
+  }
 
-  function refresh(){injectCss();document.documentElement.style.setProperty('--djf-chat-bottom-safe',bottomSafe()+'px');if(Array.isArray(chatQueue)) chatQueue=chatQueue.slice(-14);renderStack();}
-  injectCss();
-  setTimeout(refresh,150);setTimeout(refresh,700);setTimeout(refresh,1600);setInterval(refresh,4500);
-  window.addEventListener('resize',refresh);
-  window.DJF_CHAT_LAYOUT_VERSION=VERSION;
+  function emoji(html){return String(html||'').replace(/([\u{1F1E6}-\u{1F1FF}]{2}|[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]\uFE0F?)/gu,'<span class="djfV9313Emoji">$1</span>');}
+  function parseTags(raw){const tags={}; if(!raw||raw[0]!=='@')return tags; raw.slice(1).split(' ')[0].split(';').forEach(p=>{const [k,v='']=p.split('=');tags[k]=String(v).replace(/\\s/g,' ').replace(/\\:/g,';').replace(/\\r/g,'\r').replace(/\\n/g,'\n');}); return tags;}
+  function html(text,tags){
+    text=String(text||''); const em=tags&&tags.emotes; if(!em) return emoji(esc(text));
+    const ranges=[]; String(em).split('/').forEach(g=>{const [id,pos]=g.split(':'); String(pos||'').split(',').forEach(p=>{const [s,e]=p.split('-').map(Number); if(Number.isFinite(s)&&Number.isFinite(e)) ranges.push({id,s,e});});});
+    if(!ranges.length) return emoji(esc(text));
+    ranges.sort((a,b)=>a.s-b.s); let out='',last=0;
+    ranges.forEach(r=>{out+=esc(text.slice(last,r.s)); const label=text.slice(r.s,r.e+1); out+=`<img class="djfV9313Emote" src="https://static-cdn.jtvnw.net/emoticons/v2/${r.id}/default/dark/3.0" alt="${esc(label)}">`; last=r.e+1;});
+    out+=esc(text.slice(last)); return emoji(out);
+  }
+
+  function renderChat(){
+    ensurePanel(); const list=document.getElementById('djfV9313List'); if(!list) return;
+    const visible=messages.slice(-maxRows);
+    list.innerHTML=visible.map(m=>`
+      <div class="djfV9313Msg">
+        <div class="djfV9313AvatarWrap"><img class="djfV9313Avatar" data-login="${esc(m.login)}" src="${esc(m.avatar||`https://unavatar.io/twitch/${encodeURIComponent(m.login||CHANNEL)}`)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"><div class="djfV9313Fallback" style="display:none">${esc(initials(m.user))}</div></div>
+        <div class="djfV9313Body"><span class="djfV9313Name">${esc(m.user)}</span><span class="djfV9313Text">${m.html}</span></div>
+        <div class="djfV9313Time">${esc(m.time)}</div>
+      </div>`).join('');
+  }
+
+  async function add(user,login,text,tags){
+    user=cleanName(user||login); login=cleanLogin(login||user); text=String(text||'').replace(/\r?\n/g,' ').trim();
+    if(!text || text.includes('PRIVMSG #')) return;
+    const key=login+'|'+text+'|'+Date.now().toString().slice(0,-3);
+    if(key===lastMsgKey) return; lastMsgKey=key;
+    const avatar=await refreshAvatar(login);
+    messages.push({user,login,text,html:html(text,tags||{}),avatar,time:time()});
+    while(messages.length>60) messages.shift();
+    renderChat();
+  }
+
+  function connect(){
+    clearTimeout(reconnectTimer);
+    if(socket&&[0,1].includes(socket.readyState)) return;
+    try{socket=new WebSocket('wss://irc-ws.chat.twitch.tv:443');}catch(e){reconnectTimer=setTimeout(connect,5000);return;}
+    socket.onopen=()=>{socket.send('PASS SCHMOOPIIE');socket.send('NICK justinfan'+Math.floor(10000+Math.random()*89999));socket.send('CAP REQ :twitch.tv/tags twitch.tv/commands');socket.send('JOIN #'+CHANNEL);};
+    socket.onmessage=ev=>String(ev.data||'').split('\r\n').filter(Boolean).forEach(line=>{
+      if(line.startsWith('PING')){socket.send('PONG :tmi.twitch.tv');return;}
+      if(!line.includes(' PRIVMSG ')) return;
+      const tags=parseTags(line); const login=cleanLogin((line.match(/:([^!]+)!/)||[])[1]||'chat'); const idx=line.indexOf(' :'); const text=idx>=0?line.slice(idx+2):''; const user=tags['display-name']||login; add(user,login,text,tags);
+    });
+    socket.onclose=()=>{socket=null;reconnectTimer=setTimeout(connect,5000);};
+    socket.onerror=()=>{try{socket.close();}catch(e){}};
+  }
+
+  window.addEventListener('onEventReceived',e=>{
+    try{const d=e.detail||{},ev=d.event||{},data=ev.data||ev,listener=String(d.listener||'').toLowerCase();
+      if(listener.includes('message')||listener.includes('chat')){const text=data.text||data.message||data.renderedText||''; const user=data.displayName||data.name||data.username||data.nick||'CHAT'; const login=data.username||data.nick||data.login||user; add(user,login,text,data.tags||{});}
+    }catch(err){}
+  });
+
+  window.DJF_TEST_CHAT=(u,t)=>add(u||'DJFOLSOE',u||'djfolsoe',t||'Hej chatten 💜 Kappa',{});
+  ensurePanel();
+  add('LIVE CHAT','djfolsoe','Connected · waiting for Twitch chat…',{});
+  connect();
 })();
