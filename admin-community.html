@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><title>Community Admin</title></head>
+<body><h1>Community Admin</h1><input id='search' placeholder='Viewer'>
+<button onclick='load()'>Search</button><pre id='out'></pre>
+<script>
+async function load(){
+ let v=document.getElementById('search').value;
+ let r=await fetch('/api/ext001/viewer?login='+encodeURIComponent(v));
+ document.getElementById('out').textContent=await r.text();
+}
+</script></body></html>
