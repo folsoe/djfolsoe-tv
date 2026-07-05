@@ -1,11 +1,43 @@
-<!DOCTYPE html>
-<html><head><meta charset='utf-8'><title>Community Admin</title></head>
-<body><h1>Community Admin</h1><input id='search' placeholder='Viewer'>
-<button onclick='load()'>Search</button><pre id='out'></pre>
-<script>
-async function load(){
- let v=document.getElementById('search').value;
- let r=await fetch('/api/ext001/viewer?login='+encodeURIComponent(v));
- document.getElementById('out').textContent=await r.text();
-}
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Community</title>
+  <link rel="stylesheet" href="assets/css/ext001-community.css">
+</head>
+<body>
+  <main class="djf-page">
+    <section class="djf-hero">
+      <p class="djf-kicker">DJ FOLSOE NETWORK · ADMIN · EXT-001</p>
+      <h1>Community Admin</h1>
+      <p>Search, inspect and adjust viewer identity data. Admin changes are sent to Cloudflare only.</p>
+    </section>
+
+    <section class="djf-section">
+      <p class="djf-kicker">Security</p>
+      <input id="adminToken" type="password" placeholder="ADMIN_TOKEN">
+    </section>
+
+    <section class="djf-toolbar">
+      <input id="viewerLogin" type="text" placeholder="Twitch login">
+      <button id="loadViewer">Load viewer</button>
+      <button id="saveViewer">Save admin changes</button>
+    </section>
+
+    <section class="djf-section">
+      <div class="djf-grid">
+        <input id="displayName" placeholder="Display name">
+        <input id="profileImage" placeholder="Profile image URL">
+        <input id="level" type="number" placeholder="Level">
+        <input id="xp" type="number" placeholder="XP">
+        <input id="vip" type="number" placeholder="VIP 0/1">
+        <input id="moderator" type="number" placeholder="Moderator 0/1">
+      </div>
+      <pre id="adminOutput" class="djf-meta"></pre>
+    </section>
+  </main>
+
+  <script src="assets/js/ext001-admin-community.js"></script>
+</body>
+</html>

@@ -1,5 +1,36 @@
-<!DOCTYPE html>
-<html><head><meta charset='utf-8'><title>DJ FOLSOE Community</title>
-<link rel='stylesheet' href='assets/css/ext001-community.css'></head>
-<body><h1>DJ FOLSOE COMMUNITY</h1><div id='viewer-grid'></div>
-<script src='assets/js/ext001-viewers.js'></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Community</title>
+  <link rel="stylesheet" href="assets/css/ext001-community.css">
+</head>
+<body>
+  <main class="djf-page">
+    <section class="djf-hero">
+      <p class="djf-kicker">DJ FOLSOE NETWORK · EXT-001</p>
+      <h1>Community Identity</h1>
+      <p>Viewer profiles, Twitch avatars, activity and community ranking powered by Twitch and Cloudflare.</p>
+    </section>
+
+    <section class="djf-toolbar">
+      <input id="djfViewerSearch" type="text" placeholder="Search Twitch viewer, e.g. djcosmodk">
+      <button id="djfSearchBtn">Open profile</button>
+      <button id="djfRefreshBtn">Refresh leaderboard</button>
+    </section>
+
+    <section id="djfProfile" class="djf-profile" hidden></section>
+
+    <section class="djf-section">
+      <div class="djf-section-head">
+        <p class="djf-kicker">Leaderboard</p>
+        <h2>Community Viewers</h2>
+      </div>
+      <div id="djfViewerGrid" class="djf-grid"></div>
+    </section>
+  </main>
+
+  <script src="assets/js/ext001-community.js"></script>
+</body>
+</html>
