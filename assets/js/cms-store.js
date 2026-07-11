@@ -1,0 +1,1 @@
+const data={state:null,route:'dashboard',token:'',modules:new Map()};export const store={get:key=>data[key],set:(key,value)=>data[key]=value,all:()=>data};

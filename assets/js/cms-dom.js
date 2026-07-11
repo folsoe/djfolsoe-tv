@@ -1,0 +1,1 @@
+export const $=id=>document.getElementById(id);export const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));export function show(el,yes=true){if(el)el.hidden=!yes}

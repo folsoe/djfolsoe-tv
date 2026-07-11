@@ -1,0 +1,1 @@
+export const API_BASE=(window.DJF_API_BASE||'https://djfolsoe-tv-api.sunefolsoe.workers.dev').replace(/\/$/,'');export const TOKEN_KEY='djf_cms_token_v1003';
