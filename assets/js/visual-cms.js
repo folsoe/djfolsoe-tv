@@ -176,7 +176,7 @@ async function connect({silent=false}={}){
     const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
   }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
 }
-function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderBroadcastExperience();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderBroadcastExperience();renderTvStation();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
 function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
 function renderSystemStatus(){
   const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
@@ -385,6 +385,64 @@ function renderBroadcastExperience(){
     const node=document.getElementById(id);
     if(node)node.textContent=String(value);
   });
+}
+
+
+function renderTvStation(){
+  if(!state)return;
+
+  const modules=Array.isArray(state.modules)?state.modules:[];
+  const shows=Array.isArray(state.core?.featuredShows)?state.core.featuredShows:[];
+  const twitch=state.core?.twitch||{};
+  const next=state.core?.nextShow||{};
+  const isLive=!!(twitch.live||twitch.isLive);
+
+  const published=modules.filter(module=>module.status==='published').length;
+  const drafts=modules.filter(module=>module.status==='draft').length;
+  const scheduled=modules.filter(module=>moduleScheduled(module)).length;
+  const overlayReady=modules.filter(module=>module.surfaces?.overlay===true).length;
+
+  const write=(id,value)=>{
+    const node=document.getElementById(id);
+    if(node)node.textContent=String(value);
+  };
+
+  write('stationStatusLabel',isLive?'ON AIR':'READY');
+  write('stationStatusText',isLive?'DJ FOLSOE is live on Twitch':'Waiting for live broadcast');
+  write('stationWorkerVersion',state.version||'Broadcast Core');
+  write('stationTwitchStatus',isLive?'LIVE':'OFFLINE');
+  write('stationViewerCount',`${Number(twitch.viewers||0).toLocaleString()} viewers`);
+  write('stationShowCount',`${shows.length} SHOWS`);
+  write('stationContentCount',`${modules.length} ITEMS`);
+  write('stationThemeName',state.core?.theme?.title||'Weekend');
+  write('stationPublished',published);
+  write('stationDrafts',drafts);
+  write('stationScheduled',scheduled);
+  write('stationOverlayReady',overlayReady);
+  write('stationNextShowTitle',next.title||next.show||'No show selected');
+  write('stationNextShowDescription',next.description||'Add or update the next programme in the existing Homepage or Shows editor.');
+  write('stationNextShowTime',next.timeLabel||next.datetime||next.dateTime||'Time not set');
+  write('stationNextShowTheme',next.theme||state.core?.theme?.title||'Theme not set');
+
+  const onAir=document.querySelector('.stationOnAir');
+  if(onAir)onAir.classList.toggle('live',isLive);
+
+  const list=document.getElementById('stationShowList');
+  if(list){
+    list.innerHTML=shows.slice(0,6).map((show,index)=>`
+      <article class="stationShowCard">
+        <span>${String(index+1).padStart(2,'0')}</span>
+        <strong>${esc(show.title||'Untitled show')}</strong>
+        <small>${esc(show.time||show.day||show.theme||'Schedule not set')}</small>
+      </article>
+    `).join('')||`
+      <article class="stationShowCard">
+        <span>01</span>
+        <strong>No shows loaded</strong>
+        <small>Use Show Manager to add programmes.</small>
+      </article>
+    `;
+  }
 }
 
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
