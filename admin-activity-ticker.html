@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Live Activity Ticker</title>
+  <link rel="stylesheet" href="assets/css/activity-ticker-admin.css?v=9370">
+</head>
+<body>
+  <main class="activityAdmin">
+    <header>
+      <p>DJ FOLSOE NETWORK · EXT-004</p>
+      <h1>Live Activity Ticker</h1>
+      <span>Connect Twitch EventSub, inspect remembered activity and test the website ticker.</span>
+    </header>
+
+    <section class="adminPanel">
+      <label>ADMIN_TOKEN
+        <input id="adminToken" type="password" autocomplete="off" placeholder="Your existing ADMIN_TOKEN">
+      </label>
+      <div class="actions">
+        <button id="setupEventSub">One Click EventSub Setup</button>
+        <button id="loadFeed">Refresh Feed</button>
+        <button id="listSubscriptions">Twitch Subscriptions</button>
+        <button id="clearFeed" class="danger">Clear Feed</button>
+      </div>
+    </section>
+
+    <section class="adminPanel">
+      <h2>Add test / manual ticker event</h2>
+      <div class="formGrid">
+        <label>Type
+          <select id="eventType">
+            <option value="manual">Network update</option>
+            <option value="request">Song request</option>
+            <option value="follow">Follower</option>
+            <option value="bits">Bits</option>
+            <option value="sub">Sub</option>
+            <option value="raid">Raid</option>
+            <option value="reward">Channel points</option>
+          </select>
+        </label>
+        <label>Headline<input id="eventHeadline" value="Website ticker test"></label>
+        <label>Detail<input id="eventDetail" value="EXT-004 is connected"></label>
+        <label>Twitch login<input id="eventLogin" placeholder="Optional viewer login"></label>
+      </div>
+      <button id="addEvent">Add Event</button>
+    </section>
+
+    <section class="adminPanel">
+      <h2>Remembered activity</h2>
+      <div id="activityFeed" class="feed"></div>
+    </section>
+
+    <section class="adminPanel">
+      <h2>System output</h2>
+      <pre id="output">Ready.</pre>
+    </section>
+  </main>
+  <script src="assets/js/activity-ticker-admin.js?v=9370"></script>
+</body>
+</html>

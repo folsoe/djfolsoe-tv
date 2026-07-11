@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://folsoetv.dk/">
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
-  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9360">
+  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9370">
 </head>
 <body>
   <div class="tvShell">
@@ -37,10 +37,16 @@
     </header>
 
     <main id="top">
-      <section class="tickerStrip broadcastTicker neonTicker" aria-label="DJ FOLSOE broadcast ticker">
-        <span class="tickerLead">NOW PLAYING</span>
-        <div class="tickerViewport"><span id="topTicker">Loading DJ FOLSOE broadcast ticker...</span></div>
-        <b>CHANNEL 01 · LIVE MUSIC TV</b>
+      <section id="websiteActivityTicker" class="tickerStrip broadcastTicker neonTicker websiteActivityTicker" aria-label="Latest DJ FOLSOE Twitch activity" aria-live="polite">
+        <span class="tickerLead"><i class="tickerPulse"></i><span id="activityTickerLead">LIVE ACTIVITY</span></span>
+        <div class="tickerViewport activityTickerViewport">
+          <span id="topTicker" class="tickerFallback">Loading DJ FOLSOE live activity...</span>
+          <div id="activityTickerTrack" class="activityTickerTrack"></div>
+        </div>
+        <div class="activityTickerStatus">
+          <span id="activityTickerType">TWITCH</span>
+          <time id="activityTickerTime">UPDATING</time>
+        </div>
       </section>
 
       <section id="live" class="heroPortal compactMusicTvHero">
@@ -107,6 +113,6 @@
     </footer>
   </div>
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/site.js?v=9360"></script>
+  <script src="assets/js/site.js?v=9370"></script>
 </body>
 </html>
