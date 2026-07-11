@@ -15,14 +15,14 @@
   <meta property="og:url" content="https://folsoetv.dk/">
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="assets/css/site.css?v=9171">
+  <link rel="stylesheet" href="assets/css/site.css?v=9320">
 </head>
 <body>
   <div class="tvShell">
     <header class="tvNav">
       <a class="brand" href="#top"><span class="brandMark">TV</span><strong>DJ FOLSOE</strong><em id="navState">LOADING</em></a>
       <nav>
-        <a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#about">DJ FOLSOE</a><a href="#community">Community</a>
+        <a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#about">DJ FOLSOE</a><a href="#community">Community</a><a href="#presence">Presence</a><a href="#viewerCommands">Commands</a>
       </nav>
       <a class="watchBtn" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch Twitch</a>
     </header>
@@ -78,6 +78,29 @@
         <div class="communityWall" id="communityWall"></div>
       </section>
 
+
+      <section id="presence" class="portalPanel extModule extPresence">
+        <div class="panelHead"><div><p>EXT-002 · LIVE PRESENCE</p><h2>Who is here right now</h2></div><a class="secondary" href="presence.html">Open full presence</a></div>
+        <div class="extMetricGrid">
+          <div><span>Online now</span><b id="extOnlineNow">0</b></div>
+          <div><span>Seen today</span><b id="extTodayViewers">0</b></div>
+          <div><span>Total hours</span><b id="extTotalHours">0</b></div>
+          <div><span>Viewer profiles</span><b id="extTotalProfiles">0</b></div>
+        </div>
+        <div class="extProfileGrid" id="extOnlineProfiles"></div>
+      </section>
+
+      <section id="viewerCommands" class="portalPanel extModule extCommands">
+        <div class="panelHead"><div><p>EXT-003 · INTERACTIVE TV</p><h2>Viewer commands</h2></div><a class="secondary" href="commands.html">View all viewer commands</a></div>
+        <p class="extIntro">Only commands viewers can use are shown here. Admin, theme and control commands remain hidden from the public broadcast experience.</p>
+        <div class="extCommandGrid" id="extViewerCommands"></div>
+      </section>
+
+      <section id="communityProfiles" class="portalPanel extModule extCommunityProfiles">
+        <div class="panelHead"><div><p>EXT-001 · VIEWER IDENTITY</p><h2>Community profiles</h2></div><a class="secondary" href="community.html">Open community</a></div>
+        <div class="extProfileGrid" id="extCommunityProfilesGrid"></div>
+      </section>
+
       <section id="requests" class="portalPanel requestPanel">
         <div class="panelHead"><p>REQUEST WALL</p><h2>Want a song on air?</h2></div>
         <p>Use <b>!request Artist - Title</b> in Twitch chat. Danish and German commands can also be added in StreamElements.</p>
@@ -86,6 +109,6 @@
     </main>
   </div>
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/site.js?v=9171"></script>
+  <script src="assets/js/site.js?v=9320"></script>
 </body>
 </html>
