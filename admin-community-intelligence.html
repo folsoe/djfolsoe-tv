@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Community Intelligence</title>
+  <link rel="stylesheet" href="assets/css/intelligence-admin.css?v=9430">
+</head>
+<body>
+<main class="intelAdmin">
+  <header class="intelHero">
+    <div><p>DJ FOLSOE NETWORK · V943</p><h1>Community Intelligence</h1><span>Behaviour, loyalty, retention and personal viewer intelligence.</span></div>
+    <div id="intelOrb" class="intelOrb">CHECKING</div>
+  </header>
+
+  <section class="panel authPanel">
+    <label>ADMIN_TOKEN<input id="adminToken" type="password" autocomplete="off"></label>
+    <div class="actions">
+      <button id="rebuildIntel">Rebuild Intelligence</button>
+      <button id="refreshIntel">Refresh</button>
+    </div>
+  </section>
+
+  <section class="summaryGrid">
+    <article class="panel"><p>VIEWERS ANALYSED</p><strong id="viewerCount">0</strong><small>Community profiles</small></article>
+    <article class="panel"><p>AVG ENGAGEMENT</p><strong id="engagementScore">0</strong><small>Behaviour score</small></article>
+    <article class="panel"><p>SUPERFANS</p><strong id="superfanCount">0</strong><small>High loyalty + engagement</small></article>
+    <article class="panel"><p>AT RISK</p><strong id="riskCount">0</strong><small>Previously active viewers</small></article>
+  </section>
+
+  <section class="panel">
+    <h2>Automatic Insights</h2>
+    <div id="insightGrid" class="insightGrid"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Community Segments</h2>
+    <div id="segmentGrid" class="segmentGrid"></div>
+  </section>
+
+  <section class="panel">
+    <div class="sectionHead"><h2>Viewer Intelligence</h2><input id="viewerSearch" placeholder="Search Twitch viewer"></div>
+    <div id="viewerGrid" class="viewerGrid"></div>
+  </section>
+
+  <section id="viewerPanel" class="panel" hidden>
+    <h2 id="viewerTitle">Viewer Intelligence</h2>
+    <div id="viewerDetail" class="viewerDetail"></div>
+  </section>
+
+  <section class="panel"><h2>System Output</h2><pre id="output">Ready.</pre></section>
+</main>
+<script src="assets/js/intelligence-admin.js?v=9430"></script>
+</body></html>
