@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Platform Core</title>
+  <link rel="stylesheet" href="assets/css/platform-admin.css?v=9410">
+</head>
+<body>
+<main class="platformAdmin">
+  <header class="platformHero">
+    <div>
+      <p>DJ FOLSOE NETWORK · V941</p>
+      <h1>Platform Core</h1>
+      <span>Én samlet motor til Twitch, website, overlay, community og fremtidige extensions.</span>
+    </div>
+    <div id="platformOrb" class="platformOrb">CHECKING</div>
+  </header>
+
+  <section class="panel authPanel">
+    <label>ADMIN_TOKEN<input id="adminToken" type="password" autocomplete="off"></label>
+    <div class="actions">
+      <button id="refreshPlatform">Refresh Platform</button>
+      <button id="rebuildPlatform">Rebuild Data</button>
+      <button id="repairCore">Repair Twitch Core</button>
+    </div>
+  </section>
+
+  <section class="summaryGrid">
+    <article class="panel"><p>MODULES</p><strong id="moduleCount">0</strong><small>Active platform modules</small></article>
+    <article class="panel"><p>ACTIVITY</p><strong id="activityCount">0</strong><small>Remembered events</small></article>
+    <article class="panel"><p>VIEWERS</p><strong id="viewerCount">0</strong><small>Community profiles</small></article>
+    <article class="panel"><p>REQUESTS</p><strong id="requestCount">0</strong><small>Remembered requests</small></article>
+  </section>
+
+  <section class="panel">
+    <h2>Platform Modules</h2>
+    <div id="moduleGrid" class="moduleGrid"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Hall of Fame</h2>
+    <div id="hallGrid" class="hallGrid"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Latest Requests</h2>
+    <div id="requestList" class="requestList"></div>
+  </section>
+
+  <section class="panel">
+    <h2>System Output</h2>
+    <pre id="output">Ready.</pre>
+  </section>
+</main>
+<script src="assets/js/platform-admin.js?v=9410"></script>
+</body>
+</html>
