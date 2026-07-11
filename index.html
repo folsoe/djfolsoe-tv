@@ -3,46 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE · Twitch Music Streamer</title>
-  <meta name="description" content="DJ FOLSOE is a Danish Twitch music streamer with live DJ shows, requests, Top 20, community and broadcast energy from Denmark.">
-  <meta name="keywords" content="DJ FOLSOE, folsoetv, Twitch DJ, Music TV Denmark, Trance Tuesday, Eurodance, Fredagsbar, Retro Hits, DJ Folsoe live">
+  <title>DJ FOLSOE · Twitch Music TV</title>
+  <meta name="description" content="DJ FOLSOE is a Danish Twitch music streamer with live DJ shows, requests, Top 20 and interactive Music TV energy.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://folsoetv.dk/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="DJ FOLSOE TV">
-  <meta property="og:title" content="DJ FOLSOE · Twitch Music Streamer">
-  <meta property="og:description" content="Live DJ shows, Twitch community, chart countdowns and Music TV energy from Denmark.">
+  <meta property="og:title" content="DJ FOLSOE · Twitch Music TV">
   <meta property="og:url" content="https://folsoetv.dk/">
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
-  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
-  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9350">
+  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9360">
 </head>
 <body>
   <div class="tvShell">
-    <header class="tvNav">
-      <a class="brand" href="#top"><span class="brandMark">TV</span><strong>DJ FOLSOE</strong><em id="navState">LOADING</em></a>
-      <nav>
-        <a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#about">DJ FOLSOE</a><a href="#community">Community</a><a href="#presence">Presence</a><a href="#viewerCommands">Commands</a>
+    <header class="tvNav compactStationNav">
+      <a class="twitchIdentity" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
+        <span class="identityAvatarRing"><img id="navProfileImage" src="" alt="DJ FOLSOE Twitch profile"></span>
+        <span class="identityCopy">
+          <span class="identityNameRow"><strong id="navDisplayName">DJ FOLSOE</strong><em id="navState">LOADING</em></span>
+          <span class="identityMeta"><i id="navLiveDot"></i><b id="navLiveText">TWITCH CHANNEL</b><span id="navFollowers">— FOLLOWERS</span></span>
+          <small id="navProfileDescription">Live Music TV, requests, charts and community energy from Denmark.</small>
+        </span>
+      </a>
+
+      <nav class="stationNavigation" aria-label="Primary navigation">
+        <a href="#live"><span>◉</span>Live</a>
+        <a href="#shows"><span>⌁</span>Shows</a>
+        <a href="#top20"><span>♫</span>Top 20</a>
+        <a href="#viewerCommands"><span>⌨</span>Commands</a>
       </nav>
-      <a class="watchBtn" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch Twitch</a>
+      <a class="watchBtn" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch on Twitch</a>
     </header>
 
     <main id="top">
-      <section id="live" class="heroPortal musicTvHero">
-        <div class="stationIdent" aria-hidden="true"><span>DJ FOLSOE</span><b>MUSIC TELEVISION</b><em>EST. DENMARK</em></div>
+      <section class="tickerStrip broadcastTicker neonTicker" aria-label="DJ FOLSOE broadcast ticker">
+        <span class="tickerLead">NOW PLAYING</span>
+        <div class="tickerViewport"><span id="topTicker">Loading DJ FOLSOE broadcast ticker...</span></div>
+        <b>CHANNEL 01 · LIVE MUSIC TV</b>
+      </section>
+
+      <section id="live" class="heroPortal compactMusicTvHero">
         <div class="heroBg" id="heroThemeBg"></div>
         <div class="heroContent">
-          <div class="broadcastEyeline"><span class="broadcastDot"></span><span>LIVE MUSIC NETWORK</span><i>2026 DIGITAL BROADCAST</i></div>
-          <p class="eyebrow" id="heroEyebrow">MUSIC TV FROM DENMARK</p>
-          <h1 id="heroTitle">DJ FOLSOE LIVE</h1>
-          <h2 id="heroSubtitle">One channel. Live shows. Community energy.</h2>
-          <p id="heroText">Modern live DJ shows, requests, chart countdowns and retro music television vibes from Denmark.</p>
-          <div class="heroActions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live</a><a class="secondary" href="#requests">Request a song</a></div>
+          <div class="broadcastEyeline"><span class="broadcastDot"></span><span>LIVE MUSIC TV FROM DENMARK</span><i>CHANNEL 01</i></div>
+          <p class="eyebrow" id="heroEyebrow">DJ FOLSOE TWITCH · MUSIC STREAMER</p>
+          <h1 id="heroTitle">DJ FOLSOE</h1>
+          <h2 id="heroSubtitle">Dive into my Twitch world</h2>
+          <p id="heroText">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</p>
+          <div class="heroActions">
+            <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live now</a>
+            <a class="secondary" href="#requests">Request a song</a>
+          </div>
         </div>
-        <aside class="livePanel broadcastMonitor">
-          <div class="monitorChrome"><span>CHANNEL 01</span><span>FOLSOE TV</span><span>HD LIVE</span></div>
-          <div class="livePill" id="livePill">OFFLINE</div>
+
+        <aside class="livePanel broadcastMonitor compactMonitor">
+          <div class="monitorChrome"><span>ON AIR</span><span>DJ FOLSOE NETWORK</span><span>HD</span></div>
+          <div class="monitorStatusRow"><div class="livePill" id="livePill">OFFLINE</div><strong>CHANNEL 01</strong></div>
           <h3 id="currentShow">Current broadcast</h3>
           <p id="streamTitle">Loading broadcast data...</p>
           <div class="metricGrid">
@@ -51,19 +68,11 @@
             <div><span>Sub goal</span><b id="metricSubGoal">0 / 0</b></div>
             <div><span>Theme</span><b id="metricTheme">Default</b></div>
           </div>
-                  <div class="signalBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="signalBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </aside>
       </section>
 
-      <section class="channelRail channelRailExtreme" aria-label="DJ FOLSOE channel identity">
-  <div class="railCard railLive"><span>01</span><b>LIVE</b><em>DJ FOLSOE NETWORK</em><i>ON AIR</i></div>
-  <div class="railCard railShows"><span>02</span><b>SHOWS</b><em>TRANCE · EURODANCE · RETRO</em><i>PROGRAMMING</i></div>
-  <div class="railCard railCommunity"><span>03</span><b>COMMUNITY</b><em>REQUESTS · CHAT · INTERACTION</em><i>CONNECTED</i></div>
-</section>
-
-      <section class="tickerStrip broadcastTicker extremeTicker"><span>ON AIR</span><marquee id="topTicker">Loading DJ FOLSOE broadcast ticker...</marquee><b>DJ FOLSOE TV · 2026</b></section>
-
-      <section id="next" class="portalPanel nextBroadcast">
+      <section id="next" class="portalPanel nextBroadcast compactNextBroadcast">
         <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next DJ FOLSOE Broadcast</h2></div>
         <div class="nextGrid"><div><span>Starts</span><b id="nextTime">TBA</b></div><div><span>Countdown</span><b id="nextCountdown">--:--:--</b></div><div><span>Theme</span><b id="nextTheme">Music TV</b></div></div>
         <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
@@ -74,56 +83,30 @@
         <div class="showCards" id="showCards"></div>
       </section>
 
-      <section id="about" class="portalPanel splitPanel">
-        <div><p class="sectionKicker" id="aboutKicker">DISCOVER DJ FOLSOE</p><h2 id="aboutTitle">Music TV, Twitch and Danish DJ energy</h2><p id="aboutText">DJ FOLSOE brings live DJ shows, community, requests, hitlists and Twitch interaction together as a modern Music TV channel.</p></div>
-        <div class="infoCards" id="infoCards"></div>
-      </section>
-
       <section id="top20" class="portalPanel tvSection tvChart chartStage">
         <div class="panelHead"><p>FOLSOE TOP 20</p><h2>Weekly listening chart</h2></div>
         <div class="chartList" id="chartList"></div>
       </section>
 
-      <section id="community" class="portalPanel splitPanel tvSection tvCommunity communityStage">
-        <div><p class="sectionKicker">LIVE COMMUNITY</p><h2>Chat, requests, subs and followers</h2><p id="communityText">Everything starts in the Twitch chat. Join the show, request music and be part of the broadcast.</p></div>
-        <div class="communityWall" id="communityWall"></div>
-      </section>
-
-
-      <section id="presence" class="portalPanel extModule extPresence tvSection tvPresence">
-        <div class="panelHead"><div><p>EXT-002 · LIVE PRESENCE</p><h2>Who is here right now</h2></div><a class="secondary" href="presence.html">Open full presence</a></div>
-        <div class="extMetricGrid">
-          <div><span>Online now</span><b id="extOnlineNow">0</b></div>
-          <div><span>Seen today</span><b id="extTodayViewers">0</b></div>
-          <div><span>Total hours</span><b id="extTotalHours">0</b></div>
-          <div><span>Viewer profiles</span><b id="extTotalProfiles">0</b></div>
-        </div>
-        <div class="extProfileGrid" id="extOnlineProfiles"></div>
-      </section>
-
-      <section id="viewerCommands" class="portalPanel extModule extCommands tvSection tvCommands">
-        <div class="panelHead"><div><p>EXT-003 · INTERACTIVE TV</p><h2>Viewer commands</h2></div><a class="secondary" href="commands.html">View all viewer commands</a></div>
-        <p class="extIntro">Only commands viewers can use are shown here. Admin, theme and control commands remain hidden from the public broadcast experience.</p>
+      <section id="viewerCommands" class="portalPanel extModule extCommands tvSection tvCommands viewerCommandsOnly">
+        <div class="panelHead"><div><p>LIVE INTERACTION</p><h2>Active viewer commands</h2></div><span class="liveCommandBadge">TWITCH CHAT</span></div>
+        <p class="extIntro">Only active commands available to viewers are shown here. Admin, theme and control commands stay hidden.</p>
         <div class="extCommandGrid" id="extViewerCommands"></div>
       </section>
 
-      <section id="communityProfiles" class="portalPanel extModule extCommunityProfiles">
-        <div class="panelHead"><div><p>EXT-001 · VIEWER IDENTITY</p><h2>Community profiles</h2></div><a class="secondary" href="community.html">Open community</a></div>
-        <div class="extProfileGrid" id="extCommunityProfilesGrid"></div>
-      </section>
-
-      <section id="requests" class="portalPanel requestPanel">
+      <section id="requests" class="portalPanel requestPanel compactRequestPanel">
         <div class="panelHead"><p>REQUEST WALL</p><h2>Want a song on air?</h2></div>
-        <p>Use <b>!request Artist - Title</b> in Twitch chat. Danish and German commands can also be added in StreamElements.</p>
+        <p>Use <b>!request Artist - Title</b> in Twitch chat.</p>
         <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch chat</a>
       </section>
     </main>
+
     <footer class="siteFooter stationFooter">
-      <div><strong>DJ FOLSOE NETWORK</strong><p>Music TV · Twitch · Community · Denmark</p></div>
-      <nav><a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="commands.html">Commands</a></nav>
+      <div><strong>DJ FOLSOE NETWORK</strong><p>Music TV · Twitch · Denmark</p></div>
+      <nav><a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#viewerCommands">Commands</a></nav>
     </footer>
   </div>
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/site.js?v=9330"></script>
+  <script src="assets/js/site.js?v=9360"></script>
 </body>
 </html>
