@@ -177,4 +177,57 @@ function tickCountdown(){
   setText('nextCountdown', `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`);
 }
 function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-document.addEventListener('DOMContentLoaded', loadPortal);
+
+
+// =========================================================
+// DJ FOLSOE WEBSITE EXTENSION CLIENTS V932.0
+// Read-only clients for EXT001, EXT002 and EXT003.
+// Existing website/core rendering remains unchanged.
+// =========================================================
+async function loadWebsiteExtensions(){
+  await Promise.allSettled([
+    loadPresenceExtension(),
+    loadViewerCommandsExtension(),
+    loadCommunityProfilesExtension()
+  ]);
+}
+
+async function loadPresenceExtension(){
+  const stats = await readJson(API_BASE + '/api/ext002/stats?t=' + Date.now(), null);
+  if(!stats || stats.ok === false) return;
+  setText('extOnlineNow', Number(stats.online_now || 0).toLocaleString());
+  setText('extTodayViewers', Number(stats.today_viewers || 0).toLocaleString());
+  setText('extTotalHours', Number(stats.total_hours || 0).toLocaleString());
+  setText('extTotalProfiles', Number(stats.total_viewers || 0).toLocaleString());
+  const onlinePayload = await readJson(API_BASE + '/api/ext002/online?limit=8&t=' + Date.now(), {online:[]});
+  const online = Array.isArray(onlinePayload?.online) ? onlinePayload.online : [];
+  const wrap = $('extOnlineProfiles');
+  if(!wrap) return;
+  wrap.innerHTML = online.length ? online.map(renderPresenceProfile).join('') : '<div class="extEmpty">No viewers are registered online right now.</div>';
+}
+
+function renderPresenceProfile(v){
+  return `<article class="extProfileCard">
+    <img src="${escapeHtml(v.profile_image || '')}" alt="">
+    <div><h3>${escapeHtml(v.display_name || v.login || 'Viewer')}</h3><p>@${escapeHtml(v.login || '')} · ${Number(v.current_session_minutes || 0)} min online</p></div>
+    <div class="extProfileStats"><div><b>${Number(v.total_sessions || 0)}</b><span>Sessions</span></div><div><b>${Number(v.total_minutes || 0)}</b><span>Total min</span></div><div><b>${Number(v.streak_days || 0)}</b><span>Streak</span></div></div>
+  </article>`;
+}
+
+async function loadViewerCommandsExtension(){
+  const payload = await readJson(API_BASE + '/api/ext003/active?overlay=1&viewer=1&t=' + Date.now(), {commands:[]});
+  const commands = Array.isArray(payload?.commands) ? payload.commands : [];
+  const wrap = $('extViewerCommands');
+  if(!wrap) return;
+  wrap.innerHTML = commands.length ? commands.slice(0,12).map(c=>`<article class="extCommandCard"><code>${escapeHtml(c.usage || c.command || '')}</code><b>${escapeHtml(c.title || 'Viewer command')}</b><p>${escapeHtml(c.description || '')}</p><span>${escapeHtml(c.category || 'COMMAND')}</span></article>`).join('') : '<div class="extEmpty">Viewer commands will appear here automatically.</div>';
+}
+
+async function loadCommunityProfilesExtension(){
+  const payload = await readJson(API_BASE + '/api/ext001/leaderboard?limit=8&t=' + Date.now(), {viewers:[]});
+  const viewers = Array.isArray(payload?.viewers) ? payload.viewers : [];
+  const wrap = $('extCommunityProfilesGrid');
+  if(!wrap) return;
+  wrap.innerHTML = viewers.length ? viewers.map(v=>`<article class="extProfileCard"><img src="${escapeHtml(v.profile_image || v.avatar || '')}" alt=""><div><h3>${escapeHtml(v.display_name || v.login || 'Viewer')}</h3><p>@${escapeHtml(v.login || '')}</p></div><div class="extProfileStats"><div><b>${Number(v.level || 1)}</b><span>Level</span></div><div><b>${Number(v.messages || 0)}</b><span>Chat</span></div><div><b>${Number(v.xp || 0)}</b><span>XP</span></div></div></article>`).join('') : '<div class="extEmpty">Viewer profiles will appear as Twitch users are registered.</div>';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{ loadPortal(); loadWebsiteExtensions(); setInterval(loadWebsiteExtensions,30000); });
