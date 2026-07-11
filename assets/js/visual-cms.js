@@ -176,7 +176,7 @@ async function connect({silent=false}={}){
     const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
   }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
 }
-function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderBroadcastExperience();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
 function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
 function renderSystemStatus(){
   const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
@@ -355,6 +355,30 @@ function renderBroadcastContentPlatform(){
     platformNewsCount:stories.length,
     platformShowCount:shows.length,
     platformThemeName:state.core?.theme?.title||'Weekend'
+  };
+
+  Object.entries(values).forEach(([id,value])=>{
+    const node=document.getElementById(id);
+    if(node)node.textContent=String(value);
+  });
+}
+
+
+function renderBroadcastExperience(){
+  if(!state)return;
+
+  const modules=Array.isArray(state.modules)?state.modules:[];
+  const polls=modules.filter(module=>module.type==='poll');
+  const playlists=modules.filter(module=>module.type==='playlist');
+  const events=modules.filter(module=>module.type==='poster');
+  const overlayModules=modules.filter(module=>module.surfaces?.overlay===true);
+
+  const values={
+    experienceTheme:state.core?.theme?.title||'Weekend',
+    experiencePolls:polls.filter(module=>module.status==='published').length,
+    experiencePlaylists:playlists.length,
+    experienceEvents:events.length,
+    experienceOverlayModules:overlayModules.length
   };
 
   Object.entries(values).forEach(([id,value])=>{
