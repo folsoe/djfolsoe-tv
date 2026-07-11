@@ -16,8 +16,66 @@
   <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9380">
   <link rel="stylesheet" href="assets/css/tv-graphics-engine.css?v=9450">
   <link rel="stylesheet" href="assets/css/live-music-tv-experience.css?v=9460">
+  <link rel="stylesheet" href="assets/css/network-os.css?v=10000">
 </head>
-<body>
+<body class="networkOsBooting">
+  <div id="networkOS" class="networkOS" aria-hidden="true">
+    <canvas id="networkOSCanvas"></canvas>
+
+    <div class="osAtmosphere">
+      <div class="osGlow osGlowA"></div>
+      <div class="osGlow osGlowB"></div>
+      <div class="osGlow osGlowC"></div>
+      <div class="osHorizon"></div>
+      <div class="osNoise"></div>
+      <div class="osVignette"></div>
+    </div>
+
+    <div id="osBootSequence" class="osBootSequence">
+      <div class="osBootLogo">
+        <span>DJ FOLSOE</span>
+        <strong>NETWORK OS</strong>
+        <i></i>
+      </div>
+      <div class="osBootReadout">
+        <b id="osBootMessage">INITIALISING BROADCAST UNIVERSE</b>
+        <span id="osBootPercent">00%</span>
+      </div>
+      <div class="osBootProgress"><i id="osBootProgressBar"></i></div>
+      <small>CHANNEL 01 · DENMARK · INTERACTIVE MUSIC TV</small>
+    </div>
+
+    <div id="osSceneTitle" class="osSceneTitle">
+      <small id="osSceneKicker">DJ FOLSOE NETWORK</small>
+      <strong id="osSceneName">LIVE MUSIC TV</strong>
+      <span id="osSceneMeta">CHANNEL 01</span>
+    </div>
+
+    <div class="osOrbitalFrame">
+      <span class="osOrbit osOrbitA"></span>
+      <span class="osOrbit osOrbitB"></span>
+      <span class="osOrbit osOrbitC"></span>
+      <i class="osCore"></i>
+    </div>
+
+    <div class="osSignalReadout">
+      <span>SIGNAL</span>
+      <div><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <b id="osSignalValue">STANDBY</b>
+    </div>
+
+    <div id="osActivityShockwave" class="osActivityShockwave"></div>
+  </div>
+
+  <nav id="osController" class="osController" aria-label="DJ FOLSOE Network OS controller">
+    <button data-os-target="live" data-os-scene="ON AIR" class="is-active"><i>◉</i><span>Live</span></button>
+    <button data-os-target="broadcastGuide" data-os-scene="TV GUIDE"><i>▤</i><span>Guide</span></button>
+    <button data-os-target="shows" data-os-scene="PROGRAMMING"><i>⌁</i><span>Shows</span></button>
+    <button data-os-target="top20" data-os-scene="THE CHART"><i>♫</i><span>Top 20</span></button>
+    <button data-os-target="viewerCommands" data-os-scene="INTERACTIVE"><i>✦</i><span>Play</span></button>
+    <button id="osIntensityToggle" type="button"><i>≋</i><span>FX</span></button>
+  </nav>
+
   <div id="tvGraphicsEngine" class="tvGraphicsEngine" aria-hidden="true">
     <div class="tvEngineAurora"></div>
     <div class="tvEngineScanlines"></div>
@@ -149,6 +207,18 @@
           </div>
         </div>
 
+        <div class="osHeroPortal" aria-hidden="true">
+          <div class="osPortalRing ring1"></div>
+          <div class="osPortalRing ring2"></div>
+          <div class="osPortalRing ring3"></div>
+          <div class="osPortalEnergy"></div>
+          <div class="osPortalCore">
+            <span>CH 01</span>
+            <strong id="osPortalState">STANDBY</strong>
+            <small id="osPortalTheme">MUSIC TV</small>
+          </div>
+        </div>
+
         <aside class="livePanel broadcastMonitor compactMonitor">
           <div class="monitorChrome"><span>ON AIR</span><span>DJ FOLSOE NETWORK</span><span>HD</span></div>
           <div class="monitorStatusRow"><div class="livePill" id="livePill">OFFLINE</div><strong>CHANNEL 01</strong></div>
@@ -267,6 +337,14 @@
       <button id="controlRoomToggle" type="button" aria-label="Toggle control room">−</button>
     </aside>
 
+    <section class="osNetworkRibbon" aria-label="Network OS status">
+      <div><span>NETWORK OS</span><strong id="osRibbonState">CONNECTED</strong></div>
+      <div><span>SCENE</span><strong id="osRibbonScene">ON AIR</strong></div>
+      <div><span>ENERGY</span><strong id="osRibbonEnergy">72%</strong></div>
+      <div><span>ACTIVITY</span><strong id="osRibbonActivity">0 EVENTS</strong></div>
+      <div class="osRibbonWave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </section>
+
     <footer class="siteFooter stationFooter">
       <div><strong>DJ FOLSOE NETWORK</strong><p>Music TV · Twitch · Denmark</p></div>
       <nav><a href="#live">Live</a><a href="#broadcastGuide">TV Guide</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#viewerCommands">Commands</a></nav>
@@ -276,5 +354,6 @@
   <script src="assets/js/site.js?v=9380"></script>
   <script src="assets/js/tv-graphics-engine.js?v=9450"></script>
   <script src="assets/js/live-music-tv-experience.js?v=9460"></script>
+  <script src="assets/js/network-os.js?v=10000"></script>
 </body>
 </html>
