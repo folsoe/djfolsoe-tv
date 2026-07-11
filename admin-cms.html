@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10023">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10024">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -21,7 +21,7 @@
 
     <nav id="cmsNav">
       <button data-screen="dashboard" class="active"><i>⌂</i><span>Dashboard</span></button>
-      <button data-screen="homepage"><i>✦</i><span>Homepage</span></button>
+      <button data-screen="homepage"><i>✦</i><span>Homepage builder</span></button>
       <button data-screen="modules"><i>▦</i><span>Content blocks</span></button>
       <button data-screen="shows"><i>▶</i><span>Shows</span></button>
       <button data-screen="charts"><i>↗</i><span>Top 10 / Top 20</span></button>
@@ -117,44 +117,59 @@
       </section>
 
       <section data-screen-panel="homepage" class="screen">
-        <div class="screenIntro"><div><span>Homepage</span><h2>What visitors see first</h2><p>Edit the main message, next show and community call-to-action.</p></div><button id="saveHomepage">Save homepage</button></div>
-        <div class="editorLayout">
-          <div class="editorForm">
-            <article class="formCard">
-              <div class="formCardTitle"><span>01</span><div><h3>Main headline</h3><p>The opening message on folsoetv.dk.</p></div></div>
-              <label>Small heading<input id="heroEyebrowInput" maxlength="180"></label>
-              <label>Channel name<input id="heroTitleInput" maxlength="120"></label>
-              <label>Main message<input id="heroSubtitleInput" maxlength="220"></label>
-              <label>Introduction<textarea id="heroTextInput" maxlength="1200"></textarea></label>
-            </article>
-            <article class="formCard">
-              <div class="formCardTitle"><span>02</span><div><h3>Next show</h3><p>Tell visitors what is coming up.</p></div></div>
-              <div class="twoCols">
-                <label>Show title<input id="nextTitleInput"></label>
-                <label>Display time<input id="nextTimeLabelInput" placeholder="Sunday · 07:00"></label>
-              </div>
-              <label>Date and time<input id="nextDateInput" type="datetime-local"></label>
-              <label>Theme<select id="nextThemeInput"></select></label>
-              <label>Description<textarea id="nextDescriptionInput"></textarea></label>
-            </article>
-            <article class="formCard">
-              <div class="formCardTitle"><span>03</span><div><h3>Community</h3><p>Goals, request text and special announcements.</p></div></div>
-              <div class="twoCols">
-                <label>Follower goal<input id="followerGoalInput" type="number" min="0"></label>
-                <label>Subscriber goal<input id="subGoalInput" type="number" min="0"></label>
-              </div>
-              <label>Song request message<input id="requestTextInput"></label>
-              <label>Special announcement<textarea id="specialEventInput"></textarea></label>
-            </article>
+        <div class="screenIntro">
+          <div>
+            <span>Homepage builder</span>
+            <h2>Build the public homepage visually</h2>
+            <p>Choose sections, drag them into order, edit the words and preview desktop or mobile.</p>
           </div>
-          <aside class="livePreview">
-            <span>Live preview</span>
-            <div class="previewHero">
-              <small id="previewEyebrow">LIVE MUSIC FROM DENMARK</small>
-              <h2 id="previewTitle">DJ FOLSOE</h2>
-              <h3 id="previewSubtitle">Live music, requests and good company</h3>
-              <p id="previewText"></p>
-              <button>Watch live</button>
+          <div class="builderTopActions">
+            <button id="builderSaveDraft" class="secondary">Save draft</button>
+            <button id="builderPublish">Publish homepage</button>
+          </div>
+        </div>
+
+        <div class="builderToolbar">
+          <div class="builderDeviceSwitch">
+            <button data-builder-device="desktop" class="active">Desktop</button>
+            <button data-builder-device="mobile">Mobile</button>
+          </div>
+          <div class="builderThemeInfo">
+            <span>Preview theme</span>
+            <select id="builderThemePreview"></select>
+          </div>
+          <div class="builderStatus">
+            <span id="builderUnsavedDot"></span>
+            <strong id="builderStatusText">No unsaved changes</strong>
+          </div>
+        </div>
+
+        <div class="homepageBuilderLayout">
+          <aside class="builderSidebar">
+            <header>
+              <span>PAGE SECTIONS</span>
+              <h3>Drag to reorder</h3>
+            </header>
+            <div id="builderSectionList" class="builderSectionList"></div>
+          </aside>
+
+          <section class="builderCanvasArea">
+            <div id="builderCanvasFrame" class="builderCanvasFrame desktop">
+              <div class="builderBrowserBar">
+                <i></i><i></i><i></i>
+                <span>folsoetv.dk</span>
+              </div>
+              <div id="builderCanvas" class="builderCanvas"></div>
+            </div>
+          </section>
+
+          <aside class="builderInspector">
+            <header>
+              <span>SECTION SETTINGS</span>
+              <h3 id="builderInspectorTitle">Select a section</h3>
+            </header>
+            <div id="builderInspectorBody" class="builderInspectorBody">
+              <p class="inlineEmpty">Click a section in the preview or section list to edit it.</p>
             </div>
           </aside>
         </div>
@@ -371,6 +386,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=10023"></script>
+<script src="assets/js/visual-cms.js?v=10024"></script>
 </body>
 </html>
