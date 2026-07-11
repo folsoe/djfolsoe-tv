@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=11000">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=1100">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -21,6 +21,7 @@
 
     <nav id="cmsNav">
       <button data-screen="dashboard" class="active"><i>⌂</i><span>Dashboard</span></button>
+      <button data-screen="platform"><i>◆</i><span>Content Platform</span></button>
       <button data-screen="homepage"><i>✦</i><span>Homepage</span></button>
       <button data-screen="modules"><i>▦</i><span>Content blocks</span></button>
       <button data-screen="shows"><i>▶</i><span>Shows</span></button>
@@ -30,7 +31,6 @@
       <button data-screen="playlists"><i>♫</i><span>Playlists</span></button>
       <button data-screen="theme"><i>◐</i><span>Theme & overlay</span></button>
       <button data-screen="schedule"><i>◷</i><span>Schedule</span></button>
-        <button data-screen="production"><i>＋</i><span>Production modules</span></button>
     </nav>
 
     <div class="cmsSidebarFooter">
@@ -116,6 +116,172 @@
           <div id="recentContent" class="recentList"></div>
         </div>
       </section>
+
+      
+      <section data-screen-panel="platform" class="screen">
+        <div class="screenIntro platformHero">
+          <div>
+            <span>V1100 · BROADCAST CONTENT PLATFORM</span>
+            <h2>Everything you publish, in one production area</h2>
+            <p>This screen collects the existing working CMS tools. It does not replace login, the Worker, the website connection or any editor.</p>
+          </div>
+          <div class="platformHeroBadge">
+            <small>STABLE FOUNDATION</small>
+            <strong>V1002.4</strong>
+            <span>No architecture change</span>
+          </div>
+        </div>
+
+        <section class="platformSummary">
+          <article>
+            <span>Published content</span>
+            <strong id="platformPublishedCount">0</strong>
+            <small>Visible modules</small>
+          </article>
+          <article>
+            <span>Drafts</span>
+            <strong id="platformDraftCount">0</strong>
+            <small>Waiting for review</small>
+          </article>
+          <article>
+            <span>Music stories</span>
+            <strong id="platformNewsCount">0</strong>
+            <small>Editorial and external</small>
+          </article>
+          <article>
+            <span>Shows</span>
+            <strong id="platformShowCount">0</strong>
+            <small>Programme lineup</small>
+          </article>
+          <article>
+            <span>Active theme</span>
+            <strong id="platformThemeName">—</strong>
+            <small>Website and broadcast identity</small>
+          </article>
+        </section>
+
+        <div class="platformSectionHead">
+          <div>
+            <span>CONTENT PRODUCTION</span>
+            <h3>Create and manage</h3>
+          </div>
+          <p>Every button opens an editor that already exists in the stable CMS.</p>
+        </div>
+
+        <section class="platformModuleGrid">
+          <button class="platformModuleCard primary" data-screen-jump="homepage">
+            <i>✦</i>
+            <span>HOMEPAGE</span>
+            <strong>Homepage content</strong>
+            <p>Main message, Next Show, goals and request information.</p>
+            <b>Open editor →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="shows">
+            <i>▶</i>
+            <span>PROGRAMMES</span>
+            <strong>Show Manager</strong>
+            <p>Titles, broadcast times, descriptions, images and themes.</p>
+            <b>Manage shows →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="charts">
+            <i>20</i>
+            <span>COUNTDOWN</span>
+            <strong>Top 20 Chart</strong>
+            <p>Artist, track, chart status, cover and track story.</p>
+            <b>Update chart →</b>
+          </button>
+
+          <button class="platformModuleCard" data-quick-create="ranked-list">
+            <i>10</i>
+            <span>THEMED COUNTDOWN</span>
+            <strong>Retro Top 10</strong>
+            <p>Create a theme-based Top 10 with year and history.</p>
+            <b>Create countdown →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="news">
+            <i>▤</i>
+            <span>EDITORIAL</span>
+            <strong>Music News</strong>
+            <p>Review external stories and manage your own articles.</p>
+            <b>Open stories →</b>
+          </button>
+
+          <button class="platformModuleCard" data-quick-create="story">
+            <i>✎</i>
+            <span>OWN CONTENT</span>
+            <strong>Write a Music Story</strong>
+            <p>Create an artist story, show feature or music article.</p>
+            <b>Write story →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="playlists">
+            <i>♫</i>
+            <span>PLAYLISTS</span>
+            <strong>Playlist Manager</strong>
+            <p>Spotify links, covers, descriptions and programme playlists.</p>
+            <b>Manage playlists →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="polls">
+            <i>✓</i>
+            <span>INTERACTION</span>
+            <strong>Poll Studio</strong>
+            <p>Questions, answer choices, themes and publishing windows.</p>
+            <b>Manage polls →</b>
+          </button>
+
+          <button class="platformModuleCard" data-quick-create="poster">
+            <i>▣</i>
+            <span>CAMPAIGN</span>
+            <strong>Special Event</strong>
+            <p>Poster, date, announcement and call-to-action.</p>
+            <b>Create event →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="schedule">
+            <i>◷</i>
+            <span>PLANNING</span>
+            <strong>Schedule</strong>
+            <p>See live, planned and draft content in one view.</p>
+            <b>Open schedule →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="theme">
+            <i>◐</i>
+            <span>IDENTITY</span>
+            <strong>Theme & Tickers</strong>
+            <p>Active theme, top ticker and programme-specific messages.</p>
+            <b>Open theme control →</b>
+          </button>
+
+          <button class="platformModuleCard protected" data-screen-jump="modules">
+            <i>▦</i>
+            <span>ALL CONTENT</span>
+            <strong>Content Blocks</strong>
+            <p>View, reorder, duplicate, publish, hide or delete modules.</p>
+            <b>View all content →</b>
+          </button>
+        </section>
+
+        <section class="platformConnection">
+          <div>
+            <span>ADMIN</span>
+            <strong>Writes through the existing Worker</strong>
+          </div>
+          <div>
+            <span>WEBSITE</span>
+            <strong>Existing website connection is unchanged</strong>
+          </div>
+          <div>
+            <span>MAIN OVERLAY</span>
+            <strong>Logo, tickers and chat remain protected</strong>
+          </div>
+        </section>
+      </section>
+
 
       <section data-screen-panel="homepage" class="screen">
         <div class="screenIntro"><div><span>Homepage</span><h2>What visitors see first</h2><p>Edit the main message, next show and community call-to-action.</p></div><button id="saveHomepage">Save homepage</button></div>
@@ -228,91 +394,6 @@
         <div class="screenIntro"><div><span>Publishing schedule</span><h2>What is coming and going live</h2><p>See drafts, scheduled blocks and active content.</p></div></div>
         <div id="scheduleBoard" class="scheduleBoard"></div>
       </section>
-
-      <section data-screen-panel="production" class="screen">
-        <div class="screenIntro productionIntro">
-          <div>
-            <span>V1100 · PRODUCTION EXPANSION</span>
-            <h2>Build new broadcast modules safely</h2>
-            <p>Each new feature is added beside the working CMS. Existing homepage, dashboard, shows, charts and theme controls remain untouched.</p>
-          </div>
-          <div class="productionCoreBadge">
-            <small>STABLE CORE</small>
-            <strong>V1002.4</strong>
-            <span>Protected</span>
-          </div>
-        </div>
-
-        <div class="productionStatusBar">
-          <div><span>Admin</span><strong>CONNECTED</strong></div>
-          <div><span>Website</span><strong>EXISTING CORE</strong></div>
-          <div><span>Worker</span><strong>UNCHANGED</strong></div>
-          <div><span>Main Overlay</span><strong>PROTECTED</strong></div>
-        </div>
-
-        <div class="productionModuleGrid">
-          <article class="productionModuleCard ready">
-            <div class="productionModuleTop"><i>▣</i><span>AVAILABLE NOW</span></div>
-            <h3>Special Event</h3>
-            <p>Create a poster-based event with title, date, description and call-to-action.</p>
-            <button data-quick-create="poster">Create event</button>
-          </article>
-
-          <article class="productionModuleCard ready">
-            <div class="productionModuleTop"><i>10</i><span>AVAILABLE NOW</span></div>
-            <h3>Retro Top 10</h3>
-            <p>Build a themed countdown with artists, tracks, years and short stories.</p>
-            <button data-quick-create="ranked-list">Create countdown</button>
-          </article>
-
-          <article class="productionModuleCard ready">
-            <div class="productionModuleTop"><i>♫</i><span>AVAILABLE NOW</span></div>
-            <h3>Playlist</h3>
-            <p>Publish a show playlist with image, text and Spotify link.</p>
-            <button data-quick-create="playlist">Create playlist</button>
-          </article>
-
-          <article class="productionModuleCard ready">
-            <div class="productionModuleTop"><i>✓</i><span>AVAILABLE NOW</span></div>
-            <h3>Poll</h3>
-            <p>Create a question with answer choices for website and future OBS widgets.</p>
-            <button data-quick-create="poll">Create poll</button>
-          </article>
-
-          <article class="productionModuleCard ready">
-            <div class="productionModuleTop"><i>✎</i><span>AVAILABLE NOW</span></div>
-            <h3>Music Story</h3>
-            <p>Write your own music story, show feature or artist article.</p>
-            <button data-quick-create="story">Write story</button>
-          </article>
-
-          <article class="productionModuleCard planned">
-            <div class="productionModuleTop"><i>▶</i><span>PLANNED</span></div>
-            <h3>Now Playing</h3>
-            <p>Reserved for the later Serato Pro and Spotify connection.</p>
-            <button disabled>Coming later</button>
-          </article>
-        </div>
-
-        <section class="productionRules">
-          <div>
-            <span>BUILD RULE 01</span>
-            <strong>Never replace a working function</strong>
-            <p>New modules are added beside the stable core and tested separately.</p>
-          </div>
-          <div>
-            <span>BUILD RULE 02</span>
-            <strong>Admin and website use existing data</strong>
-            <p>No new architecture is introduced while the current Worker remains active.</p>
-          </div>
-          <div>
-            <span>BUILD RULE 03</span>
-            <strong>Main Overlay stays protected</strong>
-            <p>Only separate future widgets may be added around it.</p>
-          </div>
-        </section>
-      </section>
-
     </div>
   </main>
 </div>
@@ -457,6 +538,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=11000"></script>
+<script src="assets/js/visual-cms.js?v=1100"></script>
 </body>
 </html>
