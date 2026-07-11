@@ -1,0 +1,118 @@
+
+/* =========================================================
+   DJ FOLSOE V1000.3 — HERO ORB KILLER
+   Hard-stops oversized circular gradient objects inside hero.
+   ========================================================= */
+
+/* Known class-name families from old and new visual layers. */
+.compactMusicTvHero [class*="orb" i],
+.compactMusicTvHero [class*="blob" i],
+.compactMusicTvHero [class*="sphere" i],
+.compactMusicTvHero [class*="sun" i],
+.compactMusicTvHero [class*="bubble" i],
+.compactMusicTvHero [class*="halo" i],
+.compactMusicTvHero [class*="planet" i],
+.compactMusicTvHero [class*="glowBall" i],
+.compactMusicTvHero [class*="gradientBall" i],
+.compactMusicTvHero [data-orb],
+.compactMusicTvHero .heroOrb,
+.compactMusicTvHero .heroBlob,
+.compactMusicTvHero .heroSphere,
+.compactMusicTvHero .heroSun{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  width:0!important;
+  height:0!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:0!important;
+  max-height:0!important;
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  animation:none!important;
+  pointer-events:none!important;
+}
+
+/* Runtime-detected real DOM objects. */
+.compactMusicTvHero .djf-orb-killed{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  width:0!important;
+  height:0!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:0!important;
+  max-height:0!important;
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  animation:none!important;
+  pointer-events:none!important;
+}
+
+/* Runtime-detected pseudo-element owners. */
+.compactMusicTvHero .djf-kill-before::before,
+.compactMusicTvHero.djf-kill-before::before{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  animation:none!important;
+}
+
+.compactMusicTvHero .djf-kill-after::after,
+.compactMusicTvHero.djf-kill-after::after{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  animation:none!important;
+}
+
+/* Additional hard stop for common hero pseudo-element owners. */
+.compactMusicTvHero .heroBg::before,
+.compactMusicTvHero .heroBg::after,
+.compactMusicTvHero .heroContent::before,
+.compactMusicTvHero .heroContent::after,
+.compactMusicTvHero .heroPortal::before,
+.compactMusicTvHero .heroPortal::after,
+.compactMusicTvHero .heroVisual::before,
+.compactMusicTvHero .heroVisual::after,
+.compactMusicTvHero .heroArt::before,
+.compactMusicTvHero .heroArt::after{
+  border-radius:0!important;
+}
+
+/* Preserve the intended TV portal and live card. */
+.compactMusicTvHero .osHeroPortal,
+.compactMusicTvHero .livePanel,
+.compactMusicTvHero .broadcastMonitor,
+.compactMusicTvHero .heroContent,
+.compactMusicTvHero .heroBg{
+  display:block;
+  visibility:visible;
+}
+
+/* On mobile, detected objects stay removed even if older media rules re-enable them. */
+@media(max-width:720px){
+  .compactMusicTvHero .djf-orb-killed,
+  .compactMusicTvHero [class*="orb" i],
+  .compactMusicTvHero [class*="blob" i],
+  .compactMusicTvHero [class*="sphere" i],
+  .compactMusicTvHero [class*="sun" i]{
+    display:none!important;
+  }
+}
