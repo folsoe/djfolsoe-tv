@@ -132,3 +132,359 @@ button:disabled{opacity:.55;cursor:wait}
   .wizardTrackRow{grid-template-columns:38px 1fr}
   .wizardTrackRow>*:nth-child(n+3){grid-column:2}
 }
+
+
+/* =========================================================
+   V1002.4 — VISUAL DASHBOARD
+   Built directly on stable V1002.3. Dashboard only.
+   ========================================================= */
+
+.controlRoomHero{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
+  gap:18px;
+  min-height:280px;
+  margin-bottom:14px;
+  padding:28px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 82% 20%,rgba(86,231,255,.22),transparent 27%),
+    radial-gradient(circle at 90% 75%,rgba(255,67,167,.18),transparent 29%),
+    linear-gradient(135deg,#121827,#0d111b 65%,#151325);
+}
+.controlRoomHero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.12;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 54px,rgba(255,255,255,.08) 55px),
+    repeating-linear-gradient(0deg,transparent 0 54px,rgba(255,255,255,.06) 55px);
+}
+.controlRoomHeroCopy,
+.controlRoomProfile{
+  position:relative;
+  z-index:2;
+}
+.controlRoomHeroCopy>span{
+  color:var(--cyan);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.controlRoomHeroCopy h2{
+  max-width:700px;
+  margin:8px 0 10px;
+  font-family:var(--display);
+  font-size:clamp(48px,6vw,84px);
+  line-height:.82;
+  letter-spacing:-.045em;
+}
+.controlRoomHeroCopy p{
+  max-width:620px;
+  margin:0;
+  color:var(--muted);
+  line-height:1.6;
+}
+.controlRoomHeroActions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:22px;
+}
+.controlRoomProfile{
+  display:grid;
+  grid-template-columns:118px minmax(0,1fr);
+  align-items:center;
+  gap:15px;
+  align-self:center;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:19px;
+  background:rgba(8,11,18,.68);
+  backdrop-filter:blur(14px);
+}
+.controlRoomProfileImage{
+  position:relative;
+  width:118px;
+  height:118px;
+  padding:4px;
+  border-radius:24px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
+}
+.controlRoomProfileImage img{
+  width:100%;
+  height:100%;
+  border-radius:20px;
+  object-fit:cover;
+  background:#171c2a;
+}
+.controlRoomLiveDot{
+  position:absolute;
+  right:3px;
+  bottom:3px;
+  width:18px;
+  height:18px;
+  border:4px solid #0c1019;
+  border-radius:50%;
+  background:#707784;
+}
+.controlRoomLiveDot.live{
+  background:var(--green);
+  box-shadow:0 0 18px rgba(85,240,164,.75);
+}
+.controlRoomProfile small{
+  display:block;
+  color:var(--cyan);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+.controlRoomProfile strong{
+  display:block;
+  margin:7px 0 4px;
+  font-family:var(--display);
+  font-size:30px;
+  line-height:.92;
+}
+.controlRoomProfile p{
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+
+.controlRoomStatusGrid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:14px;
+}
+.controlRoomStatusCard{
+  position:relative;
+  min-height:128px;
+  padding:16px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:linear-gradient(145deg,#121725,#0e131e);
+}
+.controlRoomStatusCard::after{
+  content:"";
+  position:absolute;
+  right:-22px;
+  bottom:-32px;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:var(--status-color,#56e7ff);
+  filter:blur(26px);
+  opacity:.16;
+}
+.controlRoomStatusCard>*{position:relative;z-index:2}
+.controlRoomStatusCard span{
+  display:block;
+  color:var(--muted);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.controlRoomStatusCard strong{
+  display:block;
+  margin-top:18px;
+  font-family:var(--display);
+  font-size:31px;
+  line-height:.85;
+}
+.controlRoomStatusCard small{
+  display:block;
+  margin-top:7px;
+  color:#7f8999;
+  font-size:8px;
+}
+.controlRoomStatusCard.online{--status-color:#55f0a4}
+.controlRoomStatusCard.warning{--status-color:#ffd35c}
+.controlRoomStatusCard.accent{--status-color:#ff43a7}
+
+.controlRoomQuickGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:14px;
+}
+.controlRoomQuick{
+  position:relative;
+  display:flex;
+  min-height:175px;
+  flex-direction:column;
+  align-items:flex-start;
+  overflow:hidden;
+  padding:18px;
+  border:1px solid var(--line)!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#151b2a,#101521)!important;
+  color:#fff!important;
+  text-align:left;
+}
+.controlRoomQuick::before{
+  content:"";
+  position:absolute;
+  right:-28px;
+  top:-32px;
+  width:105px;
+  height:105px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+}
+.controlRoomQuick i{
+  display:grid;
+  place-items:center;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple),var(--pink));
+  color:#071017;
+  font-style:normal;
+  font-weight:900;
+}
+.controlRoomQuick strong{
+  display:block;
+  margin-top:auto;
+  font-family:var(--display);
+  font-size:27px;
+  line-height:.9;
+}
+.controlRoomQuick span{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+  font-size:9px;
+}
+.controlRoomQuick:hover{
+  transform:translateY(-3px);
+  border-color:rgba(86,231,255,.42)!important;
+}
+
+.controlRoomBottomGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+  gap:10px;
+}
+.controlRoomPanel{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--panel);
+}
+.controlRoomPanelHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:15px;
+  margin-bottom:14px;
+}
+.controlRoomPanelHeader span{
+  color:var(--cyan);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.controlRoomPanelHeader h3{
+  margin:5px 0 0;
+  font-family:var(--display);
+  font-size:30px;
+  line-height:.9;
+}
+.controlRoomPanelHeader button{
+  padding:8px 10px;
+}
+.controlRoomRecent{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.controlRoomRecentItem{
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) auto;
+  align-items:center;
+  gap:9px;
+  padding:10px;
+  border-radius:12px;
+  background:#171c2a;
+}
+.controlRoomRecentItem>span{
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  background:rgba(86,231,255,.1);
+  color:var(--cyan);
+  font-weight:900;
+}
+.controlRoomRecentItem strong,
+.controlRoomRecentItem small{
+  display:block;
+}
+.controlRoomRecentItem small{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:8px;
+}
+.controlRoomBroadcast{
+  display:grid;
+  gap:8px;
+}
+.controlRoomBroadcastRow{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border-radius:12px;
+  background:#171c2a;
+}
+.controlRoomBroadcastRow span{
+  color:var(--muted);
+  font-size:8px;
+  text-transform:uppercase;
+}
+.controlRoomBroadcastRow strong{
+  font-family:var(--display);
+  font-size:19px;
+}
+.controlRoomProtected{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:12px;
+  padding:11px;
+  border:1px solid rgba(85,240,164,.18);
+  border-radius:12px;
+  background:rgba(85,240,164,.06);
+  color:var(--green);
+  font-size:9px;
+  font-weight:800;
+}
+
+@media(max-width:1100px){
+  .controlRoomHero{grid-template-columns:1fr}
+  .controlRoomStatusGrid{grid-template-columns:repeat(3,1fr)}
+  .controlRoomQuickGrid{grid-template-columns:repeat(2,1fr)}
+  .controlRoomBottomGrid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .controlRoomHero{padding:21px}
+  .controlRoomHeroCopy h2{font-size:54px}
+  .controlRoomProfile{grid-template-columns:82px 1fr}
+  .controlRoomProfileImage{width:82px;height:82px;border-radius:19px}
+  .controlRoomProfileImage img{border-radius:16px}
+  .controlRoomStatusGrid{grid-template-columns:1fr 1fr}
+  .controlRoomQuickGrid{display:flex;overflow:auto}
+  .controlRoomQuick{min-width:76vw}
+}
