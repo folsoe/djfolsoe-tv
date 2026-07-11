@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Network Core</title>
+  <link rel="stylesheet" href="assets/css/network-core-admin.css?v=9400">
+</head>
+<body>
+<main class="coreAdmin">
+  <header class="coreHero">
+    <div>
+      <p>DJ FOLSOE NETWORK · V940</p>
+      <h1>Network Core Engine</h1>
+      <span>24/7 Cloudflare-hjerne til Twitch, hjemmeside, overlay og admin.</span>
+    </div>
+    <div id="coreOrb" class="coreOrb">CHECKING</div>
+  </header>
+
+  <section class="corePanel authPanel">
+    <label>ADMIN_TOKEN
+      <input id="adminToken" type="password" autocomplete="off">
+    </label>
+    <div class="actions">
+      <button id="repairCore">Repair & Connect Core</button>
+      <button id="refreshCore">Refresh Status</button>
+      <button id="loadSubscriptions">EventSub Connections</button>
+    </div>
+  </section>
+
+  <section class="statusGrid">
+    <article class="corePanel"><p>TWITCH</p><strong id="twitchStatus">UNKNOWN</strong><small id="twitchDetail">Checking</small></article>
+    <article class="corePanel"><p>EVENTSUB</p><strong id="eventSubStatus">UNKNOWN</strong><small id="eventSubDetail">Checking</small></article>
+    <article class="corePanel"><p>ACTIVITY MEMORY</p><strong id="activityCount">0</strong><small>Stored events</small></article>
+    <article class="corePanel"><p>LAST REPAIR</p><strong id="lastRepair">NEVER</strong><small>Automatic repair state</small></article>
+  </section>
+
+  <section class="corePanel">
+    <h2>Core Requirements</h2>
+    <div id="requirements" class="requirements"></div>
+  </section>
+
+  <section class="corePanel">
+    <h2>Latest Activity</h2>
+    <div id="activityFeed" class="activityFeed"></div>
+  </section>
+
+  <section class="corePanel">
+    <h2>System Output</h2>
+    <pre id="output">Ready.</pre>
+  </section>
+</main>
+<script src="assets/js/network-core-admin.js?v=9400"></script>
+</body>
+</html>
