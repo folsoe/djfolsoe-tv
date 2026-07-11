@@ -1,0 +1,181 @@
+/* DJ FOLSOE NETWORK V935.0 — EXTREME MUSIC TV 2026 VISUAL LAYER
+   Presentation only. No API, admin or JS logic changes. */
+
+:root{
+  --bg:#05050a;
+  --ink:#f8fbff;
+  --muted:rgba(248,251,255,.68);
+  --line:rgba(255,255,255,.14);
+  --cyan:#4ce5ff;
+  --blue:#5266ff;
+  --violet:#9c62ff;
+  --pink:#ff3fa4;
+  --orange:#ff8a3d;
+  --lime:#8bff85;
+  --yellow:#ffe55c;
+  --panel:rgba(13,15,28,.78);
+}
+
+html{background:var(--bg)}
+body{
+  color:var(--ink)!important;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(76,229,255,.16),transparent 22%),
+    radial-gradient(circle at 92% 4%,rgba(255,63,164,.18),transparent 24%),
+    radial-gradient(circle at 68% 66%,rgba(156,98,255,.12),transparent 30%),
+    linear-gradient(180deg,#05050a 0%,#0b0b16 44%,#040409 100%)!important;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    linear-gradient(125deg,transparent 0 42%,rgba(255,255,255,.025) 42% 43%,transparent 43% 100%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 1px,transparent 1px 80px);
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
+  background-image:radial-gradient(rgba(255,255,255,.17) .7px,transparent .7px);
+  background-size:8px 8px;
+  mask-image:linear-gradient(to bottom,#000,transparent 70%);
+}
+
+.tvShell{overflow:hidden}
+.tvNav{
+  background:rgba(5,5,10,.78)!important;
+  border-bottom:1px solid rgba(255,255,255,.1)!important;
+  box-shadow:0 18px 50px rgba(0,0,0,.35)!important;
+  backdrop-filter:blur(24px) saturate(1.5)!important;
+}
+.tvNav nav a,.brand strong{color:#fff!important}
+.tvNav nav a{position:relative}
+.tvNav nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-8px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink));transition:.25s}
+.tvNav nav a:hover:after{right:0}
+.brand em{background:rgba(255,255,255,.1)!important;color:var(--cyan)!important;border:1px solid rgba(255,255,255,.12)!important}
+.brandMark{background:conic-gradient(from 210deg,var(--cyan),var(--blue),var(--pink),var(--orange),var(--cyan))!important;color:#05050a!important;box-shadow:0 0 30px rgba(76,229,255,.35)}
+.watchBtn,.primary{background:linear-gradient(100deg,var(--cyan),var(--blue) 50%,var(--pink))!important;color:#05050a!important;border:0!important;box-shadow:0 14px 35px rgba(82,102,255,.32)!important}
+.secondary{background:rgba(255,255,255,.08)!important;color:#fff!important;border:1px solid rgba(255,255,255,.18)!important}
+
+.musicTvHero{
+  min-height:760px!important;
+  border-radius:36px!important;
+  overflow:hidden;
+  isolation:isolate;
+  background:#090a12!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 44px 120px rgba(0,0,0,.55),0 0 80px rgba(82,102,255,.08)!important;
+}
+.musicTvHero:before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(5,5,10,.97) 0%,rgba(5,5,10,.88) 34%,rgba(5,5,10,.48) 62%,rgba(5,5,10,.1) 100%),
+    linear-gradient(180deg,transparent 55%,rgba(5,5,10,.72));
+}
+.musicTvHero:after{
+  content:"";position:absolute;inset:auto -12% -46% 40%;height:70%;z-index:2;pointer-events:none;
+  background:conic-gradient(from 140deg,var(--cyan),var(--blue),var(--pink),var(--orange),var(--cyan));
+  filter:blur(68px);opacity:.38;animation:orbSpin 14s linear infinite;
+}
+.heroBg{filter:saturate(1.55) contrast(1.16) brightness(.78)!important;transform:scale(1.08)!important}
+.heroContent{position:relative;z-index:4;max-width:850px;padding-top:110px!important;padding-bottom:110px!important}
+.heroContent h1{
+  color:#fff!important;
+  font-size:clamp(82px,9vw,154px)!important;
+  line-height:.72!important;
+  letter-spacing:-.085em!important;
+  text-transform:uppercase;
+  text-shadow:0 0 45px rgba(76,229,255,.08),0 20px 60px rgba(0,0,0,.55)!important;
+}
+.heroContent h1:before{content:"CHANNEL 01";display:block;font-size:12px;line-height:1;letter-spacing:.34em;color:var(--cyan);margin-bottom:18px;text-shadow:none}
+.heroContent h1:after{content:"";display:block;width:280px;height:11px;margin-top:28px;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink),var(--orange));box-shadow:0 0 35px rgba(255,63,164,.3);transform:skewX(-24deg)}
+.heroContent h2{color:#fff!important;font-size:clamp(24px,2.8vw,42px)!important;max-width:720px!important;text-transform:uppercase;letter-spacing:-.03em}
+.heroContent>p{color:rgba(255,255,255,.72)!important;font-size:19px!important;max-width:700px!important}
+.broadcastEyeline,.eyebrow{color:rgba(255,255,255,.72)!important}
+.broadcastEyeline i{color:var(--pink)}
+.stationIdent{z-index:6!important;top:28px!important;right:28px!important;padding:14px 16px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.24);backdrop-filter:blur(10px);transform:skewX(-8deg)}
+.stationIdent>*{transform:skewX(8deg)}
+.stationIdent span{font-size:27px!important}
+
+.broadcastMonitor{
+  position:relative;z-index:5!important;
+  background:linear-gradient(160deg,rgba(12,14,28,.9),rgba(25,22,46,.82))!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:0 28px 80px rgba(0,0,0,.52),0 0 60px rgba(82,102,255,.08)!important;
+  color:#fff!important;
+}
+.broadcastMonitor:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 6px)}
+.monitorChrome{background:#fff!important;color:#05050a!important;border-radius:12px!important}
+.broadcastMonitor h3,.broadcastMonitor p,.metricGrid span,.metricGrid b{color:#fff!important}
+.metricGrid>div{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important}
+.signalBars i{background:linear-gradient(to top,var(--pink),var(--orange),var(--yellow))!important;box-shadow:0 0 12px rgba(255,63,164,.4)}
+
+.channelRailExtreme{grid-template-columns:1.05fr .95fr 1.1fr!important;gap:14px!important;transform:translateY(-26px);position:relative;z-index:7}
+.railCard{position:relative;overflow:hidden;min-height:132px!important;padding:20px 24px!important;background:#0c0e1a!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:0 22px 60px rgba(0,0,0,.35)!important}
+.railCard:before{content:"";position:absolute;inset:0;opacity:.9;background:linear-gradient(120deg,transparent 0 48%,rgba(255,255,255,.04) 48% 50%,transparent 50% 100%)}
+.railCard:after{content:"";position:absolute;right:-50px;bottom:-70px;width:180px;height:180px;border-radius:50%;filter:blur(4px);opacity:.7}
+.railLive:after{background:radial-gradient(circle,var(--pink),transparent 68%)}
+.railShows:after{background:radial-gradient(circle,var(--cyan),transparent 68%)}
+.railCommunity:after{background:radial-gradient(circle,var(--violet),transparent 68%)}
+.railCard span{color:rgba(255,255,255,.18)!important;font-size:54px!important}
+.railCard b{font-size:18px!important;color:#fff!important}
+.railCard em{color:rgba(255,255,255,.62)!important}
+.railCard i{position:absolute;right:18px;top:16px;font-style:normal;font-size:9px;letter-spacing:.16em;color:var(--cyan)}
+
+.extremeTicker{position:relative;border-radius:0!important;margin-inline:-4vw!important;background:#fff!important;color:#05050a!important;box-shadow:none!important;border:0!important;transform:rotate(-1.2deg);z-index:8}
+.extremeTicker span{background:#05050a!important;color:#fff!important;padding-inline:22px!important}
+.extremeTicker marquee{font-weight:1000!important;letter-spacing:.13em!important}
+.extremeTicker b{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:10px;letter-spacing:.16em}
+
+.portalPanel{
+  background:linear-gradient(155deg,rgba(17,18,33,.95),rgba(8,9,17,.93))!important;
+  border:1px solid rgba(255,255,255,.1)!important;
+  color:#fff!important;
+  box-shadow:0 30px 90px rgba(0,0,0,.34)!important;
+  border-radius:28px!important;
+  overflow:hidden;
+}
+.portalPanel:before{height:8px!important;width:170px!important;left:0!important;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink),var(--orange))!important;border-radius:0 0 12px 0!important}
+.portalPanel:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,transparent 0 66%,rgba(255,255,255,.025) 66% 67%,transparent 67% 100%)}
+.panelHead p,.sectionKicker{color:var(--cyan)!important}
+.panelHead h2,.splitPanel h2{color:#fff!important;text-transform:uppercase;letter-spacing:-.06em!important;font-size:clamp(42px,6vw,78px)!important;line-height:.92!important}
+.portalPanel p{color:rgba(255,255,255,.68)!important}
+
+.graphicBurst{background:radial-gradient(circle at 90% 10%,rgba(255,63,164,.18),transparent 30%),linear-gradient(155deg,#131426,#080910)!important}
+.graphicBurst:after{content:"SHOWS";position:absolute;right:-10px;bottom:-30px;font-size:150px;font-weight:1000;letter-spacing:-.08em;color:rgba(255,255,255,.025);transform:rotate(-8deg)}
+.showCard{background:linear-gradient(155deg,rgba(255,255,255,.11),rgba(255,255,255,.045))!important;border:1px solid rgba(255,255,255,.12)!important;color:#fff!important;min-height:220px!important;position:relative;overflow:hidden}
+.showCard h3,.showCard b{color:#fff!important}
+.showCard:before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,transparent 0 55%,var(--accent) 100%);opacity:.18}
+.showCard:after{width:180px!important;height:180px!important;right:-50px!important;bottom:-70px!important;opacity:.2!important}
+.showCard:hover{transform:translateY(-10px) rotate(-.5deg)!important;box-shadow:0 30px 70px rgba(0,0,0,.36)!important}
+
+.chartStage{background:radial-gradient(circle at 90% 15%,rgba(76,229,255,.16),transparent 30%),linear-gradient(155deg,#0e1322,#07080d)!important}
+.chartRow{background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.09)!important;color:#fff!important;min-height:84px!important}
+.chartRow i{background:linear-gradient(135deg,var(--pink),var(--orange))!important;color:#fff!important;font-size:22px!important}
+.chartRow b,.chartRow span{color:#fff!important}
+.chartRow:hover{transform:translateX(10px)!important;background:rgba(255,255,255,.085)!important}
+
+.communityStage{background:radial-gradient(circle at 10% 90%,rgba(156,98,255,.18),transparent 34%),linear-gradient(155deg,#151225,#07080d)!important}
+.communityWall>div,.infoCards>div,.extCommandCard,.extProfileCard{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important;color:#fff!important}
+.communityWall>div b,.extCommandCard code,.extProfileCard h3{color:#fff!important}
+.extCommandCard code{background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink))!important;color:#fff!important;box-shadow:0 10px 25px rgba(82,102,255,.22)!important}
+.extMetricGrid>div{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important}
+.extMetricGrid b{color:#fff!important;font-size:38px!important}
+
+.requestPanel{background:linear-gradient(120deg,#1a1533,#4b1f5d 58%,#b52c72)!important;border:0!important}
+.requestPanel h2,.requestPanel p{color:#fff!important}
+.stationFooter{background:linear-gradient(120deg,#06070c,#10142a 45%,#3f1e54 72%,#9b245f)!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:0 30px 90px rgba(0,0,0,.45)!important}
+
+@keyframes orbSpin{to{transform:rotate(360deg)}}
+
+@media(max-width:1050px){
+  .musicTvHero{min-height:auto!important}
+  .channelRailExtreme{grid-template-columns:1fr!important;transform:none}
+  .graphicBurst:after{font-size:90px}
+}
+@media(max-width:720px){
+  .heroContent{padding-top:70px!important;padding-bottom:60px!important}
+  .heroContent h1{font-size:clamp(64px,19vw,96px)!important}
+  .musicTvHero{border-radius:24px!important}
+  .extremeTicker{margin-inline:-18px!important}
+  .railCard{min-height:100px!important}
+  .stationIdent{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
