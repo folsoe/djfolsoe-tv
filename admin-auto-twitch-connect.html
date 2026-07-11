@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Auto Twitch Connect</title>
+  <link rel="stylesheet" href="assets/css/auto-twitch-connect.css?v=9390">
+</head>
+<body>
+<main class="connectAdmin">
+  <header class="connectHero">
+    <div>
+      <p>DJ FOLSOE NETWORK · V939</p>
+      <h1>Auto Twitch Connect</h1>
+      <span>Forbind Activity Engine til Twitch uden at indsætte en Client Secret.</span>
+    </div>
+    <div id="connectionOrb" class="connectionOrb">OFFLINE</div>
+  </header>
+
+  <section class="connectPanel authPanel">
+    <label>ADMIN_TOKEN
+      <input id="adminToken" type="password" autocomplete="off" placeholder="Dit eksisterende ADMIN_TOKEN">
+    </label>
+    <div class="actions">
+      <button id="connectTwitch">Connect Twitch</button>
+      <button id="checkStatus">Check Status</button>
+      <button id="disconnectTwitch" class="danger">Disconnect</button>
+    </div>
+  </section>
+
+  <section id="deviceCard" class="deviceCard" hidden>
+    <p>TRIN 1 · ÅBN TWITCH</p>
+    <h2 id="deviceCode">--------</h2>
+    <span>Brug koden på Twitch-aktiveringssiden.</span>
+    <a id="deviceLink" href="#" target="_blank" rel="noopener">Open Twitch Activation</a>
+    <small id="deviceCountdown">Waiting...</small>
+  </section>
+
+  <section class="statusGrid">
+    <article class="connectPanel">
+      <p class="label">USER TOKEN</p>
+      <strong id="userTokenState">NOT CONNECTED</strong>
+      <small id="userTokenDetail">Connect Twitch to begin.</small>
+    </article>
+    <article class="connectPanel">
+      <p class="label">EVENTSUB MODE</p>
+      <strong id="eventSubMode">WEBSOCKET</strong>
+      <small>No Client Secret required.</small>
+    </article>
+    <article class="connectPanel">
+      <p class="label">STREAM ELEMENTS BRIDGE</p>
+      <strong id="bridgeState">READY</strong>
+      <small>The supplied bridge files are already paired.</small>
+    </article>
+    <article class="connectPanel">
+      <p class="label">ACTIVITY MEMORY</p>
+      <strong id="eventCount">0</strong>
+      <small>Events stored in DJF_DATA.</small>
+    </article>
+  </section>
+
+  <section class="connectPanel">
+    <h2>Connection Scopes</h2>
+    <div id="scopeList" class="scopeList"></div>
+  </section>
+
+  <section class="connectPanel">
+    <h2>Recent Activity</h2>
+    <div id="activityFeed" class="activityFeed"></div>
+  </section>
+
+  <section class="connectPanel">
+    <h2>System Output</h2>
+    <pre id="output">Ready.</pre>
+  </section>
+</main>
+<script src="assets/js/auto-twitch-connect.js?v=9390"></script>
+</body>
+</html>
