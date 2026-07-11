@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
   <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9380">
   <link rel="stylesheet" href="assets/css/tv-graphics-engine.css?v=9450">
+  <link rel="stylesheet" href="assets/css/live-music-tv-experience.css?v=9460">
 </head>
 <body>
   <div id="tvGraphicsEngine" class="tvGraphicsEngine" aria-hidden="true">
@@ -52,6 +53,18 @@
     <div id="tvEngineBurst" class="tvEngineBurst">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
+
+    <div id="broadcastMoment" class="broadcastMoment">
+      <div class="broadcastMomentSignal">
+        <span id="broadcastMomentIcon">●</span>
+      </div>
+      <div class="broadcastMomentCopy">
+        <small id="broadcastMomentType">NETWORK EVENT</small>
+        <strong id="broadcastMomentHeadline">DJ FOLSOE NETWORK</strong>
+        <p id="broadcastMomentDetail">Live Music TV from Denmark</p>
+      </div>
+      <div class="broadcastMomentBars"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
   </div>
 
   <div class="tvShell">
@@ -67,6 +80,7 @@
 
       <nav class="stationNavigation" aria-label="Primary navigation">
         <a href="#live"><span>◉</span>Live</a>
+        <a href="#broadcastGuide"><span>▤</span>TV Guide</a>
         <a href="#shows"><span>⌁</span>Shows</a>
         <a href="#top20"><span>♫</span>Top 20</a>
         <a href="#viewerCommands"><span>⌨</span>Commands</a>
@@ -150,6 +164,65 @@
         </aside>
       </section>
 
+      <section id="broadcastGuide" class="broadcastExperience tvGraphicSection" data-tv-label="BROADCAST GUIDE">
+        <div class="broadcastExperienceHead">
+          <div>
+            <p>DJ FOLSOE NETWORK · LIVE PROGRAM FLOW</p>
+            <h2>Now · Next · Later</h2>
+          </div>
+          <div class="broadcastExperienceClock">
+            <span>NETWORK TIME</span>
+            <strong id="experienceClock">--:--</strong>
+            <small id="experienceDate">LOADING</small>
+          </div>
+        </div>
+
+        <div class="broadcastRundown">
+          <article class="rundownCard rundownNow">
+            <div class="rundownLabel"><i></i><span>NOW</span></div>
+            <div class="rundownVisual">
+              <span id="rundownNowChannel">CH 01</span>
+              <strong id="rundownNowState">STANDBY</strong>
+            </div>
+            <h3 id="rundownNowTitle">DJ FOLSOE</h3>
+            <p id="rundownNowDescription">Loading current broadcast...</p>
+            <div class="rundownMeta">
+              <span id="rundownNowTheme">MUSIC TV</span>
+              <b id="rundownNowViewers">0 VIEWERS</b>
+            </div>
+          </article>
+
+          <article class="rundownCard rundownNext">
+            <div class="rundownLabel"><span>NEXT</span></div>
+            <div class="rundownTimeBlock">
+              <strong id="rundownNextTime">TBA</strong>
+              <span id="rundownNextCountdown">ANNOUNCED SOON</span>
+            </div>
+            <h3 id="rundownNextTitle">Next DJ FOLSOE Broadcast</h3>
+            <p id="rundownNextDescription">The next show appears automatically from admin.</p>
+            <div class="rundownMeta">
+              <span id="rundownNextTheme">NETWORK</span>
+              <b>UP NEXT</b>
+            </div>
+          </article>
+
+          <article class="rundownCard rundownLater">
+            <div class="rundownLabel"><span>LATER</span></div>
+            <div id="rundownLaterList" class="rundownLaterList">
+              <div><span>01</span><strong>Loading programming...</strong></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="networkPulseLine">
+          <span>LIVE SIGNAL</span>
+          <div class="networkPulseWave" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <strong id="networkPulseMessage">DJ FOLSOE NETWORK CONNECTED</strong>
+        </div>
+      </section>
+
       <section id="next" class="portalPanel nextBroadcast compactNextBroadcast tvGraphicSection" data-tv-label="UP NEXT">
         <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next DJ FOLSOE Broadcast</h2></div>
         <div class="nextGrid"><div><span>Starts</span><b id="nextTime">TBA</b></div><div><span>Countdown</span><b id="nextCountdown">--:--:--</b></div><div><span>Theme</span><b id="nextTheme">Music TV</b></div></div>
@@ -179,13 +252,29 @@
       </section>
     </main>
 
+    <aside id="liveControlRoom" class="liveControlRoom" aria-label="DJ FOLSOE Network control room status">
+      <div class="controlRoomIdentity">
+        <span>CONTROL ROOM</span>
+        <strong>DJ FOLSOE NETWORK</strong>
+      </div>
+      <div class="controlRoomSystems">
+        <div data-system="twitch"><i></i><span>TWITCH</span><b id="controlTwitch">CHECKING</b></div>
+        <div data-system="eventsub"><i></i><span>EVENTSUB</span><b id="controlEventSub">CHECKING</b></div>
+        <div data-system="activity"><i></i><span>ACTIVITY</span><b id="controlActivity">0</b></div>
+        <div data-system="memory"><i></i><span>MEMORY</span><b id="controlMemory">0</b></div>
+        <div data-system="community"><i></i><span>COMMUNITY</span><b id="controlCommunity">0</b></div>
+      </div>
+      <button id="controlRoomToggle" type="button" aria-label="Toggle control room">−</button>
+    </aside>
+
     <footer class="siteFooter stationFooter">
       <div><strong>DJ FOLSOE NETWORK</strong><p>Music TV · Twitch · Denmark</p></div>
-      <nav><a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#viewerCommands">Commands</a></nav>
+      <nav><a href="#live">Live</a><a href="#broadcastGuide">TV Guide</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#viewerCommands">Commands</a></nav>
     </footer>
   </div>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/site.js?v=9380"></script>
   <script src="assets/js/tv-graphics-engine.js?v=9450"></script>
+  <script src="assets/js/live-music-tv-experience.js?v=9460"></script>
 </body>
 </html>
