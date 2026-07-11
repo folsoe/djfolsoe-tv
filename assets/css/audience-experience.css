@@ -1,0 +1,478 @@
+
+/* =========================================================
+   DJ FOLSOE V1001.3 — AUDIENCE EXPERIENCE
+   Editorial, user-facing, accessible Music TV website pass.
+   ========================================================= */
+
+:root{
+  --audience-display:"Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif;
+  --audience-body:Inter,"Segoe UI",Arial,sans-serif;
+  --audience-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --audience-light:#f5f7fb;
+  --audience-dark:#090c16;
+  --audience-soft:#111625;
+  --audience-copy:#c5cad7;
+  --audience-gap:clamp(18px,2vw,30px);
+}
+
+body{
+  font-family:var(--audience-body)!important;
+  font-size:16px;
+  line-height:1.55;
+  letter-spacing:0;
+}
+
+/* Hide technical-first content from the opening experience. */
+.audienceSecondary{
+  order:35!important;
+}
+.audienceSecondary .activityPulseHeader p,
+.audienceSecondary .activityPulseHeader small,
+.audienceSecondary [class*="system" i],
+.audienceSecondary [class*="engine" i],
+.audienceSecondary [class*="memory" i] small{
+  display:none!important;
+}
+
+/* Navigation becomes calm, clear and audience-facing. */
+.channelHeader{
+  min-height:72px!important;
+  padding:11px 16px!important;
+}
+.brandText strong{
+  font-family:var(--audience-display)!important;
+  font-size:18px!important;
+  letter-spacing:.04em!important;
+}
+.brandText span{
+  max-width:290px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:11px!important;
+}
+.mainNav a{
+  font-size:11px!important;
+  text-transform:none!important;
+  letter-spacing:.01em!important;
+  font-weight:750!important;
+}
+.watchButton{
+  min-height:42px;
+  padding:10px 16px!important;
+  font-size:11px!important;
+  text-transform:none!important;
+}
+
+/* Hero typography: strong, premium and readable. */
+.compactMusicTvHero{
+  min-height:660px!important;
+  border-radius:32px!important;
+}
+.heroContent{
+  padding:88px 64px 72px!important;
+}
+.heroContent .eyebrow,
+.heroContent .kicker{
+  font-size:11px!important;
+  letter-spacing:.14em!important;
+  font-weight:850!important;
+}
+.heroContent h1,
+.heroTitle{
+  max-width:850px!important;
+  margin:14px 0 24px!important;
+  font-family:var(--audience-display)!important;
+  font-size:clamp(68px,8.6vw,136px)!important;
+  font-weight:900!important;
+  line-height:.79!important;
+  letter-spacing:-.055em!important;
+}
+.heroContent h2,
+.heroSubtitle{
+  max-width:720px!important;
+  font-family:var(--audience-display)!important;
+  font-size:clamp(31px,3.8vw,54px)!important;
+  font-weight:820!important;
+  line-height:.98!important;
+  letter-spacing:-.03em!important;
+  text-transform:none!important;
+}
+.heroContent p{
+  max-width:680px!important;
+  margin-top:18px!important;
+  color:var(--audience-copy)!important;
+  font-size:16px!important;
+  line-height:1.65!important;
+}
+.heroActions{
+  margin-top:26px!important;
+}
+.heroActions a,
+.heroActions button{
+  min-height:50px!important;
+  padding:14px 20px!important;
+  border-radius:14px!important;
+  font-size:13px!important;
+  text-transform:none!important;
+}
+.uxThemeSignature{
+  top:30px!important;
+}
+.uxThemeSignature strong{
+  font-size:10px!important;
+  letter-spacing:.12em!important;
+}
+
+/* The monitor supports the hero instead of becoming another dashboard. */
+.livePanel,.broadcastMonitor{
+  width:calc(100% - 58px)!important;
+  margin:29px!important;
+  padding:30px!important;
+  border-radius:24px!important;
+  background:linear-gradient(160deg,#0d1220,#0a0e19)!important;
+}
+.livePanel h2,.livePanel h3,.broadcastMonitor h2,.broadcastMonitor h3{
+  font-family:var(--audience-display)!important;
+  font-size:clamp(28px,3vw,42px)!important;
+  letter-spacing:-.025em!important;
+  text-transform:none!important;
+}
+.metricCard,.liveMetric{
+  min-height:86px!important;
+}
+.metricCard span,.liveMetric span{
+  font-size:9px!important;
+  letter-spacing:.08em!important;
+}
+.metricCard strong,.liveMetric strong{
+  font-family:var(--audience-mono)!important;
+  font-variant-numeric:tabular-nums;
+  font-size:18px!important;
+}
+
+/* Section rhythm and typography. */
+.portalMain{
+  gap:var(--audience-gap)!important;
+}
+.portalPanel,.tvSection,.activityPulseEngine,.requestPanel,.contentPlatformSection,.contentModule{
+  border-radius:28px!important;
+}
+.panelHead,.sectionHead,.contentSectionHead{
+  padding:38px 38px 20px!important;
+}
+.panelHead p,.sectionHead p,.contentSectionHead p{
+  font-size:10px!important;
+  letter-spacing:.12em!important;
+  text-transform:none!important;
+}
+.panelHead h2,.sectionHead h2,.contentSectionHead h2{
+  margin-top:8px!important;
+  font-family:var(--audience-display)!important;
+  font-size:clamp(42px,5.8vw,78px)!important;
+  font-weight:900!important;
+  line-height:.86!important;
+  letter-spacing:-.045em!important;
+  text-transform:none!important;
+}
+
+/* Up next is a clean editorial strip. */
+.compactNextBroadcast{
+  display:grid!important;
+  grid-template-columns:minmax(240px,.75fr) minmax(0,1.25fr)!important;
+  align-items:center!important;
+  gap:30px!important;
+  min-height:220px!important;
+  padding:42px!important;
+}
+.compactNextBroadcast h2,
+.compactNextBroadcast h3{
+  font-family:var(--audience-display)!important;
+  font-size:clamp(40px,5.5vw,76px)!important;
+  line-height:.86!important;
+  letter-spacing:-.045em!important;
+  text-transform:none!important;
+}
+.compactNextBroadcast p{
+  color:var(--audience-copy)!important;
+  font-size:15px!important;
+}
+
+/* Shows: visual editorial cards instead of dashboard tiles. */
+.audienceShows{
+  background:linear-gradient(180deg,#0d1220,#0a0d17)!important;
+}
+.showGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:14px!important;
+  padding:18px 38px 38px!important;
+}
+.showCard{
+  min-height:250px!important;
+  padding:24px!important;
+  border-radius:20px!important;
+  background:
+    linear-gradient(180deg,transparent 0 45%,rgba(6,8,15,.92) 100%),
+    linear-gradient(135deg,color-mix(in srgb,var(--ux-primary) 20%,#151a2b),#0d1120)!important;
+}
+.showCard h3{
+  margin-top:90px!important;
+  font-family:var(--audience-display)!important;
+  font-size:30px!important;
+  line-height:.95!important;
+  letter-spacing:-.03em!important;
+  text-transform:none!important;
+}
+.showCard p{
+  color:var(--audience-copy)!important;
+  font-size:13px!important;
+  line-height:1.5!important;
+}
+
+/* News becomes editorial and spacious. */
+.audienceEditorial{
+  background:var(--audience-light)!important;
+  color:var(--audience-dark)!important;
+}
+.audienceEditorial .contentSectionHead p{
+  color:#7756ff!important;
+}
+.audienceEditorial .contentSectionHead h2{
+  color:var(--audience-dark)!important;
+}
+.audienceEditorial .newsFilter span{
+  color:#5f6573!important;
+}
+.audienceEditorial .newsFilter button{
+  border-color:rgba(0,0,0,.12)!important;
+  background:#fff!important;
+  color:#111625!important;
+}
+.featuredNews{
+  border-color:rgba(0,0,0,.10)!important;
+  background:#fff!important;
+}
+.featuredNewsCopy{
+  padding:38px!important;
+}
+.featuredNews h3{
+  font-family:var(--audience-display)!important;
+  font-size:clamp(36px,4vw,62px)!important;
+  text-transform:none!important;
+}
+.featuredNews p{
+  color:#5d6370!important;
+  font-size:15px!important;
+}
+.featuredNews a{
+  color:#10131b!important;
+}
+.musicNewsGrid{
+  gap:14px!important;
+  padding:16px 38px 38px!important;
+}
+.newsCard{
+  border-color:rgba(0,0,0,.09)!important;
+  background:#fff!important;
+}
+.newsCard h3{
+  font-family:var(--audience-display)!important;
+  font-size:25px!important;
+  letter-spacing:-.025em!important;
+}
+.newsCard a{
+  color:#111625!important;
+}
+.newsCard p{
+  color:#656b78!important;
+  font-size:13px!important;
+}
+.newsCard footer{
+  color:#777d89!important;
+}
+
+/* Chart: fewer boxes, stronger ranking. */
+.audienceChart{
+  background:#0a0e18!important;
+}
+.top20Grid,.chartGrid{
+  padding:18px 38px 38px!important;
+}
+.top20Card,.chartCard{
+  min-height:74px!important;
+  display:grid!important;
+  grid-template-columns:66px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  padding:13px 18px!important;
+}
+.top20Card::before,.chartCard::before{
+  font-family:var(--audience-display)!important;
+  font-size:34px!important;
+}
+.top20Card h3,.chartCard h3{
+  font-family:var(--audience-display)!important;
+  font-size:20px!important;
+  text-transform:none!important;
+}
+
+/* Commands: only a handful of useful actions should feel prominent. */
+.audienceCommands .viewerCommandGrid,
+.audienceCommands .commandGrid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:14px!important;
+  padding:16px 38px 38px!important;
+}
+.audienceCommands .viewerCommandCard,
+.audienceCommands .commandCard{
+  min-height:180px!important;
+  padding:20px!important;
+  border-radius:18px!important;
+}
+.audienceCommands .viewerCommandCard:nth-child(n+9),
+.audienceCommands .commandCard:nth-child(n+9){
+  display:none!important;
+}
+.audienceCommands h3{
+  font-family:var(--audience-display)!important;
+  font-size:25px!important;
+  text-transform:none!important;
+}
+.audienceCommands p{
+  color:var(--audience-copy)!important;
+  font-size:13px!important;
+}
+.audienceCommands [class*="command" i]{
+  display:inline-block!important;
+  width:auto!important;
+  padding:7px 10px!important;
+  border-radius:9px!important;
+  font-family:var(--audience-mono)!important;
+  font-size:13px!important;
+}
+
+/* Request becomes the final high-confidence call to action. */
+.audienceRequest{
+  min-height:260px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:30px!important;
+  padding:48px!important;
+  background:linear-gradient(110deg,var(--ux-surface),#0c101c 62%,color-mix(in srgb,var(--ux-highlight) 26%,#0c101c))!important;
+}
+.audienceRequest h2,.audienceRequest h3{
+  font-family:var(--audience-display)!important;
+  font-size:clamp(46px,6.2vw,90px)!important;
+  text-transform:none!important;
+}
+.audienceRequest p{
+  color:var(--audience-copy)!important;
+  font-size:15px!important;
+}
+.audienceRequest a,.audienceRequest button{
+  min-height:52px!important;
+  padding:14px 20px!important;
+  border-radius:14px!important;
+  font-size:13px!important;
+  text-transform:none!important;
+}
+
+/* Footer stays simple and human. */
+.siteFooter,.stationFooter{
+  padding:28px 30px!important;
+}
+.siteFooter nav a{
+  text-transform:none!important;
+  font-size:11px!important;
+}
+
+/* Mobile is intentionally redesigned, not merely stacked. */
+@media(max-width:980px){
+  .compactMusicTvHero{
+    min-height:auto!important;
+  }
+  .heroContent{
+    padding:86px 34px 42px!important;
+  }
+  .showGrid{
+    display:flex!important;
+    overflow-x:auto!important;
+    scroll-snap-type:x mandatory;
+    padding-bottom:30px!important;
+  }
+  .showCard{
+    min-width:min(78vw,360px)!important;
+    scroll-snap-align:start;
+  }
+  .audienceCommands .viewerCommandGrid,
+  .audienceCommands .commandGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:640px){
+  body{font-size:15px}
+  .channelHeader{min-height:62px!important}
+  .heroContent{
+    padding:82px 22px 32px!important;
+  }
+  .heroContent h1,.heroTitle{
+    font-size:clamp(58px,18vw,88px)!important;
+  }
+  .heroContent h2,.heroSubtitle{
+    font-size:32px!important;
+  }
+  .heroContent p{
+    font-size:15px!important;
+  }
+  .heroActions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+  }
+  .heroActions a,.heroActions button{
+    width:100%!important;
+    justify-content:center!important;
+  }
+  .livePanel,.broadcastMonitor{
+    width:auto!important;
+    margin:0 12px 12px!important;
+  }
+  .panelHead,.sectionHead,.contentSectionHead{
+    padding:28px 20px 14px!important;
+  }
+  .panelHead h2,.sectionHead h2,.contentSectionHead h2{
+    font-size:42px!important;
+  }
+  .compactNextBroadcast{
+    grid-template-columns:1fr!important;
+    padding:30px 22px!important;
+  }
+  .showGrid{
+    padding:12px 20px 26px!important;
+  }
+  .musicNewsGrid{
+    padding:12px 20px 26px!important;
+  }
+  .featuredNews{
+    margin:0 20px 12px!important;
+  }
+  .featuredNewsCopy{
+    padding:24px!important;
+  }
+  .audienceCommands .viewerCommandGrid,
+  .audienceCommands .commandGrid{
+    display:flex!important;
+    overflow-x:auto!important;
+    padding:12px 20px 26px!important;
+  }
+  .audienceCommands .viewerCommandCard,
+  .audienceCommands .commandCard{
+    min-width:240px!important;
+  }
+  .audienceRequest{
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    padding:34px 22px!important;
+  }
+}
+
+.audienceTechnicalHidden{display:none!important}
