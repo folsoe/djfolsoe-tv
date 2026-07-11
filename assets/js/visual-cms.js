@@ -188,7 +188,155 @@ function renderSystemStatus(){
   wrap.innerHTML=items.map(([label,value,kind])=>`<article><span>${esc(label)}</span><strong class="${kind}">${esc(value)}</strong></article>`).join('');
   dashboard.querySelector('.welcomePanel')?.insertAdjacentElement('afterend',wrap);
 }
-function renderDashboard(){const modules=state.modules||[],articles=state.news?.articles||[];$('dashPublished').textContent=modules.filter(m=>m.status==='published').length;$('dashDrafts').textContent=modules.filter(m=>m.status==='draft').length;$('dashNews').textContent=articles.length;$('dashTheme').textContent=state.core?.theme?.title||'Weekend';$('recentContent').innerHTML=modules.slice(0,6).map(m=>`<div class="recentItem"><span>${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><small>${esc(m.type)} · ${esc(m.status)}</small></div><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button></div>`).join('')||'<p>No content blocks yet.</p>'}
+
+function renderVisualDashboard(){
+  const panel=document.querySelector('[data-screen-panel="dashboard"]');
+  if(!panel||!state)return;
+
+  const modules=Array.isArray(state.modules)?state.modules:[];
+  const articles=Array.isArray(state.news?.articles)?state.news.articles:[];
+  const twitch=state.core?.twitch||{};
+  const currentTheme=state.core?.theme?.title||'Weekend';
+  const currentShow=state.core?.show?.title||state.core?.show?.current||state.core?.nextShow?.title||'No show selected';
+  const profileImage=twitch.profileImage||twitch.profile_image_url||'';
+  const isLive=!!(twitch.live||twitch.isLive);
+  const published=modules.filter(m=>m.status==='published').length;
+  const drafts=modules.filter(m=>m.status==='draft').length;
+
+  panel.innerHTML=`
+    <section class="controlRoomHero">
+      <div class="controlRoomHeroCopy">
+        <span>DJ FOLSOE NETWORK · BROADCAST CONTROL ROOM</span>
+        <h2>Ready to build the next show</h2>
+        <p>Manage the homepage, shows, charts, stories, interaction and broadcast theme from one stable production desk.</p>
+        <div class="controlRoomHeroActions">
+          <button data-screen-jump="homepage">Edit homepage</button>
+          <button data-quick-create="poster" class="secondary">Create special event</button>
+          <a class="previewLink" href="/" target="_blank" rel="noopener">Open website ↗</a>
+        </div>
+      </div>
+
+      <aside class="controlRoomProfile">
+        <div class="controlRoomProfileImage">
+          <img src="${esc(profileImage)}" alt="DJ FOLSOE Twitch profile">
+          <span class="controlRoomLiveDot ${isLive?'live':''}"></span>
+        </div>
+        <div>
+          <small>${isLive?'LIVE ON TWITCH':'TWITCH CHANNEL'}</small>
+          <strong>${esc(twitch.displayName||'DJ FOLSOE')}</strong>
+          <p>${esc(twitch.description||'Live music, requests and good company from Denmark.')}</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="controlRoomStatusGrid">
+      <article class="controlRoomStatusCard online">
+        <span>Website</span>
+        <strong>ONLINE</strong>
+        <small>folsoetv.dk is connected</small>
+      </article>
+      <article class="controlRoomStatusCard online">
+        <span>Worker</span>
+        <strong>CONNECTED</strong>
+        <small>${esc(state.version||'Broadcast Core')}</small>
+      </article>
+      <article class="controlRoomStatusCard ${isLive?'online':'warning'}">
+        <span>Twitch</span>
+        <strong>${isLive?'LIVE':'OFFLINE'}</strong>
+        <small>${Number(twitch.viewers||0).toLocaleString()} current viewers</small>
+      </article>
+      <article class="controlRoomStatusCard accent">
+        <span>Published</span>
+        <strong>${published}</strong>
+        <small>${drafts} drafts waiting</small>
+      </article>
+      <article class="controlRoomStatusCard">
+        <span>Music stories</span>
+        <strong>${articles.length}</strong>
+        <small>Editorial and external</small>
+      </article>
+    </section>
+
+    <section class="controlRoomQuickGrid">
+      <button class="controlRoomQuick" data-screen-jump="homepage">
+        <i>✦</i>
+        <strong>Homepage</strong>
+        <span>Edit the public opening experience</span>
+      </button>
+      <button class="controlRoomQuick" data-screen-jump="shows">
+        <i>▶</i>
+        <strong>Shows</strong>
+        <span>Update titles, times and descriptions</span>
+      </button>
+      <button class="controlRoomQuick" data-screen-jump="charts">
+        <i>20</i>
+        <strong>Top 20</strong>
+        <span>Build this week's countdown</span>
+      </button>
+      <button class="controlRoomQuick" data-screen-jump="theme">
+        <i>◐</i>
+        <strong>Theme & Overlay</strong>
+        <span>Choose the active broadcast identity</span>
+      </button>
+      <button class="controlRoomQuick" data-quick-create="story">
+        <i>✎</i>
+        <strong>Music Story</strong>
+        <span>Write an article or editorial feature</span>
+      </button>
+      <button class="controlRoomQuick" data-quick-create="poll">
+        <i>✓</i>
+        <strong>Poll</strong>
+        <span>Create live viewer interaction</span>
+      </button>
+      <button class="controlRoomQuick" data-quick-create="playlist">
+        <i>♫</i>
+        <strong>Playlist</strong>
+        <span>Share Spotify and show playlists</span>
+      </button>
+      <button class="controlRoomQuick" data-quick-create="poster">
+        <i>▣</i>
+        <strong>Special Event</strong>
+        <span>Publish a poster, date and announcement</span>
+      </button>
+    </section>
+
+    <section class="controlRoomBottomGrid">
+      <article class="controlRoomPanel">
+        <div class="controlRoomPanelHeader">
+          <div><span>RECENT CONTENT</span><h3>Continue working</h3></div>
+          <button data-screen-jump="modules" class="secondary">View all</button>
+        </div>
+        <div class="controlRoomRecent">
+          ${modules.slice(0,6).map(m=>`
+            <div class="controlRoomRecentItem">
+              <span>${esc(typeIcons[m.type]||'▦')}</span>
+              <div>
+                <strong>${esc(m.title||'Untitled content')}</strong>
+                <small>${esc(m.type||'content')} · ${esc(m.status||'draft')} · ${esc(m.theme||'all')}</small>
+              </div>
+              <button data-edit-module="${esc(m.id)}" class="secondary">Edit</button>
+            </div>
+          `).join('')||'<p class="note">No content blocks yet.</p>'}
+        </div>
+      </article>
+
+      <aside class="controlRoomPanel">
+        <div class="controlRoomPanelHeader">
+          <div><span>ON AIR CONTROL</span><h3>Current broadcast</h3></div>
+        </div>
+        <div class="controlRoomBroadcast">
+          <div class="controlRoomBroadcastRow"><span>Active theme</span><strong>${esc(currentTheme)}</strong></div>
+          <div class="controlRoomBroadcastRow"><span>Current / next show</span><strong>${esc(currentShow)}</strong></div>
+          <div class="controlRoomBroadcastRow"><span>Followers</span><strong>${Number(twitch.followers||state.core?.community?.followers||0).toLocaleString()}</strong></div>
+          <div class="controlRoomBroadcastRow"><span>Profile</span><strong>${profileImage?'CONNECTED':'WAITING'}</strong></div>
+        </div>
+        <div class="controlRoomProtected">✓ Main Overlay structure is protected</div>
+      </aside>
+    </section>
+  `;
+}
+
+function renderDashboard(){renderVisualDashboard();}
 function renderHomepage(){const core=state.core||{},hero=core.hero||{},next=core.nextShow||{},community=core.community||{};$('heroEyebrowInput').value=hero.eyebrow||'';$('heroTitleInput').value=hero.title||'DJ FOLSOE';$('heroSubtitleInput').value=hero.subtitle||'';$('heroTextInput').value=hero.text||'';$('nextTitleInput').value=next.title||next.show||'';$('nextTimeLabelInput').value=next.timeLabel||'';$('nextDateInput').value=toLocalInput(next.datetime||next.dateTime);$('nextDescriptionInput').value=next.description||'';$('followerGoalInput').value=community.followerGoal??1000;$('subGoalInput').value=community.subGoal??100;$('requestTextInput').value=community.requestText||'';$('specialEventInput').value=community.specialEvent||'';updateHomepagePreview()}
 function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''}
 async function saveHomepage(){try{const payload={hero:{eyebrow:$('heroEyebrowInput').value,title:$('heroTitleInput').value,subtitle:$('heroSubtitleInput').value,text:$('heroTextInput').value},nextShow:{title:$('nextTitleInput').value,timeLabel:$('nextTimeLabelInput').value,datetime:$('nextDateInput').value?new Date($('nextDateInput').value).toISOString():'',theme:$('nextThemeInput').value,description:$('nextDescriptionInput').value,active:true},community:{followerGoal:Number($('followerGoalInput').value),subGoal:Number($('subGoalInput').value),requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value},overlay:{requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value}};const result=await api('/api/cms/admin/homepage',{method:'POST',body:JSON.stringify(payload)});state.core=result.core;renderDashboard();toast('Homepage saved.')}catch(error){toast(error.message,true)}}
