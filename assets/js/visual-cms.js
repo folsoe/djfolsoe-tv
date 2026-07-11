@@ -64,3 +64,45 @@ document.addEventListener('change',async event=>{const el=event.target;if(el.mat
 ['heroEyebrowInput','heroTitleInput','heroSubtitleInput','heroTextInput'].forEach(id=>$(id).addEventListener('input',updateHomepagePreview));
 $('loadCms').onclick=connect;$('saveHomepage').onclick=saveHomepage;$('addShow').onclick=()=>{state.core.featuredShows=[...(state.core.featuredShows||[]),{title:'New show',time:'Special',description:'',theme:'weekend',color:'#55e5ff'}];renderShows()};$('saveShows').onclick=saveShows;$('chartSize').onchange=renderChart;$('saveChart').onclick=saveChart;$('newStory').onclick=()=>openNewsEditor();$('refreshNews').onclick=async()=>{try{await api('/api/news/admin/refresh',{method:'POST',body:'{}'});state=await api('/api/cms/admin/state');renderNews();renderDashboard();toast('External music stories refreshed.')}catch(error){toast(error.message,true)}};$('saveTickers').onclick=saveTickers;$('addTopTicker').onclick=()=>{$('topTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="top"]').length,false))};$('addThemeTicker').onclick=()=>{$('themeTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="theme"]').length,true))};$('contentForm').onsubmit=event=>{event.preventDefault();if($('contentType').value==='manual-news')saveNewsStory();else saveModule('published')};$('saveDraft').onclick=()=>{if($('contentType').value==='manual-news')saveNewsStory();else saveModule('draft')};$('confirmCancel').onclick=()=>{$('confirmModal').hidden=true;pendingConfirm=null};$('confirmOk').onclick=async()=>{const fn=pendingConfirm;$('confirmModal').hidden=true;pendingConfirm=null;if(fn)await fn()};document.addEventListener('click',e=>{if(e.target.id==='saveSources')saveSources()});
 const savedToken=localStorage.getItem('djf_cms_token');if(savedToken)$('adminToken').value=savedToken;
+
+
+/* =========================================================
+   V1002 BROADCAST CONTROL ROOM STATUS + SAFE BOOT
+   ========================================================= */
+function v1002SetStatus(id,text,mode='online'){
+  const value=document.getElementById(id); if(value)value.textContent=text;
+  const dot=document.getElementById(id+'Dot'); if(dot){dot.classList.remove('online','warning');dot.classList.add(mode)}
+}
+async function v1002PublicHealth(){
+  v1002SetStatus('statusWebsite','Online');
+  try{
+    const health=await fetch(API+'/api/content/health?t='+Date.now(),{cache:'no-store'}).then(r=>r.json());
+    v1002SetStatus('statusWorker',health.ok?'Online':'Attention',health.ok?'online':'warning');
+    const version=document.getElementById('statusWorkerVersion'); if(version)version.textContent=health.version||'Content Core';
+  }catch(_){v1002SetStatus('statusWorker','Unavailable','warning')}
+}
+function v1002RenderConnectedStatus(){
+  if(!state)return;
+  const core=state.core||{},twitch=core.twitch||{},theme=core.theme||{};
+  v1002SetStatus('statusWebsite','Online');
+  v1002SetStatus('statusWorker','Online');
+  v1002SetStatus('statusTwitch',twitch.live||twitch.isLive?'Live now':'Connected');
+  v1002SetStatus('statusNews',String(state.news?.articles?.length||0)+' stories');
+  v1002SetStatus('statusOverlay','Protected');
+  const twitchDetail=document.getElementById('statusTwitchDetail');if(twitchDetail)twitchDetail.textContent=(twitch.viewers||0)+' viewers · '+(twitch.followers||0)+' followers';
+  const newsDetail=document.getElementById('statusNewsDetail');if(newsDetail)newsDetail.textContent=(state.news?.articles?.filter(a=>a.manual).length||0)+' editorial · '+(state.news?.articles?.filter(a=>!a.manual).length||0)+' external';
+  const title=document.getElementById('controlNowTitle');if(title)title.textContent=core.show?.title||core.show?.current||twitch.title||'DJ FOLSOE NETWORK';
+  const detail=document.getElementById('controlNowDetail');if(detail)detail.textContent=twitch.live||twitch.isLive?'The channel is live. Website and shared content are using the current broadcast state.':'The channel is currently offline. You can prepare and schedule content safely.';
+  const themeNode=document.getElementById('controlTheme');if(themeNode)themeNode.textContent=theme.title||theme.id||'Music TV';
+  const viewers=document.getElementById('controlViewers');if(viewers)viewers.textContent=Number(twitch.viewers||0).toLocaleString();
+  const followers=document.getElementById('controlFollowers');if(followers)followers.textContent=Number(twitch.followers||core.community?.followers||0).toLocaleString();
+}
+const v1002OriginalRenderAll=renderAll;
+renderAll=function(){v1002OriginalRenderAll();v1002RenderConnectedStatus()};
+document.addEventListener('DOMContentLoaded',()=>{
+  const confirm=document.getElementById('confirmModal');if(confirm)confirm.hidden=true;
+  const editor=document.getElementById('editorModal');if(editor){editor.classList.remove('open');editor.setAttribute('aria-hidden','true')}
+  v1002PublicHealth();
+  const saved=localStorage.getItem('djf_cms_token');
+  if(saved){document.getElementById('adminToken').value=saved;setTimeout(()=>document.getElementById('loadCms')?.click(),180)}
+});
