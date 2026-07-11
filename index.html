@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9380">
   <link rel="stylesheet" href="assets/css/unified-experience.css?v=10011">
   <link rel="stylesheet" href="assets/css/content-platform.css?v=10011">
+  <link rel="stylesheet" href="assets/css/audience-experience.css?v=10013">
 </head>
 <body class="networkOsBooting">
   <div class="tvShell">
@@ -52,11 +53,11 @@
         </div>
       </section>
 
-      <section id="activityPulseEngine" data-ux-module="activity" class="activityPulseEngine" aria-label="DJ FOLSOE live activity pulse">
+      <section id="activityPulseEngine" class="audienceSecondary" data-ux-module="activity" class="activityPulseEngine" aria-label="DJ FOLSOE live activity pulse">
         <div class="activityPulseHeader">
           <div>
             <p>EXT-004 · LIVE CHANNEL MEMORY</p>
-            <h2>Activity Pulse</h2>
+            <h2>Live from the channel</h2>
           </div>
           <div class="activityPulseSignal">
             <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -69,7 +70,7 @@
             <div id="activityPulseIcon" class="activityPulseHeroIcon">●</div>
             <div>
               <span id="activityPulseType">DJ FOLSOE NETWORK</span>
-              <h3 id="activityPulseHeadline">Channel memory is starting</h3>
+              <h3 id="activityPulseHeadline">The community is warming up</h3>
               <p id="activityPulseDetail">Twitch activity will appear here automatically.</p>
             </div>
             <time id="activityPulseTime">NOW</time>
@@ -97,11 +98,11 @@
           <div class="broadcastEyeline"><span class="broadcastDot"></span><span>LIVE MUSIC TV FROM DENMARK</span><i>CHANNEL 01</i></div>
           <p class="eyebrow" id="heroEyebrow">DJ FOLSOE TWITCH · MUSIC STREAMER</p>
           <h1 id="heroTitle">DJ FOLSOE</h1>
-          <h2 id="heroSubtitle">Dive into my Twitch world</h2>
+          <h2 id="heroSubtitle">Live music, requests and good company</h2>
           <p id="heroText">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</p>
           <div class="heroActions">
-            <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live now</a>
-            <a class="secondary" href="#requests">Request a song</a>
+            <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live</a>
+            <a class="secondary" href="#requests">Make a request</a>
           </div>
         </div>
 <div class="osPortalRing ring2"></div>
@@ -129,14 +130,14 @@
         </aside>
       </section>
 <section id="next" data-ux-module="next" class="portalPanel nextBroadcast compactNextBroadcast">
-        <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next DJ FOLSOE Broadcast</h2></div>
+        <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next show</h2></div>
         <div class="nextGrid"><div><span>Starts</span><b id="nextTime">TBA</b></div><div><span>Countdown</span><b id="nextCountdown">--:--:--</b></div><div><span>Theme</span><b id="nextTheme">Music TV</b></div></div>
         <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
       </section>
 
-            <section id="musicNews" class="contentPlatformSection musicNewsSection" data-content-zone="editorial">
+            <section id="musicNews" class="contentPlatformSection musicNewsSection audienceEditorial" class="contentPlatformSection musicNewsSection" data-content-zone="editorial">
         <header class="contentSectionHead">
-          <div><p>DJ FOLSOE NETWORK · ENGLISH MUSIC NEWS</p><h2 id="musicNewsTitle">Music News</h2></div>
+          <div><p>DJ FOLSOE NETWORK · ENGLISH LATEST MUSIC STORIES</p><h2 id="musicNewsTitle">Latest music stories</h2></div>
           <div class="newsFilter"><span id="musicNewsTheme">ALL MUSIC</span><button id="musicNewsRefresh" type="button">Refresh</button></div>
         </header>
         <article id="featuredNews" class="featuredNews" hidden></article>
@@ -145,29 +146,29 @@
       <div id="contentZoneFeatured" class="contentModuleZone" data-content-zone="featured"></div>
       <div id="contentZoneEditorial" class="contentModuleZone" data-content-zone="editorial"></div>
 
-      <section id="shows" data-ux-module="shows" class="portalPanel tvSection tvShows graphicBurst">
-        <div class="panelHead"><p id="showsKicker">FEATURED SHOWS</p><h2 id="showsTitle">Your favorite show</h2></div>
+      <section id="shows" class="audienceShows" data-ux-module="shows" class="portalPanel tvSection tvShows graphicBurst">
+        <div class="panelHead"><p id="showsKicker">FEATURED SHOWS</p><h2 id="showsTitle">Explore the shows</h2></div>
         <div class="showCards" id="showCards"></div>
       </section>
       <div id="contentZoneShowsAfter" class="contentModuleZone" data-content-zone="shows-after"></div>
 
-      <section id="top20" data-ux-module="top20" class="portalPanel tvSection tvChart chartStage">
-        <div class="panelHead"><p>FOLSOE TOP 20</p><h2>Weekly listening chart</h2></div>
+      <section id="top20" class="audienceChart" data-ux-module="top20" class="portalPanel tvSection tvChart chartStage">
+        <div class="panelHead"><p>FOLSOE TOP 20</p><h2>This week's Top 20</h2></div>
         <div class="chartList" id="chartList"></div>
       </section>
       <div id="contentZoneChartsAfter" class="contentModuleZone" data-content-zone="charts-after"></div>
 
-      <section id="viewerCommands" data-ux-module="commands" class="portalPanel extModule extCommands tvSection tvCommands viewerCommandsOnly">
-        <div class="panelHead"><div><p>LIVE INTERACTION</p><h2>Active viewer commands</h2></div><span class="liveCommandBadge">TWITCH CHAT</span></div>
-        <p class="extIntro">Only active commands available to viewers are shown here. Admin, theme and control commands stay hidden.</p>
+      <section id="viewerCommands" class="audienceCommands" data-ux-module="commands" class="portalPanel extModule extCommands tvSection tvCommands viewerCommandsOnly">
+        <div class="panelHead"><div><p>LIVE INTERACTION</p><h2>Join the show</h2></div><span class="liveCommandBadge">TWITCH CHAT</span></div>
+        <p class="extIntro">Use these commands in Twitch chat to take part in the show.</p>
         <div class="extCommandGrid" id="extViewerCommands"></div>
       </section>
       <div id="contentZoneInteractive" class="contentModuleZone" data-content-zone="interactive"></div>
 
-      <section id="requests" data-ux-module="requests" class="portalPanel requestPanel compactRequestPanel">
+      <section id="requests" class="audienceRequest" data-ux-module="requests" class="portalPanel requestPanel compactRequestPanel">
         <div class="panelHead"><p>REQUEST WALL</p><h2>Want a song on air?</h2></div>
         <p>Use <b>!request Artist - Title</b> in Twitch chat.</p>
-        <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch chat</a>
+        <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Join the conversation</a>
       </section>
           <div id="contentZoneArchive" class="contentModuleZone" data-content-zone="archive"></div>
     </main>
@@ -181,5 +182,6 @@
   <script src="assets/js/site.js?v=9380"></script>
   <script src="assets/js/unified-experience.js?v=10011"></script>
   <script src="assets/js/content-platform.js?v=10011"></script>
+  <script src="assets/js/audience-experience.js?v=10013"></script>
 </body>
 </html>
