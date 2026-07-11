@@ -1,0 +1,586 @@
+
+/* =========================================================
+   DJ FOLSOE V1000 — NETWORK OS
+   Cinematic interactive Music TV operating system layer.
+   ========================================================= */
+:root{
+  --os-a:#35ddff;
+  --os-b:#8b5cff;
+  --os-c:#ff2ea6;
+  --os-d:#ffe369;
+  --os-energy:.72;
+  --os-depth:1;
+  --os-intensity:1;
+  --os-x:0;
+  --os-y:0;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:#03040b;
+  overflow-x:hidden;
+}
+body.networkOsBooting{overflow:hidden}
+body.networkOsReady .tvShell{
+  animation:osShellReveal 1.4s cubic-bezier(.2,.75,.2,1) both;
+}
+
+.networkOS{
+  position:fixed;
+  inset:0;
+  z-index:3;
+  overflow:hidden;
+  pointer-events:none;
+  perspective:1400px;
+}
+#networkOSCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:.78;
+  filter:saturate(125%);
+}
+.osAtmosphere,.osNoise,.osVignette{
+  position:absolute;
+  inset:0;
+}
+.osGlow{
+  position:absolute;
+  width:55vw;
+  height:55vw;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:calc(.22 * var(--os-intensity));
+  mix-blend-mode:screen;
+  transition:background 1.2s ease,opacity .6s ease;
+}
+.osGlowA{
+  left:-18vw;top:-15vw;
+  background:radial-gradient(circle,var(--os-a),transparent 68%);
+  transform:translate3d(calc(var(--os-x) * -22px),calc(var(--os-y) * -18px),0);
+}
+.osGlowB{
+  right:-20vw;top:2vh;
+  background:radial-gradient(circle,var(--os-c),transparent 68%);
+  transform:translate3d(calc(var(--os-x) * 28px),calc(var(--os-y) * -12px),0);
+}
+.osGlowC{
+  left:30vw;bottom:-34vw;
+  background:radial-gradient(circle,var(--os-b),transparent 67%);
+  transform:translate3d(calc(var(--os-x) * 14px),calc(var(--os-y) * 25px),0);
+}
+.osHorizon{
+  position:absolute;
+  left:-10%;
+  right:-10%;
+  bottom:-8vh;
+  height:43vh;
+  opacity:.22;
+  transform:perspective(700px) rotateX(64deg);
+  transform-origin:center bottom;
+  background:
+    linear-gradient(rgba(53,221,255,.17) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(53,221,255,.17) 1px,transparent 1px);
+  background-size:70px 44px;
+  mask-image:linear-gradient(to top,#000,transparent 92%);
+  animation:osGridTravel 6s linear infinite;
+}
+.osNoise{
+  opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+  animation:osNoiseMove .22s steps(2) infinite;
+}
+.osVignette{
+  background:
+    radial-gradient(circle at center,transparent 30%,rgba(0,0,0,.28) 72%,rgba(0,0,0,.78) 115%),
+    linear-gradient(to bottom,rgba(0,0,0,.18),transparent 18%,transparent 78%,rgba(0,0,0,.42));
+}
+
+.osBootSequence{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  display:grid;
+  place-content:center;
+  text-align:center;
+  padding:30px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(72,50,150,.3),transparent 35%),
+    #03040b;
+  transition:opacity .8s ease,visibility .8s ease;
+}
+.networkOsReady .osBootSequence{
+  opacity:0;
+  visibility:hidden;
+}
+.osBootLogo span{
+  display:block;
+  color:var(--os-a);
+  font-size:clamp(15px,2vw,26px);
+  font-weight:950;
+  letter-spacing:.44em;
+}
+.osBootLogo strong{
+  display:block;
+  margin:9px 0 14px;
+  font-size:clamp(52px,11vw,150px);
+  line-height:.75;
+  letter-spacing:-.075em;
+  text-transform:uppercase;
+  background:linear-gradient(100deg,#fff,var(--os-a),var(--os-b),var(--os-c),#fff);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:osLogoFlow 4s linear infinite;
+}
+.osBootLogo i{
+  display:block;
+  width:min(370px,70vw);
+  height:4px;
+  margin:0 auto 24px;
+  border-radius:99px;
+  background:linear-gradient(90deg,transparent,var(--os-a),var(--os-b),var(--os-c),transparent);
+  box-shadow:0 0 28px var(--os-b);
+}
+.osBootReadout{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  width:min(610px,85vw);
+  margin:auto;
+  color:rgba(255,255,255,.68);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.osBootProgress{
+  width:min(610px,85vw);
+  height:5px;
+  margin:12px auto 15px;
+  overflow:hidden;
+  border-radius:99px;
+  background:rgba(255,255,255,.08);
+}
+.osBootProgress i{
+  display:block;
+  width:0;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,var(--os-a),var(--os-b),var(--os-c));
+  box-shadow:0 0 24px var(--os-c);
+  transition:width .18s ease;
+}
+.osBootSequence small{
+  color:rgba(255,255,255,.32);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:.18em;
+}
+
+.osSceneTitle{
+  position:fixed;
+  left:50%;
+  top:50%;
+  z-index:1004;
+  width:min(1000px,90vw);
+  opacity:0;
+  text-align:center;
+  transform:translate(-50%,-50%) scale(.8);
+}
+.osSceneTitle.is-active{
+  animation:osSceneReveal 1.6s cubic-bezier(.2,.8,.2,1) both;
+}
+.osSceneTitle small{
+  color:var(--os-a);
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.3em;
+}
+.osSceneTitle strong{
+  display:block;
+  margin:7px 0;
+  font-size:clamp(54px,12vw,170px);
+  line-height:.75;
+  text-transform:uppercase;
+  letter-spacing:-.075em;
+  text-shadow:0 0 45px color-mix(in srgb,var(--os-b) 40%,transparent);
+}
+.osSceneTitle span{
+  color:rgba(255,255,255,.58);
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.22em;
+}
+
+.osOrbitalFrame{
+  position:fixed;
+  right:-12vw;
+  top:12vh;
+  width:45vw;
+  height:45vw;
+  max-width:720px;
+  max-height:720px;
+  opacity:calc(.42 * var(--os-intensity));
+  transform:
+    translate3d(calc(var(--os-x) * 18px),calc(var(--os-y) * 12px),0)
+    rotateX(calc(var(--os-y) * -5deg))
+    rotateY(calc(var(--os-x) * 6deg));
+  transition:opacity .4s ease;
+}
+.osOrbit{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:1px solid color-mix(in srgb,var(--os-a) 35%,transparent);
+  box-shadow:inset 0 0 42px rgba(53,221,255,.035),0 0 24px rgba(53,221,255,.04);
+}
+.osOrbitA{animation:osOrbitA 17s linear infinite}
+.osOrbitB{inset:14%;border-color:color-mix(in srgb,var(--os-b) 45%,transparent);animation:osOrbitB 13s linear infinite reverse}
+.osOrbitC{inset:29%;border-color:color-mix(in srgb,var(--os-c) 48%,transparent);animation:osOrbitA 8s linear infinite}
+.osOrbit:before,.osOrbit:after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:9px;height:9px;
+  border-radius:50%;
+  background:var(--os-a);
+  box-shadow:0 0 18px currentColor;
+}
+.osOrbit:before{left:-5px}
+.osOrbit:after{right:-5px;background:var(--os-c)}
+.osCore{
+  position:absolute;
+  inset:43%;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff 0 8%,var(--os-a) 18%,var(--os-b) 48%,transparent 68%);
+  box-shadow:0 0 80px var(--os-b);
+  animation:osCorePulse 2.2s ease-in-out infinite alternate;
+}
+
+.osSignalReadout{
+  position:fixed;
+  left:20px;
+  bottom:78px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.15em;
+  opacity:.75;
+}
+.osSignalReadout>span{color:var(--os-a)}
+.osSignalReadout div{display:flex;align-items:end;gap:2px;height:21px}
+.osSignalReadout i{
+  width:3px;
+  height:6px;
+  border-radius:3px;
+  background:linear-gradient(to top,var(--os-a),var(--os-c));
+  animation:osSignalBars .7s ease-in-out infinite alternate;
+}
+.osSignalReadout i:nth-child(2){height:12px;animation-delay:.08s}
+.osSignalReadout i:nth-child(3){height:18px;animation-delay:.16s}
+.osSignalReadout i:nth-child(4){height:10px;animation-delay:.24s}
+.osSignalReadout i:nth-child(5){height:20px;animation-delay:.32s}
+.osSignalReadout i:nth-child(6){height:14px;animation-delay:.4s}
+
+.osActivityShockwave{
+  position:fixed;
+  left:50%;
+  top:50%;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  opacity:0;
+  border:3px solid var(--os-a);
+  transform:translate(-50%,-50%) scale(.1);
+}
+.osActivityShockwave.is-active{
+  animation:osShockwave 1.15s ease-out both;
+}
+
+.osController{
+  position:fixed;
+  right:18px;
+  top:50%;
+  z-index:1100;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:7px;
+  transform:translateY(-50%);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:18px;
+  background:rgba(5,7,17,.78);
+  backdrop-filter:blur(18px);
+  box-shadow:0 20px 65px rgba(0,0,0,.4);
+}
+.osController button{
+  display:grid;
+  grid-template-columns:28px 0fr;
+  align-items:center;
+  gap:0;
+  width:39px;
+  height:39px;
+  padding:5px;
+  overflow:hidden;
+  border:1px solid transparent;
+  border-radius:12px;
+  color:rgba(255,255,255,.62);
+  background:transparent;
+  cursor:pointer;
+  transition:width .35s ease,grid-template-columns .35s ease,color .25s ease,background .25s ease;
+}
+.osController button:hover,.osController button.is-active{
+  width:112px;
+  grid-template-columns:28px 1fr;
+  color:#fff;
+  background:linear-gradient(100deg,rgba(53,221,255,.12),rgba(255,46,166,.12));
+  border-color:rgba(255,255,255,.11);
+}
+.osController i{
+  display:grid;place-items:center;
+  width:28px;height:28px;
+  font-style:normal;
+  font-size:14px;
+}
+.osController span{
+  overflow:hidden;
+  white-space:nowrap;
+  text-align:left;
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.tvShell{
+  position:relative;
+  z-index:10;
+  transform-style:preserve-3d;
+}
+body.os-camera .tvShell{
+  transform:
+    perspective(1800px)
+    rotateX(calc(var(--os-y) * -.6deg))
+    rotateY(calc(var(--os-x) * .8deg))
+    translateZ(0);
+  transform-origin:center top;
+}
+
+.compactMusicTvHero{
+  min-height:clamp(560px,76vh,820px)!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.1fr) minmax(420px,.9fr)!important;
+  align-items:center!important;
+  overflow:hidden;
+}
+.osHeroPortal{
+  position:absolute;
+  right:17%;
+  top:50%;
+  width:min(40vw,560px);
+  aspect-ratio:1;
+  transform:translate(50%,-50%);
+  opacity:.82;
+  pointer-events:none;
+}
+.osPortalRing{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 0 38px rgba(53,221,255,.08),inset 0 0 32px rgba(255,46,166,.05);
+}
+.osPortalRing:before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:inherit;
+  border-top:4px solid var(--os-a);
+  border-right:3px solid transparent;
+}
+.ring1{animation:osPortalSpin 12s linear infinite}
+.ring2{inset:13%;animation:osPortalSpin 8s linear infinite reverse}
+.ring3{inset:28%;animation:osPortalSpin 5s linear infinite}
+.osPortalEnergy{
+  position:absolute;
+  inset:18%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,rgba(255,255,255,.9) 0 1%,var(--os-a) 3%,var(--os-b) 20%,rgba(255,46,166,.3) 42%,transparent 70%);
+  filter:blur(2px);
+  box-shadow:0 0 90px var(--os-b);
+  animation:osPortalEnergy 2.5s ease-in-out infinite alternate;
+}
+.osPortalCore{
+  position:absolute;
+  inset:34%;
+  display:grid;
+  place-content:center;
+  text-align:center;
+  border-radius:50%;
+  color:#fff;
+  background:rgba(3,5,14,.7);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+}
+.osPortalCore span,.osPortalCore small{
+  color:var(--os-a);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.16em;
+}
+.osPortalCore strong{
+  margin:5px 0;
+  font-size:clamp(17px,2vw,29px);
+  line-height:.9;
+}
+.compactMusicTvHero .heroContent,.compactMusicTvHero .livePanel{
+  position:relative;
+  z-index:3;
+}
+.compactMusicTvHero .livePanel{
+  transform:translateZ(40px);
+}
+
+.tvGraphicSection{
+  transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .65s ease,opacity .65s ease;
+}
+.tvGraphicSection.os-section-active{
+  transform:translateZ(35px) scale(1.008);
+  filter:brightness(1.07);
+}
+.tvGraphicSection:not(.os-section-active).os-section-muted{
+  opacity:.72;
+  filter:saturate(.8) brightness(.85);
+}
+
+.osNetworkRibbon{
+  position:relative;
+  z-index:4;
+  display:grid;
+  grid-template-columns:repeat(4,1fr) minmax(160px,1.4fr);
+  gap:8px;
+  margin:16px 0 86px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  background:linear-gradient(110deg,rgba(5,7,17,.9),rgba(19,9,34,.9));
+  box-shadow:0 18px 55px rgba(0,0,0,.35);
+}
+.osNetworkRibbon>div:not(.osRibbonWave){
+  padding:8px 10px;
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+}
+.osNetworkRibbon span{
+  display:block;
+  color:rgba(255,255,255,.42);
+  font-size:6px;
+  font-weight:950;
+  letter-spacing:.13em;
+}
+.osNetworkRibbon strong{
+  display:block;
+  margin-top:3px;
+  color:var(--os-a);
+  font-size:9px;
+  letter-spacing:.08em;
+}
+.osRibbonWave{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:4px;
+  padding:0 10px;
+}
+.osRibbonWave i{
+  width:4px;
+  height:10px;
+  border-radius:3px;
+  background:linear-gradient(to top,var(--os-a),var(--os-c));
+  animation:osRibbonWave .75s ease-in-out infinite alternate;
+}
+.osRibbonWave i:nth-child(2n){height:23px;animation-delay:.1s}
+.osRibbonWave i:nth-child(3n){height:16px;animation-delay:.2s}
+.osRibbonWave i:nth-child(4n){height:31px;animation-delay:.3s}
+
+body.os-low-intensity{
+  --os-intensity:.28;
+}
+body.os-low-intensity #networkOSCanvas,
+body.os-low-intensity .osOrbitalFrame,
+body.os-low-intensity .osHorizon{opacity:.18}
+body.os-low-intensity .osGlow{opacity:.08}
+body.os-low-intensity .osNoise{display:none}
+
+body.tv-theme-morning{--os-a:#ffe369;--os-b:#ff9f59;--os-c:#ff5fa2}
+body.tv-theme-trance{--os-a:#42e8ff;--os-b:#525dff;--os-c:#b649ff}
+body.tv-theme-retro{--os-a:#ffd45c;--os-b:#ff7a59;--os-c:#ff3db7}
+body.tv-theme-eurodance{--os-a:#55f4ff;--os-b:#884eff;--os-c:#ff26b9}
+body.tv-theme-fredagsbar{--os-a:#6cffb5;--os-b:#35ddff;--os-c:#ffce52}
+body.tv-theme-summer{--os-a:#62f4ff;--os-b:#ffe15a;--os-c:#ff7f9e}
+
+@keyframes osShellReveal{
+  from{opacity:0;filter:blur(18px);transform:scale(1.04)}
+  to{opacity:1;filter:none;transform:none}
+}
+@keyframes osGridTravel{from{background-position:0 0,0 0}to{background-position:0 88px,70px 0}}
+@keyframes osNoiseMove{0%{transform:translate(0)}25%{transform:translate(1%,-1%)}50%{transform:translate(-1%,1%)}75%{transform:translate(1%,1%)}}
+@keyframes osLogoFlow{to{background-position:220% center}}
+@keyframes osSceneReveal{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.68);filter:blur(16px)}
+  24%,62%{opacity:1;transform:translate(-50%,-50%) scale(1);filter:none}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.18);filter:blur(8px)}
+}
+@keyframes osOrbitA{to{transform:rotate(360deg) rotateX(18deg)}}
+@keyframes osOrbitB{to{transform:rotate(360deg) rotateY(26deg)}}
+@keyframes osCorePulse{to{transform:scale(1.3);filter:brightness(1.35)}}
+@keyframes osSignalBars{to{transform:scaleY(.38);opacity:.4}}
+@keyframes osShockwave{
+  0%{opacity:.9;transform:translate(-50%,-50%) scale(.1);box-shadow:0 0 25px var(--os-a)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(48);box-shadow:0 0 90px var(--os-c)}
+}
+@keyframes osPortalSpin{to{transform:rotate(360deg)}}
+@keyframes osPortalEnergy{to{transform:scale(1.12);filter:blur(5px) brightness(1.3)}}
+@keyframes osRibbonWave{to{transform:scaleY(.35);opacity:.45}}
+
+@media(max-width:1050px){
+  .osOrbitalFrame{right:-22vw;width:60vw;height:60vw}
+  .compactMusicTvHero{grid-template-columns:1fr!important}
+  .osHeroPortal{right:18%;width:60vw;opacity:.38}
+  .osNetworkRibbon{grid-template-columns:1fr 1fr 1fr}
+  .osNetworkRibbon>div:nth-child(4){display:none}
+  .osRibbonWave{grid-column:1/-1;justify-content:center}
+}
+@media(max-width:720px){
+  .osController{
+    left:50%;right:auto;top:auto;bottom:62px;
+    flex-direction:row;
+    transform:translateX(-50%);
+    max-width:calc(100vw - 16px);
+    overflow:auto;
+  }
+  .osController button,.osController button:hover,.osController button.is-active{
+    width:42px;
+    grid-template-columns:28px 0fr;
+  }
+  .osController span{display:none}
+  .osOrbitalFrame{right:-42vw;top:17vh;width:96vw;height:96vw;opacity:.25}
+  .osSignalReadout{display:none}
+  .osHeroPortal{right:5%;width:88vw;opacity:.26}
+  .osNetworkRibbon{grid-template-columns:1fr 1fr;margin-bottom:120px}
+  .osNetworkRibbon>div:nth-child(3){display:none}
+  .osSceneTitle strong{font-size:18vw}
+}
+@media(prefers-reduced-motion:reduce){
+  .osBootSequence{display:none}
+  body.networkOsBooting{overflow:auto}
+  .osGlow,.osHorizon,.osNoise,.osOrbit,.osCore,.osPortalRing,.osPortalEnergy,.osRibbonWave i,.osSignalReadout i{animation:none!important}
+  #networkOSCanvas{display:none}
+}
