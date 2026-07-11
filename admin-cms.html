@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10020">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10022">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -53,6 +53,21 @@
         <a href="/" target="_blank" class="previewLink">Open website ↗</a>
       </div>
     </header>
+
+    
+    <section id="connectionPanel" class="connectionPanel" hidden>
+      <div class="connectionPanelIcon" id="connectionPanelIcon">!</div>
+      <div class="connectionPanelCopy">
+        <span id="connectionPanelKicker">CONNECTION CHECK</span>
+        <h2 id="connectionPanelTitle">The control room could not connect</h2>
+        <p id="connectionPanelMessage">Check the details below and try again.</p>
+        <div id="connectionPanelDetails" class="connectionPanelDetails"></div>
+      </div>
+      <div class="connectionPanelActions">
+        <button id="retryConnection">Try again</button>
+        <button id="forgetPassword" class="secondary">Forget saved password</button>
+      </div>
+    </section>
 
     <section id="loadingState" class="loadingState">
       <div class="loadingMark">TV</div>
@@ -265,6 +280,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=10020"></script>
+<script src="assets/js/visual-cms.js?v=10022"></script>
 </body>
 </html>
