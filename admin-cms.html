@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=1100">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=1200">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -22,6 +22,7 @@
     <nav id="cmsNav">
       <button data-screen="dashboard" class="active"><i>⌂</i><span>Dashboard</span></button>
       <button data-screen="platform"><i>◆</i><span>Content Platform</span></button>
+      <button data-screen="experience"><i>◉</i><span>Broadcast Experience</span></button>
       <button data-screen="homepage"><i>✦</i><span>Homepage</span></button>
       <button data-screen="modules"><i>▦</i><span>Content blocks</span></button>
       <button data-screen="shows"><i>▶</i><span>Shows</span></button>
@@ -283,6 +284,167 @@
       </section>
 
 
+      
+      <section data-screen-panel="experience" class="screen">
+        <div class="screenIntro experienceHero">
+          <div>
+            <span>V1200 · BROADCAST EXPERIENCE</span>
+            <h2>Shape what viewers see, hear and interact with</h2>
+            <p>This area combines the existing visual, interactive and broadcast-facing tools without replacing the stable CMS or Main Overlay.</p>
+          </div>
+          <div class="experienceHeroState">
+            <small>MAIN OVERLAY</small>
+            <strong>PROTECTED</strong>
+            <span>Logo · Top ticker · Theme ticker · Twitch chat</span>
+          </div>
+        </div>
+
+        <section class="experienceStatusGrid">
+          <article>
+            <span>Active theme</span>
+            <strong id="experienceTheme">—</strong>
+            <small>Current broadcast identity</small>
+          </article>
+          <article>
+            <span>Active polls</span>
+            <strong id="experiencePolls">0</strong>
+            <small>Viewer interaction</small>
+          </article>
+          <article>
+            <span>Playlists</span>
+            <strong id="experiencePlaylists">0</strong>
+            <small>Show and Spotify content</small>
+          </article>
+          <article>
+            <span>Special events</span>
+            <strong id="experienceEvents">0</strong>
+            <small>Posters and campaigns</small>
+          </article>
+          <article>
+            <span>OBS-ready modules</span>
+            <strong id="experienceOverlayModules">0</strong>
+            <small>Separate widget content</small>
+          </article>
+        </section>
+
+        <div class="experienceSectionHead">
+          <div>
+            <span>VIEWER EXPERIENCE</span>
+            <h3>Broadcast-facing tools</h3>
+          </div>
+          <p>All active buttons reuse existing stable editors and content modules.</p>
+        </div>
+
+        <section class="experienceGrid">
+          <button class="experienceCard live" data-screen-jump="theme">
+            <i>◐</i>
+            <span>VISUAL IDENTITY</span>
+            <strong>Theme & Tickers</strong>
+            <p>Choose theme, top ticker and programme-specific messages.</p>
+            <b>Open controls →</b>
+          </button>
+
+          <button class="experienceCard live" data-screen-jump="polls">
+            <i>✓</i>
+            <span>INTERACTION</span>
+            <strong>Polls & Voting</strong>
+            <p>Create questions and prepare website or future OBS voting.</p>
+            <b>Manage polls →</b>
+          </button>
+
+          <button class="experienceCard live" data-screen-jump="playlists">
+            <i>♫</i>
+            <span>MUSIC DISCOVERY</span>
+            <strong>Playlists</strong>
+            <p>Spotify links, covers, show descriptions and themed playlists.</p>
+            <b>Manage playlists →</b>
+          </button>
+
+          <button class="experienceCard live" data-quick-create="poster">
+            <i>▣</i>
+            <span>CAMPAIGNS</span>
+            <strong>Special Event</strong>
+            <p>Create poster-based events for website and later OBS display.</p>
+            <b>Create campaign →</b>
+          </button>
+
+          <button class="experienceCard live" data-screen-jump="modules">
+            <i>▦</i>
+            <span>WIDGET CONTENT</span>
+            <strong>OBS-ready Blocks</strong>
+            <p>See which content blocks are enabled for separate overlay use.</p>
+            <b>View content →</b>
+          </button>
+
+          <button class="experienceCard planned" disabled>
+            <i>▶</i>
+            <span>PLANNED CONNECTION</span>
+            <strong>Now Playing</strong>
+            <p>Reserved for Serato Pro and Spotify live track information.</p>
+            <b>Coming later</b>
+          </button>
+
+          <button class="experienceCard planned" disabled>
+            <i>★</i>
+            <span>PLANNED MODULE</span>
+            <strong>Sponsor Rotation</strong>
+            <p>Future timed sponsor logos for website and separate OBS widgets.</p>
+            <b>Coming later</b>
+          </button>
+
+          <button class="experienceCard planned" disabled>
+            <i>⚡</i>
+            <span>PLANNED MODULE</span>
+            <strong>Live Moments</strong>
+            <p>Future follows, subs, raids, bits and request highlights.</p>
+            <b>Coming later</b>
+          </button>
+        </section>
+
+        <section class="experienceOverlayMap">
+          <header>
+            <span>BROADCAST MAP</span>
+            <h3>Protected core and separate widgets</h3>
+          </header>
+
+          <div class="experienceMapGrid">
+            <article class="protected">
+              <small>MAIN OVERLAY</small>
+              <strong>Protected foundation</strong>
+              <ul>
+                <li>One DJ FOLSOE logo</li>
+                <li>Top ticker</li>
+                <li>Theme ticker</li>
+                <li>Twitch chat</li>
+              </ul>
+            </article>
+
+            <article>
+              <small>SEPARATE OBS SOURCES</small>
+              <strong>Expandable experience</strong>
+              <ul>
+                <li>Polls and results</li>
+                <li>Posters and campaigns</li>
+                <li>Playlists</li>
+                <li>Top 10 / Top 20</li>
+              </ul>
+            </article>
+
+            <article>
+              <small>FUTURE LIVE DATA</small>
+              <strong>Reserved connections</strong>
+              <ul>
+                <li>Serato Now Playing</li>
+                <li>Spotify track data</li>
+                <li>Live activity moments</li>
+                <li>Sponsor rotation</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </section>
+
+
       <section data-screen-panel="homepage" class="screen">
         <div class="screenIntro"><div><span>Homepage</span><h2>What visitors see first</h2><p>Edit the main message, next show and community call-to-action.</p></div><button id="saveHomepage">Save homepage</button></div>
         <div class="editorLayout">
@@ -538,6 +700,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=1100"></script>
+<script src="assets/js/visual-cms.js?v=1200"></script>
 </body>
 </html>
