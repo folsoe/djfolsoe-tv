@@ -2,6 +2,7 @@ const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const $=id=>document.getElementById(id);
 let state=null,currentModuleFilter='all',draggedModuleId='',pendingConfirm=null;
 let wizardState={type:'',step:0,module:null};
+let homepageBuilder=null,builderSelected='hero',builderDirty=false,builderDragId='';
 const themeColors={weekend:'#55e5ff',trance:'#4ce8ff',fredagsbar:'#72ffb7',eurodance:'#ff35b8',retro:'#ffd063',popup:'#ff496f',morning:'#ffd96a',summer:'#61efff',danske:'#ff5454',top20:'#8066ff'};
 const typeIcons={poster:'▣','ranked-list':'10',story:'✎',poll:'✓',playlist:'♫','news-feed':'▤',text:'T',video:'▶',embed:'<>','now-playing':'♫'};
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -47,6 +48,153 @@ function toLocalInput(value){if(!value)return'';const d=new Date(value);if(Numbe
 function activeThemes(){return state?.themes||[]}
 function themeOptions(selected='all',includeAll=true){return `${includeAll?`<option value="all" ${selected==='all'?'selected':''}>All themes</option>`:''}${activeThemes().map(t=>`<option value="${esc(t.id)}" ${selected===t.id?'selected':''}>${esc(t.title)}</option>`).join('')}`}
 function showOptions(selected='all'){const shows=state?.core?.featuredShows||[];return `<option value="all">All shows</option>${shows.map(s=>{const id=(s.id||s.title||'').toLowerCase().replace(/\s+/g,'-');return `<option value="${esc(id)}" ${selected===id?'selected':''}>${esc(s.title)}</option>`}).join('')}`}
+
+
+const builderLabels={
+  hero:['Hero','H'],
+  next:['Up next','N'],
+  featured:['Featured content','F'],
+  shows:['Shows','S'],
+  musicNews:['Music stories','M'],
+  top20:['Top 20','20'],
+  community:['Community','C'],
+  commands:['Join the show','!'],
+  requests:['Request line','R']
+};
+function builderDefaults(){
+  return {
+    version:'homepage-builder/v1',
+    devicePreview:'desktop',
+    sections:[
+      {id:'hero',enabled:true,order:10,style:'cinematic'},
+      {id:'next',enabled:true,order:20,style:'strip'},
+      {id:'featured',enabled:true,order:30,style:'editorial'},
+      {id:'shows',enabled:true,order:40,style:'cards'},
+      {id:'musicNews',enabled:true,order:50,style:'editorial'},
+      {id:'top20',enabled:true,order:60,style:'chart'},
+      {id:'community',enabled:true,order:70,style:'spotlight'},
+      {id:'commands',enabled:true,order:80,style:'actions'},
+      {id:'requests',enabled:true,order:90,style:'feature'}
+    ],
+    sectionContent:{
+      hero:{eyebrow:'LIVE MUSIC FROM DENMARK',title:'DJ FOLSOE',subtitle:'Live music, requests and good company',text:'Themed DJ shows, audience requests, weekly charts and a welcoming live community — broadcast from Denmark.',primaryLabel:'Watch live',secondaryLabel:'Make a request'},
+      next:{eyebrow:'UP NEXT',title:'Next show',text:'The next DJ FOLSOE broadcast will be announced here soon.'},
+      shows:{eyebrow:'SIGNATURE PROGRAMMES',title:'Find your show',text:'From bright morning sessions to trance journeys, retro memories and Friday-night energy.'},
+      musicNews:{eyebrow:'SELECTED FOR THE CURRENT SOUND',title:'Latest music stories'},
+      top20:{eyebrow:'DJ FOLSOE COUNTDOWN',title:"This week's Top 20",text:'Viewer favourites, discoveries and the tracks shaping the next show.'},
+      community:{eyebrow:'LIVE COMMUNITY',title:'What is happening now'},
+      commands:{eyebrow:'TAKE PART ON TWITCH',title:'Join the show',text:'Request a song, vote, react or bring extra energy to the live broadcast.'},
+      requests:{eyebrow:'REQUEST LINE',title:'Hear your song on air',text:'Send !request Artist - Title in Twitch chat and your choice may join the show.',buttonLabel:'Join the conversation'}
+    }
+  };
+}
+function initHomepageBuilder(){
+  const defaults=builderDefaults();
+  homepageBuilder={
+    ...defaults,
+    ...(state?.homepageBuilder||{}),
+    sections:Array.isArray(state?.homepageBuilder?.sections)?state.homepageBuilder.sections:defaults.sections,
+    sectionContent:{...defaults.sectionContent,...(state?.homepageBuilder?.sectionContent||{})}
+  };
+  builderSelected=homepageBuilder.sections.find(s=>s.enabled)?.id||'hero';
+  builderDirty=false;
+  renderHomepageBuilder();
+}
+function markBuilderDirty(){
+  builderDirty=true;
+  const status=$('builderStatus');if(status){status.className='builderStatus dirty';$('builderStatusText').textContent='Unsaved changes'}
+}
+function markBuilderSaved(){
+  builderDirty=false;
+  const status=$('builderStatus');if(status){status.className='builderStatus saved';$('builderStatusText').textContent='All changes saved'}
+}
+function builderSection(id){return homepageBuilder.sections.find(s=>s.id===id)}
+function builderContent(id){return homepageBuilder.sectionContent[id]||(homepageBuilder.sectionContent[id]={})}
+function renderHomepageBuilder(){
+  if(!homepageBuilder)return;
+  $('builderThemePreview').innerHTML=themeOptions(state?.core?.theme?.id||'weekend',false);
+  renderBuilderList();
+  renderBuilderCanvas();
+  renderBuilderInspector();
+  const frame=$('builderCanvasFrame');frame.className=`builderCanvasFrame ${homepageBuilder.devicePreview||'desktop'}`;
+  document.querySelectorAll('[data-builder-device]').forEach(b=>b.classList.toggle('active',b.dataset.builderDevice===homepageBuilder.devicePreview));
+}
+function renderBuilderList(){
+  const sorted=[...homepageBuilder.sections].sort((a,b)=>a.order-b.order);
+  $('builderSectionList').innerHTML=sorted.map(section=>{
+    const [label,icon]=builderLabels[section.id]||[section.id,'•'];
+    return `<article class="builderSectionItem ${section.id===builderSelected?'active':''} ${section.enabled?'':'disabled'}" draggable="true" data-builder-section="${esc(section.id)}"><span class="builderSectionDrag">⋮⋮</span><span class="builderSectionIcon">${esc(icon)}</span><div><strong>${esc(label)}</strong><small>${esc(section.style||'default')}</small></div><button class="builderSectionToggle ${section.enabled?'on':''}" data-builder-toggle="${esc(section.id)}" aria-label="Toggle section"></button></article>`;
+  }).join('');
+  installBuilderDrag();
+}
+function installBuilderDrag(){
+  document.querySelectorAll('[data-builder-section]').forEach(row=>{
+    row.addEventListener('dragstart',()=>{builderDragId=row.dataset.builderSection;row.style.opacity='.4'});
+    row.addEventListener('dragend',()=>{row.style.opacity='';builderDragId=''});
+    row.addEventListener('dragover',e=>e.preventDefault());
+    row.addEventListener('drop',e=>{
+      e.preventDefault();const target=row.dataset.builderSection;
+      if(!builderDragId||builderDragId===target)return;
+      const sorted=[...homepageBuilder.sections].sort((a,b)=>a.order-b.order);
+      const from=sorted.findIndex(s=>s.id===builderDragId),to=sorted.findIndex(s=>s.id===target);
+      sorted.splice(to,0,sorted.splice(from,1)[0]);
+      sorted.forEach((s,i)=>s.order=(i+1)*10);
+      homepageBuilder.sections=sorted;markBuilderDirty();renderHomepageBuilder();
+    });
+  });
+}
+function renderBuilderCanvas(){
+  const accent=themeColors[$('builderThemePreview')?.value||state?.core?.theme?.id||'weekend']||'#55e5ff';
+  $('builderCanvas').style.setProperty('--preview-accent',accent);
+  const sorted=[...homepageBuilder.sections].sort((a,b)=>a.order-b.order);
+  $('builderCanvas').innerHTML=sorted.map(section=>previewSection(section)).join('');
+}
+function previewSection(section){
+  const active=section.id===builderSelected?'active':'';
+  const disabled=section.enabled?'':'disabled';
+  const c=builderContent(section.id);
+  const wrap=(body)=>`<section class="builderPreviewSection ${active} ${disabled}" data-preview-section="${section.id}">${body}</section>`;
+  if(section.id==='hero')return wrap(`<div class="builderPreviewHero"><div class="builderPreviewHeroCopy"><small>${esc(c.eyebrow||'')}</small><h2>${esc(c.title||'DJ FOLSOE')}</h2><h3>${esc(c.subtitle||'')}</h3><p>${esc(c.text||'')}</p><div class="builderPreviewHeroActions"><span>${esc(c.primaryLabel||'Watch live')}</span><span>${esc(c.secondaryLabel||'Make a request')}</span></div></div><div class="builderPreviewPortrait"></div></div>`);
+  if(section.id==='next')return wrap(`<div class="builderPreviewStrip"><div><small>${esc(c.eyebrow||'UP NEXT')}</small><h3>${esc(c.title||'Next show')}</h3><p>${esc(c.text||'')}</p></div><div class="builderPreviewFacts"><div><span>STARTS</span><strong>Coming soon</strong></div><div><span>COUNTDOWN</span><strong>TBA</strong></div><div><span>SOUND</span><strong>${esc(state?.core?.theme?.title||'Music TV')}</strong></div></div></div>`);
+  if(section.id==='featured')return wrap(`<div class="builderPreviewContent"><div class="builderPreviewHeader"><div><small>FEATURED</small><h3>Dynamic content blocks</h3></div><p>Special events, playlists and other featured content appear here.</p></div><div class="builderPreviewCards"><article><small>POSTER</small><strong>Special event</strong></article><article><small>PLAYLIST</small><strong>Featured playlist</strong></article><article><small>STORY</small><strong>Editorial feature</strong></article></div></div>`);
+  if(section.id==='shows')return wrap(`<div class="builderPreviewContent"><div class="builderPreviewHeader"><div><small>${esc(c.eyebrow||'')}</small><h3>${esc(c.title||'Shows')}</h3></div><p>${esc(c.text||'')}</p></div><div class="builderPreviewCards"><article><small>01</small><strong>Retro Hits</strong></article><article><small>02</small><strong>Trance Tuesday</strong></article><article><small>03</small><strong>Fredagsbar</strong></article></div></div>`);
+  if(section.id==='musicNews')return wrap(`<div class="builderPreviewContent builderPreviewNews"><div class="builderPreviewHeader"><div><small>${esc(c.eyebrow||'')}</small><h3>${esc(c.title||'Music stories')}</h3></div></div><div class="builderPreviewNewsGrid"><article><small>FEATURED</small><strong>Lead music story</strong></article><article><small>NEWS</small><strong>Latest release</strong></article><article><small>NEWS</small><strong>Festival update</strong></article></div></div>`);
+  if(section.id==='top20')return wrap(`<div class="builderPreviewContent"><div class="builderPreviewHeader"><div><small>${esc(c.eyebrow||'')}</small><h3>${esc(c.title||'Top 20')}</h3></div><p>${esc(c.text||'')}</p></div><div class="builderPreviewChartRows">${[1,2,3,4].map(i=>`<div><b>${i}</b><strong>Artist — Track title</strong><span>${i===1?'NEW':'UP'}</span></div>`).join('')}</div></div>`);
+  if(section.id==='community')return wrap(`<div class="builderPreviewContent"><div class="builderPreviewHeader"><div><small>${esc(c.eyebrow||'')}</small><h3>${esc(c.title||'Community')}</h3></div></div><div class="builderPreviewStrip"><div><strong>New channel moment</strong><p>Follows, raids, requests and other activity.</p></div><div class="builderPreviewFacts"><div><span>MOMENTS</span><strong>24</strong></div><div><span>TODAY</span><strong>8</strong></div><div><span>PEOPLE</span><strong>12</strong></div></div></div></div>`);
+  if(section.id==='commands')return wrap(`<div class="builderPreviewContent"><div class="builderPreviewHeader"><div><small>${esc(c.eyebrow||'')}</small><h3>${esc(c.title||'Join the show')}</h3></div><p>${esc(c.text||'')}</p></div><div class="builderPreviewActions"><div><span>REQUEST</span><strong>!request</strong></div><div><span>VOTE</span><strong>!vote</strong></div><div><span>HYPE</span><strong>!hype</strong></div><div><span>LOVE</span><strong>!love</strong></div></div></div>`);
+  if(section.id==='requests')return wrap(`<div class="builderPreviewRequest"><div><small>${esc(c.eyebrow||'')}</small><h3>${esc(c.title||'Hear your song on air')}</h3><p>${esc(c.text||'')}</p></div><span>${esc(c.buttonLabel||'Join the conversation')}</span></div>`);
+  return wrap(`<div class="builderPreviewContent"><h3>${esc(section.id)}</h3></div>`);
+}
+function renderBuilderInspector(){
+  const section=builderSection(builderSelected);
+  if(!section){$('builderInspectorBody').innerHTML='<p class="inlineEmpty">Select a section.</p>';return}
+  const c=builderContent(builderSelected);
+  const [label]=builderLabels[builderSelected]||[builderSelected];
+  $('builderInspectorTitle').textContent=label;
+  let fields='';
+  if(builderSelected==='featured'){
+    fields=`<p class="note">Featured content is controlled by published content blocks. Here you control only visibility, order and style.</p>`;
+  }else{
+    fields+=`<label>Small heading<input data-builder-content="eyebrow" value="${esc(c.eyebrow||'')}"></label>`;
+    fields+=`<label>Main heading<input data-builder-content="title" value="${esc(c.title||'')}"></label>`;
+    if(['hero'].includes(builderSelected))fields+=`<label>Second line<input data-builder-content="subtitle" value="${esc(c.subtitle||'')}"></label>`;
+    if(['hero','next','shows','top20','commands','requests'].includes(builderSelected))fields+=`<label>Description<textarea data-builder-content="text">${esc(c.text||'')}</textarea></label>`;
+    if(builderSelected==='hero')fields+=`<label>Primary button<input data-builder-content="primaryLabel" value="${esc(c.primaryLabel||'')}"></label><label>Secondary button<input data-builder-content="secondaryLabel" value="${esc(c.secondaryLabel||'')}"></label>`;
+    if(builderSelected==='requests')fields+=`<label>Button label<input data-builder-content="buttonLabel" value="${esc(c.buttonLabel||'')}"></label>`;
+  }
+  fields+=`<label>Section style<div class="builderStyleGrid">${['default','cinematic','editorial','compact'].map(style=>`<label><input type="radio" name="builderStyle" value="${style}" ${section.style===style?'checked':''}><span>${style}</span></label>`).join('')}</div></label>`;
+  fields+=`<button id="builderDuplicateSection" class="secondary">Duplicate is handled through content blocks</button>`;
+  $('builderInspectorBody').innerHTML=fields;
+}
+async function saveHomepageBuilder(publish=false){
+  try{
+    const result=await api('/api/cms/admin/homepage-builder',{method:'POST',body:JSON.stringify({homepageBuilder})});
+    homepageBuilder=result.homepageBuilder;
+    state.homepageBuilder=homepageBuilder;
+    markBuilderSaved();
+    toast(publish?'Homepage published.':'Homepage draft saved.');
+  }catch(error){toast(error.message,true)}
+}
 
 function openWizard(type=''){
   wizardState={type:type||'',step:type?1:0,module:null};
@@ -176,7 +324,7 @@ async function connect({silent=false}={}){
     const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
   }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
 }
-function renderAll(){renderDashboard();renderSystemStatus();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+function renderAll(){renderDashboard();renderSystemStatus();initHomepageBuilder();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
 function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
 function renderSystemStatus(){
   const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
@@ -230,7 +378,11 @@ async function setTheme(id){try{const result=await api('/api/cms/admin/theme',{m
 async function toggleNews(id,field){const a=state.news.articles.find(x=>x.id===id);if(!a)return;try{const result=await api('/api/news/admin/article',{method:'POST',body:JSON.stringify({id,patch:{[field]:!a[field]}})});Object.assign(a,result.article);renderNews();toast('Story updated.')}catch(error){toast(error.message,true)}}
 async function deleteNews(id){confirmAction('Delete this story?','This cannot be undone.',async()=>{try{await api('/api/cms/admin/news?id='+encodeURIComponent(id),{method:'DELETE'});state.news.articles=state.news.articles.filter(a=>a.id!==id);renderNews();toast('Story deleted.')}catch(error){toast(error.message,true)}})}
 async function saveSources(){try{const sources=[...document.querySelectorAll('[data-source-index]')].map((row,i)=>({id:state.news.sources[i]?.id||`source-${i}`,name:row.querySelector('[data-source-field="name"]').value,url:row.querySelector('[data-source-field="url"]').value,priority:Number(row.querySelector('[data-source-field="priority"]').value),enabled:row.querySelector('[data-source-field="enabled"]').checked}));const result=await api('/api/news/admin/sources',{method:'POST',body:JSON.stringify({sources})});state.news.sources=result.sources;toast('News sources saved.')}catch(error){toast(error.message,true)}}
-document.addEventListener('click',async event=>{const el=event.target.closest('button,a,summary');if(!el)return;if(el.dataset.screen)openScreen(el.dataset.screen);if(el.dataset.screenJump)openScreen(el.dataset.screenJump);if(el.dataset.quickCreate)openWizard(el.dataset.quickCreate);if(el.dataset.editModule){const m=state.modules.find(x=>x.id===el.dataset.editModule);if(m)openContentEditor(m.type,m)}if(el.dataset.duplicateModule)duplicateModule(el.dataset.duplicateModule);if(el.dataset.deleteModule)deleteModule(el.dataset.deleteModule);
+document.addEventListener('click',async event=>{const el=event.target.closest('button,a,summary');if(!el)return;if(el.dataset.screen)openScreen(el.dataset.screen);if(el.dataset.screenJump)openScreen(el.dataset.screenJump);if(el.dataset.quickCreate)openWizard(el.dataset.quickCreate);
+if(el.dataset.builderDevice){homepageBuilder.devicePreview=el.dataset.builderDevice;markBuilderDirty();renderHomepageBuilder();}
+if(el.dataset.builderSection){builderSelected=el.dataset.builderSection;renderHomepageBuilder();}
+if(el.dataset.builderToggle){const section=builderSection(el.dataset.builderToggle);if(section){section.enabled=!section.enabled;markBuilderDirty();renderHomepageBuilder();}}
+if(el.dataset.editModule){const m=state.modules.find(x=>x.id===el.dataset.editModule);if(m)openContentEditor(m.type,m)}if(el.dataset.duplicateModule)duplicateModule(el.dataset.duplicateModule);if(el.dataset.deleteModule)deleteModule(el.dataset.deleteModule);
 if(el.dataset.togglePublish)quickToggleModule(el.dataset.togglePublish,{status:state.modules.find(m=>m.id===el.dataset.togglePublish)?.status==='published'?'draft':'published'});
 if(el.dataset.toggleWebsite){const m=state.modules.find(x=>x.id===el.dataset.toggleWebsite);quickToggleModule(el.dataset.toggleWebsite,{website:!(m?.surfaces?.website!==false)});}
 if(el.dataset.closeWizard!==undefined)closeWizard();
@@ -310,4 +462,25 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('input[name="wizardPublishMode"]').forEach(input=>input.addEventListener('change',()=>{
     $('wizardScheduleFields').hidden=document.querySelector('input[name="wizardPublishMode"]:checked')?.value!=='scheduled';
   }));
+});
+
+document.addEventListener('input',event=>{
+  const field=event.target.closest('[data-builder-content]');
+  if(field&&homepageBuilder){
+    builderContent(builderSelected)[field.dataset.builderContent]=field.value;
+    markBuilderDirty();renderBuilderCanvas();
+  }
+});
+document.addEventListener('change',event=>{
+  if(event.target.name==='builderStyle'&&homepageBuilder){
+    const section=builderSection(builderSelected);if(section)section.style=event.target.value;
+    markBuilderDirty();renderBuilderList();renderBuilderCanvas();
+  }
+  if(event.target.id==='builderThemePreview'){
+    renderBuilderCanvas();
+  }
+});
+document.addEventListener('DOMContentLoaded',()=>{
+  $('builderSaveDraft')?.addEventListener('click',()=>saveHomepageBuilder(false));
+  $('builderPublish')?.addEventListener('click',()=>saveHomepageBuilder(true));
 });
