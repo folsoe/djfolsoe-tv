@@ -1,0 +1,302 @@
+
+/* =========================================================
+   DJ FOLSOE V1001 — UNIFIED EXPERIENCE VISUAL RESET
+   One calm broadcast system. No wallpaper themes. No fixed UI pile.
+   ========================================================= */
+:root{
+  --ux-primary:#ffd063;
+  --ux-secondary:#ff785c;
+  --ux-highlight:#ff42ad;
+  --ux-surface:#171020;
+  --ux-ink:#f7f8fc;
+  --ux-muted:#aeb4c5;
+  --ux-panel:#0c1020;
+  --ux-panel-2:#12172a;
+  --ux-line:rgba(255,255,255,.10);
+  --ux-radius:26px;
+  --ux-max:1480px;
+}
+
+html{background:#060812}
+body{
+  margin:0!important;
+  color:var(--ux-ink)!important;
+  background:
+    linear-gradient(180deg,#060812 0,#0a0d18 42%,#070910 100%)!important;
+  font-family:Inter,"Segoe UI",Arial,sans-serif!important;
+  overflow-x:hidden;
+}
+
+/* Disable every permanent visual layer left by previous experiments. */
+.networkOS,.tvGraphicsEngine,.osController,.liveControlRoom,.osNetworkRibbon,
+.tvEngineTopBug,.tvEngineSideRail,.tvEngineCorner,.tvEngineSweep,.tvEngineGrid,
+.tvEngineScanlines,.tvEngineAurora,.osOrbitalFrame,.osAtmosphere,
+.osSignalReadout,.osActivityShockwave,.broadcastMoment,.osHeroPortal{
+  display:none!important;
+}
+
+/* Theme images are no longer global website wallpaper. */
+body::before,body::after,.tvShell::before,.tvShell::after{
+  content:none!important;
+  display:none!important;
+}
+.tvShell{
+  width:min(var(--ux-max),calc(100% - 32px))!important;
+  margin:0 auto!important;
+  padding:18px 0 64px!important;
+  background:none!important;
+  transform:none!important;
+  filter:none!important;
+}
+.heroBg{
+  background-image:none!important;
+  opacity:1!important;
+}
+.heroBg::before,.heroBg::after{content:none!important}
+
+/* One compact channel bar. */
+.channelHeader{
+  position:sticky!important;
+  top:10px!important;
+  z-index:100!important;
+  width:100%!important;
+  min-height:68px!important;
+  margin:0 0 18px!important;
+  padding:10px 14px!important;
+  border:1px solid var(--ux-line)!important;
+  border-radius:20px!important;
+  background:rgba(7,9,18,.88)!important;
+  box-shadow:0 18px 50px rgba(0,0,0,.28)!important;
+  backdrop-filter:blur(18px)!important;
+}
+.channelHeader::before,.channelHeader::after{content:none!important}
+.brandMark{gap:11px!important}
+.brandIcon{
+  width:42px!important;height:42px!important;border-radius:13px!important;
+  background:linear-gradient(135deg,var(--ux-primary),var(--ux-secondary),var(--ux-highlight))!important;
+  box-shadow:none!important;
+}
+.brandText strong{font-size:15px!important;letter-spacing:.08em!important}
+.brandText span{color:var(--ux-muted)!important}
+.mainNav{gap:5px!important}
+.mainNav a{
+  padding:9px 10px!important;border-radius:10px!important;
+  color:var(--ux-muted)!important;background:transparent!important;
+  font-size:10px!important;letter-spacing:.06em!important;
+}
+.mainNav a:hover{color:#fff!important;background:rgba(255,255,255,.06)!important}
+.watchButton{
+  border:0!important;border-radius:12px!important;
+  background:var(--ux-primary)!important;color:#080a10!important;
+  box-shadow:none!important;
+}
+
+/* Global editorial rhythm. */
+.portalMain{display:flex!important;flex-direction:column!important;gap:18px!important}
+.portalPanel,.tvSection,.activityPulseEngine,.heroPortal,.requestPanel{
+  position:relative!important;
+  margin:0!important;
+  border:1px solid var(--ux-line)!important;
+  border-radius:var(--ux-radius)!important;
+  background:linear-gradient(145deg,rgba(18,23,42,.95),rgba(8,11,22,.97))!important;
+  box-shadow:0 24px 65px rgba(0,0,0,.24)!important;
+  overflow:hidden!important;
+  transform:none!important;
+  filter:none!important;
+}
+.portalPanel::before,.portalPanel::after,.tvSection::before,.tvSection::after,
+.activityPulseEngine::before,.activityPulseEngine::after,.requestPanel::before,.requestPanel::after{
+  content:none!important;
+}
+[data-ux-module][hidden]{display:none!important}
+
+/* Hero: one designed composition, not a theme picture. */
+.compactMusicTvHero{
+  min-height:590px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr)!important;
+  align-items:stretch!important;
+  gap:0!important;
+  padding:0!important;
+  background:
+    linear-gradient(115deg,color-mix(in srgb,var(--ux-surface) 90%,#080a12) 0 58%,#0a0d18 58% 100%)!important;
+}
+.compactMusicTvHero::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:0!important;top:0!important;bottom:0!important;
+  width:8px!important;
+  background:linear-gradient(180deg,var(--ux-primary),var(--ux-secondary),var(--ux-highlight))!important;
+}
+.compactMusicTvHero::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  opacity:.22!important;
+  background:
+    linear-gradient(90deg,transparent 0 56%,rgba(255,255,255,.035) 56% 56.2%,transparent 56.2%),
+    repeating-linear-gradient(0deg,transparent 0 47px,rgba(255,255,255,.018) 48px)!important;
+}
+.heroContent{
+  position:relative!important;z-index:2!important;
+  display:flex!important;flex-direction:column!important;justify-content:center!important;
+  max-width:760px!important;padding:70px 56px!important;
+  background:none!important;
+}
+.heroContent>*{position:relative;z-index:2}
+.heroContent h1,.heroTitle{
+  max-width:800px!important;
+  margin:10px 0 18px!important;
+  color:#fff!important;
+  font-size:clamp(60px,8vw,124px)!important;
+  line-height:.78!important;
+  letter-spacing:-.075em!important;
+  text-transform:uppercase!important;
+  text-shadow:none!important;
+}
+.heroContent h2,.heroSubtitle{
+  max-width:650px!important;
+  font-size:clamp(25px,3.2vw,46px)!important;
+  line-height:.98!important;
+  letter-spacing:-.035em!important;
+}
+.heroContent p{max-width:650px!important;color:var(--ux-muted)!important;font-size:15px!important;line-height:1.55!important}
+.heroActions{display:flex!important;gap:10px!important;flex-wrap:wrap!important}
+.heroActions a,.heroActions button{
+  min-height:46px!important;padding:12px 18px!important;border-radius:12px!important;
+  font-weight:900!important;box-shadow:none!important;
+}
+.heroActions>*:first-child{background:var(--ux-primary)!important;color:#090b10!important}
+.heroActions>*:not(:first-child){background:rgba(255,255,255,.06)!important;color:#fff!important;border:1px solid var(--ux-line)!important}
+
+.uxThemeSignature{
+  position:absolute;left:54px;top:34px;z-index:4;
+  display:flex;align-items:center;gap:12px;
+  color:var(--ux-primary);
+}
+.uxThemeIndex{
+  display:grid;place-items:center;width:35px;height:26px;border:1px solid currentColor;border-radius:999px;
+  font-size:9px;font-weight:950;letter-spacing:.12em;
+}
+.uxThemeLines{display:flex;gap:3px;align-items:center}
+.uxThemeLines i{width:3px;height:14px;background:currentColor;border-radius:4px}
+.uxThemeLines i:nth-child(2){height:22px}.uxThemeLines i:nth-child(3){height:9px}
+.uxThemeSignature strong{font-size:9px;letter-spacing:.18em}
+
+/* One clean live monitor. */
+.livePanel,.broadcastMonitor{
+  position:relative!important;z-index:3!important;
+  align-self:center!important;
+  width:calc(100% - 44px)!important;
+  margin:22px!important;
+  padding:28px!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  border-radius:22px!important;
+  background:#0a0d19!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.livePanel::before,.livePanel::after{content:none!important}
+.metricGrid{gap:8px!important}
+.metricCard,.liveMetric{
+  min-height:80px!important;padding:14px!important;border-radius:14px!important;
+  background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.065)!important;
+  box-shadow:none!important;
+}
+
+/* Ticker and activity: editorial, not dashboard. */
+.tickerStrip{
+  margin:0 0 14px!important;
+  min-height:38px!important;padding:8px 15px!important;
+  border:1px solid var(--ux-line)!important;border-radius:14px!important;
+  background:#0a0d18!important;box-shadow:none!important;
+}
+.activityPulseEngine{padding:22px!important}
+.activityPulseEngine h2{font-size:clamp(30px,4vw,54px)!important;letter-spacing:-.045em!important}
+.activityPulseHero,.activityPulseCard,.activityTicker{
+  border-radius:16px!important;background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.06)!important;
+  box-shadow:none!important;
+}
+
+/* All section headings and cards share one language. */
+.panelHead,.sectionHead{padding:28px 30px 12px!important}
+.panelHead h2,.sectionHead h2{
+  color:#fff!important;font-size:clamp(34px,5vw,68px)!important;
+  line-height:.88!important;letter-spacing:-.055em!important;text-transform:uppercase!important;
+}
+.panelHead p,.sectionHead p,.eyebrow,.kicker{color:var(--ux-primary)!important;letter-spacing:.16em!important}
+.showGrid,.chartGrid,.commandGrid,.viewerCommandGrid,.top20Grid{
+  gap:10px!important;padding:12px 30px 30px!important;
+}
+.showCard,.chartCard,.commandCard,.viewerCommandCard,.top20Card{
+  border:1px solid rgba(255,255,255,.07)!important;
+  border-radius:16px!important;
+  background:rgba(255,255,255,.035)!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.showCard:hover,.commandCard:hover,.viewerCommandCard:hover{
+  transform:translateY(-2px)!important;
+  border-color:color-mix(in srgb,var(--ux-primary) 45%,transparent)!important;
+}
+.viewerCommandCard [class*="command" i],.commandCard [class*="command" i]{
+  background:linear-gradient(90deg,var(--ux-secondary),var(--ux-highlight))!important;
+  box-shadow:none!important;
+}
+
+/* Next and request become strong horizontal editorial panels. */
+.compactNextBroadcast,.compactRequestPanel{
+  padding:34px 36px!important;
+  background:
+    linear-gradient(105deg,var(--ux-surface),#0b0e19 70%)!important;
+}
+.compactRequestPanel{border-color:color-mix(in srgb,var(--ux-highlight) 30%,var(--ux-line))!important}
+.compactRequestPanel h2,.compactRequestPanel h3{
+  font-size:clamp(36px,6vw,78px)!important;line-height:.85!important;letter-spacing:-.06em!important;
+}
+.compactRequestPanel a,.compactRequestPanel button{
+  background:var(--ux-highlight)!important;color:#fff!important;border:0!important;box-shadow:none!important;
+}
+
+/* One simple footer, never fixed. */
+.siteFooter,.stationFooter{
+  position:relative!important;z-index:2!important;
+  margin:18px 0 0!important;padding:24px!important;
+  border:1px solid var(--ux-line)!important;border-radius:20px!important;
+  background:#090c16!important;box-shadow:none!important;
+}
+.siteFooter::before,.siteFooter::after{content:none!important}
+
+/* Module ordering classes are assigned by unified-experience.js. */
+[data-ux-module]{order:var(--ux-order,50)}
+
+/* Responsive: content first, decoration second. */
+@media(max-width:980px){
+  .compactMusicTvHero{grid-template-columns:1fr!important;min-height:auto!important}
+  .heroContent{padding:72px 30px 38px!important}
+  .livePanel,.broadcastMonitor{width:auto!important;margin:0 24px 24px!important}
+  .uxThemeSignature{left:30px;top:26px}
+  .mainNav{display:none!important}
+}
+@media(max-width:640px){
+  .tvShell{width:min(100% - 16px,var(--ux-max))!important;padding-top:8px!important}
+  .channelHeader{top:5px!important;min-height:58px!important;border-radius:16px!important}
+  .brandText span{display:none!important}
+  .watchButton{padding:9px 11px!important;font-size:9px!important}
+  .compactMusicTvHero{border-radius:20px!important}
+  .heroContent{padding:68px 20px 28px!important}
+  .heroContent h1,.heroTitle{font-size:clamp(55px,19vw,88px)!important}
+  .heroContent h2,.heroSubtitle{font-size:30px!important}
+  .livePanel,.broadcastMonitor{margin:0 12px 12px!important;padding:18px!important}
+  .metricGrid{grid-template-columns:1fr 1fr!important}
+  .panelHead,.sectionHead{padding:24px 18px 10px!important}
+  .showGrid,.chartGrid,.commandGrid,.viewerCommandGrid,.top20Grid{padding:10px 18px 22px!important}
+  .compactNextBroadcast,.compactRequestPanel{padding:28px 20px!important}
+  .activityPulseEngine{padding:18px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto!important}
+}
