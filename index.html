@@ -16,6 +16,7 @@
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
+  <link rel="stylesheet" href="assets/css/music-tv-2026.css?v=9340">
 </head>
 <body>
   <div class="tvShell">
@@ -28,16 +29,19 @@
     </header>
 
     <main id="top">
-      <section id="live" class="heroPortal">
+      <section id="live" class="heroPortal musicTvHero">
+        <div class="stationIdent" aria-hidden="true"><span>DJ FOLSOE</span><b>MUSIC TELEVISION</b><em>EST. DENMARK</em></div>
         <div class="heroBg" id="heroThemeBg"></div>
         <div class="heroContent">
+          <div class="broadcastEyeline"><span class="broadcastDot"></span><span>LIVE MUSIC NETWORK</span><i>2026 DIGITAL BROADCAST</i></div>
           <p class="eyebrow" id="heroEyebrow">MUSIC TV FROM DENMARK</p>
           <h1 id="heroTitle">DJ FOLSOE LIVE</h1>
           <h2 id="heroSubtitle">One channel. Live shows. Community energy.</h2>
           <p id="heroText">Modern live DJ shows, requests, chart countdowns and retro music television vibes from Denmark.</p>
           <div class="heroActions"><a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live</a><a class="secondary" href="#requests">Request a song</a></div>
         </div>
-        <aside class="livePanel">
+        <aside class="livePanel broadcastMonitor">
+          <div class="monitorChrome"><span>CHANNEL 01</span><span>FOLSOE TV</span><span>HD LIVE</span></div>
           <div class="livePill" id="livePill">OFFLINE</div>
           <h3 id="currentShow">Current broadcast</h3>
           <p id="streamTitle">Loading broadcast data...</p>
@@ -47,10 +51,13 @@
             <div><span>Sub goal</span><b id="metricSubGoal">0 / 0</b></div>
             <div><span>Theme</span><b id="metricTheme">Default</b></div>
           </div>
+                  <div class="signalBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </aside>
       </section>
 
-      <section class="tickerStrip"><span>ON AIR</span><marquee id="topTicker">Loading DJ FOLSOE broadcast ticker...</marquee></section>
+      <section class="channelRail" aria-label="DJ FOLSOE channel identity"><div><span>01</span><b>LIVE</b><em>DJ FOLSOE NETWORK</em></div><div><span>02</span><b>SHOWS</b><em>TRANCE · EURODANCE · RETRO</em></div><div><span>03</span><b>COMMUNITY</b><em>REQUESTS · CHAT · INTERACTION</em></div></section>
+
+      <section class="tickerStrip broadcastTicker"><span>ON AIR</span><marquee id="topTicker">Loading DJ FOLSOE broadcast ticker...</marquee></section>
 
       <section id="next" class="portalPanel nextBroadcast">
         <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next DJ FOLSOE Broadcast</h2></div>
@@ -58,7 +65,7 @@
         <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
       </section>
 
-      <section id="shows" class="portalPanel">
+      <section id="shows" class="portalPanel tvSection tvShows">
         <div class="panelHead"><p id="showsKicker">FEATURED SHOWS</p><h2 id="showsTitle">Your favorite show</h2></div>
         <div class="showCards" id="showCards"></div>
       </section>
@@ -68,18 +75,18 @@
         <div class="infoCards" id="infoCards"></div>
       </section>
 
-      <section id="top20" class="portalPanel">
+      <section id="top20" class="portalPanel tvSection tvChart">
         <div class="panelHead"><p>FOLSOE TOP 20</p><h2>Weekly listening chart</h2></div>
         <div class="chartList" id="chartList"></div>
       </section>
 
-      <section id="community" class="portalPanel splitPanel">
+      <section id="community" class="portalPanel splitPanel tvSection tvCommunity">
         <div><p class="sectionKicker">LIVE COMMUNITY</p><h2>Chat, requests, subs and followers</h2><p id="communityText">Everything starts in the Twitch chat. Join the show, request music and be part of the broadcast.</p></div>
         <div class="communityWall" id="communityWall"></div>
       </section>
 
 
-      <section id="presence" class="portalPanel extModule extPresence">
+      <section id="presence" class="portalPanel extModule extPresence tvSection tvPresence">
         <div class="panelHead"><div><p>EXT-002 · LIVE PRESENCE</p><h2>Who is here right now</h2></div><a class="secondary" href="presence.html">Open full presence</a></div>
         <div class="extMetricGrid">
           <div><span>Online now</span><b id="extOnlineNow">0</b></div>
@@ -90,7 +97,7 @@
         <div class="extProfileGrid" id="extOnlineProfiles"></div>
       </section>
 
-      <section id="viewerCommands" class="portalPanel extModule extCommands">
+      <section id="viewerCommands" class="portalPanel extModule extCommands tvSection tvCommands">
         <div class="panelHead"><div><p>EXT-003 · INTERACTIVE TV</p><h2>Viewer commands</h2></div><a class="secondary" href="commands.html">View all viewer commands</a></div>
         <p class="extIntro">Only commands viewers can use are shown here. Admin, theme and control commands remain hidden from the public broadcast experience.</p>
         <div class="extCommandGrid" id="extViewerCommands"></div>
