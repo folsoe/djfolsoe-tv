@@ -1,181 +1,42 @@
-/* DJ FOLSOE NETWORK V935.0 — EXTREME MUSIC TV 2026 VISUAL LAYER
-   Presentation only. No API, admin or JS logic changes. */
-
-:root{
-  --bg:#05050a;
-  --ink:#f8fbff;
-  --muted:rgba(248,251,255,.68);
-  --line:rgba(255,255,255,.14);
-  --cyan:#4ce5ff;
-  --blue:#5266ff;
-  --violet:#9c62ff;
-  --pink:#ff3fa4;
-  --orange:#ff8a3d;
-  --lime:#8bff85;
-  --yellow:#ffe55c;
-  --panel:rgba(13,15,28,.78);
-}
-
+/* DJ FOLSOE NETWORK V936.0 — COMPACT MUSIC TV HOMEPAGE
+   Visual layer only. Built for the existing website core. */
+:root{--bg:#05050b;--ink:#fff;--muted:rgba(255,255,255,.68);--line:rgba(255,255,255,.14);--cyan:#35ddff;--blue:#4278ff;--violet:#965cff;--pink:#ff2ea6;--orange:#ff8155;--panel:rgba(10,12,25,.86)}
+*{box-sizing:border-box}
 html{background:var(--bg)}
-body{
-  color:var(--ink)!important;
-  background:
-    radial-gradient(circle at 8% 8%,rgba(76,229,255,.16),transparent 22%),
-    radial-gradient(circle at 92% 4%,rgba(255,63,164,.18),transparent 24%),
-    radial-gradient(circle at 68% 66%,rgba(156,98,255,.12),transparent 30%),
-    linear-gradient(180deg,#05050a 0%,#0b0b16 44%,#040409 100%)!important;
-}
-body:before{
-  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
-  background:
-    linear-gradient(125deg,transparent 0 42%,rgba(255,255,255,.025) 42% 43%,transparent 43% 100%),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 1px,transparent 1px 80px);
-}
-body:after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;
-  background-image:radial-gradient(rgba(255,255,255,.17) .7px,transparent .7px);
-  background-size:8px 8px;
-  mask-image:linear-gradient(to bottom,#000,transparent 70%);
-}
-
+body{color:#fff!important;background:radial-gradient(circle at 10% 5%,rgba(53,221,255,.13),transparent 24%),radial-gradient(circle at 92% 3%,rgba(255,46,166,.17),transparent 25%),linear-gradient(180deg,#05050b,#090a16 46%,#040409)!important}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 90px),linear-gradient(125deg,transparent 0 48%,rgba(255,255,255,.018) 48% 49%,transparent 49%)}
 .tvShell{overflow:hidden}
-.tvNav{
-  background:rgba(5,5,10,.78)!important;
-  border-bottom:1px solid rgba(255,255,255,.1)!important;
-  box-shadow:0 18px 50px rgba(0,0,0,.35)!important;
-  backdrop-filter:blur(24px) saturate(1.5)!important;
-}
-.tvNav nav a,.brand strong{color:#fff!important}
-.tvNav nav a{position:relative}
-.tvNav nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-8px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink));transition:.25s}
-.tvNav nav a:hover:after{right:0}
-.brand em{background:rgba(255,255,255,.1)!important;color:var(--cyan)!important;border:1px solid rgba(255,255,255,.12)!important}
-.brandMark{background:conic-gradient(from 210deg,var(--cyan),var(--blue),var(--pink),var(--orange),var(--cyan))!important;color:#05050a!important;box-shadow:0 0 30px rgba(76,229,255,.35)}
-.watchBtn,.primary{background:linear-gradient(100deg,var(--cyan),var(--blue) 50%,var(--pink))!important;color:#05050a!important;border:0!important;box-shadow:0 14px 35px rgba(82,102,255,.32)!important}
-.secondary{background:rgba(255,255,255,.08)!important;color:#fff!important;border:1px solid rgba(255,255,255,.18)!important}
 
-.musicTvHero{
-  min-height:760px!important;
-  border-radius:36px!important;
-  overflow:hidden;
-  isolation:isolate;
-  background:#090a12!important;
-  border:1px solid rgba(255,255,255,.12)!important;
-  box-shadow:0 44px 120px rgba(0,0,0,.55),0 0 80px rgba(82,102,255,.08)!important;
-}
-.musicTvHero:before{
-  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    linear-gradient(90deg,rgba(5,5,10,.97) 0%,rgba(5,5,10,.88) 34%,rgba(5,5,10,.48) 62%,rgba(5,5,10,.1) 100%),
-    linear-gradient(180deg,transparent 55%,rgba(5,5,10,.72));
-}
-.musicTvHero:after{
-  content:"";position:absolute;inset:auto -12% -46% 40%;height:70%;z-index:2;pointer-events:none;
-  background:conic-gradient(from 140deg,var(--cyan),var(--blue),var(--pink),var(--orange),var(--cyan));
-  filter:blur(68px);opacity:.38;animation:orbSpin 14s linear infinite;
-}
-.heroBg{filter:saturate(1.55) contrast(1.16) brightness(.78)!important;transform:scale(1.08)!important}
-.heroContent{position:relative;z-index:4;max-width:850px;padding-top:110px!important;padding-bottom:110px!important}
-.heroContent h1{
-  color:#fff!important;
-  font-size:clamp(82px,9vw,154px)!important;
-  line-height:.72!important;
-  letter-spacing:-.085em!important;
-  text-transform:uppercase;
-  text-shadow:0 0 45px rgba(76,229,255,.08),0 20px 60px rgba(0,0,0,.55)!important;
-}
-.heroContent h1:before{content:"CHANNEL 01";display:block;font-size:12px;line-height:1;letter-spacing:.34em;color:var(--cyan);margin-bottom:18px;text-shadow:none}
-.heroContent h1:after{content:"";display:block;width:280px;height:11px;margin-top:28px;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink),var(--orange));box-shadow:0 0 35px rgba(255,63,164,.3);transform:skewX(-24deg)}
-.heroContent h2{color:#fff!important;font-size:clamp(24px,2.8vw,42px)!important;max-width:720px!important;text-transform:uppercase;letter-spacing:-.03em}
-.heroContent>p{color:rgba(255,255,255,.72)!important;font-size:19px!important;max-width:700px!important}
-.broadcastEyeline,.eyebrow{color:rgba(255,255,255,.72)!important}
-.broadcastEyeline i{color:var(--pink)}
-.stationIdent{z-index:6!important;top:28px!important;right:28px!important;padding:14px 16px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.24);backdrop-filter:blur(10px);transform:skewX(-8deg)}
-.stationIdent>*{transform:skewX(8deg)}
-.stationIdent span{font-size:27px!important}
+/* Compact Twitch identity navigation */
+.compactStationNav{display:grid!important;grid-template-columns:minmax(360px,1.25fr) auto auto!important;gap:24px!important;align-items:center!important;min-height:110px!important;padding:14px 24px!important;margin:18px!important;border:1px solid rgba(255,255,255,.18)!important;border-radius:28px!important;background:linear-gradient(105deg,rgba(5,8,18,.94),rgba(10,7,20,.92))!important;box-shadow:0 20px 70px rgba(0,0,0,.4),0 0 45px rgba(82,102,255,.07)!important;backdrop-filter:blur(24px)}
+.twitchIdentity{display:flex;align-items:center;gap:15px;min-width:0;color:#fff;text-decoration:none}
+.identityAvatarRing{width:82px;height:82px;flex:0 0 82px;padding:3px;border-radius:50%;background:conic-gradient(var(--pink),var(--violet),var(--cyan),var(--pink));box-shadow:0 0 32px rgba(255,46,166,.28)}
+.identityAvatarRing img{width:100%;height:100%;display:block;object-fit:cover;border:3px solid #080a14;border-radius:50%;background:#151728}
+.identityCopy{display:flex;min-width:0;flex-direction:column;gap:5px}
+.identityNameRow{display:flex;align-items:center;gap:10px}.identityNameRow strong{font-size:22px;letter-spacing:.02em}.identityNameRow em{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);font-size:9px;letter-spacing:.12em;font-style:normal;color:var(--cyan)}
+.identityMeta{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.74);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.identityMeta i{width:8px;height:8px;border-radius:50%;background:#687086}.identityMeta i.is-live{background:var(--pink);box-shadow:0 0 16px var(--pink)}.identityMeta b{color:#fff}.identityCopy small{display:block;max-width:430px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgba(255,255,255,.62);font-size:12px;line-height:1.35}
+.stationNavigation{display:flex!important;gap:7px!important;align-items:center}.stationNavigation a{display:flex!important;min-width:76px;flex-direction:column;align-items:center;gap:5px;padding:12px 10px!important;border-radius:15px;color:rgba(255,255,255,.75)!important;font-size:10px!important;letter-spacing:.08em!important}.stationNavigation a span{font-size:18px;color:var(--cyan)}.stationNavigation a:hover{color:#fff!important;background:rgba(255,255,255,.07)!important;box-shadow:inset 0 -2px var(--pink)}
+.watchBtn,.primary{background:linear-gradient(100deg,var(--pink),var(--violet) 55%,var(--cyan))!important;color:#fff!important;border:0!important;box-shadow:0 13px 34px rgba(255,46,166,.25)!important}.watchBtn{padding:17px 23px!important;white-space:nowrap!important}
+.secondary{background:rgba(255,255,255,.07)!important;color:#fff!important;border:1px solid rgba(255,255,255,.18)!important}
 
-.broadcastMonitor{
-  position:relative;z-index:5!important;
-  background:linear-gradient(160deg,rgba(12,14,28,.9),rgba(25,22,46,.82))!important;
-  border:1px solid rgba(255,255,255,.16)!important;
-  box-shadow:0 28px 80px rgba(0,0,0,.52),0 0 60px rgba(82,102,255,.08)!important;
-  color:#fff!important;
-}
-.broadcastMonitor:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 6px)}
-.monitorChrome{background:#fff!important;color:#05050a!important;border-radius:12px!important}
-.broadcastMonitor h3,.broadcastMonitor p,.metricGrid span,.metricGrid b{color:#fff!important}
-.metricGrid>div{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important}
-.signalBars i{background:linear-gradient(to top,var(--pink),var(--orange),var(--yellow))!important;box-shadow:0 0 12px rgba(255,63,164,.4)}
+/* Ticker above hero */
+.neonTicker{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:center!important;gap:0!important;margin:12px 28px 16px!important;padding:0!important;min-height:48px!important;border:1px solid rgba(255,255,255,.13)!important;border-radius:13px!important;overflow:hidden!important;background:linear-gradient(90deg,#0a0d19,#101029 65%,#1f0b25)!important;color:#fff!important;transform:none!important;box-shadow:0 13px 40px rgba(0,0,0,.28)!important}
+.tickerLead{align-self:stretch;display:flex!important;align-items:center;padding:0 20px!important;background:linear-gradient(90deg,var(--pink),var(--violet))!important;font-size:10px!important;letter-spacing:.13em!important;font-weight:950!important}.tickerViewport{overflow:hidden;white-space:nowrap}.tickerViewport #topTicker{display:inline-block;padding-left:100%;font-size:11px;font-weight:850;letter-spacing:.12em;animation:tickerFlow 28s linear infinite}.neonTicker b{padding:0 18px;font-size:9px;letter-spacing:.13em;color:var(--cyan)}
+@keyframes tickerFlow{to{transform:translateX(-100%)}}
 
-.channelRailExtreme{grid-template-columns:1.05fr .95fr 1.1fr!important;gap:14px!important;transform:translateY(-26px);position:relative;z-index:7}
-.railCard{position:relative;overflow:hidden;min-height:132px!important;padding:20px 24px!important;background:#0c0e1a!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:0 22px 60px rgba(0,0,0,.35)!important}
-.railCard:before{content:"";position:absolute;inset:0;opacity:.9;background:linear-gradient(120deg,transparent 0 48%,rgba(255,255,255,.04) 48% 50%,transparent 50% 100%)}
-.railCard:after{content:"";position:absolute;right:-50px;bottom:-70px;width:180px;height:180px;border-radius:50%;filter:blur(4px);opacity:.7}
-.railLive:after{background:radial-gradient(circle,var(--pink),transparent 68%)}
-.railShows:after{background:radial-gradient(circle,var(--cyan),transparent 68%)}
-.railCommunity:after{background:radial-gradient(circle,var(--violet),transparent 68%)}
-.railCard span{color:rgba(255,255,255,.18)!important;font-size:54px!important}
-.railCard b{font-size:18px!important;color:#fff!important}
-.railCard em{color:rgba(255,255,255,.62)!important}
-.railCard i{position:absolute;right:18px;top:16px;font-style:normal;font-size:9px;letter-spacing:.16em;color:var(--cyan)}
+/* Compact hero */
+.compactMusicTvHero{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(390px,.85fr)!important;align-items:center!important;gap:34px!important;min-height:510px!important;margin:0 28px!important;padding:44px 54px!important;border-radius:30px!important;overflow:hidden!important;isolation:isolate;background:#090a14!important;border:1px solid rgba(255,255,255,.13)!important;box-shadow:0 38px 100px rgba(0,0,0,.48)!important}
+.compactMusicTvHero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(4,5,12,.96) 0%,rgba(4,5,12,.82) 40%,rgba(4,5,12,.32) 72%,rgba(4,5,12,.18)),linear-gradient(180deg,transparent 54%,rgba(5,5,12,.64));pointer-events:none}.compactMusicTvHero:after{content:"";position:absolute;z-index:2;right:-5%;bottom:-52%;width:70%;height:90%;background:conic-gradient(from 160deg,var(--cyan),var(--violet),var(--pink),var(--orange),var(--cyan));filter:blur(75px);opacity:.25;pointer-events:none}
+.heroBg{filter:saturate(1.5) contrast(1.13) brightness(.72)!important;transform:scale(1.04)!important}.compactMusicTvHero .heroContent{position:relative;z-index:4;max-width:720px!important;padding:0!important}.compactMusicTvHero .heroContent h1{margin:12px 0 0!important;font-size:clamp(68px,8vw,126px)!important;line-height:.75!important;letter-spacing:-.085em!important;text-transform:uppercase;color:#fff!important;text-shadow:0 22px 55px rgba(0,0,0,.48)!important}.compactMusicTvHero .heroContent h1:after{content:"";display:block;width:230px;height:8px;margin:22px 0;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink),var(--orange));transform:skewX(-22deg);box-shadow:0 0 26px rgba(255,46,166,.3)}.compactMusicTvHero .heroContent h2{max-width:650px!important;margin:0 0 12px!important;font-size:clamp(26px,3vw,43px)!important;line-height:1!important;text-transform:uppercase;color:#fff!important}.compactMusicTvHero .heroContent>p{max-width:650px!important;margin:0!important;color:rgba(255,255,255,.72)!important;font-size:16px!important;line-height:1.55!important}.broadcastEyeline{display:flex;gap:9px;align-items:center;color:rgba(255,255,255,.68);font-size:10px;letter-spacing:.14em}.broadcastEyeline i{margin-left:auto;color:var(--pink);font-style:normal}.broadcastDot{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 15px var(--pink)}.heroActions{margin-top:24px!important}
+.compactMonitor{position:relative;z-index:5!important;padding:20px!important;background:linear-gradient(155deg,rgba(6,8,20,.91),rgba(17,10,31,.88))!important;border:1px solid rgba(53,221,255,.65)!important;box-shadow:0 0 0 4px rgba(255,46,166,.22),0 25px 65px rgba(0,0,0,.5),0 0 42px rgba(53,221,255,.16)!important;color:#fff!important}.monitorChrome{background:transparent!important;color:rgba(255,255,255,.6)!important;border-bottom:1px solid rgba(255,255,255,.11)!important;border-radius:0!important}.monitorStatusRow{display:flex;justify-content:space-between;align-items:center;margin:19px 0 7px}.monitorStatusRow>strong{padding:8px 12px;border:1px solid rgba(255,46,166,.55);border-radius:11px;color:var(--pink);font-size:10px;letter-spacing:.13em}.compactMonitor h3{margin:10px 0 7px!important;font-size:27px!important;color:#fff!important}.compactMonitor p{color:rgba(255,255,255,.72)!important}.metricGrid>div{background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.09)!important}.metricGrid span,.metricGrid b{color:#fff!important}.signalBars i{background:linear-gradient(to top,var(--pink),var(--orange),#ffe66d)!important}
 
-.extremeTicker{position:relative;border-radius:0!important;margin-inline:-4vw!important;background:#fff!important;color:#05050a!important;box-shadow:none!important;border:0!important;transform:rotate(-1.2deg);z-index:8}
-.extremeTicker span{background:#05050a!important;color:#fff!important;padding-inline:22px!important}
-.extremeTicker marquee{font-weight:1000!important;letter-spacing:.13em!important}
-.extremeTicker b{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:10px;letter-spacing:.16em}
+/* Main sections */
+.portalPanel{position:relative!important;margin:24px 28px!important;padding:34px!important;border-radius:27px!important;overflow:hidden!important;background:linear-gradient(155deg,rgba(15,16,32,.96),rgba(7,8,16,.96))!important;border:1px solid rgba(255,255,255,.1)!important;color:#fff!important;box-shadow:0 26px 80px rgba(0,0,0,.32)!important}.portalPanel:before{content:"";position:absolute;left:0;top:0;width:180px;height:5px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink),var(--orange))}.panelHead p{color:var(--cyan)!important}.panelHead h2{color:#fff!important;text-transform:uppercase;letter-spacing:-.055em!important;font-size:clamp(39px,5vw,68px)!important;line-height:.92!important}.portalPanel p{color:rgba(255,255,255,.67)!important}
+.compactNextBroadcast{display:grid;grid-template-columns:minmax(280px,.75fr) minmax(0,1.25fr);gap:25px;align-items:center}.compactNextBroadcast .panelHead{margin:0!important}.compactNextBroadcast .panelHead h2{font-size:clamp(35px,4vw,58px)!important}.compactNextBroadcast .nextGrid{margin:0!important}.compactNextBroadcast>p{grid-column:2;margin:0!important}.nextGrid>div{background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.09)!important;color:#fff!important}.nextGrid b{color:#fff!important}
+.graphicBurst{background:radial-gradient(circle at 92% 8%,rgba(255,46,166,.17),transparent 30%),linear-gradient(155deg,#121426,#070810)!important}.showCard{position:relative;overflow:hidden;min-height:205px!important;background:linear-gradient(155deg,rgba(255,255,255,.10),rgba(255,255,255,.04))!important;border:1px solid rgba(255,255,255,.11)!important;color:#fff!important}.showCard h3,.showCard p{color:#fff!important}.showCard:hover{transform:translateY(-8px)!important;box-shadow:0 26px 60px rgba(0,0,0,.35)!important}
+.chartStage{background:radial-gradient(circle at 90% 10%,rgba(53,221,255,.14),transparent 32%),linear-gradient(155deg,#0d1322,#07080e)!important}.chartRow{min-height:74px!important;background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.08)!important;color:#fff!important}.chartRow i{background:linear-gradient(135deg,var(--pink),var(--orange))!important}.chartRow strong,.chartRow em{color:#fff!important}
+.viewerCommandsOnly{background:radial-gradient(circle at 95% 8%,rgba(150,92,255,.15),transparent 30%),linear-gradient(155deg,#101024,#070810)!important}.liveCommandBadge{padding:9px 13px;border-radius:999px;background:rgba(255,46,166,.1);border:1px solid rgba(255,46,166,.34);color:var(--pink);font-size:10px;font-weight:950;letter-spacing:.13em}.extCommandGrid{grid-template-columns:repeat(auto-fit,minmax(205px,1fr))!important}.extCommandCard{min-height:155px!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.09)!important;color:#fff!important}.extCommandCard code{display:block!important;background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink))!important;color:#fff!important}.extCommandCard b{color:#fff!important}.compactRequestPanel{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:24px!important;align-items:center!important;background:linear-gradient(110deg,#15112d,#421947 62%,#a32365)!important;border:0!important}.compactRequestPanel .panelHead{margin:0!important}.compactRequestPanel p{grid-column:1;margin:0!important}.compactRequestPanel>a{grid-column:2;grid-row:1/3!important}.stationFooter{margin:24px 28px!important;border-radius:22px!important;background:linear-gradient(110deg,#070813,#11142b 50%,#42194f)!important;border:1px solid rgba(255,255,255,.1)!important}.stationFooter a{color:#fff!important}
 
-.portalPanel{
-  background:linear-gradient(155deg,rgba(17,18,33,.95),rgba(8,9,17,.93))!important;
-  border:1px solid rgba(255,255,255,.1)!important;
-  color:#fff!important;
-  box-shadow:0 30px 90px rgba(0,0,0,.34)!important;
-  border-radius:28px!important;
-  overflow:hidden;
-}
-.portalPanel:before{height:8px!important;width:170px!important;left:0!important;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--pink),var(--orange))!important;border-radius:0 0 12px 0!important}
-.portalPanel:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,transparent 0 66%,rgba(255,255,255,.025) 66% 67%,transparent 67% 100%)}
-.panelHead p,.sectionKicker{color:var(--cyan)!important}
-.panelHead h2,.splitPanel h2{color:#fff!important;text-transform:uppercase;letter-spacing:-.06em!important;font-size:clamp(42px,6vw,78px)!important;line-height:.92!important}
-.portalPanel p{color:rgba(255,255,255,.68)!important}
-
-.graphicBurst{background:radial-gradient(circle at 90% 10%,rgba(255,63,164,.18),transparent 30%),linear-gradient(155deg,#131426,#080910)!important}
-.graphicBurst:after{content:"SHOWS";position:absolute;right:-10px;bottom:-30px;font-size:150px;font-weight:1000;letter-spacing:-.08em;color:rgba(255,255,255,.025);transform:rotate(-8deg)}
-.showCard{background:linear-gradient(155deg,rgba(255,255,255,.11),rgba(255,255,255,.045))!important;border:1px solid rgba(255,255,255,.12)!important;color:#fff!important;min-height:220px!important;position:relative;overflow:hidden}
-.showCard h3,.showCard b{color:#fff!important}
-.showCard:before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,transparent 0 55%,var(--accent) 100%);opacity:.18}
-.showCard:after{width:180px!important;height:180px!important;right:-50px!important;bottom:-70px!important;opacity:.2!important}
-.showCard:hover{transform:translateY(-10px) rotate(-.5deg)!important;box-shadow:0 30px 70px rgba(0,0,0,.36)!important}
-
-.chartStage{background:radial-gradient(circle at 90% 15%,rgba(76,229,255,.16),transparent 30%),linear-gradient(155deg,#0e1322,#07080d)!important}
-.chartRow{background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.09)!important;color:#fff!important;min-height:84px!important}
-.chartRow i{background:linear-gradient(135deg,var(--pink),var(--orange))!important;color:#fff!important;font-size:22px!important}
-.chartRow b,.chartRow span{color:#fff!important}
-.chartRow:hover{transform:translateX(10px)!important;background:rgba(255,255,255,.085)!important}
-
-.communityStage{background:radial-gradient(circle at 10% 90%,rgba(156,98,255,.18),transparent 34%),linear-gradient(155deg,#151225,#07080d)!important}
-.communityWall>div,.infoCards>div,.extCommandCard,.extProfileCard{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important;color:#fff!important}
-.communityWall>div b,.extCommandCard code,.extProfileCard h3{color:#fff!important}
-.extCommandCard code{background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink))!important;color:#fff!important;box-shadow:0 10px 25px rgba(82,102,255,.22)!important}
-.extMetricGrid>div{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important}
-.extMetricGrid b{color:#fff!important;font-size:38px!important}
-
-.requestPanel{background:linear-gradient(120deg,#1a1533,#4b1f5d 58%,#b52c72)!important;border:0!important}
-.requestPanel h2,.requestPanel p{color:#fff!important}
-.stationFooter{background:linear-gradient(120deg,#06070c,#10142a 45%,#3f1e54 72%,#9b245f)!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:0 30px 90px rgba(0,0,0,.45)!important}
-
-@keyframes orbSpin{to{transform:rotate(360deg)}}
-
-@media(max-width:1050px){
-  .musicTvHero{min-height:auto!important}
-  .channelRailExtreme{grid-template-columns:1fr!important;transform:none}
-  .graphicBurst:after{font-size:90px}
-}
-@media(max-width:720px){
-  .heroContent{padding-top:70px!important;padding-bottom:60px!important}
-  .heroContent h1{font-size:clamp(64px,19vw,96px)!important}
-  .musicTvHero{border-radius:24px!important}
-  .extremeTicker{margin-inline:-18px!important}
-  .railCard{min-height:100px!important}
-  .stationIdent{display:none!important}
-}
+@media(max-width:1180px){.compactStationNav{grid-template-columns:1fr auto!important}.stationNavigation{grid-column:1/3;grid-row:2;justify-content:center}.compactMusicTvHero{grid-template-columns:1fr!important}.compactMonitor{max-width:720px}.compactNextBroadcast{grid-template-columns:1fr}.compactNextBroadcast>p{grid-column:1}.identityCopy small{max-width:380px}}
+@media(max-width:760px){.compactStationNav{display:flex!important;flex-wrap:wrap!important;margin:10px!important;padding:12px!important}.twitchIdentity{width:100%}.identityAvatarRing{width:68px;height:68px;flex-basis:68px}.identityCopy small{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.stationNavigation{order:3;width:100%;overflow:auto;justify-content:flex-start}.watchBtn{margin-left:auto!important}.neonTicker{margin:8px 12px 12px!important;grid-template-columns:auto 1fr!important}.neonTicker b{display:none}.compactMusicTvHero{margin:0 12px!important;padding:34px 22px!important;min-height:auto!important}.compactMusicTvHero .heroContent h1{font-size:clamp(61px,18vw,92px)!important}.compactMonitor{padding:15px!important}.portalPanel{margin:18px 12px!important;padding:25px 20px!important}.compactNextBroadcast,.compactRequestPanel{display:block!important}.compactRequestPanel>a{display:inline-flex;margin-top:17px}.stationFooter{margin:18px 12px!important}.tickerLead{padding-inline:12px!important;font-size:8px!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
