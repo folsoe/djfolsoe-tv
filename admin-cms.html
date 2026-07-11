@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10022">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10023">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -276,10 +276,101 @@
   </div>
 </div>
 
+
+<div id="createWizard" class="wizard" hidden>
+  <div class="wizardBackdrop" data-close-wizard></div>
+  <div class="wizardWindow">
+    <header class="wizardHeader">
+      <div>
+        <span>NEW CONTENT</span>
+        <h2 id="wizardTitle">Choose what you want to create</h2>
+      </div>
+      <button data-close-wizard aria-label="Close">×</button>
+    </header>
+
+    <div id="wizardStepChoose" class="wizardStep active">
+      <div class="wizardChoices">
+        <button data-wizard-type="poster"><i>▣</i><strong>Special event</strong><span>Poster, date, text and call-to-action</span></button>
+        <button data-wizard-type="ranked-list"><i>10</i><strong>Top 10 / Top 20</strong><span>Artist, track, year and story</span></button>
+        <button data-wizard-type="story"><i>✎</i><strong>Music story</strong><span>Your own article or show feature</span></button>
+        <button data-wizard-type="poll"><i>✓</i><strong>Poll</strong><span>Question, answers and schedule</span></button>
+        <button data-wizard-type="playlist"><i>♫</i><strong>Playlist</strong><span>Cover, text and Spotify link</span></button>
+        <button data-wizard-type="text"><i>T</i><strong>Text feature</strong><span>Announcement, history or editorial block</span></button>
+      </div>
+    </div>
+
+    <div id="wizardStepDetails" class="wizardStep">
+      <div class="wizardProgress">
+        <span class="active">1. Content</span>
+        <span>2. Placement</span>
+        <span>3. Publish</span>
+      </div>
+      <div id="wizardFields"></div>
+      <footer class="wizardActions">
+        <button id="wizardBack" class="secondary">Back</button>
+        <button id="wizardNext">Continue</button>
+      </footer>
+    </div>
+
+    <div id="wizardStepPlacement" class="wizardStep">
+      <div class="wizardProgress">
+        <span>1. Content</span>
+        <span class="active">2. Placement</span>
+        <span>3. Publish</span>
+      </div>
+      <div class="wizardPanel">
+        <h3>Where should it appear?</h3>
+        <div class="placementGrid">
+          <label><input type="radio" name="wizardZone" value="featured" checked><span><strong>Featured</strong><small>Near the top of the homepage</small></span></label>
+          <label><input type="radio" name="wizardZone" value="editorial"><span><strong>Editorial</strong><small>Among stories and features</small></span></label>
+          <label><input type="radio" name="wizardZone" value="shows-after"><span><strong>After shows</strong><small>Under the show lineup</small></span></label>
+          <label><input type="radio" name="wizardZone" value="charts-after"><span><strong>After chart</strong><small>Below the Top 20</small></span></label>
+          <label><input type="radio" name="wizardZone" value="interactive"><span><strong>Interactive</strong><small>Near commands and polls</small></span></label>
+          <label><input type="radio" name="wizardZone" value="archive"><span><strong>Archive</strong><small>Keep it available, but not prominent</small></span></label>
+        </div>
+        <div class="threeCols">
+          <label>Theme<select id="wizardTheme"></select></label>
+          <label>Show<select id="wizardShow"></select></label>
+          <label>Visibility<select id="wizardVisibility"><option value="website">Website only</option><option value="both">Website + separate OBS widget</option><option value="overlay">Separate OBS widget only</option></select></label>
+        </div>
+      </div>
+      <footer class="wizardActions">
+        <button id="wizardPlacementBack" class="secondary">Back</button>
+        <button id="wizardPlacementNext">Continue</button>
+      </footer>
+    </div>
+
+    <div id="wizardStepPublish" class="wizardStep">
+      <div class="wizardProgress">
+        <span>1. Content</span>
+        <span>2. Placement</span>
+        <span class="active">3. Publish</span>
+      </div>
+      <div class="wizardPanel">
+        <h3>When should it be visible?</h3>
+        <div class="publishChoiceGrid">
+          <label><input type="radio" name="wizardPublishMode" value="draft" checked><span><strong>Save as draft</strong><small>Keep working later</small></span></label>
+          <label><input type="radio" name="wizardPublishMode" value="published"><span><strong>Publish now</strong><small>Show it immediately</small></span></label>
+          <label><input type="radio" name="wizardPublishMode" value="scheduled"><span><strong>Schedule</strong><small>Choose start and end</small></span></label>
+        </div>
+        <div id="wizardScheduleFields" class="twoCols" hidden>
+          <label>Start<input id="wizardStart" type="datetime-local"></label>
+          <label>End<input id="wizardEnd" type="datetime-local"></label>
+        </div>
+        <label class="featureSwitch"><input id="wizardPinned" type="checkbox"><span>Feature this content prominently</span></label>
+      </div>
+      <footer class="wizardActions">
+        <button id="wizardPublishBack" class="secondary">Back</button>
+        <button id="wizardSave">Create content</button>
+      </footer>
+    </div>
+  </div>
+</div>
+
 <div id="confirmModal" class="confirmModal" hidden>
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=10022"></script>
+<script src="assets/js/visual-cms.js?v=10023"></script>
 </body>
 </html>
