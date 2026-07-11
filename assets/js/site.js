@@ -361,3 +361,80 @@ function startWebsiteActivityTicker(){
 }
 
 document.addEventListener('DOMContentLoaded', startWebsiteActivityTicker);
+
+
+// =========================================================
+// V938.0 ACTIVITY PULSE ENGINE — WEBSITE CLIENT
+// =========================================================
+let activityPulseSignature = '';
+
+function pulseEventIcon(type){
+  return ({
+    request:'♫',follow:'♥',sub:'★',resub:'★',gift_sub:'✦',bits:'◆',raid:'⚡',
+    reward:'◈',poll:'▥',prediction:'◇',hype_train:'🔥',stream_online:'◉',
+    stream_offline:'○',goal:'◎',channel_update:'▣',manual:'●'
+  })[type] || '●';
+}
+
+function pulseEventWeight(event){
+  const base = Number(event.priority || 50);
+  const amount = Math.min(100, Math.log10(Number(event.amount || 0) + 1) * 20);
+  return Math.round(base + amount);
+}
+
+function renderActivityPulse(events){
+  const root = $('activityPulseEngine');
+  if(!root) return;
+  const list = Array.isArray(events) ? events : [];
+  const latest = list[0];
+  if(!latest){
+    setText('activityPulseStatus','WAITING');
+    return;
+  }
+
+  const signature = latest.id || `${latest.type}:${latest.timestamp}`;
+  setText('activityPulseIcon',pulseEventIcon(latest.type));
+  setText('activityPulseType',activityLabel(latest.type));
+  setText('activityPulseHeadline',latest.headline || 'DJ FOLSOE NETWORK');
+  setText('activityPulseDetail',latest.detail || 'Live channel activity');
+  setText('activityPulseTime',activityRelativeTime(latest.timestamp));
+  setText('activityPulseStatus','LIVE MEMORY');
+
+  const rail = $('activityPulseRail');
+  if(rail){
+    rail.innerHTML = list.slice(1,4).map(event=>`
+      <article class="activityPulseMini">
+        <span class="activityPulseMiniIcon">${pulseEventIcon(event.type)}</span>
+        <div><strong>${escapeHtml(event.headline || activityLabel(event.type))}</strong><small>${escapeHtml(event.detail || '')}</small></div>
+        <time>${escapeHtml(activityRelativeTime(event.timestamp))}</time>
+      </article>`).join('');
+  }
+
+  const todayKey = new Date().toISOString().slice(0,10);
+  const today = list.filter(e=>String(e.timestamp || '').slice(0,10) === todayKey);
+  const people = new Set(list.map(e=>e.user_login || e.user_name).filter(Boolean));
+  const energy = list.reduce((sum,e)=>sum+pulseEventWeight(e),0);
+
+  setText('activityPulseCount',list.length);
+  setText('activityPulseToday',today.length);
+  setText('activityPulsePeople',people.size);
+  setText('activityPulseEnergy',energy.toLocaleString());
+
+  if(activityPulseSignature && activityPulseSignature !== signature){
+    const spotlight = $('activityPulseSpotlight');
+    spotlight?.classList.remove('is-new');
+    void spotlight?.offsetWidth;
+    spotlight?.classList.add('is-new');
+  }
+  activityPulseSignature = signature;
+}
+
+async function loadActivityPulseEngine(){
+  const payload = await readJson(API_BASE + '/api/ext004/feed?limit=80&t=' + Date.now(), null);
+  renderActivityPulse(payload?.events || []);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  loadActivityPulseEngine();
+  setInterval(loadActivityPulseEngine,8000);
+});
