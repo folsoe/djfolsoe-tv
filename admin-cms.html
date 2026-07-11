@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=1200">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=1300">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -23,6 +23,7 @@
       <button data-screen="dashboard" class="active"><i>⌂</i><span>Dashboard</span></button>
       <button data-screen="platform"><i>◆</i><span>Content Platform</span></button>
       <button data-screen="experience"><i>◉</i><span>Broadcast Experience</span></button>
+      <button data-screen="station"><i>▣</i><span>TV Station</span></button>
       <button data-screen="homepage"><i>✦</i><span>Homepage</span></button>
       <button data-screen="modules"><i>▦</i><span>Content blocks</span></button>
       <button data-screen="shows"><i>▶</i><span>Shows</span></button>
@@ -445,6 +446,166 @@
       </section>
 
 
+      
+      <section data-screen-panel="station" class="screen">
+        <div class="screenIntro stationHero">
+          <div>
+            <span>V1300 · TV STATION CONTROL ROOM</span>
+            <h2>Run DJ FOLSOE NETWORK from one station view</h2>
+            <p>See readiness, programming, content and broadcast identity together. Every active control opens an existing stable editor.</p>
+          </div>
+          <div class="stationOnAir">
+            <small>STATION STATUS</small>
+            <strong id="stationStatusLabel">READY</strong>
+            <span id="stationStatusText">Waiting for live broadcast</span>
+          </div>
+        </div>
+
+        <section class="stationReadiness">
+          <article class="stationReadinessCard">
+            <span>Website</span>
+            <strong>ONLINE</strong>
+            <small>Public station front</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Worker</span>
+            <strong>CONNECTED</strong>
+            <small id="stationWorkerVersion">Broadcast Core</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Twitch</span>
+            <strong id="stationTwitchStatus">OFFLINE</strong>
+            <small id="stationViewerCount">0 viewers</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Programming</span>
+            <strong id="stationShowCount">0 SHOWS</strong>
+            <small>Available programmes</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Content</span>
+            <strong id="stationContentCount">0 ITEMS</strong>
+            <small>Published and draft</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Theme</span>
+            <strong id="stationThemeName">—</strong>
+            <small>Current station identity</small>
+          </article>
+        </section>
+
+        <div class="stationGrid">
+          <section class="stationPanel stationProgrammePanel">
+            <header class="stationPanelHeader">
+              <div>
+                <span>PROGRAMMING</span>
+                <h3>Shows and schedule</h3>
+              </div>
+              <div>
+                <button data-screen-jump="shows" class="secondary">Shows</button>
+                <button data-screen-jump="schedule">Schedule</button>
+              </div>
+            </header>
+
+            <div class="stationNextShow">
+              <small>NEXT BROADCAST</small>
+              <h4 id="stationNextShowTitle">No show selected</h4>
+              <p id="stationNextShowDescription">Add or update the next programme in the existing Homepage or Shows editor.</p>
+              <div>
+                <span id="stationNextShowTime">Time not set</span>
+                <strong id="stationNextShowTheme">Theme not set</strong>
+              </div>
+            </div>
+
+            <div id="stationShowList" class="stationShowList"></div>
+          </section>
+
+          <aside class="stationPanel">
+            <header class="stationPanelHeader">
+              <div>
+                <span>CONTENT PIPELINE</span>
+                <h3>Ready to publish</h3>
+              </div>
+              <button data-screen-jump="platform" class="secondary">Open platform</button>
+            </header>
+
+            <div class="stationPipeline">
+              <div><span>Published</span><strong id="stationPublished">0</strong></div>
+              <div><span>Drafts</span><strong id="stationDrafts">0</strong></div>
+              <div><span>Scheduled</span><strong id="stationScheduled">0</strong></div>
+              <div><span>Overlay-ready</span><strong id="stationOverlayReady">0</strong></div>
+            </div>
+
+            <div class="stationQuickActions">
+              <button data-quick-create="story"><i>✎</i><span><strong>Music Story</strong><small>Write station content</small></span></button>
+              <button data-quick-create="ranked-list"><i>10</i><span><strong>Retro Top 10</strong><small>Create countdown</small></span></button>
+              <button data-screen-jump="charts"><i>20</i><span><strong>Top 20</strong><small>Update chart</small></span></button>
+              <button data-screen-jump="news"><i>▤</i><span><strong>Music News</strong><small>Review stories</small></span></button>
+            </div>
+          </aside>
+        </div>
+
+        <section class="stationControlGrid">
+          <button data-screen-jump="theme" class="stationControlCard active">
+            <i>◐</i>
+            <span>STATION IDENTITY</span>
+            <strong>Theme & Tickers</strong>
+            <p>Control the current look and station messages.</p>
+          </button>
+
+          <button data-screen-jump="experience" class="stationControlCard active">
+            <i>◉</i>
+            <span>VIEWER EXPERIENCE</span>
+            <strong>Broadcast Experience</strong>
+            <p>Polls, playlists, campaigns and OBS-ready blocks.</p>
+          </button>
+
+          <button data-screen-jump="homepage" class="stationControlCard active">
+            <i>✦</i>
+            <span>PUBLIC FRONT</span>
+            <strong>Homepage</strong>
+            <p>Edit the station introduction and next broadcast.</p>
+          </button>
+
+          <button class="stationControlCard planned" disabled>
+            <i>↗</i>
+            <span>PLANNED SYSTEM</span>
+            <strong>Analytics</strong>
+            <p>Future viewers, clicks, shows and content performance.</p>
+          </button>
+
+          <button class="stationControlCard planned" disabled>
+            <i>⚙</i>
+            <span>PLANNED SYSTEM</span>
+            <strong>Automation</strong>
+            <p>Future automatic programming and scheduled actions.</p>
+          </button>
+
+          <button class="stationControlCard planned" disabled>
+            <i>AI</i>
+            <span>PLANNED SYSTEM</span>
+            <strong>Show Assistant</strong>
+            <p>Future intros, track stories, quizzes and show preparation.</p>
+          </button>
+        </section>
+
+        <section class="stationFoundation">
+          <div>
+            <span>STABLE ADMIN</span>
+            <strong>Existing login and editors remain unchanged</strong>
+          </div>
+          <div>
+            <span>EXISTING CONNECTION</span>
+            <strong>Website and Worker use the current setup</strong>
+          </div>
+          <div>
+            <span>PROTECTED OVERLAY</span>
+            <strong>Logo, top ticker, theme ticker and chat stay intact</strong>
+          </div>
+        </section>
+      </section>
+
+
       <section data-screen-panel="homepage" class="screen">
         <div class="screenIntro"><div><span>Homepage</span><h2>What visitors see first</h2><p>Edit the main message, next show and community call-to-action.</p></div><button id="saveHomepage">Save homepage</button></div>
         <div class="editorLayout">
@@ -700,6 +861,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=1200"></script>
+<script src="assets/js/visual-cms.js?v=1300"></script>
 </body>
 </html>
