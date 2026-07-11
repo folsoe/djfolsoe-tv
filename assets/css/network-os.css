@@ -584,3 +584,253 @@ body.tv-theme-summer{--os-a:#62f4ff;--os-b:#ffe15a;--os-c:#ff7f9e}
   .osGlow,.osHorizon,.osNoise,.osOrbit,.osCore,.osPortalRing,.osPortalEnergy,.osRibbonWave i,.osSignalReadout i{animation:none!important}
   #networkOSCanvas{display:none}
 }
+
+/* =========================================================
+   DJ FOLSOE V1000.1 — ATMOSPHERE HOTFIX
+   Removes oversized colour orbs and replaces them with
+   restrained broadcast beams, haze and edge lighting.
+   ========================================================= */
+
+/* Neutralise the oversized circular glow that covered the hero. */
+.osGlow{
+  width:24vw;
+  height:24vw;
+  min-width:220px;
+  min-height:220px;
+  max-width:430px;
+  max-height:430px;
+  border-radius:50%;
+  filter:blur(115px);
+  opacity:calc(.055 * var(--os-intensity));
+  mix-blend-mode:screen;
+}
+
+.osGlowA{
+  left:-18vw;
+  top:-12vw;
+  background:radial-gradient(
+    circle,
+    color-mix(in srgb,var(--os-a) 55%,transparent) 0%,
+    color-mix(in srgb,var(--os-a) 15%,transparent) 34%,
+    transparent 72%
+  );
+  transform:translate3d(
+    calc(var(--os-x) * -8px),
+    calc(var(--os-y) * -6px),
+    0
+  );
+}
+
+.osGlowB{
+  right:-16vw;
+  top:10vh;
+  background:radial-gradient(
+    circle,
+    color-mix(in srgb,var(--os-c) 48%,transparent) 0%,
+    color-mix(in srgb,var(--os-c) 12%,transparent) 38%,
+    transparent 74%
+  );
+  transform:translate3d(
+    calc(var(--os-x) * 10px),
+    calc(var(--os-y) * -5px),
+    0
+  );
+}
+
+.osGlowC{
+  left:38vw;
+  bottom:-20vw;
+  background:radial-gradient(
+    circle,
+    color-mix(in srgb,var(--os-b) 40%,transparent) 0%,
+    color-mix(in srgb,var(--os-b) 10%,transparent) 38%,
+    transparent 76%
+  );
+  transform:translate3d(
+    calc(var(--os-x) * 7px),
+    calc(var(--os-y) * 10px),
+    0
+  );
+}
+
+/* Turn the atmosphere into a broadcast studio instead of large colour balls. */
+.osAtmosphere:before{
+  content:"";
+  position:absolute;
+  inset:-18% -12%;
+  opacity:calc(.2 * var(--os-intensity));
+  filter:blur(12px);
+  background:
+    linear-gradient(
+      112deg,
+      transparent 0 14%,
+      color-mix(in srgb,var(--os-a) 22%,transparent) 17%,
+      transparent 21% 47%,
+      color-mix(in srgb,var(--os-c) 15%,transparent) 50%,
+      transparent 54% 100%
+    ),
+    linear-gradient(
+      68deg,
+      transparent 0 59%,
+      color-mix(in srgb,var(--os-b) 12%,transparent) 62%,
+      transparent 65% 100%
+    );
+  transform:translate3d(
+    calc(var(--os-x) * -10px),
+    calc(var(--os-y) * -7px),
+    0
+  );
+  animation:osStudioBeamDrift 15s ease-in-out infinite alternate;
+}
+
+.osAtmosphere:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:calc(.22 * var(--os-intensity));
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 7%,
+      color-mix(in srgb,var(--os-a) 18%,transparent) 7.2%,
+      transparent 7.5% 91%,
+      color-mix(in srgb,var(--os-c) 14%,transparent) 91.3%,
+      transparent 91.7%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 118px,
+      rgba(255,255,255,.018) 119px,
+      transparent 120px
+    );
+  mask-image:linear-gradient(to bottom,transparent 0,#000 12%,#000 76%,transparent 100%);
+}
+
+/* More subtle hero portal so it supports the content instead of fighting it. */
+.osHeroPortal{
+  opacity:.46;
+  filter:saturate(112%) brightness(.92);
+}
+
+.osPortalEnergy{
+  opacity:.56;
+  box-shadow:
+    0 0 48px color-mix(in srgb,var(--os-b) 35%,transparent),
+    0 0 95px color-mix(in srgb,var(--os-a) 14%,transparent);
+}
+
+/* Keep the actual website and live panel visually dominant. */
+.compactMusicTvHero .heroContent,
+.compactMusicTvHero .livePanel{
+  filter:none;
+}
+
+.compactMusicTvHero .heroContent{
+  text-shadow:0 2px 28px rgba(0,0,0,.48);
+}
+
+.compactMusicTvHero .livePanel{
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.46),
+    0 0 24px color-mix(in srgb,var(--os-a) 7%,transparent);
+}
+
+/* Prevent any glow layer from becoming a solid shape over content. */
+.osGlow,
+.osAtmosphere:before,
+.osAtmosphere:after{
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+
+/* Lower the canvas brightness slightly behind the hero. */
+#networkOSCanvas{
+  opacity:.56;
+  filter:saturate(112%) brightness(.9);
+}
+
+@keyframes osStudioBeamDrift{
+  from{
+    transform:
+      translate3d(calc(var(--os-x) * -10px),calc(var(--os-y) * -7px),0)
+      translateX(-2%)
+      skewX(-2deg);
+  }
+  to{
+    transform:
+      translate3d(calc(var(--os-x) * -10px),calc(var(--os-y) * -7px),0)
+      translateX(3%)
+      skewX(2deg);
+  }
+}
+
+/* Mobile: no large glows, only faint edge light and signal texture. */
+@media(max-width:720px){
+  .osGlow{
+    width:150px;
+    height:150px;
+    min-width:0;
+    min-height:0;
+    filter:blur(85px);
+    opacity:calc(.028 * var(--os-intensity));
+  }
+
+  .osGlowA{
+    left:-110px;
+    top:40px;
+  }
+
+  .osGlowB{
+    right:-115px;
+    top:18vh;
+  }
+
+  .osGlowC{
+    left:44%;
+    bottom:-120px;
+  }
+
+  .osAtmosphere:before{
+    opacity:calc(.09 * var(--os-intensity));
+    filter:blur(18px);
+  }
+
+  .osAtmosphere:after{
+    opacity:calc(.11 * var(--os-intensity));
+  }
+
+  .osHeroPortal{
+    opacity:.17;
+    filter:saturate(100%) brightness(.8);
+  }
+
+  .osPortalEnergy{
+    opacity:.32;
+    box-shadow:0 0 34px color-mix(in srgb,var(--os-b) 18%,transparent);
+  }
+
+  #networkOSCanvas{
+    opacity:.3;
+    filter:saturate(100%) brightness(.82);
+  }
+}
+
+@media(max-width:480px){
+  .osGlow{
+    display:none;
+  }
+
+  .osAtmosphere:before{
+    opacity:.055;
+  }
+
+  .osAtmosphere:after{
+    opacity:.08;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .osAtmosphere:before{
+    animation:none!important;
+  }
+}
