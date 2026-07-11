@@ -6,7 +6,40 @@ const typeIcons={poster:'▣','ranked-list':'10',story:'✎',poll:'✓',playlist
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const token=()=>localStorage.getItem('djf_cms_token')||$('adminToken').value.trim();
 function headers(){return {'Content-Type':'application/json','X-Admin-Token':token()}}
-async function api(path,options={}){const response=await fetch(API+path,{cache:'no-store',...options,headers:{...headers(),...(options.headers||{})}});let data={};try{data=await response.json()}catch(_){data={ok:false,error:'Invalid server response'}}if(!response.ok||data.ok===false)throw new Error(data.message||data.error||`Request failed (${response.status})`);return data}
+async function api(path,options={}){let response;try{response=await fetch(API+path,{cache:'no-store',...options,headers:{...headers(),...(options.headers||{})}})}catch(error){const e=new Error('network-unreachable');e.cause=error;throw e}let data={};try{data=await response.json()}catch(_){data={ok:false,error:'invalid-server-response'}}if(!response.ok||data.ok===false){const e=new Error(data.message||data.error||`request-failed-${response.status}`);e.status=response.status;e.payload=data;throw e}return data}
+function friendlyError(error){
+  const code=String(error?.payload?.error||error?.message||'unknown-error').toLowerCase();
+  const status=Number(error?.status||0);
+  if(code.includes('unauthorized')||status===401)return{title:'The password does not match',message:'Use the value stored in the Cloudflare secret named ADMIN_TOKEN.',details:['Worker route is available','Your Twitch tokens do not need to change']};
+  if(code.includes('not found')||code.includes('route-not-found')||status===404)return{title:'The CMS route is missing',message:'Deploy the complete V1002.2 Worker. Uploading the admin page alone cannot create Worker routes.',details:[error?.payload?.path||'/api/cms/admin/state','Expected Worker: V1002.2']};
+  if(code.includes('kv put')||code.includes('limit exceeded'))return{title:'Cloudflare KV write limit reached',message:'Loading remains read-only. Saving and publishing must wait until the KV allowance resets.',details:['No password change is required','The CMS can still inspect existing content']};
+  if(code.includes('network-unreachable')||code.includes('failed to fetch'))return{title:'The Worker cannot be reached',message:'Check the internet connection, Worker address and Cloudflare deployment.',details:[API]};
+  if(code.includes('invalid-server-response'))return{title:'The Worker returned an unreadable response',message:'The deployed Worker may be incomplete or contain a runtime error.',details:['Open /api/cms/health to verify the build']};
+  return{title:'The control room could not connect',message:error?.payload?.message||error?.message||'Unknown connection error.',details:[`HTTP ${status||'—'}`,code]};
+}
+function showConnectionPanel(info,success=false){
+  const panel=$('connectionPanel');if(!panel)return;
+  panel.hidden=false;panel.classList.toggle('success',success);
+  $('connectionPanelIcon').textContent=success?'✓':'!';
+  $('connectionPanelKicker').textContent=success?'CONNECTION READY':'CONNECTION CHECK';
+  $('connectionPanelTitle').textContent=info.title;
+  $('connectionPanelMessage').textContent=info.message;
+  $('connectionPanelDetails').innerHTML=(info.details||[]).filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('');
+}
+function hideConnectionPanel(){const panel=$('connectionPanel');if(panel)panel.hidden=true}
+async function preflight(){
+  const node=$('preflightStatus');
+  if(node){node.className='preflightStatus';node.querySelector('strong').textContent='Checking Worker…'}
+  try{
+    const health=await api('/api/cms/health',{headers:{'X-Admin-Token':''}});
+    if(node){node.classList.add('ok');node.querySelector('strong').textContent=`${health.version} · CMS routes ready`}
+    return health;
+  }catch(error){
+    if(node){node.classList.add('error');node.querySelector('strong').textContent='Worker check failed'}
+    showConnectionPanel(friendlyError(error));
+    return null;
+  }
+}
 function toast(message,error=false){const node=$('toast');node.textContent=message;node.className='toast'+(error?' error':'');void node.offsetWidth;node.classList.add('show')}
 function formatDate(value){if(!value)return'';const d=new Date(value);return Number.isNaN(d.getTime())?'':d.toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'})}
 function toLocalInput(value){if(!value)return'';const d=new Date(value);if(Number.isNaN(d.getTime()))return'';const local=new Date(d.getTime()-d.getTimezoneOffset()*60000);return local.toISOString().slice(0,16)}
@@ -14,9 +47,39 @@ function activeThemes(){return state?.themes||[]}
 function themeOptions(selected='all',includeAll=true){return `${includeAll?`<option value="all" ${selected==='all'?'selected':''}>All themes</option>`:''}${activeThemes().map(t=>`<option value="${esc(t.id)}" ${selected===t.id?'selected':''}>${esc(t.title)}</option>`).join('')}`}
 function showOptions(selected='all'){const shows=state?.core?.featuredShows||[];return `<option value="all">All shows</option>${shows.map(s=>{const id=(s.id||s.title||'').toLowerCase().replace(/\s+/g,'-');return `<option value="${esc(id)}" ${selected===id?'selected':''}>${esc(s.title)}</option>`}).join('')}`}
 function openScreen(name){document.querySelectorAll('#cmsNav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===name));document.querySelectorAll('[data-screen-panel]').forEach(p=>p.classList.toggle('active',p.dataset.screenPanel===name));$('screenTitle').textContent=document.querySelector(`#cmsNav [data-screen="${name}"] span`)?.textContent||name}
-async function connect(){const entered=$('adminToken').value.trim();if(entered)localStorage.setItem('djf_cms_token',entered);if(!token())return toast('Enter the admin password first.',true);$('loadCms').disabled=true;$('loadCms').textContent='Connecting…';try{state=await api('/api/cms/admin/state');$('loadingState').hidden=true;$('cmsScreens').hidden=false;$('connectionDot').classList.add('online');$('connectionText').textContent='Connected';renderAll();toast('Content studio connected.')}catch(error){toast(error.message,true)}finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}}
-function renderAll(){renderDashboard();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+async function connect({silent=false}={}){
+  const entered=$('adminToken').value.trim();
+  if(entered)localStorage.setItem('djf_cms_token',entered);
+  if(!token()){if(!silent)toast('Enter the admin password first.',true);return false}
+  $('loadCms').disabled=true;$('loadCms').textContent='Connecting…';hideConnectionPanel();
+  try{
+    const health=await preflight();if(!health)return false;
+    state=await api('/api/cms/admin/state');
+    $('loadingState').hidden=true;$('cmsScreens').hidden=false;
+    $('connectionDot').classList.add('online');$('connectionText').textContent='Connected';
+    renderAll();
+    showConnectionPanel({title:'Broadcast Control Room connected',message:'Website, Worker, Twitch data, Music News and Main Overlay controls are ready.',details:[state.version||health.version,`${state.modules?.length||0} content blocks`,`${state.news?.articles?.length||0} music stories`,state.core?.twitch?.live?'Twitch live':'Twitch offline','Main Overlay protected']},true);
+    setTimeout(hideConnectionPanel,4500);
+    if(!silent)toast('Content studio connected.');
+    return true;
+  }catch(error){
+    $('cmsScreens').hidden=true;$('loadingState').hidden=false;
+    $('connectionDot').classList.remove('online');$('connectionText').textContent='Connection failed';
+    const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
+  }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
+}
+function renderAll(){renderDashboard();renderSystemStatus();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
 function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
+function renderSystemStatus(){
+  const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
+  if(!dashboard)return;
+  document.getElementById('cmsSystemStatus')?.remove();
+  const wrap=document.createElement('div');wrap.id='cmsSystemStatus';wrap.className='cmsSystemStatus';
+  const twitch=state?.core?.twitch||{};
+  const items=[['Website','ONLINE','ok'],['Worker',state?.version||'CONNECTED','ok'],['Twitch',twitch.live||twitch.isLive?'LIVE':'OFFLINE',twitch.live||twitch.isLive?'ok':'warning'],['Music News',`${state?.news?.articles?.length||0} STORIES`,'ok'],['Main Overlay','PROTECTED','ok']];
+  wrap.innerHTML=items.map(([label,value,kind])=>`<article><span>${esc(label)}</span><strong class="${kind}">${esc(value)}</strong></article>`).join('');
+  dashboard.querySelector('.welcomePanel')?.insertAdjacentElement('afterend',wrap);
+}
 function renderDashboard(){const modules=state.modules||[],articles=state.news?.articles||[];$('dashPublished').textContent=modules.filter(m=>m.status==='published').length;$('dashDrafts').textContent=modules.filter(m=>m.status==='draft').length;$('dashNews').textContent=articles.length;$('dashTheme').textContent=state.core?.theme?.title||'Weekend';$('recentContent').innerHTML=modules.slice(0,6).map(m=>`<div class="recentItem"><span>${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><small>${esc(m.type)} · ${esc(m.status)}</small></div><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button></div>`).join('')||'<p>No content blocks yet.</p>'}
 function renderHomepage(){const core=state.core||{},hero=core.hero||{},next=core.nextShow||{},community=core.community||{};$('heroEyebrowInput').value=hero.eyebrow||'';$('heroTitleInput').value=hero.title||'DJ FOLSOE';$('heroSubtitleInput').value=hero.subtitle||'';$('heroTextInput').value=hero.text||'';$('nextTitleInput').value=next.title||next.show||'';$('nextTimeLabelInput').value=next.timeLabel||'';$('nextDateInput').value=toLocalInput(next.datetime||next.dateTime);$('nextDescriptionInput').value=next.description||'';$('followerGoalInput').value=community.followerGoal??1000;$('subGoalInput').value=community.subGoal??100;$('requestTextInput').value=community.requestText||'';$('specialEventInput').value=community.specialEvent||'';updateHomepagePreview()}
 function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''}
@@ -105,4 +168,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   v1002PublicHealth();
   const saved=localStorage.getItem('djf_cms_token');
   if(saved){document.getElementById('adminToken').value=saved;setTimeout(()=>document.getElementById('loadCms')?.click(),180)}
+});
+
+document.addEventListener('DOMContentLoaded',async()=>{
+  const modal=document.getElementById('editorModal');
+  const confirm=document.getElementById('confirmModal');
+  if(modal){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}
+  if(confirm)confirm.hidden=true;
+  $('retryConnection')?.addEventListener('click',()=>connect());
+  $('forgetPassword')?.addEventListener('click',()=>{
+    localStorage.removeItem('djf_cms_token');$('adminToken').value='';
+    $('cmsScreens').hidden=true;$('loadingState').hidden=false;hideConnectionPanel();
+    $('connectionDot').classList.remove('online');$('connectionText').textContent='Not connected';
+    toast('Saved admin password removed.');
+  });
+  await preflight();
+  if(localStorage.getItem('djf_cms_token'))await connect({silent:true});
 });
