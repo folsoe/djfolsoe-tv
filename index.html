@@ -16,7 +16,7 @@
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
-  <link rel="stylesheet" href="assets/css/music-tv-2026.css?v=9340">
+  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9350">
 </head>
 <body>
   <div class="tvShell">
@@ -55,9 +55,13 @@
         </aside>
       </section>
 
-      <section class="channelRail" aria-label="DJ FOLSOE channel identity"><div><span>01</span><b>LIVE</b><em>DJ FOLSOE NETWORK</em></div><div><span>02</span><b>SHOWS</b><em>TRANCE · EURODANCE · RETRO</em></div><div><span>03</span><b>COMMUNITY</b><em>REQUESTS · CHAT · INTERACTION</em></div></section>
+      <section class="channelRail channelRailExtreme" aria-label="DJ FOLSOE channel identity">
+  <div class="railCard railLive"><span>01</span><b>LIVE</b><em>DJ FOLSOE NETWORK</em><i>ON AIR</i></div>
+  <div class="railCard railShows"><span>02</span><b>SHOWS</b><em>TRANCE · EURODANCE · RETRO</em><i>PROGRAMMING</i></div>
+  <div class="railCard railCommunity"><span>03</span><b>COMMUNITY</b><em>REQUESTS · CHAT · INTERACTION</em><i>CONNECTED</i></div>
+</section>
 
-      <section class="tickerStrip broadcastTicker"><span>ON AIR</span><marquee id="topTicker">Loading DJ FOLSOE broadcast ticker...</marquee></section>
+      <section class="tickerStrip broadcastTicker extremeTicker"><span>ON AIR</span><marquee id="topTicker">Loading DJ FOLSOE broadcast ticker...</marquee><b>DJ FOLSOE TV · 2026</b></section>
 
       <section id="next" class="portalPanel nextBroadcast">
         <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next DJ FOLSOE Broadcast</h2></div>
@@ -65,7 +69,7 @@
         <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
       </section>
 
-      <section id="shows" class="portalPanel tvSection tvShows">
+      <section id="shows" class="portalPanel tvSection tvShows graphicBurst">
         <div class="panelHead"><p id="showsKicker">FEATURED SHOWS</p><h2 id="showsTitle">Your favorite show</h2></div>
         <div class="showCards" id="showCards"></div>
       </section>
@@ -75,12 +79,12 @@
         <div class="infoCards" id="infoCards"></div>
       </section>
 
-      <section id="top20" class="portalPanel tvSection tvChart">
+      <section id="top20" class="portalPanel tvSection tvChart chartStage">
         <div class="panelHead"><p>FOLSOE TOP 20</p><h2>Weekly listening chart</h2></div>
         <div class="chartList" id="chartList"></div>
       </section>
 
-      <section id="community" class="portalPanel splitPanel tvSection tvCommunity">
+      <section id="community" class="portalPanel splitPanel tvSection tvCommunity communityStage">
         <div><p class="sectionKicker">LIVE COMMUNITY</p><h2>Chat, requests, subs and followers</h2><p id="communityText">Everything starts in the Twitch chat. Join the show, request music and be part of the broadcast.</p></div>
         <div class="communityWall" id="communityWall"></div>
       </section>
@@ -114,7 +118,7 @@
         <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch chat</a>
       </section>
     </main>
-    <footer class="siteFooter">
+    <footer class="siteFooter stationFooter">
       <div><strong>DJ FOLSOE NETWORK</strong><p>Music TV · Twitch · Community · Denmark</p></div>
       <nav><a href="#live">Live</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="commands.html">Commands</a></nav>
     </footer>
