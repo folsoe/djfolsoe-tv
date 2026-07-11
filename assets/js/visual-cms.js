@@ -508,9 +508,75 @@ function enhanceHomepageBuilder(){
   }
 }
 
-function renderHomepage(){const core=state.core||{},hero=core.hero||{},next=core.nextShow||{},community=core.community||{};$('heroEyebrowInput').value=hero.eyebrow||'';$('heroTitleInput').value=hero.title||'DJ FOLSOE';$('heroSubtitleInput').value=hero.subtitle||'';$('heroTextInput').value=hero.text||'';$('nextTitleInput').value=next.title||next.show||'';$('nextTimeLabelInput').value=next.timeLabel||'';$('nextDateInput').value=toLocalInput(next.datetime||next.dateTime);$('nextDescriptionInput').value=next.description||'';$('followerGoalInput').value=community.followerGoal??1000;$('subGoalInput').value=community.subGoal??100;$('requestTextInput').value=community.requestText||'';$('specialEventInput').value=community.specialEvent||'';updateHomepagePreview()}
-function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''
+function renderHomepage(){
+  const core=state?.core||{};
+  const hero=core.hero||{};
+  const next=core.nextShow||{};
+  const community=core.community||{};
+
+  const values={
+    heroEyebrowInput:hero.eyebrow||'',
+    heroTitleInput:hero.title||'DJ FOLSOE',
+    heroSubtitleInput:hero.subtitle||'',
+    heroTextInput:hero.text||'',
+    nextTitleInput:next.title||next.show||'',
+    nextTimeLabelInput:next.timeLabel||'',
+    nextDateInput:toLocalInput(next.datetime||next.dateTime),
+    nextDescriptionInput:next.description||'',
+    followerGoalInput:community.followerGoal??1000,
+    subGoalInput:community.subGoal??100,
+    requestTextInput:community.requestText||'',
+    specialEventInput:community.specialEvent||''
+  };
+
+  Object.entries(values).forEach(([id,value])=>{
+    const field=document.getElementById(id);
+    if(field)field.value=value;
+  });
+
+  updateHomepagePreview();
   enhanceHomepageBuilder();
+  updateHomepagePreview();
+}
+
+function updateHomepagePreview(){
+  const read=(id,fallback='')=>{
+    const node=document.getElementById(id);
+    return node ? (node.value||fallback) : fallback;
+  };
+  const write=(id,value)=>{
+    const node=document.getElementById(id);
+    if(node)node.textContent=value;
+  };
+
+  const eyebrow=read('heroEyebrowInput','LIVE MUSIC FROM DENMARK');
+  const title=read('heroTitleInput','DJ FOLSOE');
+  const subtitle=read('heroSubtitleInput','Live music, requests and good company');
+  const text=read('heroTextInput','');
+  const nextTitle=read('nextTitleInput','Next show');
+  const nextTime=read('nextTimeLabelInput','Coming soon');
+  const nextDescription=read('nextDescriptionInput','The next broadcast will be announced here.');
+  const requestText=read('requestTextInput','Send !request Artist - Title in Twitch chat.');
+
+  // Original V1002.3 preview, when still present.
+  write('previewEyebrow',eyebrow);
+  write('previewTitle',title);
+  write('previewSubtitle',subtitle);
+  write('previewText',text);
+
+  // V1002.5 visual preview, when enhanced.
+  write('hpPreviewEyebrow',eyebrow);
+  write('hpPreviewTitle',title);
+  write('hpPreviewSubtitle',subtitle);
+  write('hpPreviewText',text);
+  write('hpPreviewNextTitle',nextTitle);
+  write('hpPreviewNextTime',nextTime);
+  write('hpPreviewNextDescription',nextDescription);
+  write('hpPreviewRequestText',requestText);
+
+  const themeSelect=document.getElementById('nextThemeInput');
+  const themeLabel=themeSelect?.options?.[themeSelect.selectedIndex]?.text||'Music TV';
+  write('hpPreviewNextTheme',themeLabel);
 }
 async function saveHomepage(){try{const payload={hero:{eyebrow:$('heroEyebrowInput').value,title:$('heroTitleInput').value,subtitle:$('heroSubtitleInput').value,text:$('heroTextInput').value},nextShow:{title:$('nextTitleInput').value,timeLabel:$('nextTimeLabelInput').value,datetime:$('nextDateInput').value?new Date($('nextDateInput').value).toISOString():'',theme:$('nextThemeInput').value,description:$('nextDescriptionInput').value,active:true},community:{followerGoal:Number($('followerGoalInput').value),subGoal:Number($('subGoalInput').value),requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value},overlay:{requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value}};const result=await api('/api/cms/admin/homepage',{method:'POST',body:JSON.stringify(payload)});state.core=result.core;renderDashboard();toast('Homepage saved.')}catch(error){toast(error.message,true)}}
 function moduleScheduled(m){const start=m.schedule?.startsAt&&new Date(m.schedule.startsAt)>new Date();return start}
@@ -559,7 +625,7 @@ if(el.dataset.wizardType){wizardState.type=el.dataset.wizardType;wizardState.ste
 if(el.dataset.removeWizardRow!==undefined)el.closest('.wizardTrackRow,.wizardPollRow')?.remove();
 if(el.dataset.closeModal!==undefined)closeModal();if(el.dataset.moduleFilter){currentModuleFilter=el.dataset.moduleFilter;document.querySelectorAll('[data-module-filter]').forEach(b=>b.classList.toggle('active',b===el));renderModules()}if(el.dataset.newsTab){document.querySelectorAll('[data-news-tab]').forEach(b=>b.classList.toggle('active',b===el));document.querySelectorAll('.newsPanel').forEach(p=>p.classList.toggle('active',p.id===`news${el.dataset.newsTab[0].toUpperCase()+el.dataset.newsTab.slice(1)}`))}if(el.dataset.selectTheme)setTheme(el.dataset.selectTheme);if(el.dataset.editNews){const a=state.news.articles.find(x=>x.id===el.dataset.editNews);openNewsEditor(a)}if(el.dataset.toggleNews)toggleNews(el.dataset.toggleNews,el.dataset.field);if(el.dataset.deleteNews)deleteNews(el.dataset.deleteNews);if(el.dataset.removeBuilder!==undefined)el.closest('[data-ranked-row],[data-poll-row]')?.remove();if(el.id==='addPollOption')$('pollBuilder').insertAdjacentHTML('beforeend',pollBuilderRow({},document.querySelectorAll('[data-poll-row]').length));if(el.id==='resizeRanked'){const size=Number($('fieldListSize').value);const current=[...document.querySelectorAll('[data-ranked-row]')].map((r,i)=>({artist:r.querySelector('[data-artist]').value,title:r.querySelector('[data-title]').value,year:r.querySelector('[data-year]').value,story:r.querySelector('[data-story]').value}));$('rankedBuilder').innerHTML=Array.from({length:size},(_,i)=>rankedBuilderRow(current[i]||{},i)).join('')}if(el.dataset.moveShow!==undefined){const list=readShows(),i=Number(el.dataset.moveShow),to=i+Number(el.dataset.dir);if(to>=0&&to<list.length){[list[i],list[to]]=[list[to],list[i]];state.core.featuredShows=list;renderShows()}}if(el.dataset.removeShow!==undefined){state.core.featuredShows=readShows().filter((_,i)=>i!==Number(el.dataset.removeShow));renderShows()}if(el.dataset.chartStory!==undefined){const row=document.querySelector(`[data-chart-index="${el.dataset.chartStory}"]`),input=row.querySelector('[data-chart-field="story"]');input.value=prompt('Write a short story about this track:',input.value)||input.value}if(el.dataset.removeTicker){el.closest('.simpleRow').remove()}});
 document.addEventListener('change',async event=>{const el=event.target;if(el.matches('[data-show-image]')){const url=await uploadFile(el.files[0]);if(url){const card=el.closest('[data-show-index]');card.querySelector('[data-show-field="image"]').value=url;state.core.featuredShows=readShows();renderShows()}}if(el.matches('[data-chart-image]')){const url=await uploadFile(el.files[0]);if(url){const row=el.closest('[data-chart-index]');row.querySelector('[data-chart-field="cover"]').value=url;renderChart()}}});
-['heroEyebrowInput','heroTitleInput','heroSubtitleInput','heroTextInput'].forEach(id=>$(id).addEventListener('input',updateHomepagePreview));
+
 $('loadCms').onclick=connect;$('saveHomepage').onclick=saveHomepage;$('addShow').onclick=()=>{state.core.featuredShows=[...(state.core.featuredShows||[]),{title:'New show',time:'Special',description:'',theme:'weekend',color:'#55e5ff'}];renderShows()};$('saveShows').onclick=saveShows;$('chartSize').onchange=renderChart;$('saveChart').onclick=saveChart;$('newStory').onclick=()=>openNewsEditor();$('refreshNews').onclick=async()=>{try{await api('/api/news/admin/refresh',{method:'POST',body:'{}'});state=await api('/api/cms/admin/state');renderNews();renderDashboard();toast('External music stories refreshed.')}catch(error){toast(error.message,true)}};$('saveTickers').onclick=saveTickers;$('addTopTicker').onclick=()=>{$('topTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="top"]').length,false))};$('addThemeTicker').onclick=()=>{$('themeTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="theme"]').length,true))};$('contentForm').onsubmit=event=>{event.preventDefault();if($('contentType').value==='manual-news')saveNewsStory();else saveModule('published')};$('saveDraft').onclick=()=>{if($('contentType').value==='manual-news')saveNewsStory();else saveModule('draft')};$('confirmCancel').onclick=()=>{$('confirmModal').hidden=true;pendingConfirm=null};$('confirmOk').onclick=async()=>{const fn=pendingConfirm;$('confirmModal').hidden=true;pendingConfirm=null;if(fn)await fn()};document.addEventListener('click',e=>{if(e.target.id==='saveSources')saveSources()});
 const savedToken=localStorage.getItem('djf_cms_token');if(savedToken)$('adminToken').value=savedToken;
 
@@ -602,7 +668,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const editor=document.getElementById('editorModal');if(editor){editor.classList.remove('open');editor.setAttribute('aria-hidden','true')}
   v1002PublicHealth();
   const saved=localStorage.getItem('djf_cms_token');
-  if(saved){document.getElementById('adminToken').value=saved;setTimeout(()=>document.getElementById('loadCms')?.click(),180)}
+  if(saved)document.getElementById('adminToken').value=saved;
 });
 
 document.addEventListener('DOMContentLoaded',async()=>{
