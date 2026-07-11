@@ -13,6 +13,7 @@ async function post(path,body={}){
   const r=await fetch(API_BASE+path,{method:'POST',headers:headers(),body:JSON.stringify(body)});
   const d=await r.json();output(d);await loadFeed();return d;
 }
+$('bootstrapTicker').onclick=()=>post('/api/ext004/admin/bootstrap',{force:true});
 $('setupEventSub').onclick=()=>post('/api/ext004/admin/setup-eventsub');
 $('loadFeed').onclick=loadFeed;
 $('clearFeed').onclick=()=>post('/api/ext004/admin/clear');
