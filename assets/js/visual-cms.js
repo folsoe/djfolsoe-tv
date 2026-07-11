@@ -324,8 +324,8 @@ async function connect({silent=false}={}){
     const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
   }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
 }
-function renderAll(){renderDashboard();renderSystemStatus();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects();initHomepageBuilder()}
-function populateGlobalSelects(){const nextTheme=$('nextThemeInput');if(nextTheme)nextTheme.innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);const contentTheme=$('contentTheme');if(contentTheme)contentTheme.innerHTML=themeOptions('all');const contentShow=$('contentShow');if(contentShow)contentShow.innerHTML=showOptions('all')}
+function renderAll(){renderDashboard();renderSystemStatus();initHomepageBuilder();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
 function renderSystemStatus(){
   const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
   if(!dashboard)return;
@@ -337,9 +337,6 @@ function renderSystemStatus(){
   dashboard.querySelector('.welcomePanel')?.insertAdjacentElement('afterend',wrap);
 }
 function renderDashboard(){const modules=state.modules||[],articles=state.news?.articles||[];$('dashPublished').textContent=modules.filter(m=>m.status==='published').length;$('dashDrafts').textContent=modules.filter(m=>m.status==='draft').length;$('dashNews').textContent=articles.length;$('dashTheme').textContent=state.core?.theme?.title||'Weekend';$('recentContent').innerHTML=modules.slice(0,6).map(m=>`<div class="recentItem"><span>${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><small>${esc(m.type)} · ${esc(m.status)}</small></div><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button></div>`).join('')||'<p>No content blocks yet.</p>'}
-function renderHomepage(){if(!$('heroEyebrowInput'))return;const core=state.core||{},hero=core.hero||{},next=core.nextShow||{},community=core.community||{};$('heroEyebrowInput').value=hero.eyebrow||'';$('heroTitleInput').value=hero.title||'DJ FOLSOE';$('heroSubtitleInput').value=hero.subtitle||'';$('heroTextInput').value=hero.text||'';$('nextTitleInput').value=next.title||next.show||'';$('nextTimeLabelInput').value=next.timeLabel||'';$('nextDateInput').value=toLocalInput(next.datetime||next.dateTime);$('nextDescriptionInput').value=next.description||'';$('followerGoalInput').value=community.followerGoal??1000;$('subGoalInput').value=community.subGoal??100;$('requestTextInput').value=community.requestText||'';$('specialEventInput').value=community.specialEvent||'';updateHomepagePreview()}
-function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''}
-async function saveHomepage(){try{const payload={hero:{eyebrow:$('heroEyebrowInput').value,title:$('heroTitleInput').value,subtitle:$('heroSubtitleInput').value,text:$('heroTextInput').value},nextShow:{title:$('nextTitleInput').value,timeLabel:$('nextTimeLabelInput').value,datetime:$('nextDateInput').value?new Date($('nextDateInput').value).toISOString():'',theme:$('nextThemeInput').value,description:$('nextDescriptionInput').value,active:true},community:{followerGoal:Number($('followerGoalInput').value),subGoal:Number($('subGoalInput').value),requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value},overlay:{requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value}};const result=await api('/api/cms/admin/homepage',{method:'POST',body:JSON.stringify(payload)});state.core=result.core;renderDashboard();toast('Homepage saved.')}catch(error){toast(error.message,true)}}
 function moduleScheduled(m){const start=m.schedule?.startsAt&&new Date(m.schedule.startsAt)>new Date();return start}
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
 function installDragSort(){document.querySelectorAll('.moduleRow').forEach(row=>{row.addEventListener('dragstart',()=>{draggedModuleId=row.dataset.moduleId;row.style.opacity='.45'});row.addEventListener('dragend',()=>{row.style.opacity='';draggedModuleId=''});row.addEventListener('dragover',e=>e.preventDefault());row.addEventListener('drop',async e=>{e.preventDefault();const target=row.dataset.moduleId;if(!draggedModuleId||target===draggedModuleId)return;const ids=[...document.querySelectorAll('.moduleRow')].map(x=>x.dataset.moduleId);const from=ids.indexOf(draggedModuleId),to=ids.indexOf(target);ids.splice(to,0,ids.splice(from,1)[0]);try{const result=await api('/api/cms/admin/modules/reorder',{method:'POST',body:JSON.stringify({order:ids})});state.modules=result.modules;renderModules();toast('Content order saved.')}catch(error){toast(error.message,true)}})})}
@@ -390,9 +387,24 @@ if(el.dataset.wizardType){wizardState.type=el.dataset.wizardType;wizardState.ste
 if(el.dataset.removeWizardRow!==undefined)el.closest('.wizardTrackRow,.wizardPollRow')?.remove();
 if(el.dataset.closeModal!==undefined)closeModal();if(el.dataset.moduleFilter){currentModuleFilter=el.dataset.moduleFilter;document.querySelectorAll('[data-module-filter]').forEach(b=>b.classList.toggle('active',b===el));renderModules()}if(el.dataset.newsTab){document.querySelectorAll('[data-news-tab]').forEach(b=>b.classList.toggle('active',b===el));document.querySelectorAll('.newsPanel').forEach(p=>p.classList.toggle('active',p.id===`news${el.dataset.newsTab[0].toUpperCase()+el.dataset.newsTab.slice(1)}`))}if(el.dataset.selectTheme)setTheme(el.dataset.selectTheme);if(el.dataset.editNews){const a=state.news.articles.find(x=>x.id===el.dataset.editNews);openNewsEditor(a)}if(el.dataset.toggleNews)toggleNews(el.dataset.toggleNews,el.dataset.field);if(el.dataset.deleteNews)deleteNews(el.dataset.deleteNews);if(el.dataset.removeBuilder!==undefined)el.closest('[data-ranked-row],[data-poll-row]')?.remove();if(el.id==='addPollOption')$('pollBuilder').insertAdjacentHTML('beforeend',pollBuilderRow({},document.querySelectorAll('[data-poll-row]').length));if(el.id==='resizeRanked'){const size=Number($('fieldListSize').value);const current=[...document.querySelectorAll('[data-ranked-row]')].map((r,i)=>({artist:r.querySelector('[data-artist]').value,title:r.querySelector('[data-title]').value,year:r.querySelector('[data-year]').value,story:r.querySelector('[data-story]').value}));$('rankedBuilder').innerHTML=Array.from({length:size},(_,i)=>rankedBuilderRow(current[i]||{},i)).join('')}if(el.dataset.moveShow!==undefined){const list=readShows(),i=Number(el.dataset.moveShow),to=i+Number(el.dataset.dir);if(to>=0&&to<list.length){[list[i],list[to]]=[list[to],list[i]];state.core.featuredShows=list;renderShows()}}if(el.dataset.removeShow!==undefined){state.core.featuredShows=readShows().filter((_,i)=>i!==Number(el.dataset.removeShow));renderShows()}if(el.dataset.chartStory!==undefined){const row=document.querySelector(`[data-chart-index="${el.dataset.chartStory}"]`),input=row.querySelector('[data-chart-field="story"]');input.value=prompt('Write a short story about this track:',input.value)||input.value}if(el.dataset.removeTicker){el.closest('.simpleRow').remove()}});
 document.addEventListener('change',async event=>{const el=event.target;if(el.matches('[data-show-image]')){const url=await uploadFile(el.files[0]);if(url){const card=el.closest('[data-show-index]');card.querySelector('[data-show-field="image"]').value=url;state.core.featuredShows=readShows();renderShows()}}if(el.matches('[data-chart-image]')){const url=await uploadFile(el.files[0]);if(url){const row=el.closest('[data-chart-index]');row.querySelector('[data-chart-field="cover"]').value=url;renderChart()}}});
-['heroEyebrowInput','heroTitleInput','heroSubtitleInput','heroTextInput'].forEach(id=>$(id).addEventListener('input',updateHomepagePreview));
-$('loadCms').onclick=connect;$('saveHomepage').onclick=saveHomepage;$('addShow').onclick=()=>{state.core.featuredShows=[...(state.core.featuredShows||[]),{title:'New show',time:'Special',description:'',theme:'weekend',color:'#55e5ff'}];renderShows()};$('saveShows').onclick=saveShows;$('chartSize').onchange=renderChart;$('saveChart').onclick=saveChart;$('newStory').onclick=()=>openNewsEditor();$('refreshNews').onclick=async()=>{try{await api('/api/news/admin/refresh',{method:'POST',body:'{}'});state=await api('/api/cms/admin/state');renderNews();renderDashboard();toast('External music stories refreshed.')}catch(error){toast(error.message,true)}};$('saveTickers').onclick=saveTickers;$('addTopTicker').onclick=()=>{$('topTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="top"]').length,false))};$('addThemeTicker').onclick=()=>{$('themeTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="theme"]').length,true))};$('contentForm').onsubmit=event=>{event.preventDefault();if($('contentType').value==='manual-news')saveNewsStory();else saveModule('published')};$('saveDraft').onclick=()=>{if($('contentType').value==='manual-news')saveNewsStory();else saveModule('draft')};$('confirmCancel').onclick=()=>{$('confirmModal').hidden=true;pendingConfirm=null};$('confirmOk').onclick=async()=>{const fn=pendingConfirm;$('confirmModal').hidden=true;pendingConfirm=null;if(fn)await fn()};document.addEventListener('click',e=>{if(e.target.id==='saveSources')saveSources()});
-const savedToken=localStorage.getItem('djf_cms_token');if(savedToken)$('adminToken').value=savedToken;
+function bindCmsControls(){
+  const on=(id,event,handler)=>{const node=$(id);if(node)node.addEventListener(event,handler)};
+  on('loadCms','click',()=>connect());
+  on('addShow','click',()=>{if(!state)return;state.core.featuredShows=[...(state.core.featuredShows||[]),{title:'New show',time:'Special',description:'',theme:'weekend',color:'#55e5ff'}];renderShows()});
+  on('saveShows','click',saveShows);
+  on('chartSize','change',renderChart);
+  on('saveChart','click',saveChart);
+  on('newStory','click',()=>openNewsEditor());
+  on('refreshNews','click',async()=>{try{await api('/api/news/admin/refresh',{method:'POST',body:'{}'});state=await api('/api/cms/admin/state');renderNews();renderDashboard();toast('External music stories refreshed.')}catch(error){toast(error.message,true)}});
+  on('saveTickers','click',saveTickers);
+  on('addTopTicker','click',()=>{$('topTickerEditor')?.insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="top"]').length,false))});
+  on('addThemeTicker','click',()=>{$('themeTickerEditor')?.insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="theme"]').length,true))});
+  on('contentForm','submit',event=>{event.preventDefault();if($('contentType')?.value==='manual-news')saveNewsStory();else saveModule('published')});
+  on('saveDraft','click',()=>{if($('contentType')?.value==='manual-news')saveNewsStory();else saveModule('draft')});
+  on('confirmCancel','click',()=>{const modal=$('confirmModal');if(modal)modal.hidden=true;pendingConfirm=null});
+  on('confirmOk','click',async()=>{const fn=pendingConfirm;const modal=$('confirmModal');if(modal)modal.hidden=true;pendingConfirm=null;if(fn)await fn()});
+  document.addEventListener('click',event=>{if(event.target?.id==='saveSources')saveSources()});
+}
 
 
 /* =========================================================
@@ -433,7 +445,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const editor=document.getElementById('editorModal');if(editor){editor.classList.remove('open');editor.setAttribute('aria-hidden','true')}
   v1002PublicHealth();
   const saved=localStorage.getItem('djf_cms_token');
-  if(saved){document.getElementById('adminToken').value=saved;setTimeout(()=>document.getElementById('loadCms')?.click(),180)}
+  if(saved){document.getElementById('adminToken').value=saved}
 });
 
 document.addEventListener('DOMContentLoaded',async()=>{
@@ -485,4 +497,34 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('builderPublish')?.addEventListener('click',()=>saveHomepageBuilder(true));
 });
 
-const V1002_4_1_LOGIN_BUILDER_HOTFIX=true;
+
+/* =========================================================
+   V1002.4.2 STABLE LOGIN + BUILDER RECOVERY
+   ========================================================= */
+const V1002_4_2_STABLE_RECOVERY=true;
+window.addEventListener('error',event=>{
+  console.error('CMS runtime error:',event.error||event.message);
+  const panel=document.getElementById('connectionPanel');
+  if(panel){
+    panel.hidden=false;
+    panel.classList.remove('success');
+    const title=document.getElementById('connectionPanelTitle');
+    const message=document.getElementById('connectionPanelMessage');
+    if(title)title.textContent='The admin interface stopped unexpectedly';
+    if(message)message.textContent='Reload the page after uploading the complete V1002.4.2 HTML and JavaScript files.';
+  }
+});
+document.addEventListener('DOMContentLoaded',async()=>{
+  bindCmsControls();
+  const editor=document.getElementById('editorModal');
+  const confirm=document.getElementById('confirmModal');
+  const wizard=document.getElementById('createWizard');
+  if(editor){editor.classList.remove('open');editor.setAttribute('aria-hidden','true')}
+  if(confirm)confirm.hidden=true;
+  if(wizard)wizard.hidden=true;
+  const saved=localStorage.getItem('djf_cms_token');
+  if(saved){
+    const input=document.getElementById('adminToken');
+    if(input)input.value=saved;
+  }
+});
