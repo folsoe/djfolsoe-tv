@@ -834,3 +834,80 @@ body.tv-theme-summer{--os-a:#62f4ff;--os-b:#ffe15a;--os-c:#ff7f9e}
     animation:none!important;
   }
 }
+
+/* =========================================================
+   DJ FOLSOE V1000.2 — ORB REMOVAL HARD FIX
+   The three original OS glow orbs are now completely disabled.
+   Cache is also busted through index.html?v=10002.
+   ========================================================= */
+
+.networkOS .osGlow,
+.networkOS .osGlowA,
+.networkOS .osGlowB,
+.networkOS .osGlowC{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  width:0!important;
+  height:0!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:0!important;
+  max-height:0!important;
+  background:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+
+/* Keep only narrow broadcast beams and edge atmosphere. */
+.osAtmosphere:before{
+  opacity:calc(.12 * var(--os-intensity))!important;
+  filter:blur(20px)!important;
+  background:
+    linear-gradient(
+      112deg,
+      transparent 0 18%,
+      color-mix(in srgb,var(--os-a) 13%,transparent) 20%,
+      transparent 23% 63%,
+      color-mix(in srgb,var(--os-c) 9%,transparent) 66%,
+      transparent 69% 100%
+    )!important;
+}
+
+.osAtmosphere:after{
+  opacity:calc(.13 * var(--os-intensity))!important;
+}
+
+/* Make sure no circular portal can appear on the left side. */
+.osHeroPortal{
+  right:5%!important;
+  left:auto!important;
+  opacity:.2!important;
+  transform:translate(0,-50%)!important;
+  width:min(34vw,460px)!important;
+}
+
+@media(max-width:1050px){
+  .osHeroPortal{
+    right:-12%!important;
+    width:min(58vw,500px)!important;
+    opacity:.13!important;
+  }
+}
+
+@media(max-width:720px){
+  .osHeroPortal{
+    right:-35%!important;
+    width:92vw!important;
+    opacity:.08!important;
+  }
+
+  .osAtmosphere:before{
+    opacity:.045!important;
+  }
+
+  .osAtmosphere:after{
+    opacity:.065!important;
+  }
+}
