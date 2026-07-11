@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Twitch Memory</title>
+  <link rel="stylesheet" href="assets/css/memory-admin.css?v=9420">
+</head>
+<body>
+<main class="memoryAdmin">
+  <header class="memoryHero">
+    <div><p>DJ FOLSOE NETWORK · V942</p><h1>Twitch Memory</h1><span>Permanent community history, XP, milestones and achievements.</span></div>
+    <div id="memoryOrb" class="memoryOrb">CHECKING</div>
+  </header>
+
+  <section class="panel authPanel">
+    <label>ADMIN_TOKEN<input id="adminToken" type="password" autocomplete="off"></label>
+    <div class="actions">
+      <button id="rebuildMemory">Rebuild All Memory</button>
+      <button id="refreshMemory">Refresh</button>
+    </div>
+  </section>
+
+  <section class="summaryGrid">
+    <article class="panel"><p>MEMORY PROFILES</p><strong id="profileCount">0</strong><small>Remembered viewers</small></article>
+    <article class="panel"><p>EVENTS</p><strong id="eventCount">0</strong><small>Attributed events</small></article>
+    <article class="panel"><p>MESSAGES</p><strong id="messageCount">0</strong><small>Registered chat messages</small></article>
+    <article class="panel"><p>REQUESTS</p><strong id="requestCount">0</strong><small>Remembered song requests</small></article>
+  </section>
+
+  <section class="panel">
+    <div class="sectionHead"><div><p>COMMUNITY MEMORY</p><h2>Hall of Fame</h2></div><input id="searchViewer" placeholder="Search viewer"></div>
+    <div id="memoryGrid" class="memoryGrid"></div>
+  </section>
+
+  <section id="viewerDetailPanel" class="panel" hidden>
+    <h2 id="viewerTitle">Viewer Memory</h2>
+    <div id="viewerDetail" class="viewerDetail"></div>
+  </section>
+
+  <section class="panel"><h2>System Output</h2><pre id="output">Ready.</pre></section>
+</main>
+<script src="assets/js/memory-admin.js?v=9420"></script>
+</body></html>
