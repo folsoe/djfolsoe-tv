@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10025">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=11000">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -30,6 +30,7 @@
       <button data-screen="playlists"><i>♫</i><span>Playlists</span></button>
       <button data-screen="theme"><i>◐</i><span>Theme & overlay</span></button>
       <button data-screen="schedule"><i>◷</i><span>Schedule</span></button>
+        <button data-screen="production"><i>＋</i><span>Production modules</span></button>
     </nav>
 
     <div class="cmsSidebarFooter">
@@ -227,6 +228,91 @@
         <div class="screenIntro"><div><span>Publishing schedule</span><h2>What is coming and going live</h2><p>See drafts, scheduled blocks and active content.</p></div></div>
         <div id="scheduleBoard" class="scheduleBoard"></div>
       </section>
+
+      <section data-screen-panel="production" class="screen">
+        <div class="screenIntro productionIntro">
+          <div>
+            <span>V1100 · PRODUCTION EXPANSION</span>
+            <h2>Build new broadcast modules safely</h2>
+            <p>Each new feature is added beside the working CMS. Existing homepage, dashboard, shows, charts and theme controls remain untouched.</p>
+          </div>
+          <div class="productionCoreBadge">
+            <small>STABLE CORE</small>
+            <strong>V1002.4</strong>
+            <span>Protected</span>
+          </div>
+        </div>
+
+        <div class="productionStatusBar">
+          <div><span>Admin</span><strong>CONNECTED</strong></div>
+          <div><span>Website</span><strong>EXISTING CORE</strong></div>
+          <div><span>Worker</span><strong>UNCHANGED</strong></div>
+          <div><span>Main Overlay</span><strong>PROTECTED</strong></div>
+        </div>
+
+        <div class="productionModuleGrid">
+          <article class="productionModuleCard ready">
+            <div class="productionModuleTop"><i>▣</i><span>AVAILABLE NOW</span></div>
+            <h3>Special Event</h3>
+            <p>Create a poster-based event with title, date, description and call-to-action.</p>
+            <button data-quick-create="poster">Create event</button>
+          </article>
+
+          <article class="productionModuleCard ready">
+            <div class="productionModuleTop"><i>10</i><span>AVAILABLE NOW</span></div>
+            <h3>Retro Top 10</h3>
+            <p>Build a themed countdown with artists, tracks, years and short stories.</p>
+            <button data-quick-create="ranked-list">Create countdown</button>
+          </article>
+
+          <article class="productionModuleCard ready">
+            <div class="productionModuleTop"><i>♫</i><span>AVAILABLE NOW</span></div>
+            <h3>Playlist</h3>
+            <p>Publish a show playlist with image, text and Spotify link.</p>
+            <button data-quick-create="playlist">Create playlist</button>
+          </article>
+
+          <article class="productionModuleCard ready">
+            <div class="productionModuleTop"><i>✓</i><span>AVAILABLE NOW</span></div>
+            <h3>Poll</h3>
+            <p>Create a question with answer choices for website and future OBS widgets.</p>
+            <button data-quick-create="poll">Create poll</button>
+          </article>
+
+          <article class="productionModuleCard ready">
+            <div class="productionModuleTop"><i>✎</i><span>AVAILABLE NOW</span></div>
+            <h3>Music Story</h3>
+            <p>Write your own music story, show feature or artist article.</p>
+            <button data-quick-create="story">Write story</button>
+          </article>
+
+          <article class="productionModuleCard planned">
+            <div class="productionModuleTop"><i>▶</i><span>PLANNED</span></div>
+            <h3>Now Playing</h3>
+            <p>Reserved for the later Serato Pro and Spotify connection.</p>
+            <button disabled>Coming later</button>
+          </article>
+        </div>
+
+        <section class="productionRules">
+          <div>
+            <span>BUILD RULE 01</span>
+            <strong>Never replace a working function</strong>
+            <p>New modules are added beside the stable core and tested separately.</p>
+          </div>
+          <div>
+            <span>BUILD RULE 02</span>
+            <strong>Admin and website use existing data</strong>
+            <p>No new architecture is introduced while the current Worker remains active.</p>
+          </div>
+          <div>
+            <span>BUILD RULE 03</span>
+            <strong>Main Overlay stays protected</strong>
+            <p>Only separate future widgets may be added around it.</p>
+          </div>
+        </section>
+      </section>
+
     </div>
   </main>
 </div>
@@ -371,6 +457,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=100251"></script>
+<script src="assets/js/visual-cms.js?v=11000"></script>
 </body>
 </html>
