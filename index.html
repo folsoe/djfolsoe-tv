@@ -14,8 +14,46 @@
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
   <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9380">
+  <link rel="stylesheet" href="assets/css/tv-graphics-engine.css?v=9450">
 </head>
 <body>
+  <div id="tvGraphicsEngine" class="tvGraphicsEngine" aria-hidden="true">
+    <div class="tvEngineAurora"></div>
+    <div class="tvEngineScanlines"></div>
+    <div class="tvEngineGrid"></div>
+    <div class="tvEngineSweep tvEngineSweepA"></div>
+    <div class="tvEngineSweep tvEngineSweepB"></div>
+
+    <div class="tvEngineTopBug">
+      <span class="tvEngineChannel">CH 01</span>
+      <span class="tvEngineDivider"></span>
+      <strong>DJ FOLSOE NETWORK</strong>
+      <i id="tvEngineLiveState">SIGNAL</i>
+    </div>
+
+    <div class="tvEngineSideRail">
+      <span>LIVE MUSIC TV</span>
+      <b>2026</b>
+      <i></i>
+      <span>DENMARK</span>
+    </div>
+
+    <div class="tvEngineCorner tl"></div>
+    <div class="tvEngineCorner tr"></div>
+    <div class="tvEngineCorner bl"></div>
+    <div class="tvEngineCorner br"></div>
+
+    <div id="tvEngineTransition" class="tvEngineTransition">
+      <span id="tvEngineTransitionKicker">DJ FOLSOE NETWORK</span>
+      <strong id="tvEngineTransitionTitle">LIVE MUSIC TV</strong>
+      <i></i>
+    </div>
+
+    <div id="tvEngineBurst" class="tvEngineBurst">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
   <div class="tvShell">
     <header class="tvNav compactStationNav">
       <a class="twitchIdentity" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
@@ -49,7 +87,7 @@
         </div>
       </section>
 
-      <section id="activityPulseEngine" class="activityPulseEngine" aria-label="DJ FOLSOE live activity pulse">
+      <section id="activityPulseEngine" class="activityPulseEngine tvGraphicSection" data-tv-label="ACTIVITY PULSE" aria-label="DJ FOLSOE live activity pulse">
         <div class="activityPulseHeader">
           <div>
             <p>EXT-004 · LIVE CHANNEL MEMORY</p>
@@ -83,7 +121,7 @@
         </div>
       </section>
 
-      <section id="live" class="heroPortal compactMusicTvHero">
+      <section id="live" class="heroPortal compactMusicTvHero tvGraphicSection tvGraphicHero" data-tv-label="NOW ON AIR">
         <div class="heroBg" id="heroThemeBg"></div>
         <div class="heroContent">
           <div class="broadcastEyeline"><span class="broadcastDot"></span><span>LIVE MUSIC TV FROM DENMARK</span><i>CHANNEL 01</i></div>
@@ -112,29 +150,29 @@
         </aside>
       </section>
 
-      <section id="next" class="portalPanel nextBroadcast compactNextBroadcast">
+      <section id="next" class="portalPanel nextBroadcast compactNextBroadcast tvGraphicSection" data-tv-label="UP NEXT">
         <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next DJ FOLSOE Broadcast</h2></div>
         <div class="nextGrid"><div><span>Starts</span><b id="nextTime">TBA</b></div><div><span>Countdown</span><b id="nextCountdown">--:--:--</b></div><div><span>Theme</span><b id="nextTheme">Music TV</b></div></div>
         <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
       </section>
 
-      <section id="shows" class="portalPanel tvSection tvShows graphicBurst">
+      <section id="shows" class="portalPanel tvSection tvShows graphicBurst tvGraphicSection" data-tv-label="PROGRAMMING">
         <div class="panelHead"><p id="showsKicker">FEATURED SHOWS</p><h2 id="showsTitle">Your favorite show</h2></div>
         <div class="showCards" id="showCards"></div>
       </section>
 
-      <section id="top20" class="portalPanel tvSection tvChart chartStage">
+      <section id="top20" class="portalPanel tvSection tvChart chartStage tvGraphicSection" data-tv-label="THE CHART">
         <div class="panelHead"><p>FOLSOE TOP 20</p><h2>Weekly listening chart</h2></div>
         <div class="chartList" id="chartList"></div>
       </section>
 
-      <section id="viewerCommands" class="portalPanel extModule extCommands tvSection tvCommands viewerCommandsOnly">
+      <section id="viewerCommands" class="portalPanel extModule extCommands tvSection tvCommands viewerCommandsOnly tvGraphicSection" data-tv-label="INTERACTIVE TV">
         <div class="panelHead"><div><p>LIVE INTERACTION</p><h2>Active viewer commands</h2></div><span class="liveCommandBadge">TWITCH CHAT</span></div>
         <p class="extIntro">Only active commands available to viewers are shown here. Admin, theme and control commands stay hidden.</p>
         <div class="extCommandGrid" id="extViewerCommands"></div>
       </section>
 
-      <section id="requests" class="portalPanel requestPanel compactRequestPanel">
+      <section id="requests" class="portalPanel requestPanel compactRequestPanel tvGraphicSection" data-tv-label="REQUEST LINE">
         <div class="panelHead"><p>REQUEST WALL</p><h2>Want a song on air?</h2></div>
         <p>Use <b>!request Artist - Title</b> in Twitch chat.</p>
         <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch chat</a>
@@ -148,5 +186,6 @@
   </div>
   <script src="assets/js/config.js"></script>
   <script src="assets/js/site.js?v=9380"></script>
+  <script src="assets/js/tv-graphics-engine.js?v=9450"></script>
 </body>
 </html>
