@@ -1,6 +1,7 @@
 const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const $=id=>document.getElementById(id);
 let state=null,currentModuleFilter='all',draggedModuleId='',pendingConfirm=null;
+let wizardState={type:'',step:0,module:null};
 const themeColors={weekend:'#55e5ff',trance:'#4ce8ff',fredagsbar:'#72ffb7',eurodance:'#ff35b8',retro:'#ffd063',popup:'#ff496f',morning:'#ffd96a',summer:'#61efff',danske:'#ff5454',top20:'#8066ff'};
 const typeIcons={poster:'▣','ranked-list':'10',story:'✎',poll:'✓',playlist:'♫','news-feed':'▤',text:'T',video:'▶',embed:'<>','now-playing':'♫'};
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -46,6 +47,113 @@ function toLocalInput(value){if(!value)return'';const d=new Date(value);if(Numbe
 function activeThemes(){return state?.themes||[]}
 function themeOptions(selected='all',includeAll=true){return `${includeAll?`<option value="all" ${selected==='all'?'selected':''}>All themes</option>`:''}${activeThemes().map(t=>`<option value="${esc(t.id)}" ${selected===t.id?'selected':''}>${esc(t.title)}</option>`).join('')}`}
 function showOptions(selected='all'){const shows=state?.core?.featuredShows||[];return `<option value="all">All shows</option>${shows.map(s=>{const id=(s.id||s.title||'').toLowerCase().replace(/\s+/g,'-');return `<option value="${esc(id)}" ${selected===id?'selected':''}>${esc(s.title)}</option>`}).join('')}`}
+
+function openWizard(type=''){
+  wizardState={type:type||'',step:type?1:0,module:null};
+  $('createWizard').hidden=false;
+  renderWizardStep();
+}
+function closeWizard(){
+  $('createWizard').hidden=true;
+  wizardState={type:'',step:0,module:null};
+}
+function renderWizardStep(){
+  document.querySelectorAll('.wizardStep').forEach((node,index)=>node.classList.toggle('active',index===wizardState.step));
+  if(wizardState.step===1){
+    $('wizardTitle').textContent=`Create ${wizardState.type.replace('-',' ')}`;
+    $('wizardFields').innerHTML=wizardFields(wizardState.type);
+    bindWizardDynamicFields();
+  }
+  if(wizardState.step===2){
+    $('wizardTheme').innerHTML=themeOptions('all');
+    $('wizardShow').innerHTML=showOptions('all');
+  }
+}
+function wizardFields(type){
+  const titleAndText=`<div class="wizardFieldsPanel"><h3>Tell visitors what this is about</h3><label>Title<input id="wizardContentTitle" placeholder="Write a clear title"></label><label>Short introduction<textarea id="wizardContentDescription" placeholder="Explain it in one or two sentences"></textarea></label></div>`;
+  const media=`<div class="wizardFieldsPanel"><h3>Image</h3><div class="wizardMediaRow"><label class="wizardImageDrop"><span>Click or drop image</span><img id="wizardImagePreview" hidden><input id="wizardImageFile" type="file" accept="image/*"></label><div><label>Or paste an image address<input id="wizardImageUrl" placeholder="https://..."></label><p class="note">Direct upload requires the Cloudflare R2 binding DJF_MEDIA.</p></div></div></div>`;
+  if(type==='poster')return titleAndText+media+`<div class="wizardFieldsPanel"><h3>Event details</h3><div class="twoCols"><label>Date or label<input id="wizardEventDate" placeholder="Sunday 19 July · 19:00"></label><label>Button text<input id="wizardCtaLabel" value="Read more"></label></div><label>Button link<input id="wizardCtaUrl" placeholder="https://..."></label><label>Full event text<textarea id="wizardBody"></textarea></label></div>`;
+  if(type==='ranked-list')return titleAndText+`<div class="wizardFieldsPanel"><h3>Countdown</h3><div class="twoCols"><label>List size<select id="wizardListSize"><option value="10">Top 10</option><option value="20">Top 20</option></select></label><label>Intro label<input id="wizardListLabel" value="DJ FOLSOE COUNTDOWN"></label></div><div id="wizardTrackRows" class="wizardTrackRows"></div></div>`;
+  if(type==='story')return titleAndText+media+`<div class="wizardFieldsPanel"><h3>Story</h3><label>Full story<textarea id="wizardBody" style="min-height:230px"></textarea></label><label>Optional external link<input id="wizardCtaUrl" placeholder="https://..."></label></div>`;
+  if(type==='poll')return titleAndText+`<div class="wizardFieldsPanel"><h3>Question and answers</h3><label>Question<input id="wizardQuestion" placeholder="What should we play next?"></label><div id="wizardPollRows" class="wizardPollRows"></div><button type="button" id="wizardAddAnswer" class="secondary">Add answer</button></div>`;
+  if(type==='playlist')return titleAndText+media+`<div class="wizardFieldsPanel"><h3>Playlist</h3><label>Spotify or playlist link<input id="wizardPlaylistUrl" placeholder="https://open.spotify.com/..."></label><label>Button text<input id="wizardCtaLabel" value="Open playlist"></label><label>About this playlist<textarea id="wizardBody"></textarea></label></div>`;
+  return titleAndText+media+`<div class="wizardFieldsPanel"><h3>Text</h3><label>Full text<textarea id="wizardBody" style="min-height:220px"></textarea></label></div>`;
+}
+function wizardTrackRow(index){
+  return `<div class="wizardTrackRow"><input value="${index+1}" disabled><input data-wizard-artist placeholder="Artist"><input data-wizard-title placeholder="Track title"><input data-wizard-year placeholder="Year"><button type="button" data-remove-wizard-row class="secondary">×</button><textarea data-wizard-story placeholder="Short story about the song"></textarea></div>`;
+}
+function wizardPollRow(index){
+  return `<div class="wizardPollRow"><input value="${String.fromCharCode(65+index)}" disabled><input data-wizard-answer placeholder="Answer option"><button type="button" data-remove-wizard-row class="secondary">×</button></div>`;
+}
+function bindWizardDynamicFields(){
+  if(wizardState.type==='ranked-list'){
+    const render=()=>{
+      const size=Number($('wizardListSize').value||10);
+      $('wizardTrackRows').innerHTML=Array.from({length:size},(_,i)=>wizardTrackRow(i)).join('');
+    };
+    render();$('wizardListSize').onchange=render;
+  }
+  if(wizardState.type==='poll'){
+    $('wizardPollRows').innerHTML=[0,1].map(wizardPollRow).join('');
+    $('wizardAddAnswer').onclick=()=>{
+      const count=document.querySelectorAll('[data-wizard-answer]').length;
+      $('wizardPollRows').insertAdjacentHTML('beforeend',wizardPollRow(count));
+    };
+  }
+  $('wizardImageFile')?.addEventListener('change',event=>{
+    const file=event.target.files?.[0];if(!file)return;
+    const preview=$('wizardImagePreview');preview.src=URL.createObjectURL(file);preview.hidden=false;
+  });
+}
+function collectWizardContent(){
+  const type=wizardState.type;
+  const content={};
+  const media={image:$('wizardImageUrl')?.value||''};
+  if(type==='poster'){content.dateLabel=$('wizardEventDate').value;content.ctaLabel=$('wizardCtaLabel').value;content.ctaUrl=$('wizardCtaUrl').value;content.body=$('wizardBody').value}
+  if(type==='ranked-list'){content.items=[...document.querySelectorAll('.wizardTrackRow')].map((row,i)=>({rank:i+1,artist:row.querySelector('[data-wizard-artist]').value,title:row.querySelector('[data-wizard-title]').value,year:row.querySelector('[data-wizard-year]').value,story:row.querySelector('[data-wizard-story]').value})).filter(item=>item.artist||item.title);content.label=$('wizardListLabel').value}
+  if(type==='story'||type==='text'){content.body=$('wizardBody').value;if($('wizardCtaUrl'))content.ctaUrl=$('wizardCtaUrl').value}
+  if(type==='poll'){content.question=$('wizardQuestion').value;content.options=[...document.querySelectorAll('[data-wizard-answer]')].map((input,i)=>({id:String.fromCharCode(97+i),label:input.value,votes:0})).filter(item=>item.label)}
+  if(type==='playlist'){content.url=$('wizardPlaylistUrl').value;content.ctaLabel=$('wizardCtaLabel').value;content.body=$('wizardBody').value}
+  return {content,media};
+}
+async function finishWizard(){
+  try{
+    const publishMode=document.querySelector('input[name="wizardPublishMode"]:checked')?.value||'draft';
+    let status=publishMode==='published'?'published':'draft';
+    const visibility=$('wizardVisibility').value;
+    const {content,media}=collectWizardContent();
+    const file=$('wizardImageFile')?.files?.[0];
+    if(file)media.image=await uploadFile(file)||media.image;
+    const module={
+      type:wizardState.type,
+      title:$('wizardContentTitle').value,
+      description:$('wizardContentDescription').value,
+      theme:$('wizardTheme').value,
+      showId:$('wizardShow').value,
+      status,
+      enabled:true,
+      surfaces:{website:visibility!=='overlay',overlay:visibility!=='website'},
+      placement:{websiteZone:document.querySelector('input[name="wizardZone"]:checked')?.value||'featured',overlayZone:`separate-${wizardState.type}`},
+      schedule:{
+        startsAt:publishMode==='scheduled'&&$('wizardStart').value?new Date($('wizardStart').value).toISOString():null,
+        endsAt:publishMode==='scheduled'&&$('wizardEnd').value?new Date($('wizardEnd').value).toISOString():null
+      },
+      display:{pinned:$('wizardPinned').checked,label:wizardState.type.replace('-',' ')},
+      content,media
+    };
+    const result=await api('/api/content/admin/module',{method:'POST',body:JSON.stringify({module})});
+    state.modules.unshift(result.module);
+    closeWizard();renderAll();toast('Content created.');
+  }catch(error){toast(error.message,true)}
+}
+async function quickToggleModule(id,patch){
+  try{
+    const result=await api('/api/cms/admin/module/toggle',{method:'POST',body:JSON.stringify({id,...patch})});
+    const index=state.modules.findIndex(m=>m.id===id);if(index>=0)state.modules[index]=result.module;
+    renderAll();toast('Content updated.');
+  }catch(error){toast(error.message,true)}
+}
+
 function openScreen(name){document.querySelectorAll('#cmsNav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===name));document.querySelectorAll('[data-screen-panel]').forEach(p=>p.classList.toggle('active',p.dataset.screenPanel===name));$('screenTitle').textContent=document.querySelector(`#cmsNav [data-screen="${name}"] span`)?.textContent||name}
 async function connect({silent=false}={}){
   const entered=$('adminToken').value.trim();
@@ -85,7 +193,7 @@ function renderHomepage(){const core=state.core||{},hero=core.hero||{},next=core
 function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''}
 async function saveHomepage(){try{const payload={hero:{eyebrow:$('heroEyebrowInput').value,title:$('heroTitleInput').value,subtitle:$('heroSubtitleInput').value,text:$('heroTextInput').value},nextShow:{title:$('nextTitleInput').value,timeLabel:$('nextTimeLabelInput').value,datetime:$('nextDateInput').value?new Date($('nextDateInput').value).toISOString():'',theme:$('nextThemeInput').value,description:$('nextDescriptionInput').value,active:true},community:{followerGoal:Number($('followerGoalInput').value),subGoal:Number($('subGoalInput').value),requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value},overlay:{requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value}};const result=await api('/api/cms/admin/homepage',{method:'POST',body:JSON.stringify(payload)});state.core=result.core;renderDashboard();toast('Homepage saved.')}catch(error){toast(error.message,true)}}
 function moduleScheduled(m){const start=m.schedule?.startsAt&&new Date(m.schedule.startsAt)>new Date();return start}
-function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
+function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
 function installDragSort(){document.querySelectorAll('.moduleRow').forEach(row=>{row.addEventListener('dragstart',()=>{draggedModuleId=row.dataset.moduleId;row.style.opacity='.45'});row.addEventListener('dragend',()=>{row.style.opacity='';draggedModuleId=''});row.addEventListener('dragover',e=>e.preventDefault());row.addEventListener('drop',async e=>{e.preventDefault();const target=row.dataset.moduleId;if(!draggedModuleId||target===draggedModuleId)return;const ids=[...document.querySelectorAll('.moduleRow')].map(x=>x.dataset.moduleId);const from=ids.indexOf(draggedModuleId),to=ids.indexOf(target);ids.splice(to,0,ids.splice(from,1)[0]);try{const result=await api('/api/cms/admin/modules/reorder',{method:'POST',body:JSON.stringify({order:ids})});state.modules=result.modules;renderModules();toast('Content order saved.')}catch(error){toast(error.message,true)}})})}
 function renderShows(){const shows=state.core?.featuredShows||[];$('showsEditor').innerHTML=shows.map((s,i)=>showCard(s,i)).join('')||'<p>No shows yet. Press Add show.</p>'}
 function showCard(s={},i=0){return `<article class="editCard" data-show-index="${i}"><div class="editCardHeader"><h3>${esc(s.title||`Show ${i+1}`)}</h3><div class="rowActions"><button data-move-show="${i}" data-dir="-1" class="secondary">↑</button><button data-move-show="${i}" data-dir="1" class="secondary">↓</button><button data-remove-show="${i}" class="secondary">Delete</button></div></div><div class="editCardGrid"><label class="imageDrop"><span>Click or drop image</span>${s.image?`<img src="${esc(s.image)}">`:''}<input type="file" accept="image/*" data-show-image="${i}"></label><div><label>Show title<input data-show-field="title" value="${esc(s.title||'')}"></label><label>When is it on?<input data-show-field="time" value="${esc(s.time||'')}"></label><label>Theme<select data-show-field="theme">${themeOptions(s.theme||'weekend',false)}</select></label></div><div><label>Description<textarea data-show-field="description">${esc(s.description||'')}</textarea></label><label>Accent colour<input data-show-field="color" type="color" value="${esc(s.color||'#55e5ff')}"></label><input type="hidden" data-show-field="image" value="${esc(s.image||'')}"></div></div></article>`}
@@ -122,7 +230,13 @@ async function setTheme(id){try{const result=await api('/api/cms/admin/theme',{m
 async function toggleNews(id,field){const a=state.news.articles.find(x=>x.id===id);if(!a)return;try{const result=await api('/api/news/admin/article',{method:'POST',body:JSON.stringify({id,patch:{[field]:!a[field]}})});Object.assign(a,result.article);renderNews();toast('Story updated.')}catch(error){toast(error.message,true)}}
 async function deleteNews(id){confirmAction('Delete this story?','This cannot be undone.',async()=>{try{await api('/api/cms/admin/news?id='+encodeURIComponent(id),{method:'DELETE'});state.news.articles=state.news.articles.filter(a=>a.id!==id);renderNews();toast('Story deleted.')}catch(error){toast(error.message,true)}})}
 async function saveSources(){try{const sources=[...document.querySelectorAll('[data-source-index]')].map((row,i)=>({id:state.news.sources[i]?.id||`source-${i}`,name:row.querySelector('[data-source-field="name"]').value,url:row.querySelector('[data-source-field="url"]').value,priority:Number(row.querySelector('[data-source-field="priority"]').value),enabled:row.querySelector('[data-source-field="enabled"]').checked}));const result=await api('/api/news/admin/sources',{method:'POST',body:JSON.stringify({sources})});state.news.sources=result.sources;toast('News sources saved.')}catch(error){toast(error.message,true)}}
-document.addEventListener('click',async event=>{const el=event.target.closest('button,a,summary');if(!el)return;if(el.dataset.screen)openScreen(el.dataset.screen);if(el.dataset.screenJump)openScreen(el.dataset.screenJump);if(el.dataset.quickCreate)openContentEditor(el.dataset.quickCreate);if(el.dataset.editModule){const m=state.modules.find(x=>x.id===el.dataset.editModule);if(m)openContentEditor(m.type,m)}if(el.dataset.duplicateModule)duplicateModule(el.dataset.duplicateModule);if(el.dataset.deleteModule)deleteModule(el.dataset.deleteModule);if(el.dataset.closeModal!==undefined)closeModal();if(el.dataset.moduleFilter){currentModuleFilter=el.dataset.moduleFilter;document.querySelectorAll('[data-module-filter]').forEach(b=>b.classList.toggle('active',b===el));renderModules()}if(el.dataset.newsTab){document.querySelectorAll('[data-news-tab]').forEach(b=>b.classList.toggle('active',b===el));document.querySelectorAll('.newsPanel').forEach(p=>p.classList.toggle('active',p.id===`news${el.dataset.newsTab[0].toUpperCase()+el.dataset.newsTab.slice(1)}`))}if(el.dataset.selectTheme)setTheme(el.dataset.selectTheme);if(el.dataset.editNews){const a=state.news.articles.find(x=>x.id===el.dataset.editNews);openNewsEditor(a)}if(el.dataset.toggleNews)toggleNews(el.dataset.toggleNews,el.dataset.field);if(el.dataset.deleteNews)deleteNews(el.dataset.deleteNews);if(el.dataset.removeBuilder!==undefined)el.closest('[data-ranked-row],[data-poll-row]')?.remove();if(el.id==='addPollOption')$('pollBuilder').insertAdjacentHTML('beforeend',pollBuilderRow({},document.querySelectorAll('[data-poll-row]').length));if(el.id==='resizeRanked'){const size=Number($('fieldListSize').value);const current=[...document.querySelectorAll('[data-ranked-row]')].map((r,i)=>({artist:r.querySelector('[data-artist]').value,title:r.querySelector('[data-title]').value,year:r.querySelector('[data-year]').value,story:r.querySelector('[data-story]').value}));$('rankedBuilder').innerHTML=Array.from({length:size},(_,i)=>rankedBuilderRow(current[i]||{},i)).join('')}if(el.dataset.moveShow!==undefined){const list=readShows(),i=Number(el.dataset.moveShow),to=i+Number(el.dataset.dir);if(to>=0&&to<list.length){[list[i],list[to]]=[list[to],list[i]];state.core.featuredShows=list;renderShows()}}if(el.dataset.removeShow!==undefined){state.core.featuredShows=readShows().filter((_,i)=>i!==Number(el.dataset.removeShow));renderShows()}if(el.dataset.chartStory!==undefined){const row=document.querySelector(`[data-chart-index="${el.dataset.chartStory}"]`),input=row.querySelector('[data-chart-field="story"]');input.value=prompt('Write a short story about this track:',input.value)||input.value}if(el.dataset.removeTicker){el.closest('.simpleRow').remove()}});
+document.addEventListener('click',async event=>{const el=event.target.closest('button,a,summary');if(!el)return;if(el.dataset.screen)openScreen(el.dataset.screen);if(el.dataset.screenJump)openScreen(el.dataset.screenJump);if(el.dataset.quickCreate)openWizard(el.dataset.quickCreate);if(el.dataset.editModule){const m=state.modules.find(x=>x.id===el.dataset.editModule);if(m)openContentEditor(m.type,m)}if(el.dataset.duplicateModule)duplicateModule(el.dataset.duplicateModule);if(el.dataset.deleteModule)deleteModule(el.dataset.deleteModule);
+if(el.dataset.togglePublish)quickToggleModule(el.dataset.togglePublish,{status:state.modules.find(m=>m.id===el.dataset.togglePublish)?.status==='published'?'draft':'published'});
+if(el.dataset.toggleWebsite){const m=state.modules.find(x=>x.id===el.dataset.toggleWebsite);quickToggleModule(el.dataset.toggleWebsite,{website:!(m?.surfaces?.website!==false)});}
+if(el.dataset.closeWizard!==undefined)closeWizard();
+if(el.dataset.wizardType){wizardState.type=el.dataset.wizardType;wizardState.step=1;renderWizardStep();}
+if(el.dataset.removeWizardRow!==undefined)el.closest('.wizardTrackRow,.wizardPollRow')?.remove();
+if(el.dataset.closeModal!==undefined)closeModal();if(el.dataset.moduleFilter){currentModuleFilter=el.dataset.moduleFilter;document.querySelectorAll('[data-module-filter]').forEach(b=>b.classList.toggle('active',b===el));renderModules()}if(el.dataset.newsTab){document.querySelectorAll('[data-news-tab]').forEach(b=>b.classList.toggle('active',b===el));document.querySelectorAll('.newsPanel').forEach(p=>p.classList.toggle('active',p.id===`news${el.dataset.newsTab[0].toUpperCase()+el.dataset.newsTab.slice(1)}`))}if(el.dataset.selectTheme)setTheme(el.dataset.selectTheme);if(el.dataset.editNews){const a=state.news.articles.find(x=>x.id===el.dataset.editNews);openNewsEditor(a)}if(el.dataset.toggleNews)toggleNews(el.dataset.toggleNews,el.dataset.field);if(el.dataset.deleteNews)deleteNews(el.dataset.deleteNews);if(el.dataset.removeBuilder!==undefined)el.closest('[data-ranked-row],[data-poll-row]')?.remove();if(el.id==='addPollOption')$('pollBuilder').insertAdjacentHTML('beforeend',pollBuilderRow({},document.querySelectorAll('[data-poll-row]').length));if(el.id==='resizeRanked'){const size=Number($('fieldListSize').value);const current=[...document.querySelectorAll('[data-ranked-row]')].map((r,i)=>({artist:r.querySelector('[data-artist]').value,title:r.querySelector('[data-title]').value,year:r.querySelector('[data-year]').value,story:r.querySelector('[data-story]').value}));$('rankedBuilder').innerHTML=Array.from({length:size},(_,i)=>rankedBuilderRow(current[i]||{},i)).join('')}if(el.dataset.moveShow!==undefined){const list=readShows(),i=Number(el.dataset.moveShow),to=i+Number(el.dataset.dir);if(to>=0&&to<list.length){[list[i],list[to]]=[list[to],list[i]];state.core.featuredShows=list;renderShows()}}if(el.dataset.removeShow!==undefined){state.core.featuredShows=readShows().filter((_,i)=>i!==Number(el.dataset.removeShow));renderShows()}if(el.dataset.chartStory!==undefined){const row=document.querySelector(`[data-chart-index="${el.dataset.chartStory}"]`),input=row.querySelector('[data-chart-field="story"]');input.value=prompt('Write a short story about this track:',input.value)||input.value}if(el.dataset.removeTicker){el.closest('.simpleRow').remove()}});
 document.addEventListener('change',async event=>{const el=event.target;if(el.matches('[data-show-image]')){const url=await uploadFile(el.files[0]);if(url){const card=el.closest('[data-show-index]');card.querySelector('[data-show-field="image"]').value=url;state.core.featuredShows=readShows();renderShows()}}if(el.matches('[data-chart-image]')){const url=await uploadFile(el.files[0]);if(url){const row=el.closest('[data-chart-index]');row.querySelector('[data-chart-field="cover"]').value=url;renderChart()}}});
 ['heroEyebrowInput','heroTitleInput','heroSubtitleInput','heroTextInput'].forEach(id=>$(id).addEventListener('input',updateHomepagePreview));
 $('loadCms').onclick=connect;$('saveHomepage').onclick=saveHomepage;$('addShow').onclick=()=>{state.core.featuredShows=[...(state.core.featuredShows||[]),{title:'New show',time:'Special',description:'',theme:'weekend',color:'#55e5ff'}];renderShows()};$('saveShows').onclick=saveShows;$('chartSize').onchange=renderChart;$('saveChart').onclick=saveChart;$('newStory').onclick=()=>openNewsEditor();$('refreshNews').onclick=async()=>{try{await api('/api/news/admin/refresh',{method:'POST',body:'{}'});state=await api('/api/cms/admin/state');renderNews();renderDashboard();toast('External music stories refreshed.')}catch(error){toast(error.message,true)}};$('saveTickers').onclick=saveTickers;$('addTopTicker').onclick=()=>{$('topTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="top"]').length,false))};$('addThemeTicker').onclick=()=>{$('themeTickerEditor').insertAdjacentHTML('beforeend',tickerRow({},document.querySelectorAll('[data-ticker-kind="theme"]').length,true))};$('contentForm').onsubmit=event=>{event.preventDefault();if($('contentType').value==='manual-news')saveNewsStory();else saveModule('published')};$('saveDraft').onclick=()=>{if($('contentType').value==='manual-news')saveNewsStory();else saveModule('draft')};$('confirmCancel').onclick=()=>{$('confirmModal').hidden=true;pendingConfirm=null};$('confirmOk').onclick=async()=>{const fn=pendingConfirm;$('confirmModal').hidden=true;pendingConfirm=null;if(fn)await fn()};document.addEventListener('click',e=>{if(e.target.id==='saveSources')saveSources()});
@@ -184,4 +298,16 @@ document.addEventListener('DOMContentLoaded',async()=>{
   });
   await preflight();
   if(localStorage.getItem('djf_cms_token'))await connect({silent:true});
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  $('wizardBack')?.addEventListener('click',()=>{wizardState.step=0;renderWizardStep()});
+  $('wizardNext')?.addEventListener('click',()=>{if(!$('wizardContentTitle')?.value.trim())return toast('Write a title first.',true);wizardState.step=2;renderWizardStep()});
+  $('wizardPlacementBack')?.addEventListener('click',()=>{wizardState.step=1;renderWizardStep()});
+  $('wizardPlacementNext')?.addEventListener('click',()=>{wizardState.step=3;renderWizardStep()});
+  $('wizardPublishBack')?.addEventListener('click',()=>{wizardState.step=2;renderWizardStep()});
+  $('wizardSave')?.addEventListener('click',finishWizard);
+  document.querySelectorAll('input[name="wizardPublishMode"]').forEach(input=>input.addEventListener('change',()=>{
+    $('wizardScheduleFields').hidden=document.querySelector('input[name="wizardPublishMode"]:checked')?.value!=='scheduled';
+  }));
 });
