@@ -337,8 +337,181 @@ function renderVisualDashboard(){
 }
 
 function renderDashboard(){renderVisualDashboard();}
+
+function enhanceHomepageBuilder(){
+  const screen=document.querySelector('[data-screen-panel="homepage"]');
+  if(!screen||screen.dataset.enhancedHomepage==='true')return;
+
+  const editorForm=screen.querySelector('.editorForm');
+  const oldPreview=screen.querySelector('.livePreview');
+  if(!editorForm)return;
+
+  screen.dataset.enhancedHomepage='true';
+
+  const intro=document.createElement('section');
+  intro.className='homepageBuilderIntro';
+  intro.innerHTML=`
+    <div>
+      <span>VISUAL HOMEPAGE BUILDER</span>
+      <h2>Edit the words and watch the page update</h2>
+      <p>The existing stable form remains underneath. This preview is only a visual layer on top.</p>
+    </div>
+    <button id="homepageBuilderSave">Save homepage</button>
+  `;
+
+  const studio=document.createElement('div');
+  studio.className='homepageStudio';
+
+  const editorWrap=document.createElement('div');
+  editorWrap.className='homepageStudioEditor';
+  editorWrap.appendChild(editorForm);
+
+  const preview=document.createElement('aside');
+  preview.className='homepageStudioPreview';
+  preview.innerHTML=`
+    <div class="homepagePreviewToolbar">
+      <span>LIVE PAGE PREVIEW</span>
+      <div>
+        <button type="button" data-homepage-device="desktop" class="active">Desktop</button>
+        <button type="button" data-homepage-device="mobile">Mobile</button>
+      </div>
+    </div>
+
+    <div id="homepageDevice" class="homepageDevice desktop">
+      <div class="homepageBrowserBar">
+        <i></i><i></i><i></i><span>folsoetv.dk</span>
+      </div>
+      <div class="homepagePreviewCanvas">
+        <section class="homepagePreviewHero">
+          <div class="homepagePreviewHeroCopy">
+            <small id="hpPreviewEyebrow">LIVE MUSIC FROM DENMARK</small>
+            <h2 id="hpPreviewTitle">DJ FOLSOE</h2>
+            <h3 id="hpPreviewSubtitle">Live music, requests and good company</h3>
+            <p id="hpPreviewText"></p>
+            <div class="homepagePreviewButtons"><span>Watch live</span><span>Make a request</span></div>
+          </div>
+          <div class="homepagePreviewPortrait"></div>
+        </section>
+
+        <section class="homepagePreviewNext">
+          <div>
+            <small>UP NEXT</small>
+            <h3 id="hpPreviewNextTitle">Next show</h3>
+            <p id="hpPreviewNextDescription">The next broadcast will be announced here.</p>
+          </div>
+          <div class="homepagePreviewFacts">
+            <div><span>STARTS</span><strong id="hpPreviewNextTime">Coming soon</strong></div>
+            <div><span>COUNTDOWN</span><strong>TBA</strong></div>
+            <div><span>SOUND</span><strong id="hpPreviewNextTheme">Music TV</strong></div>
+          </div>
+        </section>
+
+        <section class="homepagePreviewShows">
+          <div class="homepagePreviewSectionHead">
+            <div><small>SIGNATURE PROGRAMMES</small><h3>Find your show</h3></div>
+            <p>Retro, trance, Eurodance, morning sessions and Friday-night energy.</p>
+          </div>
+          <div class="homepagePreviewShowCards">
+            <article><span>01</span><strong>Retro Hits</strong></article>
+            <article><span>02</span><strong>Trance Tuesday</strong></article>
+            <article><span>03</span><strong>Fredagsbar</strong></article>
+          </div>
+        </section>
+
+        <section class="homepagePreviewNews">
+          <div class="homepagePreviewSectionHead">
+            <div><small>SELECTED FOR THE CURRENT SOUND</small><h3>Latest music stories</h3></div>
+          </div>
+          <div class="homepagePreviewNewsGrid">
+            <article><span>FEATURED</span><strong>Lead music story</strong></article>
+            <article><span>NEWS</span><strong>Latest release</strong></article>
+            <article><span>NEWS</span><strong>Festival update</strong></article>
+          </div>
+        </section>
+
+        <section class="homepagePreviewChart">
+          <div class="homepagePreviewSectionHead">
+            <div><small>DJ FOLSOE COUNTDOWN</small><h3>This week's Top 20</h3></div>
+          </div>
+          <div class="homepagePreviewChartRows">
+            <div><b>1</b><strong>Artist — Track title</strong><span>NEW</span></div>
+            <div><b>2</b><strong>Artist — Track title</strong><span>UP</span></div>
+            <div><b>3</b><strong>Artist — Track title</strong><span>UP</span></div>
+          </div>
+        </section>
+
+        <section class="homepagePreviewRequest">
+          <div>
+            <small>REQUEST LINE</small>
+            <h3>Hear your song on air</h3>
+            <p id="hpPreviewRequestText">Send !request Artist - Title in Twitch chat.</p>
+          </div>
+          <a href="#" onclick="return false">Join the conversation</a>
+        </section>
+      </div>
+    </div>
+  `;
+
+  studio.appendChild(editorWrap);
+  studio.appendChild(preview);
+
+  const existingLayout=screen.querySelector('.editorLayout');
+  if(existingLayout){
+    existingLayout.replaceWith(studio);
+  }else{
+    screen.appendChild(studio);
+  }
+
+  if(oldPreview)oldPreview.remove();
+
+  screen.insertBefore(intro,studio);
+
+  const saveButton=document.getElementById('saveHomepage');
+  const builderSave=document.getElementById('homepageBuilderSave');
+  if(builderSave&&saveButton)builderSave.addEventListener('click',()=>saveButton.click());
+
+  screen.querySelectorAll('[data-homepage-device]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      screen.querySelectorAll('[data-homepage-device]').forEach(b=>b.classList.toggle('active',b===button));
+      const device=document.getElementById('homepageDevice');
+      if(device)device.className=`homepageDevice ${button.dataset.homepageDevice}`;
+    });
+  });
+
+  const bindings=[
+    ['heroEyebrowInput','hpPreviewEyebrow'],
+    ['heroTitleInput','hpPreviewTitle'],
+    ['heroSubtitleInput','hpPreviewSubtitle'],
+    ['heroTextInput','hpPreviewText'],
+    ['nextTitleInput','hpPreviewNextTitle'],
+    ['nextTimeLabelInput','hpPreviewNextTime'],
+    ['nextDescriptionInput','hpPreviewNextDescription'],
+    ['requestTextInput','hpPreviewRequestText']
+  ];
+
+  bindings.forEach(([inputId,previewId])=>{
+    const input=document.getElementById(inputId);
+    const target=document.getElementById(previewId);
+    if(!input||!target)return;
+    const update=()=>{target.textContent=input.value||target.dataset.fallback||target.textContent};
+    target.dataset.fallback=target.textContent;
+    input.addEventListener('input',update);
+    update();
+  });
+
+  const themeSelect=document.getElementById('nextThemeInput');
+  const themeTarget=document.getElementById('hpPreviewNextTheme');
+  if(themeSelect&&themeTarget){
+    const updateTheme=()=>{themeTarget.textContent=themeSelect.options[themeSelect.selectedIndex]?.text||'Music TV'};
+    themeSelect.addEventListener('change',updateTheme);
+    updateTheme();
+  }
+}
+
 function renderHomepage(){const core=state.core||{},hero=core.hero||{},next=core.nextShow||{},community=core.community||{};$('heroEyebrowInput').value=hero.eyebrow||'';$('heroTitleInput').value=hero.title||'DJ FOLSOE';$('heroSubtitleInput').value=hero.subtitle||'';$('heroTextInput').value=hero.text||'';$('nextTitleInput').value=next.title||next.show||'';$('nextTimeLabelInput').value=next.timeLabel||'';$('nextDateInput').value=toLocalInput(next.datetime||next.dateTime);$('nextDescriptionInput').value=next.description||'';$('followerGoalInput').value=community.followerGoal??1000;$('subGoalInput').value=community.subGoal??100;$('requestTextInput').value=community.requestText||'';$('specialEventInput').value=community.specialEvent||'';updateHomepagePreview()}
-function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''}
+function updateHomepagePreview(){$('previewEyebrow').textContent=$('heroEyebrowInput').value||'LIVE MUSIC FROM DENMARK';$('previewTitle').textContent=$('heroTitleInput').value||'DJ FOLSOE';$('previewSubtitle').textContent=$('heroSubtitleInput').value||'Live music, requests and good company';$('previewText').textContent=$('heroTextInput').value||''
+  enhanceHomepageBuilder();
+}
 async function saveHomepage(){try{const payload={hero:{eyebrow:$('heroEyebrowInput').value,title:$('heroTitleInput').value,subtitle:$('heroSubtitleInput').value,text:$('heroTextInput').value},nextShow:{title:$('nextTitleInput').value,timeLabel:$('nextTimeLabelInput').value,datetime:$('nextDateInput').value?new Date($('nextDateInput').value).toISOString():'',theme:$('nextThemeInput').value,description:$('nextDescriptionInput').value,active:true},community:{followerGoal:Number($('followerGoalInput').value),subGoal:Number($('subGoalInput').value),requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value},overlay:{requestText:$('requestTextInput').value,specialEvent:$('specialEventInput').value}};const result=await api('/api/cms/admin/homepage',{method:'POST',body:JSON.stringify(payload)});state.core=result.core;renderDashboard();toast('Homepage saved.')}catch(error){toast(error.message,true)}}
 function moduleScheduled(m){const start=m.schedule?.startsAt&&new Date(m.schedule.startsAt)>new Date();return start}
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
