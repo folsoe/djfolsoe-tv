@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE Admin · Activity Pulse Engine</title>
+  <link rel="stylesheet" href="assets/css/activity-engine-admin.css?v=9380">
+</head>
+<body>
+<main class="engineAdmin">
+  <header class="engineHero">
+    <div><p>DJ FOLSOE NETWORK · EXT-004</p><h1>Activity Pulse Engine</h1><span>Hybrid Twitch memory: EventSub, bootstrap and StreamElements bridge.</span></div>
+    <div id="engineHealth" class="engineOrb">CHECKING</div>
+  </header>
+
+  <section class="enginePanel authPanel">
+    <label>ADMIN_TOKEN<input id="adminToken" type="password" autocomplete="off"></label>
+    <div class="actions">
+      <button id="repairAll">Repair & Connect Everything</button>
+      <button id="authStatus">Check Authentication</button>
+      <button id="refreshFeed">Refresh Activity</button>
+      <button id="clearFeed" class="danger">Clear Feed</button>
+    </div>
+  </section>
+
+  <section class="engineGrid">
+    <article class="enginePanel">
+      <p class="label">TWITCH APP TOKEN</p><strong id="appTokenState">UNKNOWN</strong><small id="appTokenDetail">Checking...</small>
+    </article>
+    <article class="enginePanel">
+      <p class="label">EVENTSUB</p><strong id="eventSubState">UNKNOWN</strong><small id="eventSubDetail">Checking...</small>
+    </article>
+    <article class="enginePanel">
+      <p class="label">STREAM ELEMENTS BRIDGE</p><strong id="bridgeState">READY</strong><small id="bridgeDetail">Bridge details available after authentication check.</small>
+    </article>
+    <article class="enginePanel">
+      <p class="label">REMEMBERED EVENTS</p><strong id="eventCount">0</strong><small>Stored in DJF_DATA</small>
+    </article>
+  </section>
+
+  <section class="enginePanel">
+    <h2>Live activity memory</h2>
+    <div id="activityFeed" class="activityFeed"></div>
+  </section>
+
+  <section class="enginePanel">
+    <h2>System output</h2><pre id="output">Ready.</pre>
+  </section>
+</main>
+<script src="assets/js/activity-engine-admin.js?v=9380"></script>
+</body></html>
