@@ -242,3 +242,122 @@ async function loadCommunityProfilesExtension(){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{ loadPortal(); loadWebsiteExtensions(); setInterval(loadWebsiteExtensions,30000); });
+
+// =========================================================
+// DJ FOLSOE V937.0 — WEBSITE LIVE ACTIVITY TICKER CLIENT
+// Reads remembered Twitch events from Cloudflare EXT004.
+// =========================================================
+let websiteActivitySignature = '';
+let websiteActivityTimer = null;
+
+function activityRelativeTime(value){
+  const when = new Date(value || 0).getTime();
+  if(!when) return 'JUST NOW';
+  const seconds = Math.max(0, Math.round((Date.now() - when) / 1000));
+  if(seconds < 45) return 'JUST NOW';
+  if(seconds < 3600) return `${Math.floor(seconds / 60)} MIN AGO`;
+  if(seconds < 86400) return `${Math.floor(seconds / 3600)} H AGO`;
+  return `${Math.floor(seconds / 86400)} D AGO`;
+}
+
+function activityIcon(type){
+  return ({
+    request:'♫',
+    follow:'♥',
+    sub:'★',
+    resub:'★',
+    gift_sub:'✦',
+    bits:'◆',
+    raid:'⚡',
+    reward:'◈',
+    poll:'▥',
+    prediction:'◇',
+    hype_train:'🔥',
+    stream_online:'◉',
+    stream_offline:'○',
+    goal:'◎',
+    channel_update:'▣',
+    manual:'●'
+  })[type] || '●';
+}
+
+function activityLabel(type){
+  return ({
+    request:'SONG REQUEST',
+    follow:'NEW FOLLOWER',
+    sub:'NEW SUB',
+    resub:'RESUB',
+    gift_sub:'GIFT SUB',
+    bits:'BITS',
+    raid:'RAID',
+    reward:'CHANNEL POINTS',
+    poll:'POLL',
+    prediction:'PREDICTION',
+    hype_train:'HYPE TRAIN',
+    stream_online:'LIVE',
+    stream_offline:'OFFLINE',
+    goal:'GOAL',
+    channel_update:'CHANNEL UPDATE',
+    manual:'NETWORK'
+  })[type] || 'TWITCH';
+}
+
+function activityTickerItem(event){
+  const avatar = event.avatar
+    ? `<img class="activityTickerAvatar" src="${escapeHtml(event.avatar)}" alt="">`
+    : `<span class="activityTickerIcon" aria-hidden="true">${activityIcon(event.type)}</span>`;
+  const headline = event.headline || event.title || 'DJ FOLSOE TWITCH ACTIVITY';
+  const detail = event.detail || event.message || '';
+  return `<article class="activityTickerItem" data-event-id="${escapeHtml(event.id || '')}">
+    ${avatar}
+    <span class="activityTickerCopy">
+      <strong>${escapeHtml(headline)}</strong>
+      <small>${escapeHtml(detail || activityRelativeTime(event.timestamp))}</small>
+    </span>
+    <span class="activityTickerTag">${escapeHtml(activityLabel(event.type))}</span>
+  </article>`;
+}
+
+async function loadWebsiteActivityTicker(){
+  const root = $('websiteActivityTicker');
+  const track = $('activityTickerTrack');
+  if(!root || !track) return;
+
+  const payload = await readJson(API_BASE + '/api/ext004/feed?limit=30&t=' + Date.now(), null);
+  const events = Array.isArray(payload?.events) ? payload.events : [];
+  if(!events.length){
+    root.classList.remove('has-events');
+    setText('activityTickerLead','NETWORK');
+    setText('activityTickerType','TWITCH');
+    setText('activityTickerTime','WAITING FOR ACTIVITY');
+    return;
+  }
+
+  const signature = events.slice(0,8).map(e=>e.id || `${e.type}:${e.timestamp}`).join('|');
+  const sourceItems = events.slice(0,20);
+  const html = sourceItems.map(activityTickerItem).join('');
+  track.innerHTML = html + html;
+  track.style.setProperty('--activity-duration', `${Math.max(34, sourceItems.length * 6)}s`);
+  root.classList.add('has-events');
+  setText('activityTickerLead','LIVE ACTIVITY');
+  setText('activityTickerType', activityLabel(events[0].type));
+  setText('activityTickerTime', activityRelativeTime(events[0].timestamp));
+
+  if(websiteActivitySignature && signature !== websiteActivitySignature){
+    root.classList.remove('is-new');
+    void root.offsetWidth;
+    root.classList.add('is-new');
+  }
+  websiteActivitySignature = signature;
+}
+
+function startWebsiteActivityTicker(){
+  if(websiteActivityTimer) clearInterval(websiteActivityTimer);
+  loadWebsiteActivityTicker();
+  websiteActivityTimer = setInterval(loadWebsiteActivityTicker, 8000);
+  document.addEventListener('visibilitychange', ()=>{
+    if(!document.hidden) loadWebsiteActivityTicker();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', startWebsiteActivityTicker);
