@@ -723,3 +723,271 @@ button:disabled{opacity:.55;cursor:wait}
   .platformSectionHead{align-items:flex-start;flex-direction:column}
   .platformHeroBadge{width:100%}
 }
+
+
+/* =========================================================
+   V1200 — BROADCAST EXPERIENCE
+   Additive viewer-experience hub.
+   ========================================================= */
+.experienceHero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 87% 17%,rgba(255,67,167,.2),transparent 27%),
+    radial-gradient(circle at 70% 88%,rgba(86,231,255,.17),transparent 30%),
+    linear-gradient(135deg,#16111f,#101522);
+}
+.experienceHeroState{
+  min-width:230px;
+  padding:16px 18px;
+  border:1px solid rgba(85,240,164,.24);
+  border-radius:17px;
+  background:rgba(85,240,164,.06);
+}
+.experienceHeroState small,
+.experienceHeroState strong,
+.experienceHeroState span{
+  display:block;
+}
+.experienceHeroState small{
+  color:var(--green);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+.experienceHeroState strong{
+  margin-top:7px;
+  font-family:var(--display);
+  font-size:29px;
+}
+.experienceHeroState span{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:8px;
+}
+.experienceStatusGrid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-bottom:12px;
+}
+.experienceStatusGrid article{
+  position:relative;
+  min-height:118px;
+  overflow:hidden;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(145deg,#141927,#0f141f);
+}
+.experienceStatusGrid article::after{
+  content:"";
+  position:absolute;
+  right:-25px;
+  bottom:-35px;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:var(--pink);
+  filter:blur(29px);
+  opacity:.12;
+}
+.experienceStatusGrid span,
+.experienceStatusGrid strong,
+.experienceStatusGrid small{
+  position:relative;
+  z-index:2;
+  display:block;
+}
+.experienceStatusGrid span{
+  color:var(--muted);
+  font-size:8px;
+  text-transform:uppercase;
+}
+.experienceStatusGrid strong{
+  margin-top:17px;
+  font-family:var(--display);
+  font-size:30px;
+  line-height:.85;
+}
+.experienceStatusGrid small{
+  margin-top:6px;
+  color:#7f8998;
+  font-size:8px;
+}
+.experienceSectionHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin:18px 0 10px;
+}
+.experienceSectionHead span{
+  color:var(--pink);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.experienceSectionHead h3{
+  margin:5px 0 0;
+  font-family:var(--display);
+  font-size:34px;
+  line-height:.88;
+}
+.experienceSectionHead p{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+}
+.experienceGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+  margin-bottom:12px;
+}
+.experienceCard{
+  position:relative;
+  display:flex;
+  min-height:235px;
+  flex-direction:column;
+  align-items:flex-start;
+  overflow:hidden;
+  padding:18px;
+  border:1px solid var(--line)!important;
+  border-radius:19px!important;
+  background:linear-gradient(145deg,#151b2a,#101521)!important;
+  color:#fff!important;
+  text-align:left;
+}
+.experienceCard::after{
+  content:"";
+  position:absolute;
+  right:-34px;
+  bottom:-44px;
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  background:var(--experience-glow,var(--pink));
+  filter:blur(34px);
+  opacity:.13;
+}
+.experienceCard.live{--experience-glow:var(--cyan)}
+.experienceCard.planned{
+  --experience-glow:var(--purple);
+  opacity:.68;
+}
+.experienceCard>*{
+  position:relative;
+  z-index:2;
+}
+.experienceCard i{
+  display:grid;
+  place-items:center;
+  width:43px;
+  height:43px;
+  border-radius:13px;
+  background:linear-gradient(135deg,var(--pink),var(--purple),var(--cyan));
+  color:#071017;
+  font-style:normal;
+  font-weight:900;
+}
+.experienceCard>span{
+  margin-top:27px;
+  color:var(--pink);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.experienceCard.live>span{
+  color:var(--cyan);
+}
+.experienceCard strong{
+  margin-top:6px;
+  font-family:var(--display);
+  font-size:27px;
+  line-height:.88;
+}
+.experienceCard p{
+  margin:7px 0 18px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:500;
+  line-height:1.55;
+}
+.experienceCard b{
+  margin-top:auto;
+  color:#fff;
+  font-size:9px;
+}
+.experienceCard.live:hover{
+  transform:translateY(-3px);
+  border-color:rgba(86,231,255,.42)!important;
+}
+.experienceOverlayMap{
+  padding:19px;
+  border:1px solid var(--line);
+  border-radius:19px;
+  background:var(--panel);
+}
+.experienceOverlayMap header span{
+  color:var(--green);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.experienceOverlayMap header h3{
+  margin:5px 0 14px;
+  font-family:var(--display);
+  font-size:31px;
+}
+.experienceMapGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.experienceMapGrid article{
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#171d2c;
+}
+.experienceMapGrid article.protected{
+  border-color:rgba(85,240,164,.22);
+  background:rgba(85,240,164,.055);
+}
+.experienceMapGrid small{
+  color:var(--cyan);
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.experienceMapGrid article.protected small{
+  color:var(--green);
+}
+.experienceMapGrid strong{
+  display:block;
+  margin-top:7px;
+  font-family:var(--display);
+  font-size:22px;
+}
+.experienceMapGrid ul{
+  margin:11px 0 0;
+  padding-left:17px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.8;
+}
+@media(max-width:1200px){
+  .experienceGrid{grid-template-columns:repeat(3,1fr)}
+  .experienceStatusGrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:850px){
+  .experienceGrid{grid-template-columns:1fr 1fr}
+  .experienceMapGrid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .experienceStatusGrid,
+  .experienceGrid{grid-template-columns:1fr}
+  .experienceSectionHead{align-items:flex-start;flex-direction:column}
+  .experienceHeroState{width:100%}
+}
