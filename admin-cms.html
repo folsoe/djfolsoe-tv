@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE · Visual CMS</title>
+  <title>DJ FOLSOE · Broadcast Control Room</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10015">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=10020">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -16,7 +16,7 @@
   <aside class="cmsSidebar">
     <div class="cmsLogo">
       <span>TV</span>
-      <div><strong>DJ FOLSOE</strong><small>Visual CMS</small></div>
+      <div><strong>DJ FOLSOE</strong><small>Broadcast Control Room</small></div>
     </div>
 
     <nav id="cmsNav">
@@ -41,7 +41,7 @@
   <main class="cmsWorkspace">
     <header class="cmsTopbar">
       <div>
-        <p>DJ FOLSOE NETWORK · CONTENT CONTROL</p>
+        <p>DJ FOLSOE NETWORK · BROADCAST CONTROL ROOM</p>
         <h1 id="screenTitle">Dashboard</h1>
       </div>
       <div class="cmsTopActions">
@@ -56,12 +56,23 @@
 
     <section id="loadingState" class="loadingState">
       <div class="loadingMark">TV</div>
-      <h2>Connect your content studio</h2>
-      <p>Enter the admin password and press Connect. Nothing is changed until you press Save or Publish.</p>
+      <h2>Welcome to Broadcast Control</h2>
+      <p>Enter your admin password to open the studio. Loading and previewing never changes the live website.</p>
     </section>
 
     <div id="cmsScreens" hidden>
       <section data-screen-panel="dashboard" class="screen active">
+        <section class="controlStatus" aria-label="System status">
+          <article><i id="statusWebsiteDot"></i><div><span>Website</span><strong id="statusWebsite">Checking</strong></div><a href="/" target="_blank">Open ↗</a></article>
+          <article><i id="statusWorkerDot"></i><div><span>Content Core</span><strong id="statusWorker">Checking</strong></div><small id="statusWorkerVersion">Cloudflare</small></article>
+          <article><i id="statusTwitchDot"></i><div><span>Twitch</span><strong id="statusTwitch">Checking</strong></div><small id="statusTwitchDetail">DJ FOLSOE</small></article>
+          <article><i id="statusNewsDot"></i><div><span>Music stories</span><strong id="statusNews">Checking</strong></div><small id="statusNewsDetail">External + editorial</small></article>
+          <article><i id="statusOverlayDot"></i><div><span>Main Overlay</span><strong>Protected</strong></div><small>Logo · tickers · chat</small></article>
+        </section>
+        <div class="broadcastNow">
+          <div class="broadcastNowCopy"><span>Current channel state</span><h2 id="controlNowTitle">DJ FOLSOE NETWORK</h2><p id="controlNowDetail">Connect to load the active show, theme and next broadcast.</p></div>
+          <div class="broadcastNowMetrics"><div><span>Theme</span><strong id="controlTheme">—</strong></div><div><span>Viewers</span><strong id="controlViewers">0</strong></div><div><span>Followers</span><strong id="controlFollowers">0</strong></div></div>
+        </div>
         <div class="welcomePanel">
           <div>
             <span>Everything in one place</span>
@@ -254,6 +265,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=10015"></script>
+<script src="assets/js/visual-cms.js?v=10020"></script>
 </body>
 </html>
