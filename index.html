@@ -3,185 +3,274 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE · Twitch Music TV</title>
-  <meta name="description" content="DJ FOLSOE is a Danish Twitch music streamer with live DJ shows, requests, Top 20 and interactive Music TV energy.">
+  <title>DJ FOLSOE · Live Music TV from Denmark</title>
+  <meta name="description" content="Watch DJ FOLSOE live from Denmark. Discover themed DJ shows, music stories, weekly charts, viewer requests and an interactive Twitch community.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://folsoetv.dk/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="DJ FOLSOE TV">
-  <meta property="og:title" content="DJ FOLSOE · Twitch Music TV">
+  <meta property="og:title" content="DJ FOLSOE · Live Music TV">
+  <meta property="og:description" content="Live DJ shows, music requests, themed programmes and a welcoming Twitch community.">
   <meta property="og:url" content="https://folsoetv.dk/">
   <meta property="og:image" content="https://folsoetv.dk/assets/og-dj-folsoe.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/site.css?v=9330">
   <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9380">
   <link rel="stylesheet" href="assets/css/unified-experience.css?v=10011">
   <link rel="stylesheet" href="assets/css/content-platform.css?v=10011">
-  <link rel="stylesheet" href="assets/css/audience-experience.css?v=10013">
+  <link rel="stylesheet" href="assets/css/broadcast-premiere.css?v=10014">
 </head>
-<body class="networkOsBooting">
-  <div class="tvShell">
-    <header class="tvNav compactStationNav">
-      <a class="twitchIdentity" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
-        <span class="identityAvatarRing"><img id="navProfileImage" src="" alt="DJ FOLSOE Twitch profile"></span>
-        <span class="identityCopy">
-          <span class="identityNameRow"><strong id="navDisplayName">DJ FOLSOE</strong><em id="navState">LOADING</em></span>
-          <span class="identityMeta"><i id="navLiveDot"></i><b id="navLiveText">TWITCH CHANNEL</b><span id="navFollowers">— FOLLOWERS</span></span>
-          <small id="navProfileDescription">Live Music TV, requests, charts and community energy from Denmark.</small>
+<body>
+  <div class="premiereAmbient" aria-hidden="true">
+    <i></i><i></i><i></i>
+  </div>
+
+  <div class="tvShell premiereShell">
+    <header class="premiereNav">
+      <a class="premiereBrand" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
+        <span class="premiereBrandAvatar">
+          <img id="navProfileImage" src="" alt="DJ FOLSOE Twitch profile">
+          <i id="navLiveDot"></i>
+        </span>
+        <span class="premiereBrandCopy">
+          <span><strong id="navDisplayName">DJ FOLSOE</strong><em id="navState">OFFLINE</em></span>
+          <small id="navProfileDescription">Live music, requests and good company from Denmark.</small>
         </span>
       </a>
 
-      <nav class="stationNavigation" aria-label="Primary navigation">
-        <a href="#live"><span>◉</span>Live</a>
-        <a href="#broadcastGuide"><span>▤</span>TV Guide</a>
-        <a href="#shows"><span>⌁</span>Shows</a>
-        <a href="#top20"><span>♫</span>Top 20</a>
-        <a href="#viewerCommands"><span>⌨</span>Commands</a>
+      <nav class="premiereNavigation" aria-label="Primary navigation">
+        <a href="#live">Live</a>
+        <a href="#next">Up next</a>
+        <a href="#shows">Shows</a>
+        <a href="#musicNews">Stories</a>
+        <a href="#top20">Top 20</a>
+        <a href="#viewerCommands">Join in</a>
       </nav>
-      <a class="watchBtn" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch on Twitch</a>
+
+      <a class="premiereWatch" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
+        Watch on Twitch
+        <span>↗</span>
+      </a>
     </header>
 
-    <main id="top">
-      <section id="websiteActivityTicker" class="tickerStrip broadcastTicker neonTicker websiteActivityTicker" aria-label="Latest DJ FOLSOE Twitch activity" aria-live="polite">
-        <span class="tickerLead"><i class="tickerPulse"></i><span id="activityTickerLead">LIVE ACTIVITY</span></span>
-        <div class="tickerViewport activityTickerViewport">
-          <span id="topTicker" class="tickerFallback">Loading DJ FOLSOE live activity...</span>
-          <div id="activityTickerTrack" class="activityTickerTrack"></div>
+    <main id="top" class="premiereMain">
+      <section id="websiteActivityTicker" class="premiereTicker" aria-label="Latest channel activity" aria-live="polite">
+        <span class="premiereTickerLabel"><i></i><b id="activityTickerLead">CHANNEL UPDATE</b></span>
+        <div class="premiereTickerViewport">
+          <span id="topTicker">Live music, requests and new shows from DJ FOLSOE.</span>
+          <div id="activityTickerTrack"></div>
         </div>
-        <div class="activityTickerStatus">
-          <span id="activityTickerType">TWITCH</span>
-          <time id="activityTickerTime">UPDATING</time>
+        <time id="activityTickerTime">NOW</time>
+        <span id="activityTickerType" hidden>TWITCH</span>
+      </section>
+
+      <section id="live" data-ux-module="hero" class="premiereHero">
+        <div class="premiereHeroGrid" aria-hidden="true"></div>
+        <div class="premiereHeroSignal" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="premiereHeroCopy">
+          <div class="premiereEyebrow">
+            <span id="livePill">OFFLINE</span>
+            <b>CHANNEL 01</b>
+            <i id="uxThemeName">MUSIC TV</i>
+          </div>
+          <p id="heroEyebrow">LIVE MUSIC FROM DENMARK</p>
+          <h1 id="heroTitle">DJ FOLSOE</h1>
+          <h2 id="heroSubtitle">Live music, requests and good company</h2>
+          <p id="heroText">Themed DJ shows, audience requests, weekly charts and a welcoming live community — broadcast from Denmark.</p>
+
+          <div class="premiereHeroActions">
+            <a class="premierePrimary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
+              <span>Watch live</span><b>▶</b>
+            </a>
+            <a class="premiereSecondary" href="#requests">Make a request</a>
+          </div>
+
+          <div class="premiereHeroFacts">
+            <div><span>Current show</span><strong id="currentShow">DJ FOLSOE</strong></div>
+            <div><span>Viewers</span><strong id="metricViewers">0</strong></div>
+            <div><span>Followers</span><strong id="metricFollowers">0</strong></div>
+          </div>
+        </div>
+
+        <div class="premierePortraitStage">
+          <div class="premierePortraitHalo" aria-hidden="true"></div>
+          <div class="premierePortraitFrame">
+            <img id="heroProfileImage" src="" alt="DJ FOLSOE">
+            <div class="premierePortraitShade"></div>
+            <span class="premierePortraitChannel">DJ FOLSOE · CHANNEL 01</span>
+          </div>
+          <div class="premiereOnAirCard">
+            <span>On air</span>
+            <strong id="streamTitle">Next broadcast coming soon</strong>
+            <small id="premiereHeroTheme">Music TV</small>
+          </div>
         </div>
       </section>
 
-      <section id="activityPulseEngine" class="audienceSecondary" data-ux-module="activity" class="activityPulseEngine" aria-label="DJ FOLSOE live activity pulse">
-        <div class="activityPulseHeader">
-          <div>
-            <p>EXT-004 · LIVE CHANNEL MEMORY</p>
-            <h2>Live from the channel</h2>
-          </div>
-          <div class="activityPulseSignal">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            <span id="activityPulseStatus">CONNECTED</span>
-          </div>
+      <section id="next" data-ux-module="next" class="premiereNext">
+        <div class="premiereNextLead">
+          <span>Up next</span>
+          <h2 id="nextTitle">Next show</h2>
+          <p id="nextDescription">The next DJ FOLSOE broadcast will be announced here soon.</p>
         </div>
+        <div class="premiereNextFacts">
+          <div><span>Starts</span><strong id="nextTime">Coming soon</strong></div>
+          <div><span>Countdown</span><strong id="nextCountdown">TBA</strong></div>
+          <div><span>Sound</span><strong id="nextTheme">Music TV</strong></div>
+        </div>
+      </section>
 
-        <div class="activityPulseLayout">
-          <article id="activityPulseSpotlight" class="activityPulseSpotlight">
-            <div id="activityPulseIcon" class="activityPulseHeroIcon">●</div>
+      <div id="contentZoneFeatured" class="contentModuleZone premiereModuleZone" data-content-zone="featured"></div>
+
+      <section id="shows" data-ux-module="shows" class="premiereShows">
+        <header class="premiereSectionHeader">
+          <div>
+            <span>Signature programmes</span>
+            <h2 id="showsTitle">Find your show</h2>
+          </div>
+          <p>From bright morning sessions to trance journeys, retro memories and Friday-night energy.</p>
+        </header>
+        <div class="showCards premiereShowCards" id="showCards"></div>
+      </section>
+
+      <div id="contentZoneShowsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="shows-after"></div>
+
+      <section id="musicNews" class="premiereNews" data-content-zone="editorial">
+        <header class="premiereNewsHeader">
+          <div>
+            <span>Selected for the current sound</span>
+            <h2 id="musicNewsTitle">Latest music stories</h2>
+          </div>
+          <div class="premiereNewsControls">
+            <b id="musicNewsTheme">ALL MUSIC</b>
+            <button id="musicNewsRefresh" type="button">Refresh stories</button>
+          </div>
+        </header>
+        <article id="featuredNews" class="featuredNews premiereFeaturedNews" hidden></article>
+        <div id="musicNewsGrid" class="musicNewsGrid premiereNewsGrid">
+          <p class="contentLoading">More stories are on the way.</p>
+        </div>
+      </section>
+
+      <div id="contentZoneEditorial" class="contentModuleZone premiereModuleZone" data-content-zone="editorial"></div>
+
+      <section id="top20" data-ux-module="top20" class="premiereChart">
+        <header class="premiereSectionHeader premiereChartHeader">
+          <div>
+            <span>DJ FOLSOE countdown</span>
+            <h2>This week's Top 20</h2>
+          </div>
+          <p>Viewer favourites, discoveries and the tracks shaping the next show.</p>
+        </header>
+        <div class="chartList premiereChartList" id="chartList"></div>
+      </section>
+
+      <div id="contentZoneChartsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="charts-after"></div>
+
+      <section id="activityPulseEngine" data-ux-module="activity" class="premiereCommunity" aria-label="Latest community activity">
+        <header class="premiereCommunityHeader">
+          <div>
+            <span>Live community</span>
+            <h2>What is happening now</h2>
+          </div>
+          <div class="premiereCommunitySignal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        </header>
+
+        <div class="premiereCommunityGrid">
+          <article class="premiereCommunitySpotlight">
+            <div id="activityPulseIcon" class="premiereCommunityIcon">♥</div>
             <div>
-              <span id="activityPulseType">DJ FOLSOE NETWORK</span>
+              <span id="activityPulseType">CHANNEL UPDATE</span>
               <h3 id="activityPulseHeadline">The community is warming up</h3>
-              <p id="activityPulseDetail">Twitch activity will appear here automatically.</p>
+              <p id="activityPulseDetail">New follows, requests, raids and other channel moments will appear here.</p>
             </div>
             <time id="activityPulseTime">NOW</time>
           </article>
-
-          <div id="activityPulseRail" class="activityPulseRail"></div>
-
-          <aside class="activityPulseStats">
-            <div><strong id="activityPulseCount">0</strong><span>Remembered</span></div>
+          <div id="activityPulseRail" class="premiereCommunityRail"></div>
+          <aside class="premiereCommunityStats">
+            <div><strong id="activityPulseCount">0</strong><span>Moments</span></div>
             <div><strong id="activityPulseToday">0</strong><span>Today</span></div>
             <div><strong id="activityPulsePeople">0</strong><span>People</span></div>
             <div><strong id="activityPulseEnergy">0</strong><span>Energy</span></div>
           </aside>
         </div>
+        <span id="activityPulseStatus" hidden>CONNECTED</span>
       </section>
 
-      <section id="live" data-ux-module="hero" class="heroPortal compactMusicTvHero">
-        <div class="uxThemeSignature" aria-hidden="true">
-          <span class="uxThemeIndex">01</span>
-          <div class="uxThemeLines"><i></i><i></i><i></i></div>
-          <strong id="uxThemeName">RETRO HITS</strong>
-        </div>
-        <div class="heroBg" id="heroThemeBg"></div>
-        <div class="heroContent">
-          <div class="broadcastEyeline"><span class="broadcastDot"></span><span>LIVE MUSIC TV FROM DENMARK</span><i>CHANNEL 01</i></div>
-          <p class="eyebrow" id="heroEyebrow">DJ FOLSOE TWITCH · MUSIC STREAMER</p>
-          <h1 id="heroTitle">DJ FOLSOE</h1>
-          <h2 id="heroSubtitle">Live music, requests and good company</h2>
-          <p id="heroText">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</p>
-          <div class="heroActions">
-            <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch live</a>
-            <a class="secondary" href="#requests">Make a request</a>
+      <section id="viewerCommands" data-ux-module="commands" class="premiereInteraction">
+        <header class="premiereSectionHeader">
+          <div>
+            <span>Take part on Twitch</span>
+            <h2>Join the show</h2>
           </div>
-        </div>
-<div class="osPortalRing ring2"></div>
-          <div class="osPortalRing ring3"></div>
-          <div class="osPortalEnergy"></div>
-          <div class="osPortalCore">
-            <span>CH 01</span>
-            <strong id="osPortalState">STANDBY</strong>
-            <small id="osPortalTheme">MUSIC TV</small>
-          </div>
-        </div>
-
-        <aside class="livePanel broadcastMonitor compactMonitor">
-          <div class="monitorChrome"><span>ON AIR</span><span>DJ FOLSOE NETWORK</span><span>HD</span></div>
-          <div class="monitorStatusRow"><div class="livePill" id="livePill">OFFLINE</div><strong>CHANNEL 01</strong></div>
-          <h3 id="currentShow">Current broadcast</h3>
-          <p id="streamTitle">Loading broadcast data...</p>
-          <div class="metricGrid">
-            <div><span>Viewers</span><b id="metricViewers">0</b></div>
-            <div><span>Followers</span><b id="metricFollowers">0</b></div>
-            <div><span>Sub goal</span><b id="metricSubGoal">0 / 0</b></div>
-            <div><span>Theme</span><b id="metricTheme">Default</b></div>
-          </div>
-          <div class="signalBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        </aside>
-      </section>
-<section id="next" data-ux-module="next" class="portalPanel nextBroadcast compactNextBroadcast">
-        <div class="panelHead"><p id="nextKicker">NEXT SHOW</p><h2 id="nextTitle">Next show</h2></div>
-        <div class="nextGrid"><div><span>Starts</span><b id="nextTime">TBA</b></div><div><span>Countdown</span><b id="nextCountdown">--:--:--</b></div><div><span>Theme</span><b id="nextTheme">Music TV</b></div></div>
-        <p id="nextDescription">Upcoming DJ FOLSOE show will appear here from admin.</p>
-      </section>
-
-            <section id="musicNews" class="contentPlatformSection musicNewsSection audienceEditorial" class="contentPlatformSection musicNewsSection" data-content-zone="editorial">
-        <header class="contentSectionHead">
-          <div><p>DJ FOLSOE NETWORK · ENGLISH LATEST MUSIC STORIES</p><h2 id="musicNewsTitle">Latest music stories</h2></div>
-          <div class="newsFilter"><span id="musicNewsTheme">ALL MUSIC</span><button id="musicNewsRefresh" type="button">Refresh</button></div>
+          <p>Request a song, vote, react or bring extra energy to the live broadcast.</p>
         </header>
-        <article id="featuredNews" class="featuredNews" hidden></article>
-        <div id="musicNewsGrid" class="musicNewsGrid"><p class="contentLoading">Loading music news…</p></div>
-      </section>
-      <div id="contentZoneFeatured" class="contentModuleZone" data-content-zone="featured"></div>
-      <div id="contentZoneEditorial" class="contentModuleZone" data-content-zone="editorial"></div>
 
-      <section id="shows" class="audienceShows" data-ux-module="shows" class="portalPanel tvSection tvShows graphicBurst">
-        <div class="panelHead"><p id="showsKicker">FEATURED SHOWS</p><h2 id="showsTitle">Explore the shows</h2></div>
-        <div class="showCards" id="showCards"></div>
-      </section>
-      <div id="contentZoneShowsAfter" class="contentModuleZone" data-content-zone="shows-after"></div>
+        <div class="premiereActionDeck">
+          <article class="premiereActionCard request">
+            <span>01</span><b>Music request</b><strong>!request Artist - Title</strong><p>Put a track forward for the show.</p>
+          </article>
+          <article class="premiereActionCard vote">
+            <span>02</span><b>Vote</b><strong>!vote</strong><p>Take part in the current live vote.</p>
+          </article>
+          <article class="premiereActionCard hype">
+            <span>03</span><b>Bring the energy</b><strong>!hype</strong><p>Join the channel's live hype moment.</p>
+          </article>
+          <article class="premiereActionCard love">
+            <span>04</span><b>Send some love</b><strong>!love</strong><p>Share a positive reaction with the community.</p>
+          </article>
+        </div>
 
-      <section id="top20" class="audienceChart" data-ux-module="top20" class="portalPanel tvSection tvChart chartStage">
-        <div class="panelHead"><p>FOLSOE TOP 20</p><h2>This week's Top 20</h2></div>
-        <div class="chartList" id="chartList"></div>
+        <details class="premiereAllCommands">
+          <summary>See all active commands</summary>
+          <div class="extCommandGrid" id="extViewerCommands"></div>
+        </details>
       </section>
-      <div id="contentZoneChartsAfter" class="contentModuleZone" data-content-zone="charts-after"></div>
 
-      <section id="viewerCommands" class="audienceCommands" data-ux-module="commands" class="portalPanel extModule extCommands tvSection tvCommands viewerCommandsOnly">
-        <div class="panelHead"><div><p>LIVE INTERACTION</p><h2>Join the show</h2></div><span class="liveCommandBadge">TWITCH CHAT</span></div>
-        <p class="extIntro">Use these commands in Twitch chat to take part in the show.</p>
-        <div class="extCommandGrid" id="extViewerCommands"></div>
-      </section>
-      <div id="contentZoneInteractive" class="contentModuleZone" data-content-zone="interactive"></div>
+      <div id="contentZoneInteractive" class="contentModuleZone premiereModuleZone" data-content-zone="interactive"></div>
 
-      <section id="requests" class="audienceRequest" data-ux-module="requests" class="portalPanel requestPanel compactRequestPanel">
-        <div class="panelHead"><p>REQUEST WALL</p><h2>Want a song on air?</h2></div>
-        <p>Use <b>!request Artist - Title</b> in Twitch chat.</p>
-        <a class="primary" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Join the conversation</a>
+      <section id="requests" data-ux-module="requests" class="premiereRequest">
+        <div class="premiereRequestCopy">
+          <span>Request line</span>
+          <h2>Hear your song on air</h2>
+          <p>Send <strong>!request Artist - Title</strong> in Twitch chat and your choice may join the show.</p>
+        </div>
+        <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
+          Join the conversation
+          <b>↗</b>
+        </a>
       </section>
-          <div id="contentZoneArchive" class="contentModuleZone" data-content-zone="archive"></div>
+
+      <div id="contentZoneArchive" class="contentModuleZone premiereModuleZone" data-content-zone="archive"></div>
     </main>
 
-    <footer class="siteFooter stationFooter">
-      <div><strong>DJ FOLSOE NETWORK</strong><p>Music TV · Twitch · Denmark</p></div>
-      <nav><a href="#live">Live</a><a href="#broadcastGuide">TV Guide</a><a href="#shows">Shows</a><a href="#top20">Top 20</a><a href="#viewerCommands">Commands</a></nav>
+    <footer class="premiereFooter">
+      <div>
+        <strong>DJ FOLSOE NETWORK</strong>
+        <p>Live Music TV · Twitch · Denmark</p>
+      </div>
+      <nav>
+        <a href="#live">Live</a>
+        <a href="#shows">Shows</a>
+        <a href="#musicNews">Stories</a>
+        <a href="#top20">Top 20</a>
+        <a href="#viewerCommands">Join in</a>
+      </nav>
+      <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Twitch ↗</a>
     </footer>
   </div>
+
   <script src="assets/js/config.js"></script>
   <script src="assets/js/site.js?v=9380"></script>
   <script src="assets/js/unified-experience.js?v=10011"></script>
   <script src="assets/js/content-platform.js?v=10011"></script>
-  <script src="assets/js/audience-experience.js?v=10013"></script>
+  <script src="assets/js/broadcast-premiere.js?v=10014"></script>
 </body>
 </html>
