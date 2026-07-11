@@ -131,6 +131,19 @@ function renderPortal(){
   const hero = homepage.hero || {};
   const sectionTitles = homepage.sectionTitles || {};
   const live = broadcast.live || broadcast.broadcastState === 'LIVE' || broadcast.mode === 'LIVE SHOW';
+  const twitchProfile = portal.twitch || {};
+  const profileImage = twitchProfile.profileImage || twitchProfile.profile_image_url || '';
+  const profileDescription = twitchProfile.description || hero.text || 'Live Music TV, requests, charts and community energy from Denmark.';
+  const profileName = twitchProfile.displayName || twitchProfile.display_name || 'DJ FOLSOE';
+  if($('navProfileImage')) {
+    $('navProfileImage').src = profileImage || 'https://static-cdn.jtvnw.net/jtv_user_pictures/b759d05a-f6ea-41e5-b9e0-f834ad3d0eb3-profile_image-300x300.png';
+    $('navProfileImage').alt = profileName + ' Twitch profile';
+  }
+  setText('navDisplayName', profileName);
+  setText('navFollowers', `${Number(twitchProfile.followers ?? community.followers ?? 0).toLocaleString()} FOLLOWERS`);
+  setText('navProfileDescription', profileDescription);
+  setText('navLiveText', live ? 'LIVE ON TWITCH' : 'TWITCH CHANNEL');
+  if($('navLiveDot')) $('navLiveDot').classList.toggle('is-live', live);
   if($('heroThemeBg')) $('heroThemeBg').style.backgroundImage = `url('${hero.background || theme.background || 'themes/weekend.png'}')`;
   document.documentElement.setAttribute('data-djf-theme', theme.id || broadcast.activeTheme || 'weekend');
   document.documentElement.setAttribute('data-djf-source', portal.__source || 'unknown');
@@ -186,9 +199,7 @@ function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;',
 // =========================================================
 async function loadWebsiteExtensions(){
   await Promise.allSettled([
-    loadPresenceExtension(),
-    loadViewerCommandsExtension(),
-    loadCommunityProfilesExtension()
+    loadViewerCommandsExtension()
   ]);
 }
 
@@ -219,7 +230,7 @@ async function loadViewerCommandsExtension(){
   const commands = Array.isArray(payload?.commands) ? payload.commands : [];
   const wrap = $('extViewerCommands');
   if(!wrap) return;
-  wrap.innerHTML = commands.length ? commands.slice(0,12).map(c=>`<article class="extCommandCard"><code>${escapeHtml(c.usage || c.command || '')}</code><b>${escapeHtml(c.title || 'Viewer command')}</b><p>${escapeHtml(c.description || '')}</p><span>${escapeHtml(c.category || 'COMMAND')}</span></article>`).join('') : '<div class="extEmpty">Viewer commands will appear here automatically.</div>';
+  wrap.innerHTML = commands.length ? commands.map(c=>`<article class="extCommandCard"><code>${escapeHtml(c.usage || c.command || '')}</code><b>${escapeHtml(c.title || 'Viewer command')}</b><p>${escapeHtml(c.description || '')}</p><span>${escapeHtml(c.category || 'COMMAND')}</span></article>`).join('') : '<div class="extEmpty">Viewer commands will appear here automatically.</div>';
 }
 
 async function loadCommunityProfilesExtension(){
