@@ -23,7 +23,61 @@
   <link rel="stylesheet" href="assets/css/unified-experience.css?v=10011">
   <link rel="stylesheet" href="assets/css/content-platform.css?v=10011">
   <link rel="stylesheet" href="assets/css/broadcast-premiere.css?v=10014">
-  <link rel="stylesheet" href="assets/css/music-news-repair.css?v=16000">
+  <link rel="stylesheet" href="assets/css/music-news-repair.css?v=16001">
+
+  <style id="djf-v16001-visibility-guard">
+    html,
+    body {
+      min-width: 100%;
+      min-height: 100%;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    body,
+    .tvShell,
+    .premiereShell,
+    .premiereMain,
+    .premiereNav,
+    .premiereHero,
+    .premiereNext,
+    .premiereShows,
+    .premiereNews,
+    .premiereChart,
+    .premiereCommunity,
+    .premiereInteraction,
+    .premiereRequest,
+    .premiereFooter {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .tvShell,
+    .premiereShell {
+      display: block !important;
+    }
+
+    body > .tvShell,
+    body > .premiereShell {
+      min-height: 100vh;
+    }
+
+    body.djf-boot-failed::before {
+      content: "DJ FOLSOE NETWORK";
+      position: fixed;
+      right: 18px;
+      bottom: 14px;
+      z-index: 999999;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(5, 8, 15, 0.82);
+      color: #56e7ff;
+      font: 800 10px/1 Arial, sans-serif;
+      letter-spacing: .12em;
+      pointer-events: none;
+    }
+  </style>
+
 </head>
 <body>
   <div class="premiereAmbient" aria-hidden="true">
@@ -268,12 +322,74 @@
     </footer>
   </div>
 
+
+  <script id="djf-v16001-boot-guard">
+    (() => {
+      const reveal = () => {
+        const body = document.body;
+        if (!body) return;
+
+        body.hidden = false;
+        body.removeAttribute("hidden");
+
+        [
+          "ready",
+          "loaded",
+          "is-ready",
+          "site-ready",
+          "premiere-ready",
+          "app-ready",
+          "data-ready"
+        ].forEach(name => body.classList.add(name));
+
+        document.documentElement.classList.add(
+          "ready",
+          "loaded",
+          "is-ready",
+          "site-ready"
+        );
+
+        document.querySelectorAll(
+          ".tvShell,.premiereShell,.premiereMain,[data-ux-module]"
+        ).forEach(node => {
+          node.hidden = false;
+          node.removeAttribute("hidden");
+          node.style.removeProperty("display");
+          node.style.setProperty("visibility", "visible", "important");
+          node.style.setProperty("opacity", "1", "important");
+        });
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", reveal, { once: true });
+      } else {
+        reveal();
+      }
+
+      window.addEventListener("load", reveal, { once: true });
+
+      window.setTimeout(() => {
+        reveal();
+
+        const shell = document.querySelector(".tvShell,.premiereShell");
+        const shellVisible = shell &&
+          shell.getBoundingClientRect().height > 100 &&
+          getComputedStyle(shell).display !== "none" &&
+          getComputedStyle(shell).visibility !== "hidden";
+
+        if (!shellVisible) {
+          document.body?.classList.add("djf-boot-failed");
+        }
+      }, 1800);
+    })();
+  </script>
+
   <script src="assets/js/config.js"></script>
   <script src="assets/js/site.js?v=9380"></script>
   <script src="assets/js/unified-experience.js?v=10011"></script>
   <script src="assets/js/content-platform.js?v=10011"></script>
   <script src="assets/js/broadcast-premiere.js?v=10014"></script>
-  <script src="/live-status-sync.js?v=15000"></script>
-  <script src="assets/js/music-news-repair.js?v=16000"></script>
+  <script src="/live-status-sync.js?v=15001"></script>
+  <script src="assets/js/music-news-repair.js?v=16001"></script>
 </body>
 </html>
