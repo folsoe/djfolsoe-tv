@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/visual-cms.css?v=1300">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=14000">
 </head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -24,6 +24,7 @@
       <button data-screen="platform"><i>◆</i><span>Content Platform</span></button>
       <button data-screen="experience"><i>◉</i><span>Broadcast Experience</span></button>
       <button data-screen="station"><i>▣</i><span>TV Station</span></button>
+      <button data-screen="composer"><i>▱</i><span>Scene Composer</span></button>
       <button data-screen="homepage"><i>✦</i><span>Homepage</span></button>
       <button data-screen="modules"><i>▦</i><span>Content blocks</span></button>
       <button data-screen="shows"><i>▶</i><span>Shows</span></button>
@@ -606,6 +607,85 @@
       </section>
 
 
+      
+      <section data-screen-panel="composer" class="screen">
+        <div class="screenIntro composerHero">
+          <div>
+            <span>V1400.0 · SCENE COMPOSER</span>
+            <h2>Build the broadcast from separate, protected layers</h2>
+            <p>The Main Overlay remains the fixed foundation. Tickers, chat and future programme widgets stay as independent StreamElements or OBS sources.</p>
+          </div>
+          <div class="composerSafetyBadge">
+            <small>SAFE MODE</small>
+            <strong>ADDITIVE ONLY</strong>
+            <span>No Worker, website or overlay code replaced</span>
+          </div>
+        </div>
+
+        <section class="composerStatusStrip">
+          <div><span>Active theme</span><strong id="composerTheme">—</strong></div>
+          <div><span>Twitch</span><strong id="composerTwitch">OFFLINE</strong></div>
+          <div><span>Main Overlay</span><strong>LOCKED ON</strong></div>
+          <div><span>Configuration</span><strong>LOCAL PLAN</strong></div>
+        </section>
+
+        <div class="composerLayout">
+          <section class="composerStagePanel">
+            <header class="composerPanelHeader">
+              <div><span>OBS LAYER MAP</span><h3>Scene stack</h3></div>
+              <button id="composerReset" class="secondary">Reset local plan</button>
+            </header>
+            <div class="composerStage">
+              <article class="composerLayer" data-composer-layer="chat"><span>04</span><div><small>SEPARATE STREAMELEMENTS OVERLAY</small><strong>Twitch Chat</strong><p>Profile image, badges, emotes, emojis and messages.</p></div><b id="composerStageChat">OFF</b></article>
+              <article class="composerLayer" data-composer-layer="topTicker"><span>03</span><div><small>SEPARATE STREAMELEMENTS OVERLAY</small><strong>Top Ticker</strong><p>Programme information, live status, next show and announcements.</p></div><b id="composerStageTopTicker">OFF</b></article>
+              <article class="composerLayer" data-composer-layer="bottomTicker"><span>02</span><div><small>SEPARATE STREAMELEMENTS OVERLAY</small><strong>Bottom Ticker</strong><p>Theme humour, Twitch activity, requests and community messages.</p></div><b id="composerStageBottomTicker">OFF</b></article>
+              <article class="composerLayer locked"><span>01</span><div><small>MAIN STREAMELEMENTS OVERLAY · LOCKED</small><strong>Theme Background + One Logo</strong><p>The theme background changes from admin. The existing top-left logo remains the only fixed logo.</p></div><b>ON</b></article>
+            </div>
+          </section>
+
+          <aside class="composerControlPanel">
+            <header class="composerPanelHeader"><div><span>LAYER CONTROLS</span><h3>Separate sources</h3></div></header>
+            <div class="composerControlList">
+              <article class="composerControlCard locked">
+                <div class="composerControlTitle"><i>01</i><div><small>FOUNDATION</small><strong>Main Overlay</strong></div><span class="composerSwitch on lockedSwitch"></span></div>
+                <p>Contains only the active theme background and the existing single logo.</p>
+                <div class="composerUrlRow"><input id="composerUrlMain" placeholder="Paste Main Overlay URL"><button data-composer-preview="main" class="secondary">Preview</button></div>
+              </article>
+              <article class="composerControlCard">
+                <div class="composerControlTitle"><i>02</i><div><small>INFORMATION</small><strong>Top Ticker</strong></div><button class="composerSwitch" data-composer-toggle="topTicker"></button></div>
+                <p>Programme information, automatic live status, Next Show, polls and announcements.</p>
+                <div class="composerUrlRow"><input id="composerUrlTopTicker" placeholder="Paste Top Ticker overlay URL"><button data-composer-preview="topTicker" class="secondary">Preview</button></div>
+              </article>
+              <article class="composerControlCard">
+                <div class="composerControlTitle"><i>03</i><div><small>COMMUNITY</small><strong>Bottom Ticker</strong></div><button class="composerSwitch" data-composer-toggle="bottomTicker"></button></div>
+                <p>Theme humour, latest follow, sub, bits, raid, request and activity information.</p>
+                <div class="composerUrlRow"><input id="composerUrlBottomTicker" placeholder="Paste Bottom Ticker overlay URL"><button data-composer-preview="bottomTicker" class="secondary">Preview</button></div>
+              </article>
+              <article class="composerControlCard">
+                <div class="composerControlTitle"><i>04</i><div><small>TWITCH CHAT</small><strong>Chat Overlay</strong></div><button class="composerSwitch" data-composer-toggle="chat"></button></div>
+                <p>Independent chat layer prepared for Twitch profile images, badges, emotes and emojis.</p>
+                <div class="composerUrlRow"><input id="composerUrlChat" placeholder="Paste Chat overlay URL"><button data-composer-preview="chat" class="secondary">Preview</button></div>
+              </article>
+            </div>
+            <button id="composerSaveLocal" class="composerSaveButton">Save local scene plan</button>
+            <p class="composerLocalNotice">This version saves the scene plan only in this browser. It does not publish or switch OBS sources yet.</p>
+          </aside>
+        </div>
+
+        <section class="composerFutureWidgets">
+          <header class="composerPanelHeader"><div><span>PROGRAMME WIDGETS</span><h3>Separate sources added only when needed</h3></div></header>
+          <div class="composerWidgetGrid">
+            <article><i>20</i><strong>Top 20</strong><span>Future separate OBS source</span></article>
+            <article><i>10</i><strong>Retro Top 10</strong><span>Future separate OBS source</span></article>
+            <article><i>✓</i><strong>Poll</strong><span>Future separate OBS source</span></article>
+            <article><i>♫</i><strong>Now Playing</strong><span>Reserved for Serato</span></article>
+            <article><i>▣</i><strong>Poster</strong><span>Future event source</span></article>
+            <article><i>▤</i><strong>Music News</strong><span>Future breaking-news source</span></article>
+          </div>
+        </section>
+      </section>
+
+
       <section data-screen-panel="homepage" class="screen">
         <div class="screenIntro"><div><span>Homepage</span><h2>What visitors see first</h2><p>Edit the main message, next show and community call-to-action.</p></div><button id="saveHomepage">Save homepage</button></div>
         <div class="editorLayout">
@@ -861,6 +941,6 @@
   <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
 </div>
 
-<script src="assets/js/visual-cms.js?v=1300"></script>
+<script src="assets/js/visual-cms.js?v=14000"></script>
 </body>
 </html>
