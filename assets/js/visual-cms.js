@@ -1,6 +1,7 @@
 const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const $=id=>document.getElementById(id);
 let state=null,currentModuleFilter='all',draggedModuleId='',pendingConfirm=null;
+const SCENE_COMPOSER_KEY='djf_scene_composer_v1400';
 let wizardState={type:'',step:0,module:null};
 const themeColors={weekend:'#55e5ff',trance:'#4ce8ff',fredagsbar:'#72ffb7',eurodance:'#ff35b8',retro:'#ffd063',popup:'#ff496f',morning:'#ffd96a',summer:'#61efff',danske:'#ff5454',top20:'#8066ff'};
 const typeIcons={poster:'▣','ranked-list':'10',story:'✎',poll:'✓',playlist:'♫','news-feed':'▤',text:'T',video:'▶',embed:'<>','now-playing':'♫'};
@@ -176,7 +177,7 @@ async function connect({silent=false}={}){
     const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
   }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
 }
-function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderBroadcastExperience();renderTvStation();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderBroadcastExperience();renderTvStation();renderSceneComposer();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
 function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
 function renderSystemStatus(){
   const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
@@ -445,6 +446,16 @@ function renderTvStation(){
   }
 }
 
+
+function sceneComposerDefaults(){return{enabled:{topTicker:false,bottomTicker:false,chat:false},urls:{main:'',topTicker:'',bottomTicker:'',chat:''}}}
+function readSceneComposer(){try{const s=JSON.parse(localStorage.getItem(SCENE_COMPOSER_KEY)||'null'),d=sceneComposerDefaults();return{enabled:{...d.enabled,...(s?.enabled||{})},urls:{...d.urls,...(s?.urls||{})}}}catch(_){return sceneComposerDefaults()}}
+function collectSceneComposer(){const c=readSceneComposer();return{enabled:{...c.enabled},urls:{main:document.getElementById('composerUrlMain')?.value.trim()||'',topTicker:document.getElementById('composerUrlTopTicker')?.value.trim()||'',bottomTicker:document.getElementById('composerUrlBottomTicker')?.value.trim()||'',chat:document.getElementById('composerUrlChat')?.value.trim()||''}}}
+function renderSceneComposer(){const screen=document.querySelector('[data-screen-panel="composer"]');if(!screen||!state)return;const c=readSceneComposer(),t=state.core?.twitch||{};const write=(id,v)=>{const n=document.getElementById(id);if(n)n.textContent=String(v)};write('composerTheme',state.core?.theme?.title||'Weekend');write('composerTwitch',(t.live||t.isLive)?'LIVE':'OFFLINE');const map={main:'composerUrlMain',topTicker:'composerUrlTopTicker',bottomTicker:'composerUrlBottomTicker',chat:'composerUrlChat'};Object.entries(map).forEach(([k,id])=>{const f=document.getElementById(id);if(f&&document.activeElement!==f)f.value=c.urls[k]||''});['topTicker','bottomTicker','chat'].forEach(k=>{const on=!!c.enabled[k],b=document.querySelector(`[data-composer-toggle="${k}"]`),l=document.querySelector(`[data-composer-layer="${k}"]`);if(b)b.classList.toggle('on',on);if(l)l.classList.toggle('enabled',on);write({topTicker:'composerStageTopTicker',bottomTicker:'composerStageBottomTicker',chat:'composerStageChat'}[k],on?'ON':'OFF')})}
+function toggleSceneComposerLayer(key){const c=collectSceneComposer();c.enabled[key]=!c.enabled[key];localStorage.setItem(SCENE_COMPOSER_KEY,JSON.stringify(c));renderSceneComposer()}
+function saveSceneComposerLocal(){const c=collectSceneComposer(),e=readSceneComposer();c.enabled={...e.enabled};localStorage.setItem(SCENE_COMPOSER_KEY,JSON.stringify(c));renderSceneComposer();toast('Local scene plan saved.')}
+function previewSceneComposerLayer(key){const u=collectSceneComposer().urls[key]||'';if(!u)return toast('Paste the StreamElements overlay URL first.',true);try{window.open(new URL(u,window.location.href).href,'_blank','noopener')}catch(_){toast('The overlay URL is not valid.',true)}}
+function resetSceneComposer(){localStorage.removeItem(SCENE_COMPOSER_KEY);renderSceneComposer();toast('Local scene plan reset.')}
+
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
 function installDragSort(){document.querySelectorAll('.moduleRow').forEach(row=>{row.addEventListener('dragstart',()=>{draggedModuleId=row.dataset.moduleId;row.style.opacity='.45'});row.addEventListener('dragend',()=>{row.style.opacity='';draggedModuleId=''});row.addEventListener('dragover',e=>e.preventDefault());row.addEventListener('drop',async e=>{e.preventDefault();const target=row.dataset.moduleId;if(!draggedModuleId||target===draggedModuleId)return;const ids=[...document.querySelectorAll('.moduleRow')].map(x=>x.dataset.moduleId);const from=ids.indexOf(draggedModuleId),to=ids.indexOf(target);ids.splice(to,0,ids.splice(from,1)[0]);try{const result=await api('/api/cms/admin/modules/reorder',{method:'POST',body:JSON.stringify({order:ids})});state.modules=result.modules;renderModules();toast('Content order saved.')}catch(error){toast(error.message,true)}})})}
 function renderShows(){const shows=state.core?.featuredShows||[];$('showsEditor').innerHTML=shows.map((s,i)=>showCard(s,i)).join('')||'<p>No shows yet. Press Add show.</p>'}
@@ -482,7 +493,7 @@ async function setTheme(id){try{const result=await api('/api/cms/admin/theme',{m
 async function toggleNews(id,field){const a=state.news.articles.find(x=>x.id===id);if(!a)return;try{const result=await api('/api/news/admin/article',{method:'POST',body:JSON.stringify({id,patch:{[field]:!a[field]}})});Object.assign(a,result.article);renderNews();toast('Story updated.')}catch(error){toast(error.message,true)}}
 async function deleteNews(id){confirmAction('Delete this story?','This cannot be undone.',async()=>{try{await api('/api/cms/admin/news?id='+encodeURIComponent(id),{method:'DELETE'});state.news.articles=state.news.articles.filter(a=>a.id!==id);renderNews();toast('Story deleted.')}catch(error){toast(error.message,true)}})}
 async function saveSources(){try{const sources=[...document.querySelectorAll('[data-source-index]')].map((row,i)=>({id:state.news.sources[i]?.id||`source-${i}`,name:row.querySelector('[data-source-field="name"]').value,url:row.querySelector('[data-source-field="url"]').value,priority:Number(row.querySelector('[data-source-field="priority"]').value),enabled:row.querySelector('[data-source-field="enabled"]').checked}));const result=await api('/api/news/admin/sources',{method:'POST',body:JSON.stringify({sources})});state.news.sources=result.sources;toast('News sources saved.')}catch(error){toast(error.message,true)}}
-document.addEventListener('click',async event=>{const el=event.target.closest('button,a,summary');if(!el)return;if(el.dataset.screen)openScreen(el.dataset.screen);if(el.dataset.screenJump)openScreen(el.dataset.screenJump);if(el.dataset.quickCreate)openWizard(el.dataset.quickCreate);if(el.dataset.editModule){const m=state.modules.find(x=>x.id===el.dataset.editModule);if(m)openContentEditor(m.type,m)}if(el.dataset.duplicateModule)duplicateModule(el.dataset.duplicateModule);if(el.dataset.deleteModule)deleteModule(el.dataset.deleteModule);
+document.addEventListener('click',async event=>{const el=event.target.closest('button,a,summary');if(!el)return;if(el.dataset.screen)openScreen(el.dataset.screen);if(el.dataset.composerToggle)toggleSceneComposerLayer(el.dataset.composerToggle);if(el.dataset.composerPreview)previewSceneComposerLayer(el.dataset.composerPreview);if(el.dataset.screenJump)openScreen(el.dataset.screenJump);if(el.dataset.quickCreate)openWizard(el.dataset.quickCreate);if(el.dataset.editModule){const m=state.modules.find(x=>x.id===el.dataset.editModule);if(m)openContentEditor(m.type,m)}if(el.dataset.duplicateModule)duplicateModule(el.dataset.duplicateModule);if(el.dataset.deleteModule)deleteModule(el.dataset.deleteModule);
 if(el.dataset.togglePublish)quickToggleModule(el.dataset.togglePublish,{status:state.modules.find(m=>m.id===el.dataset.togglePublish)?.status==='published'?'draft':'published'});
 if(el.dataset.toggleWebsite){const m=state.modules.find(x=>x.id===el.dataset.toggleWebsite);quickToggleModule(el.dataset.toggleWebsite,{website:!(m?.surfaces?.website!==false)});}
 if(el.dataset.closeWizard!==undefined)closeWizard();
@@ -562,4 +573,10 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('input[name="wizardPublishMode"]').forEach(input=>input.addEventListener('change',()=>{
     $('wizardScheduleFields').hidden=document.querySelector('input[name="wizardPublishMode"]:checked')?.value!=='scheduled';
   }));
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('composerSaveLocal')?.addEventListener('click',saveSceneComposerLocal);
+  document.getElementById('composerReset')?.addEventListener('click',resetSceneComposer);
+  ['composerUrlMain','composerUrlTopTicker','composerUrlBottomTicker','composerUrlChat'].forEach(id=>document.getElementById(id)?.addEventListener('change',saveSceneComposerLocal));
 });
