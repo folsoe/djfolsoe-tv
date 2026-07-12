@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE V1700 Diagnostics</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;padding:30px;background:#080b13;color:#fff;font-family:Arial,sans-serif}
+    main{max-width:1100px;margin:auto}.head{display:flex;justify-content:space-between;align-items:end;gap:20px}
+    h1{font-size:50px;margin:6px 0}.tag{color:#56e7ff;font-weight:900;letter-spacing:.12em}
+    button{padding:12px 16px;border:0;border-radius:12px;background:#56e7ff;font-weight:900}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+    article{padding:18px;border:1px solid #252c3b;border-radius:16px;background:#121827}
+    article b{display:block;margin-top:8px;font-size:22px}.ok{color:#55f0a4}.fail{color:#ff577a}
+    pre{margin-top:20px;padding:18px;border-radius:16px;background:#05070c;white-space:pre-wrap}
+    @media(max-width:700px){.grid{grid-template-columns:1fr}.head{align-items:start;flex-direction:column}h1{font-size:35px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="head"><div><span class="tag">V1700 · READ-ONLY TEST</span><h1>Broadcast Intelligence Diagnostics</h1></div><button id="run">Run test</button></div>
+  <div id="grid" class="grid"></div>
+  <pre id="output">Press Run test.</pre>
+</main>
+<script>
+const API="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+const routes=["/api/health","/api/twitch","/api/broadcast","/api/cms/public/state"];
+async function run(){
+  const grid=document.getElementById("grid"),output=document.getElementById("output");
+  grid.innerHTML="";const result={checkedAt:new Date().toISOString(),routes:{}};
+  for(const route of routes){
+    const article=document.createElement("article");
+    article.innerHTML=`<span>${route}</span><b>CHECKING</b>`;
+    grid.appendChild(article);
+    try{
+      const r=await fetch(API+route,{cache:"no-store"});
+      const text=await r.text();let data;
+      try{data=JSON.parse(text)}catch(_){data=text}
+      result.routes[route]={ok:r.ok,status:r.status,data};
+      article.querySelector("b").textContent=r.ok?`OK · ${r.status}`:`FAIL · ${r.status}`;
+      article.querySelector("b").className=r.ok?"ok":"fail";
+    }catch(error){
+      result.routes[route]={ok:false,error:error.message};
+      article.querySelector("b").textContent="FETCH FAILED";
+      article.querySelector("b").className="fail";
+    }
+  }
+  output.textContent=JSON.stringify(result,null,2);
+}
+document.getElementById("run").addEventListener("click",run);run();
+</script>
+</body>
+</html>
