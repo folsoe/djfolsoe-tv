@@ -144,7 +144,8 @@ async function finishWizard(){
     };
     const result=await api('/api/content/admin/module',{method:'POST',body:JSON.stringify({module})});
     state.modules.unshift(result.module);
-    closeWizard();renderAll();toast('Content created.');
+    closeWizard();renderAll();
+    v1700Start();toast('Content created.');
   }catch(error){toast(error.message,true)}
 }
 async function quickToggleModule(id,patch){
@@ -167,7 +168,6 @@ async function connect({silent=false}={}){
     $('loadingState').hidden=true;$('cmsScreens').hidden=false;
     $('connectionDot').classList.add('online');$('connectionText').textContent='Connected';
     renderAll();
-    djfStartLiveStatusHeartbeat();
     showConnectionPanel({title:'Broadcast Control Room connected',message:'Website, Worker, Twitch data, Music News and Main Overlay controls are ready.',details:[state.version||health.version,`${state.modules?.length||0} content blocks`,`${state.news?.articles?.length||0} music stories`,state.core?.twitch?.live?'Twitch live':'Twitch offline','Main Overlay protected']},true);
     setTimeout(hideConnectionPanel,4500);
     if(!silent)toast('Content studio connected.');
@@ -459,16 +459,51 @@ function resetSceneComposer(){localStorage.removeItem(SCENE_COMPOSER_KEY);render
 
 
 /* =========================================================
-   V1500.0 — TWITCH LIVE STATUS HEARTBEAT
-   Additive only. Uses existing Worker routes.
+   V1700 — BROADCAST INTELLIGENCE ENGINE
+   Read-only heartbeat. No Worker writes.
    ========================================================= */
-const DJF_LIVE_STATUS_POLL_MS=12000;
-let djfLiveStatusTimer=null;
-let djfLiveStatusSignature='';
+const V1700_POLL_MS=10000;
+const V1700_STANDBY_MINUTES=60;
+const V1700_AFTERSHOW_MINUTES=30;
+let v1700Timer=null;
+let v1700Signature='';
 
-function djfNormalizeLiveStatus(payload){
-  const root=payload?.core||payload?.broadcast||payload?.data?.core||payload?.data||payload||{};
-  const twitch=root?.twitch||payload?.twitch||payload?.data?.twitch||{};
+function v1700FirstObject(...values){
+  return values.find(value=>value&&typeof value==='object'&&!Array.isArray(value))||{};
+}
+
+function v1700FirstString(...values){
+  return values.find(value=>typeof value==='string'&&value.trim())||'';
+}
+
+function v1700Timestamp(value){
+  const time=value?new Date(value).getTime():0;
+  return Number.isFinite(time)?time:0;
+}
+
+function v1700Normalize(payload){
+  const root=v1700FirstObject(
+    payload?.core,
+    payload?.broadcast,
+    payload?.data?.core,
+    payload?.data,
+    payload
+  );
+
+  const twitch=v1700FirstObject(
+    root?.twitch,
+    payload?.twitch,
+    payload?.data?.twitch,
+    root?.stream
+  );
+
+  const nextShow=v1700FirstObject(
+    root?.nextShow,
+    payload?.nextShow,
+    payload?.data?.nextShow
+  );
+
+  const themeRaw=root?.theme||payload?.theme||{};
 
   return{
     live:Boolean(
@@ -481,87 +516,192 @@ function djfNormalizeLiveStatus(payload){
     ),
     viewers:Number(twitch.viewers??twitch.viewerCount??twitch.viewer_count??0),
     followers:Number(twitch.followers??twitch.followerCount??twitch.follower_count??root?.community?.followers??0),
-    title:twitch.title||twitch.streamTitle||twitch.stream_title||root?.show?.title||root?.show?.current||'DJ FOLSOE',
-    category:twitch.gameName||twitch.game_name||twitch.category||'Music',
-    startedAt:twitch.startedAt||twitch.started_at||'',
-    displayName:twitch.displayName||twitch.display_name||'DJ FOLSOE',
-    profileImage:twitch.profileImage||twitch.profile_image_url||twitch.profileImageUrl||''
+    title:v1700FirstString(twitch.title,twitch.streamTitle,twitch.stream_title,root?.show?.title),
+    category:v1700FirstString(twitch.category,twitch.gameName,twitch.game_name,'Music'),
+    displayName:v1700FirstString(twitch.displayName,twitch.display_name,'DJ FOLSOE'),
+    profileImage:v1700FirstString(twitch.profileImage,twitch.profile_image_url,twitch.profileImageUrl,root?.profileImage),
+    startedAt:v1700FirstString(twitch.startedAt,twitch.started_at),
+    endedAt:v1700FirstString(twitch.endedAt,twitch.ended_at,root?.lastStreamEndedAt),
+    themeId:String(typeof themeRaw==='string'?themeRaw:(themeRaw?.id||themeRaw?.key||'weekend')).toLowerCase(),
+    themeTitle:v1700FirstString(typeof themeRaw==='object'?themeRaw?.title:'',typeof themeRaw==='string'?themeRaw:'','Weekend'),
+    nextShowTitle:v1700FirstString(nextShow.title,nextShow.show,nextShow.name),
+    nextShowStart:v1700FirstString(nextShow.start,nextShow.startTime,nextShow.dateTime,nextShow.datetime),
+    nowPlaying:v1700FirstObject(root?.nowPlaying,payload?.nowPlaying)
   };
 }
 
-async function djfReadLiveStatus(){
-  const paths=['/api/twitch','/api/broadcast','/api/cms/public/state'];
+function v1700Mode(snapshot){
+  if(snapshot.live)return'LIVE';
 
-  for(const path of paths){
+  const now=Date.now();
+  const next=v1700Timestamp(snapshot.nextShowStart);
+
+  if(next&&next>=now&&next-now<=V1700_STANDBY_MINUTES*60*1000){
+    return'STANDBY';
+  }
+
+  const ended=v1700Timestamp(snapshot.endedAt);
+
+  if(ended&&now>=ended&&now-ended<=V1700_AFTERSHOW_MINUTES*60*1000){
+    return'AFTERSHOW';
+  }
+
+  return'OFFLINE';
+}
+
+async function v1700Read(){
+  const routes=['/api/twitch','/api/broadcast','/api/cms/public/state'];
+
+  for(const route of routes){
     try{
-      return djfNormalizeLiveStatus(
-        await fetch(API_BASE+path,{
-          cache:'no-store',
-          headers:{Accept:'application/json'}
-        }).then(response=>{
-          if(!response.ok)throw new Error(`HTTP ${response.status}`);
-          return response.json();
-        })
-      );
+      const response=await fetch(API_BASE+route,{
+        cache:'no-store',
+        headers:{Accept:'application/json'}
+      });
+
+      if(!response.ok)throw new Error(`HTTP ${response.status}`);
+
+      return v1700Normalize(await response.json());
     }catch(error){
-      console.warn(`Admin live heartbeat could not read ${path}`,error);
+      console.warn(`V1700 admin route failed: ${route}`,error);
     }
   }
 
-  throw new Error('No Twitch status route responded.');
+  throw new Error('No Broadcast Intelligence source responded.');
 }
 
-function djfApplyAdminLiveStatus(status){
-  if(!state)return;
+function v1700EnsurePanel(){
+  let panel=document.getElementById('v1700IntelligencePanel');
+  if(panel)return panel;
 
-  const signature=JSON.stringify(status);
-  if(signature===djfLiveStatusSignature)return;
-  djfLiveStatusSignature=signature;
+  const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
+  if(!dashboard)return null;
 
+  panel=document.createElement('section');
+  panel.id='v1700IntelligencePanel';
+  panel.innerHTML=`
+    <div class="v1700IntelligenceHead">
+      <div>
+        <small>V1700 · BROADCAST INTELLIGENCE</small>
+        <h3>One signal across the network</h3>
+      </div>
+      <strong id="v1700Mode" class="v1700ModeBadge" data-mode="OFFLINE">OFFLINE</strong>
+    </div>
+
+    <div class="v1700IntelligenceGrid">
+      <article><span>Theme</span><strong id="v1700Theme">—</strong></article>
+      <article><span>Viewers</span><strong id="v1700Viewers">0</strong></article>
+      <article><span>Stream title</span><strong id="v1700Title">—</strong></article>
+      <article><span>Next show</span><strong id="v1700Next">—</strong></article>
+      <article><span>Now Playing</span><strong id="v1700NowPlaying">Reserved</strong></article>
+    </div>
+  `;
+
+  dashboard.prepend(panel);
+  return panel;
+}
+
+function v1700Text(id,value){
+  const node=document.getElementById(id);
+  if(node)node.textContent=String(value??'—');
+}
+
+function v1700Apply(snapshot){
+  const mode=v1700Mode(snapshot);
+  const complete={...snapshot,mode};
+  const signature=JSON.stringify(complete);
+
+  if(signature===v1700Signature)return;
+  v1700Signature=signature;
+
+  state=state||{};
   state.core=state.core||{};
   state.core.twitch={
     ...(state.core.twitch||{}),
-    ...status,
-    isLive:status.live
+    live:snapshot.live,
+    isLive:snapshot.live,
+    viewers:snapshot.viewers,
+    followers:snapshot.followers,
+    title:snapshot.title,
+    category:snapshot.category,
+    displayName:snapshot.displayName,
+    profileImage:snapshot.profileImage,
+    startedAt:snapshot.startedAt
   };
 
-  try{
-    renderSystemStatus();
-    renderVisualDashboard();
-    renderBroadcastContentPlatform();
-    renderBroadcastExperience();
-    renderTvStation();
-    renderSceneComposer();
-    v1002RenderConnectedStatus?.();
-  }catch(error){
-    console.warn('Admin live heartbeat render warning',error);
+  if(snapshot.themeId){
+    state.core.theme={
+      ...(typeof state.core.theme==='object'?state.core.theme:{}),
+      id:snapshot.themeId,
+      title:snapshot.themeTitle
+    };
   }
 
-  document.documentElement.dataset.twitchStatus=status.live?'live':'offline';
+  const panel=v1700EnsurePanel();
+  if(panel){
+    const badge=document.getElementById('v1700Mode');
+    if(badge){
+      badge.dataset.mode=mode;
+      badge.textContent=mode;
+    }
+
+    v1700Text('v1700Theme',snapshot.themeTitle);
+    v1700Text('v1700Viewers',snapshot.viewers.toLocaleString());
+    v1700Text('v1700Title',snapshot.title||'No current stream title');
+    v1700Text('v1700Next',snapshot.nextShowTitle||'Not announced');
+
+    const np=snapshot.nowPlaying||{};
+    const nowText=
+      np.artist&&np.title
+        ?`${np.artist} — ${np.title}`
+        :'Reserved for Serato';
+
+    v1700Text('v1700NowPlaying',nowText);
+  }
+
+  document.documentElement.dataset.broadcastMode=mode;
+  document.documentElement.dataset.activeTheme=snapshot.themeId;
+
+  try{
+    renderSystemStatus?.();
+    renderVisualDashboard?.();
+    renderBroadcastContentPlatform?.();
+    renderBroadcastExperience?.();
+    renderTvStation?.();
+    renderSceneComposer?.();
+  }catch(error){
+    console.warn('V1700 safe render warning',error);
+  }
+
+  window.DJF_BROADCAST_STATE=complete;
 
   window.dispatchEvent(
-    new CustomEvent('djf:twitch-status',{detail:status})
+    new CustomEvent('djf:broadcast-state',{detail:complete})
   );
 }
 
-async function djfRefreshLiveStatus(){
+async function v1700Refresh(){
   if(!state)return;
 
   try{
-    djfApplyAdminLiveStatus(await djfReadLiveStatus());
+    v1700Apply(await v1700Read());
   }catch(error){
-    console.warn('Admin live heartbeat failed',error);
+    console.warn('V1700 heartbeat failed',error);
   }
 }
 
-function djfStartLiveStatusHeartbeat(){
-  clearInterval(djfLiveStatusTimer);
-  djfRefreshLiveStatus();
-  djfLiveStatusTimer=setInterval(
-    djfRefreshLiveStatus,
-    DJF_LIVE_STATUS_POLL_MS
-  );
+function v1700Start(){
+  clearInterval(v1700Timer);
+  v1700EnsurePanel();
+  v1700Refresh();
+  v1700Timer=setInterval(v1700Refresh,V1700_POLL_MS);
 }
+
+window.DJF_BROADCAST_INTELLIGENCE={
+  version:'V1700',
+  refresh:v1700Refresh,
+  getState:()=>window.DJF_BROADCAST_STATE||null
+};
 
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
 function installDragSort(){document.querySelectorAll('.moduleRow').forEach(row=>{row.addEventListener('dragstart',()=>{draggedModuleId=row.dataset.moduleId;row.style.opacity='.45'});row.addEventListener('dragend',()=>{row.style.opacity='';draggedModuleId=''});row.addEventListener('dragover',e=>e.preventDefault());row.addEventListener('drop',async e=>{e.preventDefault();const target=row.dataset.moduleId;if(!draggedModuleId||target===draggedModuleId)return;const ids=[...document.querySelectorAll('.moduleRow')].map(x=>x.dataset.moduleId);const from=ids.indexOf(draggedModuleId),to=ids.indexOf(target);ids.splice(to,0,ids.splice(from,1)[0]);try{const result=await api('/api/cms/admin/modules/reorder',{method:'POST',body:JSON.stringify({order:ids})});state.modules=result.modules;renderModules();toast('Content order saved.')}catch(error){toast(error.message,true)}})})}
@@ -689,8 +829,9 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 document.addEventListener('visibilitychange',()=>{
-  if(!document.hidden&&state)djfRefreshLiveStatus();
+  if(!document.hidden&&state)v1700Refresh();
 });
+
 window.addEventListener('online',()=>{
-  if(state)djfRefreshLiveStatus();
+  if(state)v1700Refresh();
 });
