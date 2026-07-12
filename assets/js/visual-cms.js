@@ -167,6 +167,7 @@ async function connect({silent=false}={}){
     $('loadingState').hidden=true;$('cmsScreens').hidden=false;
     $('connectionDot').classList.add('online');$('connectionText').textContent='Connected';
     renderAll();
+    djfStartLiveStatusHeartbeat();
     showConnectionPanel({title:'Broadcast Control Room connected',message:'Website, Worker, Twitch data, Music News and Main Overlay controls are ready.',details:[state.version||health.version,`${state.modules?.length||0} content blocks`,`${state.news?.articles?.length||0} music stories`,state.core?.twitch?.live?'Twitch live':'Twitch offline','Main Overlay protected']},true);
     setTimeout(hideConnectionPanel,4500);
     if(!silent)toast('Content studio connected.');
@@ -447,7 +448,7 @@ function renderTvStation(){
 }
 
 
-function sceneComposerDefaults(){const root=location.origin;return{enabled:{topTicker:false,bottomTicker:false,chat:false},urls:{main:root+'/overlays/main-overlay/main-overlay.html',topTicker:root+'/overlays/top-ticker/top-ticker.html',bottomTicker:root+'/overlays/bottom-ticker/bottom-ticker.html',chat:root+'/overlays/chat/chat.html'}}}
+function sceneComposerDefaults(){return{enabled:{topTicker:false,bottomTicker:false,chat:false},urls:{main:'',topTicker:'',bottomTicker:'',chat:''}}}
 function readSceneComposer(){try{const s=JSON.parse(localStorage.getItem(SCENE_COMPOSER_KEY)||'null'),d=sceneComposerDefaults();return{enabled:{...d.enabled,...(s?.enabled||{})},urls:{...d.urls,...(s?.urls||{})}}}catch(_){return sceneComposerDefaults()}}
 function collectSceneComposer(){const c=readSceneComposer();return{enabled:{...c.enabled},urls:{main:document.getElementById('composerUrlMain')?.value.trim()||'',topTicker:document.getElementById('composerUrlTopTicker')?.value.trim()||'',bottomTicker:document.getElementById('composerUrlBottomTicker')?.value.trim()||'',chat:document.getElementById('composerUrlChat')?.value.trim()||''}}}
 function renderSceneComposer(){const screen=document.querySelector('[data-screen-panel="composer"]');if(!screen||!state)return;const c=readSceneComposer(),t=state.core?.twitch||{};const write=(id,v)=>{const n=document.getElementById(id);if(n)n.textContent=String(v)};write('composerTheme',state.core?.theme?.title||'Weekend');write('composerTwitch',(t.live||t.isLive)?'LIVE':'OFFLINE');const map={main:'composerUrlMain',topTicker:'composerUrlTopTicker',bottomTicker:'composerUrlBottomTicker',chat:'composerUrlChat'};Object.entries(map).forEach(([k,id])=>{const f=document.getElementById(id);if(f&&document.activeElement!==f)f.value=c.urls[k]||''});['topTicker','bottomTicker','chat'].forEach(k=>{const on=!!c.enabled[k],b=document.querySelector(`[data-composer-toggle="${k}"]`),l=document.querySelector(`[data-composer-layer="${k}"]`);if(b)b.classList.toggle('on',on);if(l)l.classList.toggle('enabled',on);write({topTicker:'composerStageTopTicker',bottomTicker:'composerStageBottomTicker',chat:'composerStageChat'}[k],on?'ON':'OFF')})}
@@ -455,6 +456,112 @@ function toggleSceneComposerLayer(key){const c=collectSceneComposer();c.enabled[
 function saveSceneComposerLocal(){const c=collectSceneComposer(),e=readSceneComposer();c.enabled={...e.enabled};localStorage.setItem(SCENE_COMPOSER_KEY,JSON.stringify(c));renderSceneComposer();toast('Local scene plan saved.')}
 function previewSceneComposerLayer(key){const u=collectSceneComposer().urls[key]||'';if(!u)return toast('Paste the StreamElements overlay URL first.',true);try{window.open(new URL(u,window.location.href).href,'_blank','noopener')}catch(_){toast('The overlay URL is not valid.',true)}}
 function resetSceneComposer(){localStorage.removeItem(SCENE_COMPOSER_KEY);renderSceneComposer();toast('Local scene plan reset.')}
+
+
+/* =========================================================
+   V1500.0 — TWITCH LIVE STATUS HEARTBEAT
+   Additive only. Uses existing Worker routes.
+   ========================================================= */
+const DJF_LIVE_STATUS_POLL_MS=12000;
+let djfLiveStatusTimer=null;
+let djfLiveStatusSignature='';
+
+function djfNormalizeLiveStatus(payload){
+  const root=payload?.core||payload?.broadcast||payload?.data?.core||payload?.data||payload||{};
+  const twitch=root?.twitch||payload?.twitch||payload?.data?.twitch||{};
+
+  return{
+    live:Boolean(
+      twitch.live??
+      twitch.isLive??
+      twitch.online??
+      twitch.is_online??
+      root.live??
+      root.isLive
+    ),
+    viewers:Number(twitch.viewers??twitch.viewerCount??twitch.viewer_count??0),
+    followers:Number(twitch.followers??twitch.followerCount??twitch.follower_count??root?.community?.followers??0),
+    title:twitch.title||twitch.streamTitle||twitch.stream_title||root?.show?.title||root?.show?.current||'DJ FOLSOE',
+    category:twitch.gameName||twitch.game_name||twitch.category||'Music',
+    startedAt:twitch.startedAt||twitch.started_at||'',
+    displayName:twitch.displayName||twitch.display_name||'DJ FOLSOE',
+    profileImage:twitch.profileImage||twitch.profile_image_url||twitch.profileImageUrl||''
+  };
+}
+
+async function djfReadLiveStatus(){
+  const paths=['/api/twitch','/api/broadcast','/api/cms/public/state'];
+
+  for(const path of paths){
+    try{
+      return djfNormalizeLiveStatus(
+        await fetch(API_BASE+path,{
+          cache:'no-store',
+          headers:{Accept:'application/json'}
+        }).then(response=>{
+          if(!response.ok)throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+      );
+    }catch(error){
+      console.warn(`Admin live heartbeat could not read ${path}`,error);
+    }
+  }
+
+  throw new Error('No Twitch status route responded.');
+}
+
+function djfApplyAdminLiveStatus(status){
+  if(!state)return;
+
+  const signature=JSON.stringify(status);
+  if(signature===djfLiveStatusSignature)return;
+  djfLiveStatusSignature=signature;
+
+  state.core=state.core||{};
+  state.core.twitch={
+    ...(state.core.twitch||{}),
+    ...status,
+    isLive:status.live
+  };
+
+  try{
+    renderSystemStatus();
+    renderVisualDashboard();
+    renderBroadcastContentPlatform();
+    renderBroadcastExperience();
+    renderTvStation();
+    renderSceneComposer();
+    v1002RenderConnectedStatus?.();
+  }catch(error){
+    console.warn('Admin live heartbeat render warning',error);
+  }
+
+  document.documentElement.dataset.twitchStatus=status.live?'live':'offline';
+
+  window.dispatchEvent(
+    new CustomEvent('djf:twitch-status',{detail:status})
+  );
+}
+
+async function djfRefreshLiveStatus(){
+  if(!state)return;
+
+  try{
+    djfApplyAdminLiveStatus(await djfReadLiveStatus());
+  }catch(error){
+    console.warn('Admin live heartbeat failed',error);
+  }
+}
+
+function djfStartLiveStatusHeartbeat(){
+  clearInterval(djfLiveStatusTimer);
+  djfRefreshLiveStatus();
+  djfLiveStatusTimer=setInterval(
+    djfRefreshLiveStatus,
+    DJF_LIVE_STATUS_POLL_MS
+  );
+}
 
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
 function installDragSort(){document.querySelectorAll('.moduleRow').forEach(row=>{row.addEventListener('dragstart',()=>{draggedModuleId=row.dataset.moduleId;row.style.opacity='.45'});row.addEventListener('dragend',()=>{row.style.opacity='';draggedModuleId=''});row.addEventListener('dragover',e=>e.preventDefault());row.addEventListener('drop',async e=>{e.preventDefault();const target=row.dataset.moduleId;if(!draggedModuleId||target===draggedModuleId)return;const ids=[...document.querySelectorAll('.moduleRow')].map(x=>x.dataset.moduleId);const from=ids.indexOf(draggedModuleId),to=ids.indexOf(target);ids.splice(to,0,ids.splice(from,1)[0]);try{const result=await api('/api/cms/admin/modules/reorder',{method:'POST',body:JSON.stringify({order:ids})});state.modules=result.modules;renderModules();toast('Content order saved.')}catch(error){toast(error.message,true)}})})}
@@ -579,4 +686,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('composerSaveLocal')?.addEventListener('click',saveSceneComposerLocal);
   document.getElementById('composerReset')?.addEventListener('click',resetSceneComposer);
   ['composerUrlMain','composerUrlTopTicker','composerUrlBottomTicker','composerUrlChat'].forEach(id=>document.getElementById(id)?.addEventListener('change',saveSceneComposerLocal));
+});
+
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden&&state)djfRefreshLiveStatus();
+});
+window.addEventListener('online',()=>{
+  if(state)djfRefreshLiveStatus();
 });
