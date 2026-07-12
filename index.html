@@ -18,11 +18,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/site.css?v=9331">
-  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9381">
-  <link rel="stylesheet" href="assets/css/unified-experience.css?v=10012">
-  <link rel="stylesheet" href="assets/css/content-platform.css?v=10012">
-  <link rel="stylesheet" href="assets/css/broadcast-premiere.css?v=10015">
+  <link rel="stylesheet" href="assets/css/site.css?v=9332">
+  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9382">
+  <link rel="stylesheet" href="assets/css/unified-experience.css?v=10013">
+  <link rel="stylesheet" href="assets/css/content-platform.css?v=10013">
+  <link rel="stylesheet" href="assets/css/broadcast-premiere.css?v=10016">
 
   <style id="djf-v16003-integrated-fix">
     /* Compact Music News repair — scoped only to #musicNews */
@@ -139,6 +139,56 @@
         min-height: 0 !important;
         max-height: none;
       }
+    }
+  </style>
+
+
+  <style id="djf-v16004-news-deep-clean-css">
+    /* Hide empty featured-news media columns */
+    #featuredNews.djfNoNewsImage {
+      display: block !important;
+      max-height: none !important;
+    }
+
+    #featuredNews.djfNoNewsImage > :first-child:empty,
+    #featuredNews.djfNoNewsImage .djfEmptyNewsMedia,
+    #featuredNews.djfNoNewsImage [class*="media"]:empty,
+    #featuredNews.djfNoNewsImage [class*="image"]:empty,
+    #featuredNews.djfNoNewsImage [class*="visual"]:empty {
+      display: none !important;
+    }
+
+    #featuredNews.djfNoNewsImage > * {
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    #featuredNews.djfNoNewsImage {
+      grid-template-columns: 1fr !important;
+    }
+
+    #featuredNews.djfNoNewsImage img:not([src]),
+    #featuredNews.djfNoNewsImage img[src=""],
+    #featuredNews img.djfBrokenNewsImage {
+      display: none !important;
+    }
+
+    /* Keep the editorial area compact even when source data is malformed */
+    #featuredNews {
+      min-height: 210px !important;
+    }
+
+    #featuredNews.djfNoNewsImage {
+      min-height: 0 !important;
+    }
+
+    #musicNewsGrid > * {
+      min-height: 185px !important;
+    }
+
+    #musicNewsGrid p:empty,
+    #featuredNews p:empty {
+      display: none !important;
     }
   </style>
 
@@ -387,10 +437,10 @@
   </div>
 
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/site.js?v=9381"></script>
-  <script src="assets/js/unified-experience.js?v=10012"></script>
-  <script src="assets/js/content-platform.js?v=10012"></script>
-  <script src="assets/js/broadcast-premiere.js?v=10015"></script>
+  <script src="assets/js/site.js?v=9382"></script>
+  <script src="assets/js/unified-experience.js?v=10013"></script>
+  <script src="assets/js/content-platform.js?v=10013"></script>
+  <script src="assets/js/broadcast-premiere.js?v=10016"></script>
 
   <script id="djf-v16003-integrated-engine">
     (() => {
@@ -682,6 +732,276 @@
         document.addEventListener("DOMContentLoaded", start, { once: true });
       } else {
         start();
+      }
+    })();
+  </script>
+
+
+  <script id="djf-v16004-news-deep-clean-js">
+    (() => {
+      "use strict";
+
+      const NEWS_ROOT_ID = "musicNews";
+      let cleaning = false;
+      let scheduled = 0;
+
+      function decodeRepeatedly(value) {
+        let output = String(value ?? "");
+
+        for (let pass = 0; pass < 5; pass += 1) {
+          const textarea = document.createElement("textarea");
+          textarea.innerHTML = output;
+          const decoded = textarea.value;
+
+          if (decoded === output) break;
+          output = decoded;
+        }
+
+        return output;
+      }
+
+      function stripMarkup(value) {
+        let output = decodeRepeatedly(value);
+
+        /*
+          Decode the source into a detached DOM repeatedly. This handles:
+          &lt;div&gt;, &amp;lt;div&amp;gt; and genuine embedded HTML.
+        */
+        for (let pass = 0; pass < 4; pass += 1) {
+          if (!/[<&]/.test(output)) break;
+
+          const holder = document.createElement("div");
+          holder.innerHTML = output;
+
+          const extracted =
+            holder.textContent ||
+            holder.innerText ||
+            output;
+
+          if (extracted === output) break;
+          output = decodeRepeatedly(extracted);
+        }
+
+        output = output
+          .replace(/<[^>]*>/g, " ")
+          .replace(/&(?:lt|gt|amp|quot|#39|nbsp);/gi, " ")
+          .replace(/\b(?:class|item|style|id|field|clearfix|text-formatted|field-name-[a-z0-9_-]+)\s*=\s*["']?[^"'\s>]*/gi, " ")
+          .replace(/\b(?:div|span|p|header|article|section)\s+class\b/gi, " ")
+          .replace(/\s*Music Reviews\s*<div.*$/i, " Music Reviews")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        return output;
+      }
+
+      function isTextElement(node) {
+        return node.matches(
+          "h1,h2,h3,h4,h5,h6,p,span,small,b,strong,em,i,a,li,blockquote"
+        );
+      }
+
+      function cleanElementText(element) {
+        if (!element || !isTextElement(element)) return;
+
+        const source = element.innerHTML;
+        const cleaned = stripMarkup(source);
+
+        if (!cleaned) {
+          if (
+            /&lt;|&gt;|<[^>]+>|\bclass=|\bitem=/i.test(source)
+          ) {
+            element.textContent = "";
+          }
+          return;
+        }
+
+        const visibleNow = String(element.textContent || "")
+          .replace(/\s+/g, " ")
+          .trim();
+
+        if (
+          cleaned !== visibleNow ||
+          /&lt;|&gt;|&amp;lt;|<[^>]+>|\bclass=|\bitem=/i.test(source)
+        ) {
+          element.textContent = cleaned;
+        }
+      }
+
+      function cleanDirectTextNodes(container) {
+        Array.from(container.childNodes).forEach(node => {
+          if (node.nodeType !== Node.TEXT_NODE) return;
+
+          const original = node.nodeValue || "";
+          const cleaned = stripMarkup(original);
+
+          if (cleaned !== original.trim()) {
+            node.nodeValue = cleaned ? ` ${cleaned} ` : "";
+          }
+        });
+      }
+
+      function cleanNewsCard(card) {
+        if (!card) return;
+
+        cleanDirectTextNodes(card);
+
+        card
+          .querySelectorAll(
+            "h1,h2,h3,h4,h5,h6,p,span,small,b,strong,em,i,a,li,blockquote"
+          )
+          .forEach(cleanElementText);
+
+        card.querySelectorAll("img").forEach(image => {
+          const source = image.getAttribute("src") || "";
+
+          if (!source) {
+            image.classList.add("djfBrokenNewsImage");
+            return;
+          }
+
+          image.addEventListener(
+            "error",
+            () => {
+              image.classList.add("djfBrokenNewsImage");
+              updateFeaturedImageState();
+            },
+            { once: true }
+          );
+        });
+      }
+
+      function hasUsableImage(container) {
+        return Array.from(container.querySelectorAll("img")).some(image => {
+          const source = image.getAttribute("src") || "";
+
+          return (
+            source &&
+            !image.classList.contains("djfBrokenNewsImage") &&
+            image.complete &&
+            image.naturalWidth > 10
+          );
+        });
+      }
+
+      function hasVisualBackground(container) {
+        return Array.from(container.querySelectorAll("*")).some(element => {
+          const background = getComputedStyle(element).backgroundImage;
+
+          return (
+            background &&
+            background !== "none" &&
+            /url\(/i.test(background)
+          );
+        });
+      }
+
+      function updateFeaturedImageState() {
+        const featured = document.getElementById("featuredNews");
+        if (!featured) return;
+
+        const usable =
+          hasUsableImage(featured) ||
+          hasVisualBackground(featured);
+
+        featured.classList.toggle("djfNoNewsImage", !usable);
+
+        if (!usable) {
+          Array.from(featured.children).forEach(child => {
+            const text = String(child.textContent || "").trim();
+            const background =
+              getComputedStyle(child).backgroundImage;
+
+            if (
+              !text &&
+              (!background || background === "none") &&
+              !child.querySelector("img[src]:not(.djfBrokenNewsImage)")
+            ) {
+              child.classList.add("djfEmptyNewsMedia");
+            }
+          });
+        }
+      }
+
+      function cleanAllNews() {
+        if (cleaning) return;
+        cleaning = true;
+
+        try {
+          const root = document.getElementById(NEWS_ROOT_ID);
+          if (!root) return;
+
+          const featured = document.getElementById("featuredNews");
+          const grid = document.getElementById("musicNewsGrid");
+
+          if (featured) cleanNewsCard(featured);
+
+          if (grid) {
+            Array.from(grid.children).forEach(cleanNewsCard);
+          }
+
+          updateFeaturedImageState();
+
+          window.setTimeout(updateFeaturedImageState, 300);
+          window.setTimeout(updateFeaturedImageState, 1200);
+        } finally {
+          cleaning = false;
+        }
+      }
+
+      function scheduleClean(delay = 45) {
+        window.clearTimeout(scheduled);
+        scheduled = window.setTimeout(cleanAllNews, delay);
+      }
+
+      function startDeepNewsCleaner() {
+        const root = document.getElementById(NEWS_ROOT_ID);
+        if (!root) return;
+
+        const observer = new MutationObserver(mutations => {
+          if (cleaning) return;
+
+          const relevant = mutations.some(mutation =>
+            mutation.type === "childList" ||
+            mutation.type === "characterData" ||
+            mutation.type === "attributes"
+          );
+
+          if (relevant) scheduleClean();
+        });
+
+        observer.observe(root, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+          attributes: true,
+          attributeFilter: ["src", "style", "class"]
+        });
+
+        /*
+          The existing news engine refreshes asynchronously. These passes cover
+          initial load, Worker response, image load and manual refresh.
+        */
+        [0, 150, 500, 1200, 2500, 5000].forEach(delay => {
+          window.setTimeout(cleanAllNews, delay);
+        });
+
+        document
+          .getElementById("musicNewsRefresh")
+          ?.addEventListener("click", () => {
+            [100, 500, 1400, 3000].forEach(delay => {
+              window.setTimeout(cleanAllNews, delay);
+            });
+          });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener(
+          "DOMContentLoaded",
+          startDeepNewsCleaner,
+          { once: true }
+        );
+      } else {
+        startDeepNewsCleaner();
       }
     })();
   </script>
