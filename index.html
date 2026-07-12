@@ -18,11 +18,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/site.css?v=9332">
-  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9382">
-  <link rel="stylesheet" href="assets/css/unified-experience.css?v=10013">
-  <link rel="stylesheet" href="assets/css/content-platform.css?v=10013">
-  <link rel="stylesheet" href="assets/css/broadcast-premiere.css?v=10016">
+  <link rel="stylesheet" href="assets/css/site.css?v=9333">
+  <link rel="stylesheet" href="assets/css/music-tv-2026-extreme.css?v=9383">
+  <link rel="stylesheet" href="assets/css/unified-experience.css?v=10014">
+  <link rel="stylesheet" href="assets/css/content-platform.css?v=10014">
+  <link rel="stylesheet" href="assets/css/broadcast-premiere.css?v=10017">
 
   <style id="djf-v16003-integrated-fix">
     /* Compact Music News repair — scoped only to #musicNews */
@@ -192,6 +192,55 @@
     }
   </style>
 
+
+  <style id="djf-v1700-intelligence-css">
+    #djfBroadcastIntelligence {
+      position: fixed;
+      z-index: 99990;
+      right: 16px;
+      bottom: 16px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(7,10,18,.86);
+      color: #fff;
+      font: 800 10px/1 Arial, sans-serif;
+      letter-spacing: .08em;
+      backdrop-filter: blur(14px);
+      pointer-events: none;
+    }
+
+    html[data-djf-debug="true"] #djfBroadcastIntelligence {
+      display: flex;
+    }
+
+    #djfBroadcastIntelligence i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #8b93a3;
+    }
+
+    #djfBroadcastIntelligence[data-mode="LIVE"] i {
+      background: #55f0a4;
+      box-shadow: 0 0 13px rgba(85,240,164,.8);
+    }
+
+    #djfBroadcastIntelligence[data-mode="STANDBY"] i {
+      background: #ffd45a;
+      box-shadow: 0 0 13px rgba(255,212,90,.65);
+    }
+
+    #djfBroadcastIntelligence[data-mode="AFTERSHOW"] i {
+      background: #b984ff;
+      box-shadow: 0 0 13px rgba(185,132,255,.65);
+    }
+  </style>
+
+  
 </head>
 <body>
   <div class="premiereAmbient" aria-hidden="true">
@@ -437,10 +486,10 @@
   </div>
 
   <script src="assets/js/config.js"></script>
-  <script src="assets/js/site.js?v=9382"></script>
-  <script src="assets/js/unified-experience.js?v=10013"></script>
-  <script src="assets/js/content-platform.js?v=10013"></script>
-  <script src="assets/js/broadcast-premiere.js?v=10016"></script>
+  <script src="assets/js/site.js?v=9383"></script>
+  <script src="assets/js/unified-experience.js?v=10014"></script>
+  <script src="assets/js/content-platform.js?v=10014"></script>
+  <script src="assets/js/broadcast-premiere.js?v=10017"></script>
 
   <script id="djf-v16003-integrated-engine">
     (() => {
@@ -1003,6 +1052,358 @@
       } else {
         startDeepNewsCleaner();
       }
+    })();
+  </script>
+
+<script id="djf-v1700-broadcast-intelligence">
+    (() => {
+      "use strict";
+
+      if (window.DJF_BROADCAST_INTELLIGENCE_V1700) return;
+      window.DJF_BROADCAST_INTELLIGENCE_V1700 = true;
+
+      const API_BASE = (
+        window.DJF_API_BASE ||
+        window.DJF_CONFIG?.apiBase ||
+        window.CONFIG?.apiBase ||
+        "https://djfolsoe-tv-api.sunefolsoe.workers.dev"
+      ).replace(/\/$/, "");
+
+      const POLL_MS = 10000;
+      const STANDBY_MINUTES = 60;
+      const AFTERSHOW_MINUTES = 30;
+
+      let currentSignature = "";
+      let timer = null;
+
+      function firstObject(...values) {
+        return values.find(value =>
+          value && typeof value === "object" && !Array.isArray(value)
+        ) || {};
+      }
+
+      function firstString(...values) {
+        return values.find(value =>
+          typeof value === "string" && value.trim()
+        ) || "";
+      }
+
+      function toTimestamp(value) {
+        if (!value) return 0;
+        const time = new Date(value).getTime();
+        return Number.isFinite(time) ? time : 0;
+      }
+
+      async function readJson(path) {
+        const response = await fetch(API_BASE + path, {
+          cache: "no-store",
+          headers: { Accept: "application/json" }
+        });
+
+        if (!response.ok) {
+          throw new Error("HTTP " + response.status);
+        }
+
+        return response.json();
+      }
+
+      function normalize(payload) {
+        const root = firstObject(
+          payload?.core,
+          payload?.broadcast,
+          payload?.data?.core,
+          payload?.data,
+          payload
+        );
+
+        const twitch = firstObject(
+          root?.twitch,
+          payload?.twitch,
+          payload?.data?.twitch,
+          root?.stream
+        );
+
+        const nextShow = firstObject(
+          root?.nextShow,
+          payload?.nextShow,
+          payload?.data?.nextShow
+        );
+
+        const themeRaw =
+          root?.theme ||
+          payload?.theme ||
+          {};
+
+        const live = Boolean(
+          twitch.live ??
+          twitch.isLive ??
+          twitch.online ??
+          twitch.is_online ??
+          root.live ??
+          root.isLive
+        );
+
+        return {
+          live,
+          viewers: Number(
+            twitch.viewers ??
+            twitch.viewerCount ??
+            twitch.viewer_count ??
+            0
+          ),
+          followers: Number(
+            twitch.followers ??
+            twitch.followerCount ??
+            twitch.follower_count ??
+            root?.community?.followers ??
+            0
+          ),
+          title: firstString(
+            twitch.title,
+            twitch.streamTitle,
+            twitch.stream_title,
+            root?.show?.title
+          ),
+          category: firstString(
+            twitch.category,
+            twitch.gameName,
+            twitch.game_name,
+            "Music"
+          ),
+          startedAt: firstString(
+            twitch.startedAt,
+            twitch.started_at
+          ),
+          endedAt: firstString(
+            twitch.endedAt,
+            twitch.ended_at,
+            root?.lastStreamEndedAt
+          ),
+          displayName: firstString(
+            twitch.displayName,
+            twitch.display_name,
+            "DJ FOLSOE"
+          ),
+          profileImage: firstString(
+            twitch.profileImage,
+            twitch.profile_image_url,
+            twitch.profileImageUrl,
+            root?.profileImage
+          ),
+          themeId: String(
+            typeof themeRaw === "string"
+              ? themeRaw
+              : themeRaw?.id || themeRaw?.key || "weekend"
+          ).toLowerCase(),
+          themeTitle: firstString(
+            typeof themeRaw === "object" ? themeRaw?.title : "",
+            typeof themeRaw === "string" ? themeRaw : "",
+            "Weekend"
+          ),
+          nextShowTitle: firstString(
+            nextShow.title,
+            nextShow.show,
+            nextShow.name
+          ),
+          nextShowStart: firstString(
+            nextShow.start,
+            nextShow.startTime,
+            nextShow.dateTime,
+            nextShow.datetime
+          ),
+          requestText: firstString(
+            root?.community?.requestText,
+            root?.requestText
+          ),
+          nowPlaying: firstObject(
+            root?.nowPlaying,
+            payload?.nowPlaying
+          )
+        };
+      }
+
+      function determineMode(state) {
+        if (state.live) return "LIVE";
+
+        const now = Date.now();
+        const nextStart = toTimestamp(state.nextShowStart);
+
+        if (
+          nextStart &&
+          nextStart >= now &&
+          nextStart - now <= STANDBY_MINUTES * 60 * 1000
+        ) {
+          return "STANDBY";
+        }
+
+        const endedAt = toTimestamp(state.endedAt);
+
+        if (
+          endedAt &&
+          now >= endedAt &&
+          now - endedAt <= AFTERSHOW_MINUTES * 60 * 1000
+        ) {
+          return "AFTERSHOW";
+        }
+
+        return "OFFLINE";
+      }
+
+      function setText(ids, value) {
+        ids.forEach(id => {
+          const node = document.getElementById(id);
+          if (node && value !== undefined && value !== null) {
+            node.textContent = String(value);
+          }
+        });
+      }
+
+      function setImage(ids, value) {
+        if (!value) return;
+
+        ids.forEach(id => {
+          const node = document.getElementById(id);
+          if (node && node.tagName === "IMG" && node.src !== value) {
+            node.src = value;
+          }
+        });
+      }
+
+      function ensureDebugBadge() {
+        let badge = document.getElementById("djfBroadcastIntelligence");
+
+        if (!badge) {
+          badge = document.createElement("div");
+          badge.id = "djfBroadcastIntelligence";
+          badge.innerHTML = "<i></i><b>V1700</b><span>OFFLINE</span>";
+          document.body.appendChild(badge);
+        }
+
+        return badge;
+      }
+
+      function apply(state) {
+        const mode = determineMode(state);
+        const complete = { ...state, mode };
+        const signature = JSON.stringify(complete);
+
+        if (signature === currentSignature) return;
+        currentSignature = signature;
+
+        document.documentElement.dataset.broadcastMode = mode;
+        document.documentElement.dataset.activeTheme = state.themeId;
+        document.body?.setAttribute("data-broadcast-mode", mode);
+        document.body?.setAttribute("data-active-theme", state.themeId);
+
+        document.body?.classList.toggle("is-live", mode === "LIVE");
+        document.body?.classList.toggle("is-standby", mode === "STANDBY");
+        document.body?.classList.toggle("is-aftershow", mode === "AFTERSHOW");
+        document.body?.classList.toggle("is-offline", mode === "OFFLINE");
+
+        const statusLabel =
+          mode === "LIVE" ? "LIVE" :
+          mode === "STANDBY" ? "STANDBY" :
+          mode === "AFTERSHOW" ? "AFTERSHOW" :
+          "OFFLINE";
+
+        setText(
+          ["navState", "livePill", "heroLiveState"],
+          statusLabel
+        );
+
+        setText(
+          ["heroViewers", "viewerCount", "twitchViewers"],
+          state.viewers.toLocaleString("en-GB")
+        );
+
+        if (state.title) {
+          setText(["heroSubtitle", "streamTitle"], state.title);
+        }
+
+        if (state.displayName) {
+          setText(["navDisplayName", "twitchDisplayName"], state.displayName);
+        }
+
+        setImage(
+          ["navProfileImage", "heroProfileImage"],
+          state.profileImage
+        );
+
+        const navDot = document.getElementById("navLiveDot");
+        if (navDot) {
+          navDot.classList.toggle("live", mode === "LIVE");
+          navDot.classList.toggle("isLive", mode === "LIVE");
+          navDot.dataset.mode = mode;
+        }
+
+        const badge = ensureDebugBadge();
+        badge.dataset.mode = mode;
+        badge.querySelector("span").textContent =
+          `${mode} · ${state.themeTitle}`;
+
+        try {
+          localStorage.setItem(
+            "djf_broadcast_intelligence_v1700",
+            JSON.stringify({
+              ...complete,
+              checkedAt: Date.now()
+            })
+          );
+        } catch (_) {}
+
+        window.DJF_BROADCAST_STATE = complete;
+
+        window.dispatchEvent(
+          new CustomEvent("djf:broadcast-state", {
+            detail: complete
+          })
+        );
+      }
+
+      async function refresh() {
+        const routes = [
+          "/api/twitch",
+          "/api/broadcast",
+          "/api/cms/public/state"
+        ];
+
+        for (const route of routes) {
+          try {
+            apply(normalize(await readJson(route)));
+            return;
+          } catch (error) {
+            console.warn("V1700 route failed:", route, error);
+          }
+        }
+      }
+
+      function start() {
+        clearInterval(timer);
+        refresh();
+        timer = setInterval(refresh, POLL_MS);
+      }
+
+      window.DJF_BROADCAST_INTELLIGENCE = {
+        version: "V1700",
+        refresh,
+        getState: () => window.DJF_BROADCAST_STATE || null,
+        setDebug(enabled) {
+          document.documentElement.dataset.djfDebug =
+            enabled ? "true" : "false";
+        }
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start, { once: true });
+      } else {
+        start();
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) refresh();
+      });
+
+      window.addEventListener("online", refresh);
     })();
   </script>
 
