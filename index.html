@@ -1407,5 +1407,343 @@
     })();
   </script>
 
+
+  <style id="djf-v1701-verification-css">
+    #djfVerificationBadge {
+      position: fixed;
+      right: 16px;
+      bottom: 58px;
+      z-index: 99991;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(7,10,18,.88);
+      color: #fff;
+      font: 800 10px/1 Arial,sans-serif;
+      letter-spacing: .08em;
+      backdrop-filter: blur(14px);
+      pointer-events: none;
+    }
+
+    html[data-djf-debug="true"] #djfVerificationBadge {
+      display: flex;
+    }
+
+    #djfVerificationBadge i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #8b93a3;
+    }
+
+    #djfVerificationBadge[data-health="GREEN"] i {
+      background: #55f0a4;
+      box-shadow: 0 0 13px rgba(85,240,164,.8);
+    }
+
+    #djfVerificationBadge[data-health="YELLOW"] i {
+      background: #ffd45a;
+      box-shadow: 0 0 13px rgba(255,212,90,.7);
+    }
+
+    #djfVerificationBadge[data-health="RED"] i {
+      background: #ff5878;
+      box-shadow: 0 0 13px rgba(255,88,120,.75);
+    }
+  </style>
+
+  <script id="djf-v1701-verification-engine">
+    (() => {
+      "use strict";
+
+      if (window.DJF_BROADCAST_VERIFICATION_V1701) return;
+      window.DJF_BROADCAST_VERIFICATION_V1701 = true;
+
+      const API_BASE = (
+        window.DJF_API_BASE ||
+        window.DJF_CONFIG?.apiBase ||
+        window.CONFIG?.apiBase ||
+        "https://djfolsoe-tv-api.sunefolsoe.workers.dev"
+      ).replace(/\/$/, "");
+
+      const ROUTES = [
+        { id: "twitch", path: "/api/twitch", priority: 1 },
+        { id: "broadcast", path: "/api/broadcast", priority: 2 },
+        { id: "cms", path: "/api/cms/public/state", priority: 3 }
+      ];
+
+      const POLL_MS = 10000;
+      let timer = null;
+
+      function firstObject(...values) {
+        return values.find(value =>
+          value && typeof value === "object" && !Array.isArray(value)
+        ) || {};
+      }
+
+      function firstString(...values) {
+        return values.find(value =>
+          typeof value === "string" && value.trim()
+        ) || "";
+      }
+
+      function normalize(payload, sourceId) {
+        const root = firstObject(
+          payload?.core,
+          payload?.broadcast,
+          payload?.data?.core,
+          payload?.data,
+          payload
+        );
+
+        const twitch = firstObject(
+          root?.twitch,
+          payload?.twitch,
+          payload?.data?.twitch,
+          root?.stream
+        );
+
+        const themeRaw = root?.theme || payload?.theme || {};
+
+        return {
+          sourceId,
+          live: Boolean(
+            twitch.live ??
+            twitch.isLive ??
+            twitch.online ??
+            twitch.is_online ??
+            root.live ??
+            root.isLive
+          ),
+          viewers: Number(
+            twitch.viewers ??
+            twitch.viewerCount ??
+            twitch.viewer_count ??
+            0
+          ),
+          title: firstString(
+            twitch.title,
+            twitch.streamTitle,
+            twitch.stream_title,
+            root?.show?.title
+          ),
+          themeId: String(
+            typeof themeRaw === "string"
+              ? themeRaw
+              : themeRaw?.id || themeRaw?.key || "weekend"
+          ).toLowerCase(),
+          themeTitle: firstString(
+            typeof themeRaw === "object" ? themeRaw?.title : "",
+            typeof themeRaw === "string" ? themeRaw : "",
+            "Weekend"
+          ),
+          checkedAt: Date.now()
+        };
+      }
+
+      async function readRoute(route) {
+        const started = performance.now();
+
+        try {
+          const response = await fetch(API_BASE + route.path, {
+            cache: "no-store",
+            headers: { Accept: "application/json" }
+          });
+
+          if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+          }
+
+          const data = await response.json();
+
+          return {
+            ...route,
+            ok: true,
+            latency: Math.round(performance.now() - started),
+            state: normalize(data, route.id)
+          };
+        } catch (error) {
+          return {
+            ...route,
+            ok: false,
+            latency: Math.round(performance.now() - started),
+            error: error.message,
+            state: null
+          };
+        }
+      }
+
+      function chooseTruth(results) {
+        const available = results
+          .filter(result => result.ok && result.state)
+          .sort((a, b) => a.priority - b.priority);
+
+        return available[0] || null;
+      }
+
+      function compare(results) {
+        const valid = results.filter(result => result.ok && result.state);
+        const mismatches = [];
+
+        if (!valid.length) {
+          return {
+            health: "RED",
+            mismatches: ["No source responded"],
+            truth: null
+          };
+        }
+
+        const truth = chooseTruth(valid);
+
+        valid.forEach(result => {
+          if (result.id === truth.id) return;
+
+          if (result.state.live !== truth.state.live) {
+            mismatches.push(
+              `${result.id}.live=${result.state.live} / ${truth.id}.live=${truth.state.live}`
+            );
+          }
+
+          if (
+            result.state.themeId &&
+            truth.state.themeId &&
+            result.state.themeId !== truth.state.themeId
+          ) {
+            mismatches.push(
+              `${result.id}.theme=${result.state.themeId} / ${truth.id}.theme=${truth.state.themeId}`
+            );
+          }
+        });
+
+        const failed = results.filter(result => !result.ok);
+
+        return {
+          health:
+            !failed.length && !mismatches.length
+              ? "GREEN"
+              : truth
+                ? "YELLOW"
+                : "RED",
+          mismatches,
+          failed: failed.map(item => item.id),
+          truth
+        };
+      }
+
+      function ensureBadge() {
+        let badge = document.getElementById("djfVerificationBadge");
+
+        if (!badge) {
+          badge = document.createElement("div");
+          badge.id = "djfVerificationBadge";
+          badge.innerHTML = "<i></i><b>V1701</b><span>CHECKING</span>";
+          document.body.appendChild(badge);
+        }
+
+        return badge;
+      }
+
+      function applyTruth(report) {
+        if (!report.truth?.state) return;
+
+        const selected = report.truth.state;
+
+        if (window.DJF_BROADCAST_STATE) {
+          window.DJF_BROADCAST_STATE = {
+            ...window.DJF_BROADCAST_STATE,
+            live: selected.live,
+            viewers: selected.viewers,
+            title: selected.title || window.DJF_BROADCAST_STATE.title,
+            themeId: selected.themeId,
+            themeTitle: selected.themeTitle,
+            truthSource: report.truth.id,
+            verificationHealth: report.health
+          };
+        }
+
+        document.documentElement.dataset.truthSource = report.truth.id;
+        document.documentElement.dataset.verificationHealth = report.health;
+      }
+
+      function publish(results, report) {
+        const badge = ensureBadge();
+        badge.dataset.health = report.health;
+        badge.querySelector("span").textContent =
+          `${report.health} · ${report.truth?.id || "NO SOURCE"}`;
+
+        applyTruth(report);
+
+        const payload = {
+          version: "V1701",
+          checkedAt: Date.now(),
+          health: report.health,
+          truthSource: report.truth?.id || "",
+          mismatches: report.mismatches || [],
+          failed: report.failed || [],
+          sources: results.map(result => ({
+            id: result.id,
+            path: result.path,
+            ok: result.ok,
+            latency: result.latency,
+            error: result.error || "",
+            state: result.state
+          }))
+        };
+
+        window.DJF_BROADCAST_VERIFICATION = payload;
+
+        try {
+          localStorage.setItem(
+            "djf_broadcast_verification_v1701",
+            JSON.stringify(payload)
+          );
+        } catch (_) {}
+
+        window.dispatchEvent(
+          new CustomEvent("djf:broadcast-verification", {
+            detail: payload
+          })
+        );
+      }
+
+      async function refresh() {
+        const results = await Promise.all(ROUTES.map(readRoute));
+        const report = compare(results);
+        publish(results, report);
+      }
+
+      function start() {
+        clearInterval(timer);
+        refresh();
+        timer = setInterval(refresh, POLL_MS);
+      }
+
+      window.DJF_BROADCAST_VERIFICATION_API = {
+        version: "V1701",
+        refresh,
+        getReport: () => window.DJF_BROADCAST_VERIFICATION || null,
+        setDebug(enabled) {
+          document.documentElement.dataset.djfDebug =
+            enabled ? "true" : "false";
+        }
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start, { once: true });
+      } else {
+        start();
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) refresh();
+      });
+
+      window.addEventListener("online", refresh);
+    })();
+  </script>
+
 </body>
 </html>
