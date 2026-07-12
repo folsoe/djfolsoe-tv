@@ -145,7 +145,8 @@ async function finishWizard(){
     const result=await api('/api/content/admin/module',{method:'POST',body:JSON.stringify({module})});
     state.modules.unshift(result.module);
     closeWizard();renderAll();
-    v1700Start();toast('Content created.');
+    v1700Start();
+    v1701Start();toast('Content created.');
   }catch(error){toast(error.message,true)}
 }
 async function quickToggleModule(id,patch){
@@ -703,6 +704,320 @@ window.DJF_BROADCAST_INTELLIGENCE={
   getState:()=>window.DJF_BROADCAST_STATE||null
 };
 
+
+/* =========================================================
+   V1701 — BROADCAST VERIFICATION & SAFE AUTOMATION
+   Read-only. No Worker or KV writes.
+   ========================================================= */
+const V1701_ROUTES=[
+  {id:'twitch',path:'/api/twitch',priority:1},
+  {id:'broadcast',path:'/api/broadcast',priority:2},
+  {id:'cms',path:'/api/cms/public/state',priority:3}
+];
+
+let v1701Timer=null;
+let v1701LastSignature='';
+
+function v1701FirstObject(...values){
+  return values.find(value=>value&&typeof value==='object'&&!Array.isArray(value))||{};
+}
+
+function v1701FirstString(...values){
+  return values.find(value=>typeof value==='string'&&value.trim())||'';
+}
+
+function v1701Normalize(payload,sourceId){
+  const root=v1701FirstObject(
+    payload?.core,
+    payload?.broadcast,
+    payload?.data?.core,
+    payload?.data,
+    payload
+  );
+
+  const twitch=v1701FirstObject(
+    root?.twitch,
+    payload?.twitch,
+    payload?.data?.twitch,
+    root?.stream
+  );
+
+  const themeRaw=root?.theme||payload?.theme||{};
+
+  return{
+    sourceId,
+    live:Boolean(
+      twitch.live??
+      twitch.isLive??
+      twitch.online??
+      twitch.is_online??
+      root.live??
+      root.isLive
+    ),
+    viewers:Number(twitch.viewers??twitch.viewerCount??twitch.viewer_count??0),
+    title:v1701FirstString(twitch.title,twitch.streamTitle,twitch.stream_title,root?.show?.title),
+    themeId:String(typeof themeRaw==='string'?themeRaw:(themeRaw?.id||themeRaw?.key||'weekend')).toLowerCase(),
+    themeTitle:v1701FirstString(typeof themeRaw==='object'?themeRaw?.title:'',typeof themeRaw==='string'?themeRaw:'','Weekend'),
+    checkedAt:Date.now()
+  };
+}
+
+async function v1701ReadRoute(route){
+  const started=performance.now();
+
+  try{
+    const response=await fetch(API_BASE+route.path,{
+      cache:'no-store',
+      headers:{Accept:'application/json'}
+    });
+
+    if(!response.ok)throw new Error(`HTTP ${response.status}`);
+
+    return{
+      ...route,
+      ok:true,
+      latency:Math.round(performance.now()-started),
+      state:v1701Normalize(await response.json(),route.id)
+    };
+  }catch(error){
+    return{
+      ...route,
+      ok:false,
+      latency:Math.round(performance.now()-started),
+      error:error.message,
+      state:null
+    };
+  }
+}
+
+function v1701ChooseTruth(results){
+  return results
+    .filter(result=>result.ok&&result.state)
+    .sort((a,b)=>a.priority-b.priority)[0]||null;
+}
+
+function v1701Compare(results){
+  const valid=results.filter(result=>result.ok&&result.state);
+  const truth=v1701ChooseTruth(valid);
+  const mismatches=[];
+
+  if(!truth){
+    return{
+      health:'RED',
+      truth:null,
+      mismatches:['No Broadcast Intelligence source responded'],
+      failed:results.map(result=>result.id)
+    };
+  }
+
+  valid.forEach(result=>{
+    if(result.id===truth.id)return;
+
+    if(result.state.live!==truth.state.live){
+      mismatches.push(
+        `${result.id}.live=${result.state.live} / ${truth.id}.live=${truth.state.live}`
+      );
+    }
+
+    if(
+      result.state.themeId&&
+      truth.state.themeId&&
+      result.state.themeId!==truth.state.themeId
+    ){
+      mismatches.push(
+        `${result.id}.theme=${result.state.themeId} / ${truth.id}.theme=${truth.state.themeId}`
+      );
+    }
+  });
+
+  const failed=results.filter(result=>!result.ok).map(result=>result.id);
+
+  return{
+    health:!failed.length&&!mismatches.length?'GREEN':'YELLOW',
+    truth,
+    mismatches,
+    failed
+  };
+}
+
+function v1701EnsurePanel(){
+  let panel=document.getElementById('v1701VerificationPanel');
+  if(panel)return panel;
+
+  const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
+  if(!dashboard)return null;
+
+  panel=document.createElement('section');
+  panel.id='v1701VerificationPanel';
+  panel.innerHTML=`
+    <div class="v1701Head">
+      <div>
+        <small>V1701 · VERIFICATION & SAFE AUTOMATION</small>
+        <h3>Trust, compare and protect</h3>
+      </div>
+      <strong id="v1701Health" class="v1701Health" data-health="YELLOW">CHECKING</strong>
+    </div>
+
+    <div id="v1701SourceGrid" class="v1701SourceGrid"></div>
+
+    <div id="v1701WarningBox" class="v1701WarningBox">
+      Waiting for the first verification cycle.
+    </div>
+
+    <div class="v1701AutomationGrid">
+      <article><span>LIVE</span><strong>Display mode only</strong></article>
+      <article><span>OFFLINE</span><strong>Display mode only</strong></article>
+      <article><span>STANDBY</span><strong>No theme changes</strong></article>
+      <article><span>AFTERSHOW</span><strong>No content writes</strong></article>
+    </div>
+  `;
+
+  const intelligence=document.getElementById('v1700IntelligencePanel');
+  if(intelligence&&intelligence.parentNode){
+    intelligence.insertAdjacentElement('afterend',panel);
+  }else{
+    dashboard.prepend(panel);
+  }
+
+  return panel;
+}
+
+function v1701RenderSource(result,truthId){
+  const state=result.state||{};
+
+  return`
+    <article class="v1701SourceCard">
+      <header>
+        <strong>${result.id.toUpperCase()}${result.id===truthId?' · TRUTH':''}</strong>
+        <span>${result.ok?`${result.latency} ms`:'FAILED'}</span>
+      </header>
+      <dl>
+        <dt>Route</dt><dd>${result.path}</dd>
+        <dt>Live</dt><dd>${result.ok?String(state.live):'—'}</dd>
+        <dt>Theme</dt><dd>${result.ok?(state.themeTitle||state.themeId):'—'}</dd>
+        <dt>Viewers</dt><dd>${result.ok?state.viewers:'—'}</dd>
+        <dt>Title</dt><dd>${result.ok?(state.title||'No title'):(result.error||'Unavailable')}</dd>
+      </dl>
+    </article>
+  `;
+}
+
+function v1701ApplyTruth(report){
+  if(!report.truth?.state||!state)return;
+
+  const selected=report.truth.state;
+
+  state.core=state.core||{};
+  state.core.twitch={
+    ...(state.core.twitch||{}),
+    live:selected.live,
+    isLive:selected.live,
+    viewers:selected.viewers,
+    title:selected.title
+  };
+
+  state.core.theme={
+    ...(typeof state.core.theme==='object'?state.core.theme:{}),
+    id:selected.themeId,
+    title:selected.themeTitle
+  };
+
+  document.documentElement.dataset.truthSource=report.truth.id;
+  document.documentElement.dataset.verificationHealth=report.health;
+
+  try{
+    renderSystemStatus?.();
+    renderVisualDashboard?.();
+    renderBroadcastContentPlatform?.();
+    renderBroadcastExperience?.();
+    renderTvStation?.();
+    renderSceneComposer?.();
+  }catch(error){
+    console.warn('V1701 safe render warning',error);
+  }
+}
+
+function v1701Render(results,report){
+  v1701EnsurePanel();
+
+  const health=document.getElementById('v1701Health');
+  if(health){
+    health.dataset.health=report.health;
+    health.textContent=report.health;
+  }
+
+  const grid=document.getElementById('v1701SourceGrid');
+  if(grid){
+    grid.innerHTML=results
+      .map(result=>v1701RenderSource(result,report.truth?.id))
+      .join('');
+  }
+
+  const warning=document.getElementById('v1701WarningBox');
+  if(warning){
+    const messages=[
+      ...report.mismatches,
+      ...report.failed.map(id=>`${id} route did not respond`)
+    ];
+
+    warning.classList.toggle('ok',!messages.length);
+
+    warning.textContent=messages.length
+      ?messages.join(' · ')
+      :`All sources agree. Truth source: ${report.truth?.id||'none'}.`;
+  }
+}
+
+async function v1701Refresh(){
+  if(!state)return;
+
+  const results=await Promise.all(V1701_ROUTES.map(v1701ReadRoute));
+  const report=v1701Compare(results);
+  const signature=JSON.stringify({results,report});
+
+  if(signature===v1701LastSignature)return;
+  v1701LastSignature=signature;
+
+  v1701ApplyTruth(report);
+  v1701Render(results,report);
+
+  const payload={
+    version:'V1701',
+    checkedAt:Date.now(),
+    health:report.health,
+    truthSource:report.truth?.id||'',
+    mismatches:report.mismatches,
+    failed:report.failed,
+    sources:results
+  };
+
+  window.DJF_BROADCAST_VERIFICATION=payload;
+
+  try{
+    localStorage.setItem(
+      'djf_broadcast_verification_v1701',
+      JSON.stringify(payload)
+    );
+  }catch(_){}
+
+  window.dispatchEvent(
+    new CustomEvent('djf:broadcast-verification',{detail:payload})
+  );
+}
+
+function v1701Start(){
+  clearInterval(v1701Timer);
+  v1701EnsurePanel();
+  v1701Refresh();
+  v1701Timer=setInterval(v1701Refresh,10000);
+}
+
+window.DJF_BROADCAST_VERIFICATION_API={
+  version:'V1701',
+  refresh:v1701Refresh,
+  getReport:()=>window.DJF_BROADCAST_VERIFICATION||null
+};
+
 function renderModules(){const modules=(state.modules||[]).filter(m=>currentModuleFilter==='all'||(currentModuleFilter==='scheduled'?moduleScheduled(m):m.status===currentModuleFilter));$('moduleList').innerHTML=modules.map(m=>`<article class="moduleRow" draggable="true" data-module-id="${esc(m.id)}"><span class="moduleDrag">⋮⋮</span><span class="moduleRowIcon">${typeIcons[m.type]||'▦'}</span><div><strong>${esc(m.title)}</strong><span class="statusPill ${esc(m.status)}">${moduleScheduled(m)?'scheduled':esc(m.status)}</span><small>${esc(m.type)} · ${esc(m.theme)} · ${esc(m.placement?.websiteZone||'editorial')}</small></div><div class="moduleActions"><button data-toggle-publish="${esc(m.id)}" class="secondary">${m.status==='published'?'Unpublish':'Publish'}</button><button data-toggle-website="${esc(m.id)}" class="secondary">${m.surfaces?.website===false?'Show on site':'Hide from site'}</button><button data-edit-module="${esc(m.id)}" class="secondary">Edit</button><button data-duplicate-module="${esc(m.id)}" class="secondary">Duplicate</button><button data-delete-module="${esc(m.id)}" class="secondary">Delete</button></div></article>`).join('')||'<p>No content in this view.</p>';installDragSort()}
 function installDragSort(){document.querySelectorAll('.moduleRow').forEach(row=>{row.addEventListener('dragstart',()=>{draggedModuleId=row.dataset.moduleId;row.style.opacity='.45'});row.addEventListener('dragend',()=>{row.style.opacity='';draggedModuleId=''});row.addEventListener('dragover',e=>e.preventDefault());row.addEventListener('drop',async e=>{e.preventDefault();const target=row.dataset.moduleId;if(!draggedModuleId||target===draggedModuleId)return;const ids=[...document.querySelectorAll('.moduleRow')].map(x=>x.dataset.moduleId);const from=ids.indexOf(draggedModuleId),to=ids.indexOf(target);ids.splice(to,0,ids.splice(from,1)[0]);try{const result=await api('/api/cms/admin/modules/reorder',{method:'POST',body:JSON.stringify({order:ids})});state.modules=result.modules;renderModules();toast('Content order saved.')}catch(error){toast(error.message,true)}})})}
 function renderShows(){const shows=state.core?.featuredShows||[];$('showsEditor').innerHTML=shows.map((s,i)=>showCard(s,i)).join('')||'<p>No shows yet. Press Add show.</p>'}
@@ -834,4 +1149,12 @@ document.addEventListener('visibilitychange',()=>{
 
 window.addEventListener('online',()=>{
   if(state)v1700Refresh();
+});
+
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden&&state)v1701Refresh();
+});
+
+window.addEventListener('online',()=>{
+  if(state)v1701Refresh();
 });
