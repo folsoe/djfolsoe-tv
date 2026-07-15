@@ -1,0 +1,400 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V2800 — PERFORMANCE & STABILITY
+   CSS-ONLY RELEASE
+   Built on V2700 Broadcast Television.
+   No Worker, Admin, API, Theme Engine, scene-switch or JS changes.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   01. Rendering containment
+   ------------------------------------------------------------ */
+
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty),
+.premiereFooter{
+  contain:layout paint style !important;
+}
+
+@supports (content-visibility:auto){
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .contentModuleZone:not(:empty),
+  .premiereFooter{
+    content-visibility:auto !important;
+    contain-intrinsic-size:700px !important;
+  }
+
+  .premiereChart{
+    contain-intrinsic-size:1200px !important;
+  }
+
+  .premiereShows{
+    content-visibility:auto !important;
+    contain-intrinsic-size:650px !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   02. Stable image geometry
+   ------------------------------------------------------------ */
+
+.premierePortraitFrame img,
+.premiereShowCards img,
+.djfChartCover,
+.modAvatar,
+.chatAvatar,
+.premiereNews img{
+  display:block !important;
+  max-width:100% !important;
+  height:auto;
+}
+
+.premierePortraitFrame,
+.premiereShowCards > *,
+.djfChartCover,
+.modAvatar,
+.premiereNewsGrid > *{
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+
+.premierePortraitFrame img,
+.premiereShowCards img,
+.premiereNews img{
+  image-rendering:auto !important;
+}
+
+/* Reserve space to reduce layout shift. */
+.premiereShowCards img{
+  aspect-ratio:16 / 9 !important;
+  width:100% !important;
+  height:auto !important;
+  object-fit:cover !important;
+}
+
+.djfChartCover{
+  aspect-ratio:1 / 1 !important;
+  object-fit:cover !important;
+}
+
+/* ------------------------------------------------------------
+   03. Motion budget
+   ------------------------------------------------------------ */
+
+/* Keep the station alive, but remove duplicate simultaneous GPU work. */
+body::after{
+  animation-duration:34s !important;
+}
+
+.premiereHero::before,
+.premiereNext::before,
+.premiereShows::before,
+.premiereNews::before,
+.premiereChart::before,
+.premiereCommunity::before,
+.premiereInteraction::before,
+.premiereRequest::before{
+  animation-duration:20s !important;
+}
+
+.premiereNav::after,
+.premiereFooter::before,
+.premiereHero::after,
+.premiereNext::after,
+.premiereShows::after,
+.premiereNews::after,
+.premiereChart::after,
+.premiereCommunity::after,
+.premiereInteraction::after,
+.premiereRequest::after{
+  animation-duration:10s !important;
+}
+
+#websiteActivityTicker .premiereTickerLabel,
+#live .premierePrimary,
+.djfChartExpand{
+  animation-duration:8s !important;
+}
+
+#live .premierePortraitFrame{
+  animation-duration:14s !important;
+}
+
+/* Pause decorative motion when not actively interacting. */
+@media (hover:hover){
+  .premiereHero:hover::before,
+  .premiereNext:hover::before,
+  .premiereShows:hover::before,
+  .premiereNews:hover::before,
+  .premiereChart:hover::before,
+  .premiereCommunity:hover::before,
+  .premiereInteraction:hover::before,
+  .premiereRequest:hover::before{
+    animation-play-state:running !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   04. Safer transforms
+   ------------------------------------------------------------ */
+
+#shows .premiereShowCards > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard{
+  will-change:auto !important;
+}
+
+#shows .premiereShowCards > *:hover,
+.djfChartRow:hover,
+.djfCommunityCard:hover,
+.premiereActionCard:hover{
+  will-change:transform !important;
+}
+
+#shows .premiereShowCards > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard,
+.premierePrimary,
+.premiereSecondary{
+  transition-duration:.24s !important;
+}
+
+/* ------------------------------------------------------------
+   05. Scroll stability
+   ------------------------------------------------------------ */
+
+html{
+  scroll-padding-top:110px !important;
+}
+
+body{
+  overscroll-behavior-y:none !important;
+}
+
+.premiereMain{
+  overflow:visible !important;
+}
+
+.premiereShowCards,
+.djfMusicHubRail,
+.djfCommunityRail{
+  overscroll-behavior-x:contain !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+
+/* ------------------------------------------------------------
+   06. Touch and mobile performance
+   ------------------------------------------------------------ */
+
+@media(max-width:900px){
+  body::after{
+    display:none !important;
+  }
+
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    opacity:.22 !important;
+    animation-duration:28s !important;
+  }
+
+  #shows .premiereShowCards > *:hover,
+  .djfChartRow:hover,
+  .djfCommunityCard:hover,
+  .premiereActionCard:hover{
+    transform:none !important;
+  }
+
+  .premiereNav{
+    backdrop-filter:blur(14px) saturate(115%) !important;
+  }
+}
+
+@media(max-width:640px){
+  html{
+    scroll-padding-top:20px !important;
+  }
+
+  .premiereNav{
+    backdrop-filter:none !important;
+  }
+
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    display:none !important;
+  }
+
+  .premiereHero::after,
+  .premiereNext::after,
+  .premiereShows::after,
+  .premiereNews::after,
+  .premiereChart::after,
+  .premiereCommunity::after,
+  .premiereInteraction::after,
+  .premiereRequest::after{
+    animation:none !important;
+    background-position:50% 50% !important;
+  }
+
+  #live .premierePortraitFrame{
+    animation:none !important;
+  }
+
+  #live .premierePrimary,
+  .djfChartExpand,
+  #websiteActivityTicker .premiereTickerLabel{
+    animation:none !important;
+    background-position:50% 50% !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   07. Accessibility and clarity
+   ------------------------------------------------------------ */
+
+:focus{
+  scroll-margin-top:120px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid rgba(76,114,255,.46) !important;
+  outline-offset:3px !important;
+  box-shadow:0 0 0 6px rgba(76,114,255,.10) !important;
+}
+
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:disabled,
+[aria-disabled="true"]{
+  opacity:.55 !important;
+  cursor:not-allowed !important;
+}
+
+/* ------------------------------------------------------------
+   08. Safer text rendering
+   ------------------------------------------------------------ */
+
+body,
+.premiereMain,
+.premiereNav,
+.premiereFooter{
+  text-rendering:optimizeLegibility !important;
+  -webkit-font-smoothing:antialiased !important;
+  -moz-osx-font-smoothing:grayscale !important;
+}
+
+.premiereMain p,
+.premiereMain small,
+.premiereMain span{
+  overflow-wrap:anywhere;
+}
+
+#heroTitle,
+.premiereSectionHeader h2,
+.premiereChartHeader h2,
+.premiereCommunityHeader h2{
+  text-wrap:balance;
+}
+
+/* ------------------------------------------------------------
+   09. Reduced data / reduced motion
+   ------------------------------------------------------------ */
+
+@media(prefers-reduced-data:reduce){
+  body::after,
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    display:none !important;
+  }
+
+  .premierePortraitFrame img,
+  .premiereShowCards img,
+  .premiereNews img{
+    filter:none !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto !important;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition-duration:.001ms !important;
+  }
+
+  #websiteActivityTicker #activityTickerTrack{
+    transform:none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   10. Print fallback
+   ------------------------------------------------------------ */
+
+@media print{
+  .premiereNav,
+  #websiteActivityTicker,
+  .premiereHeroSignal,
+  .djfShowRailControls,
+  .djfChartExpand{
+    display:none !important;
+  }
+
+  body,
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter{
+    color:#000 !important;
+    background:#fff !important;
+    box-shadow:none !important;
+  }
+
+  .djfExpandableChart > *{
+    display:grid !important;
+  }
+}
