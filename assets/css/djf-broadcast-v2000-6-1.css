@@ -1,0 +1,269 @@
+/* ============================================================
+   DJ FOLSOE WEBSITE V2000.6.1 — SAFE HERO LIVE HOTFIX
+   Stable replacement for V2000.6.
+   No blocking overlays. No self-triggering DOM loops.
+   ============================================================ */
+
+#live.premiereHero{
+  --djf-hero-a:#f23996;
+  --djf-hero-b:#7d4eff;
+  --djf-hero-c:#ff9a28;
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+}
+
+#live[data-djf-live="true"]{
+  --djf-hero-a:#20d891;
+  --djf-hero-b:#42d9f5;
+  --djf-hero-c:#7d4eff;
+}
+
+/* Decorative layers must never block links or buttons. */
+#live .djfHeroSafeAtmosphere,
+#live .djfHeroSafeAtmosphere::before,
+#live .djfHeroSafeAtmosphere::after,
+#live .djfHeroSafeMeta{
+  pointer-events:none !important;
+}
+
+#live .djfHeroSafeAtmosphere{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  overflow:hidden;
+}
+
+#live .djfHeroSafeAtmosphere::before{
+  content:"";
+  position:absolute;
+  inset:-25%;
+  background:
+    radial-gradient(circle at 18% 30%,color-mix(in srgb,var(--djf-hero-a) 15%,transparent),transparent 23%),
+    radial-gradient(circle at 82% 18%,color-mix(in srgb,var(--djf-hero-b) 14%,transparent),transparent 24%),
+    radial-gradient(circle at 75% 82%,rgba(255,154,40,.08),transparent 22%);
+  filter:blur(34px);
+  animation:djfSafeHeroAmbient 16s ease-in-out infinite alternate;
+}
+
+#live .djfHeroSafeAtmosphere::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  bottom:-50%;
+  left:-32%;
+  width:12%;
+  transform:skewX(-19deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.48),transparent);
+  opacity:.38;
+  animation:djfSafeHeroSweep 12s ease-in-out infinite;
+}
+
+#live .premiereHeroCopy,
+#live .premierePortraitStage,
+#live .premiereHeroSignal{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+#live .djfHeroSafeMeta{
+  position:absolute;
+  z-index:7;
+  right:24px;
+  top:24px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:6px;
+  max-width:56%;
+}
+
+#live .djfHeroSafeMeta span{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:0 9px;
+  border:1px solid rgba(42,54,82,.12);
+  border-radius:999px;
+  color:#546178;
+  background:rgba(255,255,255,.79);
+  box-shadow:0 6px 15px rgba(34,45,72,.08);
+  backdrop-filter:blur(10px);
+  font:950 7px/1 "Manrope",Arial,sans-serif;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+#live .djfHeroSafeMeta span:first-child{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(100deg,var(--djf-hero-a),var(--djf-hero-b));
+}
+
+#live #livePill{
+  position:relative !important;
+  padding-left:23px !important;
+  background:linear-gradient(100deg,var(--djf-hero-a),var(--djf-hero-b)) !important;
+}
+
+#live #livePill::before{
+  content:"";
+  position:absolute;
+  left:9px;
+  top:50%;
+  width:7px;
+  height:7px;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background:#fff;
+}
+
+#live[data-djf-live="true"] #livePill::before{
+  animation:djfSafeLiveDot 1.8s ease-in-out infinite;
+}
+
+#live[data-djf-live="false"] #livePill{
+  background:linear-gradient(100deg,#6d7687,#424b5c) !important;
+}
+
+/* Keep the portrait animation lightweight and isolated. */
+#live[data-djf-live="true"] .premierePortraitFrame{
+  box-shadow:
+    0 34px 78px rgba(34,45,72,.25),
+    0 0 34px color-mix(in srgb,var(--djf-hero-a) 16%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+
+#live[data-djf-live="true"] .premierePortraitFrame img{
+  animation:djfSafeHeroCamera 15s ease-in-out infinite alternate !important;
+}
+
+/* Safe status line in the existing ON AIR card. */
+#live .djfHeroSafeStatus{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-bottom:7px;
+  color:var(--djf-hero-a);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+#live .djfHeroSafeStatus i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:0 0 10px currentColor;
+}
+
+#live[data-djf-live="true"] .premiereOnAirCard{
+  box-shadow:
+    0 20px 44px rgba(34,45,72,.19),
+    0 0 24px color-mix(in srgb,var(--djf-hero-a) 10%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.96) !important;
+}
+
+/* Metrics only receive a visual flash; JS does not rewrite their text. */
+#live .premiereHeroFacts strong{
+  font-variant-numeric:tabular-nums;
+}
+
+#live .premiereHeroFacts strong.djfSafeMetricFlash{
+  color:var(--djf-hero-a) !important;
+  animation:djfSafeMetricFlash .55s ease;
+}
+
+#live[data-djf-live="true"] .premierePrimary{
+  background:linear-gradient(105deg,#16be7c,#20d891,#42d9f5,#7d4eff) !important;
+  background-size:210% 100% !important;
+  animation:djfSafeLiveButton 5.5s linear infinite !important;
+}
+
+#live .djfHeroSafeCountdown{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:31px;
+  margin-top:13px;
+  padding:0 12px;
+  border:1px solid rgba(42,54,82,.13);
+  border-radius:999px;
+  color:#4e5b72;
+  background:rgba(255,255,255,.78);
+  box-shadow:0 7px 18px rgba(34,45,72,.08);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+#live .djfHeroSafeCountdown b{
+  color:var(--djf-hero-a);
+  font-variant-numeric:tabular-nums;
+}
+
+/* Keep original V2000.5 platform order. */
+@media(max-width:900px){
+  #live .djfHeroSafeMeta{
+    right:14px;
+    top:14px;
+    max-width:68%;
+  }
+}
+
+@media(max-width:640px){
+  #live .djfHeroSafeMeta{
+    right:10px;
+    top:10px;
+    max-width:76%;
+  }
+
+  #live .djfHeroSafeMeta span:nth-child(n+4){
+    display:none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #live .djfHeroSafeAtmosphere::before,
+  #live .djfHeroSafeAtmosphere::after,
+  #live[data-djf-live="true"] .premierePortraitFrame img,
+  #live[data-djf-live="true"] #livePill::before,
+  #live[data-djf-live="true"] .premierePrimary{
+    animation:none !important;
+  }
+}
+
+@keyframes djfSafeHeroAmbient{
+  from{transform:translate3d(-1.5%,-1%,0) scale(1)}
+  to{transform:translate3d(2%,1.5%,0) scale(1.04)}
+}
+
+@keyframes djfSafeHeroSweep{
+  0%,70%{left:-32%;opacity:0}
+  77%{opacity:.45}
+  93%,100%{left:125%;opacity:0}
+}
+
+@keyframes djfSafeLiveDot{
+  0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.42)}
+  50%{box-shadow:0 0 0 7px rgba(255,255,255,0)}
+}
+
+@keyframes djfSafeHeroCamera{
+  from{transform:scale(1.002)}
+  to{transform:scale(1.025)}
+}
+
+@keyframes djfSafeMetricFlash{
+  0%,100%{transform:scale(1)}
+  45%{transform:scale(1.08)}
+}
+
+@keyframes djfSafeLiveButton{
+  from{background-position:0% 50%}
+  to{background-position:210% 50%}
+}
