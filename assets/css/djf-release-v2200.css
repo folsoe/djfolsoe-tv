@@ -1,0 +1,346 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V2200 — RELEASE 2: COMMUNITY EXPERIENCE
+   Safe enhancement of existing community content.
+   No new API routes. No layout rewrites.
+   ============================================================ */
+
+#community,
+.premiereCommunity{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  background:
+    radial-gradient(circle at 95% 5%,rgba(242,57,150,.09),transparent 25%),
+    radial-gradient(circle at 5% 95%,rgba(80,223,245,.10),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.995),rgba(238,244,250,.98)) !important;
+}
+
+#community::before,
+.premiereCommunity::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(rgba(76,114,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,114,255,.03) 1px,transparent 1px) !important;
+  background-size:58px 58px !important;
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.45),transparent 84%) !important;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.45),transparent 84%) !important;
+}
+
+#community > *,
+.premiereCommunity > *{
+  position:relative !important;
+  z-index:3 !important;
+}
+
+/* Community headline */
+.premiereCommunityHeader{
+  align-items:flex-end !important;
+  gap:26px !important;
+}
+
+.premiereCommunityHeader h2{
+  font-size:clamp(45px,5vw,72px) !important;
+}
+
+.premiereCommunityHeader p{
+  max-width:520px !important;
+  color:#617087 !important;
+  font-weight:650 !important;
+}
+
+/* Core community spotlight */
+.premiereCommunitySpotlight{
+  min-height:160px !important;
+  padding:22px !important;
+  border-radius:22px !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.07),transparent 28%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 15px 38px rgba(34,45,72,.12),
+    inset 0 1px 0 #fff !important;
+}
+
+.premiereCommunitySpotlight::before{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  top:0 !important;
+  bottom:0 !important;
+  width:5px !important;
+  background:linear-gradient(180deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+}
+
+.premiereCommunitySpotlight h3{
+  color:#151b28 !important;
+  font-family:"Barlow Condensed",Arial,sans-serif !important;
+  font-size:32px !important;
+  line-height:.92 !important;
+  font-weight:900 !important;
+}
+
+.premiereCommunitySpotlight p{
+  color:#667187 !important;
+  font-weight:650 !important;
+}
+
+/* Stat cards */
+.premiereCommunityStats{
+  gap:10px !important;
+}
+
+.premiereCommunityStats > div{
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:92px !important;
+  padding:17px !important;
+  border-radius:18px !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 10px 26px rgba(34,45,72,.10),
+    inset 0 1px 0 #fff !important;
+}
+
+.premiereCommunityStats > div::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:3px !important;
+  background:linear-gradient(90deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+}
+
+.premiereCommunityStats strong{
+  color:#151b28 !important;
+  font-family:"Barlow Condensed",Arial,sans-serif !important;
+  font-size:36px !important;
+  line-height:.9 !important;
+  font-variant-numeric:tabular-nums !important;
+}
+
+/* V2200 community rail injected by safe JS */
+.djfCommunityRail{
+  position:relative;
+  z-index:4;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-top:16px;
+}
+
+.djfCommunityCard{
+  position:relative;
+  min-width:0;
+  min-height:150px;
+  padding:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.96);
+  border-radius:19px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(125,78,255,.08),transparent 30%),
+    linear-gradient(145deg,#fff,#edf3f9);
+  box-shadow:
+    0 12px 31px rgba(34,45,72,.10),
+    inset 0 1px 0 #fff;
+  transition:transform .24s cubic-bezier(.2,.7,.2,1),box-shadow .24s ease;
+}
+
+.djfCommunityCard::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:4px;
+  background:linear-gradient(90deg,#ff9a28,#f23996,#7d4eff,#4c72ff);
+}
+
+.djfCommunityCard:hover{
+  transform:translateY(-5px);
+  box-shadow:
+    0 22px 46px rgba(34,45,72,.16),
+    0 0 24px rgba(242,57,150,.06);
+}
+
+.djfCommunityCardIcon{
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  border-radius:14px 4px 14px 4px;
+  color:#fff;
+  background:linear-gradient(125deg,#ff9a28,#f23996,#7d4eff);
+  box-shadow:0 10px 22px rgba(125,78,255,.20);
+  font-size:18px;
+}
+
+.djfCommunityCard span{
+  display:block;
+  margin-top:18px;
+  color:#7d4eff;
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.djfCommunityCard strong{
+  display:block;
+  margin-top:7px;
+  overflow:hidden;
+  color:#151b28;
+  font-family:"Barlow Condensed",Arial,sans-serif;
+  font-size:26px;
+  line-height:.95;
+  font-weight:900;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.djfCommunityCard p{
+  margin:8px 0 0;
+  color:#667187;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:650;
+}
+
+/* Existing mod/community cards */
+.modsGrid,
+.communityGrid{
+  gap:12px !important;
+}
+
+.modsGrid > *,
+.communityGrid > *,
+.modCard{
+  position:relative !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.96) !important;
+  border-radius:18px !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  color:#151b28 !important;
+  box-shadow:
+    0 11px 28px rgba(34,45,72,.10),
+    inset 0 1px 0 #fff !important;
+}
+
+.modAvatar{
+  border:3px solid #fff !important;
+  background:linear-gradient(135deg,#ff9a28,#f23996,#7d4eff) !important;
+  box-shadow:0 8px 20px rgba(34,45,72,.14) !important;
+}
+
+/* Activity list treatment */
+.djfCommunityActivityList{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:14px;
+}
+
+.djfCommunityActivityItem{
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) auto;
+  align-items:center;
+  gap:10px;
+  min-height:58px;
+  padding:9px 11px;
+  border:1px solid rgba(42,54,82,.10);
+  border-radius:15px;
+  background:linear-gradient(145deg,#fff,#edf3f9);
+  box-shadow:0 8px 20px rgba(34,45,72,.08);
+}
+
+.djfCommunityActivityItem i{
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  color:#fff;
+  background:linear-gradient(125deg,#4c72ff,#7d4eff,#f23996);
+  font-style:normal;
+  font-size:15px;
+}
+
+.djfCommunityActivityItem b{
+  display:block;
+  overflow:hidden;
+  color:#151b28;
+  font-size:11px;
+  font-weight:900;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.djfCommunityActivityItem span{
+  display:block;
+  margin-top:3px;
+  overflow:hidden;
+  color:#667187;
+  font-size:9px;
+  font-weight:650;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.djfCommunityActivityItem time{
+  color:#738096;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+
+/* Empty content never becomes fake content */
+.djfCommunityRail[hidden],
+.djfCommunityActivityList[hidden]{
+  display:none !important;
+}
+
+@media(max-width:1050px){
+  .djfCommunityRail{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:640px){
+  .djfCommunityRail{
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding-bottom:12px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+
+  .djfCommunityRail::-webkit-scrollbar{
+    display:none;
+  }
+
+  .djfCommunityCard{
+    flex:0 0 78vw;
+    scroll-snap-align:start;
+  }
+
+  .djfCommunityActivityItem{
+    grid-template-columns:34px minmax(0,1fr);
+  }
+
+  .djfCommunityActivityItem time{
+    grid-column:2;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .djfCommunityCard,
+  .premiereCommunitySpotlight{
+    transition:none !important;
+  }
+}
