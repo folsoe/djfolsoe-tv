@@ -1,0 +1,309 @@
+/* ============================================================
+   DJ FOLSOE WEBSITE V2001 — BROADCAST DESIGN PASS
+   Pure CSS only.
+   Keeps V2000.5 layout, DOM, data and JavaScript unchanged.
+   ============================================================ */
+
+/* SAFETY: decorative layers never block interaction */
+#live::before,
+#live::after,
+#live .premiereHeroGrid,
+#live .premiereHeroSignal,
+#live .premierePortraitHalo,
+#live .premierePortraitShade,
+#live .premierePortraitFrame::before,
+#live .premierePortraitFrame::after{
+  pointer-events:none !important;
+}
+
+/* HERO — KEEP ORIGINAL GRID AND PLACEMENT */
+#live.premiereHero{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  min-height:650px !important;
+  background:
+    radial-gradient(circle at 91% 8%,rgba(242,57,150,.10),transparent 27%),
+    radial-gradient(circle at 8% 92%,rgba(80,223,245,.11),transparent 30%),
+    linear-gradient(145deg,rgba(255,255,255,.995),rgba(239,245,251,.975)) !important;
+  box-shadow:
+    0 28px 78px rgba(34,45,72,.17),
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -1px 0 rgba(56,70,105,.06) !important;
+}
+
+/* ambient broadcast glow without changing layout */
+#live.premiereHero::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-22% !important;
+  z-index:0 !important;
+  background:
+    radial-gradient(circle at 18% 32%,rgba(255,154,40,.08),transparent 21%),
+    radial-gradient(circle at 79% 23%,rgba(242,57,150,.10),transparent 24%),
+    radial-gradient(circle at 75% 78%,rgba(125,78,255,.08),transparent 26%) !important;
+  filter:blur(35px) !important;
+  animation:djfV2001Ambient 18s ease-in-out infinite alternate !important;
+}
+
+#live.premiereHero::after{
+  content:"" !important;
+  position:absolute !important;
+  z-index:1 !important;
+  top:-55% !important;
+  bottom:-55% !important;
+  left:-36% !important;
+  width:12% !important;
+  transform:skewX(-20deg) !important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.48),transparent) !important;
+  opacity:.42 !important;
+  animation:djfV2001Sweep 12s ease-in-out infinite !important;
+}
+
+#live .premiereHeroCopy,
+#live .premierePortraitStage{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+/* text polish only */
+#live #heroTitle{
+  color:#111827 !important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.95),
+    0 10px 32px rgba(34,45,72,.08) !important;
+}
+
+#live #heroSubtitle{
+  color:#344056 !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+#live #heroText{
+  color:#5f6d83 !important;
+  font-weight:650 !important;
+}
+
+/* buttons */
+#live .premierePrimary{
+  position:relative !important;
+  overflow:hidden !important;
+  background:linear-gradient(105deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+  background-size:210% 100% !important;
+  box-shadow:
+    0 14px 34px rgba(125,78,255,.24),
+    0 0 22px rgba(242,57,150,.12),
+    inset 0 1px 0 rgba(255,255,255,.38) !important;
+  animation:djfV2001ButtonFlow 6s linear infinite !important;
+}
+
+#live .premierePrimary::after{
+  content:"" !important;
+  position:absolute !important;
+  top:-70% !important;
+  bottom:-70% !important;
+  left:-38% !important;
+  width:20% !important;
+  transform:skewX(-20deg) !important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.80),transparent) !important;
+  animation:djfV2001ButtonSweep 6.8s ease-in-out infinite !important;
+}
+
+#live .premiereSecondary{
+  background:rgba(255,255,255,.88) !important;
+  box-shadow:
+    0 11px 27px rgba(34,45,72,.10),
+    inset 0 1px 0 #fff !important;
+}
+
+/* facts remain exactly where they are */
+#live .premiereHeroFacts > div{
+  border:1px solid rgba(255,255,255,.96) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.99),rgba(237,243,249,.97)) !important;
+  box-shadow:
+    0 12px 29px rgba(34,45,72,.10),
+    inset 0 1px 0 #fff !important;
+}
+
+#live .premiereHeroFacts > div::before{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:3px !important;
+  background:linear-gradient(90deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+  opacity:.82 !important;
+}
+
+/* IMAGE — NO POSITION, WIDTH, GRID OR ORDER CHANGES */
+#live .premierePortraitStage{
+  isolation:isolate !important;
+}
+
+#live .premierePortraitStage::before{
+  content:"" !important;
+  position:absolute !important;
+  z-index:-1 !important;
+  width:86% !important;
+  height:86% !important;
+  left:7% !important;
+  top:7% !important;
+  border-radius:50% !important;
+  background:
+    radial-gradient(circle,rgba(255,255,255,.72) 0 30%,rgba(125,78,255,.15) 50%,rgba(242,57,150,.06) 68%,transparent 77%) !important;
+  filter:blur(15px) !important;
+}
+
+#live .premierePortraitFrame{
+  position:relative !important;
+  overflow:hidden !important;
+  background:linear-gradient(125deg,#ff9a28,#f23996 38%,#7d4eff 72%,#4c72ff) !important;
+  box-shadow:
+    0 34px 78px rgba(34,45,72,.24),
+    0 0 36px rgba(242,57,150,.12),
+    inset 0 1px 0 rgba(255,255,255,.68) !important;
+}
+
+#live .premierePortraitFrame::before{
+  content:"" !important;
+  position:absolute !important;
+  z-index:6 !important;
+  top:-60% !important;
+  bottom:-60% !important;
+  left:-42% !important;
+  width:17% !important;
+  transform:skewX(-20deg) !important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.70),transparent) !important;
+  animation:djfV2001ImageSweep 10s ease-in-out infinite !important;
+}
+
+#live .premierePortraitFrame::after{
+  content:"" !important;
+  position:absolute !important;
+  z-index:5 !important;
+  inset:8px !important;
+  border-radius:inherit !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.22),
+    inset 0 -50px 70px rgba(10,14,26,.08) !important;
+}
+
+#live .premierePortraitFrame img{
+  filter:contrast(1.04) saturate(1.06) brightness(1.02) !important;
+  transition:filter .35s ease !important;
+}
+
+#live .premierePortraitFrame:hover img{
+  filter:contrast(1.06) saturate(1.10) brightness(1.035) !important;
+}
+
+/* ON AIR CARD stays attached to existing image */
+#live .premiereOnAirCard{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 30%),
+    linear-gradient(145deg,rgba(255,255,255,.99),rgba(237,243,249,.97)) !important;
+  box-shadow:
+    0 22px 48px rgba(34,45,72,.20),
+    inset 0 1px 0 #fff !important;
+}
+
+#live .premiereOnAirCard::before{
+  background:linear-gradient(180deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+}
+
+#live .premiereOnAirCard::after{
+  content:"" !important;
+  position:absolute !important;
+  right:15px !important;
+  top:15px !important;
+  width:32px !important;
+  height:17px !important;
+  opacity:.75 !important;
+  background:
+    linear-gradient(90deg,
+      #ff9a28 0 3px,transparent 3px 6px,
+      #f23996 6px 9px,transparent 9px 12px,
+      #7d4eff 12px 15px,transparent 15px 18px,
+      #4c72ff 18px 21px,transparent 21px 24px,
+      #f23996 24px 27px,transparent 27px 30px,
+      #ff9a28 30px 33px) !important;
+  clip-path:polygon(
+    0 72%,9% 72%,9% 25%,18% 25%,18% 85%,27% 85%,27% 42%,
+    36% 42%,36% 96%,45% 96%,45% 12%,54% 12%,54% 75%,
+    63% 75%,63% 30%,72% 30%,72% 88%,81% 88%,81% 52%,
+    90% 52%,90% 100%,100% 100%,100% 100%,0 100%
+  ) !important;
+}
+
+/* signal bars */
+#live .premiereHeroSignal span{
+  background:linear-gradient(180deg,#f23996,#7d4eff,#4c72ff) !important;
+  filter:drop-shadow(0 4px 8px rgba(125,78,255,.24)) !important;
+}
+
+/* preserve V2000.5 tablet/mobile layout exactly */
+@media(max-width:900px){
+  #live.premiereHero{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+  }
+
+  #live .premiereHeroCopy{
+    order:initial !important;
+  }
+
+  #live .premierePortraitStage{
+    order:initial !important;
+  }
+}
+
+@media(max-width:640px){
+  #live.premiereHero{
+    min-height:0 !important;
+  }
+
+  #live .premierePortraitFrame::after{
+    inset:7px !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #live.premiereHero::before,
+  #live.premiereHero::after,
+  #live .premierePrimary,
+  #live .premierePrimary::after,
+  #live .premierePortraitFrame::before{
+    animation:none !important;
+  }
+}
+
+@keyframes djfV2001Ambient{
+  from{transform:translate3d(-1.5%,-1%,0) scale(1)}
+  to{transform:translate3d(2%,1.5%,0) scale(1.045)}
+}
+
+@keyframes djfV2001Sweep{
+  0%,69%{left:-36%;opacity:0}
+  76%{opacity:.43}
+  92%,100%{left:125%;opacity:0}
+}
+
+@keyframes djfV2001ButtonFlow{
+  from{background-position:0% 50%}
+  to{background-position:210% 50%}
+}
+
+@keyframes djfV2001ButtonSweep{
+  0%,60%{left:-38%;opacity:0}
+  70%{opacity:.78}
+  89%,100%{left:130%;opacity:0}
+}
+
+@keyframes djfV2001ImageSweep{
+  0%,69%{left:-42%;opacity:0}
+  76%{opacity:.62}
+  92%,100%{left:125%;opacity:0}
+}
