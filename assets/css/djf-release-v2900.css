@@ -1,0 +1,498 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V2900 — PRODUCTION CANDIDATE
+   FINAL STABILITY LAYER BEFORE V3000
+   CSS-ONLY RELEASE
+   No Worker, Admin, API, Theme Engine, scene-switch or JS changes.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   01. Browser-safe defaults
+   ------------------------------------------------------------ */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  scrollbar-gutter:stable;
+}
+
+body{
+  min-width:320px;
+}
+
+img,
+svg,
+video,
+canvas{
+  max-width:100%;
+}
+
+img{
+  height:auto;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button,
+a{
+  touch-action:manipulation;
+}
+
+/* ------------------------------------------------------------
+   02. Production-safe content visibility
+   ------------------------------------------------------------ */
+
+/*
+  Keep V2800's optimization where supported, but avoid hidden content
+  in browsers with incomplete content-visibility implementations.
+*/
+@supports not (content-visibility:auto){
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .contentModuleZone:not(:empty),
+  .premiereFooter{
+    content-visibility:visible !important;
+    contain:none !important;
+  }
+}
+
+@supports (content-visibility:auto){
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .contentModuleZone:not(:empty),
+  .premiereFooter{
+    content-visibility:auto !important;
+  }
+
+  /*
+    Prevent deep links and keyboard focus from landing inside a skipped
+    section that has not been painted yet.
+  */
+  .premiereNews:target,
+  .premiereChart:target,
+  .premiereCommunity:target,
+  .premiereInteraction:target,
+  .premiereRequest:target,
+  .contentModuleZone:target{
+    content-visibility:visible !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   03. Layout integrity
+   ------------------------------------------------------------ */
+
+.premiereMain{
+  min-width:0 !important;
+}
+
+.premiereMain > *{
+  min-width:0 !important;
+}
+
+.premiereHero,
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty),
+.premiereFooter{
+  width:100% !important;
+  max-width:100% !important;
+}
+
+.premiereHeroCopy,
+.premierePortraitStage,
+.premiereSectionHeader > *,
+.premiereChartHeader > *,
+.premiereCommunityHeader > *,
+.djfChartCopy{
+  min-width:0 !important;
+}
+
+/* ------------------------------------------------------------
+   04. Safe typography
+   ------------------------------------------------------------ */
+
+body,
+.premiereMain,
+.premiereNav,
+.premiereFooter{
+  font-synthesis:none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p{
+  margin-block-start:0;
+}
+
+#heroTitle,
+.premiereSectionHeader h2,
+.premiereChartHeader h2,
+.premiereCommunityHeader h2{
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+  hyphens:auto;
+}
+
+.premiereMain p,
+.premiereMain small,
+.premiereMain span{
+  word-break:normal;
+  overflow-wrap:anywhere;
+}
+
+/* ------------------------------------------------------------
+   05. Image and card resilience
+   ------------------------------------------------------------ */
+
+.premierePortraitFrame,
+.premiereShowCards > *,
+.premiereNewsGrid > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard{
+  isolation:isolate;
+}
+
+.premiereShowCards img,
+.premiereNews img,
+.djfChartCover,
+.modAvatar{
+  background:#e8eef5;
+}
+
+.premiereShowCards img:not([src]),
+.premiereNews img:not([src]){
+  visibility:hidden;
+}
+
+.premiereShowCards > *,
+.premiereNewsGrid > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard{
+  overflow:hidden;
+}
+
+/* ------------------------------------------------------------
+   06. Interaction safety
+   ------------------------------------------------------------ */
+
+a,
+button,
+[role="button"]{
+  cursor:pointer;
+}
+
+a[aria-disabled="true"],
+button:disabled,
+[role="button"][aria-disabled="true"]{
+  pointer-events:none !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid rgba(76,114,255,.52) !important;
+  outline-offset:3px !important;
+  box-shadow:0 0 0 6px rgba(76,114,255,.11) !important;
+}
+
+.premiereNav a,
+.premiereMain a,
+.premiereMain button,
+.premiereFooter a{
+  position:relative;
+  z-index:2;
+}
+
+/* ------------------------------------------------------------
+   07. Animation guardrails
+   ------------------------------------------------------------ */
+
+@media (update:slow){
+  body::after,
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    display:none !important;
+  }
+
+  .premiereNav::after,
+  .premiereFooter::before,
+  .premiereHero::after,
+  .premiereNext::after,
+  .premiereShows::after,
+  .premiereNews::after,
+  .premiereChart::after,
+  .premiereCommunity::after,
+  .premiereInteraction::after,
+  .premiereRequest::after,
+  #websiteActivityTicker .premiereTickerLabel,
+  #live .premierePrimary,
+  #live .premierePortraitFrame,
+  .djfChartExpand{
+    animation:none !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto !important;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+  }
+
+  #websiteActivityTicker #activityTickerTrack{
+    transform:none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   08. High-contrast compatibility
+   ------------------------------------------------------------ */
+
+@media (prefers-contrast:more){
+  body{
+    color:#080c14 !important;
+  }
+
+  .premiereNav,
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty){
+    border-color:rgba(15,22,37,.30) !important;
+  }
+
+  .premiereMain p,
+  .premiereMain small,
+  .premiereMain span{
+    color:#303b4e !important;
+  }
+
+  a:focus-visible,
+  button:focus-visible{
+    outline-color:#1c4fff !important;
+  }
+}
+
+@media (forced-colors:active){
+  .premiereNav,
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty),
+  .premiereShowCards > *,
+  .djfChartRow,
+  .djfCommunityCard{
+    forced-color-adjust:auto;
+    box-shadow:none !important;
+  }
+
+  .premiereNav::after,
+  .premiereFooter::before,
+  .premiereHero::after,
+  .premiereNext::after,
+  .premiereShows::after,
+  .premiereNews::after,
+  .premiereChart::after,
+  .premiereCommunity::after,
+  .premiereInteraction::after,
+  .premiereRequest::after{
+    background:CanvasText !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   09. Device-specific production fallbacks
+   ------------------------------------------------------------ */
+
+@media(max-width:1200px){
+  .premiereMain{
+    padding-inline:max(12px,env(safe-area-inset-left)) !important;
+  }
+}
+
+@media(max-width:900px){
+  .premiereNav{
+    max-width:calc(100% - 14px) !important;
+    margin-inline:auto !important;
+  }
+
+  #live #heroTitle{
+    max-width:100% !important;
+  }
+
+  .premiereShowCards,
+  .djfMusicHubRail,
+  .djfCommunityRail{
+    scroll-padding-inline:12px !important;
+  }
+}
+
+@media(max-width:640px){
+  body{
+    overflow-x:hidden !important;
+  }
+
+  .premiereMain{
+    padding-inline:max(8px,env(safe-area-inset-left)) !important;
+  }
+
+  .premiereNav{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty){
+    border-radius:18px !important;
+  }
+
+  .premiereShowCards > *,
+  .djfCommunityCard,
+  .djfMusicHubLink{
+    scroll-snap-stop:always;
+  }
+}
+
+/* Large-screen / TV readability */
+@media(min-width:1800px){
+  body{
+    font-size:17px;
+  }
+
+  .premiereMain{
+    max-width:1680px !important;
+    margin-inline:auto !important;
+  }
+
+  .premiereNav,
+  .premiereFooter{
+    max-width:1680px !important;
+    margin-inline:auto !important;
+  }
+
+  .premiereMain p{
+    line-height:1.65 !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   10. Safe-area support
+   ------------------------------------------------------------ */
+
+@supports(padding:max(0px)){
+  .premiereNav{
+    padding-left:max(var(--nav-pad-left,16px),env(safe-area-inset-left)) !important;
+    padding-right:max(var(--nav-pad-right,16px),env(safe-area-inset-right)) !important;
+  }
+
+  .premiereFooter{
+    padding-bottom:max(var(--footer-pad-bottom,20px),env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   11. Production print / fallback
+   ------------------------------------------------------------ */
+
+@media print{
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+    box-shadow:none !important;
+    text-shadow:none !important;
+  }
+
+  body{
+    color:#000 !important;
+    background:#fff !important;
+  }
+
+  .premiereNav,
+  #websiteActivityTicker,
+  .premiereHeroSignal,
+  .djfShowRailControls,
+  .djfChartExpand{
+    display:none !important;
+  }
+
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter{
+    break-inside:avoid;
+    color:#000 !important;
+    background:#fff !important;
+    border:1px solid #bbb !important;
+  }
+
+  .djfExpandableChart > *{
+    display:grid !important;
+  }
+}
