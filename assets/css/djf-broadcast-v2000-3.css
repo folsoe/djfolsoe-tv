@@ -1,0 +1,92 @@
+/* ============================================================
+   DJ FOLSOE WEBSITE V2000.3
+   Dynamic CMS content-zone order repair
+   ============================================================ */
+
+/*
+  Every direct child in .premiereMain now has an explicit order.
+  Dynamic CMS zones can therefore never fall back to order:0 and jump
+  in front of Live Activity, Hero, Up Next or Activity Pulse.
+*/
+
+.premiereMain{
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+/* Locked opening sequence */
+#websiteActivityTicker{order:10 !important}
+#live{order:20 !important}
+#next{order:30 !important}
+#activityPulseEngine{order:40 !important}
+#shows{order:50 !important}
+
+/* Dynamic content connected to the shows/featured area */
+#contentZoneShowsAfter{order:51 !important}
+#contentZoneFeatured{order:52 !important}
+
+/* Editorial */
+#musicNews{order:60 !important}
+#contentZoneEditorial{order:61 !important}
+
+/* Charts */
+#top20{order:70 !important}
+#contentZoneChartsAfter{order:71 !important}
+
+/* Interactive modules */
+#viewerCommands{order:80 !important}
+#contentZoneInteractive{order:81 !important}
+
+/* Request and archive */
+#requests{order:90 !important}
+#contentZoneArchive{order:91 !important}
+
+/*
+  Defensive rule for any future CMS zone added directly inside the main area.
+  It will go after the known core content rather than jumping to the top.
+*/
+.premiereMain > .contentModuleZone:not(
+  #contentZoneShowsAfter,
+  #contentZoneFeatured,
+  #contentZoneEditorial,
+  #contentZoneChartsAfter,
+  #contentZoneInteractive,
+  #contentZoneArchive
+){
+  order:95 !important;
+}
+
+/* Dynamic modules must not create empty visual gaps. */
+.contentModuleZone:empty{
+  display:none !important;
+}
+
+/* Keep populated dynamic modules inside the same visual flow. */
+.contentModuleZone:not(:empty){
+  width:100% !important;
+  margin:0 !important;
+}
+
+/* The old standalone Retro Top 10 module belongs after the real Top 20. */
+#contentZoneChartsAfter:not(:empty){
+  margin-top:0 !important;
+}
+
+/* Same exact order across desktop, tablet and mobile. */
+@media(max-width:1200px){
+  #websiteActivityTicker{order:10 !important}
+  #live{order:20 !important}
+  #next{order:30 !important}
+  #activityPulseEngine{order:40 !important}
+  #shows{order:50 !important}
+  #contentZoneShowsAfter{order:51 !important}
+  #contentZoneFeatured{order:52 !important}
+  #musicNews{order:60 !important}
+  #contentZoneEditorial{order:61 !important}
+  #top20{order:70 !important}
+  #contentZoneChartsAfter{order:71 !important}
+  #viewerCommands{order:80 !important}
+  #contentZoneInteractive{order:81 !important}
+  #requests{order:90 !important}
+  #contentZoneArchive{order:91 !important}
+}
