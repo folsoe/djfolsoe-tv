@@ -1,0 +1,459 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V2500 — BROADCAST GRAPHICS
+   CSS-ONLY RELEASE
+   Built on V2400.1 production-verified runtime.
+   Locked Core, theme switching and data flow remain untouched.
+   ============================================================ */
+
+:root{
+  --djf-v2500-orange:#ff9a28;
+  --djf-v2500-pink:#f23996;
+  --djf-v2500-purple:#7d4eff;
+  --djf-v2500-blue:#4c72ff;
+  --djf-v2500-cyan:#50dff5;
+
+  --djf-v2500-ink:#151b28;
+  --djf-v2500-muted:#627087;
+  --djf-v2500-surface:#ffffff;
+  --djf-v2500-surface-soft:#eef4fa;
+  --djf-v2500-line:rgba(42,54,82,.12);
+
+  --djf-v2500-spectrum:linear-gradient(
+    100deg,
+    var(--djf-v2500-orange),
+    var(--djf-v2500-pink),
+    var(--djf-v2500-purple),
+    var(--djf-v2500-blue)
+  );
+
+  --djf-v2500-shadow-soft:
+    0 12px 30px rgba(34,45,72,.10),
+    inset 0 1px 0 rgba(255,255,255,.98);
+
+  --djf-v2500-shadow-strong:
+    0 24px 58px rgba(34,45,72,.16),
+    0 0 26px rgba(125,78,255,.06),
+    inset 0 1px 0 rgba(255,255,255,.98);
+}
+
+/* ------------------------------------------------------------
+   Global broadcast canvas
+   ------------------------------------------------------------ */
+
+html,
+body{
+  color:var(--djf-v2500-ink) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.055),transparent 28%),
+    radial-gradient(circle at 0% 100%,rgba(80,223,245,.06),transparent 30%),
+    linear-gradient(180deg,#f7f9fc,#edf3f8) !important;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(76,114,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,114,255,.024) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 92%);
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 92%);
+}
+
+/* Ensure all visual decoration can never block the website. */
+.premiereMain *::before,
+.premiereMain *::after,
+.premiereNav::before,
+.premiereNav::after,
+.premiereFooter::before,
+.premiereFooter::after{
+  pointer-events:none;
+}
+
+/* ------------------------------------------------------------
+   Navigation / station header
+   ------------------------------------------------------------ */
+
+.premiereNav{
+  border:1px solid rgba(255,255,255,.94) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.96),rgba(237,243,249,.94)) !important;
+  box-shadow:
+    0 16px 38px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+  backdrop-filter:blur(18px) saturate(120%) !important;
+}
+
+.premiereNav::after{
+  height:4px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 7s linear infinite !important;
+}
+
+.premiereBrandCopy strong{
+  color:var(--djf-v2500-ink) !important;
+  letter-spacing:-.02em !important;
+}
+
+.premiereNav a,
+.premiereNav button{
+  font-weight:850 !important;
+  letter-spacing:.015em !important;
+}
+
+.premiereNav a:hover{
+  color:var(--djf-v2500-purple) !important;
+}
+
+/* ------------------------------------------------------------
+   Live Activity = real broadcast ticker
+   ------------------------------------------------------------ */
+
+#websiteActivityTicker.premiereTicker{
+  border:1px solid rgba(255,255,255,.95) !important;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.98),rgba(239,244,250,.97)) !important;
+  box-shadow:
+    0 12px 29px rgba(34,45,72,.11),
+    inset 0 1px 0 #fff !important;
+}
+
+#websiteActivityTicker .premiereTickerLabel{
+  color:#fff !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:200% 100% !important;
+  animation:djfV2500Spectrum 7s linear infinite !important;
+}
+
+#websiteActivityTicker #activityTickerTrack,
+#websiteActivityTicker #activityTickerTrack *{
+  color:#1a2232 !important;
+  text-shadow:none !important;
+}
+
+#websiteActivityTicker #activityTickerTrack > *{
+  border-right:1px solid rgba(42,54,82,.10) !important;
+}
+
+/* ------------------------------------------------------------
+   Shared station panels
+   ------------------------------------------------------------ */
+
+.premiereHero,
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty){
+  border:1px solid rgba(255,255,255,.96) !important;
+  background:
+    radial-gradient(circle at 98% 2%,rgba(242,57,150,.07),transparent 27%),
+    radial-gradient(circle at 2% 98%,rgba(80,223,245,.075),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.995),rgba(238,244,250,.98)) !important;
+  box-shadow:var(--djf-v2500-shadow-strong) !important;
+}
+
+/* Shared section heading rhythm */
+.premiereSectionHeader span,
+.premiereChartHeader span,
+.premiereCommunityHeader span{
+  color:var(--djf-v2500-purple) !important;
+  font-weight:950 !important;
+  letter-spacing:.16em !important;
+}
+
+.premiereSectionHeader h2,
+.premiereChartHeader h2,
+.premiereCommunityHeader h2{
+  color:var(--djf-v2500-ink) !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+/* ------------------------------------------------------------
+   Hero polish — visual only, no layout changes
+   ------------------------------------------------------------ */
+
+#live.premiereHero{
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+
+#live.premiereHero::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-24% !important;
+  z-index:0 !important;
+  background:
+    radial-gradient(circle at 17% 28%,rgba(255,154,40,.08),transparent 21%),
+    radial-gradient(circle at 82% 20%,rgba(242,57,150,.10),transparent 25%),
+    radial-gradient(circle at 76% 80%,rgba(125,78,255,.08),transparent 27%) !important;
+  filter:blur(35px) !important;
+  animation:djfV2500Ambient 17s ease-in-out infinite alternate !important;
+}
+
+#live .premiereHeroCopy,
+#live .premierePortraitStage{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+#live #heroTitle{
+  color:#111827 !important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.96),
+    0 13px 34px rgba(34,45,72,.08) !important;
+}
+
+#live #heroSubtitle{
+  color:#334056 !important;
+}
+
+#live .premierePortraitFrame{
+  background:var(--djf-v2500-spectrum) !important;
+  box-shadow:
+    0 36px 82px rgba(34,45,72,.25),
+    0 0 38px rgba(242,57,150,.11),
+    inset 0 1px 0 rgba(255,255,255,.68) !important;
+}
+
+#live .premiereOnAirCard{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 31%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 22px 48px rgba(34,45,72,.20),
+    inset 0 1px 0 #fff !important;
+}
+
+#live .premierePrimary{
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+/* ------------------------------------------------------------
+   Up Next
+   ------------------------------------------------------------ */
+
+#next.premiereNext{
+  position:relative !important;
+  overflow:hidden !important;
+}
+
+#next.premiereNext::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:5px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+#next .premiereNextDate,
+#next .premiereNextCountdown{
+  border:1px solid rgba(255,255,255,.97) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--djf-v2500-shadow-soft) !important;
+}
+
+/* ------------------------------------------------------------
+   Shows
+   ------------------------------------------------------------ */
+
+#shows .premiereShowCards > *{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:linear-gradient(180deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 15px 36px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+}
+
+#shows .premiereShowCards > *::after{
+  height:5px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+#shows .premiereShowCards h2,
+#shows .premiereShowCards h3{
+  color:var(--djf-v2500-ink) !important;
+}
+
+#shows .premiereShowCards p{
+  color:var(--djf-v2500-muted) !important;
+}
+
+#shows .premiereShowCards > *:hover{
+  transform:translateY(-7px) scale(1.008) !important;
+  border-color:rgba(125,78,255,.24) !important;
+  box-shadow:
+    0 27px 58px rgba(34,45,72,.19),
+    0 0 27px rgba(242,57,150,.07) !important;
+}
+
+/* ------------------------------------------------------------
+   Charts
+   ------------------------------------------------------------ */
+
+.djfChartPanel{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.06),transparent 27%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 17px 42px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartPanel::after{
+  background:var(--djf-v2500-spectrum) !important;
+}
+
+.djfChartRow{
+  border:1px solid rgba(42,54,82,.10) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 9px 22px rgba(34,45,72,.085),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartRow::before{
+  background:linear-gradient(180deg,#ff9a28,#f23996,#7d4eff) !important;
+}
+
+.djfChartRow:hover{
+  transform:translateX(5px) !important;
+  border-color:rgba(125,78,255,.22) !important;
+  box-shadow:
+    0 15px 32px rgba(34,45,72,.14),
+    0 0 20px rgba(242,57,150,.055) !important;
+}
+
+.djfChartExpand{
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+/* ------------------------------------------------------------
+   Community and interaction
+   ------------------------------------------------------------ */
+
+.premiereCommunityStats > div,
+.djfCommunityCard,
+.premiereActionCard{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--djf-v2500-shadow-soft) !important;
+}
+
+.premiereCommunityStats > div::after,
+.djfCommunityCard::after{
+  background:var(--djf-v2500-spectrum) !important;
+}
+
+.djfCommunityCard:hover,
+.premiereActionCard:hover{
+  transform:translateY(-5px) !important;
+  box-shadow:
+    0 22px 46px rgba(34,45,72,.16),
+    0 0 24px rgba(242,57,150,.06) !important;
+}
+
+/* ------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------ */
+
+.premiereFooter{
+  position:relative !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.98),rgba(235,242,249,.97)) !important;
+  box-shadow:
+    0 18px 44px rgba(34,45,72,.14),
+    inset 0 1px 0 #fff !important;
+}
+
+.premiereFooter::before{
+  height:5px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 7s linear infinite !important;
+}
+
+.premiereFooter,
+.premiereFooter a,
+.premiereFooter strong{
+  color:var(--djf-v2500-ink) !important;
+}
+
+/* ------------------------------------------------------------
+   Focus, readability and responsive safety
+   ------------------------------------------------------------ */
+
+a:focus-visible,
+button:focus-visible{
+  outline:3px solid rgba(76,114,255,.35) !important;
+  outline-offset:3px !important;
+}
+
+@media(max-width:900px){
+  .premiereMain{
+    gap:12px !important;
+  }
+}
+
+@media(max-width:640px){
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter{
+    border-radius:20px !important;
+  }
+
+  #shows .premiereShowCards > *{
+    box-shadow:
+      0 12px 29px rgba(34,45,72,.12),
+      inset 0 1px 0 #fff !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+@keyframes djfV2500Spectrum{
+  from{background-position:0% 50%}
+  to{background-position:220% 50%}
+}
+
+@keyframes djfV2500Ambient{
+  from{transform:translate3d(-1.5%,-1%,0) scale(1)}
+  to{transform:translate3d(2%,1.5%,0) scale(1.045)}
+}
