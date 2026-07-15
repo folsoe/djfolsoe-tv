@@ -1,0 +1,332 @@
+/* ============================================================
+   DJ FOLSOE WEBSITE V2000.5 — FEATURED SHOWS BROADCAST RAIL
+   Pure visual + interaction layer for #shows.
+   ============================================================ */
+
+#shows.premiereShows{
+  position:relative !important;
+  overflow:hidden !important;
+  padding:30px 31px 34px !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.10),transparent 27%),
+    radial-gradient(circle at 0% 100%,rgba(80,223,245,.10),transparent 30%),
+    linear-gradient(145deg,rgba(255,255,255,.99),rgba(239,245,251,.97)) !important;
+}
+
+#shows.premiereShows::before{
+  content:"" !important;
+  position:absolute !important;
+  z-index:1 !important;
+  inset:0 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(rgba(76,114,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,114,255,.035) 1px,transparent 1px) !important;
+  background-size:62px 62px !important;
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.42),transparent 86%) !important;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.42),transparent 86%) !important;
+}
+
+#shows .premiereSectionHeader{
+  position:relative !important;
+  z-index:5 !important;
+  margin-bottom:20px !important;
+}
+
+#shows .premiereSectionHeader > div{
+  position:relative !important;
+}
+
+#shows .premiereSectionHeader > div::after{
+  content:"" !important;
+  display:block !important;
+  width:112px !important;
+  height:5px !important;
+  margin-top:15px !important;
+  border-radius:999px !important;
+  background:linear-gradient(90deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+  box-shadow:0 6px 16px rgba(125,78,255,.18) !important;
+}
+
+#shows .premiereSectionHeader h2{
+  font-size:clamp(44px,4.7vw,68px) !important;
+}
+
+#shows .premiereSectionHeader p{
+  max-width:480px !important;
+  font-weight:650 !important;
+}
+
+/* Rail controls added by JS */
+
+.djfShowRailShell{
+  position:relative !important;
+  z-index:5 !important;
+}
+
+.djfShowRailControls{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:8px !important;
+  margin-bottom:12px !important;
+}
+
+.djfShowRailControls button{
+  display:grid !important;
+  place-items:center !important;
+  width:40px !important;
+  height:40px !important;
+  padding:0 !important;
+  border:1px solid rgba(42,54,82,.13) !important;
+  border-radius:50% !important;
+  color:#151b28 !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:0 8px 20px rgba(34,45,72,.09) !important;
+  font:900 17px/1 Arial,sans-serif !important;
+  cursor:pointer !important;
+  transition:.22s ease !important;
+}
+
+.djfShowRailControls button:hover{
+  transform:translateY(-2px) !important;
+  color:#fff !important;
+  border-color:transparent !important;
+  background:linear-gradient(120deg,#ff9a28,#f23996,#7d4eff) !important;
+  box-shadow:0 12px 27px rgba(125,78,255,.22) !important;
+}
+
+/* Main card rail */
+
+#shows .premiereShowCards{
+  position:relative !important;
+  z-index:5 !important;
+  display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(225px,1fr)) !important;
+  gap:14px !important;
+  align-items:stretch !important;
+}
+
+#shows .premiereShowCards > *{
+  position:relative !important;
+  isolation:isolate !important;
+  min-height:330px !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.96) !important;
+  border-radius:20px !important;
+  background:linear-gradient(180deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 15px 38px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+  transition:
+    transform .28s cubic-bezier(.2,.7,.2,1),
+    box-shadow .28s ease,
+    border-color .28s ease !important;
+}
+
+#shows .premiereShowCards > *::before{
+  content:"SHOW" !important;
+  position:absolute !important;
+  z-index:8 !important;
+  left:12px !important;
+  top:12px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  min-height:25px !important;
+  padding:0 10px !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  border-radius:999px !important;
+  color:#fff !important;
+  background:rgba(15,20,34,.74) !important;
+  box-shadow:0 8px 18px rgba(0,0,0,.20) !important;
+  backdrop-filter:blur(10px) !important;
+  font-size:7px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase !important;
+}
+
+#shows .premiereShowCards > *[data-djf-show-state="live"]::before{
+  content:"ON AIR" !important;
+  background:linear-gradient(100deg,#f23996,#7d4eff) !important;
+  animation:djfShowLivePulse 2s ease-in-out infinite !important;
+}
+
+#shows .premiereShowCards > *[data-djf-show-state="next"]::before{
+  content:"UP NEXT" !important;
+  background:linear-gradient(100deg,#ff9a28,#f23996) !important;
+}
+
+#shows .premiereShowCards > *[data-djf-show-state="weekly"]::before{
+  content:"WEEKLY" !important;
+  background:linear-gradient(100deg,#4c72ff,#7d4eff) !important;
+}
+
+#shows .premiereShowCards > *::after{
+  content:"" !important;
+  position:absolute !important;
+  z-index:9 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:5px !important;
+  background:linear-gradient(90deg,#ff9a28,#f23996,#7d4eff,#4c72ff) !important;
+  background-size:220% 100% !important;
+  animation:djfAccentFlow 5.5s linear infinite !important;
+}
+
+#shows .premiereShowCards img{
+  display:block !important;
+  width:100% !important;
+  height:190px !important;
+  object-fit:cover !important;
+  object-position:center !important;
+  filter:saturate(1.1) contrast(1.06) brightness(1.02) !important;
+  transition:
+    transform .55s cubic-bezier(.2,.7,.2,1),
+    filter .35s ease !important;
+}
+
+#shows .premiereShowCards > * > div,
+#shows .premiereShowCards > * > section,
+#shows .premiereShowCards > * > article{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+#shows .premiereShowCards h2,
+#shows .premiereShowCards h3,
+#shows .premiereShowCards h4{
+  margin-top:0 !important;
+  color:#151b28 !important;
+  font-family:"Barlow Condensed",Arial,sans-serif !important;
+  font-size:29px !important;
+  line-height:.91 !important;
+  font-weight:900 !important;
+  letter-spacing:-.025em !important;
+  text-transform:uppercase !important;
+}
+
+#shows .premiereShowCards p{
+  color:#667187 !important;
+  font-size:12px !important;
+  line-height:1.55 !important;
+  font-weight:650 !important;
+}
+
+#shows .premiereShowCards a{
+  color:inherit !important;
+  text-decoration:none !important;
+}
+
+#shows .premiereShowCards > *:hover{
+  transform:translateY(-8px) scale(1.012) !important;
+  border-color:rgba(125,78,255,.25) !important;
+  box-shadow:
+    0 27px 59px rgba(34,45,72,.19),
+    0 0 31px rgba(242,57,150,.08) !important;
+}
+
+#shows .premiereShowCards > *:hover img{
+  transform:scale(1.055) !important;
+  filter:saturate(1.18) contrast(1.08) brightness(1.04) !important;
+}
+
+/* Decorative light sweep on each programme card */
+
+#shows .premiereShowCards > * .djfShowShine{
+  position:absolute !important;
+  z-index:7 !important;
+  top:-60% !important;
+  bottom:-60% !important;
+  left:-45% !important;
+  width:18% !important;
+  pointer-events:none !important;
+  transform:skewX(-20deg) !important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.74),transparent) !important;
+  animation:djfShowSweep 9s ease-in-out infinite !important;
+}
+
+/* Active card */
+
+#shows .premiereShowCards > *.djfShowActive{
+  border-color:rgba(242,57,150,.24) !important;
+  box-shadow:
+    0 24px 54px rgba(34,45,72,.18),
+    0 0 29px rgba(242,57,150,.10),
+    inset 0 1px 0 #fff !important;
+}
+
+/* Mobile/tablet = true horizontal TV rail */
+
+@media(max-width:1050px){
+  #shows .premiereShowCards{
+    display:flex !important;
+    grid-template-columns:none !important;
+    gap:12px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    scroll-behavior:smooth !important;
+    scrollbar-width:none !important;
+    padding:3px 3px 16px !important;
+    overscroll-behavior-x:contain !important;
+  }
+
+  #shows .premiereShowCards::-webkit-scrollbar{
+    display:none !important;
+  }
+
+  #shows .premiereShowCards > *{
+    flex:0 0 min(320px,78vw) !important;
+    scroll-snap-align:start !important;
+  }
+
+  .djfShowRailControls{
+    display:flex !important;
+  }
+}
+
+@media(min-width:1051px){
+  .djfShowRailControls{
+    display:none !important;
+  }
+}
+
+@media(max-width:640px){
+  #shows.premiereShows{
+    padding:25px 16px 29px !important;
+  }
+
+  #shows .premiereSectionHeader h2{
+    font-size:45px !important;
+  }
+
+  #shows .premiereShowCards > *{
+    flex-basis:82vw !important;
+    min-height:315px !important;
+  }
+
+  #shows .premiereShowCards img{
+    height:180px !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #shows .premiereShowCards > * .djfShowShine,
+  #shows .premiereShowCards > *[data-djf-show-state="live"]::before{
+    animation:none !important;
+  }
+}
+
+@keyframes djfShowSweep{
+  0%,67%{left:-45%;opacity:0}
+  75%{opacity:.6}
+  91%,100%{left:125%;opacity:0}
+}
+
+@keyframes djfShowLivePulse{
+  0%,100%{box-shadow:0 8px 18px rgba(242,57,150,.20)}
+  50%{box-shadow:0 8px 25px rgba(242,57,150,.42)}
+}
