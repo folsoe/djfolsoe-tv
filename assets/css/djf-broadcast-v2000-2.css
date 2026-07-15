@@ -1,0 +1,91 @@
+/* DJ FOLSOE WEBSITE V2000.2 — LOCKED ORDER + STACKED CHARTS */
+
+.premiereMain{
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+#websiteActivityTicker{order:10 !important}
+#live{order:20 !important}
+#next{order:30 !important}
+#activityPulseEngine{order:40 !important}
+#shows{order:50 !important}
+#contentZoneShowsAfter{order:51 !important}
+#musicNews{order:60 !important}
+#top20{order:70 !important}
+#viewerCommands{order:80 !important}
+#requests{order:90 !important}
+.premiereFooter{order:100 !important}
+
+/* Avoid the mobile navigation bar cutting through long chart content. */
+@media(max-width:640px){
+  .premiereNav{
+    position:relative !important;
+    top:auto !important;
+  }
+}
+
+/* Top 20 first, Retro Top 10 immediately under it on every device. */
+.djfChartColumns{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:16px !important;
+}
+
+#top20Panel{order:1 !important}
+#retroFavoritePanel{order:2 !important}
+
+.djfChartPanel,
+.djfChartPanel .premiereChartList,
+.djfExpandableChart,
+.premiereChartStation{
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+.djfExpandableChart.is-expanded > *{
+  display:grid !important;
+}
+
+.djfExpandableChart:not(.is-expanded) > *:nth-child(n+4){
+  display:none !important;
+}
+
+#top20Panel,
+#retroFavoritePanel{
+  width:100% !important;
+}
+
+#retroFavoritePanel{
+  margin-top:0 !important;
+}
+
+#retroFavoritePanel .djfChartPanelHeader > b{
+  background:linear-gradient(120deg,#50dff5,#4c72ff,#7d4eff) !important;
+}
+
+#retroFavoritePanel::after{
+  background:linear-gradient(90deg,#50dff5,#4c72ff,#7d4eff,#f23996) !important;
+}
+
+.djfChartRow:nth-child(even){
+  background:linear-gradient(145deg,#f8fbff,#eaf1f8) !important;
+}
+
+.djfChartRow:hover{
+  transform:translateX(4px) !important;
+  box-shadow:0 13px 29px rgba(34,45,72,.13) !important;
+}
+
+@media(max-width:900px){
+  #websiteActivityTicker{order:10 !important}
+  #live{order:20 !important}
+  #next{order:30 !important}
+  #activityPulseEngine{order:40 !important}
+  #shows{order:50 !important}
+  #contentZoneShowsAfter{order:51 !important}
+  #musicNews{order:60 !important}
+  #top20{order:70 !important}
+  #viewerCommands{order:80 !important}
+  #requests{order:90 !important}
+}
