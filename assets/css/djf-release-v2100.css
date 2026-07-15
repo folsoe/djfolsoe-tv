@@ -1,0 +1,193 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V2100 — RELEASE 1: BROADCAST IDENTITY
+   Final release identity layer.
+   Built on stable V2001. CSS only.
+   ============================================================ */
+
+:root{
+  --broadcast-orange:#ff9a28;
+  --broadcast-pink:#f23996;
+  --broadcast-purple:#7d4eff;
+  --broadcast-blue:#4c72ff;
+  --broadcast-cyan:#50dff5;
+
+  --broadcast-ink:#151b28;
+  --broadcast-muted:#667187;
+  --broadcast-paper:#ffffff;
+  --broadcast-paper-soft:#edf3f9;
+  --broadcast-line:rgba(42,54,82,.13);
+
+  --broadcast-gradient:linear-gradient(
+    100deg,
+    var(--broadcast-orange),
+    var(--broadcast-pink),
+    var(--broadcast-purple),
+    var(--broadcast-blue)
+  );
+
+  --broadcast-shadow-soft:0 12px 32px rgba(34,45,72,.10);
+  --broadcast-shadow:0 22px 60px rgba(34,45,72,.15);
+  --broadcast-radius-card:22px;
+  --broadcast-radius-panel:30px;
+  --broadcast-radius-button:999px;
+  --broadcast-transition:.24s cubic-bezier(.2,.7,.2,1);
+}
+
+/* Shared identity line */
+.premiereNav,
+.premiereTicker,
+.premiereHero,
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.premiereFooter,
+.contentModuleZone:not(:empty){
+  --broadcast-surface:
+    radial-gradient(circle at 96% 4%,rgba(242,57,150,.07),transparent 26%),
+    radial-gradient(circle at 4% 96%,rgba(80,223,245,.08),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.99),rgba(238,244,250,.975));
+}
+
+/* Prevent visual layers from blocking clicks */
+.premiereNav::before,
+.premiereNav::after,
+.premiereTicker::before,
+.premiereTicker::after,
+.premiereHero::before,
+.premiereHero::after,
+.premiereShows::before,
+.premiereShows::after,
+.premiereNews::before,
+.premiereNews::after,
+.premiereChart::before,
+.premiereChart::after,
+.premiereFooter::before,
+.premiereFooter::after{
+  pointer-events:none !important;
+}
+
+/* Unified headings */
+.premiereMain h1,
+.premiereMain h2,
+.premiereMain h3,
+.premiereFooter strong,
+.premiereBrandCopy strong{
+  font-family:"Barlow Condensed",Arial,sans-serif !important;
+  text-rendering:optimizeLegibility !important;
+}
+
+/* Unified body clarity */
+.premiereMain p,
+.premiereMain span,
+.premiereMain small,
+.premiereMain a,
+.premiereMain button,
+.premiereNav,
+.premiereFooter{
+  font-family:"Manrope",Arial,sans-serif !important;
+  -webkit-font-smoothing:antialiased !important;
+}
+
+/* Shared card treatment */
+.premiereShowCards > *,
+.premiereNewsGrid > *,
+.premiereChartList > *,
+.djfChartPanel,
+.premiereCommunitySpotlight,
+.premiereCommunityStats > *,
+.premiereActionCard,
+.contentModuleZone:not(:empty) > *{
+  border:1px solid rgba(255,255,255,.96) !important;
+  background:
+    linear-gradient(145deg,var(--broadcast-paper),var(--broadcast-paper-soft)) !important;
+  box-shadow:
+    var(--broadcast-shadow-soft),
+    inset 0 1px 0 rgba(255,255,255,.98) !important;
+  transition:
+    transform var(--broadcast-transition),
+    box-shadow var(--broadcast-transition),
+    border-color var(--broadcast-transition) !important;
+}
+
+/* Unified hover behaviour */
+.premiereShowCards > *:hover,
+.premiereNewsGrid > *:hover,
+.premiereChartList > *:hover,
+.premiereActionCard:hover{
+  transform:translateY(-5px) !important;
+  border-color:rgba(125,78,255,.22) !important;
+  box-shadow:
+    0 22px 48px rgba(34,45,72,.16),
+    0 0 24px rgba(242,57,150,.06) !important;
+}
+
+/* Unified button identity */
+.premiereWatch,
+.premierePrimary,
+.djfChartExpand,
+.premiereRequest > a{
+  border-radius:var(--broadcast-radius-button) !important;
+  background:var(--broadcast-gradient) !important;
+  background-size:210% 100% !important;
+  box-shadow:
+    0 13px 31px rgba(125,78,255,.23),
+    inset 0 1px 0 rgba(255,255,255,.38) !important;
+}
+
+/* Unified accent underline */
+.premiereNav::after,
+.premiereTicker::before,
+.premiereHero::after,
+.premiereNext::after,
+.premiereShows::after,
+.premiereNews::after,
+.premiereChart::after,
+.premiereCommunity::after,
+.premiereInteraction::after,
+.premiereRequest::after,
+.premiereFooter::before{
+  background:var(--broadcast-gradient) !important;
+  background-size:220% 100% !important;
+}
+
+/* Better focus visibility */
+.premiereNav a:focus-visible,
+.premiereMain a:focus-visible,
+.premiereMain button:focus-visible,
+.premiereFooter a:focus-visible{
+  outline:3px solid rgba(76,114,255,.34) !important;
+  outline-offset:3px !important;
+}
+
+/* Stable platform readability */
+@media(max-width:640px){
+  .premiereMain{
+    gap:11px !important;
+  }
+
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest{
+    border-radius:20px !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
