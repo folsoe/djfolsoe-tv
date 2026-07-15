@@ -1,0 +1,2264 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V3000 — MUSIC TV EXPERIENCE
+   Consolidated milestone stylesheet.
+   Includes V2500, V2700, V2800 and V2900 in original order.
+   ============================================================ */
+
+/* ===== CONSOLIDATED SOURCE: assets/css/djf-release-v2500.css ===== */
+
+/* ============================================================
+   DJ FOLSOE NETWORK V2500 — BROADCAST GRAPHICS
+   CSS-ONLY RELEASE
+   Built on V2400.1 production-verified runtime.
+   Locked Core, theme switching and data flow remain untouched.
+   ============================================================ */
+
+:root{
+  --djf-v2500-orange:#ff9a28;
+  --djf-v2500-pink:#f23996;
+  --djf-v2500-purple:#7d4eff;
+  --djf-v2500-blue:#4c72ff;
+  --djf-v2500-cyan:#50dff5;
+
+  --djf-v2500-ink:#151b28;
+  --djf-v2500-muted:#627087;
+  --djf-v2500-surface:#ffffff;
+  --djf-v2500-surface-soft:#eef4fa;
+  --djf-v2500-line:rgba(42,54,82,.12);
+
+  --djf-v2500-spectrum:linear-gradient(
+    100deg,
+    var(--djf-v2500-orange),
+    var(--djf-v2500-pink),
+    var(--djf-v2500-purple),
+    var(--djf-v2500-blue)
+  );
+
+  --djf-v2500-shadow-soft:
+    0 12px 30px rgba(34,45,72,.10),
+    inset 0 1px 0 rgba(255,255,255,.98);
+
+  --djf-v2500-shadow-strong:
+    0 24px 58px rgba(34,45,72,.16),
+    0 0 26px rgba(125,78,255,.06),
+    inset 0 1px 0 rgba(255,255,255,.98);
+}
+
+/* ------------------------------------------------------------
+   Global broadcast canvas
+   ------------------------------------------------------------ */
+
+html,
+body{
+  color:var(--djf-v2500-ink) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.055),transparent 28%),
+    radial-gradient(circle at 0% 100%,rgba(80,223,245,.06),transparent 30%),
+    linear-gradient(180deg,#f7f9fc,#edf3f8) !important;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(76,114,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,114,255,.024) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 92%);
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.55),transparent 92%);
+}
+
+/* Ensure all visual decoration can never block the website. */
+.premiereMain *::before,
+.premiereMain *::after,
+.premiereNav::before,
+.premiereNav::after,
+.premiereFooter::before,
+.premiereFooter::after{
+  pointer-events:none;
+}
+
+/* ------------------------------------------------------------
+   Navigation / station header
+   ------------------------------------------------------------ */
+
+.premiereNav{
+  border:1px solid rgba(255,255,255,.94) !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.96),rgba(237,243,249,.94)) !important;
+  box-shadow:
+    0 16px 38px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+  backdrop-filter:blur(18px) saturate(120%) !important;
+}
+
+.premiereNav::after{
+  height:4px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 7s linear infinite !important;
+}
+
+.premiereBrandCopy strong{
+  color:var(--djf-v2500-ink) !important;
+  letter-spacing:-.02em !important;
+}
+
+.premiereNav a,
+.premiereNav button{
+  font-weight:850 !important;
+  letter-spacing:.015em !important;
+}
+
+.premiereNav a:hover{
+  color:var(--djf-v2500-purple) !important;
+}
+
+/* ------------------------------------------------------------
+   Live Activity = real broadcast ticker
+   ------------------------------------------------------------ */
+
+#websiteActivityTicker.premiereTicker{
+  border:1px solid rgba(255,255,255,.95) !important;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.98),rgba(239,244,250,.97)) !important;
+  box-shadow:
+    0 12px 29px rgba(34,45,72,.11),
+    inset 0 1px 0 #fff !important;
+}
+
+#websiteActivityTicker .premiereTickerLabel{
+  color:#fff !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:200% 100% !important;
+  animation:djfV2500Spectrum 7s linear infinite !important;
+}
+
+#websiteActivityTicker #activityTickerTrack,
+#websiteActivityTicker #activityTickerTrack *{
+  color:#1a2232 !important;
+  text-shadow:none !important;
+}
+
+#websiteActivityTicker #activityTickerTrack > *{
+  border-right:1px solid rgba(42,54,82,.10) !important;
+}
+
+/* ------------------------------------------------------------
+   Shared station panels
+   ------------------------------------------------------------ */
+
+.premiereHero,
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty){
+  border:1px solid rgba(255,255,255,.96) !important;
+  background:
+    radial-gradient(circle at 98% 2%,rgba(242,57,150,.07),transparent 27%),
+    radial-gradient(circle at 2% 98%,rgba(80,223,245,.075),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.995),rgba(238,244,250,.98)) !important;
+  box-shadow:var(--djf-v2500-shadow-strong) !important;
+}
+
+/* Shared section heading rhythm */
+.premiereSectionHeader span,
+.premiereChartHeader span,
+.premiereCommunityHeader span{
+  color:var(--djf-v2500-purple) !important;
+  font-weight:950 !important;
+  letter-spacing:.16em !important;
+}
+
+.premiereSectionHeader h2,
+.premiereChartHeader h2,
+.premiereCommunityHeader h2{
+  color:var(--djf-v2500-ink) !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+/* ------------------------------------------------------------
+   Hero polish — visual only, no layout changes
+   ------------------------------------------------------------ */
+
+#live.premiereHero{
+  overflow:hidden !important;
+  isolation:isolate !important;
+}
+
+#live.premiereHero::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-24% !important;
+  z-index:0 !important;
+  background:
+    radial-gradient(circle at 17% 28%,rgba(255,154,40,.08),transparent 21%),
+    radial-gradient(circle at 82% 20%,rgba(242,57,150,.10),transparent 25%),
+    radial-gradient(circle at 76% 80%,rgba(125,78,255,.08),transparent 27%) !important;
+  filter:blur(35px) !important;
+  animation:djfV2500Ambient 17s ease-in-out infinite alternate !important;
+}
+
+#live .premiereHeroCopy,
+#live .premierePortraitStage{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+#live #heroTitle{
+  color:#111827 !important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.96),
+    0 13px 34px rgba(34,45,72,.08) !important;
+}
+
+#live #heroSubtitle{
+  color:#334056 !important;
+}
+
+#live .premierePortraitFrame{
+  background:var(--djf-v2500-spectrum) !important;
+  box-shadow:
+    0 36px 82px rgba(34,45,72,.25),
+    0 0 38px rgba(242,57,150,.11),
+    inset 0 1px 0 rgba(255,255,255,.68) !important;
+}
+
+#live .premiereOnAirCard{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 31%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 22px 48px rgba(34,45,72,.20),
+    inset 0 1px 0 #fff !important;
+}
+
+#live .premierePrimary{
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+/* ------------------------------------------------------------
+   Up Next
+   ------------------------------------------------------------ */
+
+#next.premiereNext{
+  position:relative !important;
+  overflow:hidden !important;
+}
+
+#next.premiereNext::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:5px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+#next .premiereNextDate,
+#next .premiereNextCountdown{
+  border:1px solid rgba(255,255,255,.97) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--djf-v2500-shadow-soft) !important;
+}
+
+/* ------------------------------------------------------------
+   Shows
+   ------------------------------------------------------------ */
+
+#shows .premiereShowCards > *{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:linear-gradient(180deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 15px 36px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+}
+
+#shows .premiereShowCards > *::after{
+  height:5px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+#shows .premiereShowCards h2,
+#shows .premiereShowCards h3{
+  color:var(--djf-v2500-ink) !important;
+}
+
+#shows .premiereShowCards p{
+  color:var(--djf-v2500-muted) !important;
+}
+
+#shows .premiereShowCards > *:hover{
+  transform:translateY(-7px) scale(1.008) !important;
+  border-color:rgba(125,78,255,.24) !important;
+  box-shadow:
+    0 27px 58px rgba(34,45,72,.19),
+    0 0 27px rgba(242,57,150,.07) !important;
+}
+
+/* ------------------------------------------------------------
+   Charts
+   ------------------------------------------------------------ */
+
+.djfChartPanel{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.06),transparent 27%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 17px 42px rgba(34,45,72,.13),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartPanel::after{
+  background:var(--djf-v2500-spectrum) !important;
+}
+
+.djfChartRow{
+  border:1px solid rgba(42,54,82,.10) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 9px 22px rgba(34,45,72,.085),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartRow::before{
+  background:linear-gradient(180deg,#ff9a28,#f23996,#7d4eff) !important;
+}
+
+.djfChartRow:hover{
+  transform:translateX(5px) !important;
+  border-color:rgba(125,78,255,.22) !important;
+  box-shadow:
+    0 15px 32px rgba(34,45,72,.14),
+    0 0 20px rgba(242,57,150,.055) !important;
+}
+
+.djfChartExpand{
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 6s linear infinite !important;
+}
+
+/* ------------------------------------------------------------
+   Community and interaction
+   ------------------------------------------------------------ */
+
+.premiereCommunityStats > div,
+.djfCommunityCard,
+.premiereActionCard{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--djf-v2500-shadow-soft) !important;
+}
+
+.premiereCommunityStats > div::after,
+.djfCommunityCard::after{
+  background:var(--djf-v2500-spectrum) !important;
+}
+
+.djfCommunityCard:hover,
+.premiereActionCard:hover{
+  transform:translateY(-5px) !important;
+  box-shadow:
+    0 22px 46px rgba(34,45,72,.16),
+    0 0 24px rgba(242,57,150,.06) !important;
+}
+
+/* ------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------ */
+
+.premiereFooter{
+  position:relative !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.95) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 28%),
+    linear-gradient(145deg,rgba(255,255,255,.98),rgba(235,242,249,.97)) !important;
+  box-shadow:
+    0 18px 44px rgba(34,45,72,.14),
+    inset 0 1px 0 #fff !important;
+}
+
+.premiereFooter::before{
+  height:5px !important;
+  background:var(--djf-v2500-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:djfV2500Spectrum 7s linear infinite !important;
+}
+
+.premiereFooter,
+.premiereFooter a,
+.premiereFooter strong{
+  color:var(--djf-v2500-ink) !important;
+}
+
+/* ------------------------------------------------------------
+   Focus, readability and responsive safety
+   ------------------------------------------------------------ */
+
+a:focus-visible,
+button:focus-visible{
+  outline:3px solid rgba(76,114,255,.35) !important;
+  outline-offset:3px !important;
+}
+
+@media(max-width:900px){
+  .premiereMain{
+    gap:12px !important;
+  }
+}
+
+@media(max-width:640px){
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter{
+    border-radius:20px !important;
+  }
+
+  #shows .premiereShowCards > *{
+    box-shadow:
+      0 12px 29px rgba(34,45,72,.12),
+      inset 0 1px 0 #fff !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+@keyframes djfV2500Spectrum{
+  from{background-position:0% 50%}
+  to{background-position:220% 50%}
+}
+
+@keyframes djfV2500Ambient{
+  from{transform:translate3d(-1.5%,-1%,0) scale(1)}
+  to{transform:translate3d(2%,1.5%,0) scale(1.045)}
+}
+
+
+/* ===== CONSOLIDATED SOURCE: assets/css/djf-release-v2700.css ===== */
+
+/* ============================================================
+   DJ FOLSOE NETWORK V2700
+   BROADCAST MOTION + WEBSITE BROADCAST TELEVISION
+   CSS-ONLY MASTER RELEASE
+   Built on V2500.
+   No Worker, Admin, API, Theme Engine or scene-switch changes.
+   ============================================================ */
+
+:root{
+  --v2700-orange:#ff9a28;
+  --v2700-pink:#f23996;
+  --v2700-purple:#7d4eff;
+  --v2700-blue:#4c72ff;
+  --v2700-cyan:#50dff5;
+
+  --v2700-ink:#121827;
+  --v2700-copy:#526078;
+  --v2700-paper:#ffffff;
+  --v2700-paper-soft:#edf3f9;
+
+  --v2700-spectrum:linear-gradient(
+    100deg,
+    var(--v2700-orange),
+    var(--v2700-pink),
+    var(--v2700-purple),
+    var(--v2700-blue)
+  );
+
+  --v2700-panel-shadow:
+    0 28px 70px rgba(30,40,67,.17),
+    0 0 34px rgba(125,78,255,.055),
+    inset 0 1px 0 rgba(255,255,255,.98);
+
+  --v2700-card-shadow:
+    0 14px 34px rgba(30,40,67,.105),
+    inset 0 1px 0 rgba(255,255,255,.98);
+
+  --v2700-radius-xl:32px;
+  --v2700-radius-lg:23px;
+  --v2700-radius-md:17px;
+}
+
+/* ============================================================
+   01. TELEVISION CANVAS
+   ============================================================ */
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  color:var(--v2700-ink) !important;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(242,57,150,.07),transparent 28%),
+    radial-gradient(circle at 0% 92%,rgba(80,223,245,.075),transparent 32%),
+    linear-gradient(180deg,#f8fafc 0%,#edf3f8 58%,#e7eef5 100%) !important;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(76,114,255,.024) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(76,114,255,.024) 1px,transparent 1px);
+  background-size:76px 76px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.56),transparent 94%);
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.56),transparent 94%);
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:-20%;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 22% 24%,rgba(255,154,40,.05),transparent 22%),
+    radial-gradient(circle at 79% 20%,rgba(242,57,150,.06),transparent 25%),
+    radial-gradient(circle at 70% 78%,rgba(125,78,255,.05),transparent 28%);
+  filter:blur(42px);
+  animation:v2700CanvasDrift 24s ease-in-out infinite alternate;
+}
+
+/* No decorative layer may ever block interaction. */
+.premiereMain *::before,
+.premiereMain *::after,
+.premiereNav::before,
+.premiereNav::after,
+.premiereFooter::before,
+.premiereFooter::after,
+body::before,
+body::after{
+  pointer-events:none !important;
+}
+
+/* ============================================================
+   02. STATION HEADER
+   ============================================================ */
+
+.premiereNav{
+  position:sticky !important;
+  top:12px !important;
+  z-index:100 !important;
+  border:1px solid rgba(255,255,255,.97) !important;
+  border-radius:20px !important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.955),rgba(237,243,249,.935)) !important;
+  box-shadow:
+    0 18px 46px rgba(30,40,67,.15),
+    inset 0 1px 0 #fff !important;
+  backdrop-filter:blur(22px) saturate(125%) !important;
+}
+
+.premiereNav::after{
+  height:4px !important;
+  background:var(--v2700-spectrum) !important;
+  background-size:230% 100% !important;
+  animation:v2700Spectrum 7s linear infinite !important;
+}
+
+.premiereBrandCopy strong{
+  color:var(--v2700-ink) !important;
+  font-size:1.08em !important;
+  letter-spacing:-.025em !important;
+}
+
+.premiereNav a,
+.premiereNav button{
+  color:#263248 !important;
+  font-weight:850 !important;
+}
+
+.premiereNav a:hover{
+  color:var(--v2700-purple) !important;
+}
+
+/* ============================================================
+   03. LIVE ACTIVITY BROADCAST STRIP
+   ============================================================ */
+
+#websiteActivityTicker.premiereTicker{
+  min-height:46px !important;
+  height:46px !important;
+  border:1px solid rgba(255,255,255,.97) !important;
+  border-radius:14px !important;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.99),rgba(237,243,249,.98)) !important;
+  box-shadow:
+    0 12px 31px rgba(30,40,67,.11),
+    inset 0 1px 0 #fff !important;
+}
+
+#websiteActivityTicker .premiereTickerLabel{
+  min-width:148px !important;
+  color:#fff !important;
+  background:var(--v2700-spectrum) !important;
+  background-size:220% 100% !important;
+  animation:v2700Spectrum 7s linear infinite !important;
+}
+
+#websiteActivityTicker .premiereTickerLabel b{
+  font-size:8px !important;
+  letter-spacing:.15em !important;
+}
+
+#websiteActivityTicker #activityTickerTrack,
+#websiteActivityTicker #activityTickerTrack *{
+  color:#172033 !important;
+  text-shadow:none !important;
+  font-weight:820 !important;
+}
+
+/* ============================================================
+   04. SHARED TELEVISION PANELS
+   ============================================================ */
+
+.premiereHero,
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty){
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.97) !important;
+  border-radius:var(--v2700-radius-xl) !important;
+  background:
+    radial-gradient(circle at 98% 2%,rgba(242,57,150,.075),transparent 27%),
+    radial-gradient(circle at 2% 98%,rgba(80,223,245,.075),transparent 29%),
+    linear-gradient(145deg,rgba(255,255,255,.997),rgba(237,243,249,.985)) !important;
+  box-shadow:var(--v2700-panel-shadow) !important;
+}
+
+.premiereHero::after,
+.premiereNext::after,
+.premiereShows::after,
+.premiereNews::after,
+.premiereChart::after,
+.premiereCommunity::after,
+.premiereInteraction::after,
+.premiereRequest::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:5px !important;
+  z-index:8 !important;
+  background:var(--v2700-spectrum) !important;
+  background-size:230% 100% !important;
+  animation:v2700Spectrum 7s linear infinite !important;
+}
+
+/* subtle station light sweep */
+.premiereHero::before,
+.premiereNext::before,
+.premiereShows::before,
+.premiereNews::before,
+.premiereChart::before,
+.premiereCommunity::before,
+.premiereInteraction::before,
+.premiereRequest::before{
+  content:"" !important;
+  position:absolute !important;
+  z-index:1 !important;
+  top:-70% !important;
+  bottom:-70% !important;
+  left:-42% !important;
+  width:12% !important;
+  transform:skewX(-20deg) !important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.52),transparent) !important;
+  opacity:.42 !important;
+  animation:v2700PanelSweep 14s ease-in-out infinite !important;
+}
+
+/* ============================================================
+   05. HERO — LARGE TELEVISION FEATURE
+   Layout is preserved; only visual hierarchy changes.
+   ============================================================ */
+
+#live.premiereHero{
+  min-height:640px !important;
+}
+
+#live .premiereHeroCopy,
+#live .premierePortraitStage{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+#live #heroTitle{
+  color:#0f1625 !important;
+  font-size:clamp(78px,8.5vw,138px) !important;
+  line-height:.78 !important;
+  letter-spacing:-.055em !important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.98),
+    0 15px 38px rgba(30,40,67,.09) !important;
+}
+
+#live #heroSubtitle{
+  color:#334056 !important;
+  font-size:clamp(31px,3.55vw,53px) !important;
+  line-height:.92 !important;
+}
+
+#live #heroText{
+  color:#5b6980 !important;
+  font-weight:650 !important;
+  line-height:1.67 !important;
+}
+
+#live .premierePortraitFrame{
+  background:var(--v2700-spectrum) !important;
+  background-size:220% 100% !important;
+  box-shadow:
+    0 38px 86px rgba(30,40,67,.27),
+    0 0 42px rgba(242,57,150,.12),
+    inset 0 1px 0 rgba(255,255,255,.72) !important;
+  animation:v2700Spectrum 9s linear infinite !important;
+}
+
+#live .premierePortraitFrame::before{
+  animation:v2700ImageSweep 11s ease-in-out infinite !important;
+}
+
+#live .premierePortraitFrame img{
+  filter:contrast(1.045) saturate(1.075) brightness(1.025) !important;
+}
+
+#live .premiereOnAirCard{
+  border:1px solid rgba(255,255,255,.99) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.09),transparent 31%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 23px 50px rgba(30,40,67,.21),
+    0 0 25px rgba(125,78,255,.055),
+    inset 0 1px 0 #fff !important;
+}
+
+#live .premierePrimary{
+  position:relative !important;
+  overflow:hidden !important;
+  background:var(--v2700-spectrum) !important;
+  background-size:230% 100% !important;
+  box-shadow:
+    0 15px 36px rgba(125,78,255,.25),
+    0 0 24px rgba(242,57,150,.11),
+    inset 0 1px 0 rgba(255,255,255,.40) !important;
+  animation:v2700Spectrum 6s linear infinite !important;
+}
+
+#live .premiereHeroFacts > div{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--v2700-card-shadow) !important;
+}
+
+/* ============================================================
+   06. UP NEXT — PROGRAMME STRIP
+   ============================================================ */
+
+#next .premiereNextDate,
+#next .premiereNextCountdown,
+#next .premiereNextInfo{
+  border:1px solid rgba(255,255,255,.98) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--v2700-card-shadow) !important;
+}
+
+#next h2,
+#next h3{
+  color:var(--v2700-ink) !important;
+}
+
+/* ============================================================
+   07. SHOWS — TELEVISION PROGRAMME RAIL
+   ============================================================ */
+
+#shows .premiereShowCards{
+  gap:15px !important;
+}
+
+#shows .premiereShowCards > *{
+  min-height:335px !important;
+  border:1px solid rgba(255,255,255,.99) !important;
+  border-radius:20px !important;
+  background:linear-gradient(180deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 16px 40px rgba(30,40,67,.14),
+    inset 0 1px 0 #fff !important;
+  transition:
+    transform .30s cubic-bezier(.2,.7,.2,1),
+    box-shadow .30s ease,
+    border-color .30s ease !important;
+}
+
+#shows .premiereShowCards img{
+  height:195px !important;
+  filter:saturate(1.13) contrast(1.065) brightness(1.025) !important;
+}
+
+#shows .premiereShowCards h2,
+#shows .premiereShowCards h3{
+  color:var(--v2700-ink) !important;
+  font-size:30px !important;
+}
+
+#shows .premiereShowCards p{
+  color:var(--v2700-copy) !important;
+}
+
+#shows .premiereShowCards > *:hover{
+  transform:translateY(-9px) scale(1.013) !important;
+  border-color:rgba(125,78,255,.25) !important;
+  box-shadow:
+    0 30px 64px rgba(30,40,67,.20),
+    0 0 30px rgba(242,57,150,.075) !important;
+}
+
+/* ============================================================
+   08. CHART TELEVISION
+   ============================================================ */
+
+.djfChartPanel{
+  border:1px solid rgba(255,255,255,.99) !important;
+  border-radius:23px !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.065),transparent 28%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 19px 46px rgba(30,40,67,.14),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartPanelHeader h3{
+  color:var(--v2700-ink) !important;
+}
+
+.djfChartRow{
+  min-height:80px !important;
+  border:1px solid rgba(42,54,82,.10) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:
+    0 9px 23px rgba(30,40,67,.09),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartRow:hover{
+  transform:translateX(6px) !important;
+  border-color:rgba(125,78,255,.23) !important;
+  box-shadow:
+    0 17px 36px rgba(30,40,67,.145),
+    0 0 21px rgba(242,57,150,.06) !important;
+}
+
+#top20Panel .djfChartRow:nth-child(-n+3),
+#retroFavoritePanel .djfChartRow:nth-child(-n+3){
+  min-height:96px !important;
+  box-shadow:
+    0 15px 35px rgba(30,40,67,.13),
+    inset 0 1px 0 #fff !important;
+}
+
+.djfChartExpand{
+  min-height:51px !important;
+  background:var(--v2700-spectrum) !important;
+  background-size:230% 100% !important;
+  animation:v2700Spectrum 6s linear infinite !important;
+}
+
+/* ============================================================
+   09. COMMUNITY / INTERACTION
+   ============================================================ */
+
+.premiereCommunitySpotlight,
+.premiereCommunityStats > div,
+.djfCommunityCard,
+.premiereActionCard,
+.djfCommunityActivityItem{
+  border:1px solid rgba(255,255,255,.99) !important;
+  background:linear-gradient(145deg,#fff,#edf3f9) !important;
+  box-shadow:var(--v2700-card-shadow) !important;
+}
+
+.djfCommunityCard:hover,
+.premiereActionCard:hover{
+  transform:translateY(-6px) !important;
+  box-shadow:
+    0 24px 49px rgba(30,40,67,.17),
+    0 0 26px rgba(242,57,150,.065) !important;
+}
+
+/* ============================================================
+   10. FOOTER — STATION SIGN-OFF
+   ============================================================ */
+
+.premiereFooter{
+  position:relative !important;
+  overflow:hidden !important;
+  border:1px solid rgba(255,255,255,.97) !important;
+  border-radius:24px !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 29%),
+    linear-gradient(145deg,rgba(255,255,255,.99),rgba(234,241,248,.98)) !important;
+  box-shadow:
+    0 20px 49px rgba(30,40,67,.15),
+    inset 0 1px 0 #fff !important;
+}
+
+.premiereFooter::before{
+  height:5px !important;
+  background:var(--v2700-spectrum) !important;
+  background-size:230% 100% !important;
+  animation:v2700Spectrum 7s linear infinite !important;
+}
+
+.premiereFooter,
+.premiereFooter a,
+.premiereFooter strong{
+  color:var(--v2700-ink) !important;
+}
+
+/* ============================================================
+   11. PLATFORM READABILITY
+   ============================================================ */
+
+.premiereMain p,
+.premiereMain small{
+  color:var(--v2700-copy) !important;
+}
+
+a:focus-visible,
+button:focus-visible{
+  outline:3px solid rgba(76,114,255,.38) !important;
+  outline-offset:3px !important;
+}
+
+@media(max-width:1050px){
+  #live #heroTitle{
+    font-size:clamp(70px,10vw,110px) !important;
+  }
+
+  .premiereMain{
+    gap:13px !important;
+  }
+}
+
+@media(max-width:900px){
+  .premiereNav{
+    top:7px !important;
+  }
+
+  #live.premiereHero{
+    min-height:0 !important;
+  }
+}
+
+@media(max-width:640px){
+  body{
+    background:linear-gradient(180deg,#f7f9fc,#e9f0f6) !important;
+  }
+
+  .premiereNav{
+    position:relative !important;
+    top:auto !important;
+  }
+
+  #websiteActivityTicker.premiereTicker{
+    min-height:44px !important;
+    height:44px !important;
+  }
+
+  #websiteActivityTicker .premiereTickerLabel{
+    min-width:110px !important;
+  }
+
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty){
+    border-radius:20px !important;
+    box-shadow:
+      0 15px 36px rgba(30,40,67,.135),
+      inset 0 1px 0 #fff !important;
+  }
+
+  #live #heroTitle{
+    font-size:clamp(61px,19vw,88px) !important;
+  }
+
+  #shows .premiereShowCards > *{
+    min-height:315px !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+@keyframes v2700Spectrum{
+  from{background-position:0% 50%}
+  to{background-position:230% 50%}
+}
+
+@keyframes v2700CanvasDrift{
+  from{transform:translate3d(-1.5%,-1%,0) scale(1)}
+  to{transform:translate3d(2%,1.5%,0) scale(1.045)}
+}
+
+@keyframes v2700PanelSweep{
+  0%,74%{left:-42%;opacity:0}
+  80%{opacity:.44}
+  94%,100%{left:125%;opacity:0}
+}
+
+@keyframes v2700ImageSweep{
+  0%,68%{left:-42%;opacity:0}
+  76%{opacity:.64}
+  92%,100%{left:125%;opacity:0}
+}
+
+
+/* ===== CONSOLIDATED SOURCE: assets/css/djf-release-v2800.css ===== */
+
+/* ============================================================
+   DJ FOLSOE NETWORK V2800 — PERFORMANCE & STABILITY
+   CSS-ONLY RELEASE
+   Built on V2700 Broadcast Television.
+   No Worker, Admin, API, Theme Engine, scene-switch or JS changes.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   01. Rendering containment
+   ------------------------------------------------------------ */
+
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty),
+.premiereFooter{
+  contain:layout paint style !important;
+}
+
+@supports (content-visibility:auto){
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .contentModuleZone:not(:empty),
+  .premiereFooter{
+    content-visibility:auto !important;
+    contain-intrinsic-size:700px !important;
+  }
+
+  .premiereChart{
+    contain-intrinsic-size:1200px !important;
+  }
+
+  .premiereShows{
+    content-visibility:auto !important;
+    contain-intrinsic-size:650px !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   02. Stable image geometry
+   ------------------------------------------------------------ */
+
+.premierePortraitFrame img,
+.premiereShowCards img,
+.djfChartCover,
+.modAvatar,
+.chatAvatar,
+.premiereNews img{
+  display:block !important;
+  max-width:100% !important;
+  height:auto;
+}
+
+.premierePortraitFrame,
+.premiereShowCards > *,
+.djfChartCover,
+.modAvatar,
+.premiereNewsGrid > *{
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+
+.premierePortraitFrame img,
+.premiereShowCards img,
+.premiereNews img{
+  image-rendering:auto !important;
+}
+
+/* Reserve space to reduce layout shift. */
+.premiereShowCards img{
+  aspect-ratio:16 / 9 !important;
+  width:100% !important;
+  height:auto !important;
+  object-fit:cover !important;
+}
+
+.djfChartCover{
+  aspect-ratio:1 / 1 !important;
+  object-fit:cover !important;
+}
+
+/* ------------------------------------------------------------
+   03. Motion budget
+   ------------------------------------------------------------ */
+
+/* Keep the station alive, but remove duplicate simultaneous GPU work. */
+body::after{
+  animation-duration:34s !important;
+}
+
+.premiereHero::before,
+.premiereNext::before,
+.premiereShows::before,
+.premiereNews::before,
+.premiereChart::before,
+.premiereCommunity::before,
+.premiereInteraction::before,
+.premiereRequest::before{
+  animation-duration:20s !important;
+}
+
+.premiereNav::after,
+.premiereFooter::before,
+.premiereHero::after,
+.premiereNext::after,
+.premiereShows::after,
+.premiereNews::after,
+.premiereChart::after,
+.premiereCommunity::after,
+.premiereInteraction::after,
+.premiereRequest::after{
+  animation-duration:10s !important;
+}
+
+#websiteActivityTicker .premiereTickerLabel,
+#live .premierePrimary,
+.djfChartExpand{
+  animation-duration:8s !important;
+}
+
+#live .premierePortraitFrame{
+  animation-duration:14s !important;
+}
+
+/* Pause decorative motion when not actively interacting. */
+@media (hover:hover){
+  .premiereHero:hover::before,
+  .premiereNext:hover::before,
+  .premiereShows:hover::before,
+  .premiereNews:hover::before,
+  .premiereChart:hover::before,
+  .premiereCommunity:hover::before,
+  .premiereInteraction:hover::before,
+  .premiereRequest:hover::before{
+    animation-play-state:running !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   04. Safer transforms
+   ------------------------------------------------------------ */
+
+#shows .premiereShowCards > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard{
+  will-change:auto !important;
+}
+
+#shows .premiereShowCards > *:hover,
+.djfChartRow:hover,
+.djfCommunityCard:hover,
+.premiereActionCard:hover{
+  will-change:transform !important;
+}
+
+#shows .premiereShowCards > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard,
+.premierePrimary,
+.premiereSecondary{
+  transition-duration:.24s !important;
+}
+
+/* ------------------------------------------------------------
+   05. Scroll stability
+   ------------------------------------------------------------ */
+
+html{
+  scroll-padding-top:110px !important;
+}
+
+body{
+  overscroll-behavior-y:none !important;
+}
+
+.premiereMain{
+  overflow:visible !important;
+}
+
+.premiereShowCards,
+.djfMusicHubRail,
+.djfCommunityRail{
+  overscroll-behavior-x:contain !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+
+/* ------------------------------------------------------------
+   06. Touch and mobile performance
+   ------------------------------------------------------------ */
+
+@media(max-width:900px){
+  body::after{
+    display:none !important;
+  }
+
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    opacity:.22 !important;
+    animation-duration:28s !important;
+  }
+
+  #shows .premiereShowCards > *:hover,
+  .djfChartRow:hover,
+  .djfCommunityCard:hover,
+  .premiereActionCard:hover{
+    transform:none !important;
+  }
+
+  .premiereNav{
+    backdrop-filter:blur(14px) saturate(115%) !important;
+  }
+}
+
+@media(max-width:640px){
+  html{
+    scroll-padding-top:20px !important;
+  }
+
+  .premiereNav{
+    backdrop-filter:none !important;
+  }
+
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    display:none !important;
+  }
+
+  .premiereHero::after,
+  .premiereNext::after,
+  .premiereShows::after,
+  .premiereNews::after,
+  .premiereChart::after,
+  .premiereCommunity::after,
+  .premiereInteraction::after,
+  .premiereRequest::after{
+    animation:none !important;
+    background-position:50% 50% !important;
+  }
+
+  #live .premierePortraitFrame{
+    animation:none !important;
+  }
+
+  #live .premierePrimary,
+  .djfChartExpand,
+  #websiteActivityTicker .premiereTickerLabel{
+    animation:none !important;
+    background-position:50% 50% !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   07. Accessibility and clarity
+   ------------------------------------------------------------ */
+
+:focus{
+  scroll-margin-top:120px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline:3px solid rgba(76,114,255,.46) !important;
+  outline-offset:3px !important;
+  box-shadow:0 0 0 6px rgba(76,114,255,.10) !important;
+}
+
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:disabled,
+[aria-disabled="true"]{
+  opacity:.55 !important;
+  cursor:not-allowed !important;
+}
+
+/* ------------------------------------------------------------
+   08. Safer text rendering
+   ------------------------------------------------------------ */
+
+body,
+.premiereMain,
+.premiereNav,
+.premiereFooter{
+  text-rendering:optimizeLegibility !important;
+  -webkit-font-smoothing:antialiased !important;
+  -moz-osx-font-smoothing:grayscale !important;
+}
+
+.premiereMain p,
+.premiereMain small,
+.premiereMain span{
+  overflow-wrap:anywhere;
+}
+
+#heroTitle,
+.premiereSectionHeader h2,
+.premiereChartHeader h2,
+.premiereCommunityHeader h2{
+  text-wrap:balance;
+}
+
+/* ------------------------------------------------------------
+   09. Reduced data / reduced motion
+   ------------------------------------------------------------ */
+
+@media(prefers-reduced-data:reduce){
+  body::after,
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    display:none !important;
+  }
+
+  .premierePortraitFrame img,
+  .premiereShowCards img,
+  .premiereNews img{
+    filter:none !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto !important;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition-duration:.001ms !important;
+  }
+
+  #websiteActivityTicker #activityTickerTrack{
+    transform:none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   10. Print fallback
+   ------------------------------------------------------------ */
+
+@media print{
+  .premiereNav,
+  #websiteActivityTicker,
+  .premiereHeroSignal,
+  .djfShowRailControls,
+  .djfChartExpand{
+    display:none !important;
+  }
+
+  body,
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter{
+    color:#000 !important;
+    background:#fff !important;
+    box-shadow:none !important;
+  }
+
+  .djfExpandableChart > *{
+    display:grid !important;
+  }
+}
+
+
+/* ===== CONSOLIDATED SOURCE: assets/css/djf-release-v2900.css ===== */
+
+/* ============================================================
+   DJ FOLSOE NETWORK V2900 — PRODUCTION CANDIDATE
+   FINAL STABILITY LAYER BEFORE V3000
+   CSS-ONLY RELEASE
+   No Worker, Admin, API, Theme Engine, scene-switch or JS changes.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   01. Browser-safe defaults
+   ------------------------------------------------------------ */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  scrollbar-gutter:stable;
+}
+
+body{
+  min-width:320px;
+}
+
+img,
+svg,
+video,
+canvas{
+  max-width:100%;
+}
+
+img{
+  height:auto;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button,
+a{
+  touch-action:manipulation;
+}
+
+/* ------------------------------------------------------------
+   02. Production-safe content visibility
+   ------------------------------------------------------------ */
+
+/*
+  Keep V2800's optimization where supported, but avoid hidden content
+  in browsers with incomplete content-visibility implementations.
+*/
+@supports not (content-visibility:auto){
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .contentModuleZone:not(:empty),
+  .premiereFooter{
+    content-visibility:visible !important;
+    contain:none !important;
+  }
+}
+
+@supports (content-visibility:auto){
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .contentModuleZone:not(:empty),
+  .premiereFooter{
+    content-visibility:auto !important;
+  }
+
+  /*
+    Prevent deep links and keyboard focus from landing inside a skipped
+    section that has not been painted yet.
+  */
+  .premiereNews:target,
+  .premiereChart:target,
+  .premiereCommunity:target,
+  .premiereInteraction:target,
+  .premiereRequest:target,
+  .contentModuleZone:target{
+    content-visibility:visible !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   03. Layout integrity
+   ------------------------------------------------------------ */
+
+.premiereMain{
+  min-width:0 !important;
+}
+
+.premiereMain > *{
+  min-width:0 !important;
+}
+
+.premiereHero,
+.premiereNext,
+.premiereShows,
+.premiereNews,
+.premiereChart,
+.premiereCommunity,
+.premiereInteraction,
+.premiereRequest,
+.contentModuleZone:not(:empty),
+.premiereFooter{
+  width:100% !important;
+  max-width:100% !important;
+}
+
+.premiereHeroCopy,
+.premierePortraitStage,
+.premiereSectionHeader > *,
+.premiereChartHeader > *,
+.premiereCommunityHeader > *,
+.djfChartCopy{
+  min-width:0 !important;
+}
+
+/* ------------------------------------------------------------
+   04. Safe typography
+   ------------------------------------------------------------ */
+
+body,
+.premiereMain,
+.premiereNav,
+.premiereFooter{
+  font-synthesis:none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p{
+  margin-block-start:0;
+}
+
+#heroTitle,
+.premiereSectionHeader h2,
+.premiereChartHeader h2,
+.premiereCommunityHeader h2{
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+  hyphens:auto;
+}
+
+.premiereMain p,
+.premiereMain small,
+.premiereMain span{
+  word-break:normal;
+  overflow-wrap:anywhere;
+}
+
+/* ------------------------------------------------------------
+   05. Image and card resilience
+   ------------------------------------------------------------ */
+
+.premierePortraitFrame,
+.premiereShowCards > *,
+.premiereNewsGrid > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard{
+  isolation:isolate;
+}
+
+.premiereShowCards img,
+.premiereNews img,
+.djfChartCover,
+.modAvatar{
+  background:#e8eef5;
+}
+
+.premiereShowCards img:not([src]),
+.premiereNews img:not([src]){
+  visibility:hidden;
+}
+
+.premiereShowCards > *,
+.premiereNewsGrid > *,
+.djfChartRow,
+.djfCommunityCard,
+.premiereActionCard{
+  overflow:hidden;
+}
+
+/* ------------------------------------------------------------
+   06. Interaction safety
+   ------------------------------------------------------------ */
+
+a,
+button,
+[role="button"]{
+  cursor:pointer;
+}
+
+a[aria-disabled="true"],
+button:disabled,
+[role="button"][aria-disabled="true"]{
+  pointer-events:none !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid rgba(76,114,255,.52) !important;
+  outline-offset:3px !important;
+  box-shadow:0 0 0 6px rgba(76,114,255,.11) !important;
+}
+
+.premiereNav a,
+.premiereMain a,
+.premiereMain button,
+.premiereFooter a{
+  position:relative;
+  z-index:2;
+}
+
+/* ------------------------------------------------------------
+   07. Animation guardrails
+   ------------------------------------------------------------ */
+
+@media (update:slow){
+  body::after,
+  .premiereHero::before,
+  .premiereNext::before,
+  .premiereShows::before,
+  .premiereNews::before,
+  .premiereChart::before,
+  .premiereCommunity::before,
+  .premiereInteraction::before,
+  .premiereRequest::before{
+    display:none !important;
+  }
+
+  .premiereNav::after,
+  .premiereFooter::before,
+  .premiereHero::after,
+  .premiereNext::after,
+  .premiereShows::after,
+  .premiereNews::after,
+  .premiereChart::after,
+  .premiereCommunity::after,
+  .premiereInteraction::after,
+  .premiereRequest::after,
+  #websiteActivityTicker .premiereTickerLabel,
+  #live .premierePrimary,
+  #live .premierePortraitFrame,
+  .djfChartExpand{
+    animation:none !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto !important;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+  }
+
+  #websiteActivityTicker #activityTickerTrack{
+    transform:none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   08. High-contrast compatibility
+   ------------------------------------------------------------ */
+
+@media (prefers-contrast:more){
+  body{
+    color:#080c14 !important;
+  }
+
+  .premiereNav,
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty){
+    border-color:rgba(15,22,37,.30) !important;
+  }
+
+  .premiereMain p,
+  .premiereMain small,
+  .premiereMain span{
+    color:#303b4e !important;
+  }
+
+  a:focus-visible,
+  button:focus-visible{
+    outline-color:#1c4fff !important;
+  }
+}
+
+@media (forced-colors:active){
+  .premiereNav,
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty),
+  .premiereShowCards > *,
+  .djfChartRow,
+  .djfCommunityCard{
+    forced-color-adjust:auto;
+    box-shadow:none !important;
+  }
+
+  .premiereNav::after,
+  .premiereFooter::before,
+  .premiereHero::after,
+  .premiereNext::after,
+  .premiereShows::after,
+  .premiereNews::after,
+  .premiereChart::after,
+  .premiereCommunity::after,
+  .premiereInteraction::after,
+  .premiereRequest::after{
+    background:CanvasText !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   09. Device-specific production fallbacks
+   ------------------------------------------------------------ */
+
+@media(max-width:1200px){
+  .premiereMain{
+    padding-inline:max(12px,env(safe-area-inset-left)) !important;
+  }
+}
+
+@media(max-width:900px){
+  .premiereNav{
+    max-width:calc(100% - 14px) !important;
+    margin-inline:auto !important;
+  }
+
+  #live #heroTitle{
+    max-width:100% !important;
+  }
+
+  .premiereShowCards,
+  .djfMusicHubRail,
+  .djfCommunityRail{
+    scroll-padding-inline:12px !important;
+  }
+}
+
+@media(max-width:640px){
+  body{
+    overflow-x:hidden !important;
+  }
+
+  .premiereMain{
+    padding-inline:max(8px,env(safe-area-inset-left)) !important;
+  }
+
+  .premiereNav{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter,
+  .contentModuleZone:not(:empty){
+    border-radius:18px !important;
+  }
+
+  .premiereShowCards > *,
+  .djfCommunityCard,
+  .djfMusicHubLink{
+    scroll-snap-stop:always;
+  }
+}
+
+/* Large-screen / TV readability */
+@media(min-width:1800px){
+  body{
+    font-size:17px;
+  }
+
+  .premiereMain{
+    max-width:1680px !important;
+    margin-inline:auto !important;
+  }
+
+  .premiereNav,
+  .premiereFooter{
+    max-width:1680px !important;
+    margin-inline:auto !important;
+  }
+
+  .premiereMain p{
+    line-height:1.65 !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   10. Safe-area support
+   ------------------------------------------------------------ */
+
+@supports(padding:max(0px)){
+  .premiereNav{
+    padding-left:max(var(--nav-pad-left,16px),env(safe-area-inset-left)) !important;
+    padding-right:max(var(--nav-pad-right,16px),env(safe-area-inset-right)) !important;
+  }
+
+  .premiereFooter{
+    padding-bottom:max(var(--footer-pad-bottom,20px),env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   11. Production print / fallback
+   ------------------------------------------------------------ */
+
+@media print{
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+    box-shadow:none !important;
+    text-shadow:none !important;
+  }
+
+  body{
+    color:#000 !important;
+    background:#fff !important;
+  }
+
+  .premiereNav,
+  #websiteActivityTicker,
+  .premiereHeroSignal,
+  .djfShowRailControls,
+  .djfChartExpand{
+    display:none !important;
+  }
+
+  .premiereHero,
+  .premiereNext,
+  .premiereShows,
+  .premiereNews,
+  .premiereChart,
+  .premiereCommunity,
+  .premiereInteraction,
+  .premiereRequest,
+  .premiereFooter{
+    break-inside:avoid;
+    color:#000 !important;
+    background:#fff !important;
+    border:1px solid #bbb !important;
+  }
+
+  .djfExpandableChart > *{
+    display:grid !important;
+  }
+}
+
+
+/* ============================================================
+   V3000 MILESTONE EXPERIENCE LAYER
+   ============================================================ */
+
+:root{
+  --v3000-spectrum:linear-gradient(100deg,#ff9a28,#f23996,#7d4eff,#4c72ff);
+  --v3000-ink:#101726;
+  --v3000-muted:#59677d;
+  --v3000-panel:rgba(255,255,255,.985);
+  --v3000-panel-soft:rgba(237,243,249,.97);
+}
+
+/* Main station rhythm */
+.premiereMain{
+  gap:16px !important;
+}
+
+/* Broadcast Guide inserted by V3000 UX */
+.djfV3000Guide{
+  position:relative;
+  z-index:30;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  min-height:58px;
+  padding:8px 10px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  border:1px solid rgba(255,255,255,.96);
+  border-radius:17px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.97),rgba(237,243,249,.95));
+  box-shadow:
+    0 13px 33px rgba(30,40,67,.12),
+    inset 0 1px 0 #fff;
+  backdrop-filter:blur(16px) saturate(120%);
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+
+.djfV3000Guide::-webkit-scrollbar{
+  display:none;
+}
+
+.djfV3000Guide::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:4px;
+  pointer-events:none;
+  background:var(--v3000-spectrum);
+  background-size:230% 100%;
+  animation:v3000GuideSpectrum 8s linear infinite;
+}
+
+.djfV3000GuideLabel{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  min-height:38px;
+  padding:0 14px;
+  border-radius:12px;
+  color:#fff;
+  background:var(--v3000-spectrum);
+  background-size:210% 100%;
+  box-shadow:0 9px 21px rgba(125,78,255,.20);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  animation:v3000GuideSpectrum 8s linear infinite;
+}
+
+.djfV3000Guide a{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:38px;
+  padding:0 13px;
+  scroll-snap-align:start;
+  border:1px solid rgba(42,54,82,.10);
+  border-radius:12px;
+  color:#28344a;
+  background:linear-gradient(145deg,#fff,#edf3f9);
+  box-shadow:0 7px 17px rgba(30,40,67,.075);
+  text-decoration:none;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.035em;
+  white-space:nowrap;
+  transition:transform .22s ease,color .22s ease,box-shadow .22s ease;
+}
+
+.djfV3000Guide a::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#f23996,#7d4eff,#4c72ff);
+  box-shadow:0 0 10px rgba(125,78,255,.32);
+}
+
+.djfV3000Guide a:hover,
+.djfV3000Guide a:focus-visible{
+  color:#fff;
+  transform:translateY(-2px);
+  background:var(--v3000-spectrum);
+  background-size:210% 100%;
+  box-shadow:0 11px 24px rgba(125,78,255,.20);
+}
+
+/* Hero as television feature without moving its layout */
+#live.premiereHero{
+  min-height:660px !important;
+}
+
+#live .premiereEyebrow{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  padding:7px 11px !important;
+  border:1px solid rgba(42,54,82,.10) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.74) !important;
+  box-shadow:0 7px 18px rgba(30,40,67,.08) !important;
+  backdrop-filter:blur(10px) !important;
+}
+
+#live .premiereEyebrow::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff9a28,#f23996,#7d4eff);
+  box-shadow:0 0 12px rgba(242,57,150,.30);
+}
+
+#live .premiereHeroActions{
+  gap:11px !important;
+}
+
+#live .premierePrimary,
+#live .premiereSecondary{
+  min-height:52px !important;
+  padding-inline:20px !important;
+}
+
+/* Programme cards become a television shelf */
+#shows .premiereShowCards{
+  align-items:stretch !important;
+}
+
+#shows .premiereShowCards > *{
+  isolation:isolate !important;
+}
+
+#shows .premiereShowCards > *::before{
+  backdrop-filter:blur(11px) saturate(120%) !important;
+}
+
+#shows .premiereShowCards img{
+  width:100% !important;
+  object-position:center !important;
+}
+
+/* Chart station hierarchy */
+#top20 .premiereChartHeader{
+  align-items:flex-end !important;
+}
+
+.djfChartPanelHeader{
+  padding-inline:8px !important;
+}
+
+.djfChartRank{
+  text-shadow:0 1px 0 rgba(255,255,255,.95) !important;
+}
+
+.djfChartCopy b,
+.djfChartCopy span{
+  text-rendering:optimizeLegibility !important;
+}
+
+/* Community feels like one network */
+.premiereCommunitySpotlight,
+.djfCommunityRail,
+.djfCommunityActivityList{
+  position:relative !important;
+  z-index:4 !important;
+}
+
+.djfCommunityCardIcon{
+  background:var(--v3000-spectrum) !important;
+  background-size:210% 100% !important;
+}
+
+/* Footer becomes a true station sign-off */
+.premiereFooter{
+  min-height:150px !important;
+}
+
+.premiereFooter strong{
+  letter-spacing:-.015em !important;
+}
+
+/* Deep-link visibility and selected guide item */
+.djfV3000Guide a[aria-current="location"]{
+  color:#fff;
+  background:var(--v3000-spectrum);
+  background-size:210% 100%;
+}
+
+/* Television-scale readability */
+@media(min-width:1800px){
+  .djfV3000Guide{
+    min-height:64px;
+  }
+
+  .djfV3000Guide a,
+  .djfV3000GuideLabel{
+    min-height:42px;
+    font-size:10px;
+  }
+
+  #shows .premiereShowCards h2,
+  #shows .premiereShowCards h3{
+    font-size:34px !important;
+  }
+}
+
+@media(max-width:900px){
+  .djfV3000Guide{
+    border-radius:15px;
+    padding-inline:8px;
+  }
+
+  #live.premiereHero{
+    min-height:0 !important;
+  }
+}
+
+@media(max-width:640px){
+  .premiereMain{
+    gap:11px !important;
+  }
+
+  .djfV3000Guide{
+    min-height:52px;
+    padding:6px 7px;
+    border-radius:14px;
+  }
+
+  .djfV3000GuideLabel{
+    min-height:34px;
+    padding-inline:11px;
+  }
+
+  .djfV3000Guide a{
+    min-height:34px;
+    padding-inline:10px;
+  }
+
+  #live .premierePrimary,
+  #live .premiereSecondary{
+    min-height:48px !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .djfV3000Guide::after,
+  .djfV3000GuideLabel{
+    animation:none !important;
+  }
+}
+
+@keyframes v3000GuideSpectrum{
+  from{background-position:0% 50%}
+  to{background-position:230% 50%}
+}
