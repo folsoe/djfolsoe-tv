@@ -243,6 +243,7 @@
   
   <link rel="stylesheet" href="assets/css/djf-broadcast-v2000.css?v=2000">
   <link rel="stylesheet" href="assets/css/djf-broadcast-v2000-1.css?v=20001">
+  <link rel="stylesheet" href="assets/css/djf-broadcast-v2000-2.css?v=20002">
 </head>
 <body>
   <div class="premiereAmbient" aria-hidden="true">
@@ -288,21 +289,7 @@
         <span id="activityTickerType" hidden>TWITCH</span>
       </section>
 
-<section id="shows" data-ux-module="shows" class="premiereShows">
-        <header class="premiereSectionHeader">
-          <div>
-            <span>Signature programmes</span>
-            <h2 id="showsTitle">Find your show</h2>
-          </div>
-          <p>From bright morning sessions to trance journeys, retro memories and Friday-night energy.</p>
-        </header>
-        <div class="showCards premiereShowCards" id="showCards"></div>
-      </section>
-
-      <div id="contentZoneShowsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="shows-after"></div>
-
-
-      <section id="live" data-ux-module="hero" class="premiereHero">
+<section id="live" data-ux-module="hero" class="premiereHero">
         <div class="premiereHeroGrid" aria-hidden="true"></div>
         <div class="premiereHeroSignal" aria-hidden="true">
           <span></span><span></span><span></span><span></span><span></span>
@@ -348,7 +335,7 @@
         </div>
       </section>
 
-      <section id="next" data-ux-module="next" class="premiereNext">
+<section id="next" data-ux-module="next" class="premiereNext">
         <div class="premiereNextLead">
           <span>Up next</span>
           <h2 id="nextTitle">Next show</h2>
@@ -361,7 +348,49 @@
         </div>
       </section>
 
-      <div id="contentZoneFeatured" class="contentModuleZone premiereModuleZone" data-content-zone="featured"></div>
+<section id="activityPulseEngine" data-ux-module="activity" class="premiereCommunity" aria-label="Latest community activity">
+        <header class="premiereCommunityHeader">
+          <div>
+            <span>Live community</span>
+            <h2>What is happening now</h2>
+          </div>
+          <div class="premiereCommunitySignal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        </header>
+
+        <div class="premiereCommunityGrid">
+          <article class="premiereCommunitySpotlight">
+            <div id="activityPulseIcon" class="premiereCommunityIcon">♥</div>
+            <div>
+              <span id="activityPulseType">CHANNEL UPDATE</span>
+              <h3 id="activityPulseHeadline">The community is warming up</h3>
+              <p id="activityPulseDetail">New follows, requests, raids and other channel moments will appear here.</p>
+            </div>
+            <time id="activityPulseTime">NOW</time>
+          </article>
+          <div id="activityPulseRail" class="premiereCommunityRail"></div>
+          <aside class="premiereCommunityStats">
+            <div><strong id="activityPulseCount">0</strong><span>Moments</span></div>
+            <div><strong id="activityPulseToday">0</strong><span>Today</span></div>
+            <div><strong id="activityPulsePeople">0</strong><span>People</span></div>
+            <div><strong id="activityPulseEnergy">0</strong><span>Energy</span></div>
+          </aside>
+        </div>
+        <span id="activityPulseStatus" hidden>CONNECTED</span>
+      </section>
+
+<section id="shows" data-ux-module="shows" class="premiereShows">
+        <header class="premiereSectionHeader">
+          <div>
+            <span>Signature programmes</span>
+            <h2 id="showsTitle">Find your show</h2>
+          </div>
+          <p>From bright morning sessions to trance journeys, retro memories and Friday-night energy.</p>
+        </header>
+        <div class="showCards premiereShowCards" id="showCards"></div>
+      </section>
+<div id="contentZoneShowsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="shows-after"></div>
+
+<div id="contentZoneFeatured" class="contentModuleZone premiereModuleZone" data-content-zone="featured"></div>
 
 
       <section id="musicNews" class="premiereNews" data-content-zone="editorial">
@@ -424,38 +453,7 @@
       </section>
 
       <div id="contentZoneChartsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="charts-after"></div>
-
-      <section id="activityPulseEngine" data-ux-module="activity" class="premiereCommunity" aria-label="Latest community activity">
-        <header class="premiereCommunityHeader">
-          <div>
-            <span>Live community</span>
-            <h2>What is happening now</h2>
-          </div>
-          <div class="premiereCommunitySignal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        </header>
-
-        <div class="premiereCommunityGrid">
-          <article class="premiereCommunitySpotlight">
-            <div id="activityPulseIcon" class="premiereCommunityIcon">♥</div>
-            <div>
-              <span id="activityPulseType">CHANNEL UPDATE</span>
-              <h3 id="activityPulseHeadline">The community is warming up</h3>
-              <p id="activityPulseDetail">New follows, requests, raids and other channel moments will appear here.</p>
-            </div>
-            <time id="activityPulseTime">NOW</time>
-          </article>
-          <div id="activityPulseRail" class="premiereCommunityRail"></div>
-          <aside class="premiereCommunityStats">
-            <div><strong id="activityPulseCount">0</strong><span>Moments</span></div>
-            <div><strong id="activityPulseToday">0</strong><span>Today</span></div>
-            <div><strong id="activityPulsePeople">0</strong><span>People</span></div>
-            <div><strong id="activityPulseEnergy">0</strong><span>Energy</span></div>
-          </aside>
-        </div>
-        <span id="activityPulseStatus" hidden>CONNECTED</span>
-      </section>
-
-      <section id="viewerCommands" data-ux-module="commands" class="premiereInteraction">
+<section id="viewerCommands" data-ux-module="commands" class="premiereInteraction">
         <header class="premiereSectionHeader">
           <div>
             <span>Take part on Twitch</span>
@@ -524,6 +522,7 @@
   <script src="assets/js/content-platform.js?v=10014"></script>
   <script src="assets/js/broadcast-premiere.js?v=10017"></script>
 <script src="assets/js/djf-homepage-v2000-1.js?v=20001"></script>
+<script src="assets/js/djf-homepage-v2000-2.js?v=20002"></script>
 
   <script id="djf-v16003-integrated-engine">
     (() => {
