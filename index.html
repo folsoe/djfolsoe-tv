@@ -242,6 +242,7 @@
 
   
   <link rel="stylesheet" href="assets/css/djf-broadcast-v2000.css?v=2000">
+  <link rel="stylesheet" href="assets/css/djf-broadcast-v2000-1.css?v=20001">
 </head>
 <body>
   <div class="premiereAmbient" aria-hidden="true">
@@ -286,6 +287,20 @@
         <time id="activityTickerTime">NOW</time>
         <span id="activityTickerType" hidden>TWITCH</span>
       </section>
+
+<section id="shows" data-ux-module="shows" class="premiereShows">
+        <header class="premiereSectionHeader">
+          <div>
+            <span>Signature programmes</span>
+            <h2 id="showsTitle">Find your show</h2>
+          </div>
+          <p>From bright morning sessions to trance journeys, retro memories and Friday-night energy.</p>
+        </header>
+        <div class="showCards premiereShowCards" id="showCards"></div>
+      </section>
+
+      <div id="contentZoneShowsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="shows-after"></div>
+
 
       <section id="live" data-ux-module="hero" class="premiereHero">
         <div class="premiereHeroGrid" aria-hidden="true"></div>
@@ -348,18 +363,6 @@
 
       <div id="contentZoneFeatured" class="contentModuleZone premiereModuleZone" data-content-zone="featured"></div>
 
-      <section id="shows" data-ux-module="shows" class="premiereShows">
-        <header class="premiereSectionHeader">
-          <div>
-            <span>Signature programmes</span>
-            <h2 id="showsTitle">Find your show</h2>
-          </div>
-          <p>From bright morning sessions to trance journeys, retro memories and Friday-night energy.</p>
-        </header>
-        <div class="showCards premiereShowCards" id="showCards"></div>
-      </section>
-
-      <div id="contentZoneShowsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="shows-after"></div>
 
       <section id="musicNews" class="premiereNews" data-content-zone="editorial">
         <header class="premiereNewsHeader">
@@ -380,15 +383,44 @@
 
       <div id="contentZoneEditorial" class="contentModuleZone premiereModuleZone" data-content-zone="editorial"></div>
 
-      <section id="top20" data-ux-module="top20" class="premiereChart">
+      <section id="top20" data-ux-module="top20" class="premiereChart premiereChartStation">
         <header class="premiereSectionHeader premiereChartHeader">
           <div>
-            <span>DJ FOLSOE countdown</span>
-            <h2>This week's Top 20</h2>
+            <span>DJ FOLSOE charts</span>
+            <h2>Charts & Retro Favorites</h2>
           </div>
-          <p>Viewer favourites, discoveries and the tracks shaping the next show.</p>
+          <p>Three highlights are shown first. Expand each chart to see every available position.</p>
         </header>
-        <div class="chartList premiereChartList" id="chartList"></div>
+
+        <div class="djfChartColumns">
+          <article class="djfChartPanel" id="top20Panel">
+            <header class="djfChartPanelHeader">
+              <div>
+                <span>Current countdown</span>
+                <h3>Top 20 Chart</h3>
+              </div>
+              <b>20</b>
+            </header>
+            <div class="chartList premiereChartList djfExpandableChart" id="chartList"></div>
+            <button class="djfChartExpand" id="top20Expand" type="button" aria-expanded="false">
+              <span>View full Top 20</span><b>＋</b>
+            </button>
+          </article>
+
+          <article class="djfChartPanel" id="retroFavoritePanel" hidden>
+            <header class="djfChartPanelHeader">
+              <div>
+                <span>Classic audience picks</span>
+                <h3>Retro Favorite Top 10</h3>
+              </div>
+              <b>10</b>
+            </header>
+            <div class="chartList premiereChartList djfExpandableChart" id="retroFavoriteList"></div>
+            <button class="djfChartExpand" id="retroExpand" type="button" aria-expanded="false">
+              <span>View full Top 10</span><b>＋</b>
+            </button>
+          </article>
+        </div>
       </section>
 
       <div id="contentZoneChartsAfter" class="contentModuleZone premiereModuleZone" data-content-zone="charts-after"></div>
@@ -491,6 +523,7 @@
   <script src="assets/js/unified-experience.js?v=10014"></script>
   <script src="assets/js/content-platform.js?v=10014"></script>
   <script src="assets/js/broadcast-premiere.js?v=10017"></script>
+<script src="assets/js/djf-homepage-v2000-1.js?v=20001"></script>
 
   <script id="djf-v16003-integrated-engine">
     (() => {
