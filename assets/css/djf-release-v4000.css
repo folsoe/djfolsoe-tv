@@ -1,0 +1,552 @@
+/* ============================================================
+   DJ FOLSOE NETWORK V4000 — EUROPEAN MUSIC TV
+   WEBSITE-ONLY MILESTONE RELEASE
+   Built on stable V3000.
+   No Worker, Admin, API, Theme Engine or scene-switch changes.
+   ============================================================ */
+
+:root{
+  --v4000-orange:#ff9a28;
+  --v4000-pink:#f23996;
+  --v4000-purple:#7d4eff;
+  --v4000-blue:#4c72ff;
+  --v4000-cyan:#50dff5;
+  --v4000-green:#23d891;
+
+  --v4000-ink:#0f1625;
+  --v4000-copy:#56657b;
+  --v4000-paper:#ffffff;
+  --v4000-paper-soft:#edf3f9;
+
+  --v4000-spectrum:linear-gradient(
+    100deg,
+    var(--v4000-orange),
+    var(--v4000-pink),
+    var(--v4000-purple),
+    var(--v4000-blue)
+  );
+
+  --v4000-shadow:
+    0 30px 78px rgba(26,36,62,.18),
+    0 0 34px rgba(125,78,255,.055),
+    inset 0 1px 0 rgba(255,255,255,.98);
+}
+
+/* ============================================================
+   01. EUROPEAN BROADCAST CANVAS
+   ============================================================ */
+
+body{
+  background:
+    radial-gradient(circle at 94% 4%,rgba(242,57,150,.075),transparent 28%),
+    radial-gradient(circle at 5% 96%,rgba(80,223,245,.08),transparent 31%),
+    linear-gradient(180deg,#f8fafc 0%,#edf3f8 58%,#e8eff5 100%) !important;
+}
+
+.premiereMain{
+  gap:17px !important;
+}
+
+/* ============================================================
+   02. EUROPEAN CHANNEL BAR
+   ============================================================ */
+
+.djfV4000ChannelBar{
+  position:relative;
+  z-index:45;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:14px;
+  min-height:64px;
+  padding:10px 12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.98);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(242,57,150,.08),transparent 31%),
+    linear-gradient(145deg,rgba(255,255,255,.98),rgba(237,243,249,.965));
+  box-shadow:
+    0 16px 39px rgba(26,36,62,.13),
+    inset 0 1px 0 #fff;
+  backdrop-filter:blur(17px) saturate(120%);
+}
+
+.djfV4000ChannelBar::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:4px;
+  pointer-events:none;
+  background:var(--v4000-spectrum);
+  background-size:230% 100%;
+  animation:v4000Spectrum 8s linear infinite;
+}
+
+.djfV4000ChannelIdentity{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.djfV4000ChannelBug{
+  display:grid;
+  place-items:center;
+  width:43px;
+  height:43px;
+  flex:0 0 43px;
+  border-radius:15px 5px 15px 5px;
+  color:#fff;
+  background:var(--v4000-spectrum);
+  background-size:210% 100%;
+  box-shadow:
+    0 11px 24px rgba(125,78,255,.23),
+    inset 0 1px 0 rgba(255,255,255,.36);
+  font:950 12px/1 "Manrope",Arial,sans-serif;
+  letter-spacing:.07em;
+  animation:v4000Spectrum 8s linear infinite;
+}
+
+.djfV4000ChannelCopy{
+  min-width:0;
+}
+
+.djfV4000ChannelCopy span{
+  display:block;
+  color:#7d4eff;
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.djfV4000ChannelCopy strong{
+  display:block;
+  margin-top:4px;
+  overflow:hidden;
+  color:var(--v4000-ink);
+  font-family:"Barlow Condensed",Arial,sans-serif;
+  font-size:24px;
+  line-height:.9;
+  font-weight:900;
+  letter-spacing:-.02em;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-transform:uppercase;
+}
+
+.djfV4000ChannelSignal{
+  min-width:0;
+  overflow:hidden;
+}
+
+.djfV4000ChannelSignal p{
+  margin:0;
+  overflow:hidden;
+  color:#4d5b72;
+  font-size:10px;
+  line-height:1.4;
+  font-weight:750;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.djfV4000ChannelMeta{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+}
+
+.djfV4000ChannelMeta span{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:0 10px;
+  border:1px solid rgba(42,54,82,.10);
+  border-radius:999px;
+  color:#4b5870;
+  background:linear-gradient(145deg,#fff,#edf3f9);
+  box-shadow:0 7px 17px rgba(26,36,62,.075);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.djfV4000ChannelMeta span:first-child{
+  color:#fff;
+  border-color:transparent;
+  background:linear-gradient(100deg,#23d891,#50dff5,#7d4eff);
+}
+
+/* ============================================================
+   03. EUROPEAN TV GUIDE
+   ============================================================ */
+
+.djfV4000Guide{
+  position:relative;
+  overflow:hidden;
+  padding:26px;
+  border:1px solid rgba(255,255,255,.98);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 96% 4%,rgba(242,57,150,.09),transparent 27%),
+    radial-gradient(circle at 4% 96%,rgba(80,223,245,.09),transparent 29%),
+    linear-gradient(145deg,#fff,#edf3f9);
+  box-shadow:var(--v4000-shadow);
+}
+
+.djfV4000Guide::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:5px;
+  pointer-events:none;
+  background:var(--v4000-spectrum);
+  background-size:230% 100%;
+  animation:v4000Spectrum 8s linear infinite;
+}
+
+.djfV4000GuideHeader{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:18px;
+}
+
+.djfV4000GuideHeader span{
+  display:block;
+  margin-bottom:7px;
+  color:#7d4eff;
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.djfV4000GuideHeader h2{
+  margin:0;
+  color:var(--v4000-ink);
+  font-family:"Barlow Condensed",Arial,sans-serif;
+  font-size:clamp(43px,4.8vw,70px);
+  line-height:.84;
+  font-weight:900;
+  letter-spacing:-.035em;
+  text-transform:uppercase;
+}
+
+.djfV4000GuideHeader p{
+  max-width:500px;
+  margin:0;
+  color:var(--v4000-copy);
+  font-size:12px;
+  line-height:1.55;
+  font-weight:650;
+}
+
+.djfV4000GuideRail{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(205px,1fr));
+  gap:12px;
+}
+
+.djfV4000GuideCard{
+  position:relative;
+  min-width:0;
+  min-height:166px;
+  padding:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.99);
+  border-radius:19px;
+  color:inherit;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(125,78,255,.075),transparent 31%),
+    linear-gradient(145deg,#fff,#edf3f9);
+  box-shadow:
+    0 13px 31px rgba(26,36,62,.105),
+    inset 0 1px 0 #fff;
+  text-decoration:none;
+  transition:
+    transform .27s cubic-bezier(.2,.7,.2,1),
+    box-shadow .27s ease,
+    border-color .27s ease;
+}
+
+.djfV4000GuideCard::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:5px;
+  background:var(--v4000-spectrum);
+}
+
+.djfV4000GuideCard::after{
+  content:"";
+  position:absolute;
+  top:-65%;
+  bottom:-65%;
+  left:-42%;
+  width:16%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent);
+  opacity:.52;
+  animation:v4000CardSweep 11s ease-in-out infinite;
+}
+
+.djfV4000GuideCard span{
+  display:block;
+  color:#7d4eff;
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+
+.djfV4000GuideCard strong{
+  display:block;
+  margin-top:16px;
+  overflow:hidden;
+  color:var(--v4000-ink);
+  font-family:"Barlow Condensed",Arial,sans-serif;
+  font-size:30px;
+  line-height:.9;
+  font-weight:900;
+  letter-spacing:-.025em;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-transform:uppercase;
+}
+
+.djfV4000GuideCard p{
+  margin:9px 0 0;
+  color:var(--v4000-copy);
+  font-size:10px;
+  line-height:1.45;
+  font-weight:650;
+}
+
+.djfV4000GuideCard b{
+  display:inline-flex;
+  align-items:center;
+  min-height:25px;
+  margin-top:15px;
+  padding:0 9px;
+  border-radius:999px;
+  color:#fff;
+  background:var(--v4000-spectrum);
+  background-size:210% 100%;
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.djfV4000GuideCard:hover{
+  transform:translateY(-7px);
+  border-color:rgba(125,78,255,.24);
+  box-shadow:
+    0 27px 57px rgba(26,36,62,.18),
+    0 0 28px rgba(242,57,150,.07);
+}
+
+/* ============================================================
+   04. HERO / ON AIR
+   ============================================================ */
+
+#live.premiereHero{
+  min-height:680px !important;
+}
+
+#live #heroTitle{
+  font-size:clamp(82px,8.8vw,145px) !important;
+}
+
+#live .premierePortraitFrame{
+  box-shadow:
+    0 40px 92px rgba(26,36,62,.28),
+    0 0 44px rgba(242,57,150,.125),
+    inset 0 1px 0 rgba(255,255,255,.72) !important;
+}
+
+#live .premiereOnAirCard{
+  box-shadow:
+    0 25px 55px rgba(26,36,62,.22),
+    0 0 28px rgba(125,78,255,.06),
+    inset 0 1px 0 #fff !important;
+}
+
+/* ============================================================
+   05. PROGRAMME SHELF
+   ============================================================ */
+
+#shows .premiereShowCards > *{
+  min-height:345px !important;
+}
+
+#shows .premiereShowCards img{
+  min-height:198px !important;
+}
+
+#shows .premiereShowCards h2,
+#shows .premiereShowCards h3{
+  font-size:31px !important;
+}
+
+/* ============================================================
+   06. CHART CHANNEL
+   ============================================================ */
+
+#top20 .premiereChartHeader h2{
+  font-size:clamp(48px,5.2vw,78px) !important;
+}
+
+.djfChartPanel{
+  border-radius:25px !important;
+}
+
+.djfChartRow{
+  min-height:82px !important;
+}
+
+#top20Panel .djfChartRow:nth-child(1),
+#retroFavoritePanel .djfChartRow:nth-child(1){
+  background:
+    radial-gradient(circle at 95% 5%,rgba(255,202,90,.15),transparent 27%),
+    linear-gradient(145deg,#fff,#edf3f9) !important;
+}
+
+/* ============================================================
+   07. COMMUNITY NETWORK
+   ============================================================ */
+
+.djfCommunityRail{
+  gap:13px !important;
+}
+
+.djfCommunityCard{
+  min-height:165px !important;
+}
+
+.premiereCommunitySpotlight{
+  min-height:170px !important;
+}
+
+/* ============================================================
+   08. EUROPEAN STATION SIGN-OFF
+   ============================================================ */
+
+.premiereFooter{
+  min-height:170px !important;
+  border-radius:27px !important;
+}
+
+/* ============================================================
+   09. RESPONSIVE EUROPEAN TV
+   ============================================================ */
+
+@media(min-width:1800px){
+  .djfV4000GuideRail{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .djfV4000GuideCard{
+    min-height:182px;
+  }
+
+  .djfV4000ChannelBar{
+    min-height:70px;
+  }
+}
+
+@media(max-width:1050px){
+  .djfV4000ChannelBar{
+    grid-template-columns:auto minmax(0,1fr);
+  }
+
+  .djfV4000ChannelMeta{
+    grid-column:1 / -1;
+    justify-content:flex-start;
+  }
+
+  .djfV4000GuideRail{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:700px){
+  .djfV4000ChannelBar{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .djfV4000ChannelMeta{
+    grid-column:auto;
+  }
+
+  .djfV4000ChannelMeta span:nth-child(n+3){
+    display:none;
+  }
+
+  .djfV4000Guide{
+    padding:22px 15px;
+    border-radius:21px;
+  }
+
+  .djfV4000GuideHeader{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:9px;
+  }
+
+  .djfV4000GuideRail{
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding-bottom:12px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+
+  .djfV4000GuideRail::-webkit-scrollbar{
+    display:none;
+  }
+
+  .djfV4000GuideCard{
+    flex:0 0 80vw;
+    min-height:158px;
+    scroll-snap-align:start;
+  }
+
+  #live.premiereHero{
+    min-height:0 !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .djfV4000ChannelBar::after,
+  .djfV4000ChannelBug,
+  .djfV4000Guide::after,
+  .djfV4000GuideCard::after{
+    animation:none !important;
+  }
+}
+
+@keyframes v4000Spectrum{
+  from{background-position:0% 50%}
+  to{background-position:230% 50%}
+}
+
+@keyframes v4000CardSweep{
+  0%,70%{left:-42%;opacity:0}
+  77%{opacity:.58}
+  92%,100%{left:125%;opacity:0}
+}
