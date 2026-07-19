@@ -1,0 +1,36 @@
+{
+  "version": "2.0",
+  "show": {
+    "id": "trance",
+    "name": "Trance Tuesday",
+    "targetTracks": 50,
+    "allowedSourceTags": [
+      "trance",
+      "progressive",
+      "uplifting",
+      "eurotrance"
+    ],
+    "yearMin": 1995,
+    "yearMax": 2099,
+    "maxPerArtist": 2,
+    "repeatDays": 35,
+    "mix": {
+      "progressive": 25,
+      "uplifting": 35,
+      "classics": 20,
+      "new": 20
+    },
+    "energyCurve": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      7
+    ]
+  },
+  "updatedAt": "2026-07-19T18:13:58.294Z",
+  "count": 0,
+  "items": []
+}

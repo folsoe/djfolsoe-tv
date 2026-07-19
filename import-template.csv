@@ -1,0 +1,35 @@
+{
+  "version": "2.0",
+  "show": {
+    "id": "fredagsbar",
+    "name": "Fredagsbar",
+    "targetTracks": 55,
+    "allowedSourceTags": [
+      "fredagsbar",
+      "current",
+      "party",
+      "denmark",
+      "international"
+    ],
+    "yearMin": 1970,
+    "yearMax": 2099,
+    "maxPerArtist": 2,
+    "repeatDays": 21,
+    "mix": {
+      "current": 35,
+      "singalong": 30,
+      "danish": 20,
+      "surprise": 15
+    },
+    "energyCurve": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "updatedAt": "2026-07-19T18:13:58.295Z",
+  "count": 0,
+  "items": []
+}

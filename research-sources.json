@@ -1,0 +1,31 @@
+{
+  "version": "2.0",
+  "show": {
+    "id": "retro",
+    "name": "Retro Hits 70/80",
+    "targetTracks": 48,
+    "allowedSourceTags": [
+      "retro",
+      "70s",
+      "80s"
+    ],
+    "yearMin": 1970,
+    "yearMax": 1989,
+    "maxPerArtist": 2,
+    "repeatDays": 42,
+    "mix": {
+      "70s": 45,
+      "80s": 45,
+      "danish": 10
+    },
+    "energyCurve": [
+      4,
+      5,
+      7,
+      8
+    ]
+  },
+  "updatedAt": "2026-07-19T18:13:58.293Z",
+  "count": 0,
+  "items": []
+}

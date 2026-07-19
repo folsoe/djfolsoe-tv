@@ -1,0 +1,40 @@
+{
+  "version": "2.0",
+  "updatedAt": "2026-07-19T18:13:58.053Z",
+  "forceRefresh": false,
+  "sources": 4,
+  "successfulSources": 0,
+  "staleSources": 0,
+  "failedSources": 4,
+  "totalItems": 0,
+  "statuses": [
+    {
+      "id": "apple-dk",
+      "name": "Apple Music Danmark",
+      "status": "failed",
+      "count": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "apple-gb",
+      "name": "Apple Music UK",
+      "status": "failed",
+      "count": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "hitlisten",
+      "name": "Hitlisten Danmark",
+      "status": "failed",
+      "count": 0,
+      "error": "fetch failed"
+    },
+    {
+      "id": "official-uk",
+      "name": "Official UK Singles",
+      "status": "failed",
+      "count": 0,
+      "error": "fetch failed"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+[
+ {"id":"morning","name":"Good Morning Twitch","targetTracks":45,"minEnergy":3,"maxEnergy":7,"genres":["Pop","Dance Pop","Nu-Disco","Eurodance","Danish Pop","Morning"],"repeatDays":28,"bpmMin":90,"bpmMax":130},
+ {"id":"trance","name":"Trance Tuesday","targetTracks":50,"minEnergy":5,"maxEnergy":10,"genres":["Trance","Progressive Trance","Uplifting Trance","Eurotrance"],"repeatDays":35,"bpmMin":124,"bpmMax":142},
+ {"id":"eurodance","name":"Eurodance","targetTracks":55,"minEnergy":6,"maxEnergy":10,"genres":["Eurodance","Euro House","Italodance","Bubblegum Dance","Eurotrance"],"repeatDays":35,"bpmMin":115,"bpmMax":150},
+ {"id":"fredagsbar","name":"Fredagsbar","targetTracks":55,"minEnergy":6,"maxEnergy":10,"genres":["Party","Dance","Eurodance","Danish Hits","EDM","Disco","Fredagsbar"],"repeatDays":21,"bpmMin":100,"bpmMax":145},
+ {"id":"retro","name":"Retro Hits","targetTracks":45,"minEnergy":4,"maxEnergy":9,"genres":["70s","80s","90s","Disco","Pop","Eurodance","Retro"],"repeatDays":42,"bpmMin":75,"bpmMax":145},
+ {"id":"weekend","name":"Weekend","targetTracks":50,"minEnergy":5,"maxEnergy":10,"genres":["Dance","EDM","Eurodance","House","Hands Up","Weekend"],"repeatDays":28,"bpmMin":105,"bpmMax":150},
+ {"id":"popup","name":"Pop Up Live","targetTracks":45,"minEnergy":3,"maxEnergy":10,"genres":["Any"],"repeatDays":14,"bpmMin":65,"bpmMax":185}
+]

@@ -1,0 +1,10 @@
+{
+  "id": "official-uk",
+  "name": "Official UK Singles",
+  "updatedAt": null,
+  "checkedAt": "2026-07-19T18:13:58.051Z",
+  "status": "failed",
+  "error": "fetch failed",
+  "count": 0,
+  "items": []
+}

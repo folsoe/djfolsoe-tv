@@ -1,0 +1,34 @@
+{
+  "version": "2.0",
+  "show": {
+    "id": "eurodance",
+    "name": "Eurodance",
+    "targetTracks": 55,
+    "allowedSourceTags": [
+      "eurodance",
+      "90s",
+      "italodance",
+      "eurotrance"
+    ],
+    "yearMin": 1989,
+    "yearMax": 2012,
+    "maxPerArtist": 2,
+    "repeatDays": 35,
+    "mix": {
+      "anthems": 45,
+      "deepCuts": 25,
+      "danish": 15,
+      "evolution": 15
+    },
+    "energyCurve": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "updatedAt": "2026-07-19T18:13:58.294Z",
+  "count": 0,
+  "items": []
+}
