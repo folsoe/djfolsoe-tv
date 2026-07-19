@@ -1,0 +1,11 @@
+{
+  "name": "dj-folsoe-music-research",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "research": "node scripts/update-research.mjs"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0"
+  }
+}
