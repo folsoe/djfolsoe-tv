@@ -1,0 +1,139 @@
+[
+  {
+    "id": "morning",
+    "name": "Good Morning Twitch",
+    "targetTracks": 45,
+    "minEnergy": 3,
+    "maxEnergy": 7,
+    "genres": [
+      "Pop",
+      "Dance Pop",
+      "Nu-Disco",
+      "Eurodance",
+      "Danish Pop"
+    ],
+    "danishMin": 0.15,
+    "deepCutMin": 0.15,
+    "hitMax": 0.55,
+    "repeatDays": 28,
+    "bpmMin": 95,
+    "bpmMax": 130
+  },
+  {
+    "id": "trance",
+    "name": "Trance Tuesday",
+    "targetTracks": 50,
+    "minEnergy": 5,
+    "maxEnergy": 10,
+    "genres": [
+      "Trance",
+      "Progressive Trance",
+      "Uplifting Trance",
+      "Eurotrance"
+    ],
+    "danishMin": 0.05,
+    "deepCutMin": 0.2,
+    "hitMax": 0.45,
+    "repeatDays": 35,
+    "bpmMin": 124,
+    "bpmMax": 142
+  },
+  {
+    "id": "eurodance",
+    "name": "Eurodance",
+    "targetTracks": 55,
+    "minEnergy": 6,
+    "maxEnergy": 10,
+    "genres": [
+      "Eurodance",
+      "Euro House",
+      "Italodance",
+      "Bubblegum Dance",
+      "Eurotrance"
+    ],
+    "danishMin": 0.18,
+    "deepCutMin": 0.25,
+    "hitMax": 0.55,
+    "repeatDays": 35,
+    "bpmMin": 115,
+    "bpmMax": 150
+  },
+  {
+    "id": "fredagsbar",
+    "name": "Fredagsbar",
+    "targetTracks": 55,
+    "minEnergy": 6,
+    "maxEnergy": 10,
+    "genres": [
+      "Party",
+      "Dance",
+      "Eurodance",
+      "Danish Hits",
+      "EDM",
+      "Disco"
+    ],
+    "danishMin": 0.25,
+    "deepCutMin": 0.1,
+    "hitMax": 0.7,
+    "repeatDays": 21,
+    "bpmMin": 100,
+    "bpmMax": 145
+  },
+  {
+    "id": "retro",
+    "name": "Retro Hits",
+    "targetTracks": 45,
+    "minEnergy": 4,
+    "maxEnergy": 9,
+    "genres": [
+      "70s",
+      "80s",
+      "90s",
+      "Disco",
+      "Pop",
+      "Eurodance"
+    ],
+    "danishMin": 0.2,
+    "deepCutMin": 0.25,
+    "hitMax": 0.55,
+    "repeatDays": 42,
+    "bpmMin": 80,
+    "bpmMax": 145
+  },
+  {
+    "id": "weekend",
+    "name": "Weekend",
+    "targetTracks": 50,
+    "minEnergy": 5,
+    "maxEnergy": 10,
+    "genres": [
+      "Dance",
+      "EDM",
+      "Eurodance",
+      "House",
+      "Hands Up"
+    ],
+    "danishMin": 0.1,
+    "deepCutMin": 0.15,
+    "hitMax": 0.65,
+    "repeatDays": 28,
+    "bpmMin": 110,
+    "bpmMax": 150
+  },
+  {
+    "id": "popup",
+    "name": "Pop Up Live",
+    "targetTracks": 45,
+    "minEnergy": 4,
+    "maxEnergy": 10,
+    "genres": [
+      "Any"
+    ],
+    "danishMin": 0.1,
+    "deepCutMin": 0.15,
+    "hitMax": 0.7,
+    "repeatDays": 14,
+    "bpmMin": 70,
+    "bpmMax": 180
+  }
+]
