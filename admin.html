@@ -9,6 +9,7 @@
 .top20Editor{display:grid;gap:8px;max-height:560px;overflow:auto;padding-right:4px}.top20Row{display:grid;grid-template-columns:44px 1fr 1fr .75fr;gap:8px;align-items:center}.top20Row b{color:#fff;opacity:.9}.wideCard{grid-column:span 2}@media(max-width:900px){.wideCard{grid-column:span 1}.top20Row{grid-template-columns:38px 1fr}.top20Row input{min-width:0}}
 </style>  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19100">
   <link rel="stylesheet" href="assets/css/graphics-studio.css?v=19200">
+  <link rel="stylesheet" href="assets/css/ai-music-director.css?v=19300">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -453,6 +454,86 @@
       </div>
     </section>
 
+
+    <section class="aiMusicDirector" id="aiMusicDirector">
+      <div class="aiMusicDirector__head">
+        <div>
+          <span>V19300 · AI MUSIC DIRECTOR</span>
+          <h2>Plan complete DJ shows</h2>
+          <p>Build a four-hour structure, control genre and energy, reserve request slots and export a TIDAL-compatible CSV.</p>
+        </div>
+        <button type="button" id="musicDirectorGenerateBtn" class="bigPublish">Generate show plan</button>
+      </div>
+
+      <div class="aiMusicDirector__grid">
+        <article class="aiMusicDirector__panel">
+          <div class="aiMusicDirector__panelHead">
+            <span>SHOW BRIEF</span>
+            <h3>Music direction</h3>
+          </div>
+          <div class="aiMusicDirector__form">
+            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
+              <label for="musicDirectorShow">Show</label>
+              <select id="musicDirectorShow">
+                <option value="good-morning">Good Morning Twitch</option>
+                <option value="trance-tuesday">Trance Tuesday</option>
+                <option value="eurodance">Eurodance</option>
+                <option value="retro-hits">Retro Hits</option>
+                <option value="fredagsbar">Fredagsbar</option>
+              </select>
+            </div>
+            <div class="aiMusicDirector__field">
+              <label for="musicDirectorDuration">Duration minutes</label>
+              <input id="musicDirectorDuration" type="number" value="240" min="30" max="600">
+            </div>
+            <div class="aiMusicDirector__field">
+              <label for="musicDirectorAverage">Average track minutes</label>
+              <input id="musicDirectorAverage" type="number" value="3.6" min="2" max="10" step=".1">
+            </div>
+            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
+              <label for="musicDirectorGenres">Genres, separated by commas</label>
+              <textarea id="musicDirectorGenres">Radio Hits, Dance Pop, Nu-Disco, Pop</textarea>
+            </div>
+            <div class="aiMusicDirector__field">
+              <label for="musicDirectorArtistSpacing">Artist spacing</label>
+              <input id="musicDirectorArtistSpacing" type="number" value="12" min="2" max="40">
+            </div>
+            <div class="aiMusicDirector__field">
+              <label for="musicDirectorDecadeRun">Max same decade in row</label>
+              <input id="musicDirectorDecadeRun" type="number" value="4" min="1" max="12">
+            </div>
+            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
+              <label><input id="musicDirectorRequests" type="checkbox" checked> Include viewer-request slots</label>
+            </div>
+            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
+              <label for="musicDirectorNotes">Additional instructions</label>
+              <textarea id="musicDirectorNotes" placeholder="Danish radio hits, stronger final hour, avoid slow ballads…"></textarea>
+            </div>
+          </div>
+          <div class="aiMusicDirector__actions">
+            <button type="button" id="musicDirectorCopyBtn">Copy AI prompt</button>
+            <button type="button" id="musicDirectorExportBtn">Export CSV</button>
+            <button type="button" id="musicDirectorAdminBtn">Send to admin</button>
+          </div>
+          <pre class="aiMusicDirector__prompt" id="musicDirectorPrompt">Music Director prompt appears here.</pre>
+        </article>
+
+        <article class="aiMusicDirector__panel">
+          <div class="aiMusicDirector__panelHead">
+            <span>SHOW PLAN</span>
+            <h3>Energy and running order</h3>
+          </div>
+          <div class="aiMusicDirector__summary">
+            <article><span>TRACKS</span><strong id="musicDirectorTrackCount">0</strong></article>
+            <article><span>DURATION</span><strong id="musicDirectorTotalTime">0 min</strong></article>
+            <article><span>PEAK ENERGY</span><strong id="musicDirectorPeak">0</strong></article>
+            <article><span>REQUEST SLOTS</span><strong id="musicDirectorRequestsCount">0</strong></article>
+          </div>
+          <div class="aiMusicDirector__timeline" id="musicDirectorTimeline"></div>
+        </article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -483,5 +564,6 @@
 <script src="assets/js/admin.js?v=19100"></script>
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
   <script src="assets/js/graphics-studio.js?v=19200"></script>
+  <script src="assets/js/ai-music-director.js?v=19300"></script>
 </body>
 </html>
