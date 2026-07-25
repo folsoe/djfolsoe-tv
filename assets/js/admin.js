@@ -65,6 +65,7 @@ function normalizeCore(raw){
     top20: core.top20 || core.homepage?.top20 || [],
     featuredShows: core.featuredShows || core.homepage?.featuredShows || [],
     mods: core.mods || {},
+    interactive: core.interactive || {},
     overlay:{title:showTitle,status:mode,infoLine:tickerText,requestText:c.requestText||cp.requestText||'Use !request Artist - Title in Twitch chat',specialEvent:c.specialEvent||cp.specialEvent||'',subGoal:c.subGoal||cp.subGoal||100}
   };
 }
@@ -203,6 +204,7 @@ function buildPayload(){
     ticker:{text:tickerText,items:[tickerText]},
     top20: top20FromFields(),
     mods: modsFromFields(),
+    interactive: window.DJF_INTERACTION_ADMIN?.buildInteractive?.() || {},
     featuredShows:[
       {time:'Morning',title:'Good Morning Twitch',description:'Bright morning mood, coffee, chat and fresh music.',color:'#ffe36e'},
       {time:'Tuesday',title:'Trance Tuesday',description:'Melodic trance, energy and emotional peak-time sound.',color:'#62ecff'},
