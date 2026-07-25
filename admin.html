@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/css/music-chart-tv.css?v=19500">
   <link rel="stylesheet" href="assets/css/serato-bridge.css?v=19600">
   <link rel="stylesheet" href="assets/css/audience-identity.css?v=19700">
+  <link rel="stylesheet" href="assets/css/website-cms.css?v=19800">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -693,6 +694,64 @@
       </div>
     </section>
 
+
+    <section class="websiteCmsAdmin" id="websiteCmsAdmin">
+      <div class="websiteCmsAdmin__head">
+        <div>
+          <span>V19800 · WEBSITE CMS 2.0</span>
+          <h2>Control homepage content without code</h2>
+          <p>Create news, highlights and channel updates that publish through the same broadcast core.</p>
+        </div>
+        <button type="button" id="websiteCmsPublishBtn" class="bigPublish">Publish website CMS</button>
+      </div>
+
+      <div class="websiteCmsAdmin__grid">
+        <article class="websiteCmsAdmin__panel">
+          <span>CONTENT BUILDER</span>
+          <h3>Add content</h3>
+          <div class="websiteCmsAdmin__form">
+            <div class="websiteCmsAdmin__field">
+              <label for="websiteCmsType">Content type</label>
+              <select id="websiteCmsType">
+                <option value="news">News</option>
+                <option value="highlight">Highlight</option>
+                <option value="clip">Clip</option>
+                <option value="promo">Promo</option>
+              </select>
+            </div>
+            <div class="websiteCmsAdmin__field">
+              <label for="websiteCmsDate">Date label</label>
+              <input id="websiteCmsDate" placeholder="TODAY">
+            </div>
+            <div class="websiteCmsAdmin__field websiteCmsAdmin__field--wide">
+              <label for="websiteCmsTitle">Title</label>
+              <input id="websiteCmsTitle">
+            </div>
+            <div class="websiteCmsAdmin__field websiteCmsAdmin__field--wide">
+              <label for="websiteCmsBody">Body</label>
+              <textarea id="websiteCmsBody"></textarea>
+            </div>
+            <div class="websiteCmsAdmin__field websiteCmsAdmin__field--wide">
+              <label for="websiteCmsUrl">Optional URL</label>
+              <input id="websiteCmsUrl" placeholder="https://">
+            </div>
+          </div>
+          <div class="websiteCmsAdmin__actions">
+            <button type="button" id="websiteCmsAddBtn">Add item</button>
+            <button type="button" id="websiteCmsClearBtn">Clear form</button>
+            <button type="button" id="websiteCmsLoadBtn">Load current</button>
+          </div>
+          <pre id="websiteCmsDiagnostics" class="websiteCmsAdmin__diag">Website CMS ready.</pre>
+        </article>
+
+        <article class="websiteCmsAdmin__panel">
+          <span>CONTENT QUEUE</span>
+          <h3>Homepage items</h3>
+          <div id="websiteCmsItems" class="websiteCmsAdmin__items"></div>
+        </article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -728,5 +787,6 @@
   <script src="assets/js/music-chart-admin.js?v=19500"></script>
   <script src="assets/js/serato-admin.js?v=19600"></script>
   <script src="assets/js/audience-identity-admin.js?v=19700"></script>
+  <script src="assets/js/website-cms-admin.js?v=19800"></script>
 </body>
 </html>
