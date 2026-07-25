@@ -13,6 +13,7 @@
   <link rel="canonical" href="https://folsoetv.dk/">
   <link rel="stylesheet" href="assets/css/site.css?v=restore-20260725">
   <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19000">
+  <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -151,6 +152,34 @@
     </section>
 
 
+
+    <section class="section interactiveBroadcast" id="interactive" data-interactive-state="inactive">
+      <div class="interactiveBroadcast__head">
+        <div>
+          <span>INTERACTIVE BROADCAST</span>
+          <h2>Join the show</h2>
+        </div>
+        <div id="interactiveStatus" class="interactiveBroadcast__status">WAITING FOR NEXT MODULE</div>
+      </div>
+      <div class="interactiveBroadcast__grid">
+        <article class="interactiveBroadcast__card">
+          <span id="interactiveTypeLabel" class="interactiveBroadcast__label">COMMUNITY</span>
+          <h3 id="interactiveQuestion" class="interactiveBroadcast__question">The next interactive module appears here.</h3>
+          <p id="interactiveDescription" class="interactiveBroadcast__copy">Vote, rate, play and help shape the live show.</p>
+          <div id="interactiveOptions" class="interactiveBroadcast__options">
+            <div class="interactiveBroadcast__empty">No active poll, quiz or battle.</div>
+          </div>
+        </article>
+        <article class="interactiveBroadcast__card interactiveBroadcast__result">
+          <div>
+            <span class="interactiveBroadcast__label">LIVE RESULT</span>
+            <strong id="interactiveVoteCount">0 votes</strong>
+            <p id="interactiveResultText">Results update automatically.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="section homepage-chart" id="chart">
       <div class="section-heading homepage-heading">
         <div>
@@ -223,5 +252,6 @@
 
   <script src="assets/js/site.js?v=19000"></script>
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
+  <script src="assets/js/interaction-site.js?v=19400"></script>
 </body>
 </html>

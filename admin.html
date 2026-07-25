@@ -10,6 +10,7 @@
 </style>  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19100">
   <link rel="stylesheet" href="assets/css/graphics-studio.css?v=19200">
   <link rel="stylesheet" href="assets/css/ai-music-director.css?v=19300">
+  <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -534,6 +535,75 @@
       </div>
     </section>
 
+
+    <section class="interactionAdmin" id="interactionAdmin">
+      <div class="interactionAdmin__head">
+        <div>
+          <span>V19400 · INTERACTIVE BROADCAST MODULES</span>
+          <h2>Let the audience shape the show</h2>
+          <p>Create polls, quizzes, battles, ratings, wheels and request votes for website and overlay.</p>
+        </div>
+        <button type="button" id="interactionPublishBtn" class="bigPublish">Publish interaction</button>
+      </div>
+      <div class="interactionAdmin__grid">
+        <article class="interactionAdmin__panel">
+          <span>MODULE BUILDER</span>
+          <h3>Create interaction</h3>
+          <div class="interactionAdmin__templates">
+            <button type="button" data-interaction-template="poll">Poll</button>
+            <button type="button" data-interaction-template="quiz">Quiz</button>
+            <button type="button" data-interaction-template="battle">Battle</button>
+            <button type="button" data-interaction-template="rating">Rating</button>
+            <button type="button" data-interaction-template="wheel">Wheel</button>
+            <button type="button" data-interaction-template="request">Requests</button>
+          </div>
+          <div class="interactionAdmin__form">
+            <div class="interactionAdmin__field">
+              <label for="interactionState">State</label>
+              <select id="interactionState">
+                <option value="open">Voting open</option>
+                <option value="closed">Show result</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+            <div class="interactionAdmin__field">
+              <label for="interactionDuration">Overlay duration ms</label>
+              <input id="interactionDuration" type="number" value="12000" min="4000" max="30000">
+            </div>
+            <div class="interactionAdmin__field interactionAdmin__field--wide">
+              <label for="interactionQuestion">Question</label>
+              <input id="interactionQuestion">
+            </div>
+            <div class="interactionAdmin__field interactionAdmin__field--wide">
+              <label for="interactionDescription">Description</label>
+              <textarea id="interactionDescription"></textarea>
+            </div>
+            <div class="interactionAdmin__field"><label for="interactionOptionA">Option A</label><input id="interactionOptionA"></div>
+            <div class="interactionAdmin__field"><label for="interactionOptionB">Option B</label><input id="interactionOptionB"></div>
+            <div class="interactionAdmin__field"><label for="interactionOptionC">Option C</label><input id="interactionOptionC"></div>
+            <div class="interactionAdmin__field"><label for="interactionOptionD">Option D</label><input id="interactionOptionD"></div>
+          </div>
+          <div class="interactionAdmin__actions">
+            <button type="button" id="interactionPreviewBtn">Preview</button>
+            <button type="button" id="interactionResetVotesBtn">Reset votes</button>
+            <button type="button" id="interactionShowResultBtn">Show result</button>
+            <button type="button" id="interactionStopBtn">Stop module</button>
+          </div>
+        </article>
+        <article class="interactionAdmin__panel">
+          <span>TV PREVIEW</span>
+          <h3 id="interactionPreviewType">LIVE POLL</h3>
+          <div class="interactionAdmin__preview">
+            <span id="interactionPreviewLabel">VOTING OPEN</span>
+            <h4 id="interactionPreviewQuestion">Which track should play next?</h4>
+            <p id="interactionPreviewDescription">Vote on the website.</p>
+            <div id="interactionPreviewOptions" class="interactionAdmin__previewOptions"></div>
+          </div>
+          <pre id="interactionDiagnostics" class="interactionAdmin__diagnostics">Interactive Broadcast ready.</pre>
+        </article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -565,5 +635,6 @@
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
   <script src="assets/js/graphics-studio.js?v=19200"></script>
   <script src="assets/js/ai-music-director.js?v=19300"></script>
+  <script src="assets/js/interaction-admin.js?v=19400"></script>
 </body>
 </html>
