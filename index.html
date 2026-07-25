@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://folsoetv.dk/">
   <link rel="stylesheet" href="assets/css/site.css?v=restore-20260725">
-  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=18850-1">
+  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19000">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -29,7 +29,9 @@
     <nav aria-label="Primary navigation">
       <a href="#live">Live</a>
       <a href="#shows">Shows</a>
-      <a href="#about">About</a>
+      <a href="#channel">Channel</a>
+      <a href="#shows">Shows</a>
+      <a href="#chart">Top 20</a>
       <a href="#community">Community</a>
     </nav>
 
@@ -61,12 +63,12 @@
         <div class="screen">
           <div class="screen-grid"></div>
           <div class="screen-copy">
-            <small>DJ FOLSOE NETWORK</small>
+            <small id="networkLabel">DJ FOLSOE NETWORK</small>
             <strong id="showTitle">LIVE FROM DENMARK</strong>
             <span id="streamTitle">Music, requests and good company</span>
           </div>
         </div>
-        <div class="now-next">
+        <div class="now-next" data-home-module="next-show">
           <span>UP NEXT</span>
           <strong id="nextShow">Check Twitch for the next live show</strong>
           <small id="nextShowTime">Schedule updates automatically when available</small>
@@ -78,19 +80,111 @@
       <div>DJ FOLSOE · TWITCH MUSIC TV · EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK ·</div>
     </section>
 
+
+    <section class="section homepage-channel" id="channel">
+      <div class="section-heading homepage-heading">
+        <div>
+          <p>CHANNEL NOW</p>
+          <h2>A living Music TV front page</h2>
+        </div>
+        <span id="channelStatusBadge" class="homepage-status-badge">CONNECTED</span>
+      </div>
+
+      <div class="homepage-live-grid">
+        <article class="homepage-nowplaying homepage-module" data-home-module="now-playing">
+          <div class="homepage-module-head">
+            <span>NOW PLAYING</span>
+            <strong id="nowPlayingSource">LIVE MUSIC</strong>
+          </div>
+          <div class="homepage-track">
+            <div id="nowPlayingCover" class="homepage-cover" aria-hidden="true">♫</div>
+            <div>
+              <h3 id="nowPlayingTitle">DJ FOLSOE · LIVE MUSIC</h3>
+              <p id="nowPlayingMeta">Track information appears automatically when available.</p>
+            </div>
+          </div>
+          <div class="homepage-progress" aria-hidden="true"><span id="nowPlayingProgress"></span></div>
+        </article>
+
+        <article class="homepage-module homepage-next-card" data-home-module="next-show">
+          <div class="homepage-module-head">
+            <span>NEXT BROADCAST</span>
+            <strong id="homepageNextTheme">DJ FOLSOE</strong>
+          </div>
+          <h3 id="homepageNextTitle">Next DJ FOLSOE Broadcast</h3>
+          <p id="homepageNextDescription">The next show appears automatically from the broadcast system.</p>
+          <strong id="homepageNextTime" class="homepage-large-value">Announced soon</strong>
+        </article>
+
+        <article class="homepage-module homepage-goals-card" data-home-module="community-goals">
+          <div class="homepage-module-head">
+            <span>COMMUNITY</span>
+            <strong>LIVE GOALS</strong>
+          </div>
+          <div class="homepage-goal">
+            <div><span>Followers</span><strong id="homepageFollowerGoalText">— / 1000</strong></div>
+            <div class="homepage-goal-track"><span id="homepageFollowerGoalBar"></span></div>
+          </div>
+          <div class="homepage-goal">
+            <div><span>Subscribers</span><strong id="homepageSubGoalText">0 / 100</strong></div>
+            <div class="homepage-goal-track"><span id="homepageSubGoalBar"></span></div>
+          </div>
+          <p id="homepageRequestText">Use !request Artist - Title in Twitch chat</p>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="shows">
       <div class="section-heading">
         <p>PROGRAMMING</p>
         <h2>Signature shows</h2>
       </div>
 
-      <div class="show-grid">
+      <div id="featuredShowsGrid" class="show-grid">
         <article class="show-card trance"><small>TUESDAY</small><h3>Trance Tuesday</h3><p>Uplifting, progressive and classic trance.</p></article>
         <article class="show-card eurodance"><small>90s &amp; 00s</small><h3>Eurodance</h3><p>Big hooks, fast beats and pure nostalgia.</p></article>
         <article class="show-card retro"><small>SUNDAY</small><h3>Retro Hits</h3><p>Classic chart hits from the golden decades.</p></article>
         <article class="show-card friday"><small>FRIDAY</small><h3>Fredagsbar</h3><p>Weekend energy, requests and community.</p></article>
         <article class="show-card morning"><small>MORNING</small><h3>Good Morning Twitch</h3><p>Coffee, radio hits and a bright start.</p></article>
         <article class="show-card popup"><small>ANYTIME</small><h3>Pop Up Live</h3><p>Surprise shows when you least expect them.</p></article>
+      </div>
+    </section>
+
+
+    <section class="section homepage-chart" id="chart">
+      <div class="section-heading homepage-heading">
+        <div>
+          <p>FOLSOE TOP 20</p>
+          <h2>This week on the channel</h2>
+        </div>
+        <span id="chartUpdatedLabel" class="homepage-status-badge">WEEKLY CHART</span>
+      </div>
+      <div class="homepage-chart-layout">
+        <article id="chartNumberOne" class="homepage-number-one homepage-module">
+          <span>#1 THIS WEEK</span>
+          <strong id="chartNumberOneTitle">DJ FOLSOE — This Week's Number One</strong>
+          <p id="chartNumberOneStatus">The current chart is controlled from admin.</p>
+        </article>
+        <div id="homepageChartList" class="homepage-chart-list">
+          <div><strong>#2</strong><span>Chart data appears automatically</span></div>
+          <div><strong>#3</strong><span>Chart data appears automatically</span></div>
+          <div><strong>#4</strong><span>Chart data appears automatically</span></div>
+          <div><strong>#5</strong><span>Chart data appears automatically</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section homepage-community-crew" id="community-crew">
+      <div class="section-heading homepage-heading">
+        <div>
+          <p>BEHIND THE CHANNEL</p>
+          <h2>DJ FOLSOE community crew</h2>
+        </div>
+      </div>
+      <div id="homepageCrewGrid" class="homepage-crew-grid">
+        <article class="homepage-module"><span>HEAD MODS</span><strong>Community team</strong></article>
+        <article class="homepage-module"><span>COMMUNITY MODS</span><strong>Keeping chat alive</strong></article>
+        <article class="homepage-module"><span>MUSIC TEAM</span><strong>Music and requests</strong></article>
       </div>
     </section>
 
@@ -127,7 +221,7 @@
     <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">twitch.tv/djfolsoe</a>
   </footer>
 
-  <script src="assets/js/site.js?v=restore-20260725"></script>
-  <script src="assets/js/v18850-visual-system.js?v=18850-1"></script>
+  <script src="assets/js/site.js?v=19000"></script>
+  <script src="assets/js/v18850-visual-system.js?v=19000"></script>
 </body>
 </html>
