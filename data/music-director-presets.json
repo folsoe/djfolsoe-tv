@@ -1,0 +1,141 @@
+{
+  "version": "V19300",
+  "showPresets": {
+    "good-morning": {
+      "name": "Good Morning Twitch",
+      "durationMinutes": 240,
+      "genres": [
+        "Radio Hits",
+        "Dance Pop",
+        "Nu-Disco",
+        "Pop"
+      ],
+      "energyCurve": [
+        35,
+        45,
+        55,
+        68,
+        75,
+        82,
+        70,
+        58
+      ],
+      "decades": {
+        "1980s": 15,
+        "1990s": 20,
+        "2000s": 20,
+        "2010s": 20,
+        "2020s": 25
+      }
+    },
+    "trance-tuesday": {
+      "name": "Trance Tuesday",
+      "durationMinutes": 180,
+      "genres": [
+        "Progressive Trance",
+        "Uplifting Trance",
+        "Classic Trance"
+      ],
+      "energyCurve": [
+        55,
+        64,
+        72,
+        82,
+        90,
+        96,
+        88,
+        76
+      ],
+      "decades": {
+        "1990s": 15,
+        "2000s": 35,
+        "2010s": 25,
+        "2020s": 25
+      }
+    },
+    "eurodance": {
+      "name": "Eurodance",
+      "durationMinutes": 180,
+      "genres": [
+        "Eurodance",
+        "Dance Pop",
+        "Hands Up",
+        "Club Classics"
+      ],
+      "energyCurve": [
+        68,
+        76,
+        84,
+        92,
+        96,
+        90,
+        82,
+        74
+      ],
+      "decades": {
+        "1990s": 55,
+        "2000s": 30,
+        "2010s": 10,
+        "2020s": 5
+      }
+    },
+    "retro-hits": {
+      "name": "Retro Hits",
+      "durationMinutes": 180,
+      "genres": [
+        "Pop",
+        "Disco",
+        "Rock",
+        "New Wave"
+      ],
+      "energyCurve": [
+        42,
+        55,
+        66,
+        72,
+        78,
+        70,
+        60,
+        48
+      ],
+      "decades": {
+        "1970s": 25,
+        "1980s": 45,
+        "1990s": 30
+      }
+    },
+    "fredagsbar": {
+      "name": "Fredagsbar",
+      "durationMinutes": 240,
+      "genres": [
+        "Party Hits",
+        "Dance Pop",
+        "Nu-Disco",
+        "EDM"
+      ],
+      "energyCurve": [
+        58,
+        68,
+        78,
+        88,
+        96,
+        100,
+        92,
+        80
+      ],
+      "decades": {
+        "1980s": 10,
+        "1990s": 20,
+        "2000s": 20,
+        "2010s": 25,
+        "2020s": 25
+      }
+    }
+  },
+  "rules": {
+    "maxSameArtistWithinTracks": 12,
+    "maxSameDecadeInRow": 4,
+    "targetTrackLengthMinutes": 3.6,
+    "allowRequests": true
+  }
+}
