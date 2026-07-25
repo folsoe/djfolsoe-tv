@@ -8,6 +8,7 @@
 <style>
 .top20Editor{display:grid;gap:8px;max-height:560px;overflow:auto;padding-right:4px}.top20Row{display:grid;grid-template-columns:44px 1fr 1fr .75fr;gap:8px;align-items:center}.top20Row b{color:#fff;opacity:.9}.wideCard{grid-column:span 2}@media(max-width:900px){.wideCard{grid-column:span 1}.top20Row{grid-template-columns:38px 1fr}.top20Row input{min-width:0}}
 </style>  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19100">
+  <link rel="stylesheet" href="assets/css/graphics-studio.css?v=19200">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -349,6 +350,109 @@
       </div>
     </section>
 
+
+    <section class="tvGraphicsStudio" id="tvGraphicsStudio">
+      <div class="tvGraphicsStudio__head">
+        <div>
+          <span>V19200 · TV GRAPHICS STUDIO</span>
+          <h2>Build broadcast graphics without code</h2>
+          <p>Create, preview and publish lower-thirds, breaking information, chart graphics, polls, quizzes and promos.</p>
+        </div>
+        <button type="button" id="gfxResetBtn">Reset studio</button>
+      </div>
+
+      <div class="tvGraphicsStudio__grid">
+        <article class="tvGraphicsStudio__panel">
+          <div class="tvGraphicsStudio__panelHead">
+            <span>TEMPLATES</span>
+            <h3>Choose a graphic</h3>
+          </div>
+          <div class="tvGraphicsStudio__templates">
+            <button type="button" data-gfx-template="lower">Lower-third</button>
+            <button type="button" data-gfx-template="breaking">Breaking</button>
+            <button type="button" data-gfx-template="upnext">Up Next</button>
+            <button type="button" data-gfx-template="chart">Chart</button>
+            <button type="button" data-gfx-template="poll">Poll</button>
+            <button type="button" data-gfx-template="quiz">Quiz</button>
+            <button type="button" data-gfx-template="promo">Promo</button>
+            <button type="button" data-gfx-template="special">Special</button>
+          </div>
+
+          <div class="tvGraphicsStudio__form">
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxKicker">Kicker</label>
+              <input id="gfxKicker">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxBadge">Badge</label>
+              <input id="gfxBadge">
+            </div>
+            <div class="tvGraphicsStudio__field tvGraphicsStudio__field--wide">
+              <label for="gfxTitle">Title</label>
+              <input id="gfxTitle">
+            </div>
+            <div class="tvGraphicsStudio__field tvGraphicsStudio__field--wide">
+              <label for="gfxBody">Supporting text</label>
+              <textarea id="gfxBody"></textarea>
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxIcon">Icon</label>
+              <input id="gfxIcon" maxlength="3">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxDuration">Duration ms</label>
+              <input id="gfxDuration" type="number" value="9000" min="3200" max="30000">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxPosition">Chart position</label>
+              <input id="gfxPosition" type="number" min="1" max="100">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxOptionA">Option A</label>
+              <input id="gfxOptionA">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxOptionB">Option B</label>
+              <input id="gfxOptionB">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxOptionC">Option C</label>
+              <input id="gfxOptionC">
+            </div>
+            <div class="tvGraphicsStudio__field">
+              <label for="gfxOptionD">Option D</label>
+              <input id="gfxOptionD">
+            </div>
+          </div>
+
+          <div class="tvGraphicsStudio__actions">
+            <button type="button" id="gfxApplyBtn">Apply to admin</button>
+            <button type="button" id="gfxPreviewBtn">Preview</button>
+            <button type="button" id="gfxPublishBtn" class="bigPublish">Publish</button>
+          </div>
+        </article>
+
+        <article class="tvGraphicsStudio__panel">
+          <div class="tvGraphicsStudio__panelHead">
+            <span>PROGRAM PREVIEW</span>
+            <h3>Live graphic preview</h3>
+          </div>
+          <div class="tvGraphicsStudio__preview">
+            <div class="tvGraphicsStudio__lower">
+              <div class="tvGraphicsStudio__icon" id="gfxPreviewIcon">♫</div>
+              <div class="tvGraphicsStudio__copy">
+                <span id="gfxPreviewKicker">NOW PLAYING</span>
+                <strong id="gfxPreviewTitle">Artist — Track</strong>
+                <p id="gfxPreviewBody">Live music from Denmark</p>
+              </div>
+              <div class="tvGraphicsStudio__badge" id="gfxPreviewBadge">MUSIC</div>
+            </div>
+          </div>
+          <pre class="tvGraphicsStudio__status" id="gfxStudioStatus">Graphics Studio ready.</pre>
+        </article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -378,5 +482,6 @@
 
 <script src="assets/js/admin.js?v=19100"></script>
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
+  <script src="assets/js/graphics-studio.js?v=19200"></script>
 </body>
 </html>
