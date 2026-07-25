@@ -1,0 +1,77 @@
+
+/* DJ FOLSOE V19300 · AI MUSIC DIRECTOR */
+.aiMusicDirector{
+  margin-top:24px;padding:24px;border:var(--djf-border-soft);border-radius:var(--djf-radius-xl);
+  background:
+    radial-gradient(circle at 12% 0%,color-mix(in srgb,var(--djf-theme-primary) 16%,transparent),transparent 38%),
+    radial-gradient(circle at 92% 8%,color-mix(in srgb,var(--djf-theme-secondary) 12%,transparent),transparent 34%),
+    var(--djf-surface-glass-heavy);
+  box-shadow:var(--djf-shadow-contact),var(--djf-shadow-deep),var(--djf-shadow-inset)
+}
+.aiMusicDirector__head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px
+}
+.aiMusicDirector__head span,.aiMusicDirector__panelHead span{
+  color:var(--djf-theme-accent);font-size:11px;font-weight:950;letter-spacing:.13em
+}
+.aiMusicDirector__head h2{
+  margin:8px 0 6px;font-size:clamp(30px,3vw,48px);letter-spacing:-.04em
+}
+.aiMusicDirector__head p{margin:0;color:var(--djf-text-secondary);max-width:70ch}
+.aiMusicDirector__grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:16px}
+.aiMusicDirector__panel{
+  min-width:0;padding:20px;border:var(--djf-border-soft);border-radius:var(--djf-radius-lg);
+  background:rgba(255,255,255,.045)
+}
+.aiMusicDirector__panelHead{margin-bottom:16px}
+.aiMusicDirector__panelHead h3{margin:7px 0 0;font-size:23px}
+.aiMusicDirector__form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.aiMusicDirector__field{display:flex;flex-direction:column;gap:7px}
+.aiMusicDirector__field--wide{grid-column:1/-1}
+.aiMusicDirector__field label{
+  color:var(--djf-text-muted);font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase
+}
+.aiMusicDirector__field input,.aiMusicDirector__field select,.aiMusicDirector__field textarea{
+  min-height:42px;padding:0 12px;border:var(--djf-border-soft);border-radius:var(--djf-radius-sm);
+  background:rgba(255,255,255,.055);color:var(--djf-text-primary);font:inherit
+}
+.aiMusicDirector__field textarea{min-height:88px;padding-top:11px;resize:vertical}
+.aiMusicDirector__actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.aiMusicDirector__summary{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px
+}
+.aiMusicDirector__summary article{
+  padding:14px;border:var(--djf-border-soft);border-radius:var(--djf-radius-md);background:rgba(255,255,255,.04)
+}
+.aiMusicDirector__summary span{color:var(--djf-text-muted);font-size:10px;font-weight:900;letter-spacing:.08em}
+.aiMusicDirector__summary strong{display:block;margin-top:8px;font-size:20px}
+.aiMusicDirector__timeline{display:grid;gap:8px;max-height:590px;overflow:auto}
+.aiMusicDirector__track{
+  display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:12px;align-items:center;
+  min-height:62px;padding:0 14px;border:var(--djf-border-soft);border-radius:var(--djf-radius-md);
+  background:rgba(255,255,255,.035)
+}
+.aiMusicDirector__track > strong{color:var(--djf-theme-accent)}
+.aiMusicDirector__track div{min-width:0}
+.aiMusicDirector__track div strong,.aiMusicDirector__track div span{
+  display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis
+}
+.aiMusicDirector__track div span{margin-top:4px;color:var(--djf-text-muted);font-size:12px}
+.aiMusicDirector__energy{
+  width:84px;height:7px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden
+}
+.aiMusicDirector__energy span{
+  display:block;height:100%;background:linear-gradient(90deg,var(--djf-theme-primary),var(--djf-theme-secondary))
+}
+.aiMusicDirector__prompt{
+  margin-top:14px;max-height:220px;overflow:auto;white-space:pre-wrap
+}
+@media(max-width:980px){.aiMusicDirector__grid{grid-template-columns:1fr}}
+@media(max-width:680px){
+  .aiMusicDirector{padding:15px}
+  .aiMusicDirector__head{flex-direction:column}
+  .aiMusicDirector__form,.aiMusicDirector__actions,.aiMusicDirector__summary{grid-template-columns:1fr}
+  .aiMusicDirector__field--wide{grid-column:auto}
+  .aiMusicDirector__track{grid-template-columns:38px minmax(0,1fr)}
+  .aiMusicDirector__energy{grid-column:1/-1;width:100%}
+}
