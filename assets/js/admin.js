@@ -222,6 +222,9 @@ function djfPreview(){
   const p=buildPayload();
   set('previewWebsiteTitle',p.hero.title); set('previewWebsiteSub',p.hero.subtitle); set('previewWebsiteNext',`${p.nextShow.title} · ${p.nextShow.timeLabel}`);
   set('previewOverlayTitle',`${p.show.current} · ${p.show.mode}`); set('previewOverlayStats',`Viewers ${p.show.viewers||0} · Followers ${p.community.followers ?? '—'} · Subs ${p.community.subs||0}/${p.community.subGoal||100}`); set('previewOverlayTicker',p.ticker.text);
+  set('homepage2030ShowCount',`${(p.featuredShows||[]).length} shows`);
+  set('homepage2030ChartCount',`${(p.top20||[]).filter(x=>x && (x.artist||x.title)).length} chart entries`);
+  set('homepage2030Theme',`Theme · ${p.theme.title||p.theme.id}`);
   set('readyState','Preview OK'); status('👁 Preview updated. V921 maps each visible website/overlay field to broadcast-core.');
   return p;
 }
