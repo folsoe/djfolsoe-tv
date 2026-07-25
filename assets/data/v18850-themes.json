@@ -1,0 +1,45 @@
+{
+  "version": "V18850",
+  "themes": {
+    "morning": {
+      "title": "Good Morning Twitch",
+      "energy": 0.68
+    },
+    "trance": {
+      "title": "Trance Tuesday",
+      "energy": 1.12
+    },
+    "eurodance": {
+      "title": "Eurodance",
+      "energy": 1.18
+    },
+    "fredagsbar": {
+      "title": "Fredagsbar",
+      "energy": 1.02
+    },
+    "retro": {
+      "title": "Retro Hits",
+      "energy": 0.74
+    },
+    "popup": {
+      "title": "Pop Up Live",
+      "energy": 1.1
+    },
+    "summer": {
+      "title": "Summer",
+      "energy": 0.7
+    },
+    "weekend": {
+      "title": "Weekend",
+      "energy": 0.88
+    },
+    "danske": {
+      "title": "Danish Hits",
+      "energy": 0.78
+    },
+    "top20": {
+      "title": "FOLSOE TOP 20",
+      "energy": 1.0
+    }
+  }
+}
