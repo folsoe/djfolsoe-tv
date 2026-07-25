@@ -335,3 +335,243 @@ async function djfLoadFromCore(){
   status('✅ V921 mapped broadcast-core loaded into admin. Fields now control website + overlay.');
 }
 document.addEventListener('DOMContentLoaded',()=>{ renderTop20Editor(); restoreSettings(); bindAutoPreview(); renderTwitch(); djfPreview(); status('✅ V928.3 loaded. Edit fields and publish; admin will not reload old core unless you press Load Core/Refresh.'); });
+
+
+/* =========================================================
+   DJ FOLSOE V19100 · ADMIN STUDIO PRO
+   ========================================================= */
+(function(){
+"use strict";
+
+const $studio=(id)=>document.getElementById(id);
+const studioState={
+  lastCore:null,
+  lastRefreshAt:0,
+  errors:[]
+};
+
+function studioText(id,value,fallback="—"){
+  const el=$studio(id);
+  if(el) el.textContent=(value===undefined||value===null||value==="")?fallback:String(value);
+}
+
+function studioJson(value){
+  try{return JSON.stringify(value,null,2)}catch(_){return String(value)}
+}
+
+function studioThemeName(theme){
+  if(!theme) return "Morning";
+  if(typeof theme==="string") return theme;
+  return theme.title||theme.id||"Morning";
+}
+
+function studioUpdateFromCore(core){
+  if(!core||typeof core!=="object") return;
+  studioState.lastCore=core;
+  studioState.lastRefreshAt=Date.now();
+
+  const show=core.show||core.currentShow||{};
+  const theme=core.theme||{};
+  const twitch=core.twitch||core.live||{};
+  const music=core.music||core.nowPlaying||core.track||{};
+  const current=music.current||music;
+  const community=core.community||{};
+  const overlay=core.overlay||core.overlayHub||{};
+
+  studioText("studioChannelStatus",twitch.isLive?"LIVE":"READY");
+  studioText("studioRuntimeState",overlay.status||core.status||"Broadcast core loaded");
+  studioText("studioActiveShow",show.current||show.title||show.name||"DJ FOLSOE LIVE");
+  studioText("studioActiveMode",show.mode||show.description||"Music TV");
+  studioText("studioActiveTheme",studioThemeName(theme));
+  studioText("studioThemeSource",theme.id||"Broadcast core");
+
+  const track=[current.artist,current.title].filter(Boolean).join(" — ");
+  studioText("studioNowPlaying",track||"No active track");
+  studioText("studioMusicMeta",[
+    current.genre,
+    current.bpm?`${current.bpm} BPM`:"",
+    current.key
+  ].filter(Boolean).join(" · ")||"Waiting for music data");
+
+  const queue=community.queue||[];
+  studioText("studioCommunityQueue",`${Array.isArray(queue)?queue.length:0} queued`);
+  studioText("studioCommunityActive",community.active?.title||community.active?.user||"No active event");
+
+  studioText("studioPreviewKicker",show.kicker||"DJ FOLSOE NETWORK");
+  studioText("studioPreviewTitle",show.current||show.title||"DJ FOLSOE LIVE");
+  studioText("studioPreviewBody",show.description||overlay.infoLine||"Professional Music TV from Denmark.");
+  studioText("studioPreviewLowerKicker",track?"NOW PLAYING":"CHANNEL");
+  studioText("studioPreviewLowerTitle",track||overlay.requestText||"Live music");
+  studioText("studioPreviewLowerBody",[
+    current.album,current.year,current.genre
+  ].filter(Boolean).join(" · ")||community.requestText||"Music data appears automatically.");
+
+  const diag=$studio("studioDiagnostics");
+  if(diag) diag.textContent=studioJson({
+    refreshedAt:new Date().toISOString(),
+    show:show.current||show.title||null,
+    theme:theme.id||theme.title||theme,
+    live:Boolean(twitch.isLive),
+    track:track||null,
+    queue:Array.isArray(queue)?queue.length:0
+  });
+}
+
+async function studioRefresh(){
+  const diag=$studio("studioDiagnostics");
+  try{
+    if(diag) diag.textContent="Refreshing Admin Studio Pro…";
+    if(typeof window.djfLoadCore==="function"){
+      await window.djfLoadCore();
+    }
+    const core=window.__DJF_ADMIN_CORE__||window.__DJF_CORE__||studioState.lastCore;
+    if(core) studioUpdateFromCore(core);
+
+    const workerHealthy=Boolean(core);
+    studioText("studioServiceState",workerHealthy?"HEALTHY":"UNKNOWN");
+    studioText("studioWorkerApiState",workerHealthy?"Worker and API connected":"Waiting for core data");
+    studioText("studioPreviewBadge",workerHealthy?"READY":"CHECK");
+  }catch(error){
+    studioState.errors.push(String(error?.message||error));
+    studioText("studioServiceState","ERROR");
+    studioText("studioWorkerApiState",String(error?.message||error));
+    if(diag) diag.textContent=studioJson({error:String(error?.message||error)});
+  }
+}
+
+function studioCreateGraphic(type){
+  const core=studioState.lastCore||{};
+  const show=core.show||{};
+  const next=core.nextShow||{};
+  const chart=(core.top20||[])[0]||{};
+
+  const payloads={
+    upnext:{
+      type:"upnext",
+      title:next.title||next.name||"Next on DJ FOLSOE",
+      body:next.displayTime||next.dateText||next.description||"Announced soon"
+    },
+    channel:{
+      type:"channel",
+      title:show.current||show.title||"DJ FOLSOE LIVE",
+      body:show.description||"Professional Music TV from Denmark"
+    },
+    chart:{
+      type:"chart",
+      position:chart.rank||1,
+      title:[chart.artist,chart.title].filter(Boolean).join(" — ")||"FOLSOE TOP 20",
+      body:chart.status||"This week's chart update"
+    },
+    special:{
+      type:"special",
+      title:"DJ FOLSOE SPECIAL EVENT",
+      body:"Live music, community and interactive television"
+    }
+  };
+
+  const payload=payloads[type]||payloads.channel;
+
+  window.dispatchEvent(new CustomEvent("djf:generate-graphic",{detail:payload}));
+  const diag=$studio("studioDiagnostics");
+  if(diag) diag.textContent=studioJson({graphicPreview:payload});
+}
+
+function studioThemePreview(theme){
+  window.DJF_VISUAL_SYSTEM?.applyTheme?.(theme,document.documentElement);
+  const themeSelect=document.getElementById("theme");
+  if(themeSelect){
+    const option=[...themeSelect.options].find(opt=>String(opt.value).toLowerCase()===theme);
+    if(option){
+      themeSelect.value=option.value;
+      themeSelect.dispatchEvent(new Event("change",{bubbles:true}));
+    }
+  }
+  studioText("studioActiveTheme",theme);
+}
+
+async function studioValidate(){
+  const diag=$studio("studioDiagnostics");
+  const result={
+    adminCore:Boolean(studioState.lastCore),
+    theme:document.documentElement.dataset.djfTheme||"morning",
+    oneClickAvailable:typeof window.djfOneClick==="function",
+    loadCoreAvailable:typeof window.djfLoadCore==="function",
+    timestamp:new Date().toISOString()
+  };
+  if(diag) diag.textContent=studioJson(result);
+  studioText("studioPreviewBadge",result.adminCore?"VALID":"CHECK");
+  return result;
+}
+
+async function studioPreview(){
+  const result=await studioValidate();
+  window.dispatchEvent(new CustomEvent("djf:control-room-preview",{detail:result}));
+  return result;
+}
+
+async function studioPublish(){
+  const diag=$studio("studioDiagnostics");
+  try{
+    if(typeof window.djfOneClick==="function"){
+      if(diag) diag.textContent="Safe publish started…";
+      await window.djfOneClick();
+      if(diag) diag.textContent="Safe publish completed.";
+      studioText("studioPreviewBadge","PUBLISHED");
+      setTimeout(()=>studioText("studioPreviewBadge","READY"),1800);
+      return true;
+    }
+    throw new Error("One Click Publish is unavailable");
+  }catch(error){
+    if(diag) diag.textContent=studioJson({publishError:String(error?.message||error)});
+    studioText("studioPreviewBadge","ERROR");
+    return false;
+  }
+}
+
+function studioRollback(){
+  window.dispatchEvent(new CustomEvent("djf:release-rollback"));
+  const diag=$studio("studioDiagnostics");
+  if(diag) diag.textContent="Rollback event sent. Existing release manager will restore the last known good state.";
+  studioText("studioPreviewBadge","ROLLBACK");
+  setTimeout(()=>studioText("studioPreviewBadge","READY"),1800);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  $studio("studioRefreshBtn")?.addEventListener("click",studioRefresh);
+  $studio("studioSafePublishBtn")?.addEventListener("click",studioPublish);
+  $studio("studioValidateBtn")?.addEventListener("click",studioValidate);
+  $studio("studioPreviewBtn")?.addEventListener("click",studioPreview);
+  $studio("studioPublishBtn")?.addEventListener("click",studioPublish);
+  $studio("studioRollbackBtn")?.addEventListener("click",studioRollback);
+
+  document.querySelectorAll("[data-studio-graphic]").forEach(button=>{
+    button.addEventListener("click",()=>studioCreateGraphic(button.dataset.studioGraphic));
+  });
+
+  document.querySelectorAll("[data-studio-theme]").forEach(button=>{
+    button.addEventListener("click",()=>studioThemePreview(button.dataset.studioTheme));
+  });
+
+  window.addEventListener("djf:admin-core-loaded",event=>{
+    studioUpdateFromCore(event.detail||{});
+  });
+
+  setTimeout(studioRefresh,500);
+});
+
+window.DJF_ADMIN_STUDIO_PRO=Object.freeze({
+  version:"V19100",
+  refresh:studioRefresh,
+  updateFromCore:studioUpdateFromCore,
+  validate:studioValidate,
+  preview:studioPreview,
+  publish:studioPublish,
+  rollback:studioRollback,
+  getStatus:()=>({
+    version:"V19100",
+    lastRefreshAt:studioState.lastRefreshAt,
+    coreLoaded:Boolean(studioState.lastCore),
+    errors:studioState.errors.slice()
+  })
+});
+})();
