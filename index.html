@@ -1,57 +1,131 @@
-name: DJ FOLSOE Music Research V2
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DJ FOLSOE · Live Music TV from Denmark</title>
+  <meta name="description" content="DJ FOLSOE live from Denmark — Twitch DJ shows, Eurodance, Trance, Retro Hits, requests and community.">
+  <meta name="theme-color" content="#050711">
+  <meta property="og:title" content="DJ FOLSOE · Live Music TV">
+  <meta property="og:description" content="Live DJ shows, music requests and community from Denmark.">
+  <meta property="og:url" content="https://folsoetv.dk/">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://folsoetv.dk/">
+  <link rel="stylesheet" href="assets/css/site.css?v=restore-20260725">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
 
-on:
-  workflow_dispatch:
-    inputs:
-      force_refresh:
-        description: "Ignorer cache og hent alle kilder igen"
-        required: false
-        default: false
-        type: boolean
-  schedule:
-    - cron: "17 5 * * 1"
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="DJ FOLSOE home">
+      <span class="brand-mark">DF</span>
+      <span>
+        <strong>DJ FOLSOE</strong>
+        <small>LIVE MUSIC TV · DENMARK</small>
+      </span>
+    </a>
 
-permissions:
-  contents: write
+    <nav aria-label="Primary navigation">
+      <a href="#live">Live</a>
+      <a href="#shows">Shows</a>
+      <a href="#about">About</a>
+      <a href="#community">Community</a>
+    </nav>
 
-concurrency:
-  group: music-research-v2
-  cancel-in-progress: false
+    <a class="button button-small" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">
+      Open Twitch
+    </a>
+  </header>
 
-jobs:
-  update-research:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: music
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  <main id="top">
+    <section class="hero" id="live">
+      <div class="hero-copy">
+        <p class="eyebrow"><span id="liveDot" class="live-dot"></span><span id="liveState">TWITCH CHANNEL</span></p>
+        <h1>MUSIC TV<br><span>BUILT FOR LIVE</span></h1>
+        <p id="heroDescription" class="hero-description">
+          Eurodance, Trance, Retro Hits, Nu-Disco and community-driven live DJ shows from Denmark.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Watch DJ FOLSOE</a>
+          <a class="button button-secondary" href="#shows">Explore shows</a>
+        </div>
+        <div class="stats">
+          <div><strong id="viewerCount">0</strong><span>Viewers</span></div>
+          <div><strong id="followerCount">—</strong><span>Followers</span></div>
+          <div><strong id="activeTheme">MUSIC TV</strong><span>Active theme</span></div>
+        </div>
+      </div>
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
-          cache-dependency-path: music/package-lock.json
+      <aside class="broadcast-card">
+        <div class="screen">
+          <div class="screen-grid"></div>
+          <div class="screen-copy">
+            <small>DJ FOLSOE NETWORK</small>
+            <strong id="showTitle">LIVE FROM DENMARK</strong>
+            <span id="streamTitle">Music, requests and good company</span>
+          </div>
+        </div>
+        <div class="now-next">
+          <span>UP NEXT</span>
+          <strong id="nextShow">Check Twitch for the next live show</strong>
+          <small id="nextShowTime">Schedule updates automatically when available</small>
+        </div>
+      </aside>
+    </section>
 
-      - name: Install dependencies
-        run: npm ci
+    <section class="ticker" aria-label="DJ FOLSOE information">
+      <div>DJ FOLSOE · TWITCH MUSIC TV · EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK ·</div>
+    </section>
 
-      - name: Update internet charts
-        env:
-          FORCE_REFRESH: ${{ inputs.force_refresh || 'false' }}
-        run: npm run research:update
+    <section class="section" id="shows">
+      <div class="section-heading">
+        <p>PROGRAMMING</p>
+        <h2>Signature shows</h2>
+      </div>
 
-      - name: Build show research pools
-        run: npm run research:pools
+      <div class="show-grid">
+        <article class="show-card trance"><small>TUESDAY</small><h3>Trance Tuesday</h3><p>Uplifting, progressive and classic trance.</p></article>
+        <article class="show-card eurodance"><small>90s &amp; 00s</small><h3>Eurodance</h3><p>Big hooks, fast beats and pure nostalgia.</p></article>
+        <article class="show-card retro"><small>SUNDAY</small><h3>Retro Hits</h3><p>Classic chart hits from the golden decades.</p></article>
+        <article class="show-card friday"><small>FRIDAY</small><h3>Fredagsbar</h3><p>Weekend energy, requests and community.</p></article>
+        <article class="show-card morning"><small>MORNING</small><h3>Good Morning Twitch</h3><p>Coffee, radio hits and a bright start.</p></article>
+        <article class="show-card popup"><small>ANYTIME</small><h3>Pop Up Live</h3><p>Surprise shows when you least expect them.</p></article>
+      </div>
+    </section>
 
-      - name: Validate generated files
-        run: npm run research:validate
+    <section class="section split" id="about">
+      <div>
+        <div class="section-heading">
+          <p>THE CHANNEL</p>
+          <h2>Radio energy.<br>Television presence.</h2>
+        </div>
+        <p class="large-copy">
+          DJ FOLSOE combines a live DJ booth, television graphics and an active Twitch community.
+          The audience helps shape the show through chat, music requests and live interaction.
+        </p>
+      </div>
+      <div class="feature-list">
+        <div><span>01</span><strong>Live DJ sets</strong><p>Genre-based shows with a recognizable visual identity.</p></div>
+        <div><span>02</span><strong>Viewer requests</strong><p>Use <code>!request Artist - Title</code> in Twitch chat.</p></div>
+        <div><span>03</span><strong>Community first</strong><p>A welcoming place for music fans and Twitch DJs.</p></div>
+      </div>
+    </section>
 
-      - name: Commit updated research
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "music: update weekly research pools"
-          file_pattern: "music/data/research/*.json music/data/research/pools/*.json music/data/research/cache/*.json"
+    <section class="section community" id="community">
+      <div>
+        <p class="eyebrow">JOIN THE BROADCAST</p>
+        <h2>Your music.<br>Your chat.<br>Your show.</h2>
+      </div>
+      <a class="button" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Join DJ FOLSOE on Twitch</a>
+    </section>
+  </main>
+
+  <footer>
+    <strong>DJ FOLSOE</strong>
+    <span>Live Music TV from Denmark</span>
+    <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">twitch.tv/djfolsoe</a>
+  </footer>
+
+  <script src="assets/js/site.js?v=restore-20260725"></script>
+</body>
+</html>
