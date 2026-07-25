@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="assets/css/admin.css">
 <style>
 .top20Editor{display:grid;gap:8px;max-height:560px;overflow:auto;padding-right:4px}.top20Row{display:grid;grid-template-columns:44px 1fr 1fr .75fr;gap:8px;align-items:center}.top20Row b{color:#fff;opacity:.9}.wideCard{grid-column:span 2}@media(max-width:900px){.wideCard{grid-column:span 1}.top20Row{grid-template-columns:38px 1fr}.top20Row input{min-width:0}}
-</style>  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=18850-1">
+</style>  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19100">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -229,6 +229,126 @@
       </div>
     </div>
 
+
+    <section class="adminStudioPro" id="adminStudioPro">
+      <div class="adminStudioHeader">
+        <div>
+          <span>V19100 · ADMIN STUDIO PRO</span>
+          <h2>Broadcast control room</h2>
+          <p>Live status, show, theme, music, community, graphics and publish health in one place.</p>
+        </div>
+        <div class="adminStudioActions">
+          <button type="button" id="studioRefreshBtn">Refresh studio</button>
+          <button type="button" id="studioSafePublishBtn" class="bigPublish">Safe publish</button>
+        </div>
+      </div>
+
+      <div class="adminStudioStatusGrid">
+        <article class="adminStudioStatusCard">
+          <span>CHANNEL</span>
+          <strong id="studioChannelStatus">Checking…</strong>
+          <small id="studioRuntimeState">Runtime unknown</small>
+        </article>
+        <article class="adminStudioStatusCard">
+          <span>ACTIVE SHOW</span>
+          <strong id="studioActiveShow">DJ FOLSOE LIVE</strong>
+          <small id="studioActiveMode">Mode unknown</small>
+        </article>
+        <article class="adminStudioStatusCard">
+          <span>THEME</span>
+          <strong id="studioActiveTheme">Morning</strong>
+          <small id="studioThemeSource">Broadcast core</small>
+        </article>
+        <article class="adminStudioStatusCard">
+          <span>MUSIC</span>
+          <strong id="studioNowPlaying">No active track</strong>
+          <small id="studioMusicMeta">Waiting for music data</small>
+        </article>
+        <article class="adminStudioStatusCard">
+          <span>COMMUNITY</span>
+          <strong id="studioCommunityQueue">0 queued</strong>
+          <small id="studioCommunityActive">No active event</small>
+        </article>
+        <article class="adminStudioStatusCard">
+          <span>SERVICES</span>
+          <strong id="studioServiceState">Checking…</strong>
+          <small id="studioWorkerApiState">Worker / API unknown</small>
+        </article>
+      </div>
+
+      <div class="adminStudioWorkspace">
+        <article class="adminStudioPanel adminStudioPanelWide">
+          <div class="adminStudioPanelHead">
+            <div>
+              <span>LIVE PREVIEW</span>
+              <h3>Website + overlay state</h3>
+            </div>
+            <span id="studioPreviewBadge" class="homepage-status-badge">READY</span>
+          </div>
+          <div class="adminStudioPreview">
+            <div class="adminStudioPreviewHero">
+              <span id="studioPreviewKicker">DJ FOLSOE NETWORK</span>
+              <strong id="studioPreviewTitle">DJ FOLSOE LIVE</strong>
+              <p id="studioPreviewBody">Professional Music TV from Denmark.</p>
+            </div>
+            <div class="adminStudioPreviewLower">
+              <span id="studioPreviewLowerKicker">NOW PLAYING</span>
+              <strong id="studioPreviewLowerTitle">Live music</strong>
+              <p id="studioPreviewLowerBody">Music data appears automatically.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="adminStudioPanel">
+          <div class="adminStudioPanelHead">
+            <div>
+              <span>QUICK GRAPHICS</span>
+              <h3>One-click TV graphics</h3>
+            </div>
+          </div>
+          <div class="adminStudioQuickActions">
+            <button type="button" data-studio-graphic="upnext">Up Next</button>
+            <button type="button" data-studio-graphic="channel">Channel message</button>
+            <button type="button" data-studio-graphic="chart">Chart update</button>
+            <button type="button" data-studio-graphic="special">Special event</button>
+          </div>
+        </article>
+
+        <article class="adminStudioPanel">
+          <div class="adminStudioPanelHead">
+            <div>
+              <span>THEME PREVIEW</span>
+              <h3>Visual identity</h3>
+            </div>
+          </div>
+          <div class="adminStudioThemeGrid">
+            <button type="button" data-studio-theme="morning">Morning</button>
+            <button type="button" data-studio-theme="trance">Trance</button>
+            <button type="button" data-studio-theme="eurodance">Eurodance</button>
+            <button type="button" data-studio-theme="fredagsbar">Fredagsbar</button>
+            <button type="button" data-studio-theme="retro">Retro</button>
+            <button type="button" data-studio-theme="top20">Top 20</button>
+          </div>
+        </article>
+
+        <article class="adminStudioPanel adminStudioPanelWide">
+          <div class="adminStudioPanelHead">
+            <div>
+              <span>RELEASE SAFETY</span>
+              <h3>Preview, validation and rollback</h3>
+            </div>
+          </div>
+          <div class="adminStudioSafetyGrid">
+            <button type="button" id="studioValidateBtn">Validate current state</button>
+            <button type="button" id="studioPreviewBtn">Create preview</button>
+            <button type="button" id="studioPublishBtn">Publish preview</button>
+            <button type="button" id="studioRollbackBtn">Rollback last publish</button>
+          </div>
+          <pre id="studioDiagnostics">Admin Studio Pro is ready.</pre>
+        </article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -256,7 +376,7 @@
   </details>
 </main>
 
-<script src="assets/js/admin.js?v=19000"></script>
+<script src="assets/js/admin.js?v=19100"></script>
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
 </body>
 </html>
