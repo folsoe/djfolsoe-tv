@@ -327,6 +327,7 @@ async function djfLoadFromCore(){
   if(!res || !res.ok){ status('❌ Could not load broadcast-core.', 'bad'); return; }
   const core = normalizeCore(res);
   hydrateFromCore(core);
+  window.dispatchEvent(new CustomEvent('djf:admin-core-loaded',{detail:core}));
   djfPreview();
   status('✅ V921 mapped broadcast-core loaded into admin. Fields now control website + overlay.');
 }

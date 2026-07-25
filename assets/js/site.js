@@ -52,6 +52,10 @@
 
     text("nextShow", next.title || next.name);
     text("nextShowTime", next.displayTime || next.dateText || next.start || next.description);
+
+    window.dispatchEvent(new CustomEvent("djf:broadcast-core", {
+      detail: data
+    }));
   }
 
   async function load() {
