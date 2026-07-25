@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/css/site.css?v=restore-20260725">
   <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19000">
   <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
+  <link rel="stylesheet" href="assets/css/music-chart-tv.css?v=19500">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -180,6 +181,49 @@
       </div>
     </section>
 
+
+    <section class="section musicChartTV" id="chart-tv">
+      <div class="musicChartTV__head">
+        <div>
+          <span>MUSIC CHART TELEVISION</span>
+          <h2>FOLSOE TOP 20</h2>
+        </div>
+        <div id="musicChartWeek" class="musicChartTV__week">CURRENT WEEK</div>
+      </div>
+
+      <div class="musicChartTV__hero">
+        <article class="musicChartTV__numberOne">
+          <span class="musicChartTV__label">NUMBER ONE</span>
+          <h3 id="musicChartNumberOne">This week's number one</h3>
+          <p id="musicChartNumberOneArtist">DJ FOLSOE</p>
+          <div class="musicChartTV__numberOneMeta">
+            <span id="musicChartNumberOneChange">NEW</span>
+            <span id="musicChartNumberOneWeeks">1 week</span>
+          </div>
+        </article>
+
+        <div class="musicChartTV__movements">
+          <article class="musicChartTV__movement">
+            <span class="musicChartTV__label">HIGHEST NEW ENTRY</span>
+            <strong id="musicChartHighestNew">Waiting for chart data</strong>
+            <p id="musicChartHighestNewMeta">Weekly chart information</p>
+          </article>
+          <article class="musicChartTV__movement">
+            <span class="musicChartTV__label">BIGGEST CLIMBER</span>
+            <strong id="musicChartClimber">Waiting for chart data</strong>
+            <p id="musicChartClimberMeta">Weekly chart information</p>
+          </article>
+          <article class="musicChartTV__movement">
+            <span class="musicChartTV__label">BIGGEST FALL</span>
+            <strong id="musicChartFall">Waiting for chart data</strong>
+            <p id="musicChartFallMeta">Weekly chart information</p>
+          </article>
+        </div>
+      </div>
+
+      <div id="musicChartList" class="musicChartTV__list"></div>
+    </section>
+
     <section class="section homepage-chart" id="chart">
       <div class="section-heading homepage-heading">
         <div>
@@ -253,5 +297,6 @@
   <script src="assets/js/site.js?v=19000"></script>
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
   <script src="assets/js/interaction-site.js?v=19400"></script>
+  <script src="assets/js/music-chart-site.js?v=19500"></script>
 </body>
 </html>

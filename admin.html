@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="assets/css/graphics-studio.css?v=19200">
   <link rel="stylesheet" href="assets/css/ai-music-director.css?v=19300">
   <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
+  <link rel="stylesheet" href="assets/css/music-chart-tv.css?v=19500">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -604,6 +605,59 @@
       </div>
     </section>
 
+
+    <section class="chartAdmin" id="chartAdmin">
+      <div class="chartAdmin__head">
+        <div>
+          <span>V19500 · MUSIC CHART TELEVISION ENGINE</span>
+          <h2>Build the weekly FOLSOE TOP 20</h2>
+          <p>Edit rankings, last week's positions, movement and weeks on chart. Website and overlay use the same data.</p>
+        </div>
+        <button type="button" id="chartPublishBtn" class="bigPublish">Publish chart</button>
+      </div>
+
+      <div class="chartAdmin__grid">
+        <article class="chartAdmin__panel">
+          <span class="chartAdmin__label">CHART SETTINGS</span>
+          <h3>Weekly chart</h3>
+          <div class="chartAdmin__form">
+            <div class="chartAdmin__field">
+              <label for="chartWeekLabel">Week label</label>
+              <input id="chartWeekLabel" placeholder="Week 31 · 2026">
+            </div>
+            <div class="chartAdmin__field">
+              <label for="chartDisplayCount">Website entries</label>
+              <select id="chartDisplayCount">
+                <option value="10">Top 10</option>
+                <option value="20" selected>Top 20</option>
+              </select>
+            </div>
+            <div class="chartAdmin__field chartAdmin__field--wide">
+              <label for="chartSourceNote">Source note</label>
+              <input id="chartSourceNote" value="Danish airplay, BBC Radio 1 and international chart signals">
+            </div>
+          </div>
+          <div class="chartAdmin__actions">
+            <button type="button" id="chartLoadBtn">Load current</button>
+            <button type="button" id="chartRecalculateBtn">Calculate movement</button>
+            <button type="button" id="chartNumberOneBtn">Preview number 1</button>
+          </div>
+          <div class="chartAdmin__preview">
+            <span class="chartAdmin__label">NUMBER ONE PREVIEW</span>
+            <strong id="chartPreviewNumberOne">No chart loaded</strong>
+            <p id="chartPreviewMeta">Movement and week information appears here.</p>
+          </div>
+          <pre id="chartDiagnostics" class="chartAdmin__diag">Chart engine ready.</pre>
+        </article>
+
+        <article class="chartAdmin__panel">
+          <span class="chartAdmin__label">RUNNING ORDER</span>
+          <h3>Top 20 entries</h3>
+          <div id="chartEditorList" class="chartAdmin__list"></div>
+        </article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -636,5 +690,6 @@
   <script src="assets/js/graphics-studio.js?v=19200"></script>
   <script src="assets/js/ai-music-director.js?v=19300"></script>
   <script src="assets/js/interaction-admin.js?v=19400"></script>
+  <script src="assets/js/music-chart-admin.js?v=19500"></script>
 </body>
 </html>
