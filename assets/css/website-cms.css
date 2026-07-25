@@ -1,0 +1,93 @@
+
+/* DJ FOLSOE V19800 · WEBSITE CMS 2.0 */
+
+.websiteCms{
+  padding-top:72px;
+}
+.websiteCms__head{
+  display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px
+}
+.websiteCms__head span,.websiteCms__label,.websiteCmsAdmin__head span,.websiteCmsAdmin__panel span{
+  color:var(--djf-theme-accent);font-size:11px;font-weight:950;letter-spacing:.13em
+}
+.websiteCms__head h2{
+  margin:7px 0 0;font-size:clamp(34px,4.6vw,70px);line-height:.9;letter-spacing:-.045em
+}
+.websiteCms__grid{
+  display:grid;grid-template-columns:1.18fr .82fr;gap:18px
+}
+.websiteCms__news,.websiteCms__side{
+  min-width:0;padding:24px;border:var(--djf-border-soft);border-radius:var(--djf-radius-xl);
+  background:
+    radial-gradient(circle at 14% 0%,color-mix(in srgb,var(--djf-theme-primary) 15%,transparent),transparent 38%),
+    var(--djf-surface-glass-heavy);
+  box-shadow:var(--djf-shadow-contact),var(--djf-shadow-tv),var(--djf-shadow-inset)
+}
+.websiteCms__newsList{display:grid;gap:10px}
+.websiteCms__newsItem{
+  display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:14px;
+  border:var(--djf-border-soft);border-radius:var(--djf-radius-md);background:rgba(255,255,255,.04)
+}
+.websiteCms__newsItem time{color:var(--djf-theme-accent);font-size:11px;font-weight:950;letter-spacing:.07em}
+.websiteCms__newsItem strong{display:block;font-size:20px;line-height:1.05}
+.websiteCms__newsItem p{margin:6px 0 0;color:var(--djf-text-secondary)}
+.websiteCms__cards{display:grid;gap:12px}
+.websiteCms__card{
+  padding:18px;border:var(--djf-border-soft);border-radius:var(--djf-radius-lg);background:rgba(255,255,255,.04)
+}
+.websiteCms__card strong{display:block;margin:10px 0 5px;font-size:22px}
+.websiteCms__card p{margin:0;color:var(--djf-text-secondary)}
+.websiteCms__card a{display:inline-flex;margin-top:14px;color:var(--djf-theme-accent);font-weight:900}
+
+/* ADMIN */
+.websiteCmsAdmin{
+  margin-top:24px;padding:24px;border:var(--djf-border-soft);border-radius:var(--djf-radius-xl);
+  background:
+    radial-gradient(circle at 12% 0%,color-mix(in srgb,var(--djf-theme-primary) 16%,transparent),transparent 38%),
+    radial-gradient(circle at 92% 8%,color-mix(in srgb,var(--djf-theme-secondary) 12%,transparent),transparent 34%),
+    var(--djf-surface-glass-heavy);
+  box-shadow:var(--djf-shadow-contact),var(--djf-shadow-deep),var(--djf-shadow-inset)
+}
+.websiteCmsAdmin__head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px
+}
+.websiteCmsAdmin__head h2{margin:8px 0 6px;font-size:clamp(30px,3vw,48px);letter-spacing:-.04em}
+.websiteCmsAdmin__head p{margin:0;color:var(--djf-text-secondary)}
+.websiteCmsAdmin__grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:16px}
+.websiteCmsAdmin__panel{
+  min-width:0;padding:20px;border:var(--djf-border-soft);border-radius:var(--djf-radius-lg);
+  background:rgba(255,255,255,.045)
+}
+.websiteCmsAdmin__panel h3{margin:7px 0 16px;font-size:23px}
+.websiteCmsAdmin__form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.websiteCmsAdmin__field{display:flex;flex-direction:column;gap:7px}
+.websiteCmsAdmin__field--wide{grid-column:1/-1}
+.websiteCmsAdmin__field label{
+  color:var(--djf-text-muted);font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase
+}
+.websiteCmsAdmin__field input,.websiteCmsAdmin__field textarea,.websiteCmsAdmin__field select{
+  min-height:42px;padding:0 12px;border:var(--djf-border-soft);border-radius:var(--djf-radius-sm);
+  background:rgba(255,255,255,.055);color:var(--djf-text-primary);font:inherit
+}
+.websiteCmsAdmin__field textarea{min-height:90px;padding-top:11px;resize:vertical}
+.websiteCmsAdmin__actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.websiteCmsAdmin__items{display:grid;gap:10px;max-height:660px;overflow:auto}
+.websiteCmsAdmin__item{
+  padding:14px;border:var(--djf-border-soft);border-radius:var(--djf-radius-md);background:rgba(255,255,255,.035)
+}
+.websiteCmsAdmin__itemHead{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.websiteCmsAdmin__item strong{font-size:18px}
+.websiteCmsAdmin__item p{margin:7px 0;color:var(--djf-text-secondary)}
+.websiteCmsAdmin__item small{color:var(--djf-text-muted)}
+.websiteCmsAdmin__diag{margin-top:14px;max-height:210px;overflow:auto}
+
+@media(max-width:920px){
+  .websiteCms__grid,.websiteCmsAdmin__grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .websiteCms__head,.websiteCmsAdmin__head{flex-direction:column;align-items:flex-start}
+  .websiteCmsAdmin{padding:15px}
+  .websiteCmsAdmin__form,.websiteCmsAdmin__actions{grid-template-columns:1fr}
+  .websiteCmsAdmin__field--wide{grid-column:auto}
+  .websiteCms__newsItem{grid-template-columns:1fr}
+}
