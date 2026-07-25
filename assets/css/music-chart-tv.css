@@ -1,0 +1,149 @@
+
+/* DJ FOLSOE V19500 · MUSIC CHART TELEVISION ENGINE */
+
+/* WEBSITE */
+.musicChartTV{
+  padding-top:72px;
+}
+.musicChartTV__head{
+  display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:18px
+}
+.musicChartTV__head span,
+.musicChartTV__label{
+  color:var(--djf-theme-accent);font-size:11px;font-weight:950;letter-spacing:.13em
+}
+.musicChartTV__head h2{
+  margin:7px 0 0;font-size:clamp(34px,4.8vw,72px);line-height:.9;letter-spacing:-.045em
+}
+.musicChartTV__week{
+  display:inline-flex;align-items:center;min-height:32px;padding:0 14px;border:var(--djf-border-soft);
+  border-radius:999px;background:rgba(255,255,255,.05);font-size:11px;font-weight:950
+}
+.musicChartTV__hero{
+  display:grid;grid-template-columns:1.12fr .88fr;gap:18px;margin-bottom:18px
+}
+.musicChartTV__numberOne{
+  position:relative;min-height:360px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;
+  border:var(--djf-border-soft);border-radius:var(--djf-radius-xl);overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 10%,color-mix(in srgb,var(--djf-theme-secondary) 32%,transparent),transparent 38%),
+    radial-gradient(circle at 18% 88%,color-mix(in srgb,var(--djf-theme-primary) 34%,transparent),transparent 44%),
+    var(--djf-surface-glass-heavy);
+  box-shadow:var(--djf-shadow-contact),var(--djf-shadow-deep),var(--djf-shadow-inset)
+}
+.musicChartTV__numberOne::before{
+  content:"#1";position:absolute;right:22px;top:8px;color:rgba(255,255,255,.08);
+  font-size:clamp(110px,16vw,260px);font-weight:950;line-height:1
+}
+.musicChartTV__numberOne h3{
+  position:relative;margin:14px 0 8px;font-size:clamp(42px,6vw,88px);line-height:.86;letter-spacing:-.055em
+}
+.musicChartTV__numberOne p{position:relative;margin:0;color:var(--djf-text-secondary)}
+.musicChartTV__numberOneMeta{
+  position:relative;display:flex;gap:10px;flex-wrap:wrap;margin-top:18px
+}
+.musicChartTV__numberOneMeta span{
+  padding:7px 10px;border:var(--djf-border-soft);border-radius:999px;background:rgba(9,11,19,.54);
+  font-size:11px;font-weight:900
+}
+.musicChartTV__movements{
+  display:grid;gap:12px
+}
+.musicChartTV__movement{
+  min-height:108px;padding:18px;border:var(--djf-border-soft);border-radius:var(--djf-radius-lg);
+  background:rgba(255,255,255,.045)
+}
+.musicChartTV__movement strong{display:block;margin:10px 0 5px;font-size:20px}
+.musicChartTV__movement p{margin:0;color:var(--djf-text-secondary)}
+.musicChartTV__list{
+  display:grid;gap:9px
+}
+.musicChartTV__row{
+  display:grid;grid-template-columns:54px minmax(0,1fr) 82px 96px;align-items:center;gap:14px;
+  min-height:72px;padding:0 16px;border:var(--djf-border-soft);border-radius:var(--djf-radius-md);
+  background:rgba(255,255,255,.04)
+}
+.musicChartTV__rank{
+  color:var(--djf-theme-accent);font-size:23px;font-weight:950
+}
+.musicChartTV__track{min-width:0}
+.musicChartTV__track strong,.musicChartTV__track span{
+  display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis
+}
+.musicChartTV__track span{margin-top:4px;color:var(--djf-text-muted);font-size:12px}
+.musicChartTV__change{
+  text-align:center;font-weight:950
+}
+.musicChartTV__change[data-change="up"]{color:var(--djf-success)}
+.musicChartTV__change[data-change="down"]{color:var(--djf-danger)}
+.musicChartTV__change[data-change="new"]{color:var(--djf-warning)}
+.musicChartTV__weeks{text-align:right;color:var(--djf-text-muted);font-size:12px}
+
+/* ADMIN */
+.chartAdmin{
+  margin-top:24px;padding:24px;border:var(--djf-border-soft);border-radius:var(--djf-radius-xl);
+  background:
+    radial-gradient(circle at 12% 0%,color-mix(in srgb,var(--djf-theme-primary) 16%,transparent),transparent 38%),
+    radial-gradient(circle at 92% 8%,color-mix(in srgb,var(--djf-theme-secondary) 12%,transparent),transparent 34%),
+    var(--djf-surface-glass-heavy);
+  box-shadow:var(--djf-shadow-contact),var(--djf-shadow-deep),var(--djf-shadow-inset)
+}
+.chartAdmin__head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:20px
+}
+.chartAdmin__head span,.chartAdmin__label{
+  color:var(--djf-theme-accent);font-size:11px;font-weight:950;letter-spacing:.13em
+}
+.chartAdmin__head h2{margin:8px 0 6px;font-size:clamp(30px,3vw,48px);letter-spacing:-.04em}
+.chartAdmin__head p{margin:0;color:var(--djf-text-secondary)}
+.chartAdmin__grid{display:grid;grid-template-columns:.74fr 1.26fr;gap:16px}
+.chartAdmin__panel{
+  min-width:0;padding:20px;border:var(--djf-border-soft);border-radius:var(--djf-radius-lg);
+  background:rgba(255,255,255,.045)
+}
+.chartAdmin__panel h3{margin:7px 0 16px;font-size:23px}
+.chartAdmin__form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.chartAdmin__field{display:flex;flex-direction:column;gap:7px}
+.chartAdmin__field--wide{grid-column:1/-1}
+.chartAdmin__field label{
+  color:var(--djf-text-muted);font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase
+}
+.chartAdmin__field input,.chartAdmin__field select{
+  min-height:42px;padding:0 12px;border:var(--djf-border-soft);border-radius:var(--djf-radius-sm);
+  background:rgba(255,255,255,.055);color:var(--djf-text-primary);font:inherit
+}
+.chartAdmin__actions{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px
+}
+.chartAdmin__list{display:grid;gap:8px;max-height:650px;overflow:auto}
+.chartAdmin__row{
+  display:grid;grid-template-columns:48px minmax(140px,1fr) minmax(140px,1fr) 76px 76px 70px 44px;
+  gap:8px;align-items:center;padding:9px;border:var(--djf-border-soft);border-radius:var(--djf-radius-md);
+  background:rgba(255,255,255,.035)
+}
+.chartAdmin__row input,.chartAdmin__row select{
+  min-width:0;min-height:36px;padding:0 8px;border:var(--djf-border-soft);border-radius:8px;
+  background:rgba(255,255,255,.055);color:var(--djf-text-primary)
+}
+.chartAdmin__row button{min-height:36px;padding:0}
+.chartAdmin__preview{
+  margin-top:14px;padding:18px;border:var(--djf-border-soft);border-radius:var(--djf-radius-lg);
+  background:linear-gradient(135deg,var(--djf-theme-bg-a),var(--djf-theme-bg-b))
+}
+.chartAdmin__preview strong{display:block;margin:9px 0;font-size:28px;line-height:.95}
+.chartAdmin__preview p{margin:0;color:var(--djf-text-secondary)}
+.chartAdmin__diag{margin-top:14px;max-height:180px;overflow:auto}
+
+@media(max-width:1000px){
+  .musicChartTV__hero,.chartAdmin__grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .musicChartTV__head,.chartAdmin__head{flex-direction:column;align-items:flex-start}
+  .musicChartTV__row{grid-template-columns:44px minmax(0,1fr) 66px}
+  .musicChartTV__weeks{display:none}
+  .chartAdmin{padding:15px}
+  .chartAdmin__form,.chartAdmin__actions{grid-template-columns:1fr}
+  .chartAdmin__field--wide{grid-column:auto}
+  .chartAdmin__row{grid-template-columns:40px 1fr 1fr}
+  .chartAdmin__row > :nth-child(n+4){grid-column:auto}
+}
