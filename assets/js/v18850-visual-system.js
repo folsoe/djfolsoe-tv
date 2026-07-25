@@ -167,3 +167,39 @@
     })
   });
 })();
+
+
+/* DJ FOLSOE V18900 · BROADCAST EXPERIENCE REVOLUTION */
+(function(){
+"use strict";
+const VERSION="V18900";
+function overlayExperience(){
+  const root=document.getElementById("djfBroadcastPackage");
+  if(!root||window.DJF_BROADCAST_EXPERIENCE)return;
+  root.classList.add("v18900ExperienceRevolution");
+  const state={focus:"balanced",energy:"balanced",changes:0,lastChangeAt:0};
+  let timer=null;
+  function setFocus(focus,duration=0){
+    const safe=["balanced","centre","lower-third","music"].includes(focus)?focus:"balanced";
+    state.focus=safe;state.changes++;state.lastChangeAt=Date.now();root.dataset.viewerFocus=safe;
+    clearTimeout(timer);if(duration>0)timer=setTimeout(()=>setFocus("balanced"),duration);return safe;
+  }
+  function setEnergy(energy){
+    const safe=["calm","balanced","high"].includes(energy)?energy:"balanced";
+    state.energy=safe;root.dataset.viewerEnergy=safe;return safe;
+  }
+  window.addEventListener("djf:graphics-show",e=>setFocus("lower-third",Number(e.detail?.duration)||7600));
+  window.addEventListener("djf:generated-graphic-published",e=>setFocus("lower-third",Number(e.detail?.graphic?.duration)||9000));
+  window.addEventListener("djf:community-show",e=>setFocus("lower-third",Number(e.detail?.event?.duration)||8200));
+  window.addEventListener("djf:music-track",()=>setFocus("music",4200));
+  window.addEventListener("djf:performance-transition-start",e=>setFocus("centre",Number(e.detail?.duration)||2600));
+  window.addEventListener("djf:performance-active-deck",e=>setEnergy(e.detail?.energy||"balanced"));
+  window.DJF_BROADCAST_EXPERIENCE=Object.freeze({
+    version:VERSION,setFocus,setEnergy,
+    getStatus:()=>({...state,version:VERSION})
+  });
+  setFocus("balanced");setEnergy("balanced");
+}
+document.addEventListener("DOMContentLoaded",overlayExperience);
+window.DJF_EXPERIENCE_REVOLUTION=Object.freeze({version:VERSION});
+})();
