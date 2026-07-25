@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="assets/css/ai-music-director.css?v=19300">
   <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
   <link rel="stylesheet" href="assets/css/music-chart-tv.css?v=19500">
+  <link rel="stylesheet" href="assets/css/serato-bridge.css?v=19600">
+  <link rel="stylesheet" href="assets/css/audience-identity.css?v=19700">
 </head>
 <body>
 <header class="adminHero v9185Hero">
@@ -658,6 +660,39 @@
       </div>
     </section>
 
+
+    <section class="seratoAdmin" id="seratoAdmin"><div class="seratoAdmin__head"><div><span>V19600 · ADVANCED SERATO BROADCAST BRIDGE</span><h2>Serato connection</h2><p>Monitor deck A/B, active deck, BPM, key, crossfader and bridge state.</p></div><button id="seratoAdminRefreshBtn" type="button" class="bigPublish">Refresh</button></div><div class="seratoGrid"><article class="seratoPanel"><span class="seratoLabel">BRIDGE HEALTH</span><h3 id="seratoAdminStatus">WAITING</h3><p id="seratoAdminSummary">No Serato data received</p><div class="seratoActions"><button id="seratoAdminTestBtn" type="button">Test</button><button id="seratoAdminReconnectBtn" type="button">Reconnect</button><button id="seratoAdminClearBtn" type="button">Clear</button></div><pre class="seratoDiag" id="seratoAdminDiagnostics">Ready.</pre></article><article class="seratoPanel"><span class="seratoLabel">DECK MONITOR</span><div class="seratoGrid"><article class="seratoDeck"><span>DECK A</span><strong id="seratoAdminDeckA">No track</strong><p id="seratoAdminDeckAMeta">Waiting</p></article><article class="seratoDeck"><span>DECK B</span><strong id="seratoAdminDeckB">No track</strong><p id="seratoAdminDeckBMeta">Waiting</p></article></div></article></div></section>
+
+    <section class="audienceAdmin" id="audienceAdmin">
+      <div class="audienceAdmin__head">
+        <div><span>V19700 · AUDIENCE IDENTITY & LOYALTY ENGINE</span><h2>Community profiles and recognition</h2><p>Track visits, roles, requests and loyalty while controlling recognition.</p></div>
+        <button type="button" id="audienceRefreshBtn" class="bigPublish">Refresh audience</button>
+      </div>
+      <div class="audienceAdmin__grid">
+        <article class="audienceAdmin__panel">
+          <span>LOYALTY CONTROL</span><h3>Audience engine</h3>
+          <div class="audienceAdmin__kpis">
+            <article><span>PROFILES</span><strong id="audienceProfileCount">0</strong></article>
+            <article><span>REGULARS</span><strong id="audienceRegularCount">0</strong></article>
+            <article><span>REQUESTS</span><strong id="audienceRequestCount">0</strong></article>
+            <article><span>RECOGNITIONS</span><strong id="audienceRecognitionCount">0</strong></article>
+          </div>
+          <div class="audienceAdmin__form">
+            <div class="audienceAdmin__field"><label for="audienceRecognitionCooldown">Cooldown minutes</label><input id="audienceRecognitionCooldown" type="number" min="1" max="240" value="30"></div>
+            <div class="audienceAdmin__field"><label for="audienceMinimumVisits">Regular viewer visits</label><input id="audienceMinimumVisits" type="number" min="2" max="100" value="10"></div>
+            <div class="audienceAdmin__field audienceAdmin__field--wide"><label for="audienceRecognitionMode">Automatic recognition</label><select id="audienceRecognitionMode"><option value="balanced">Balanced</option><option value="first-and-milestones">First visit and milestones</option><option value="roles-only">Mods, VIPs and DJs only</option><option value="off">Off</option></select></div>
+          </div>
+          <div class="audienceAdmin__actions">
+            <button type="button" id="audienceTestFirstBtn">Test first viewer</button>
+            <button type="button" id="audienceTestVipBtn">Test VIP</button>
+            <button type="button" id="audienceClearRecognitionBtn">Clear recognition</button>
+          </div>
+          <pre id="audienceDiagnostics" class="audienceAdmin__diag">Audience engine ready.</pre>
+        </article>
+        <article class="audienceAdmin__panel"><span>COMMUNITY DIRECTORY</span><h3>Viewer profiles</h3><div id="audienceProfileList" class="audienceAdmin__profiles"></div></article>
+      </div>
+    </section>
+
     <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
   </section>
 
@@ -691,5 +726,7 @@
   <script src="assets/js/ai-music-director.js?v=19300"></script>
   <script src="assets/js/interaction-admin.js?v=19400"></script>
   <script src="assets/js/music-chart-admin.js?v=19500"></script>
+  <script src="assets/js/serato-admin.js?v=19600"></script>
+  <script src="assets/js/audience-identity-admin.js?v=19700"></script>
 </body>
 </html>

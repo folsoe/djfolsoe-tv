@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19000">
   <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
   <link rel="stylesheet" href="assets/css/music-chart-tv.css?v=19500">
+  <link rel="stylesheet" href="assets/css/serato-bridge.css?v=19600">
+  <link rel="stylesheet" href="assets/css/audience-identity.css?v=19700">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"></div>
@@ -182,6 +184,32 @@
     </section>
 
 
+
+
+    <section class="section audienceIdentity" id="audience-identity">
+      <div class="audienceIdentity__head">
+        <div><span>COMMUNITY TELEVISION</span><h2>The people behind the channel</h2></div>
+        <div id="audienceIdentityStatus" class="audienceIdentity__status">COMMUNITY CONNECTED</div>
+      </div>
+      <div class="audienceIdentity__grid">
+        <article class="audienceIdentity__card">
+          <span class="audienceIdentity__label">COMMUNITY PROFILES</span>
+          <div id="audienceIdentityCommunity" class="audienceIdentity__community">
+            <article><strong>First-time viewers</strong><p>Recognised automatically</p></article>
+            <article><strong>Regular viewers</strong><p>Loyalty builds over time</p></article>
+            <article><strong>Mods & VIPs</strong><p>Community roles respected</p></article>
+          </div>
+        </article>
+        <article class="audienceIdentity__card audienceIdentity__latest">
+          <div class="audienceIdentity__latestIcon" id="audienceLatestIcon">★</div>
+          <span class="audienceIdentity__label" id="audienceLatestLabel">LATEST RECOGNITION</span>
+          <strong id="audienceLatestName">DJ FOLSOE community</strong>
+          <p id="audienceLatestMessage">Community recognition appears here when enabled.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section seratoTV" id="serato-tv"><div class="seratoTV__head"><div><span>DJ PERFORMANCE TELEVISION</span><h2>Live decks</h2><p>Real-time Serato status from the local bridge.</p></div><strong id="seratoConnectionStatus">WAITING</strong></div><div class="seratoGrid"><article class="seratoDeck" id="seratoDeckA" data-active="false"><span class="seratoLabel">DECK A</span><strong id="seratoDeckATrack">No track loaded</strong><p id="seratoDeckAAlbum">Waiting for Serato</p><div class="seratoMeta"><div><span>BPM</span><b id="seratoDeckABpm">—</b></div><div><span>KEY</span><b id="seratoDeckAKey">—</b></div><div><span>TIME</span><b id="seratoDeckATime">0:00</b></div><div><span>VOL</span><b id="seratoDeckAVolume">0%</b></div></div><div class="seratoProgress"><span id="seratoDeckAProgress"></span></div></article><article class="seratoDeck" id="seratoDeckB" data-active="false"><span class="seratoLabel">DECK B</span><strong id="seratoDeckBTrack">No track loaded</strong><p id="seratoDeckBAlbum">Waiting for Serato</p><div class="seratoMeta"><div><span>BPM</span><b id="seratoDeckBBpm">—</b></div><div><span>KEY</span><b id="seratoDeckBKey">—</b></div><div><span>TIME</span><b id="seratoDeckBTime">0:00</b></div><div><span>VOL</span><b id="seratoDeckBVolume">0%</b></div></div><div class="seratoProgress"><span id="seratoDeckBProgress"></span></div></article><article class="seratoPanel seratoMix"><span class="seratoLabel">MIX POSITION</span><strong id="seratoMixState">IDLE</strong><div class="seratoFader"><span id="seratoCrossfader"></span></div></article></div></section>
     <section class="section musicChartTV" id="chart-tv">
       <div class="musicChartTV__head">
         <div>
@@ -298,5 +326,7 @@
   <script src="assets/js/v18850-visual-system.js?v=19000"></script>
   <script src="assets/js/interaction-site.js?v=19400"></script>
   <script src="assets/js/music-chart-site.js?v=19500"></script>
+  <script src="assets/js/serato-site.js?v=19600"></script>
+  <script src="assets/js/audience-identity-site.js?v=19700"></script>
 </body>
 </html>
