@@ -67,6 +67,7 @@ function normalizeCore(raw){
     mods: core.mods || {},
     interactive: core.interactive || {},
     chart: core.chart || {},
+    websiteCms: core.websiteCms || {},
     overlay:{title:showTitle,status:mode,infoLine:tickerText,requestText:c.requestText||cp.requestText||'Use !request Artist - Title in Twitch chat',specialEvent:c.specialEvent||cp.specialEvent||'',subGoal:c.subGoal||cp.subGoal||100}
   };
 }
