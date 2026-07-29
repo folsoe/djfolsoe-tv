@@ -1,0 +1,59 @@
+
+/* DJ FOLSOE WEBSITE V18911 — CLEAN CHANNEL FOUNDATION
+   Removes dead vertical gaps after retired homepage modules. */
+
+main > .section:first-of-type{
+  padding-top:92px!important;
+}
+
+#shows{
+  padding-top:96px!important;
+}
+
+#about{
+  border-top:1px solid rgba(255,255,255,.075);
+}
+
+#about::before{
+  content:"DJ FOLSOE / THE CHANNEL";
+  position:absolute;
+  top:46px;
+  left:28px;
+  color:rgba(255,255,255,.22);
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.2em;
+}
+
+#community{
+  margin-top:12px;
+}
+
+/* No empty anchors or legacy module space. */
+.interactiveBroadcast,
+.websiteCms,
+.audienceIdentity,
+.seratoTV,
+.musicChartTV,
+.homepage-chart,
+.homepage-community-crew,
+.v18910-channel-section{
+  display:none!important;
+}
+
+/* Clean transition from programme cards to channel story. */
+#shows + #about{
+  margin-top:0;
+}
+
+@media(max-width:800px){
+  main > .section:first-of-type,
+  #shows{
+    padding-top:72px!important;
+  }
+
+  #about::before{
+    top:34px;
+    left:18px;
+  }
+}
