@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-djf-surface="website" data-djf-theme="morning">
+<html lang="en" data-djf-surface="website" data-djf-theme="morning" data-website-build="V18900">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +18,19 @@
   <link rel="stylesheet" href="assets/css/serato-bridge.css?v=19600">
   <link rel="stylesheet" href="assets/css/audience-identity.css?v=19700">
   <link rel="stylesheet" href="assets/css/website-cms.css?v=19800">
+  <link rel="stylesheet" href="assets/css/v18900-unified-broadcast-experience.css?v=18900">
 </head>
 <body>
+  <a class="v18900-skip-link" href="#live">Skip to live channel</a>
   <div class="ambient" aria-hidden="true"></div>
+  <div class="v18900-channel-atmosphere" aria-hidden="true">
+    <span class="v18900-beam v18900-beam-one"></span>
+    <span class="v18900-beam v18900-beam-two"></span>
+    <span class="v18900-orbit"></span>
+    <span class="v18900-noise"></span>
+  </div>
 
-  <header class="site-header">
+  <header class="site-header v18900-site-header">
     <a class="brand" href="#top" aria-label="DJ FOLSOE home">
       <span class="brand-mark">DF</span>
       <span>
@@ -35,7 +43,6 @@
       <a href="#live">Live</a>
       <a href="#shows">Shows</a>
       <a href="#channel">Channel</a>
-      <a href="#shows">Shows</a>
       <a href="#chart">Top 20</a>
       <a href="#community">Community</a>
     </nav>
@@ -46,7 +53,7 @@
   </header>
 
   <main id="top">
-    <section class="hero" id="live">
+    <section class="hero v18900-hero" id="live">
       <div class="hero-copy">
         <p class="eyebrow"><span id="liveDot" class="live-dot"></span><span id="liveState">TWITCH CHANNEL</span></p>
         <h1>MUSIC TV<br><span>BUILT FOR LIVE</span></h1>
@@ -64,7 +71,7 @@
         </div>
       </div>
 
-      <aside class="broadcast-card">
+      <aside class="broadcast-card v18900-broadcast-card">
         <div class="screen">
           <div class="screen-grid"></div>
           <div class="screen-copy">
@@ -357,5 +364,6 @@
   <script src="assets/js/serato-site.js?v=19600"></script>
   <script src="assets/js/audience-identity-site.js?v=19700"></script>
   <script src="assets/js/website-cms-site.js?v=19800"></script>
+  <script src="assets/js/v18900-unified-broadcast-experience.js?v=18900"></script>
 </body>
 </html>
