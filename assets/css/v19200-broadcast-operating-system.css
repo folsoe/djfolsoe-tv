@@ -1,0 +1,190 @@
+
+/* DJ FOLSOE WEBSITE V19200 — BROADCAST OPERATING SYSTEM */
+
+.v19000-tv-experience{
+  --os-online:#45df8a;
+  --os-starting:#ffd05a;
+  --os-offline:#ff5e79;
+  --os-sync:#37cfff;
+}
+
+.v19200-control-strip{
+  position:relative;
+  z-index:3;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(140px,.65fr)) minmax(280px,1.55fr);
+  gap:1px;
+  margin-top:8px;
+  overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--tv-a) 18%,var(--tv-line));
+  border-radius:12px;
+  background:rgba(255,255,255,.045);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 16px 42px rgba(0,0,0,.25);
+}
+
+.v19200-control-strip::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--tv-a),var(--tv-b),transparent);
+  background-size:220% 100%;
+  animation:v19200ControlRail 12s linear infinite;
+}
+
+.v19200-control-item{
+  min-width:0;
+  min-height:58px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:10px 15px;
+  background:
+    linear-gradient(145deg,rgba(14,20,36,.96),rgba(6,10,19,.98));
+}
+
+.v19200-control-item:not(:last-child){
+  border-right:1px solid rgba(255,255,255,.06);
+}
+
+.v19200-control-item span{
+  color:rgba(255,255,255,.38);
+  font-size:7px;
+  font-weight:950;
+  letter-spacing:.14em;
+}
+
+.v19200-control-item strong{
+  display:block;
+  max-width:100%;
+  margin-top:6px;
+  color:#fff;
+  font-size:11px;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.v19200-control-item[data-state="live"] strong{
+  color:var(--os-online);
+  text-shadow:0 0 12px color-mix(in srgb,var(--os-online) 26%,transparent);
+}
+
+.v19200-control-item[data-state="starting"] strong{
+  color:var(--os-starting);
+  text-shadow:0 0 12px color-mix(in srgb,var(--os-starting) 26%,transparent);
+}
+
+.v19200-control-item[data-state="offline"] strong{
+  color:var(--os-offline);
+}
+
+.v19200-control-item[data-state="synced"] strong{
+  color:var(--os-sync);
+}
+
+/* State-aware channel framing */
+html[data-channel-state="live"] .v19000-top-status{
+  border-color:color-mix(in srgb,var(--os-online) 42%,var(--tv-line))!important;
+}
+
+html[data-channel-state="live"] .v19000-status-line b{
+  color:var(--os-online);
+}
+
+html[data-channel-state="starting"] .v19000-top-status{
+  border-color:color-mix(in srgb,var(--os-starting) 42%,var(--tv-line))!important;
+}
+
+html[data-channel-state="starting"] .v19000-status-line b{
+  color:var(--os-starting);
+}
+
+html[data-channel-state="offline"] .v19000-top-status{
+  border-color:color-mix(in srgb,var(--os-offline) 26%,var(--tv-line))!important;
+}
+
+/* Unified transition when the OS changes channel state */
+.v19200-state-take .v19000-topbar,
+.v19200-state-take .v19000-main-grid,
+.v19200-state-take .v19000-broadcast-row,
+.v19200-state-take .v19000-schedule-row,
+.v19200-state-take .v19200-control-strip{
+  animation:v19200StateTake .72s cubic-bezier(.22,.8,.2,1) both;
+}
+
+/* Highlight the next scheduled card from the shared OS */
+.v19000-schedule-card[data-os-next="true"]{
+  border-color:color-mix(in srgb,var(--tv-a) 58%,rgba(255,255,255,.1))!important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--tv-a) 14%,transparent),
+    0 0 24px var(--tv-glow)!important;
+}
+
+.v19000-schedule-card[data-os-current="true"]{
+  border-color:color-mix(in srgb,var(--os-online) 52%,rgba(255,255,255,.1))!important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb,var(--os-online) 14%,transparent),
+    0 0 24px color-mix(in srgb,var(--os-online) 18%,transparent)!important;
+}
+
+/* Synchronized data pulse */
+.v19200-data-pulse .v19000-status-column article,
+.v19200-data-pulse .v19200-control-strip{
+  animation:v19200DataPulse .9s cubic-bezier(.22,.8,.2,1) both;
+}
+
+@keyframes v19200ControlRail{
+  from{background-position:0% 50%}
+  to{background-position:220% 50%}
+}
+
+@keyframes v19200StateTake{
+  0%{opacity:.45;transform:translateY(3px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+@keyframes v19200DataPulse{
+  0%,100%{filter:brightness(1)}
+  45%{filter:brightness(1.13)}
+}
+
+@media(max-width:1050px){
+  .v19200-control-strip{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .v19200-control-item:nth-child(2){
+    border-right:0;
+  }
+
+  .v19200-control-item:nth-child(-n+2){
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+}
+
+@media(max-width:620px){
+  .v19200-control-strip{
+    grid-template-columns:1fr;
+  }
+
+  .v19200-control-item{
+    min-height:52px;
+  }
+
+  .v19200-control-item:not(:last-child){
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .v19200-control-strip::before{
+    animation:none!important;
+  }
+}
