@@ -1,0 +1,80 @@
+
+/* DJ FOLSOE WEBSITE V19300 — INTELLIGENT BROADCAST COUNTDOWN */
+
+.v19300-next-date-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+  color:color-mix(in srgb,var(--tv-a) 78%,#fff);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.045em;
+}
+
+.v19300-next-date-label::before{
+  content:"◷";
+  color:var(--tv-b);
+  font-size:15px;
+  text-shadow:0 0 12px color-mix(in srgb,var(--tv-b) 28%,transparent);
+}
+
+/* Starting soon state */
+html[data-countdown-state="starting-soon"] .v19000-top-status{
+  border-color:color-mix(in srgb,var(--os-starting,#ffd05a) 45%,var(--tv-line))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 0 30px color-mix(in srgb,var(--os-starting,#ffd05a) 15%,transparent),
+    0 20px 50px rgba(0,0,0,.3)!important;
+}
+
+html[data-countdown-state="starting"] .v19000-top-status{
+  border-color:color-mix(in srgb,var(--tv-b) 56%,var(--tv-line))!important;
+  animation:v19300StartingPulse 1.1s ease-in-out infinite;
+}
+
+html[data-countdown-state="live"] .v19000-countdown{
+  grid-template-columns:1fr;
+}
+
+html[data-countdown-state="live"] .v19000-countdown b,
+html[data-countdown-state="live"] .v19000-countdown small{
+  display:none;
+}
+
+html[data-countdown-state="live"] .v19000-countdown>span{
+  color:var(--os-online,#45df8a);
+  font-size:17px;
+  font-weight:950;
+  letter-spacing:.09em;
+}
+
+html[data-countdown-state="live"] .v19300-next-date-label{
+  color:var(--os-online,#45df8a);
+}
+
+html[data-countdown-state="starting"] .v19000-countdown>span{
+  color:var(--tv-b);
+  font-weight:950;
+}
+
+.v19300-countdown-take .v19000-countdown,
+.v19300-countdown-take .v19300-next-date-label{
+  animation:v19300CountdownTake .52s cubic-bezier(.22,.8,.2,1) both;
+}
+
+@keyframes v19300CountdownTake{
+  0%{opacity:.25;transform:translateY(4px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+@keyframes v19300StartingPulse{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.14)}
+}
+
+@media(max-width:520px){
+  .v19300-next-date-label{
+    font-size:9px;
+  }
+}
