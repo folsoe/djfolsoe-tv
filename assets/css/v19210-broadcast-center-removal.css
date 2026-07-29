@@ -1,0 +1,40 @@
+
+/* DJ FOLSOE WEBSITE V19210 — BROADCAST CENTER REMOVAL */
+
+/* The repeated Broadcast Center and secondary Live Desk are physically
+   removed from index.html. This file closes the layout cleanly. */
+
+.v19000-main-grid{
+  margin-bottom:8px;
+}
+
+.v19000-schedule-row{
+  margin-top:8px!important;
+}
+
+.v19000-main-grid + .v19000-schedule-row{
+  border-top-color:color-mix(in srgb,var(--tv-a) 24%,var(--tv-line))!important;
+}
+
+/* Defensive fallback in case an old cached HTML version remains briefly. */
+.v19000-broadcast-row{
+  display:none!important;
+}
+
+/* Keep the main Live Desk in the hero visually dominant. */
+.v19000-live-desk-stage{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 18px 46px rgba(0,0,0,.28),
+    0 0 30px color-mix(in srgb,var(--tv-b) 10%,transparent);
+}
+
+@media(max-width:850px){
+  .v19000-main-grid{
+    margin-bottom:6px;
+  }
+
+  .v19000-schedule-row{
+    margin-top:6px!important;
+  }
+}
