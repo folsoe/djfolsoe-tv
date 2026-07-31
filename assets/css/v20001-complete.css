@@ -22,3 +22,46 @@ linear-gradient(135deg,#080c17,#11192b)}
 .channelStatusCard .heroStatusNumbers article{padding:13px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.035);display:flex;flex-direction:column}
 .channelStatusCard .heroStatusNumbers b{font-size:26px}.channelStatusCard .heroStatusNumbers small{margin-top:4px;color:var(--muted);font-size:8px;letter-spacing:.11em}
 .scheduleStrip{display:none!important}
+
+/* ============================================================
+   V21000 — BROADCAST AUTOMATION PLATFORM
+   ============================================================ */
+body[data-show-theme="morning"]{--cyan:#ffd45a;--pink:#ff7ca8}
+body[data-show-theme="trance"]{--cyan:#38e8ff;--pink:#8063ff}
+body[data-show-theme="fredagsbar"]{--cyan:#75f0b5;--pink:#ffd45a}
+body[data-show-theme="eurodance"]{--cyan:#35e8ff;--pink:#ff3cb6}
+body[data-show-theme="retro"]{--cyan:#ffd063;--pink:#ff6d8f}
+body[data-show-theme="summer"]{--cyan:#61efff;--pink:#ffe261}
+body[data-show-theme="top20"]{--cyan:#44e7ff;--pink:#8066ff}
+body[data-show-theme="danske"]{--cyan:#ff5b64;--pink:#ffffff}
+body[data-show-theme="popup"]{--cyan:#ff557f;--pink:#8a5cff}
+body[data-show-theme="weekend"]{--cyan:#ffae35;--pink:#f13c9a}
+
+.automationStateStrip{
+  display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px
+}
+.automationStateStrip span{
+  padding:8px 10px;border-radius:999px;background:#273042;
+  font-size:9px;font-weight:900;letter-spacing:.12em
+}
+.automationStateStrip b{
+  font-size:10px;letter-spacing:.13em;color:var(--muted)
+}
+body[data-broadcast-state="starting"] .automationStateStrip span{
+  background:#ffb52f;color:#16100a;animation:v21000Urgent 1.35s ease-in-out infinite
+}
+body[data-broadcast-state="live"] .automationStateStrip span{
+  background:#ff2855;color:#fff;animation:v21000Urgent 1.15s ease-in-out infinite
+}
+body[data-broadcast-state="live"] .customOffline{
+  background:radial-gradient(circle at 50% 20%,rgba(255,40,85,.18),transparent 36%),
+  linear-gradient(135deg,#0b0d17,#1a0d19)
+}
+body[data-broadcast-state="starting"] .customOffline{
+  background:radial-gradient(circle at 50% 20%,rgba(255,181,47,.18),transparent 38%),
+  linear-gradient(135deg,#0b0d17,#1a1510)
+}
+body[data-broadcast-state="live"] .offlineCountdown{display:none}
+body[data-broadcast-state="live"] #automationAction{background:#9147ff;color:#fff}
+body[data-broadcast-state="starting"] #automationAction{border-color:#ffb52f;color:#ffcf6e}
+@keyframes v21000Urgent{50%{filter:brightness(1.35);transform:scale(1.03)}}
