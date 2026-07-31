@@ -4,7 +4,7 @@ const API="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 const SCHEDULE_URL="https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/twitch-schedule";
 const CHANNEL="djfolsoe";
 const $=id=>document.getElementById(id);
-const state={live:false,viewers:0,followers:874,title:"",theme:"GOOD MORNING",schedule:[],next:null,scheduleUpdated:"",scheduleError:""};
+const state={live:false,viewers:0,followers:0,title:"",theme:"GOOD MORNING",schedule:[],next:null,scheduleUpdated:"",scheduleError:""};
 
 function parents(){const s=new Set(["folsoetv.dk","www.folsoetv.dk"]);if(location.hostname&&!["localhost","127.0.0.1"].includes(location.hostname))s.add(location.hostname);return [...s]}
 function pq(){return parents().map(x=>"parent="+encodeURIComponent(x)).join("&")}
@@ -43,7 +43,10 @@ async function refresh(){
  ]);
  state.live=bool(tw)||bool(bc);
  state.viewers=Number(pick(tw.viewerCount,tw.viewers,tw.viewer_count,bc.viewers,0));
- state.followers=Number(pick(tw.followers,tw.followerCount,bc.followers,state.followers));
+ {
+ const unifiedFollowers=Number(pick(tw.followers,tw.followerCount,0));
+ if(Number.isFinite(unifiedFollowers)&&unifiedFollowers>=0)state.followers=Math.floor(unifiedFollowers);
+}
  state.title=String(pick(tw.title,tw.streamTitle,bc.streamTitle,bc.showTitle,""));
  state.theme=String(pick(bc.theme?.title,bc.activeTheme,bc.theme,state.theme)).replace(/[_-]/g," ").toUpperCase();
  if(sch){
@@ -199,7 +202,7 @@ function applyBroadcastAutomation(){
 
 mountChat();refresh();setInterval(tick,1000);setInterval(refresh,60000);
 window.DJF_V21000=Object.freeze({
- version:"V21000",
+ version:"V21001",
  refresh,
  status:()=>({...state,automation:automationSnapshot(),parents:parents()}),
  automation:automationSnapshot
