@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Connect Twitch Followers | DJ FOLSOE</title>
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+  :root{--bg:#040611;--panel:#0c1120;--line:rgba(255,255,255,.14);--text:#fff;--muted:#aeb8ca;--cyan:#32e5ff;--purple:#9147ff;--green:#29d98b;--red:#ff365f}
+  *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 20% 0,rgba(50,229,255,.14),transparent 32rem),linear-gradient(145deg,#050816,#02030a);color:var(--text);font-family:Arial,sans-serif}
+  main{width:min(680px,100%);padding:28px;border:1px solid var(--line);border-radius:22px;background:rgba(12,17,32,.96);box-shadow:0 30px 90px rgba(0,0,0,.45)}
+  .kicker{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.16em}h1{font-size:clamp(34px,7vw,62px);line-height:.92;letter-spacing:-.05em;margin:12px 0}p{color:var(--muted);line-height:1.55}
+  label{display:block;margin:22px 0 7px;font-size:11px;font-weight:900;letter-spacing:.09em}input{width:100%;padding:14px;border:1px solid var(--line);border-radius:11px;background:#070a13;color:#fff;font-size:15px}
+  .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}button,a.button{border:0;padding:13px 16px;border-radius:10px;color:#fff;font-weight:900;cursor:pointer;text-decoration:none;background:var(--purple)}button.secondary{background:#20283a}.status{margin-top:20px;padding:16px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}.status header{display:flex;align-items:center;justify-content:space-between;gap:10px}.badge{padding:7px 9px;border-radius:999px;background:#323a49;font-size:10px;font-weight:900}.badge.ok{background:var(--green);color:#04130d}.badge.error{background:var(--red)}pre{white-space:pre-wrap;word-break:break-word;color:#dce4f4;font-size:12px;line-height:1.5}.note{font-size:12px}.back{display:inline-block;margin-top:18px;color:var(--cyan);font-size:12px;font-weight:900}
+  </style>
+</head>
+<body>
+<main>
+  <div class="kicker">V21002 · TWITCH FOLLOWER AUTHORIZATION</div>
+  <h1>Connect follower access</h1>
+  <p>Authorize DJ FOLSOE NETWORK to read the official follower total. Your Twitch password and tokens are never stored in this webpage.</p>
+
+  <label for="adminToken">CLOUDFLARE ADMIN TOKEN</label>
+  <input id="adminToken" type="password" autocomplete="off" placeholder="Enter the existing ADMIN_TOKEN">
+
+  <div class="actions">
+    <button id="connect">CONNECT TWITCH</button>
+    <button id="refresh" class="secondary">REFRESH STATUS</button>
+    <button id="disconnect" class="secondary">DISCONNECT</button>
+  </div>
+
+  <section class="status">
+    <header><strong>CONNECTION STATUS</strong><span id="badge" class="badge">CHECKING</span></header>
+    <pre id="output">Loading…</pre>
+  </section>
+
+  <p class="note">The Twitch app must contain this exact OAuth redirect URL:<br><strong id="redirect">Loading…</strong></p>
+  <a class="back" href="/">← RETURN TO FOLSOE TV</a>
+</main>
+<script>
+const API="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+const $=id=>document.getElementById(id);
+function headers(){return{"Content-Type":"application/json","X-Admin-Token":$("adminToken").value.trim()}}
+async function read(path,options={}){const r=await fetch(API+path,{cache:"no-store",...options});const j=await r.json();if(!r.ok)throw Error(j.error||r.status);return j}
+function render(data){
+ $("redirect").textContent=data.redirectUri||"";
+ const a=data.authorization||{};
+ const t=data.followerTruth||{};
+ $("badge").textContent=a.connected?"CONNECTED":"NOT CONNECTED";
+ $("badge").className="badge "+(a.connected?"ok":"");
+ $("output").textContent=JSON.stringify({
+  connected:a.connected,
+  account:a.displayName||a.login||null,
+  scopes:a.scopes||[],
+  expiresAt:a.expiresAt||null,
+  followers:t.followers??null,
+  followerSource:t.source||null
+ },null,2);
+}
+async function status(){try{render(await read("/api/follower-auth/status"))}catch(e){$("badge").textContent="ERROR";$("badge").className="badge error";$("output").textContent=e.message}}
+$("connect").onclick=async()=>{try{const j=await read("/api/follower-auth/start",{method:"POST",headers:headers(),body:"{}"});location.href=j.authorizationUrl}catch(e){alert(e.message)}};
+$("refresh").onclick=async()=>{try{const j=await read("/api/follower-auth/refresh",{method:"POST",headers:headers(),body:"{}"});await status()}catch(e){alert(e.message)}};
+$("disconnect").onclick=async()=>{if(!confirm("Disconnect Twitch follower access?"))return;try{await read("/api/follower-auth/disconnect",{method:"POST",headers:headers(),body:"{}"});await status()}catch(e){alert(e.message)}};
+status();
+</script>
+</body>
+</html>
