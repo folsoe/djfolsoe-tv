@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://www.twitch.tv">
   <link rel="stylesheet" href="assets/css/v20001-complete.css?v=20001">
 </head>
-<body>
+<body data-broadcast-state="offline" data-show-theme="default">
 <header class="topbar">
   <a class="brand" href="#top"><span class="bug">DF</span><span><b>DJ FOLSOE</b><small>LIVE MUSIC TV · DENMARK</small></span></a>
   <nav><a href="#live">Live</a><a href="#shows">Shows</a><a href="#about">Community</a><a class="twitch" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch</a></nav>
@@ -47,7 +47,7 @@
 
   <section class="liveSection" id="live">
     <div class="sectionHead">
-      <div><p>TWITCH SCHEDULE COUNTDOWN FIX</p><h2 id="liveHeading">DJ FOLSOE LIVE CHANNEL</h2></div>
+      <div><p>BROADCAST AUTOMATION PLATFORM</p><h2 id="liveHeading">DJ FOLSOE LIVE CHANNEL</h2></div>
       <span id="livePill" class="statusPill"><i></i><b>CHECKING</b></span>
     </div>
 
@@ -56,16 +56,20 @@
         <div class="playerFrame">
           <div class="playerLoading" id="playerLoading"><span></span><b>CHECKING THE LIVE CHANNEL</b><small>Live video opens automatically when DJ FOLSOE is online.</small></div>
           <div class="customOffline" id="customOffline" hidden>
-            <small>NEXT LIVE SHOW</small>
+            <small id="automationKicker">NEXT LIVE SHOW</small>
             <h3 id="offlineNextTitle">SCHEDULE LOADING</h3>
             <p id="offlineNextDate">Reading the official Twitch schedule…</p>
+            <div class="automationStateStrip" id="automationStateStrip">
+              <span id="automationStateBadge">OFF AIR</span>
+              <b id="automationStateText">NEXT BROADCAST</b>
+            </div>
             <div class="offlineCountdown">
               <span><b id="offDays">00</b><small>DAYS</small></span>
               <span><b id="offHours">00</b><small>HOURS</small></span>
               <span><b id="offMinutes">00</b><small>MINUTES</small></span>
               <span><b id="offSeconds">00</b><small>SECONDS</small></span>
             </div>
-            <a href="https://twitch.tv/djfolsoe/schedule" target="_blank" rel="noopener">VIEW FULL TWITCH SCHEDULE ↗</a>
+            <a id="automationAction" href="https://twitch.tv/djfolsoe/schedule" target="_blank" rel="noopener">VIEW FULL TWITCH SCHEDULE ↗</a>
           </div>
           <iframe id="twitchPlayer" title="DJ FOLSOE live Twitch stream" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
         </div>
