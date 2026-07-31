@@ -32,12 +32,15 @@
           <a class="secondary" href="#shows">EXPLORE SHOWS</a>
         </div>
       </div>
-      <aside class="nextCard">
-        <small>UP NEXT</small>
-        <strong id="nextShow">GOOD MORNING TWITCH</strong>
-        <span id="nextTime">Next show time loading…</span>
-        <div class="countdown"><b id="countH">00</b><small>HOURS</small><b id="countM">00</b><small>MINUTES</small><b id="countS">00</b><small>SECONDS</small></div>
-        <p id="channelStats">874 FOLLOWERS · 0 VIEWERS</p>
+      <aside class="nextCard channelStatusCard">
+        <small>CHANNEL STATUS</small>
+        <strong id="heroChannelState">DJ FOLSOE · OFF AIR</strong>
+        <span id="heroChannelText">The next show is displayed in the live channel below.</span>
+        <div class="heroStatusNumbers">
+          <article><b id="heroFollowers">869</b><small>FOLLOWERS</small></article>
+          <article><b id="heroViewers">0</b><small>VIEWERS</small></article>
+        </div>
+        <p>TWITCH.TV/DJFOLSOE · FOLSOETV.DK</p>
       </aside>
     </div>
   </section>
@@ -74,13 +77,7 @@
         <iframe id="twitchChat" title="DJ FOLSOE Twitch chat"></iframe>
       </aside>
     </div>
-
-    <section class="scheduleStrip" id="scheduleStrip">
-      <header><div><small>OFFICIAL TWITCH SCHEDULE</small><h3>Coming up on FOLSOE TV</h3></div><span id="scheduleUpdated">SYNCING…</span></header>
-      <div class="scheduleCards" id="scheduleCards"><article><small>LOADING</small><b>Reading Twitch schedule…</b></article></div>
-    </section>
-
-    <div id="offlineMessage" class="offlineMessage" hidden>
+<div id="offlineMessage" class="offlineMessage" hidden>
       <b>OFF AIR</b><div><strong>The channel is currently offline</strong><span>Follow DJ FOLSOE on Twitch and return here for the next live show.</span></div>
       <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">FOLLOW ON TWITCH</a>
     </div>
