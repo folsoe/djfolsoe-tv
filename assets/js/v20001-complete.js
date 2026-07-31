@@ -46,7 +46,13 @@ async function refresh(){
  state.followers=Number(pick(tw.followers,tw.followerCount,bc.followers,state.followers));
  state.title=String(pick(tw.title,tw.streamTitle,bc.streamTitle,bc.showTitle,""));
  state.theme=String(pick(bc.theme?.title,bc.activeTheme,bc.theme,state.theme)).replace(/[_-]/g," ").toUpperCase();
- if(sch){state.schedule=cleanSegments(sch);state.next=state.schedule[0]||null;state.scheduleUpdated=sch.generatedAt||"";state.scheduleError=sch.error||""}
+ if(sch){
+ state.schedule=cleanSegments(sch);
+ const directNext=sch.next&&sch.next.startTime?sch.next:null;
+ state.next=directNext||state.schedule[0]||null;
+ state.scheduleUpdated=sch.generatedAt||"";
+ state.scheduleError=sch.error||"";
+}
  if(state.live)mountPlayer();else unmountPlayer();
  render();
 }
@@ -81,11 +87,46 @@ function render(){
 }
 function partsUntil(iso){let d=Math.max(0,Date.parse(iso)-Date.now());return{days:Math.floor(d/864e5),hours:Math.floor(d%864e5/36e5),minutes:Math.floor(d%36e5/6e4),seconds:Math.floor(d%6e4/1e3)}}
 function tick(){
- const n=state.next;if(!n)return;
- const x=partsUntil(n.startTime);
- $("countH").textContent=String(x.days*24+x.hours).padStart(2,"0");$("countM").textContent=String(x.minutes).padStart(2,"0");$("countS").textContent=String(x.seconds).padStart(2,"0");
- $("offDays").textContent=String(x.days).padStart(2,"0");$("offHours").textContent=String(x.hours).padStart(2,"0");$("offMinutes").textContent=String(x.minutes).padStart(2,"0");$("offSeconds").textContent=String(x.seconds).padStart(2,"0");
+ const n=state.next;
+ const setSafe=(id,value)=>{const el=$(id);if(el)el.textContent=value};
+
+ if(!n){
+  setSafe("countH","00");
+  setSafe("countM","00");
+  setSafe("countS","00");
+  setSafe("offDays","00");
+  setSafe("offHours","00");
+  setSafe("offMinutes","00");
+  setSafe("offSeconds","00");
+  return;
+ }
+
+ const target=Date.parse(n.startTime);
+ if(!Number.isFinite(target)){
+  setSafe("offDays","00");
+  setSafe("offHours","00");
+  setSafe("offMinutes","00");
+  setSafe("offSeconds","00");
+  return;
+ }
+
+ let remaining=Math.max(0,target-Date.now());
+ const days=Math.floor(remaining/864e5);
+ const hours=Math.floor((remaining%864e5)/36e5);
+ const minutes=Math.floor((remaining%36e5)/6e4);
+ const seconds=Math.floor((remaining%6e4)/1e3);
+
+ // Legacy compact counters are updated only if they still exist.
+ setSafe("countH",String(days*24+hours).padStart(2,"0"));
+ setSafe("countM",String(minutes).padStart(2,"0"));
+ setSafe("countS",String(seconds).padStart(2,"0"));
+
+ // Main offline countdown.
+ setSafe("offDays",String(days).padStart(2,"0"));
+ setSafe("offHours",String(hours).padStart(2,"0"));
+ setSafe("offMinutes",String(minutes).padStart(2,"0"));
+ setSafe("offSeconds",String(seconds).padStart(2,"0"));
 }
 mountChat();refresh();setInterval(tick,1000);setInterval(refresh,60000);
-window.DJF_V20001=Object.freeze({refresh,status:()=>({...state,parents:parents()})});
+window.DJF_V20002_2=Object.freeze({version:"V20002.2",refresh,status:()=>({...state,parents:parents()})});
 })();
