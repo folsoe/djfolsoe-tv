@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-version="V20000">
+<html lang="en" data-version="V20001">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://folsoetv.dk/">
   <link rel="preconnect" href="https://player.twitch.tv">
   <link rel="preconnect" href="https://www.twitch.tv">
-  <link rel="stylesheet" href="assets/css/v20000-complete.css?v=20000">
+  <link rel="stylesheet" href="assets/css/v20001-complete.css?v=20001">
 </head>
 <body>
 <header class="topbar">
@@ -44,15 +44,27 @@
 
   <section class="liveSection" id="live">
     <div class="sectionHead">
-      <div><p>FOLSOE TV WATCH LIVE EXPERIENCE</p><h2 id="liveHeading">DJ FOLSOE LIVE CHANNEL</h2></div>
+      <div><p>TWITCH SCHEDULE SYNC ENGINE</p><h2 id="liveHeading">DJ FOLSOE LIVE CHANNEL</h2></div>
       <span id="livePill" class="statusPill"><i></i><b>CHECKING</b></span>
     </div>
 
     <div class="liveStage">
       <article class="playerCard">
         <div class="playerFrame">
-          <div class="playerLoading" id="playerLoading"><span></span><b>PREPARING TWITCH PLAYER</b><small>Press play to enable sound.</small></div>
-          <iframe id="twitchPlayer" title="DJ FOLSOE live Twitch stream" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          <div class="playerLoading" id="playerLoading"><span></span><b>CHECKING THE LIVE CHANNEL</b><small>Live video opens automatically when DJ FOLSOE is online.</small></div>
+          <div class="customOffline" id="customOffline" hidden>
+            <small>NEXT LIVE SHOW</small>
+            <h3 id="offlineNextTitle">SCHEDULE LOADING</h3>
+            <p id="offlineNextDate">Reading the official Twitch schedule…</p>
+            <div class="offlineCountdown">
+              <span><b id="offDays">00</b><small>DAYS</small></span>
+              <span><b id="offHours">00</b><small>HOURS</small></span>
+              <span><b id="offMinutes">00</b><small>MINUTES</small></span>
+              <span><b id="offSeconds">00</b><small>SECONDS</small></span>
+            </div>
+            <a href="https://twitch.tv/djfolsoe/schedule" target="_blank" rel="noopener">VIEW FULL TWITCH SCHEDULE ↗</a>
+          </div>
+          <iframe id="twitchPlayer" title="DJ FOLSOE live Twitch stream" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
         </div>
         <footer><div><strong id="streamTitle">DJ FOLSOE LIVE</strong><small id="streamMeta">Official Twitch stream embedded on FOLSOE TV</small></div><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">WATCH ON TWITCH ↗</a></footer>
       </article>
@@ -62,6 +74,11 @@
         <iframe id="twitchChat" title="DJ FOLSOE Twitch chat"></iframe>
       </aside>
     </div>
+
+    <section class="scheduleStrip" id="scheduleStrip">
+      <header><div><small>OFFICIAL TWITCH SCHEDULE</small><h3>Coming up on FOLSOE TV</h3></div><span id="scheduleUpdated">SYNCING…</span></header>
+      <div class="scheduleCards" id="scheduleCards"><article><small>LOADING</small><b>Reading Twitch schedule…</b></article></div>
+    </section>
 
     <div id="offlineMessage" class="offlineMessage" hidden>
       <b>OFF AIR</b><div><strong>The channel is currently offline</strong><span>Follow DJ FOLSOE on Twitch and return here for the next live show.</span></div>
@@ -97,6 +114,6 @@
 </main>
 
 <footer class="siteFooter"><b>DJ FOLSOE NETWORK</b><span>EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK</span><small>© 2026 DJ FOLSOE</small></footer>
-<script src="assets/js/v20000-complete.js?v=20000"></script>
+<script src="assets/js/v20001-complete.js?v=20001"></script>
 </body>
 </html>
