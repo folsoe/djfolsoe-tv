@@ -83,7 +83,7 @@ function render(){
  $("customOffline").hidden=state.live;$("offlineMessage").hidden=state.live;
  $("deskTitle").textContent=state.live?"DJ FOLSOE IS LIVE NOW":(state.next?`UP NEXT: ${state.next.title}`:"WELCOME TO DJ FOLSOE");
  $("deskText").textContent=state.live?"Watch the stream and join the Twitch chat directly above.":(state.next?fmtDate(state.next.startTime):"Follow the channel and become part of the community.");
- renderSchedule();tick();
+ renderSchedule();tick();applyBroadcastAutomation();
 }
 function partsUntil(iso){let d=Math.max(0,Date.parse(iso)-Date.now());return{days:Math.floor(d/864e5),hours:Math.floor(d%864e5/36e5),minutes:Math.floor(d%36e5/6e4),seconds:Math.floor(d%6e4/1e3)}}
 function tick(){
@@ -126,7 +126,82 @@ function tick(){
  setSafe("offHours",String(hours).padStart(2,"0"));
  setSafe("offMinutes",String(minutes).padStart(2,"0"));
  setSafe("offSeconds",String(seconds).padStart(2,"0"));
+ applyBroadcastAutomation();
 }
+
+const V21000_STARTING_SOON_MS=30*60*1000;
+function detectShowTheme(title=""){
+ const value=String(title).toLowerCase();
+ if(value.includes("morning")||value.includes("morgen"))return"morning";
+ if(value.includes("trance"))return"trance";
+ if(value.includes("fredagsbar")||value.includes("friday bar"))return"fredagsbar";
+ if(value.includes("eurodance"))return"eurodance";
+ if(value.includes("retro"))return"retro";
+ if(value.includes("summer")||value.includes("sommer"))return"summer";
+ if(value.includes("top 20")||value.includes("chart"))return"top20";
+ if(value.includes("danish")||value.includes("danske"))return"danske";
+ if(value.includes("pop up")||value.includes("popup"))return"popup";
+ if(value.includes("weekend"))return"weekend";
+ return"default";
+}
+function automationSnapshot(){
+ const now=Date.now();
+ const nextMs=state.next?Date.parse(state.next.startTime):NaN;
+ const remaining=Number.isFinite(nextMs)?Math.max(0,nextMs-now):null;
+ const starting=Boolean(!state.live&&remaining!==null&&remaining<=V21000_STARTING_SOON_MS);
+ return{
+  mode:state.live?"live":starting?"starting":state.next?"next":"offline",
+  remaining,
+  theme:detectShowTheme(state.live?(state.title||state.next?.title):(state.next?.title||"")),
+  title:state.live?(state.title||state.next?.title||"DJ FOLSOE LIVE"):(state.next?.title||"NEXT SHOW TO BE ANNOUNCED")
+ };
+}
+function applyBroadcastAutomation(){
+ const a=automationSnapshot();
+ document.body.dataset.broadcastState=a.mode;
+ document.body.dataset.showTheme=a.theme;
+
+ const badge=$("automationStateBadge");
+ const textNode=$("automationStateText");
+ const kicker=$("automationKicker");
+ const titleNode=$("offlineNextTitle");
+ const dateNode=$("offlineNextDate");
+ const action=$("automationAction");
+ const watchButton=$("watchButton");
+
+ if(a.mode==="live"){
+  if(badge)badge.textContent="LIVE NOW";
+  if(textNode)textNode.textContent="THE BROADCAST IS ON AIR";
+  if(kicker)kicker.textContent="NOW PLAYING";
+  if(titleNode)titleNode.textContent=a.title;
+  if(dateNode)dateNode.textContent=state.viewers?`${state.viewers.toLocaleString("en-US")} WATCHING NOW`:"WATCH · CHAT · JOIN THE SHOW";
+  if(action){action.textContent="WATCH LIVE ON TWITCH ↗";action.href="https://twitch.tv/djfolsoe"}
+  if(watchButton)watchButton.querySelector("span").textContent="SE MED NU · WATCH LIVE";
+ }else if(a.mode==="starting"){
+  if(badge)badge.textContent="STARTING SOON";
+  if(textNode)textNode.textContent="GET READY";
+  if(kicker)kicker.textContent="STARTING IN";
+  if(titleNode)titleNode.textContent=a.title;
+  if(action){action.textContent="OPEN TWITCH CHANNEL ↗";action.href="https://twitch.tv/djfolsoe"}
+  if(watchButton)watchButton.querySelector("span").textContent="STARTING SOON";
+ }else if(a.mode==="next"){
+  if(badge)badge.textContent="OFF AIR";
+  if(textNode)textNode.textContent="NEXT BROADCAST";
+  if(kicker)kicker.textContent="NEXT LIVE SHOW";
+  if(titleNode)titleNode.textContent=a.title;
+  if(action){action.textContent="VIEW FULL TWITCH SCHEDULE ↗";action.href="https://twitch.tv/djfolsoe/schedule"}
+ }else{
+  if(badge)badge.textContent="OFF AIR";
+  if(textNode)textNode.textContent="SCHEDULE TO BE ANNOUNCED";
+  if(kicker)kicker.textContent="NEXT LIVE SHOW";
+ }
+}
+
 mountChat();refresh();setInterval(tick,1000);setInterval(refresh,60000);
-window.DJF_V20002_2=Object.freeze({version:"V20002.2",refresh,status:()=>({...state,parents:parents()})});
+window.DJF_V21000=Object.freeze({
+ version:"V21000",
+ refresh,
+ status:()=>({...state,automation:automationSnapshot(),parents:parents()}),
+ automation:automationSnapshot
+});
 })();
