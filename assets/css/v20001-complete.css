@@ -16,3 +16,9 @@ linear-gradient(135deg,#080c17,#11192b)}
 .scheduleStrip>header{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:13px}.scheduleStrip header small{font-size:9px;color:var(--cyan);font-weight:900;letter-spacing:.14em}.scheduleStrip h3{font-size:22px;margin:5px 0 0}.scheduleStrip header>span{font-size:9px;color:var(--muted)}
 .scheduleCards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.scheduleCards article{padding:14px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025);display:flex;flex-direction:column;gap:6px}.scheduleCards article.next{border-color:rgba(40,229,255,.5);background:rgba(40,229,255,.055)}.scheduleCards small{font-size:9px;color:var(--pink);font-weight:900;letter-spacing:.1em}.scheduleCards b{font-size:15px}.scheduleCards span{font-size:11px;color:var(--muted)}
 @media(max-width:780px){.scheduleCards{grid-template-columns:1fr}.offlineCountdown{grid-template-columns:repeat(2,minmax(70px,110px))}.customOffline h3{font-size:30px}}
+
+/* V20001.2 — one schedule presentation only */
+.channelStatusCard .heroStatusNumbers{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}
+.channelStatusCard .heroStatusNumbers article{padding:13px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.035);display:flex;flex-direction:column}
+.channelStatusCard .heroStatusNumbers b{font-size:26px}.channelStatusCard .heroStatusNumbers small{margin-top:4px;color:var(--muted);font-size:8px;letter-spacing:.11em}
+.scheduleStrip{display:none!important}
