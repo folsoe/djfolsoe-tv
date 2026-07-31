@@ -26,7 +26,7 @@ function unmountPlayer(){
  $("playerLoading").classList.add("hidden");
 }
 function cleanSegments(raw){
- const source=Array.isArray(raw?.segments)?raw.segments:Array.isArray(raw?.data)?raw.data:[];
+ const source=Array.isArray(raw?.segments)?raw.segments:Array.isArray(raw?.data?.segments)?raw.data.segments:Array.isArray(raw?.data)?raw.data:[];
  const now=Date.now();
  return source.map((s,i)=>({
    id:String(s.id||i),title:String(s.title||s.category?.name||"DJ FOLSOE LIVE"),
@@ -56,19 +56,19 @@ function fmtDate(iso){
 }
 function renderSchedule(){
  const n=state.next;
- $("nextShow").textContent=n?.title||"NEXT SHOW TO BE ANNOUNCED";
- $("nextTime").textContent=n?fmtDate(n.startTime):"Update the schedule on Twitch";
+ $("nextShow") && ($("nextShow").textContent=n?.title||"NEXT SHOW TO BE ANNOUNCED");
+ $("nextTime") && ($("nextTime").textContent=n?fmtDate(n.startTime):"Update the schedule on Twitch");
  $("offlineNextTitle").textContent=n?.title||"NEXT SHOW TO BE ANNOUNCED";
- $("offlineNextDate").textContent=n?fmtDate(n.startTime):"The official Twitch schedule currently has no upcoming show.";
- $("scheduleUpdated").textContent=state.scheduleUpdated?`SYNCED ${new Date(state.scheduleUpdated).toLocaleString("en-GB",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Copenhagen"})}`:"TWITCH SYNC";
- $("scheduleCards").innerHTML=state.schedule.length
-  ?state.schedule.slice(0,3).map((s,i)=>`<article class="${i===0?"next":""}"><small>${i===0?"UP NEXT":"COMING UP"}</small><b>${escapeHtml(s.title)}</b><span>${escapeHtml(fmtDate(s.startTime))}</span></article>`).join("")
-  :`<article class="next"><small>SCHEDULE</small><b>No upcoming Twitch shows found</b><span>Add the next stream in Twitch Creator Dashboard.</span></article>`;
+ $("offlineNextDate").textContent=n?fmtDate(n.startTime):(state.scheduleError||"The official Twitch schedule currently has no upcoming show.");
 }
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){
  $("followers").textContent=state.followers.toLocaleString("en-US");$("viewers").textContent=state.viewers.toLocaleString("en-US");$("theme").textContent=state.theme;
- $("channelStats").textContent=`${state.followers.toLocaleString("en-US")} FOLLOWERS · ${state.viewers.toLocaleString("en-US")} VIEWERS`;
+ $("channelStats") && ($("channelStats").textContent=`${state.followers.toLocaleString("en-US")} FOLLOWERS · ${state.viewers.toLocaleString("en-US")} VIEWERS`);
+ $("heroFollowers").textContent=state.followers.toLocaleString("en-US");
+ $("heroViewers").textContent=state.viewers.toLocaleString("en-US");
+ $("heroChannelState").textContent=state.live?"DJ FOLSOE · LIVE NOW":"DJ FOLSOE · OFF AIR";
+ $("heroChannelText").textContent=state.live?(state.title||"Watch the live show below."):(state.next?`Next: ${state.next.title}`:"The next show is displayed in the live channel below.");
  const b=$("watchButton"),p=$("livePill");b.classList.toggle("isLive",state.live);b.querySelector("span").textContent=state.live?"SE MED NU · WATCH LIVE":"SEE THE NEXT SHOW";
  p.classList.toggle("live",state.live);p.querySelector("b").textContent=state.live?"LIVE NOW":"OFFLINE";
  $("liveHeading").textContent=state.live?(state.title||"DJ FOLSOE IS LIVE NOW"):"DJ FOLSOE LIVE CHANNEL";
