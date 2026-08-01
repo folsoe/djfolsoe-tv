@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DJ FOLSOE · Twitch Chat Setup</title>
+  <style>
+    :root{
+      --bg:#050711;--panel:#0d1220;--line:rgba(255,255,255,.14);
+      --text:#fff;--muted:#aeb7c9;--accent:#9147ff;--ok:#29d884;--bad:#ff4d6d;--warn:#ffcf4d;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;background:
+      radial-gradient(circle at 20% 10%,rgba(145,71,255,.2),transparent 30%),
+      radial-gradient(circle at 80% 20%,rgba(255,47,154,.15),transparent 35%),
+      var(--bg);
+      color:var(--text);font-family:Arial,sans-serif;
+    }
+    main{width:min(980px,calc(100% - 28px));margin:30px auto 60px}
+    header{margin-bottom:22px}
+    h1{margin:0;font-size:clamp(28px,5vw,52px)}
+    header p{color:var(--muted);font-size:18px;line-height:1.5}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{
+      border:1px solid var(--line);border-radius:18px;background:rgba(13,18,32,.94);
+      padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.35)
+    }
+    .full{grid-column:1/-1}
+    label{display:block;font-weight:800;margin-bottom:8px}
+    input{
+      width:100%;padding:14px 15px;border-radius:12px;border:1px solid var(--line);
+      background:#080c16;color:#fff;font-size:16px
+    }
+    .buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    button,a.button{
+      border:0;border-radius:12px;padding:13px 16px;font-weight:900;
+      background:var(--accent);color:#fff;cursor:pointer;text-decoration:none;display:inline-block
+    }
+    button.secondary{background:#20283b}
+    button.danger{background:#a91f3a}
+    button:disabled{opacity:.45;cursor:not-allowed}
+    .status{
+      margin-top:14px;padding:13px 14px;border-radius:12px;background:#080c16;
+      border:1px solid var(--line);white-space:pre-wrap;line-height:1.45;color:var(--muted)
+    }
+    .status.ok{border-color:rgba(41,216,132,.55);color:#b7ffd9}
+    .status.bad{border-color:rgba(255,77,109,.55);color:#ffd0d9}
+    .status.warn{border-color:rgba(255,207,77,.55);color:#ffeeb5}
+    .code{
+      display:grid;place-items:center;min-height:88px;border-radius:14px;background:#070a13;
+      border:1px dashed rgba(255,255,255,.25);font-size:34px;font-weight:1000;letter-spacing:.12em
+    }
+    .small{font-size:14px;color:var(--muted);line-height:1.5}
+    .checklist{display:grid;gap:10px;margin-top:12px}
+    .check{display:flex;gap:10px;align-items:center}
+    .dot{width:13px;height:13px;border-radius:50%;background:#4a5367}
+    .dot.ok{background:var(--ok);box-shadow:0 0 12px rgba(41,216,132,.5)}
+    .dot.bad{background:var(--bad);box-shadow:0 0 12px rgba(255,77,109,.5)}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>DJ FOLSOE · Twitch Chat Setup</h1>
+    <p>Denne side forbinder DJFolsoe-kontoen igen, aktiverer chat-rettighederne og tester, at Worker’en kan skrive i Twitch-chatten.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card full">
+      <label for="adminToken">Admin Token</label>
+      <input id="adminToken" type="password" autocomplete="off" placeholder="Indsæt din Admin Token">
+      <p class="small">Tokenet bruges kun i denne browserfane og gemmes ikke på hjemmesiden.</p>
+      <div class="buttons">
+        <button id="checkBtn" type="button">Tjek forbindelse</button>
+        <button id="reconnectBtn" type="button">Forbind Twitch igen</button>
+        <button id="repairBtn" type="button" class="secondary">Reparer EventSub</button>
+        <button id="testBtn" type="button" class="secondary">Test chat</button>
+      </div>
+      <div id="mainStatus" class="status">Klar til opsætning.</div>
+    </section>
+
+    <section class="card">
+      <h2>1. Twitch-kode</h2>
+      <div id="userCode" class="code">—</div>
+      <div class="buttons">
+        <a id="verifyLink" class="button" href="#" target="_blank" rel="noopener" style="pointer-events:none;opacity:.45">Åbn Twitch</a>
+        <button id="pollBtn" type="button" class="secondary" disabled>Jeg har godkendt</button>
+      </div>
+      <p class="small">Når du klikker “Forbind Twitch igen”, får du en kode. Klik derefter “Åbn Twitch”, log ind som DJFolsoe og indtast koden.</p>
+    </section>
+
+    <section class="card">
+      <h2>2. Forbindelsesstatus</h2>
+      <div class="checklist">
+        <div class="check"><span id="connectedDot" class="dot"></span><span>DJFolsoe forbundet</span></div>
+        <div class="check"><span id="readDot" class="dot"></span><span>Kan læse chat</span></div>
+        <div class="check"><span id="writeDot" class="dot"></span><span>Kan skrive i chat</span></div>
+        <div class="check"><span id="eventsubDot" class="dot"></span><span>EventSub klar</span></div>
+      </div>
+      <div id="detailStatus" class="status">Ingen status endnu.</div>
+    </section>
+
+    <section class="card full">
+      <h2>Live test</h2>
+      <p>Skriv bagefter dette i Twitch-chatten:</p>
+      <div class="code" style="font-size:22px">!ønske Depeche Mode - Enjoy The Silence</div>
+      <p class="small">Når alt er grønt, skal DJFolsoe svare direkte i chatten, og request-grafikken skal vises i main overlayet.</p>
+    </section>
+  </div>
+</main>
+
+<script>
+(() => {
+  const API = "https://djfolsoe-tv-api.sunefolsoe.workers.dev";
+  const $ = id => document.getElementById(id);
+
+  let deviceId = "";
+  let pollTimer = 0;
+
+  function token(){
+    return $("adminToken").value.trim();
+  }
+
+  function setStatus(message,type=""){
+    const box=$("mainStatus");
+    box.textContent=message;
+    box.className="status"+(type?` ${type}`:"");
+  }
+
+  function setDetail(message,type=""){
+    const box=$("detailStatus");
+    box.textContent=message;
+    box.className="status"+(type?` ${type}`:"");
+  }
+
+  function dot(id,state){
+    const el=$(id);
+    el.className="dot"+(state===true?" ok":state===false?" bad":"");
+  }
+
+  async function api(path,options={}){
+    if(!token()) throw new Error("Skriv først din Admin Token.");
+    const headers={...(options.headers||{}),"X-Admin-Token":token()};
+    if(options.body && !headers["Content-Type"]) headers["Content-Type"]="application/json";
+    const res=await fetch(API+path,{...options,headers,cache:"no-store"});
+    const raw=await res.text();
+    let data={};
+    try{data=raw?JSON.parse(raw):{}}catch{data={raw}}
+    if(!res.ok) throw new Error(data.error||data.message||`HTTP ${res.status}`);
+    return data;
+  }
+
+  async function checkStatus(){
+    setStatus("Tjekker Twitch-forbindelsen…","warn");
+    try{
+      const data=await api("/api/song-requests/chat-status");
+      dot("connectedDot",data.connected===true);
+      dot("readDot",data.hasReadChat===true);
+      dot("writeDot",data.hasWriteChat===true);
+      setDetail(
+        `Konto: ${data.login||"ukendt"}\n`+
+        `Forbundet: ${data.connected?"JA":"NEJ"}\n`+
+        `Læs chat: ${data.hasReadChat?"JA":"NEJ"}\n`+
+        `Skriv chat: ${data.hasWriteChat?"JA":"NEJ"}\n`+
+        `Kræver ny forbindelse: ${data.reconnectRequired?"JA":"NEJ"}`,
+        data.connected&&data.hasWriteChat?"ok":"warn"
+      );
+      setStatus(data.connected&&data.hasWriteChat
+        ?"Chatforbindelsen er klar."
+        :"Twitch skal forbindes igen med de nye chat-rettigheder.",
+        data.connected&&data.hasWriteChat?"ok":"warn"
+      );
+      return data;
+    }catch(error){
+      dot("connectedDot",false);dot("readDot",false);dot("writeDot",false);
+      setStatus(error.message,"bad");
+      throw error;
+    }
+  }
+
+  async function reconnect(){
+    setStatus("Afbryder gammel forbindelse…","warn");
+    try{
+      try{ await api("/api/ext004/admin/device/disconnect",{method:"POST"}); }catch{}
+      setStatus("Starter ny Twitch-forbindelse…","warn");
+      const data=await api("/api/ext004/admin/device/start",{method:"POST"});
+      deviceId=data.device_code||data.deviceCode||data.id||"";
+      const code=data.user_code||data.userCode||"";
+      const uri=data.verification_uri||data.verificationUri||data.verification_uri_complete||"https://www.twitch.tv/activate";
+      $("userCode").textContent=code||"SE SVAR";
+      $("verifyLink").href=uri;
+      $("verifyLink").style.pointerEvents="auto";
+      $("verifyLink").style.opacity="1";
+      $("pollBtn").disabled=false;
+      setStatus("Koden er klar. Klik “Åbn Twitch”, log ind som DJFolsoe og indtast koden.","ok");
+    }catch(error){
+      setStatus(error.message,"bad");
+    }
+  }
+
+  async function pollConnection(){
+    setStatus("Kontrollerer Twitch-godkendelsen…","warn");
+    try{
+      const body=deviceId?JSON.stringify({device_code:deviceId}):undefined;
+      const data=await api("/api/ext004/admin/device/poll",{
+        method:"POST",
+        body
+      });
+      if(data.connected||data.ok&&data.status==="connected"){
+        clearInterval(pollTimer);
+        setStatus("Twitch er forbundet. Kontrollerer rettigheder…","ok");
+        await checkStatus();
+      }else{
+        setStatus("Ikke godkendt endnu. Gennemfør Twitch-trinnet og prøv igen.","warn");
+      }
+    }catch(error){
+      setStatus(error.message,"bad");
+    }
+  }
+
+  async function repair(){
+    setStatus("Reparerer EventSub-abonnementer…","warn");
+    try{
+      const data=await api("/api/ext004/admin/setup-eventsub",{method:"POST"});
+      dot("eventsubDot",data.ok!==false);
+      setStatus("EventSub er oprettet eller repareret.","ok");
+    }catch(error){
+      dot("eventsubDot",false);
+      setStatus(error.message,"bad");
+    }
+  }
+
+  async function testChat(){
+    setStatus("Sender testbesked til Twitch-chatten…","warn");
+    try{
+      const data=await api("/api/song-requests/test-chat",{
+        method:"POST",
+        body:JSON.stringify({message:"✅ DJ FOLSOE request chat engine is connected."})
+      });
+      setStatus(data.ok?"Testbeskeden blev sendt. Se Twitch-chatten.":"Twitch afviste beskeden.","ok");
+    }catch(error){
+      setStatus(error.message,"bad");
+    }
+  }
+
+  $("checkBtn").addEventListener("click",()=>checkStatus().catch(()=>{}));
+  $("reconnectBtn").addEventListener("click",reconnect);
+  $("pollBtn").addEventListener("click",pollConnection);
+  $("repairBtn").addEventListener("click",repair);
+  $("testBtn").addEventListener("click",testChat);
+})();
+</script>
+</body>
+</html>
