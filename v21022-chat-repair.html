@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE V21022 Repair</title>
+<style>
+body{margin:0;min-height:100vh;background:#050711;color:#fff;font-family:Arial,sans-serif}
+main{width:min(760px,calc(100% - 28px));margin:30px auto}.card{background:#0d1220;border:1px solid #293044;border-radius:18px;padding:22px;margin-bottom:16px}
+h1{font-size:40px;margin:0 0 10px}p{color:#b6bfd2;line-height:1.5}input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #353e55;border-radius:10px;background:#080b13;color:#fff;font-size:16px}
+button,a{display:inline-block;margin:8px 7px 0 0;padding:13px 16px;border:0;border-radius:10px;background:#9147ff;color:#fff;text-decoration:none;font-weight:800;cursor:pointer}
+pre{white-space:pre-wrap;background:#070a12;border:1px solid #293044;border-radius:12px;padding:14px;color:#dce3f4}
+.ok{color:#62f0aa}.bad{color:#ff718a}.warn{color:#ffdb70}
+</style></head><body><main>
+<div class="card"><h1>V21022 Chat Repair</h1><p>Tryk knapperne i rækkefølge. Den nye forbindelse godkender læsning, skrivning og webhook-chat.</p>
+<input id="token" type="password" placeholder="Admin Token">
+<button id="disconnect">1. Nulstil Twitch</button>
+<button id="start">2. Hent ny kode</button>
+<a id="activate" href="#" target="_blank" style="opacity:.4;pointer-events:none">3. Åbn Twitch</a>
+<button id="poll">4. Jeg har godkendt</button>
+<button id="repair">5. Reparer chat</button>
+<button id="test">6. Test besked</button>
+<pre id="out">Klar.</pre></div>
+<div class="card"><strong>Twitch-kode</strong><h2 id="code">—</h2>
+<p>Godkend disse fire rettigheder: user:read:chat, user:write:chat, user:bot og channel:bot.</p></div>
+</main><script>
+const API="https://djfolsoe-tv-api.sunefolsoe.workers.dev",q=id=>document.getElementById(id);
+const output=(x,cls="")=>{q("out").className=cls;q("out").textContent=typeof x==="string"?x:JSON.stringify(x,null,2)};
+async function call(path,method="GET",body){
+ const token=q("token").value.trim();if(!token)throw Error("Indsæt Admin Token.");
+ const r=await fetch(API+path,{method,headers:{"X-Admin-Token":token,...(body?{"Content-Type":"application/json"}:{})},body:body?JSON.stringify(body):undefined,cache:"no-store"});
+ const t=await r.text();let d={};try{d=t?JSON.parse(t):{}}catch{d={raw:t}}if(!r.ok)throw Error(JSON.stringify(d,null,2));return d;
+}
+q("disconnect").onclick=async()=>{try{output(await call("/api/ext004/admin/device/disconnect","POST"),"ok")}catch(e){output(e.message,"bad")}};
+q("start").onclick=async()=>{try{const d=await call("/api/ext004/admin/device/start","POST"),r=d.record||d; q("code").textContent=r.user_code||"INGEN KODE";q("activate").href=r.verification_uri||"https://www.twitch.tv/activate";q("activate").style.opacity=1;q("activate").style.pointerEvents="auto";output(d,"ok")}catch(e){output(e.message,"bad")}};
+q("poll").onclick=async()=>{try{output(await call("/api/ext004/admin/device/poll","POST"),"ok")}catch(e){output(e.message,"warn")}};
+q("repair").onclick=async()=>{try{output(await call("/api/song-requests/repair-chat","POST"),"ok")}catch(e){output(e.message,"bad")}};
+q("test").onclick=async()=>{try{output(await call("/api/song-requests/test-chat","POST",{message:"✅ DJ FOLSOE V21022 chat og request engine virker."}),"ok")}catch(e){output(e.message,"bad")}};
+</script></body></html>
