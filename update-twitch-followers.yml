@@ -1,0 +1,49 @@
+name: Update Twitch Followers
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: twitch-followers-sync
+  cancel-in-progress: true
+
+jobs:
+  update-followers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch follower total from Twitch Helix
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_USER_ACCESS_TOKEN: ${{ secrets.TWITCH_USER_ACCESS_TOKEN }}
+          TWITCH_BROADCASTER_ID: "756562979"
+          TWITCH_CHANNEL_LOGIN: "djfolsoe"
+          FOLLOWERS_OUTPUT: "assets/data/followers.json"
+        run: python scripts/update-twitch-followers.py
+
+      - name: Commit follower JSON when changed
+        run: |
+          if git diff --quiet -- assets/data/followers.json; then
+            echo "Follower total is unchanged."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/data/followers.json
+          git commit -m "Update Twitch follower total"
+          git push

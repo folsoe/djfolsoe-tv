@@ -1,0 +1,24 @@
+DJ FOLSOE V25010.1 — GITHUB/HJEMMESIDE
+
+Upload disse filer til samme placering i dit repository:
+
+index.html
+assets/js/v20001-complete.js
+assets/js/v25010-1-github-followers.js
+assets/data/followers.json
+scripts/update-twitch-followers.py
+.github/workflows/update-twitch-followers.yml
+
+GitHub Secrets:
+TWITCH_CLIENT_ID
+TWITCH_USER_ACCESS_TOKEN
+
+Derefter:
+GitHub → Actions → Update Twitch Followers → Run workflow
+
+Kontrol:
+https://folsoetv.dk/assets/data/followers.json
+
+Browser-konsol:
+DJF_GITHUB_FOLLOWERS.status()
+DJF_GITHUB_FOLLOWERS.refresh()

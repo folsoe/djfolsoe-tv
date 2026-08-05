@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "followers": 870,
+  "broadcasterId": "756562979",
+  "channel": "djfolsoe",
+  "source": "initial-fallback",
+  "updatedAt": "2026-08-05T00:00:00Z",
+  "note": "This file is updated automatically by .github/workflows/update-twitch-followers.yml"
+}

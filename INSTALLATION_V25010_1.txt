@@ -1,0 +1,130 @@
+DJ FOLSOE V25010.1 — TWITCH HELIX + GITHUB FOLLOWERS SYNC
+
+ARKITEKTUR
+----------
+Overlay:
+Twitch Helix → StreamElements V25010.1 → follower-tal i V25000
+
+Hjemmeside:
+GitHub Actions → Twitch Helix → assets/data/followers.json → folsoetv.dk
+
+Ingen follower-data kommer fra Cloudflare Worker.
+Ingen StreamElements bridge-widget bruges.
+
+TWITCH-KRAV
+-----------
+Twitch user access token skal have scope:
+
+moderator:read:followers
+
+Tokenets bruger skal være broadcasteren DJFolsoe eller moderator for kanalen.
+Broadcaster ID er allerede indsat:
+
+756562979
+
+DEL 1 — GITHUB SECRETS
+----------------------
+I GitHub-repositoriet:
+
+Settings
+→ Secrets and variables
+→ Actions
+→ New repository secret
+
+Opret præcis:
+
+TWITCH_CLIENT_ID
+TWITCH_USER_ACCESS_TOKEN
+
+Tokenet må ikke lægges i website-JavaScript eller commits.
+
+DEL 2 — HJEMMESIDE
+-------------------
+Upload hele indholdet fra:
+
+GITHUB_WEBSITE_COMPLETE/
+
+Vigtige nye filer:
+
+.github/workflows/update-twitch-followers.yml
+scripts/update-twitch-followers.py
+assets/data/followers.json
+assets/js/v25010-1-github-followers.js
+
+Ændrede filer:
+
+index.html
+assets/js/v20001-complete.js
+
+Kør derefter manuelt:
+
+GitHub → Actions → Update Twitch Followers → Run workflow
+
+Når workflowet er grønt, skal denne fil vise det aktuelle tal:
+
+https://folsoetv.dk/assets/data/followers.json
+
+DEL 3 — STREAM ELEMENTS
+-----------------------
+Erstat hele Main Overlay med:
+
+HTML_COMPLETE_V25010_1.txt
+CSS_COMPLETE_V25010_1.txt
+JS_COMPLETE_V25010_1.txt
+
+V25010.1 leder efter eksisterende StreamElements custom fields med navne som:
+
+twitchClientId
+clientId
+TWITCH_CLIENT_ID
+
+og:
+
+twitchUserAccessToken
+twitchAccessToken
+userAccessToken
+accessToken
+oauthToken
+TWITCH_ACCESS_TOKEN
+
+Hvis dine eksisterende feltnavne ikke matcher, indsæt værdierne øverst i
+V25010.1-modulet i JS-filen:
+
+const CONFIG={
+  broadcasterId:"756562979",
+  channelLogin:"djfolsoe",
+  clientId:"",
+  userAccessToken:""
+};
+
+Disse værdier må kun ligge i den private StreamElements-widget — aldrig på
+hjemmesiden eller GitHub som almindelige filer.
+
+KONTROL — OVERLAY
+-----------------
+DJF_HELIX_FOLLOWERS.credentialsStatus()
+DJF_HELIX_FOLLOWERS.status()
+DJF_HELIX_FOLLOWERS.refresh("manual")
+
+Forventet:
+
+authoritative: true
+source: "twitch-helix:..."
+workerUsed: false
+
+KONTROL — HJEMMESIDE
+--------------------
+DJF_GITHUB_FOLLOWERS.status()
+DJF_GITHUB_FOLLOWERS.refresh()
+
+OPDATERINGSFREKVENS
+-------------------
+GitHub Actions: hvert 5. minut.
+Hjemmeside: læser JSON hvert minut.
+Overlay: Twitch Helix hvert minut og ekstra opslag efter et follow-event.
+
+VIGTIGT OM TOKEN
+----------------
+Hvis workflowet får HTTP 401, er user access token udløbet, ugyldigt eller
+mangler moderator:read:followers. Opdatér kun GitHub-secretet og det private
+StreamElements-felt — ikke kildekoden.

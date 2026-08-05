@@ -1,0 +1,14 @@
+{
+  "package": "DJ_FOLSOE_GITHUB_V25010_1_UPLOAD_READY",
+  "files": [
+    ".github/workflows/update-twitch-followers.yml",
+    "GITHUB_SECRETS_V25010_1.txt",
+    "INSTALLATION_V25010_1.txt",
+    "UPLOAD_HER.txt",
+    "assets/data/followers.json",
+    "assets/js/v20001-complete.js",
+    "assets/js/v25010-1-github-followers.js",
+    "index.html",
+    "scripts/update-twitch-followers.py"
+  ]
+}
