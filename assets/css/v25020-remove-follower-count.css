@@ -1,0 +1,12 @@
+/* DJ FOLSOE V25020 — follower count removed */
+#heroFollowers,
+#followers,
+#metricFollowers,
+#statFollowers,
+#sideFollowers,
+[data-community-followers],
+[data-followers],
+.followerCount,
+.followersCount{
+  display:none!important;
+}
