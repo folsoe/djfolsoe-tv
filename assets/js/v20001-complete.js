@@ -4,7 +4,7 @@ const API="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 const SCHEDULE_URL="https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/twitch-schedule";
 const CHANNEL="djfolsoe";
 const $=id=>document.getElementById(id);
-const state={live:false,viewers:0,followers:0,title:"",theme:"GOOD MORNING",schedule:[],next:null,scheduleUpdated:"",scheduleError:""};
+const state={live:false,viewers:0,title:"",theme:"GOOD MORNING",schedule:[],next:null,scheduleUpdated:"",scheduleError:""};
 
 function parents(){const s=new Set(["folsoetv.dk","www.folsoetv.dk"]);if(location.hostname&&!["localhost","127.0.0.1"].includes(location.hostname))s.add(location.hostname);return [...s]}
 function pq(){return parents().map(x=>"parent="+encodeURIComponent(x)).join("&")}
@@ -43,10 +43,6 @@ async function refresh(){
  ]);
  state.live=bool(tw)||bool(bc);
  state.viewers=Number(pick(tw.viewerCount,tw.viewers,tw.viewer_count,bc.viewers,0));
- {
- const unifiedFollowers=Number(pick(tw.followers,tw.followerCount,0));
- if(Number.isFinite(unifiedFollowers)&&unifiedFollowers>=0)state.followers=Math.floor(unifiedFollowers);
-}
  state.title=String(pick(tw.title,tw.streamTitle,bc.streamTitle,bc.showTitle,""));
  state.theme=String(pick(bc.theme?.title,bc.activeTheme,bc.theme,state.theme)).replace(/[_-]/g," ").toUpperCase();
  if(sch){
@@ -72,10 +68,9 @@ function renderSchedule(){
 }
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){
- $("followers").textContent=state.followers.toLocaleString("en-US");$("viewers").textContent=state.viewers.toLocaleString("en-US");$("theme").textContent=state.theme;
- $("channelStats") && ($("channelStats").textContent=`${state.followers.toLocaleString("en-US")} FOLLOWERS · ${state.viewers.toLocaleString("en-US")} VIEWERS`);
- $("heroFollowers").textContent=state.followers.toLocaleString("en-US");
- $("heroViewers").textContent=state.viewers.toLocaleString("en-US");
+ $("viewers")&&($("viewers").textContent=state.viewers.toLocaleString("en-US"));$("theme")&&($("theme").textContent=state.theme);
+ $("channelStats")&&($("channelStats").textContent=`${state.viewers.toLocaleString("en-US")} VIEWERS`);
+ $("heroViewers")&&($("heroViewers").textContent=state.viewers.toLocaleString("en-US"));
  $("heroChannelState").textContent=state.live?"DJ FOLSOE · LIVE NOW":"DJ FOLSOE · OFF AIR";
  $("heroChannelText").textContent=state.live?(state.title||"Watch the live show below."):(state.next?`Next: ${state.next.title}`:"The next show is displayed in the live channel below.");
  const b=$("watchButton"),p=$("livePill");b.classList.toggle("isLive",state.live);b.querySelector("span").textContent=state.live?"SE MED NU · WATCH LIVE":"SEE THE NEXT SHOW";
