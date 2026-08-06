@@ -1,0 +1,26 @@
+/* DJ FOLSOE V26140 — LIVE STATUS, SEO & SHARE EXPERIENCE */
+.broadcastShareBar{
+  position:relative;
+  width:min(1480px,calc(100% - 36px));
+  margin:28px auto 0;
+  min-height:92px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:22px;
+  padding:18px 22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  border-top:3px solid var(--a,#ffae2f);
+  border-radius:16px;
+  background:linear-gradient(115deg,rgba(4,7,14,.985),rgba(14,17,30,.97));
+  box-shadow:0 18px 42px rgba(0,0,0,.34),0 0 26px color-mix(in srgb,var(--a,#ffae2f) 12%,transparent);
+}
+.broadcastShareBar::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 0 40%,rgba(255,255,255,.035) 48%,transparent 58%);transform:translateX(-110%);animation:v26140ShareSweep 12s ease-in-out infinite}
+.broadcastShareBar>span{position:relative;z-index:1;min-width:0}.broadcastShareBar small{display:block;color:var(--a,#ffae2f);font-size:12px;font-weight:800;letter-spacing:.16em}.broadcastShareBar strong{display:block;margin-top:5px;font-size:28px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.broadcastShareBar>div{position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.broadcastShareBar button,.broadcastShareBar a{min-height:42px;padding:0 17px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:rgba(255,255,255,.045);color:#fff;font:800 13px/1 Oswald,"Arial Narrow",sans-serif;letter-spacing:.08em;text-decoration:none;cursor:pointer}.broadcastShareBar button:first-child{background:linear-gradient(90deg,var(--a,#ffae2f),var(--b,#ff3b93));border-color:transparent;color:#080b12}.broadcastShareBar button:hover,.broadcastShareBar a:hover{transform:translateY(-1px);border-color:var(--a,#ffae2f)}.broadcastShareBar output{position:absolute;right:22px;bottom:5px;color:#d9e3f5;font-size:11px;letter-spacing:.06em}
+html[data-live="true"] .broadcastShareBar{border-top-color:#35e894;box-shadow:0 18px 42px rgba(0,0,0,.34),0 0 30px rgba(53,232,148,.14)}
+html[data-live="true"] .broadcastShareBar small{color:#35e894}
+@keyframes v26140ShareSweep{0%,76%{transform:translateX(-110%)}92%,100%{transform:translateX(110%)}}
+@media(max-width:900px){.broadcastShareBar{grid-template-columns:1fr}.broadcastShareBar>div{justify-content:flex-start}.broadcastShareBar output{position:static;grid-column:1/-1}.broadcastShareBar strong{font-size:24px}}
+@media(max-width:560px){.broadcastShareBar{width:calc(100% - 24px);padding:16px}.broadcastShareBar>div{display:grid;grid-template-columns:1fr 1fr}.broadcastShareBar a{grid-column:1/-1}.broadcastShareBar button,.broadcastShareBar a{width:100%}}
+@media(prefers-reduced-motion:reduce){.broadcastShareBar::after{animation:none}.broadcastShareBar button,.broadcastShareBar a{transition:none}}
