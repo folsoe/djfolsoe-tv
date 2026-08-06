@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-version="V25020">
+<html lang="en" data-version="V26100" data-djf-theme="morning">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -14,15 +14,37 @@
   <link rel="preconnect" href="https://www.twitch.tv">
   <link rel="stylesheet" href="assets/css/v20001-complete.css?v=20001">
   <link rel="stylesheet" href="assets/css/v25020-remove-follower-count.css?v=25020">
+  <link rel="stylesheet" href="assets/css/v26100-overlay-to-web.css?v=26100">
 </head>
-<body data-broadcast-state="offline" data-show-theme="default">
-<header class="topbar">
-  <a class="brand" href="#top"><span class="bug">DF</span><span><b>DJ FOLSOE</b><small>LIVE MUSIC TV · DENMARK</small></span></a>
-  <nav><a href="#live">Live</a><a href="#shows">Shows</a><a href="#about">Community</a><a class="twitch" href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">Open Twitch</a></nav>
+<body data-broadcast-state="offline" data-show-theme="morning">
+<header class="broadcastHeader" id="top">
+  <a class="broadcastBrand" href="#top" aria-label="DJ FOLSOE home">
+    <span id="siteProfileImage" class="broadcastAvatar"><b>DJ</b></span>
+    <span class="broadcastBrandCopy"><strong>DJ FOLSOE</strong><small>ON TWITCH · LIVE MUSIC TV</small></span>
+  </a>
+
+  <section class="broadcastShow" aria-label="Current show">
+    <span id="siteShowIcon" class="broadcastShowIcon">☀</span>
+    <span class="broadcastShowCopy"><small>ON AIR SHOW</small><strong id="deskTitle">WELCOME TO DJ FOLSOE</strong><b id="siteShowGenre">LIVE MUSIC &amp; GOOD VIBES</b></span>
+  </section>
+
+  <section class="broadcastSignal" aria-live="polite">
+    <span class="broadcastSignalDot"></span>
+    <span><small id="siteSignalKicker">CHANNEL STATUS</small><strong id="heroChannelState">DJ FOLSOE · OFF AIR</strong><b id="heroChannelText">The next show is displayed below.</b></span>
+  </section>
+
+  <section class="broadcastSupport">
+    <span class="broadcastSupportIcon">♥</span>
+    <span><small>SUPPORT THE STREAM</small><strong>MOBILEPAY / VIPPS</strong><b>1267PN</b></span>
+  </section>
+
+  <nav class="broadcastNav" aria-label="Primary navigation">
+    <a href="#live">LIVE</a><i></i><a href="#shows">SHOWS</a><i></i><a href="#about">COMMUNITY</a><i></i><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">TWITCH ↗</a>
+  </nav>
 </header>
 
-<main id="top">
-  <section class="hero">
+<main class="broadcastPage">
+  <section class="hero broadcastHero">
     <div class="heroGrid">
       <div class="heroCopy">
         <p id="cmsHeroEyebrow" class="eyebrow">DJ FOLSOE NETWORK · LIVE MUSIC TELEVISION</p>
@@ -33,20 +55,18 @@
           <a class="secondary" href="#shows">EXPLORE SHOWS</a>
         </div>
       </div>
-      <aside class="nextCard channelStatusCard">
-        <small>CHANNEL STATUS</small>
-        <strong id="heroChannelState">DJ FOLSOE · OFF AIR</strong>
-        <span id="heroChannelText">The next show is displayed in the live channel below.</span>
-        <div class="heroStatusNumbers">
-          <article><b id="heroViewers">0</b><small>VIEWERS</small></article>
-        </div>
+      <aside class="nextCard channelStatusCard broadcastFeatureCard">
+        <small>NEXT ON DJ FOLSOE TV</small>
+        <strong id="offlineNextTitle">SCHEDULE LOADING</strong>
+        <span id="offlineNextDate">Reading the official Twitch schedule…</span>
+        <div class="heroStatusNumbers"><article><b id="heroViewers">0</b><small>VIEWERS</small></article></div>
         <p>TWITCH.TV/DJFOLSOE · FOLSOETV.DK</p>
       </aside>
     </div>
   </section>
 
   <section class="liveSection" id="live">
-    <div class="sectionHead">
+    <div class="sectionHead broadcastSectionHead">
       <div><p>TWITCH LIVE CHANNEL</p><h2 id="liveHeading">DJ FOLSOE LIVE CHANNEL</h2></div>
       <span id="livePill" class="statusPill"><i></i><b>CHECKING</b></span>
     </div>
@@ -57,17 +77,11 @@
           <div class="playerLoading" id="playerLoading"><span></span><b>CHECKING THE LIVE CHANNEL</b><small>Live video opens automatically when DJ FOLSOE is online.</small></div>
           <div class="customOffline" id="customOffline" hidden>
             <small id="automationKicker">NEXT LIVE SHOW</small>
-            <h3 id="offlineNextTitle">SCHEDULE LOADING</h3>
-            <p id="offlineNextDate">Reading the official Twitch schedule…</p>
-            <div class="automationStateStrip" id="automationStateStrip">
-              <span id="automationStateBadge">OFF AIR</span>
-              <b id="automationStateText">NEXT BROADCAST</b>
-            </div>
+            <h3 id="automationNextTitle">SCHEDULE LOADING</h3>
+            <p id="automationNextDate">Reading the official Twitch schedule…</p>
+            <div class="automationStateStrip" id="automationStateStrip"><span id="automationStateBadge">OFF AIR</span><b id="automationStateText">NEXT BROADCAST</b></div>
             <div class="offlineCountdown">
-              <span><b id="offDays">00</b><small>DAYS</small></span>
-              <span><b id="offHours">00</b><small>HOURS</small></span>
-              <span><b id="offMinutes">00</b><small>MINUTES</small></span>
-              <span><b id="offSeconds">00</b><small>SECONDS</small></span>
+              <span><b id="offDays">00</b><small>DAYS</small></span><span><b id="offHours">00</b><small>HOURS</small></span><span><b id="offMinutes">00</b><small>MINUTES</small></span><span><b id="offSeconds">00</b><small>SECONDS</small></span>
             </div>
             <a id="automationAction" href="https://twitch.tv/djfolsoe/schedule" target="_blank" rel="noopener">VIEW FULL TWITCH SCHEDULE ↗</a>
           </div>
@@ -75,27 +89,21 @@
         </div>
         <footer><div><strong id="streamTitle">DJ FOLSOE LIVE</strong><small id="streamMeta">Official Twitch stream embedded on FOLSOE TV</small></div><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">WATCH ON TWITCH ↗</a></footer>
       </article>
-
-      <aside class="chatCard">
-        <header><b>LIVE CHAT</b><span>TWITCH</span></header>
-        <iframe id="twitchChat" title="DJ FOLSOE Twitch chat"></iframe>
-      </aside>
+      <aside class="chatCard"><header><b>LIVE CHAT</b><span>TWITCH</span></header><iframe id="twitchChat" title="DJ FOLSOE Twitch chat"></iframe></aside>
     </div>
-<div id="offlineMessage" class="offlineMessage" hidden>
-      <b>OFF AIR</b><div><strong>The channel is currently offline</strong><span>Follow DJ FOLSOE on Twitch and return here for the next live show.</span></div>
-      <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">FOLLOW ON TWITCH</a>
-    </div>
+    <div id="offlineMessage" class="offlineMessage" hidden><b>OFF AIR</b><div><strong>The channel is currently offline</strong><span>Follow DJ FOLSOE on Twitch and return here for the next live show.</span></div><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">FOLLOW ON TWITCH</a></div>
   </section>
 
-  <section class="desk">
-    <div class="deskMain"><small>LIVE DESK</small><b id="deskTitle">WELCOME TO DJ FOLSOE</b><p id="deskText">Follow the channel and become part of the community.</p></div>
-    <div class="stat"><span>◉</span><small>VIEWERS</small><b id="viewers">0</b></div>
-    <div class="stat"><span>◌</span><small>THEME</small><b id="theme">GOOD MORNING</b></div>
-    <div class="stat"><span>♫</span><small>REQUESTS</small><b>OPEN</b></div>
+  <section class="webBroadcastDock" aria-label="Broadcast information">
+    <article class="webDockPanel webDockLive"><small>LIVE DESK</small><strong id="webDockLiveTitle">WELCOME TO DJ FOLSOE</strong><span id="deskText">Follow the channel and become part of the community.</span></article>
+    <article class="webDockPanel webDockNext"><small>NEXT SHOW</small><strong id="webDockNextTitle">SCHEDULE LOADING</strong><span id="webDockNextTime">OFFICIAL TWITCH SCHEDULE</span></article>
+    <article class="webDockPanel webDockTheme"><small>ACTIVE THEME</small><strong id="theme">GOOD MORNING</strong><span>CONTROLLED FROM DJ FOLSOE ADMIN</span></article>
+    <article class="webDockPanel webDockCommunity"><small>COMMUNITY</small><strong>REQUESTS OPEN</strong><span>USE !REQUEST ARTIST - TITLE IN CHAT</span></article>
+    <div class="webSocialRail"><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener"><b>TWITCH</b><span>DJFOLSOE</span></a><i></i><a href="#about"><b>COMMUNITY</b><span>LIVE MUSIC FAMILY</span></a><i></i><a href="https://folsoetv.dk"><b>WEBSITE</b><span>FOLSOETV.DK</span></a><i></i><a href="#live"><b>VIPPS</b><span>1267PN</span></a></div>
   </section>
 
   <section class="shows" id="shows">
-    <div class="sectionHead"><div><p>PROGRAMMING</p><h2>Signature shows</h2></div></div>
+    <div class="sectionHead broadcastSectionHead"><div><p>PROGRAMMING</p><h2>Signature shows</h2></div></div>
     <div class="showGrid">
       <article><small>TUESDAY</small><h3>Trance Tuesday</h3><p>Uplifting, progressive and classic trance.</p></article>
       <article><small>90s &amp; 00s</small><h3>Eurodance</h3><p>Big hooks, fast beats and pure nostalgia.</p></article>
@@ -113,8 +121,8 @@
   <section class="join"><p>JOIN THE BROADCAST</p><h2>Your music.<br>Your chat.<br>Your show.</h2><a href="#live">WATCH DIRECTLY ON FOLSOETV.DK →</a></section>
 </main>
 
-<footer class="siteFooter"><b>DJ FOLSOE NETWORK</b><span>EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK</span><small>© 2026 DJ FOLSOE</small></footer>
+<footer class="siteFooter broadcastFooter"><b>DJ FOLSOE NETWORK</b><span>EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK</span><small>© 2026 DJ FOLSOE</small></footer>
 <script src="assets/js/v20001-complete.js?v=20001"></script>
-<script src="assets/js/v26010-site-bridge.js?v=26010"></script>
+<script src="assets/js/v26100-site-bridge.js?v=26100"></script>
 </body>
 </html>
