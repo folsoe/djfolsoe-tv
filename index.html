@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-version="V26130" data-djf-theme="morning">
+<html lang="en" data-version="V26140" data-djf-theme="morning">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,6 +12,12 @@
   <meta property="og:description" content="Watch DJ FOLSOE live directly on FOLSOE TV.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://folsoetv.dk/">
+  <meta property="og:site_name" content="DJ FOLSOE TV">
+  <meta property="og:image" content="https://folsoetv.dk/assets/images/djfolsoe-share.jpg" id="djfOgImage">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DJ FOLSOE · Live Music TV" id="djfTwitterTitle">
+  <meta name="twitter:description" content="Watch DJ FOLSOE live directly on FOLSOE TV." id="djfTwitterDescription">
+  <meta name="twitter:image" content="https://folsoetv.dk/assets/images/djfolsoe-share.jpg" id="djfTwitterImage">
   <link rel="preconnect" href="https://player.twitch.tv">
   <link rel="preconnect" href="https://www.twitch.tv">
   <link rel="stylesheet" href="assets/css/v20001-complete.css?v=20001">
@@ -19,6 +25,7 @@
   <link rel="stylesheet" href="assets/css/v26110-theme-aware-content.css?v=26110">
   <link rel="stylesheet" href="assets/css/v26120-broadcast-navigation-mobile.css?v=26120">
   <link rel="stylesheet" href="assets/css/v26130-broadcast-polish-performance.css?v=26130">
+  <link rel="stylesheet" href="assets/css/v26140-live-status-seo-share.css?v=26140">
 </head>
 <body data-broadcast-state="offline" data-show-theme="morning">
 <header class="broadcastHeader" id="top">
@@ -151,6 +158,16 @@
   </section>
 
   <section class="join cmsModule" data-cms-module="join" data-cms-order="80"><p>JOIN THE BROADCAST</p><h2>Your music.<br>Your chat.<br>Your show.</h2><a href="#live">WATCH DIRECTLY ON FOLSOETV.DK →</a></section>
+
+  <section class="broadcastShareBar" id="broadcastShareBar" aria-label="Share DJ FOLSOE TV">
+    <span><small id="shareStatusKicker">DJ FOLSOE TV</small><strong id="shareStatusTitle">SHARE THE BROADCAST</strong></span>
+    <div>
+      <button type="button" id="shareBroadcastButton">SHARE</button>
+      <button type="button" id="copyBroadcastLink">COPY LINK</button>
+      <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">OPEN TWITCH ↗</a>
+    </div>
+    <output id="shareFeedback" aria-live="polite"></output>
+  </section>
 </main>
 <nav class="mobileBroadcastDock" id="mobileBroadcastDock" aria-label="Quick navigation">
   <a href="#live" data-nav-target="live"><b>●</b><span>LIVE</span></a>
@@ -165,5 +182,6 @@
 <script src="assets/js/v26110-site-bridge.js?v=26110"></script>
 <script src="assets/js/v26120-broadcast-navigation-mobile.js?v=26120"></script>
 <script src="assets/js/v26130-broadcast-polish-performance.js?v=26130"></script>
+<script src="assets/js/v26140-live-status-seo-share.js?v=26140"></script>
 </body>
 </html>
