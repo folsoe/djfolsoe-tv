@@ -54,7 +54,7 @@ function normalizeCore(raw){
   const mode = b.mode || b.broadcastState || ov.state || cp.status || 'OFFLINE';
   const tickerText = Array.isArray(core.homepage?.ticker) ? core.homepage.ticker.join(' · ') : (ov.ticker || cp.infoLine || 'DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK');
   return {
-    ok:true, version:'V928.2 Broadcast Content Manager', schema:'broadcast-core/v2-clean', source:core.source || 'admin-normalized', updatedAt:core.updatedAt || new Date().toISOString(),
+    ok:true, version:'V26000 Unified Admin Broadcast Control', schema:'broadcast-core/v2-clean', source:core.source || 'admin-normalized', updatedAt:core.updatedAt || new Date().toISOString(),
     twitch: core.twitch || {},
     show:{current:showTitle,title:showTitle,mode,state:mode,live:!!b.live,viewers:b.viewers||0,streamTitle:b.streamTitle||showTitle},
     nextShow:{title:n.title||n.show||'Next DJ FOLSOE Broadcast',show:n.show||n.title||'Next DJ FOLSOE Broadcast',datetime:n.datetime||n.dateTime||'',dateTime:n.datetime||n.dateTime||'',timeLabel:n.timeLabel||'Announced soon',theme:n.theme||'Music TV',description:n.description||'',active:n.active!==false},
@@ -172,7 +172,8 @@ function buildPayload(){
     ok:true,
     version:'V928.2 Broadcast Content Manager',
     schema:'broadcast-core/v2-clean',
-    source:'admin-publish',
+    source:'admin-unified-publish',
+    control:{visualBaselineLocked:true,preserveUnknownFields:true,client:'admin-v26000'},
     updatedAt:new Date().toISOString(),
     twitch:{...twitchData, channel:'djfolsoe'},
     show:{
@@ -283,12 +284,12 @@ async function djfOneClick(){
     localStorage.setItem('DJF_V9283_LAST_PAYLOAD', JSON.stringify(p));
     localStorage.setItem('DJF_V9283_DRAFT', JSON.stringify(p));
 
-    const r = await postJson('/api/publish', p);
+    const r = await postJson('/api/unified-control', p);
     localStorage.setItem('DJF_V921_LAST_PUBLISH', new Date().toISOString());
     localStorage.setItem('DJF_V9283_LAST_PUBLISH', new Date().toISOString());
 
-    const verify = await getJson('/api/broadcast?t='+Date.now(), null);
-    const vc = normalizeCore(verify);
+    const verify = await getJson('/api/unified-control?t='+Date.now(), null);
+    const vc = normalizeCore(verify?.core || verify);
     const wantedTheme = p.theme?.id;
     const savedTheme = vc?.theme?.id;
     const okTheme = !wantedTheme || wantedTheme === savedTheme;
@@ -296,7 +297,7 @@ async function djfOneClick(){
     set('readyState', okTheme ? 'PUBLISHED OK' : 'PUBLISHED - CHECK THEME');
     set('lastPublish', new Date().toLocaleString());
     status(okTheme
-      ? `✅ Published. Theme saved as ${savedTheme}. Top20 + Mods included.`
+      ? `✅ Published revision ${verify?.revision ?? r?.revision ?? '—'}. Existing website and overlay data preserved.`
       : `⚠️ Published, but verify says theme=${savedTheme}, expected=${wantedTheme}.`, okTheme ? 'ok' : 'warn');
     return r;
   }catch(e){
