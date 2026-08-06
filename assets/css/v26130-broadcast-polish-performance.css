@@ -1,0 +1,27 @@
+/* DJ FOLSOE V26130 — BROADCAST POLISH & PERFORMANCE
+   Website-only finishing layer. No overlay, CMS, Worker or data-model changes. */
+:root{--v26130-focus:color-mix(in srgb,var(--a) 78%,white);--v26130-section-gap:clamp(44px,6vw,92px)}
+html{background:#050711}
+body{min-height:100vh;text-rendering:optimizeLegibility}
+body.isBooting main{opacity:.001}body.isReady main{opacity:1;transition:opacity .28s ease}
+.broadcastPage{isolation:isolate}
+.broadcastPage>.cmsModule{margin-block:var(--v26130-section-gap)}
+.broadcastPage>.cmsModule:first-child{margin-top:0}
+.broadcastPage>.cmsModule:last-child{margin-bottom:0}
+.broadcastHeader,.mobileBroadcastDock{backdrop-filter:saturate(1.15) blur(18px);-webkit-backdrop-filter:saturate(1.15) blur(18px)}
+.broadcastHeader{box-shadow:0 18px 52px rgba(0,0,0,.42),0 1px 0 rgba(255,255,255,.045) inset}
+.broadcastHeader::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--a),var(--b),var(--c),transparent);opacity:.72;pointer-events:none}
+.playerCard,.chatCard,.webDockPanel,.showGrid article,.cmsFeatureStory,.cmsSpecialEvent,.cmsChartGrid article,.aboutFacts article{transform:translateZ(0);backface-visibility:hidden}
+.playerCard,.chatCard,.webDockPanel,.showGrid article,.cmsFeatureStory,.cmsSpecialEvent,.cmsChartGrid article,.aboutFacts article{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+@media(hover:hover){.showGrid article:hover,.cmsChartGrid article:hover,.aboutFacts article:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--a) 56%,rgba(255,255,255,.16));box-shadow:0 18px 45px rgba(0,0,0,.32)}}
+:is(a,button,input,select,textarea):focus-visible{outline:3px solid var(--v26130-focus);outline-offset:4px;box-shadow:0 0 0 6px color-mix(in srgb,var(--v26130-focus) 18%,transparent)}
+iframe{background:#080b16}
+img,iframe{max-width:100%}
+.cmsModule[data-v26130-reveal]{opacity:0;transform:translateY(18px)}
+.cmsModule[data-v26130-reveal].isVisible{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.cmsModule:not(#hero):not(#live){content-visibility:auto;contain-intrinsic-size:760px}
+.siteFooter{position:relative;overflow:hidden}.siteFooter::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--a),var(--b),var(--c),var(--cyan))}
+[data-network="offline"] .broadcastSignalDot{animation:none;opacity:.45}
+[data-network="slow"] .broadcastSignal::after{content:"SLOW CONNECTION";position:absolute;right:12px;bottom:8px;color:var(--a);font-size:9px;font-weight:800;letter-spacing:.11em}
+@media(max-width:760px){:root{--v26130-section-gap:38px}.broadcastPage>.cmsModule{margin-block:var(--v26130-section-gap)}.cmsModule:not(#hero):not(#live){contain-intrinsic-size:980px}.broadcastHeader{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}}
+@media(prefers-reduced-motion:reduce){body.isReady main,.cmsModule[data-v26130-reveal],.cmsModule[data-v26130-reveal].isVisible,.playerCard,.chatCard,.webDockPanel,.showGrid article,.cmsFeatureStory,.cmsSpecialEvent,.cmsChartGrid article,.aboutFacts article{transition:none!important;transform:none!important;opacity:1!important}}
