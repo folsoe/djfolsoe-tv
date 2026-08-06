@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-version="V26110" data-djf-theme="morning">
+<html lang="en" data-version="V26120" data-djf-theme="morning">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="assets/css/v20001-complete.css?v=20001">
   <link rel="stylesheet" href="assets/css/v25020-remove-follower-count.css?v=25020">
   <link rel="stylesheet" href="assets/css/v26110-theme-aware-content.css?v=26110">
+  <link rel="stylesheet" href="assets/css/v26120-broadcast-navigation-mobile.css?v=26120">
 </head>
 <body data-broadcast-state="offline" data-show-theme="morning">
 <header class="broadcastHeader" id="top">
@@ -40,6 +41,10 @@
 
   <nav class="broadcastNav" aria-label="Primary navigation">
     <a href="#live">LIVE</a><i></i><a href="#shows">SHOWS</a><i></i><a href="#about">COMMUNITY</a><i></i><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">TWITCH ↗</a>
+  </nav>
+  <button class="mobileNavToggle" id="mobileNavToggle" type="button" aria-expanded="false" aria-controls="mobileBroadcastNav" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  <nav class="mobileBroadcastNav" id="mobileBroadcastNav" aria-label="Mobile navigation" hidden>
+    <a href="#live">LIVE</a><a href="#shows">SHOWS</a><a href="#editorial">FEATURE</a><a href="#charts">TOP 20</a><a href="#about">COMMUNITY</a><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">TWITCH ↗</a>
   </nav>
 </header>
 
@@ -144,9 +149,17 @@
 
   <section class="join cmsModule" data-cms-module="join" data-cms-order="80"><p>JOIN THE BROADCAST</p><h2>Your music.<br>Your chat.<br>Your show.</h2><a href="#live">WATCH DIRECTLY ON FOLSOETV.DK →</a></section>
 </main>
+<nav class="mobileBroadcastDock" id="mobileBroadcastDock" aria-label="Quick navigation">
+  <a href="#live" data-nav-target="live"><b>●</b><span>LIVE</span></a>
+  <a href="#shows" data-nav-target="shows"><b>▦</b><span>SHOWS</span></a>
+  <a href="#charts" data-nav-target="charts"><b>20</b><span>CHART</span></a>
+  <a href="#about" data-nav-target="about"><b>♥</b><span>COMMUNITY</span></a>
+</nav>
+<button class="broadcastBackToTop" id="broadcastBackToTop" type="button" aria-label="Back to top">↑</button>
 
 <footer class="siteFooter broadcastFooter"><b>DJ FOLSOE NETWORK</b><span>EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK</span><small>© 2026 DJ FOLSOE</small></footer>
 <script src="assets/js/v20001-complete.js?v=20001"></script>
 <script src="assets/js/v26110-site-bridge.js?v=26110"></script>
+<script src="assets/js/v26120-broadcast-navigation-mobile.js?v=26120"></script>
 </body>
 </html>
