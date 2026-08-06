@@ -1,0 +1,33 @@
+/* DJ FOLSOE V26120 — BROADCAST NAVIGATION & MOBILE EXPERIENCE
+   Website-only enhancement. Does not modify overlay, Worker or CMS data. */
+:root{--v26120-mobile-dock-h:72px}
+html{scroll-behavior:smooth;scroll-padding-top:185px}
+body{overscroll-behavior-y:none}
+.broadcastNav a,.mobileBroadcastNav a,.mobileBroadcastDock a{transition:color .2s ease,background .2s ease,border-color .2s ease,transform .2s ease}
+.broadcastNav a[aria-current="page"]{color:var(--a);text-shadow:0 0 18px color-mix(in srgb,var(--a) 55%,transparent)}
+.mobileNavToggle{display:none;position:absolute;right:18px;bottom:12px;width:48px;height:38px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(4,7,14,.82);z-index:32;padding:9px 11px}
+.mobileNavToggle span{display:block;height:2px;margin:4px 0;background:linear-gradient(90deg,var(--a),var(--b));border-radius:4px;transition:transform .25s ease,opacity .2s ease}
+.mobileNavToggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.mobileNavToggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.mobileNavToggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobileBroadcastNav{position:absolute;left:12px;right:12px;top:calc(100% + 8px);z-index:31;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:linear-gradient(145deg,rgba(4,7,15,.99),rgba(14,13,29,.98));box-shadow:0 22px 55px rgba(0,0,0,.5)}
+.mobileBroadcastNav[hidden]{display:none}
+.mobileBroadcastNav a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px;border:1px solid rgba(255,255,255,.1);border-radius:9px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.08em}
+.mobileBroadcastNav a:hover,.mobileBroadcastNav a:focus-visible,.mobileBroadcastNav a[aria-current="page"]{border-color:var(--a);background:color-mix(in srgb,var(--a) 14%,rgba(7,10,18,.96));color:var(--a)}
+.mobileBroadcastDock{display:none;position:fixed;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));height:var(--v26120-mobile-dock-h);z-index:80;grid-template-columns:repeat(4,1fr);overflow:hidden;border:1px solid rgba(255,255,255,.15);border-radius:16px;background:linear-gradient(120deg,rgba(4,7,14,.98),rgba(15,14,31,.98));box-shadow:0 16px 45px rgba(0,0,0,.55),0 0 0 1px color-mix(in srgb,var(--b) 18%,transparent);backdrop-filter:blur(16px)}
+.mobileBroadcastDock a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#d8dce8;text-decoration:none;border-right:1px solid rgba(255,255,255,.08)}
+.mobileBroadcastDock a:last-child{border-right:0}.mobileBroadcastDock b{font-size:18px;color:var(--b)}.mobileBroadcastDock span{font-size:10px;font-weight:800;letter-spacing:.09em}
+.mobileBroadcastDock a[aria-current="page"]{background:linear-gradient(180deg,color-mix(in srgb,var(--a) 16%,transparent),transparent);color:#fff}.mobileBroadcastDock a[aria-current="page"] b{color:var(--a);filter:drop-shadow(0 0 8px var(--a))}
+.broadcastBackToTop{position:fixed;right:18px;bottom:20px;z-index:75;width:46px;height:46px;border:1px solid rgba(255,255,255,.16);border-radius:50%;background:rgba(5,8,17,.94);color:#fff;font-size:22px;box-shadow:0 10px 30px rgba(0,0,0,.45);opacity:0;visibility:hidden;transform:translateY(12px);transition:.25s ease}
+.broadcastBackToTop.isVisible{opacity:1;visibility:visible;transform:none}.broadcastBackToTop:hover{border-color:var(--a);color:var(--a)}
+.cmsModule{scroll-margin-top:190px}
+@media(max-width:1100px){
+  html{scroll-padding-top:145px}.broadcastNav{display:none!important}.mobileNavToggle{display:block}.cmsModule{scroll-margin-top:150px}
+}
+@media(max-width:760px){
+  body{padding-bottom:calc(var(--v26120-mobile-dock-h) + 28px)}
+  .mobileBroadcastDock{display:grid}.broadcastBackToTop{bottom:calc(var(--v26120-mobile-dock-h) + 26px)}
+  .mobileNavToggle{right:12px;bottom:9px}.mobileBroadcastNav{grid-template-columns:1fr}
+  .siteFooter{padding-bottom:calc(var(--v26120-mobile-dock-h) + 24px)!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.broadcastNav a,.mobileBroadcastNav a,.mobileBroadcastDock a,.mobileNavToggle span,.broadcastBackToTop{transition:none!important}}
