@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-version="V26100" data-djf-theme="morning">
+<html lang="en" data-version="V26110" data-djf-theme="morning">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://www.twitch.tv">
   <link rel="stylesheet" href="assets/css/v20001-complete.css?v=20001">
   <link rel="stylesheet" href="assets/css/v25020-remove-follower-count.css?v=25020">
-  <link rel="stylesheet" href="assets/css/v26100-overlay-to-web.css?v=26100">
+  <link rel="stylesheet" href="assets/css/v26110-theme-aware-content.css?v=26110">
 </head>
 <body data-broadcast-state="offline" data-show-theme="morning">
 <header class="broadcastHeader" id="top">
@@ -44,7 +44,7 @@
 </header>
 
 <main class="broadcastPage">
-  <section class="hero broadcastHero">
+  <section class="hero broadcastHero cmsModule" id="hero" data-cms-module="hero" data-cms-order="10">
     <div class="heroGrid">
       <div class="heroCopy">
         <p id="cmsHeroEyebrow" class="eyebrow">DJ FOLSOE NETWORK · LIVE MUSIC TELEVISION</p>
@@ -65,7 +65,7 @@
     </div>
   </section>
 
-  <section class="liveSection" id="live">
+  <section class="liveSection cmsModule" id="live" data-cms-module="live" data-cms-order="20">
     <div class="sectionHead broadcastSectionHead">
       <div><p>TWITCH LIVE CHANNEL</p><h2 id="liveHeading">DJ FOLSOE LIVE CHANNEL</h2></div>
       <span id="livePill" class="statusPill"><i></i><b>CHECKING</b></span>
@@ -94,7 +94,7 @@
     <div id="offlineMessage" class="offlineMessage" hidden><b>OFF AIR</b><div><strong>The channel is currently offline</strong><span>Follow DJ FOLSOE on Twitch and return here for the next live show.</span></div><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">FOLLOW ON TWITCH</a></div>
   </section>
 
-  <section class="webBroadcastDock" aria-label="Broadcast information">
+  <section class="webBroadcastDock cmsModule" data-cms-module="broadcastGuide" data-cms-order="30" aria-label="Broadcast information">
     <article class="webDockPanel webDockLive"><small>LIVE DESK</small><strong id="webDockLiveTitle">WELCOME TO DJ FOLSOE</strong><span id="deskText">Follow the channel and become part of the community.</span></article>
     <article class="webDockPanel webDockNext"><small>NEXT SHOW</small><strong id="webDockNextTitle">SCHEDULE LOADING</strong><span id="webDockNextTime">OFFICIAL TWITCH SCHEDULE</span></article>
     <article class="webDockPanel webDockTheme"><small>ACTIVE THEME</small><strong id="theme">GOOD MORNING</strong><span>CONTROLLED FROM DJ FOLSOE ADMIN</span></article>
@@ -102,7 +102,7 @@
     <div class="webSocialRail"><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener"><b>TWITCH</b><span>DJFOLSOE</span></a><i></i><a href="#about"><b>COMMUNITY</b><span>LIVE MUSIC FAMILY</span></a><i></i><a href="https://folsoetv.dk"><b>WEBSITE</b><span>FOLSOETV.DK</span></a><i></i><a href="#live"><b>VIPPS</b><span>1267PN</span></a></div>
   </section>
 
-  <section class="shows" id="shows">
+  <section class="shows cmsModule" id="shows" data-cms-module="shows" data-cms-order="40">
     <div class="sectionHead broadcastSectionHead"><div><p>PROGRAMMING</p><h2>Signature shows</h2></div></div>
     <div class="showGrid">
       <article><small>TUESDAY</small><h3>Trance Tuesday</h3><p>Uplifting, progressive and classic trance.</p></article>
@@ -113,16 +113,40 @@
     </div>
   </section>
 
-  <section class="about" id="about">
+  <section class="cmsStoryGrid cmsModule" id="editorial" data-cms-module="editorial" data-cms-order="50">
+    <article class="cmsFeatureStory">
+      <p class="eyebrow" id="cmsStoryEyebrow">ON THE CHANNEL</p>
+      <h2 id="cmsStoryTitle">The sound and story behind the show</h2>
+      <p id="cmsStoryText">Live music, community moments and themed broadcasts from DJ FOLSOE.</p>
+      <a id="cmsStoryAction" href="#live">WATCH THE CHANNEL →</a>
+    </article>
+    <aside class="cmsSpecialEvent">
+      <small>SPECIAL EVENT</small>
+      <strong id="cmsSpecialTitle">NEXT BROADCAST EVENT</strong>
+      <span id="cmsSpecialText">Details are controlled from DJ FOLSOE Admin.</span>
+      <b id="cmsSpecialBadge">FOLSOE TV</b>
+    </aside>
+  </section>
+
+  <section class="cmsChartSection cmsModule" id="charts" data-cms-module="top20" data-cms-order="60">
+    <div class="sectionHead broadcastSectionHead"><div><p>DJ FOLSOE CHART</p><h2 id="cmsChartHeading">FOLSOE TOP 20</h2></div><span class="cmsChartStatus" id="cmsChartStatus">LATEST LIST</span></div>
+    <div class="cmsChartGrid" id="cmsChartGrid">
+      <article><b>01</b><span><strong>Chart loading</strong><small>Controlled from admin</small></span></article>
+      <article><b>02</b><span><strong>Chart loading</strong><small>Controlled from admin</small></span></article>
+      <article><b>03</b><span><strong>Chart loading</strong><small>Controlled from admin</small></span></article>
+    </div>
+  </section>
+
+  <section class="about cmsModule" id="about" data-cms-module="community" data-cms-order="70">
     <div><p class="eyebrow">THE CHANNEL</p><h2>Meet the person behind the channel</h2><p>DJ FOLSOE combines a live DJ booth, television graphics and an active Twitch community. The audience helps shape the show through chat, music requests and live interaction.</p></div>
     <div class="aboutFacts"><article><b>01</b><strong>Live DJ sets</strong><span>Genre-based shows with a recognizable visual identity.</span></article><article><b>02</b><strong>Viewer requests</strong><span>Use !request Artist - Title in Twitch chat.</span></article><article><b>03</b><strong>Community first</strong><span>A welcoming place for music fans and Twitch DJs.</span></article></div>
   </section>
 
-  <section class="join"><p>JOIN THE BROADCAST</p><h2>Your music.<br>Your chat.<br>Your show.</h2><a href="#live">WATCH DIRECTLY ON FOLSOETV.DK →</a></section>
+  <section class="join cmsModule" data-cms-module="join" data-cms-order="80"><p>JOIN THE BROADCAST</p><h2>Your music.<br>Your chat.<br>Your show.</h2><a href="#live">WATCH DIRECTLY ON FOLSOETV.DK →</a></section>
 </main>
 
 <footer class="siteFooter broadcastFooter"><b>DJ FOLSOE NETWORK</b><span>EURODANCE · TRANCE · RETRO HITS · NU-DISCO · LIVE FROM DENMARK</span><small>© 2026 DJ FOLSOE</small></footer>
 <script src="assets/js/v20001-complete.js?v=20001"></script>
-<script src="assets/js/v26100-site-bridge.js?v=26100"></script>
+<script src="assets/js/v26110-site-bridge.js?v=26110"></script>
 </body>
 </html>
