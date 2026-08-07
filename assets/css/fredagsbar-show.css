@@ -1,0 +1,179 @@
+
+:root{
+  --fb-bg:#07090d;
+  --fb-panel:#0d1118;
+  --fb-panel2:#111721;
+  --fb-text:#f3f6fa;
+  --fb-muted:#9aa5b3;
+  --fb-line:rgba(255,255,255,.12);
+  --fb-accent:#ff3b63;
+  --fb-accent2:#ffb037;
+  --fb-glow:rgba(255,59,99,.22);
+  --fb-max:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body.fredagsbarPage{
+  margin:0;
+  background:
+    radial-gradient(circle at 15% -10%,rgba(255,59,99,.10),transparent 34rem),
+    radial-gradient(circle at 100% 10%,rgba(255,176,55,.07),transparent 28rem),
+    var(--fb-bg);
+  color:var(--fb-text);
+  font-family:Manrope,system-ui,sans-serif;
+}
+.fredagsbarPage a{color:inherit;text-decoration:none}
+.fbTop{
+  width:min(calc(100% - 32px),var(--fb-max));
+  margin:0 auto;
+  min-height:84px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  border-bottom:1px solid var(--fb-line);
+}
+.fbBrand{display:flex;align-items:center;gap:12px}
+.fbBrandMark{
+  display:grid;place-items:center;width:42px;height:42px;border-radius:10px;
+  background:linear-gradient(145deg,var(--fb-accent),#a41638);
+  font:900 18px/1 "Barlow Condensed",sans-serif;
+  box-shadow:0 0 30px var(--fb-glow);
+}
+.fbBrand strong{display:block;font:800 18px/1 "Barlow Condensed",sans-serif;letter-spacing:.05em}
+.fbBrand small{display:block;margin-top:4px;color:var(--fb-muted);font-size:9px;letter-spacing:.16em}
+.fbNav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fbNav a{
+  padding:10px 12px;border-radius:8px;color:var(--fb-muted);
+  font:700 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.1em
+}
+.fbNav a:hover,.fbNav a.active{color:#fff;background:rgba(255,255,255,.06)}
+
+.fbHero{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--fb-line);
+}
+.fbHero:before{
+  content:"FREDAGSBAR";
+  position:absolute;right:-.03em;bottom:-.22em;
+  font:900 clamp(7rem,20vw,20rem)/.8 "Barlow Condensed",sans-serif;
+  letter-spacing:-.06em;color:rgba(255,255,255,.018);pointer-events:none;
+}
+.fbHeroGlow{
+  position:absolute;width:38rem;height:38rem;border-radius:50%;
+  left:58%;top:-14rem;background:radial-gradient(circle,var(--fb-glow),transparent 70%);
+  filter:blur(10px);pointer-events:none
+}
+.fbHeroInner{position:relative;width:min(calc(100% - 32px),var(--fb-max));margin:0 auto;padding:105px 0 88px}
+.fbEyebrow,.fbKicker{
+  margin:0 0 16px;color:var(--fb-accent2);
+  font:800 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.18em;text-transform:uppercase
+}
+.fbHero h1,.fbWide h2,.fbCard h2,.fbSchedule h2,.fbFinal h2,.fbManifesto h2{
+  font-family:"Barlow Condensed",sans-serif;text-transform:uppercase
+}
+.fbHero h1{
+  max-width:1000px;margin:0;
+  font-size:clamp(4.4rem,10vw,9rem);line-height:.82;letter-spacing:-.045em;font-weight:900
+}
+.fbHero h1 span{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.55)}
+.fbHeroLine{
+  margin:28px 0 0;font:800 clamp(1.35rem,2.4vw,2.2rem)/1 "Barlow Condensed",sans-serif;
+  text-transform:uppercase;letter-spacing:.04em
+}
+.fbHeroIntro{max-width:800px;margin:22px 0 0;color:#c8d0da;font-size:1.08rem;line-height:1.75}
+.fbSignalRow{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0}
+.fbSignalRow span{
+  padding:10px 13px;border:1px solid var(--fb-line);border-radius:999px;
+  background:rgba(255,255,255,.035);font:800 11px/1 "Barlow Condensed",sans-serif;letter-spacing:.09em
+}
+.fbSignalRow b{color:var(--fb-accent)}
+.fbActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.fbBtn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;
+  border:1px solid var(--fb-line);border-radius:9px;background:rgba(255,255,255,.035);
+  font:800 12px/1 "Barlow Condensed",sans-serif;letter-spacing:.11em;text-transform:uppercase
+}
+.fbBtn:hover{background:rgba(255,255,255,.08)}
+.fbBtnPrimary{border-color:transparent;background:linear-gradient(135deg,var(--fb-accent),#c92149)}
+.fbBtnPrimary:hover{background:linear-gradient(135deg,#ff5877,var(--fb-accent))}
+
+.fbManifesto,.fbWide,.fbSchedule,.fbFinal{
+  width:min(calc(100% - 32px),var(--fb-max));margin:0 auto;
+  padding:84px 0;border-bottom:1px solid var(--fb-line)
+}
+.fbManifesto{display:grid;grid-template-columns:110px 1fr;gap:34px}
+.fbManifestoNumber,.fbIndex{
+  font:900 72px/1 "Barlow Condensed",sans-serif;color:rgba(255,255,255,.07)
+}
+.fbManifesto h2,.fbWide h2,.fbCard h2,.fbSchedule h2,.fbFinal h2{
+  margin:0 0 22px;font-size:clamp(2.4rem,5vw,4.8rem);line-height:.93;letter-spacing:-.03em
+}
+.fbManifesto p,.fbWide p,.fbCard p,.fbFinal p{
+  max-width:920px;color:#c2cad4;font-size:1rem;line-height:1.8
+}
+.fbManifesto strong,.fbWide strong,.fbCard strong,.fbFinal strong{color:#fff}
+.fbSplit{
+  width:min(calc(100% - 32px),var(--fb-max));margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--fb-line)
+}
+.fbCard{position:relative;padding:74px 54px 74px 0}
+.fbCard + .fbCard{padding-left:54px;padding-right:0;border-left:1px solid var(--fb-line)}
+.fbCardAccent:after{
+  content:"";
+  position:absolute;inset:20px 0 20px 20px;
+  background:linear-gradient(135deg,rgba(255,59,99,.055),transparent 55%);
+  border-radius:20px;pointer-events:none
+}
+.fbCardQuiet{background:linear-gradient(180deg,rgba(255,255,255,.018),transparent)}
+.fbWide .fbLead,.fbCommunity .fbLead{font-size:1.25rem;color:#fff}
+.fbGenreGrid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:30px 0
+}
+.fbGenreGrid span{
+  border:1px solid var(--fb-line);background:var(--fb-panel);
+  padding:18px 14px;border-radius:8px;
+  font:800 15px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.06em
+}
+.fbWide blockquote{
+  margin:35px 0;padding:20px 24px;border-left:3px solid var(--fb-accent);
+  background:linear-gradient(90deg,rgba(255,59,99,.08),transparent);
+  font:800 clamp(1.8rem,4vw,3rem)/1 "Barlow Condensed",sans-serif;text-transform:uppercase
+}
+.fbTextLink{
+  display:inline-block;margin-top:22px;color:#fff;border-bottom:1px solid var(--fb-accent);
+  font:800 13px/1.4 "Barlow Condensed",sans-serif;letter-spacing:.1em
+}
+.fbSchedule{display:grid;grid-template-columns:.95fr 1.05fr;gap:70px}
+.fbSchedule dl{margin:0}
+.fbSchedule dl div{
+  display:grid;grid-template-columns:135px 1fr;gap:16px;
+  padding:17px 0;border-bottom:1px solid var(--fb-line)
+}
+.fbSchedule dt{color:var(--fb-muted);font:800 11px/1.4 "Barlow Condensed",sans-serif;letter-spacing:.13em}
+.fbSchedule dd{margin:0;font-weight:700}
+.fbFinal{text-align:center;padding-top:110px;padding-bottom:110px}
+.fbFinal h2{max-width:950px;margin-left:auto;margin-right:auto;font-size:clamp(3.1rem,7vw,7rem)}
+.fbFinal p{margin-left:auto;margin-right:auto}
+.fbFinal .fbActions{justify-content:center}
+.fbFinal small{display:block;margin-top:34px;color:var(--fb-muted);font-style:italic}
+.fbFooter{
+  width:min(calc(100% - 32px),var(--fb-max));margin:0 auto;padding:28px 0 40px;
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#6f7885;
+  font:700 9px/1.5 "Barlow Condensed",sans-serif;letter-spacing:.13em
+}
+
+@media (max-width:800px){
+  .fbTop{min-height:70px}.fbNav a:not(.active):not(:last-child){display:none}
+  .fbBrand small{display:none}
+  .fbHeroInner{padding:74px 0 60px}
+  .fbHero h1{font-size:clamp(3.8rem,19vw,6.2rem)}
+  .fbHeroIntro{font-size:.98rem}
+  .fbManifesto{grid-template-columns:1fr;gap:8px;padding:58px 0}
+  .fbManifestoNumber{font-size:48px}
+  .fbSplit{grid-template-columns:1fr}
+  .fbCard,.fbCard + .fbCard{padding:58px 0;border-left:0}
+  .fbCard + .fbCard{border-top:1px solid var(--fb-line)}
+  .fbWide,.fbSchedule,.fbFinal{padding:58px 0}
+  .fbGenreGrid{grid-template-columns:repeat(2,1fr)}
+  .fbSchedule{grid-template-columns:1fr;gap:26px}
+  .fbSchedule dl div{grid-template-columns:100px 1fr}
+  .fbFinal{padding-top:72px;padding-bottom:72px}
+}
