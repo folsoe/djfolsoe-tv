@@ -1,0 +1,276 @@
+
+/* ============================================================
+   DJ FOLSOE TV — SITE FOUNDATION V28000
+   Shared visual DNA only. Never replaces show-specific design.
+   ============================================================ */
+
+:root{
+  --djf-shell: 1240px;
+  --djf-foundation-bg: #070a0f;
+  --djf-foundation-panel: rgba(11,15,22,.82);
+  --djf-foundation-line: rgba(255,255,255,.12);
+  --djf-foundation-text: #f4f7fb;
+  --djf-foundation-muted: #8490a0;
+  --djf-accent: #ffffff;
+  --djf-accent-rgb: 255,255,255;
+  --djf-nav-h: 76px;
+  --djf-radius-sm: 8px;
+  --djf-radius-md: 16px;
+  --djf-shadow: 0 20px 70px rgba(0,0,0,.22);
+}
+
+/* Theme accents: family resemblance, individual identity retained */
+html[data-djf-section="fredagsbar"]{--djf-accent:#ff4e68;--djf-accent-rgb:255,78,104}
+html[data-djf-section="trance"]{--djf-accent:#4ef6ff;--djf-accent-rgb:78,246,255}
+html[data-djf-section="eurodance"]{--djf-accent:#ff4db6;--djf-accent-rgb:255,77,182}
+html[data-djf-section="retro"]{--djf-accent:#d9bc4b;--djf-accent-rgb:217,188,75}
+html[data-djf-section="morning"]{--djf-accent:#f2cc75;--djf-accent-rgb:242,204,117}
+html[data-djf-section="popup"]{--djf-accent:#ff5a45;--djf-accent-rgb:255,90,69}
+html[data-djf-section="weekend"]{--djf-accent:#c3ff35;--djf-accent-rgb:195,255,53}
+html[data-djf-section="nudisco"]{--djf-accent:#d9b66f;--djf-accent-rgb:217,182,111}
+html[data-djf-section="shows"]{--djf-accent:#ffffff;--djf-accent-rgb:255,255,255}
+html[data-djf-section="music"]{--djf-accent:#7ee8ff;--djf-accent-rgb:126,232,255}
+html[data-djf-section="live"]{--djf-accent:#ff405c;--djf-accent-rgb:255,64,92}
+
+/* We do not touch homepage layout. */
+html[data-djf-section="home"] .djf-foundation-header,
+html[data-djf-section="home"] .djf-foundation-footer{
+  all: revert-layer;
+}
+
+/* Universal accessibility and rhythm, intentionally low-impact */
+html.djf-foundation-loaded{
+  scroll-behavior:smooth;
+  color-scheme:dark;
+}
+html.djf-foundation-loaded body{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+html.djf-foundation-loaded :focus-visible{
+  outline:2px solid var(--djf-accent);
+  outline-offset:4px;
+}
+
+/* ------------------------------------------------------------
+   HEADER — common FOLSOE TV chrome
+   ------------------------------------------------------------ */
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-header{
+  width:min(calc(100% - 32px),var(--djf-shell)) !important;
+  min-height:var(--djf-nav-h) !important;
+  margin-inline:auto !important;
+  padding-inline:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:20px !important;
+  position:relative !important;
+  z-index:110 !important;
+  border-bottom:1px solid var(--djf-foundation-line) !important;
+  background:
+    linear-gradient(90deg,rgba(var(--djf-accent-rgb),.018),transparent 24%),
+    rgba(7,10,15,.54) !important;
+  backdrop-filter:blur(16px) saturate(1.08);
+  -webkit-backdrop-filter:blur(16px) saturate(1.08);
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-header::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:-1px;
+  width:68px;height:2px;
+  background:linear-gradient(90deg,var(--djf-accent),transparent);
+  pointer-events:none;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+  min-width:0;
+  color:var(--djf-foundation-text) !important;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-brand > :first-child{
+  flex:0 0 auto;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-brand strong{
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:.05em !important;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-brand small{
+  color:var(--djf-foundation-muted) !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:5px !important;
+  flex-wrap:wrap;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav a{
+  min-height:36px;
+  padding:0 11px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  border:1px solid transparent !important;
+  border-radius:999px !important;
+  color:#8e99a8 !important;
+  background:transparent !important;
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  letter-spacing:.11em !important;
+  text-transform:uppercase !important;
+  transition:
+    color .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    transform .18s ease !important;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav a:hover{
+  color:#fff !important;
+  border-color:rgba(var(--djf-accent-rgb),.28) !important;
+  background:rgba(var(--djf-accent-rgb),.07) !important;
+  transform:translateY(-1px);
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav a.active,
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav a[aria-current="page"]{
+  color:#fff !important;
+  border-color:rgba(var(--djf-accent-rgb),.35) !important;
+  background:rgba(var(--djf-accent-rgb),.10) !important;
+}
+
+/* ------------------------------------------------------------
+   COMMON CTA DNA
+   We target only known CTA classes, never ordinary links.
+   ------------------------------------------------------------ */
+html.djf-foundation-loaded:not([data-djf-section="home"]) :is(
+  .fbBtn,.trBtn,.trIActions a,.edActions a,.rhActions a,
+  .acts a,.wActs a,.nActs a,.suActions a
+){
+  border-radius:var(--djf-radius-sm) !important;
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease !important;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) :is(
+  .fbBtn,.trBtn,.trIActions a,.edActions a,.rhActions a,
+  .acts a,.wActs a,.nActs a,.suActions a
+):hover{
+  transform:translateY(-2px);
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) :is(
+  .fbBtnPrimary,.trBtnPrimary,.trIPrimary,.edPrimary,.rhPrimary,
+  .acts .primary,.wPrimary,.nPrimary,.suPrimary
+){
+  box-shadow:0 10px 36px rgba(var(--djf-accent-rgb),.14) !important;
+}
+
+/* ------------------------------------------------------------
+   SECTION EDGE LANGUAGE
+   Only adds a common tiny top marker to major content sections.
+   Existing backgrounds/art direction remain untouched.
+   ------------------------------------------------------------ */
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-section{
+  position:relative;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-section[data-djf-edge="1"]::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;
+  width:54px;height:2px;
+  background:linear-gradient(90deg,var(--djf-accent),transparent);
+  opacity:.7;
+  pointer-events:none;
+}
+
+/* ------------------------------------------------------------
+   TYPOGRAPHIC FAMILY
+   Do not resize show hero typography. Only normalize font families.
+   ------------------------------------------------------------ */
+html.djf-foundation-loaded:not([data-djf-section="home"]) :is(h1,h2,h3){
+  text-wrap:balance;
+}
+html.djf-foundation-loaded:not([data-djf-section="home"]) :is(
+  .fbKicker,.trKicker,.trIKicker,.edKicker,.rhKicker,.wk,.nk,.suKicker
+){
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  letter-spacing:.18em !important;
+}
+
+/* ------------------------------------------------------------
+   FOOTER — same quiet sign-off as homepage
+   ------------------------------------------------------------ */
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-footer{
+  width:min(calc(100% - 32px),var(--djf-shell)) !important;
+  margin-inline:auto !important;
+  padding:28px 0 40px !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:20px !important;
+  flex-wrap:wrap !important;
+  position:relative;
+  border-top:1px solid var(--djf-foundation-line) !important;
+  color:#657181 !important;
+  background:transparent !important;
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-size:9px !important;
+  line-height:1.5 !important;
+  font-weight:800 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase;
+}
+
+html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-footer::before{
+  content:"FOLSOE TV";
+  color:var(--djf-accent);
+  opacity:.8;
+  margin-right:auto;
+  font-weight:900;
+  letter-spacing:.18em;
+}
+
+/* Prevent duplicate FOLSOE TV marker on very narrow displays */
+@media(max-width:760px){
+  :root{--djf-nav-h:68px}
+  html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-header{
+    width:min(calc(100% - 24px),var(--djf-shell)) !important;
+    gap:10px !important;
+  }
+  html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav{
+    gap:2px !important;
+  }
+  html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-nav a{
+    padding-inline:8px !important;
+    font-size:10px !important;
+  }
+  html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-footer{
+    width:min(calc(100% - 24px),var(--djf-shell)) !important;
+  }
+  html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-footer::before{
+    width:100%;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html.djf-foundation-loaded *{
+    scroll-behavior:auto !important;
+  }
+}
