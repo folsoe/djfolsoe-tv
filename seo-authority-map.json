@@ -1,0 +1,49 @@
+{
+  "version": "V26350",
+  "canonical_host": "https://folsoetv.dk",
+  "clusters": [
+    {
+      "cluster": "Live DJ Shows",
+      "hub": "/shows/",
+      "supports": [
+        "/music/",
+        "/guides/",
+        "/watch-live/"
+      ]
+    },
+    {
+      "cluster": "Music Discovery",
+      "hub": "/music/",
+      "supports": [
+        "/shows/",
+        "/guides/",
+        "/archive/"
+      ]
+    },
+    {
+      "cluster": "Music Guides",
+      "hub": "/guides/",
+      "supports": [
+        "/music/",
+        "/shows/"
+      ]
+    },
+    {
+      "cluster": "DJ from Denmark",
+      "hub": "/dj-denmark/",
+      "supports": [
+        "/about-dj-folsoe/",
+        "/watch-live/"
+      ]
+    },
+    {
+      "cluster": "DJ FOLSOE Entity",
+      "hub": "/about-dj-folsoe/",
+      "supports": [
+        "/shows/",
+        "/music/",
+        "/dj-denmark/"
+      ]
+    }
+  ]
+}
