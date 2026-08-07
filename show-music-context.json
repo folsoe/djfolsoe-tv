@@ -1,0 +1,187 @@
+{
+  "version": "V27000",
+  "defaultShow": "popup",
+  "shows": {
+    "trance": {
+      "id": "trance",
+      "aliases": [
+        "trance",
+        "trance tuesday"
+      ],
+      "showTitle": "Trance Tuesday",
+      "showUrl": "/shows/trance-tuesday/",
+      "musicTitle": "Trance music",
+      "musicUrl": "/music/trance/",
+      "badge": "UPLIFTING · PROGRESSIVE · CLASSIC",
+      "short": "Melodic builds, emotional breakdowns, progressive journeys and classic trance energy.",
+      "story": "Trance Tuesday gives the music time to breathe: long builds, real breakdowns, uplifting melodies, progressive movement and classics that still stop the room for a moment.",
+      "keywords": [
+        "Uplifting",
+        "Progressive",
+        "Classic Trance",
+        "Vocal Trance",
+        "Tech Trance"
+      ],
+      "newsTheme": "TRANCE"
+    },
+    "eurodance": {
+      "id": "eurodance",
+      "aliases": [
+        "eurodance",
+        "euro dance"
+      ],
+      "showTitle": "Eurodance",
+      "showUrl": "/shows/eurodance/",
+      "musicTitle": "Eurodance",
+      "musicUrl": "/music/eurodance/",
+      "badge": "1990 → FORWARD",
+      "short": "Hooks, rap verses, female vocals, piano riffs, synths and European dance-floor energy.",
+      "story": "Eurodance is two hours of the genre itself: huge hooks, female vocals, rap verses, piano riffs, synths, classics, forgotten gems and the European dance records that carried the sound forward.",
+      "keywords": [
+        "90s Eurodance",
+        "00s Dance",
+        "Piano Riffs",
+        "Rap + Vocal",
+        "Forgotten Gems"
+      ],
+      "newsTheme": "EURODANCE"
+    },
+    "retro": {
+      "id": "retro",
+      "aliases": [
+        "retro",
+        "retro hits"
+      ],
+      "showTitle": "Retro Hits",
+      "showUrl": "/shows/retro-hits/",
+      "musicTitle": "Retro hits",
+      "musicUrl": "/music/retro/",
+      "badge": "10 · 20 · 30 · 40 · 50 YEARS BACK",
+      "short": "Real chart history across pop, dance, rock, soul and everything else that became a hit.",
+      "story": "Retro Hits is the chart time machine: big hits, forgotten hits and small stories from 10, 20, 30, 40 and 50 years ago — with room to stop on one year and explore what people were actually listening to.",
+      "keywords": [
+        "Chart History",
+        "Pop",
+        "Dance",
+        "Rock",
+        "Year Deep Dives"
+      ],
+      "newsTheme": "RETRO"
+    },
+    "nudisco": {
+      "id": "nudisco",
+      "aliases": [
+        "nu disco",
+        "nu-disco",
+        "nudisco"
+      ],
+      "showTitle": "Nu Disco",
+      "showUrl": "/shows/nu-disco/",
+      "musicTitle": "Nu-disco",
+      "musicUrl": "/music/nu-disco/",
+      "badge": "MODERN DISCO · FUNK · GROOVE",
+      "short": "Classic disco DNA with modern production, funk, basslines, edits and sophisticated house grooves.",
+      "story": "Nu Disco stays inside the groove: modern disco, funk-driven house, basslines, strings, guitars, synths, edits and remixes with old soul and contemporary production.",
+      "keywords": [
+        "Nu Disco",
+        "Funk",
+        "Disco House",
+        "Edits",
+        "Remixes"
+      ],
+      "newsTheme": "NU DISCO"
+    },
+    "weekend": {
+      "id": "weekend",
+      "aliases": [
+        "weekend",
+        "edm",
+        "house"
+      ],
+      "showTitle": "Weekend",
+      "showUrl": "/shows/weekend/",
+      "musicTitle": "New EDM & House",
+      "musicUrl": "/music/",
+      "badge": "NEW EDM · HOUSE · TOP 20",
+      "short": "Forward-facing EDM and house with fresh releases, raidtrain energy and FOLSOE Top 20 movement.",
+      "story": "Weekend looks forward: fresh EDM, house, vocal house, club tracks and selected movement from the FOLSOE Top 20 — ideal for Friday nights, Saturday sessions and raidtrains.",
+      "keywords": [
+        "New EDM",
+        "House",
+        "Vocal House",
+        "Top 20",
+        "Raidtrain"
+      ],
+      "newsTheme": "EDM · HOUSE"
+    },
+    "fredagsbar": {
+      "id": "fredagsbar",
+      "aliases": [
+        "fredagsbar",
+        "friday bar"
+      ],
+      "showTitle": "Fredagsbar",
+      "showUrl": "/shows/fredagsbar/",
+      "musicTitle": "Friday music mix",
+      "musicUrl": "/music/",
+      "badge": "DANCE · POP · HOUSE · CLASSICS",
+      "short": "Friday music without a genre committee: dance, pop, house, disco, classics and whatever the room needs.",
+      "story": "Fredagsbar is intentionally broad: dance, pop, house, disco, Eurodance, classics and requests. The music follows the room, the chat and the general condition of Friday evening.",
+      "keywords": [
+        "Dance",
+        "Pop",
+        "House",
+        "Disco",
+        "Requests"
+      ],
+      "newsTheme": "FRIDAY MIX"
+    },
+    "morning": {
+      "id": "morning",
+      "aliases": [
+        "good morning twitch",
+        "morning",
+        "good morning"
+      ],
+      "showTitle": "Good Morning Twitch",
+      "showUrl": "/shows/good-morning-twitch/",
+      "musicTitle": "Morning music",
+      "musicUrl": "/music/",
+      "badge": "RADIO HITS · DANCE POP · GOOD COMPANY",
+      "short": "A bright morning blend of familiar radio hits, pop, dance-pop, Nu Disco and easy-start energy.",
+      "story": "Good Morning Twitch is built for waking up rather than peak-time club pressure: radio hits, pop, dance-pop, Nu Disco, familiar favourites and whatever makes the morning move in the right direction.",
+      "keywords": [
+        "Radio Hits",
+        "Pop",
+        "Dance Pop",
+        "Nu Disco",
+        "Morning"
+      ],
+      "newsTheme": "MORNING MUSIC"
+    },
+    "popup": {
+      "id": "popup",
+      "aliases": [
+        "pop up",
+        "popup",
+        "pop-up",
+        "dj folsoe"
+      ],
+      "showTitle": "POP UP",
+      "showUrl": "/shows/pop-up/",
+      "musicTitle": "The mixed bag",
+      "musicUrl": "/music/",
+      "badge": "ANY GENRE · ANY DIRECTION",
+      "short": "Pop, dance, house, rock, retro, trance and anything else that makes sense at that exact moment.",
+      "story": "POP UP has no genre rules. The music can move through pop, dance, house, rock, disco, trance, Eurodance, new releases and old favourites depending on the moment and the chat.",
+      "keywords": [
+        "Any Genre",
+        "Requests",
+        "Discovery",
+        "Old + New",
+        "Live Choice"
+      ],
+      "newsTheme": "ALL MUSIC"
+    }
+  }
+}
