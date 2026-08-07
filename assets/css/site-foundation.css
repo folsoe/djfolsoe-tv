@@ -274,3 +274,173 @@ html.djf-foundation-loaded:not([data-djf-section="home"]) .djf-foundation-footer
     scroll-behavior:auto !important;
   }
 }
+
+
+/* ============================================================
+   V28100 — GLOBAL FACEBOOK SOCIAL RAIL
+   Discreet, visible, theme-aware and non-invasive.
+   ============================================================ */
+
+.djf-social-rail{
+  position:fixed;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:140;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  pointer-events:auto;
+}
+
+.djf-social-link{
+  position:relative;
+  width:46px;
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:999px;
+  background:rgba(7,10,15,.82);
+  backdrop-filter:blur(16px) saturate(1.1);
+  -webkit-backdrop-filter:blur(16px) saturate(1.1);
+  color:#fff;
+  box-shadow:0 10px 35px rgba(0,0,0,.24);
+  transition:
+    width .22s ease,
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+.djf-social-link:hover,
+.djf-social-link:focus-visible{
+  width:190px;
+  transform:translateX(-2px);
+  border-color:rgba(var(--djf-accent-rgb),.42);
+  background:
+    linear-gradient(90deg,rgba(var(--djf-accent-rgb),.10),rgba(7,10,15,.92));
+}
+
+.djf-social-icon{
+  flex:0 0 44px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  font-family:"Barlow Condensed",Impact,sans-serif;
+  font-size:20px;
+  font-weight:900;
+  line-height:1;
+  color:#fff;
+}
+
+.djf-social-icon::before{
+  content:"f";
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1877f2;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  font-size:18px;
+  font-weight:700;
+  line-height:1;
+}
+
+.djf-social-copy{
+  min-width:132px;
+  padding-right:13px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  opacity:0;
+  transform:translateX(8px);
+  transition:opacity .16s ease .04s, transform .16s ease .04s;
+  white-space:nowrap;
+}
+
+.djf-social-link:hover .djf-social-copy,
+.djf-social-link:focus-visible .djf-social-copy{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.djf-social-copy strong{
+  font-family:"Barlow Condensed",Impact,sans-serif;
+  font-size:12px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.djf-social-copy small{
+  margin-top:4px;
+  color:#8f9aaa;
+  font-family:Manrope,system-ui,sans-serif;
+  font-size:8px;
+  line-height:1.15;
+  letter-spacing:.04em;
+}
+
+.djf-social-link[data-social="group"] .djf-social-icon::after{
+  content:"•";
+  position:absolute;
+  left:31px;
+  top:8px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--djf-accent);
+  color:transparent;
+  box-shadow:0 0 10px rgba(var(--djf-accent-rgb),.4);
+}
+
+.djf-social-link::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(var(--djf-accent-rgb),.025);
+}
+
+@media(max-width:900px){
+  .djf-social-rail{
+    right:10px;
+    top:auto;
+    bottom:12px;
+    transform:none;
+    flex-direction:row;
+  }
+
+  .djf-social-link{
+    width:44px;
+    min-height:44px;
+    box-shadow:0 8px 24px rgba(0,0,0,.30);
+  }
+
+  .djf-social-link:hover,
+  .djf-social-link:focus-visible{
+    width:44px;
+    transform:translateY(-2px);
+  }
+
+  .djf-social-copy{
+    display:none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .djf-social-link,
+  .djf-social-copy{
+    transition:none !important;
+  }
+}

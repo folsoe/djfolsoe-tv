@@ -1,8 +1,8 @@
 (() => {
 "use strict";
 
-const VERSION="V28000";
-const CSS="/assets/css/site-foundation.css?v=28000";
+const VERSION="V28100";
+const CSS="/assets/css/site-foundation.css?v=28100";
 
 function sectionFromPath(){
   const p=(location.pathname||"/").toLowerCase().replace(/\/+/g,"/");
@@ -104,13 +104,68 @@ function markSections(){
   });
 }
 
+
+function addSocialRail(){
+  if(document.querySelector(".djf-social-rail")) return;
+
+  const rail=document.createElement("aside");
+  rail.className="djf-social-rail";
+  rail.setAttribute("aria-label","DJ FOLSOE Facebook links");
+
+  const links=[
+    {
+      type:"page",
+      href:"https://www.facebook.com/profile.php?id=61550472850742",
+      title:"DJ FOLSOE on Facebook",
+      sub:"Official Facebook page"
+    },
+    {
+      type:"group",
+      href:"https://www.facebook.com/groups/kesseogfolsoe",
+      title:"Kesse & Folsoe",
+      sub:"Facebook community"
+    }
+  ];
+
+  links.forEach(item=>{
+    const a=document.createElement("a");
+    a.className="djf-social-link";
+    a.href=item.href;
+    a.target="_blank";
+    a.rel="noopener";
+    a.dataset.social=item.type;
+    a.setAttribute("aria-label",item.title);
+
+    const icon=document.createElement("span");
+    icon.className="djf-social-icon";
+    icon.setAttribute("aria-hidden","true");
+
+    const copy=document.createElement("span");
+    copy.className="djf-social-copy";
+
+    const strong=document.createElement("strong");
+    strong.textContent=item.title;
+
+    const small=document.createElement("small");
+    small.textContent=item.sub;
+
+    copy.append(strong,small);
+    a.append(icon,copy);
+    rail.append(a);
+  });
+
+  document.body.appendChild(rail);
+}
+
 function boot(){
   const section=sectionFromPath();
   document.documentElement.dataset.djfSection=section;
 
   // Homepage is already the visual master; don't restyle it.
   if(section==="home"){
-    document.documentElement.classList.add("djf-foundation-master");
+    ensureCSS();
+    document.documentElement.classList.add("djf-foundation-master","djf-foundation-loaded");
+    addSocialRail();
     return;
   }
 
@@ -119,6 +174,7 @@ function boot(){
   markHeader();
   markFooter();
   markSections();
+  addSocialRail();
 
   window.DJF_SITE_FOUNDATION={
     version:VERSION,
