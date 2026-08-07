@@ -1,0 +1,257 @@
+/* DJ FOLSOE V26300 — Mobile Broadcast Experience */
+@media (max-width:760px){
+
+  body.v26280-body,
+  body.v26290-body{
+    background:
+      radial-gradient(circle at 20% 0%,rgba(255,43,134,.16),transparent 28%),
+      radial-gradient(circle at 90% 30%,rgba(24,220,255,.10),transparent 32%),
+      #050711 !important;
+  }
+
+  /* compact top identity */
+  .broadcastHeader{
+    margin:10px 10px 0!important;
+    width:calc(100% - 20px)!important;
+    border-radius:16px!important;
+    overflow:hidden!important;
+    background:linear-gradient(145deg,#0d1020,#070913)!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    box-shadow:0 14px 36px rgba(0,0,0,.42)!important;
+  }
+
+  .broadcastIdentity{
+    padding:12px!important;
+    min-height:86px!important;
+  }
+
+  .broadcastAvatar{
+    width:66px!important;
+    height:66px!important;
+    min-width:66px!important;
+    box-shadow:0 0 0 2px #ff2b86,0 0 28px rgba(255,43,134,.55)!important;
+  }
+
+  .broadcastIdentity strong{
+    font-size:clamp(24px,8vw,36px)!important;
+    line-height:.92!important;
+  }
+
+  .broadcastIdentity small{
+    font-size:10px!important;
+    letter-spacing:.12em!important;
+  }
+
+  /* stack on-air + channel status into stronger cards */
+  .broadcastOnAir,
+  .broadcastStatus,
+  .broadcastSupport{
+    margin:0!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+    padding:12px 14px!important;
+    min-height:auto!important;
+  }
+
+  .broadcastOnAir{
+    background:
+      radial-gradient(circle at 0 50%,rgba(255,173,49,.17),transparent 35%),
+      rgba(8,10,20,.96)!important;
+  }
+
+  .broadcastStatus{
+    background:
+      radial-gradient(circle at 0 50%,rgba(255,43,134,.16),transparent 35%),
+      rgba(8,10,20,.96)!important;
+  }
+
+  .broadcastSupport{
+    display:none!important;
+  }
+
+  /* hide desktop nav, use purpose-built mobile nav */
+  .broadcastNav{
+    display:none!important;
+  }
+
+  /* three-item live ribbon directly under header */
+  .v26300MobileRibbon{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:6px;
+    margin:8px 10px 10px;
+  }
+
+  .v26300RibbonItem{
+    min-height:48px;
+    padding:8px 6px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    text-decoration:none;
+    background:linear-gradient(145deg,#101524,#090c16);
+    border:1px solid rgba(255,255,255,.10);
+    color:#fff;
+    font-size:10px;
+    letter-spacing:.06em;
+  }
+
+  .v26300RibbonItem span{
+    color:#18dcff;
+    font-size:14px;
+  }
+
+  .v26300RibbonItem.live span{
+    color:#ff2b86;
+    text-shadow:0 0 12px rgba(255,43,134,.8);
+  }
+
+  /* hero becomes a real mobile TV billboard */
+  .broadcastHero,
+  .v26280Hero{
+    margin:0 10px 10px!important;
+    border-radius:16px!important;
+    overflow:hidden!important;
+    min-height:340px!important;
+    display:grid!important;
+    align-content:end!important;
+    background-position:center!important;
+    box-shadow:0 22px 60px rgba(0,0,0,.50)!important;
+  }
+
+  .broadcastHero::before,
+  .v26280Hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(180deg,rgba(3,5,12,.12),rgba(3,5,12,.90) 76%),
+      linear-gradient(90deg,rgba(255,43,134,.12),transparent 50%);
+    pointer-events:none;
+  }
+
+  .broadcastHeroContent,
+  .v26280HeroContent{
+    position:relative!important;
+    z-index:2!important;
+    padding:18px!important;
+  }
+
+  .broadcastHero h1,
+  .v26280Hero h1{
+    font-size:clamp(42px,14vw,68px)!important;
+    line-height:.82!important;
+    max-width:95%!important;
+    margin:8px 0 10px!important;
+  }
+
+  .broadcastHero p,
+  .v26280Hero p{
+    font-size:14px!important;
+    max-width:90%!important;
+  }
+
+  .broadcastHeroActions,
+  .v26280HeroActions{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+
+  .broadcastHeroActions a,
+  .v26280HeroActions a{
+    min-height:48px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    border-radius:10px!important;
+  }
+
+  /* signal cards become 2-column mobile dashboard */
+  .v26280SignalGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    margin:0 10px 10px!important;
+    gap:8px!important;
+  }
+
+  .v26280SignalCard{
+    min-height:110px!important;
+    padding:13px!important;
+    border-radius:14px!important;
+    background:linear-gradient(145deg,#101423,#090c16)!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+  }
+
+  .v26280SignalCard:nth-child(1){
+    grid-column:span 2!important;
+  }
+
+  .v26280SignalCard strong{
+    font-size:clamp(24px,8vw,34px)!important;
+  }
+
+  /* discovery/cards: image-led, no huge empty regions */
+  .v26280Discovery,
+  .cmsStoryGrid,
+  .seoAuthorityGrid{
+    grid-template-columns:1fr!important;
+    margin-left:10px!important;
+    margin-right:10px!important;
+    gap:8px!important;
+  }
+
+  .cmsFeatureStory{
+    min-height:210px!important;
+    padding:16px!important;
+    border-radius:15px!important;
+  }
+
+  .cmsFeatureStory h2{
+    font-size:clamp(28px,10vw,48px)!important;
+    line-height:.9!important;
+  }
+
+  .seoAuthorityGrid>a{
+    min-height:105px!important;
+    padding:14px!important;
+    border-radius:13px!important;
+    display:flex!important;
+    align-items:end!important;
+  }
+
+  /* about/footer compact */
+  .about,
+  .siteFooter,
+  .broadcastFooter{
+    margin-left:10px!important;
+    margin-right:10px!important;
+  }
+
+  /* bottom nav: compact and part of the page flow */
+  #mobileBroadcastDock,
+  .mobileBroadcastDock{
+    margin:10px!important;
+    width:calc(100% - 20px)!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    background:rgba(8,10,20,.96)!important;
+    border:1px solid rgba(255,255,255,.12)!important;
+    border-top:2px solid #ff2b86!important;
+  }
+
+  #mobileBroadcastDock a,
+  .mobileBroadcastDock a{
+    min-height:56px!important;
+    color:#fff!important;
+  }
+
+  #mobileBroadcastDock a:nth-child(1) b{color:#ff2b86!important}
+  #mobileBroadcastDock a:nth-child(2) b{color:#18dcff!important}
+  #mobileBroadcastDock a:nth-child(3) b{color:#ffad31!important}
+  #mobileBroadcastDock a:nth-child(4) b{color:#8b5cff!important}
+}
+
+@media (min-width:761px){
+  .v26300MobileRibbon{display:none!important}
+}

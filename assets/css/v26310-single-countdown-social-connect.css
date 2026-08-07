@@ -1,0 +1,138 @@
+/* DJ FOLSOE V26310 — Single Countdown + Social Connect */
+.v26310SocialConnect{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+.v26310SocialHead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:10px;
+}
+.v26310SocialHead small{
+  color:#18dcff;
+  font-weight:900;
+  letter-spacing:.14em;
+}
+.v26310SocialHead strong{
+  color:#fff;
+  font-size:.72rem;
+  letter-spacing:.08em;
+  opacity:.72;
+}
+.v26310SocialGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.v26310Social{
+  position:relative;
+  min-width:0;
+  min-height:64px;
+  display:grid;
+  grid-template-columns:40px minmax(0,1fr) 20px;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-radius:11px;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.11);
+  background:linear-gradient(145deg,rgba(18,22,38,.96),rgba(8,10,19,.96));
+  overflow:hidden;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.v26310Social::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:2px;
+  background:currentColor;
+  opacity:.85;
+}
+.v26310Social:hover{
+  transform:translateY(-2px);
+  border-color:currentColor;
+  box-shadow:0 10px 28px rgba(0,0,0,.3);
+}
+.v26310SocialIcon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:rgba(255,255,255,.07);
+  border:1px solid currentColor;
+  font-weight:1000;
+  font-style:normal;
+  font-size:20px;
+}
+.v26310Social span:nth-child(2){
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+.v26310Social small{
+  color:rgba(255,255,255,.58)!important;
+  font-size:9px!important;
+  line-height:1!important;
+  letter-spacing:.11em!important;
+  font-weight:900!important;
+}
+.v26310Social b{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:13px;
+  line-height:1.1;
+  letter-spacing:.025em;
+}
+.v26310Social i{
+  font-style:normal;
+  opacity:.58;
+}
+.v26310Social.twitch{color:#a970ff}
+.v26310Social.instagram{color:#ff4ca0}
+.v26310Social.facebook{color:#37a2ff}
+.v26310Social.tiktok{color:#27f3e5}
+
+/* Explicitly suppress the retired duplicate timer even if old cached HTML appears. */
+.nextCard .v26280HeroCountdown{display:none!important}
+
+/* The one official countdown remains inside the live-channel offline panel. */
+#customOffline .offlineCountdown{
+  display:flex;
+}
+
+@media(max-width:760px){
+  .v26310SocialConnect{
+    margin-top:14px;
+    padding-top:13px;
+  }
+  .v26310SocialHead{
+    align-items:start;
+    flex-direction:column;
+    gap:3px;
+  }
+  .v26310SocialHead strong{font-size:9px}
+  .v26310SocialGrid{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+  .v26310Social{
+    min-height:58px;
+    grid-template-columns:32px minmax(0,1fr);
+    padding:8px;
+    gap:8px;
+  }
+  .v26310SocialIcon{
+    width:32px;height:32px;border-radius:8px;font-size:17px;
+  }
+  .v26310Social i{display:none}
+  .v26310Social b{font-size:11px}
+}
+@media(max-width:390px){
+  .v26310SocialGrid{grid-template-columns:1fr}
+}

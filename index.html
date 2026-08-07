@@ -62,7 +62,7 @@
 <link href="/assets/css/v26210-search-growth.css?v=26210" rel="stylesheet"/>
 <link href="/assets/css/v26220-topical-authority.css?v=26220" rel="stylesheet"/>
 <link href="assets/css/v26230-indexing-conversion.css?v=26230" rel="stylesheet"/><link href="/assets/css/v26240-entity-authority.css?v=26240" rel="stylesheet"/> <link href="/assets/css/v26250-show-archive.css" rel="stylesheet"/>
-<link href="/assets/css/v26270-responsive-homepage.css?v=26270" rel="stylesheet"/><link href="/assets/css/v26280-broadcast-visual-homepage.css?v=26280" rel="stylesheet"/><link href="/assets/css/v26290-ultra-visual-clean-nav.css?v=26290" rel="stylesheet"/><link rel="stylesheet" href="/assets/css/v26291-twitch-profile-image-sync.css?v=26291"><link rel="stylesheet" href="/assets/css/v26292-mobile-safe-layout.css?v=26292"></head>
+<link href="/assets/css/v26270-responsive-homepage.css?v=26270" rel="stylesheet"/><link href="/assets/css/v26280-broadcast-visual-homepage.css?v=26280" rel="stylesheet"/><link href="/assets/css/v26290-ultra-visual-clean-nav.css?v=26290" rel="stylesheet"/><link rel="stylesheet" href="/assets/css/v26291-twitch-profile-image-sync.css?v=26291"><link rel="stylesheet" href="/assets/css/v26292-mobile-safe-layout.css?v=26292"><link rel="stylesheet" href="/assets/css/v26300-mobile-broadcast-experience.css?v=26300"><link rel="stylesheet" href="/assets/css/v26310-single-countdown-social-connect.css?v=26310"></head>
 <body class="v26280-body v26290-body" data-broadcast-state="offline" data-show-theme="morning">
 <header class="broadcastHeader v26270Header" id="top">
 <a aria-label="DJ FOLSOE home" class="broadcastBrand" href="#top">
@@ -87,6 +87,12 @@
 <a href="#live">LIVE</a><a href="/shows/">SHOWS</a><a href="/music/">MUSIC</a><a href="/guides/">GUIDES</a><a href="#editorial">FEATURE</a><a href="#charts">TOP 20</a><a href="/community/">COMMUNITY</a><a href="https://twitch.tv/djfolsoe" rel="noopener" target="_blank">TWITCH ↗</a>
 </nav>
 </header>
+
+<section class="v26300MobileRibbon" aria-label="Live channel summary">
+  <a href="#live" class="v26300RibbonItem live"><span>●</span><b id="v26300RibbonLive">LIVE</b></a>
+  <a href="/shows/" class="v26300RibbonItem"><span>◷</span><b id="v26300RibbonShow">NEXT SHOW</b></a>
+  <a href="/commands/" class="v26300RibbonItem"><span>♫</span><b>REQUEST</b></a>
+</section>
 <main class="broadcastPage v26270Homepage">
 <section class="hero broadcastHero cmsModule v26280Hero" data-cms-module="hero" data-cms-order="10" id="hero">
 <div class="heroGrid">
@@ -104,7 +110,34 @@
 <strong id="offlineNextTitle">SCHEDULE LOADING</strong>
 <span id="offlineNextDate">Reading the official Twitch schedule…</span>
 <div class="heroStatusNumbers"><article><b id="heroViewers">0</b><small>VIEWERS</small></article></div>
-<p>TWITCH.TV/DJFOLSOE · FOLSOETV.DK</p><div aria-label="Countdown to next show" class="v26280HeroCountdown"><span><b id="v26280Days">00</b><small>DAYS</small></span><span><b id="v26280Hours">00</b><small>HOURS</small></span><span><b id="v26280Minutes">00</b><small>MIN</small></span><span><b id="v26280Seconds">00</b><small>SEC</small></span></div>
+<p>TWITCH.TV/DJFOLSOE · FOLSOETV.DK</p><div class="v26310SocialConnect" aria-label="Follow DJ FOLSOE on social media">
+  <div class="v26310SocialHead">
+    <small>CONNECT WITH DJ FOLSOE</small>
+    <strong>FOLLOW · WATCH · JOIN IN</strong>
+  </div>
+  <div class="v26310SocialGrid">
+    <a class="v26310Social twitch" href="https://www.twitch.tv/djfolsoe" target="_blank" rel="noopener">
+      <span class="v26310SocialIcon" aria-hidden="true">◧</span>
+      <span><small>TWITCH</small><b>DJFOLSOE</b></span>
+      <i aria-hidden="true">↗</i>
+    </a>
+    <a class="v26310Social instagram" href="https://www.instagram.com/folsoesune/" target="_blank" rel="noopener">
+      <span class="v26310SocialIcon" aria-hidden="true">◎</span>
+      <span><small>INSTAGRAM</small><b>@FOLSOESUNE</b></span>
+      <i aria-hidden="true">↗</i>
+    </a>
+    <a class="v26310Social facebook" href="https://www.facebook.com/sune.folsoe" target="_blank" rel="noopener">
+      <span class="v26310SocialIcon" aria-hidden="true">f</span>
+      <span><small>FACEBOOK</small><b>SUNE.FOLSOE</b></span>
+      <i aria-hidden="true">↗</i>
+    </a>
+    <a class="v26310Social tiktok" href="https://www.tiktok.com/@folsoesune" target="_blank" rel="noopener">
+      <span class="v26310SocialIcon" aria-hidden="true">♪</span>
+      <span><small>TIKTOK</small><b>@FOLSOESUNE</b></span>
+      <i aria-hidden="true">↗</i>
+    </a>
+  </div>
+</div>
 </aside>
 </div>
 </section><section aria-label="Channel snapshot" class="v26280SignalRail"><article class="v26280SignalCard amber"><span class="v26280SignalIcon">☀</span><div><small>NEXT SHOW</small><strong id="v26280NextCompact">CHECKING</strong><p>Official Twitch schedule</p></div></article><article class="v26280SignalCard pink"><span class="v26280SignalIcon">●</span><div><small>VIEWERS</small><strong id="v26280Viewers">CHECKING</strong><p>Live channel audience</p></div></article><article class="v26280SignalCard magenta"><span class="v26280SignalIcon">♥</span><div><small>FOLLOWERS</small><strong id="v26280Followers">CHECKING</strong><p>Twitch community</p></div></article><article class="v26280SignalCard purple"><span class="v26280SignalIcon">♫</span><div><small>REQUESTS</small><strong id="v26280Requests">CHECKING</strong><p>!request Artist - Title</p></div></article><article class="v26280SignalCard cyan"><span class="v26280SignalIcon">◆</span><div><small>ACTIVE THEME</small><strong id="v26280Theme">CHECKING</strong><p>Broadcast visual identity</p></div></article></section>
@@ -223,5 +256,5 @@
 
 
 <script src="assets/js/v26230-search-conversion.js?v=26230"></script>
-<script defer="True" src="/assets/js/v26270-layout-guard.js?v=26270"></script><script defer="True" src="/assets/js/v26280-broadcast-visual-homepage.js?v=26280"></script><script defer src="/assets/js/v26291-twitch-profile-image-sync.js?v=26291"></script><script defer src="/assets/js/v26292-mobile-safe-layout.js?v=26292"></script></body>
+<script defer="True" src="/assets/js/v26270-layout-guard.js?v=26270"></script><script defer="True" src="/assets/js/v26280-broadcast-visual-homepage.js?v=26280"></script><script defer src="/assets/js/v26291-twitch-profile-image-sync.js?v=26291"></script><script defer src="/assets/js/v26292-mobile-safe-layout.js?v=26292"></script><script defer src="/assets/js/v26300-mobile-broadcast-experience.js?v=26300"></script><script defer src="/assets/js/v26310-social-connect.js?v=26310"></script></body>
 </html>
