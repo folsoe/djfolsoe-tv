@@ -1,0 +1,17 @@
+{
+  "siteUrl": "https://folsoetv.dk",
+  "siteName": "FOLSOE TV",
+  "author": {
+    "name": "DJ FOLSOE",
+    "url": "https://folsoetv.dk/about-dj-folsoe/",
+    "id": "https://folsoetv.dk/#djfolsoe"
+  },
+  "allowedShows": [
+    "good-morning-twitch",
+    "trance-tuesday",
+    "eurodance",
+    "retro-hits",
+    "fredagsbar"
+  ],
+  "requireApproval": true
+}

@@ -1,0 +1,44 @@
+{
+  "status": "draft",
+  "type": "show-recap",
+  "slug": "replace-with-real-date-and-title",
+  "title": "Replace with verified show title",
+  "description": "Replace with a factual summary of the completed broadcast.",
+  "published": "2026-08-07",
+  "updated": "2026-08-07",
+  "show": "retro-hits",
+  "showName": "Retro Hits",
+  "language": "en",
+  "heroLabel": "Show recap",
+  "intro": "Write a short factual introduction based on the completed broadcast.",
+  "sections": [
+    {
+      "heading": "What happened in the show",
+      "paragraphs": [
+        "Add verified highlights from the broadcast."
+      ]
+    },
+    {
+      "heading": "Music direction",
+      "paragraphs": [
+        "Describe genres or eras played without inventing a full playlist."
+      ]
+    },
+    {
+      "heading": "Community moments",
+      "paragraphs": [
+        "Add verified requests, themes or notable moments."
+      ]
+    }
+  ],
+  "related": [
+    {
+      "label": "Explore Retro Hits",
+      "url": "/shows/retro-hits/"
+    },
+    {
+      "label": "Watch DJ FOLSOE live",
+      "url": "/watch-live/"
+    }
+  ]
+}
