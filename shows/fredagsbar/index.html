@@ -25,9 +25,12 @@
   <link rel="stylesheet" href="/assets/css/broadcast-premiere.css">
 
   <!-- Fredagsbar page-only layer -->
-  <link rel="stylesheet" href="/assets/css/fredagsbar-show.css?v=21000">
+  <link rel="stylesheet" href="/assets/css/fredagsbar-show.css?v=21100">
 </head>
 <body class="fredagsbarPage">
+  <div class="fbBroadcastNoise" aria-hidden="true"></div>
+  <div class="fbEdgeRail fbEdgeRailLeft" aria-hidden="true"><span>FREDAGSBAR</span><span>LIVE</span><span>DENMARK</span></div>
+  <div class="fbEdgeRail fbEdgeRailRight" aria-hidden="true"><span>LAST FRIDAY</span><span>19:00</span><span>UNTIL COLD</span></div>
 
   <header class="fbTop">
     <a class="fbBrand" href="/">
@@ -41,6 +44,27 @@
       <a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">TWITCH ↗</a>
     </nav>
   </header>
+
+  <div class="fbOnAirStrip" aria-label="Fredagsbar broadcast status">
+    <div class="fbOnAirStripInner">
+      <span class="fbLiveLamp">LIVE FORMAT</span>
+      <div class="fbMarquee"><div>
+        LAST FRIDAY OF EVERY MONTH&nbsp;&nbsp;•&nbsp;&nbsp;
+        19:00 COPENHAGEN TIME&nbsp;&nbsp;•&nbsp;&nbsp;
+        MUSIC REQUESTS&nbsp;&nbsp;•&nbsp;&nbsp;
+        TWITCH CHAT&nbsp;&nbsp;•&nbsp;&nbsp;
+        CONTROLLED DANISH CHAOS&nbsp;&nbsp;•&nbsp;&nbsp;
+        UNTIL WE GO COLD&nbsp;&nbsp;•&nbsp;&nbsp;
+        LAST FRIDAY OF EVERY MONTH&nbsp;&nbsp;•&nbsp;&nbsp;
+        19:00 COPENHAGEN TIME&nbsp;&nbsp;•&nbsp;&nbsp;
+        MUSIC REQUESTS&nbsp;&nbsp;•&nbsp;&nbsp;
+        TWITCH CHAT&nbsp;&nbsp;•&nbsp;&nbsp;
+        CONTROLLED DANISH CHAOS&nbsp;&nbsp;•&nbsp;&nbsp;
+        UNTIL WE GO COLD
+      </div></div>
+      <span class="fbSignalCode">FRI/19:00/DK</span>
+    </div>
+  </div>
 
   <main>
     <section class="fbHero">
@@ -59,6 +83,27 @@
           <span><b>19:00</b> COPENHAGEN</span>
           <span><b>♫</b> REQUESTS</span>
           <span><b>∞</b> UNTIL WE GO COLD</span>
+        </div>
+
+
+        <div class="fbTransmissionDeck" aria-hidden="true">
+          <div class="fbDeckLeft">
+            <span class="fbDeckLabel">MONTHLY SIGNAL</span>
+            <strong>FRIDAY<br>19:00</strong>
+            <small>COPENHAGEN</small>
+          </div>
+          <div class="fbDeckCenter">
+            <div class="fbWave">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <span>TRANSMISSION ACTIVE ON THE LAST FRIDAY OF THE MONTH</span>
+          </div>
+          <div class="fbDeckRight">
+            <b>∞</b>
+            <span>END TIME</span>
+            <strong>WHEN<br>WE GO COLD</strong>
+          </div>
         </div>
 
         <div class="fbActions">
@@ -187,6 +232,13 @@
       <p>We have not reached a final conclusion.</p>
     </section>
 
+    <section class="fbChaosBreak" aria-label="Fredagsbar transmission separator">
+      <div class="fbChaosWord">FREDAGSBAR</div>
+      <div class="fbChaosMeta">
+        <span>LAST FRIDAY</span><span>19:00</span><span>TWITCH</span><span>DENMARK</span><span>UNTIL COLD</span>
+      </div>
+    </section>
+
     <section class="fbSchedule">
       <div>
         <p class="fbKicker">THE OFFICIAL ARRANGEMENT</p>
@@ -215,6 +267,10 @@
       <small>Come for the music. Stay because somebody in chat has started something.</small>
     </section>
   </main>
+
+  <div class="fbBottomTicker" aria-hidden="true">
+    <div>ONE MORE SONG · ONE MORE SONG · ONE MORE SONG · THIS IS HOW IT HAPPENS · ONE MORE SONG · ONE MORE SONG · ONE MORE SONG · THIS IS HOW IT HAPPENS ·</div>
+  </div>
 
   <footer class="fbFooter">
     <span>© DJ FOLSOE · LIVE MUSIC TELEVISION FROM DENMARK</span>
