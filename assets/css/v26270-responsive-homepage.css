@@ -1,0 +1,130 @@
+/* DJ FOLSOE V26270 — Responsive Homepage Consolidation
+   Final homepage layout layer. Intentionally loaded last. */
+:root{--v26270-max:1500px;--v26270-pad:clamp(14px,2.3vw,34px);--v26270-gap:clamp(12px,1.7vw,24px);--v26270-radius:clamp(14px,1.5vw,22px)}
+html{overflow-x:hidden}
+body{overflow-x:hidden}
+.broadcastPage.v26270Homepage{width:min(var(--v26270-max),calc(100% - (var(--v26270-pad) * 2)));margin:0 auto;padding:clamp(18px,2.4vw,34px) 0 clamp(48px,6vw,92px)}
+.broadcastPage.v26270Homepage>.cmsModule,.broadcastPage.v26270Homepage>#discover,.broadcastPage.v26270Homepage>#about{margin-left:0!important;margin-right:0!important;width:100%!important;max-width:none!important}
+.broadcastPage.v26270Homepage>*+*{margin-top:clamp(18px,2.5vw,36px)!important}
+
+/* HEADER: four clear broadcast cells + one nav rail. */
+.broadcastHeader.v26270Header{width:min(var(--v26270-max),calc(100% - (var(--v26270-pad) * 2)));margin:16px auto 0;display:grid!important;grid-template-columns:1.1fr 1.55fr 1.28fr 1.06fr;grid-template-areas:"brand show signal support" "nav nav nav nav";align-items:stretch;min-height:0!important;height:auto!important;border-radius:22px;overflow:hidden}
+.v26270Header .broadcastBrand{grid-area:brand}.v26270Header .broadcastShow{grid-area:show}.v26270Header .broadcastSignal{grid-area:signal}.v26270Header .broadcastSupport{grid-area:support}.v26270Header .broadcastNav{grid-area:nav}
+.v26270Header .broadcastBrand,.v26270Header .broadcastShow,.v26270Header .broadcastSignal,.v26270Header .broadcastSupport{min-width:0;padding:clamp(14px,1.55vw,24px)!important}
+.v26270Header .broadcastBrandCopy,.v26270Header .broadcastShowCopy,.v26270Header .broadcastSignal>span:last-child,.v26270Header .broadcastSupport>span:last-child{min-width:0}
+.v26270Header strong,.v26270Header b{overflow:hidden;text-overflow:ellipsis}
+.v26270Header .broadcastShowCopy strong,.v26270Header .broadcastSignal strong{white-space:nowrap}
+.v26270Header .broadcastShowCopy b,.v26270Header .broadcastSignal b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v26270Header .broadcastNav{min-height:52px!important;height:auto!important;padding:0 clamp(16px,2vw,30px)!important;display:flex!important;justify-content:center;gap:clamp(12px,2.5vw,34px)!important;flex-wrap:nowrap}
+.v26270Header .broadcastNav a{white-space:nowrap}
+
+/* HERO: remove oversized empty broadcast canvas and keep information above the fold. */
+.v26270Homepage .broadcastHero{min-height:0!important;height:auto!important;padding:clamp(28px,5vw,72px)!important;border-radius:var(--v26270-radius);overflow:hidden}
+.v26270Homepage .heroGrid{min-height:clamp(390px,48vw,620px)!important;display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr)!important;align-items:center!important;gap:clamp(24px,5vw,80px)!important}
+.v26270Homepage .heroCopy{min-width:0}
+.v26270Homepage .heroCopy h1{font-size:clamp(4rem,8vw,9rem)!important;line-height:.82!important;margin:.12em 0 .18em!important}
+.v26270Homepage .nextCard{width:100%!important;max-width:520px!important;justify-self:end;align-self:center!important;min-height:0!important}
+
+/* Core live stage does not grow beyond the video/chat content. */
+.v26270Homepage .liveSection{padding:clamp(18px,2vw,30px)!important;border-radius:var(--v26270-radius)}
+.v26270Homepage .liveStage{display:grid!important;grid-template-columns:minmax(0,1.7fr) minmax(300px,.7fr)!important;gap:var(--v26270-gap)!important;align-items:stretch}
+.v26270Homepage .playerCard,.v26270Homepage .chatCard{min-width:0}
+.v26270Homepage .playerFrame{aspect-ratio:16/9;min-height:0!important;height:auto!important}
+
+/* Broadcast status information becomes one compact rail. */
+.v26270Homepage .webBroadcastDock{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:1px!important;border-radius:var(--v26270-radius);overflow:hidden;padding:0!important}
+.v26270Homepage .webDockPanel{min-width:0;min-height:116px!important;padding:18px!important}
+.v26270Homepage .webDockPanel strong,.v26270Homepage .webDockPanel span{overflow:hidden;text-overflow:ellipsis}
+.v26270Homepage .webSocialRail{grid-column:1/-1!important;min-height:54px!important;display:flex!important;align-items:center!important;justify-content:space-around!important;gap:10px!important;padding:8px 18px!important}
+
+/* Reminder + share: one deck instead of two floating full-width strips. */
+.broadcastUtilityDeck{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:var(--v26270-gap);padding:0!important;background:none!important;border:0!important}
+.broadcastUtilityDeck>.broadcastReminderBar,.broadcastUtilityDeck>.broadcastShareBar{margin:0!important;width:100%!important;max-width:none!important;min-width:0;min-height:138px!important;height:auto!important;border-radius:var(--v26270-radius)!important;padding:20px!important;display:grid!important;align-content:center!important;gap:14px!important;overflow:hidden}
+.broadcastUtilityDeck .broadcastReminderCopy{min-width:0}
+.broadcastUtilityDeck .broadcastReminderCopy strong,.broadcastUtilityDeck .broadcastReminderCopy b{white-space:normal!important;overflow-wrap:anywhere}
+.broadcastUtilityDeck .broadcastReminderActions{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+.broadcastUtilityDeck .broadcastShareBar>div{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+.broadcastUtilityDeck output:empty{display:none!important}
+
+/* Content modules share one visual rhythm. */
+.v26270Homepage .shows,.v26270Homepage .cmsStoryGrid,.v26270Homepage .cmsChartSection,.v26270Homepage .communityCommandCenter,.v26270Homepage .liveCommunityPulse,.v26270Homepage .seoAuthorityHub,.v26270Homepage .about{padding:clamp(22px,3.2vw,48px)!important;border-radius:var(--v26270-radius)!important;overflow:hidden}
+.v26270Homepage .sectionHead{margin-bottom:clamp(16px,2vw,28px)!important}
+.v26270Homepage .showGrid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))!important;gap:12px!important}
+
+/* Discovery now owns music, guides and archive. No loose duplicate SEO panels. */
+.v26270Homepage #discover{display:grid;gap:clamp(22px,3vw,42px)}
+.v26270Homepage #discover .seoAuthorityGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.v26270Homepage #discover .seoContextCopy{padding-top:0!important;max-width:950px}
+.v26270Homepage #discover .topicPath{max-width:none!important;width:100%!important;margin:0!important;padding:clamp(20px,2.8vw,36px)!important;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(0,0,0,.16)}
+.v26270Homepage #discover .topicPath h2{margin:.3em 0 .7em!important}
+.v26270Homepage #discover .topicPathGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.v26270Homepage #discover .archive-shell{max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+.v26270Homepage #discover .archive-hero{padding:clamp(20px,2.8vw,36px)!important;border-radius:18px!important}
+.v26270Homepage #discover .archive-hero h2{font-size:clamp(1.8rem,3.4vw,3.4rem);line-height:1;margin:.25em 0}
+
+/* One — and only one — official entity block. */
+.v26270Homepage .entityBandSingle{max-width:none!important;width:100%!important;margin:clamp(24px,3vw,40px) 0 0!important;padding:0!important}
+.v26270Homepage .entityBandSingle .entityPanel{grid-template-columns:minmax(0,1.3fr) minmax(240px,.7fr)!important;border-radius:18px;padding:clamp(20px,2.8vw,34px)!important}
+
+/* Footer no longer carries a second entity panel. */
+.v26270Footer{width:min(var(--v26270-max),calc(100% - (var(--v26270-pad) * 2)));margin:0 auto clamp(18px,2vw,30px)!important;border-radius:18px;min-height:0!important;padding:22px clamp(18px,3vw,38px)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px;flex-wrap:wrap}
+
+/* Tablet: 2x2 header, single-column live, balanced grids. */
+@media (max-width:1180px){
+ .broadcastHeader.v26270Header{grid-template-columns:1fr 1fr;grid-template-areas:"brand show" "signal support" "nav nav"}
+ .v26270Homepage .heroGrid{grid-template-columns:1fr minmax(270px,.65fr)!important;min-height:440px!important}
+ .v26270Homepage .liveStage{grid-template-columns:1fr!important}
+ .v26270Homepage .chatCard{min-height:420px!important}
+ .v26270Homepage .webBroadcastDock{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .broadcastUtilityDeck{grid-template-columns:1fr}
+ .v26270Homepage #discover .seoAuthorityGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Phone + narrow tablets: one clean broadcast column. */
+@media (max-width:760px){
+ :root{--v26270-pad:12px;--v26270-gap:12px}
+ .broadcastHeader.v26270Header{margin-top:10px;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"brand toggle" "show show" "signal support";border-radius:16px;overflow:visible}
+ .v26270Header .mobileNavToggle{grid-area:toggle!important;display:flex!important;align-self:center;justify-self:end;margin-right:10px}
+ .v26270Header .broadcastNav{display:none!important}
+ .v26270Header .broadcastBrand{padding:12px!important}
+ .v26270Header .broadcastShow{padding:12px 14px!important}
+ .v26270Header .broadcastSignal,.v26270Header .broadcastSupport{padding:12px!important;min-height:82px}
+ .v26270Header .broadcastShowCopy strong{font-size:clamp(1.1rem,6vw,1.55rem)!important}
+ .v26270Header .broadcastSignal strong,.v26270Header .broadcastSupport strong{font-size:.9rem!important;white-space:normal!important}
+ .v26270Header .broadcastSupport b{font-size:1.45rem!important}
+ .v26270Header .mobileBroadcastNav{left:0!important;right:0!important;top:100%!important;width:100%!important;max-height:70vh;overflow:auto}
+ .broadcastPage.v26270Homepage{padding-top:14px}
+ .v26270Homepage .broadcastHero{padding:24px 18px!important}
+ .v26270Homepage .heroGrid{grid-template-columns:1fr!important;min-height:0!important;gap:22px!important}
+ .v26270Homepage .heroCopy h1{font-size:clamp(3.8rem,20vw,6.6rem)!important}
+ .v26270Homepage .nextCard{justify-self:stretch;max-width:none!important}
+ .v26270Homepage .liveSection{padding:14px!important}
+ .v26270Homepage .playerFrame{aspect-ratio:16/9!important}
+ .v26270Homepage .chatCard{min-height:360px!important}
+ .v26270Homepage .webBroadcastDock{grid-template-columns:1fr!important}
+ .v26270Homepage .webDockPanel{min-height:90px!important}
+ .v26270Homepage .webSocialRail{grid-column:auto!important;flex-wrap:wrap!important;justify-content:flex-start!important}
+ .broadcastUtilityDeck>.broadcastReminderBar,.broadcastUtilityDeck>.broadcastShareBar{padding:16px!important;min-height:0!important}
+ .broadcastUtilityDeck .broadcastReminderActions,.broadcastUtilityDeck .broadcastShareBar>div{display:grid!important;grid-template-columns:1fr!important;width:100%}
+ .broadcastUtilityDeck button,.broadcastUtilityDeck a{width:100%;text-align:center}
+ .v26270Homepage .shows,.v26270Homepage .cmsStoryGrid,.v26270Homepage .cmsChartSection,.v26270Homepage .communityCommandCenter,.v26270Homepage .liveCommunityPulse,.v26270Homepage .seoAuthorityHub,.v26270Homepage .about{padding:18px 14px!important}
+ .v26270Homepage #discover .seoAuthorityGrid,.v26270Homepage #discover .topicPathGrid{grid-template-columns:1fr!important}
+ .v26270Homepage .entityBandSingle .entityPanel{grid-template-columns:1fr!important}
+ .v26270Footer{display:grid!important;text-align:center;justify-items:center}
+}
+
+/* Very small phones. */
+@media (max-width:430px){
+ .broadcastHeader.v26270Header{grid-template-areas:"brand toggle" "show show" "signal signal" "support support"}
+ .v26270Header .broadcastSignal,.v26270Header .broadcastSupport{min-height:68px}
+ .v26270Homepage .heroCopy h1{font-size:clamp(3.25rem,19vw,5rem)!important}
+ .v26270Homepage .heroActions{display:grid!important}
+ .v26270Homepage .heroActions a{width:100%;text-align:center}
+ .v26270Homepage .sectionHead{align-items:flex-start!important;gap:10px;flex-direction:column!important}
+}
+
+/* Large 4K / ultrawide: don't stretch cards into empty wallpaper. */
+@media (min-width:1800px){
+ :root{--v26270-max:1640px}
+ .v26270Homepage .heroGrid{min-height:600px!important}
+}
