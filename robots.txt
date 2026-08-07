@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /tools/
 
-Sitemap: https://folsoetv.dk/sitemap.xml
+Sitemap: https://www.folsoetv.dk/sitemap.xml
