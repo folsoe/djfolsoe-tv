@@ -1,10 +1,10 @@
 {
-  "siteUrl": "https://www.folsoetv.dk",
+  "siteUrl": "https://folsoetv.dk",
   "siteName": "FOLSOE TV",
   "author": {
     "name": "DJ FOLSOE",
-    "url": "https://www.folsoetv.dk/about-dj-folsoe/",
-    "id": "https://www.folsoetv.dk/#djfolsoe"
+    "url": "https://folsoetv.dk/about-dj-folsoe/",
+    "id": "https://folsoetv.dk/#djfolsoe"
   },
   "allowedShows": [
     "good-morning-twitch",

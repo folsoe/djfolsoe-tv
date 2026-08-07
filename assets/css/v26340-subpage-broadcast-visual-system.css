@@ -1,0 +1,228 @@
+/* DJ FOLSOE V26340 — SUBPAGE BROADCAST VISUAL SYSTEM */
+:root{
+  --djf-bg:#050711;
+  --djf-panel:#0b0f1a;
+  --djf-panel2:#101626;
+  --djf-text:#f7f7fb;
+  --djf-muted:#9ea8bd;
+  --djf-pink:#ff2b86;
+  --djf-cyan:#18dcff;
+  --djf-orange:#ffad31;
+  --djf-violet:#8b5cff;
+  --djf-green:#38f7a0;
+  --djf-border:rgba(255,255,255,.10);
+}
+html{background:var(--djf-bg)}
+body{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,43,134,.16),transparent 24%),
+    radial-gradient(circle at 88% 18%,rgba(24,220,255,.10),transparent 24%),
+    linear-gradient(180deg,#080a13 0%,#050711 100%)!important;
+  color:var(--djf-text)!important;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background:
+    linear-gradient(90deg,transparent 0 49.8%,rgba(255,255,255,.025) 50%,transparent 50.2%),
+    linear-gradient(0deg,transparent 0 49.8%,rgba(255,255,255,.02) 50%,transparent 50.2%);
+  background-size:48px 48px;
+  opacity:.28;
+}
+body > header,
+body > nav,
+.siteHeader,.broadcastHeader,.top,.pageHeader{
+  backdrop-filter:blur(18px);
+}
+main{
+  width:min(1500px,calc(100% - 28px))!important;
+  margin-inline:auto!important;
+}
+.v26340SubHero{
+  position:relative;
+  overflow:hidden;
+  margin:16px auto 18px;
+  min-height:280px;
+  padding:26px;
+  border-radius:22px;
+  border:1px solid var(--djf-border);
+  background:
+    linear-gradient(110deg,rgba(7,9,18,.96),rgba(7,9,18,.72) 45%,rgba(7,9,18,.25)),
+    var(--v26340-bg,linear-gradient(135deg,#17182a,#0a0d17));
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 22px 70px rgba(0,0,0,.45);
+  display:grid;
+  align-content:end;
+}
+.v26340SubHero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 35%,color-mix(in srgb,var(--v26340-accent,#ff2b86) 24%,transparent),transparent 28%),
+    linear-gradient(135deg,transparent 55%,rgba(24,220,255,.08));
+  pointer-events:none;
+}
+.v26340SubHero:after{
+  content:"DJ FOLSOE TV";
+  position:absolute;
+  top:18px;right:18px;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(5,7,17,.52);
+  color:rgba(255,255,255,.74);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.16em;
+}
+.v26340HeroInner{position:relative;z-index:2;max-width:920px}
+.v26340Kicker{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--v26340-accent,#18dcff);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.v26340Kicker:before{
+  content:"";
+  width:28px;height:2px;
+  background:currentColor;
+  box-shadow:0 0 12px currentColor;
+}
+.v26340SubHero h1{
+  margin:10px 0 10px!important;
+  font-size:clamp(42px,7vw,92px)!important;
+  line-height:.84!important;
+  letter-spacing:-.035em!important;
+  color:#fff!important;
+  text-transform:uppercase;
+}
+.v26340SubHero p{
+  max-width:760px;
+  margin:0!important;
+  color:#c0c8d7!important;
+  font-size:clamp(15px,1.6vw,20px)!important;
+  line-height:1.45!important;
+}
+.v26340HeroActions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+.v26340HeroActions a{
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 15px;
+  border-radius:10px;
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:.04em;
+  text-decoration:none;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(8,11,20,.72);
+}
+.v26340HeroActions a:first-child{
+  background:linear-gradient(90deg,var(--v26340-accent,#ff2b86),var(--djf-orange));
+  color:#080a10;
+  border-color:transparent;
+}
+.v26340BroadcastRail{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  margin:0 auto 18px;
+}
+.v26340BroadcastRail a{
+  min-width:0;
+  min-height:82px;
+  padding:12px 14px;
+  border-radius:14px;
+  display:grid;
+  align-content:center;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(145deg,#101525,#080b14);
+  border:1px solid var(--djf-border);
+  position:relative;
+  overflow:hidden;
+}
+.v26340BroadcastRail a:after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--v26340-accent,#ff2b86),transparent);
+}
+.v26340BroadcastRail small{
+  color:var(--djf-muted);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+}
+.v26340BroadcastRail strong{
+  font-size:14px;
+  margin-top:4px;
+}
+.v26340BroadcastRail a:hover{transform:translateY(-2px);transition:.18s ease;border-color:rgba(255,255,255,.25)}
+section,article,.card,.panel,.guide-card,.show-card,.music-card,.archive-card{
+  border-color:var(--djf-border)!important;
+}
+main section:not(.v26340SubHero):not(.v26340BroadcastRail),
+main article,
+main .card,
+main .panel{
+  border-radius:16px!important;
+}
+main img{
+  border-radius:14px;
+}
+main a{transition:.18s ease}
+main a:hover{filter:brightness(1.08)}
+.v26340EnhanceGrid{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important;
+  gap:10px!important;
+}
+.v26340EnhanceGrid > *{
+  min-width:0!important;
+  overflow:hidden!important;
+}
+.v26340EnhanceGrid > *:hover{
+  transform:translateY(-3px);
+  transition:.18s ease;
+}
+footer,.siteFooter,.footer{
+  border-top:1px solid var(--djf-border)!important;
+  background:linear-gradient(180deg,rgba(10,13,23,.4),rgba(4,6,12,.95))!important;
+}
+@media(max-width:900px){
+  .v26340BroadcastRail{grid-template-columns:repeat(2,1fr)}
+  .v26340SubHero{min-height:230px;padding:20px}
+}
+@media(max-width:600px){
+  main{width:min(100% - 20px,1500px)!important}
+  .v26340SubHero{
+    margin-top:10px;
+    min-height:200px;
+    padding:16px;
+    border-radius:16px;
+  }
+  .v26340SubHero:after{display:none}
+  .v26340SubHero h1{font-size:clamp(38px,13vw,58px)!important}
+  .v26340SubHero p{font-size:14px!important}
+  .v26340HeroActions{display:grid;grid-template-columns:1fr 1fr}
+  .v26340HeroActions a{padding:9px 8px;font-size:10px}
+  .v26340BroadcastRail{grid-template-columns:repeat(2,1fr);gap:6px}
+  .v26340BroadcastRail a{min-height:70px;padding:10px}
+  .v26340EnhanceGrid{grid-template-columns:1fr!important}
+}
