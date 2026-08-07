@@ -1,0 +1,35 @@
+/* DJ FOLSOE V26291 — Twitch Profile Image Sync */
+#siteProfileImage{
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden!important;
+  border-radius:50%!important;
+}
+#siteProfileImagePhoto{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  opacity:0;
+  transition:opacity .25s ease;
+  z-index:2;
+}
+#siteProfileImage.profile-ready #siteProfileImagePhoto{
+  opacity:1;
+}
+#siteProfileImage #siteProfileFallback,
+#siteProfileImage > b{
+  position:relative;
+  z-index:1;
+}
+#siteProfileImage.profile-ready #siteProfileFallback,
+#siteProfileImage.profile-ready > b{
+  opacity:0!important;
+}
+#siteProfileImage.profile-error #siteProfileImagePhoto{
+  display:none;
+}
