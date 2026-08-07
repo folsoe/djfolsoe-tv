@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://folsoetv.dk/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://folsoetv.dk/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://folsoetv.dk/shows/good-morning-twitch/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://folsoetv.dk/shows/trance-tuesday/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://folsoetv.dk/shows/eurodance/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://folsoetv.dk/shows/retro-hits/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://folsoetv.dk/shows/fredagsbar/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

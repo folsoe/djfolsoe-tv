@@ -1,0 +1,8 @@
+{
+  "name": "FOLSOE TV",
+  "short_name": "FOLSOE TV",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a12",
+  "theme_color": "#080b16"
+}
