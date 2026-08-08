@@ -1,0 +1,33 @@
+{
+  "version": "V28300",
+  "name": "Google Discovery & Structured SEO Engine",
+  "built": "2026-08-08",
+  "base": "V28200 UNIFIED MASTER",
+  "changes": [
+    "index.html",
+    "music/index.html",
+    "robots.txt",
+    "shows/index.html",
+    "shows/nu-disco/index.html",
+    "shows/pop-up/index.html",
+    "shows/weekend/index.html",
+    "sitemap.xml"
+  ],
+  "show_urls": [
+    "https://folsoetv.dk/shows/good-morning-twitch/",
+    "https://folsoetv.dk/shows/trance-tuesday/",
+    "https://folsoetv.dk/shows/eurodance/",
+    "https://folsoetv.dk/shows/fredagsbar/",
+    "https://folsoetv.dk/shows/retro-hits/",
+    "https://folsoetv.dk/shows/pop-up/",
+    "https://folsoetv.dk/shows/weekend/",
+    "https://folsoetv.dk/shows/nu-disco/"
+  ],
+  "notes": [
+    "No visual CSS or layout changed.",
+    "New show pages are included in sitemap.xml.",
+    "POP UP, WEEKEND and NU DISCO received complete search/social/schema metadata.",
+    "Shows and Music hubs received ItemList structured data.",
+    "Utility overlay/admin paths are blocked from crawling."
+  ]
+}

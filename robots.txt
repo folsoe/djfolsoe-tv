@@ -2,5 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /tools/
+Disallow: /overlay/
+Disallow: /overlay-client/
+Disallow: /streamelements-v170.3-overlay/
 
 Sitemap: https://folsoetv.dk/sitemap.xml
