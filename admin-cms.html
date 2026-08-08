@@ -3,844 +3,986 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DJ FOLSOE — Unified Admin CMS V26431</title>
-  <link rel="stylesheet" href="assets/css/admin.css">
-<style>
-.top20Editor{display:grid;gap:8px;max-height:560px;overflow:auto;padding-right:4px}.top20Row{display:grid;grid-template-columns:44px 1fr 1fr .75fr;gap:8px;align-items:center}.top20Row b{color:#fff;opacity:.9}.wideCard{grid-column:span 2}@media(max-width:900px){.wideCard{grid-column:span 1}.top20Row{grid-template-columns:38px 1fr}.top20Row input{min-width:0}}
-</style>  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=19100">
-  <link rel="stylesheet" href="assets/css/graphics-studio.css?v=19200">
-  <link rel="stylesheet" href="assets/css/ai-music-director.css?v=19300">
-  <link rel="stylesheet" href="assets/css/interactive-broadcast.css?v=19400">
-  <link rel="stylesheet" href="assets/css/music-chart-tv.css?v=19500">
-  <link rel="stylesheet" href="assets/css/serato-bridge.css?v=19600">
-  <link rel="stylesheet" href="assets/css/audience-identity.css?v=19700">
-  <link rel="stylesheet" href="assets/css/website-cms.css?v=19800">
-<link rel="stylesheet" href="assets/css/v26431-admin-rescue.css?v=26431"></head>
+  <title>DJ FOLSOE · Click CMS Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/visual-cms.css?v=17010">
+  <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=18850-1">
+<link rel="stylesheet" href="assets/css/v26432-admin-legacy-bridge.css?v=26432"></head>
 <body>
-<section id="v26431ControlCenter" class="v26431ControlCenter">
-  <header class="v26431Hero">
-    <div>
-      <small>V26431 · CRITICAL ADMIN RESCUE</small>
-      <h1>UNIFIED ADMIN CONTROL CENTER</h1>
-      <p>Live theme control uses the existing Broadcast Core. Chart editing writes directly to the same <code>data/charts.json</code> used by the Chart Universe.</p>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<div class="cmsApp">
+  <aside class="cmsSidebar">
+    <div class="cmsLogo">
+      <span>TV</span>
+      <div><strong>DJ FOLSOE</strong><small>Broadcast Control Room</small></div>
     </div>
-    <div class="v26431Status" id="v26431Status"><i></i><strong>CHECKING</strong><span>Broadcast Core</span></div>
-  </header>
 
-  <div class="v26431Grid">
-    <section class="v26431Panel">
-      <header><div><small>CRITICAL CONTROL</small><h2>Theme & Overlay</h2></div><button id="v26431Refresh">Refresh state</button></header>
-      <p class="v26431Help">One-click theme switching. This calls the existing <code>/api/set-theme</code> route directly, so it does not overwrite your other broadcast settings.</p>
-      <div id="v26431Themes" class="v26431Themes"></div>
-      <div class="v26431Now">
-        <div><small>ACTIVE THEME</small><strong id="v26431ActiveTheme">—</strong></div>
-        <div><small>CURRENT / NEXT SHOW</small><strong id="v26431CurrentShow">—</strong></div>
-        <div><small>TWITCH</small><strong id="v26431Twitch">—</strong></div>
+    <nav id="cmsNav">
+      <button data-screen="dashboard" class="active"><i>⌂</i><span>Dashboard</span></button>
+      <button data-screen="platform"><i>◆</i><span>Content Platform</span></button>
+      <button data-screen="experience"><i>◉</i><span>Broadcast Experience</span></button>
+      <button data-screen="station"><i>▣</i><span>TV Station</span></button>
+      <button data-screen="composer"><i>▱</i><span>Scene Composer</span></button>
+      <button data-screen="homepage"><i>✦</i><span>Homepage</span></button>
+      <button data-screen="modules"><i>▦</i><span>Content blocks</span></button>
+      <button data-screen="shows"><i>▶</i><span>Shows</span></button>
+      <button data-screen="charts"><i>↗</i><span>Top 10 / Top 20</span></button>
+      <button data-screen="news"><i>▤</i><span>Music stories</span></button>
+      <button data-screen="polls"><i>✓</i><span>Polls & interaction</span></button>
+      <button data-screen="playlists"><i>♫</i><span>Playlists</span></button>
+      <button data-screen="theme"><i>◐</i><span>Theme & overlay</span></button>
+      <button data-screen="schedule"><i>◷</i><span>Schedule</span></button>
+    </nav>
+
+    <div class="cmsSidebarFooter">
+      <span id="connectionDot"></span>
+      <div><strong id="connectionText">Not connected</strong><small>Cloudflare Content Core</small></div>
+    </div>
+  </aside>
+
+  <main class="cmsWorkspace">
+    <header class="cmsTopbar">
+      <div>
+        <p>DJ FOLSOE NETWORK · BROADCAST CONTROL ROOM</p>
+        <h1 id="screenTitle">Dashboard</h1>
       </div>
-    </section>
-
-    <section class="v26431Panel">
-      <header><div><small>WEBSITE CHART DATA</small><h2>Chart Universe Connection</h2></div><button id="v26431LoadCharts">Load charts</button></header>
-      <p class="v26431Help">The modern chart pages read one source: <code>/data/charts.json</code>. The editor below updates exactly that file through GitHub.</p>
-      <div class="v26431GitHub">
-        <label>GitHub owner<input id="v26431Owner" value="folsoe"></label>
-        <label>Repository<input id="v26431Repo" value="djfolsoe-tv"></label>
-        <label>Branch<input id="v26431Branch" value="main"></label>
-        <label class="wide">Fine-grained GitHub token<input id="v26431GitHubToken" type="password" autocomplete="off" placeholder="Token with Contents: Read and write"></label>
+      <div class="cmsTopActions">
+        <label class="tokenField">
+          <span>Admin password</span>
+          <input id="adminToken" type="password" autocomplete="off" placeholder="Enter ADMIN_TOKEN">
+        </label>
+        <button id="loadCms" class="secondary">Connect</button>
+        <a href="/" target="_blank" class="previewLink">Open website ↗</a>
       </div>
-      <p class="v26431TokenNote">Token is kept only in this browser session and is never written into the website files.</p>
-    </section>
-  </div>
-
-  <section class="v26431Panel v26431Charts">
-    <header>
-      <div><small>ONE DATA SOURCE · NO DUPLICATES</small><h2>Top 20 + Retro Top 10 + TIDAL</h2></div>
-      <div class="v26431Actions"><button id="v26431LoadChartData">Load current</button><button id="v26431SaveCharts" class="primary">Save & deploy charts</button></div>
     </header>
-    <div class="v26431ChartMeta">
-      <label>Chart week<input id="v26431Week" placeholder="2026-W32"></label>
-      <label>Published date<input id="v26431Date" type="date"></label>
-    </div>
-    <div class="v26431ChartColumns">
-      <div><h3>DJ FOLSOE TOP 20</h3><div id="v26431Top20"></div></div>
-      <div><h3>RETRO HITS TOP 10</h3><div id="v26431Retro10"></div></div>
-    </div>
-    <h3>TIDAL PLAYLISTS</h3>
-    <div id="v26431Playlists" class="v26431Playlists"></div>
-    <div id="v26431ChartMessage" class="v26431Message">Ready.</div>
-  </section>
-</section>
 
-<header class="adminHero v9185Hero">
-  <div>
-    <span class="kicker">DJ FOLSOE NETWORK V928.2</span>
-    <h1>Broadcast Content Manager</h1>
-    <p>Edit Top 20 and Mods directly in admin. The same broadcast-core drives website and overlay.</p>
-  </div>
-  <div class="loginCard">
-    <label>ADMIN TOKEN</label>
-    <input id="adminToken" type="password" placeholder="Cloudflare ADMIN_TOKEN">
-    <button onclick="djfSaveSettings()">Save</button>
-  </div>
-</header>
-
-<nav class="adminTabs v9185Tabs">
-  <button onclick="djfOneClick()" class="bigPublish">🚀 ONE CLICK · SYNC + PUBLISH</button>
-  <button onclick="djfPreview()">👁 Preview</button>
-  <button onclick="djfRefresh()">🔄 Refresh Twitch</button>
-  <button onclick="djfLoadFromCore()">🔁 Load Core</button>
-  <button onclick="djfOpenWebsite()">🌍 Website</button>
-  <button onclick="djfOpenTwitch()">📺 Twitch</button>
-  <button onclick="djfToggleAdvanced()">⚙ Advanced</button>
-</nav>
-
-<main>
-  <section class="panel v9185Control" id="controlCenter">
-    <div class="panelHead">
-      <div>
-        <h2>🎛️ Unified Control Center</h2>
-        <p class="note">Every field below is mapped directly to broadcast-core and used by both website and overlay.</p>
+    
+    <section id="connectionPanel" class="connectionPanel" hidden>
+      <div class="connectionPanelIcon" id="connectionPanelIcon">!</div>
+      <div class="connectionPanelCopy">
+        <span id="connectionPanelKicker">CONNECTION CHECK</span>
+        <h2 id="connectionPanelTitle">The control room could not connect</h2>
+        <p id="connectionPanelMessage">Check the details below and try again.</p>
+        <div id="connectionPanelDetails" class="connectionPanelDetails"></div>
       </div>
-      <div class="v9185TopActions">
-        <button onclick="djfSaveDraft()">Save draft</button>
-        <button onclick="djfPreview()">Preview</button>
-        <button onclick="djfOneClick()" class="bigPublish">Publish everything</button>
-      </div>
-    </div>
-
-    <div class="v9185StatusStrip">
-      <article><span>Twitch</span><b id="twitchStatus">Checking…</b><small id="twitchTitle">twitch.tv/djfolsoe</small></article>
-      <article><span>Viewers</span><b id="twitchViewers">0</b><small>Live from Twitch</small></article>
-      <article><span>Followers</span><b id="twitchFollowers">—</b><small>Live/fallback</small></article>
-      <article><span>Subs</span><b id="twitchSubs">—</b><small>Token scope/fallback</small></article>
-      <article><span>Ready</span><b id="readyState">Draft</b><small id="lastPublish">Not published yet</small></article>
-    </div>
-
-
-    <div class="v921MappingStrip">
-      <article><b>Website</b><span>Hero, next show, ticker, goals</span></article>
-      <article><b>Overlay</b><span>Same show, theme, stats, ticker</span></article>
-      <article><b>Twitch</b><span>Live status, viewers, followers</span></article>
-      <article><b>Admin</b><span>Text, goals, schedule, mode</span></article>
-    </div>
-
-    <div class="v9185OneGrid">
-      <article class="v9185Card primaryCard">
-        <h3>1 · Broadcast</h3>
-        <label>Current show <small>→ core.show.current</small></label>
-        <select id="currentShow">
-          <option>DJ FOLSOE</option>
-          <option>Good Morning Twitch</option>
-          <option>Trance Tuesday</option>
-          <option>Eurodance</option>
-          <option>Fredagsbar</option>
-          <option>Retro Hits</option>
-          <option>FOLSOE Top 20</option>
-          <option>Pop Up Live</option>
-          <option>Summer Beats</option>
-          <option>Weekend Vibes</option>
-        </select>
-        <label>Theme <small>→ core.theme.id</small></label>
-        <select id="theme">
-          <option value="weekend">Weekend</option>
-          <option value="morning">Good Morning</option>
-          <option value="trance">Trance</option>
-          <option value="eurodance">Eurodance</option>
-          <option value="fredagsbar">Fredagsbar</option>
-          <option value="retro">Retro</option>
-          <option value="chart">Top 20</option>
-          <option value="popup">Pop Up</option>
-          <option value="summer">Summer</option>
-          <option value="disco">Disco</option>
-          <option value="handsup">Hands Up</option>
-          <option value="harddance">Hard Dance</option>
-          <option value="danske">Danish Hits</option>
-        </select>
-        <label>Broadcast mode <small>→ core.show.mode</small></label>
-        <select id="mode">
-          <option>LIVE SHOW</option>
-          <option>STARTING SOON</option>
-          <option>COUNTDOWN</option>
-          <option>BREAK</option>
-          <option>SPECIAL EVENT</option>
-          <option>AFTER PARTY</option>
-          <option>ENDING</option>
-          <option>OFFLINE</option>
-        </select>
-        <div class="v9185ButtonRow">
-          <button onclick="djfPresetMode('LIVE SHOW')">Go live</button>
-          <button onclick="djfPresetMode('BREAK')">Break</button>
-          <button onclick="djfPresetMode('ENDING')">Ending</button>
-          <button onclick="djfPresetMode('OFFLINE')">Offline</button>
-        </div>
-      </article>
-
-      <article class="v9185Card">
-        <h3>2 · Website + Overlay Text</h3>
-        <label>Top line <small>→ core.hero.eyebrow</small></label>
-        <input id="eyebrow" value="DJ FOLSOE TWITCH · MUSIC STREAMER FROM DENMARK">
-        <label>Main title <small>→ core.hero.title</small></label>
-        <input id="heroTitle" value="DJ FOLSOE">
-        <label>Headline <small>→ core.hero.subtitle</small></label>
-        <input id="heroSubtitle" value="Dive into my Twitch world">
-        <label>Description <small>→ core.hero.text + core.community.text</small></label>
-        <textarea id="heroText" rows="3">Live DJ shows, song requests, Top 20 countdowns and community energy from Denmark.</textarea>
-        <label>Ticker / info line <small>→ core.ticker.text + core.overlay.infoLine</small></label>
-        <input id="ticker" value="LIVE DJ SHOWS FROM DENMARK · REQUEST A SONG IN TWITCH CHAT · FOLSOE TOP 20 · WEEKLY MUSIC CHART">
-      </article>
-
-      <article class="v9185Card">
-        <h3>3 · Next Show</h3>
-        <label>Next show <small>→ core.nextShow.show</small></label>
-        <input id="nextShowTitle" value="Next DJ FOLSOE Broadcast">
-        <label>Date <small>→ core.nextShow.datetime</small></label>
-        <input id="nextShowDate" type="date">
-        <label>Time <small>→ core.nextShow.datetime</small></label>
-        <input id="nextShowTime" type="time">
-        <label>Theme</label>
-        <select id="nextShowTheme">
-          <option value="weekend">Weekend</option><option value="morning">Good Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="fredagsbar">Fredagsbar</option><option value="retro">Retro</option><option value="chart">Top 20</option><option value="popup">Pop Up</option><option value="summer">Summer</option>
-        </select>
-        <label>Description</label>
-        <textarea id="nextShowDescription" rows="3">The next show is controlled from admin and appears automatically on website and overlay.</textarea>
-      </article>
-
-      <article class="v9185Card">
-        <h3>4 · Goals + Requests</h3>
-        <label>Follower goal <small>→ core.community.followerGoal</small></label>
-        <input id="followerGoal" type="number" value="1000">
-        <label>Manual subs fallback <small>→ core.community.subs</small></label>
-        <input id="subs" type="number" value="0">
-        <label>Sub goal <small>→ core.community.subGoal</small></label>
-        <input id="subGoal" type="number" value="100">
-        <label>Request text <small>→ core.community.requestText + core.overlay.requestText</small></label>
-        <input id="requestText" value="Use !request Artist - Title in Twitch chat">
-        <label>Special message <small>→ core.community.specialEvent + core.overlay.specialEvent</small></label>
-        <input id="specialMessage" value="">
-      </article>
-
-      <article class="v9185Card wideCard">
-        <h3>5 · Top 20 Content Manager</h3>
-        <p class="note">Edit the full Top 20 here. It publishes to core.top20 and is used by website + overlay.</p>
-        <div id="top20FullEditor" class="top20Editor"></div>
-      </article>
-
-      <article class="v9185Card wideCard">
-        <h3>6 · Mods / Community Crew</h3>
-        <p class="note">Write your real mods here. One name per line. Nothing is hardcoded.</p>
-        <label>Section title</label>
-        <input id="modsTitle" value="DJ FOLSOE COMMUNITY CREW">
-        <label>Subtitle</label>
-        <input id="modsSubtitle" value="The people keeping the chat, music and vibes alive">
-        <label>Head mods</label>
-        <textarea id="modsHead" rows="4" placeholder="One mod per line"></textarea>
-        <label>Community mods</label>
-        <textarea id="modsCommunity" rows="4" placeholder="One mod per line"></textarea>
-        <label>Music team</label>
-        <textarea id="modsMusic" rows="3" placeholder="One name per line"></textarea>
-        <label>VIP supporters</label>
-        <textarea id="modsVip" rows="3" placeholder="One name per line"></textarea>
-      </article>
-    </div>
-
-    <div class="v9185OneClickBox">
-      <div>
-        <span>ONE BUTTON FLOW</span>
-        <h3>Sync Twitch → Save admin → Publish website + overlay</h3>
-        <p>Use this when you want the channel to update everywhere from the same data.</p>
-      </div>
-      <button onclick="djfOneClick()" class="megaButton">ONE CLICK PUBLISH</button>
-    </div>
-
-    <div class="v9185PreviewGrid">
-      <article>
-        <span>Website preview · offline</span>
-        <h3 id="previewWebsiteTitle">DJ FOLSOE</h3>
-        <p id="previewWebsiteSub">Dive into my Twitch world</p>
-        <small id="previewWebsiteNext">Next show · Announced soon</small>
-      </article>
-      <article>
-        <span>Overlay control panel · live</span>
-        <h3 id="previewOverlayTitle">DJ FOLSOE · LIVE SHOW</h3>
-        <p id="previewOverlayStats">Viewers 0 · Followers — · Subs 0/100</p>
-        <small id="previewOverlayTicker">LIVE DJ SHOWS FROM DENMARK</small>
-      </article>
-    </div>
-
-    <div class="v9185OneClickBox">
-      <div>
-        <span>FIELD MAPPING</span>
-        <h3>One admin field → website + overlay</h3>
-        <p>Hero, next show, theme, ticker, goals and Top 20 now publish through the same broadcast-core. The website is the offline channel surface. The overlay is the live channel surface.</p>
-      </div>
-      <button onclick="djfShowFieldMap()">Show mapping</button>
-    </div>
-
-
-    <div class="v9185OneClickBox homepage2030AdminPreview">
-      <div>
-        <span>HOMEPAGE 2030</span>
-        <h3>Live website modules controlled from this admin</h3>
-        <p>Hero, next show, shows, Top 20, community goals and crew are published through the same broadcast-core.</p>
-      </div>
-      <div class="homepage2030AdminStats">
-        <strong id="homepage2030ShowCount">6 shows</strong>
-        <strong id="homepage2030ChartCount">20 chart entries</strong>
-        <strong id="homepage2030Theme">Theme · Morning</strong>
-      </div>
-    </div>
-
-
-    <section class="adminStudioPro" id="adminStudioPro">
-      <div class="adminStudioHeader">
-        <div>
-          <span>V19100 · ADMIN STUDIO PRO</span>
-          <h2>Broadcast control room</h2>
-          <p>Live status, show, theme, music, community, graphics and publish health in one place.</p>
-        </div>
-        <div class="adminStudioActions">
-          <button type="button" id="studioRefreshBtn">Refresh studio</button>
-          <button type="button" id="studioSafePublishBtn" class="bigPublish">Safe publish</button>
-        </div>
-      </div>
-
-      <div class="adminStudioStatusGrid">
-        <article class="adminStudioStatusCard">
-          <span>CHANNEL</span>
-          <strong id="studioChannelStatus">Checking…</strong>
-          <small id="studioRuntimeState">Runtime unknown</small>
-        </article>
-        <article class="adminStudioStatusCard">
-          <span>ACTIVE SHOW</span>
-          <strong id="studioActiveShow">DJ FOLSOE LIVE</strong>
-          <small id="studioActiveMode">Mode unknown</small>
-        </article>
-        <article class="adminStudioStatusCard">
-          <span>THEME</span>
-          <strong id="studioActiveTheme">Morning</strong>
-          <small id="studioThemeSource">Broadcast core</small>
-        </article>
-        <article class="adminStudioStatusCard">
-          <span>MUSIC</span>
-          <strong id="studioNowPlaying">No active track</strong>
-          <small id="studioMusicMeta">Waiting for music data</small>
-        </article>
-        <article class="adminStudioStatusCard">
-          <span>COMMUNITY</span>
-          <strong id="studioCommunityQueue">0 queued</strong>
-          <small id="studioCommunityActive">No active event</small>
-        </article>
-        <article class="adminStudioStatusCard">
-          <span>SERVICES</span>
-          <strong id="studioServiceState">Checking…</strong>
-          <small id="studioWorkerApiState">Worker / API unknown</small>
-        </article>
-      </div>
-
-      <div class="adminStudioWorkspace">
-        <article class="adminStudioPanel adminStudioPanelWide">
-          <div class="adminStudioPanelHead">
-            <div>
-              <span>LIVE PREVIEW</span>
-              <h3>Website + overlay state</h3>
-            </div>
-            <span id="studioPreviewBadge" class="homepage-status-badge">READY</span>
-          </div>
-          <div class="adminStudioPreview">
-            <div class="adminStudioPreviewHero">
-              <span id="studioPreviewKicker">DJ FOLSOE NETWORK</span>
-              <strong id="studioPreviewTitle">DJ FOLSOE LIVE</strong>
-              <p id="studioPreviewBody">Professional Music TV from Denmark.</p>
-            </div>
-            <div class="adminStudioPreviewLower">
-              <span id="studioPreviewLowerKicker">NOW PLAYING</span>
-              <strong id="studioPreviewLowerTitle">Live music</strong>
-              <p id="studioPreviewLowerBody">Music data appears automatically.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="adminStudioPanel">
-          <div class="adminStudioPanelHead">
-            <div>
-              <span>QUICK GRAPHICS</span>
-              <h3>One-click TV graphics</h3>
-            </div>
-          </div>
-          <div class="adminStudioQuickActions">
-            <button type="button" data-studio-graphic="upnext">Up Next</button>
-            <button type="button" data-studio-graphic="channel">Channel message</button>
-            <button type="button" data-studio-graphic="chart">Chart update</button>
-            <button type="button" data-studio-graphic="special">Special event</button>
-          </div>
-        </article>
-
-        <article class="adminStudioPanel">
-          <div class="adminStudioPanelHead">
-            <div>
-              <span>THEME PREVIEW</span>
-              <h3>Visual identity</h3>
-            </div>
-          </div>
-          <div class="adminStudioThemeGrid">
-            <button type="button" data-studio-theme="morning">Morning</button>
-            <button type="button" data-studio-theme="trance">Trance</button>
-            <button type="button" data-studio-theme="eurodance">Eurodance</button>
-            <button type="button" data-studio-theme="fredagsbar">Fredagsbar</button>
-            <button type="button" data-studio-theme="retro">Retro</button>
-            <button type="button" data-studio-theme="top20">Top 20</button>
-          </div>
-        </article>
-
-        <article class="adminStudioPanel adminStudioPanelWide">
-          <div class="adminStudioPanelHead">
-            <div>
-              <span>RELEASE SAFETY</span>
-              <h3>Preview, validation and rollback</h3>
-            </div>
-          </div>
-          <div class="adminStudioSafetyGrid">
-            <button type="button" id="studioValidateBtn">Validate current state</button>
-            <button type="button" id="studioPreviewBtn">Create preview</button>
-            <button type="button" id="studioPublishBtn">Publish preview</button>
-            <button type="button" id="studioRollbackBtn">Rollback last publish</button>
-          </div>
-          <pre id="studioDiagnostics">Admin Studio Pro is ready.</pre>
-        </article>
+      <div class="connectionPanelActions">
+        <button id="retryConnection">Try again</button>
+        <button id="forgetPassword" class="secondary">Forget saved password</button>
       </div>
     </section>
 
+    <section id="loadingState" class="loadingState">
+      <div class="loadingMark">TV</div>
+      <h2>Welcome to Broadcast Control</h2>
+      <p>Enter your admin password to open the studio. Loading and previewing never changes the live website.</p>
+    </section>
 
-    <section class="tvGraphicsStudio" id="tvGraphicsStudio">
-      <div class="tvGraphicsStudio__head">
-        <div>
-          <span>V19200 · TV GRAPHICS STUDIO</span>
-          <h2>Build broadcast graphics without code</h2>
-          <p>Create, preview and publish lower-thirds, breaking information, chart graphics, polls, quizzes and promos.</p>
+    <div id="cmsScreens" hidden>
+      <section data-screen-panel="dashboard" class="screen active">
+        <section class="controlStatus" aria-label="System status">
+          <article><i id="statusWebsiteDot"></i><div><span>Website</span><strong id="statusWebsite">Checking</strong></div><a href="/" target="_blank">Open ↗</a></article>
+          <article><i id="statusWorkerDot"></i><div><span>Content Core</span><strong id="statusWorker">Checking</strong></div><small id="statusWorkerVersion">Cloudflare</small></article>
+          <article><i id="statusTwitchDot"></i><div><span>Twitch</span><strong id="statusTwitch">Checking</strong></div><small id="statusTwitchDetail">DJ FOLSOE</small></article>
+          <article><i id="statusNewsDot"></i><div><span>Music stories</span><strong id="statusNews">Checking</strong></div><small id="statusNewsDetail">External + editorial</small></article>
+          <article><i id="statusOverlayDot"></i><div><span>Main Overlay</span><strong>Protected</strong></div><small>Logo · tickers · chat</small></article>
+        </section>
+        <div class="broadcastNow">
+          <div class="broadcastNowCopy"><span>Current channel state</span><h2 id="controlNowTitle">DJ FOLSOE NETWORK</h2><p id="controlNowDetail">Connect to load the active show, theme and next broadcast.</p></div>
+          <div class="broadcastNowMetrics"><div><span>Theme</span><strong id="controlTheme">—</strong></div><div><span>Viewers</span><strong id="controlViewers">0</strong></div><div><span>Followers</span><strong id="controlFollowers">0</strong></div></div>
         </div>
-        <button type="button" id="gfxResetBtn">Reset studio</button>
-      </div>
+        <div class="welcomePanel">
+          <div>
+            <span>Everything in one place</span>
+            <h2>What would you like to publish?</h2>
+            <p>Create, preview and publish content without touching code.</p>
+          </div>
+          <button data-quick-create="poster">Create new content</button>
+        </div>
+        <div class="quickCreate">
+          <button data-quick-create="poster"><i>▣</i><strong>Special event</strong><span>Poster, text and date</span></button>
+          <button data-quick-create="ranked-list"><i>10</i><strong>Top 10 / Top 20</strong><span>Tracks, covers and stories</span></button>
+          <button data-quick-create="story"><i>✎</i><strong>Write a story</strong><span>Your own music article</span></button>
+          <button data-quick-create="poll"><i>✓</i><strong>Start a poll</strong><span>Question and answers</span></button>
+          <button data-quick-create="playlist"><i>♫</i><strong>Share a playlist</strong><span>Spotify or another service</span></button>
+          <button data-screen-jump="theme"><i>◐</i><strong>Change theme</strong><span>Website and Main Overlay</span></button>
+        </div>
+        <div class="dashboardGrid">
+          <article><span>Published blocks</span><strong id="dashPublished">0</strong><small>Visible on the website</small></article>
+          <article><span>Drafts</span><strong id="dashDrafts">0</strong><small>Waiting for you</small></article>
+          <article><span>Music stories</span><strong id="dashNews">0</strong><small>External and editorial</small></article>
+          <article><span>Active theme</span><strong id="dashTheme">—</strong><small>Website and ticker identity</small></article>
+        </div>
+        <div class="recentPanel">
+          <div class="panelHeader"><div><span>Recent content</span><h2>Continue working</h2></div><button data-screen-jump="modules" class="textButton">View everything</button></div>
+          <div id="recentContent" class="recentList"></div>
+        </div>
+      </section>
 
-      <div class="tvGraphicsStudio__grid">
-        <article class="tvGraphicsStudio__panel">
-          <div class="tvGraphicsStudio__panelHead">
-            <span>TEMPLATES</span>
-            <h3>Choose a graphic</h3>
+      
+      <section data-screen-panel="platform" class="screen">
+        <div class="screenIntro platformHero">
+          <div>
+            <span>V1100 · BROADCAST CONTENT PLATFORM</span>
+            <h2>Everything you publish, in one production area</h2>
+            <p>This screen collects the existing working CMS tools. It does not replace login, the Worker, the website connection or any editor.</p>
           </div>
-          <div class="tvGraphicsStudio__templates">
-            <button type="button" data-gfx-template="lower">Lower-third</button>
-            <button type="button" data-gfx-template="breaking">Breaking</button>
-            <button type="button" data-gfx-template="upnext">Up Next</button>
-            <button type="button" data-gfx-template="chart">Chart</button>
-            <button type="button" data-gfx-template="poll">Poll</button>
-            <button type="button" data-gfx-template="quiz">Quiz</button>
-            <button type="button" data-gfx-template="promo">Promo</button>
-            <button type="button" data-gfx-template="special">Special</button>
+          <div class="platformHeroBadge">
+            <small>STABLE FOUNDATION</small>
+            <strong>V1002.4</strong>
+            <span>No architecture change</span>
           </div>
+        </div>
 
-          <div class="tvGraphicsStudio__form">
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxKicker">Kicker</label>
-              <input id="gfxKicker">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxBadge">Badge</label>
-              <input id="gfxBadge">
-            </div>
-            <div class="tvGraphicsStudio__field tvGraphicsStudio__field--wide">
-              <label for="gfxTitle">Title</label>
-              <input id="gfxTitle">
-            </div>
-            <div class="tvGraphicsStudio__field tvGraphicsStudio__field--wide">
-              <label for="gfxBody">Supporting text</label>
-              <textarea id="gfxBody"></textarea>
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxIcon">Icon</label>
-              <input id="gfxIcon" maxlength="3">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxDuration">Duration ms</label>
-              <input id="gfxDuration" type="number" value="9000" min="3200" max="30000">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxPosition">Chart position</label>
-              <input id="gfxPosition" type="number" min="1" max="100">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxOptionA">Option A</label>
-              <input id="gfxOptionA">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxOptionB">Option B</label>
-              <input id="gfxOptionB">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxOptionC">Option C</label>
-              <input id="gfxOptionC">
-            </div>
-            <div class="tvGraphicsStudio__field">
-              <label for="gfxOptionD">Option D</label>
-              <input id="gfxOptionD">
-            </div>
-          </div>
+        <section class="platformSummary">
+          <article>
+            <span>Published content</span>
+            <strong id="platformPublishedCount">0</strong>
+            <small>Visible modules</small>
+          </article>
+          <article>
+            <span>Drafts</span>
+            <strong id="platformDraftCount">0</strong>
+            <small>Waiting for review</small>
+          </article>
+          <article>
+            <span>Music stories</span>
+            <strong id="platformNewsCount">0</strong>
+            <small>Editorial and external</small>
+          </article>
+          <article>
+            <span>Shows</span>
+            <strong id="platformShowCount">0</strong>
+            <small>Programme lineup</small>
+          </article>
+          <article>
+            <span>Active theme</span>
+            <strong id="platformThemeName">—</strong>
+            <small>Website and broadcast identity</small>
+          </article>
+        </section>
 
-          <div class="tvGraphicsStudio__actions">
-            <button type="button" id="gfxApplyBtn">Apply to admin</button>
-            <button type="button" id="gfxPreviewBtn">Preview</button>
-            <button type="button" id="gfxPublishBtn" class="bigPublish">Publish</button>
+        <div class="platformSectionHead">
+          <div>
+            <span>CONTENT PRODUCTION</span>
+            <h3>Create and manage</h3>
           </div>
-        </article>
+          <p>Every button opens an editor that already exists in the stable CMS.</p>
+        </div>
 
-        <article class="tvGraphicsStudio__panel">
-          <div class="tvGraphicsStudio__panelHead">
-            <span>PROGRAM PREVIEW</span>
-            <h3>Live graphic preview</h3>
+        <section class="platformModuleGrid">
+          <button class="platformModuleCard primary" data-screen-jump="homepage">
+            <i>✦</i>
+            <span>HOMEPAGE</span>
+            <strong>Homepage content</strong>
+            <p>Main message, Next Show, goals and request information.</p>
+            <b>Open editor →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="shows">
+            <i>▶</i>
+            <span>PROGRAMMES</span>
+            <strong>Show Manager</strong>
+            <p>Titles, broadcast times, descriptions, images and themes.</p>
+            <b>Manage shows →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="charts">
+            <i>20</i>
+            <span>COUNTDOWN</span>
+            <strong>Top 20 Chart</strong>
+            <p>Artist, track, chart status, cover and track story.</p>
+            <b>Update chart →</b>
+          </button>
+
+          <button class="platformModuleCard" data-quick-create="ranked-list">
+            <i>10</i>
+            <span>THEMED COUNTDOWN</span>
+            <strong>Retro Top 10</strong>
+            <p>Create a theme-based Top 10 with year and history.</p>
+            <b>Create countdown →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="news">
+            <i>▤</i>
+            <span>EDITORIAL</span>
+            <strong>Music News</strong>
+            <p>Review external stories and manage your own articles.</p>
+            <b>Open stories →</b>
+          </button>
+
+          <button class="platformModuleCard" data-quick-create="story">
+            <i>✎</i>
+            <span>OWN CONTENT</span>
+            <strong>Write a Music Story</strong>
+            <p>Create an artist story, show feature or music article.</p>
+            <b>Write story →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="playlists">
+            <i>♫</i>
+            <span>PLAYLISTS</span>
+            <strong>Playlist Manager</strong>
+            <p>Spotify links, covers, descriptions and programme playlists.</p>
+            <b>Manage playlists →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="polls">
+            <i>✓</i>
+            <span>INTERACTION</span>
+            <strong>Poll Studio</strong>
+            <p>Questions, answer choices, themes and publishing windows.</p>
+            <b>Manage polls →</b>
+          </button>
+
+          <button class="platformModuleCard" data-quick-create="poster">
+            <i>▣</i>
+            <span>CAMPAIGN</span>
+            <strong>Special Event</strong>
+            <p>Poster, date, announcement and call-to-action.</p>
+            <b>Create event →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="schedule">
+            <i>◷</i>
+            <span>PLANNING</span>
+            <strong>Schedule</strong>
+            <p>See live, planned and draft content in one view.</p>
+            <b>Open schedule →</b>
+          </button>
+
+          <button class="platformModuleCard" data-screen-jump="theme">
+            <i>◐</i>
+            <span>IDENTITY</span>
+            <strong>Theme & Tickers</strong>
+            <p>Active theme, top ticker and programme-specific messages.</p>
+            <b>Open theme control →</b>
+          </button>
+
+          <button class="platformModuleCard protected" data-screen-jump="modules">
+            <i>▦</i>
+            <span>ALL CONTENT</span>
+            <strong>Content Blocks</strong>
+            <p>View, reorder, duplicate, publish, hide or delete modules.</p>
+            <b>View all content →</b>
+          </button>
+        </section>
+
+        <section class="platformConnection">
+          <div>
+            <span>ADMIN</span>
+            <strong>Writes through the existing Worker</strong>
           </div>
-          <div class="tvGraphicsStudio__preview">
-            <div class="tvGraphicsStudio__lower">
-              <div class="tvGraphicsStudio__icon" id="gfxPreviewIcon">♫</div>
-              <div class="tvGraphicsStudio__copy">
-                <span id="gfxPreviewKicker">NOW PLAYING</span>
-                <strong id="gfxPreviewTitle">Artist — Track</strong>
-                <p id="gfxPreviewBody">Live music from Denmark</p>
+          <div>
+            <span>WEBSITE</span>
+            <strong>Existing website connection is unchanged</strong>
+          </div>
+          <div>
+            <span>MAIN OVERLAY</span>
+            <strong>Logo, tickers and chat remain protected</strong>
+          </div>
+        </section>
+      </section>
+
+
+      
+      <section data-screen-panel="experience" class="screen">
+        <div class="screenIntro experienceHero">
+          <div>
+            <span>V1200 · BROADCAST EXPERIENCE</span>
+            <h2>Shape what viewers see, hear and interact with</h2>
+            <p>This area combines the existing visual, interactive and broadcast-facing tools without replacing the stable CMS or Main Overlay.</p>
+          </div>
+          <div class="experienceHeroState">
+            <small>MAIN OVERLAY</small>
+            <strong>PROTECTED</strong>
+            <span>Logo · Top ticker · Theme ticker · Twitch chat</span>
+          </div>
+        </div>
+
+        <section class="experienceStatusGrid">
+          <article>
+            <span>Active theme</span>
+            <strong id="experienceTheme">—</strong>
+            <small>Current broadcast identity</small>
+          </article>
+          <article>
+            <span>Active polls</span>
+            <strong id="experiencePolls">0</strong>
+            <small>Viewer interaction</small>
+          </article>
+          <article>
+            <span>Playlists</span>
+            <strong id="experiencePlaylists">0</strong>
+            <small>Show and Spotify content</small>
+          </article>
+          <article>
+            <span>Special events</span>
+            <strong id="experienceEvents">0</strong>
+            <small>Posters and campaigns</small>
+          </article>
+          <article>
+            <span>OBS-ready modules</span>
+            <strong id="experienceOverlayModules">0</strong>
+            <small>Separate widget content</small>
+          </article>
+        </section>
+
+        <div class="experienceSectionHead">
+          <div>
+            <span>VIEWER EXPERIENCE</span>
+            <h3>Broadcast-facing tools</h3>
+          </div>
+          <p>All active buttons reuse existing stable editors and content modules.</p>
+        </div>
+
+        <section class="experienceGrid">
+          <button class="experienceCard live" data-screen-jump="theme">
+            <i>◐</i>
+            <span>VISUAL IDENTITY</span>
+            <strong>Theme & Tickers</strong>
+            <p>Choose theme, top ticker and programme-specific messages.</p>
+            <b>Open controls →</b>
+          </button>
+
+          <button class="experienceCard live" data-screen-jump="polls">
+            <i>✓</i>
+            <span>INTERACTION</span>
+            <strong>Polls & Voting</strong>
+            <p>Create questions and prepare website or future OBS voting.</p>
+            <b>Manage polls →</b>
+          </button>
+
+          <button class="experienceCard live" data-screen-jump="playlists">
+            <i>♫</i>
+            <span>MUSIC DISCOVERY</span>
+            <strong>Playlists</strong>
+            <p>Spotify links, covers, show descriptions and themed playlists.</p>
+            <b>Manage playlists →</b>
+          </button>
+
+          <button class="experienceCard live" data-quick-create="poster">
+            <i>▣</i>
+            <span>CAMPAIGNS</span>
+            <strong>Special Event</strong>
+            <p>Create poster-based events for website and later OBS display.</p>
+            <b>Create campaign →</b>
+          </button>
+
+          <button class="experienceCard live" data-screen-jump="modules">
+            <i>▦</i>
+            <span>WIDGET CONTENT</span>
+            <strong>OBS-ready Blocks</strong>
+            <p>See which content blocks are enabled for separate overlay use.</p>
+            <b>View content →</b>
+          </button>
+
+          <button class="experienceCard planned" disabled>
+            <i>▶</i>
+            <span>PLANNED CONNECTION</span>
+            <strong>Now Playing</strong>
+            <p>Reserved for Serato Pro and Spotify live track information.</p>
+            <b>Coming later</b>
+          </button>
+
+          <button class="experienceCard planned" disabled>
+            <i>★</i>
+            <span>PLANNED MODULE</span>
+            <strong>Sponsor Rotation</strong>
+            <p>Future timed sponsor logos for website and separate OBS widgets.</p>
+            <b>Coming later</b>
+          </button>
+
+          <button class="experienceCard planned" disabled>
+            <i>⚡</i>
+            <span>PLANNED MODULE</span>
+            <strong>Live Moments</strong>
+            <p>Future follows, subs, raids, bits and request highlights.</p>
+            <b>Coming later</b>
+          </button>
+        </section>
+
+        <section class="experienceOverlayMap">
+          <header>
+            <span>BROADCAST MAP</span>
+            <h3>Protected core and separate widgets</h3>
+          </header>
+
+          <div class="experienceMapGrid">
+            <article class="protected">
+              <small>MAIN OVERLAY</small>
+              <strong>Protected foundation</strong>
+              <ul>
+                <li>One DJ FOLSOE logo</li>
+                <li>Top ticker</li>
+                <li>Theme ticker</li>
+                <li>Twitch chat</li>
+              </ul>
+            </article>
+
+            <article>
+              <small>SEPARATE OBS SOURCES</small>
+              <strong>Expandable experience</strong>
+              <ul>
+                <li>Polls and results</li>
+                <li>Posters and campaigns</li>
+                <li>Playlists</li>
+                <li>Top 10 / Top 20</li>
+              </ul>
+            </article>
+
+            <article>
+              <small>FUTURE LIVE DATA</small>
+              <strong>Reserved connections</strong>
+              <ul>
+                <li>Serato Now Playing</li>
+                <li>Spotify track data</li>
+                <li>Live activity moments</li>
+                <li>Sponsor rotation</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </section>
+
+
+      
+      <section data-screen-panel="station" class="screen">
+        <div class="screenIntro stationHero">
+          <div>
+            <span>V1300 · TV STATION CONTROL ROOM</span>
+            <h2>Run DJ FOLSOE NETWORK from one station view</h2>
+            <p>See readiness, programming, content and broadcast identity together. Every active control opens an existing stable editor.</p>
+          </div>
+          <div class="stationOnAir">
+            <small>STATION STATUS</small>
+            <strong id="stationStatusLabel">READY</strong>
+            <span id="stationStatusText">Waiting for live broadcast</span>
+          </div>
+        </div>
+
+        <section class="stationReadiness">
+          <article class="stationReadinessCard">
+            <span>Website</span>
+            <strong>ONLINE</strong>
+            <small>Public station front</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Worker</span>
+            <strong>CONNECTED</strong>
+            <small id="stationWorkerVersion">Broadcast Core</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Twitch</span>
+            <strong id="stationTwitchStatus">OFFLINE</strong>
+            <small id="stationViewerCount">0 viewers</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Programming</span>
+            <strong id="stationShowCount">0 SHOWS</strong>
+            <small>Available programmes</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Content</span>
+            <strong id="stationContentCount">0 ITEMS</strong>
+            <small>Published and draft</small>
+          </article>
+          <article class="stationReadinessCard">
+            <span>Theme</span>
+            <strong id="stationThemeName">—</strong>
+            <small>Current station identity</small>
+          </article>
+        </section>
+
+        <div class="stationGrid">
+          <section class="stationPanel stationProgrammePanel">
+            <header class="stationPanelHeader">
+              <div>
+                <span>PROGRAMMING</span>
+                <h3>Shows and schedule</h3>
               </div>
-              <div class="tvGraphicsStudio__badge" id="gfxPreviewBadge">MUSIC</div>
+              <div>
+                <button data-screen-jump="shows" class="secondary">Shows</button>
+                <button data-screen-jump="schedule">Schedule</button>
+              </div>
+            </header>
+
+            <div class="stationNextShow">
+              <small>NEXT BROADCAST</small>
+              <h4 id="stationNextShowTitle">No show selected</h4>
+              <p id="stationNextShowDescription">Add or update the next programme in the existing Homepage or Shows editor.</p>
+              <div>
+                <span id="stationNextShowTime">Time not set</span>
+                <strong id="stationNextShowTheme">Theme not set</strong>
+              </div>
             </div>
-          </div>
-          <pre class="tvGraphicsStudio__status" id="gfxStudioStatus">Graphics Studio ready.</pre>
-        </article>
-      </div>
-    </section>
 
+            <div id="stationShowList" class="stationShowList"></div>
+          </section>
 
-    <section class="aiMusicDirector" id="aiMusicDirector">
-      <div class="aiMusicDirector__head">
-        <div>
-          <span>V19300 · AI MUSIC DIRECTOR</span>
-          <h2>Plan complete DJ shows</h2>
-          <p>Build a four-hour structure, control genre and energy, reserve request slots and export a TIDAL-compatible CSV.</p>
+          <aside class="stationPanel">
+            <header class="stationPanelHeader">
+              <div>
+                <span>CONTENT PIPELINE</span>
+                <h3>Ready to publish</h3>
+              </div>
+              <button data-screen-jump="platform" class="secondary">Open platform</button>
+            </header>
+
+            <div class="stationPipeline">
+              <div><span>Published</span><strong id="stationPublished">0</strong></div>
+              <div><span>Drafts</span><strong id="stationDrafts">0</strong></div>
+              <div><span>Scheduled</span><strong id="stationScheduled">0</strong></div>
+              <div><span>Overlay-ready</span><strong id="stationOverlayReady">0</strong></div>
+            </div>
+
+            <div class="stationQuickActions">
+              <button data-quick-create="story"><i>✎</i><span><strong>Music Story</strong><small>Write station content</small></span></button>
+              <button data-quick-create="ranked-list"><i>10</i><span><strong>Retro Top 10</strong><small>Create countdown</small></span></button>
+              <button data-screen-jump="charts"><i>20</i><span><strong>Top 20</strong><small>Update chart</small></span></button>
+              <button data-screen-jump="news"><i>▤</i><span><strong>Music News</strong><small>Review stories</small></span></button>
+            </div>
+          </aside>
         </div>
-        <button type="button" id="musicDirectorGenerateBtn" class="bigPublish">Generate show plan</button>
-      </div>
 
-      <div class="aiMusicDirector__grid">
-        <article class="aiMusicDirector__panel">
-          <div class="aiMusicDirector__panelHead">
-            <span>SHOW BRIEF</span>
-            <h3>Music direction</h3>
-          </div>
-          <div class="aiMusicDirector__form">
-            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
-              <label for="musicDirectorShow">Show</label>
-              <select id="musicDirectorShow">
-                <option value="good-morning">Good Morning Twitch</option>
-                <option value="trance-tuesday">Trance Tuesday</option>
-                <option value="eurodance">Eurodance</option>
-                <option value="retro-hits">Retro Hits</option>
-                <option value="fredagsbar">Fredagsbar</option>
-              </select>
-            </div>
-            <div class="aiMusicDirector__field">
-              <label for="musicDirectorDuration">Duration minutes</label>
-              <input id="musicDirectorDuration" type="number" value="240" min="30" max="600">
-            </div>
-            <div class="aiMusicDirector__field">
-              <label for="musicDirectorAverage">Average track minutes</label>
-              <input id="musicDirectorAverage" type="number" value="3.6" min="2" max="10" step=".1">
-            </div>
-            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
-              <label for="musicDirectorGenres">Genres, separated by commas</label>
-              <textarea id="musicDirectorGenres">Radio Hits, Dance Pop, Nu-Disco, Pop</textarea>
-            </div>
-            <div class="aiMusicDirector__field">
-              <label for="musicDirectorArtistSpacing">Artist spacing</label>
-              <input id="musicDirectorArtistSpacing" type="number" value="12" min="2" max="40">
-            </div>
-            <div class="aiMusicDirector__field">
-              <label for="musicDirectorDecadeRun">Max same decade in row</label>
-              <input id="musicDirectorDecadeRun" type="number" value="4" min="1" max="12">
-            </div>
-            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
-              <label><input id="musicDirectorRequests" type="checkbox" checked> Include viewer-request slots</label>
-            </div>
-            <div class="aiMusicDirector__field aiMusicDirector__field--wide">
-              <label for="musicDirectorNotes">Additional instructions</label>
-              <textarea id="musicDirectorNotes" placeholder="Danish radio hits, stronger final hour, avoid slow ballads…"></textarea>
-            </div>
-          </div>
-          <div class="aiMusicDirector__actions">
-            <button type="button" id="musicDirectorCopyBtn">Copy AI prompt</button>
-            <button type="button" id="musicDirectorExportBtn">Export CSV</button>
-            <button type="button" id="musicDirectorAdminBtn">Send to admin</button>
-          </div>
-          <pre class="aiMusicDirector__prompt" id="musicDirectorPrompt">Music Director prompt appears here.</pre>
-        </article>
+        <section class="stationControlGrid">
+          <button data-screen-jump="theme" class="stationControlCard active">
+            <i>◐</i>
+            <span>STATION IDENTITY</span>
+            <strong>Theme & Tickers</strong>
+            <p>Control the current look and station messages.</p>
+          </button>
 
-        <article class="aiMusicDirector__panel">
-          <div class="aiMusicDirector__panelHead">
-            <span>SHOW PLAN</span>
-            <h3>Energy and running order</h3>
+          <button data-screen-jump="experience" class="stationControlCard active">
+            <i>◉</i>
+            <span>VIEWER EXPERIENCE</span>
+            <strong>Broadcast Experience</strong>
+            <p>Polls, playlists, campaigns and OBS-ready blocks.</p>
+          </button>
+
+          <button data-screen-jump="homepage" class="stationControlCard active">
+            <i>✦</i>
+            <span>PUBLIC FRONT</span>
+            <strong>Homepage</strong>
+            <p>Edit the station introduction and next broadcast.</p>
+          </button>
+
+          <button class="stationControlCard planned" disabled>
+            <i>↗</i>
+            <span>PLANNED SYSTEM</span>
+            <strong>Analytics</strong>
+            <p>Future viewers, clicks, shows and content performance.</p>
+          </button>
+
+          <button class="stationControlCard planned" disabled>
+            <i>⚙</i>
+            <span>PLANNED SYSTEM</span>
+            <strong>Automation</strong>
+            <p>Future automatic programming and scheduled actions.</p>
+          </button>
+
+          <button class="stationControlCard planned" disabled>
+            <i>AI</i>
+            <span>PLANNED SYSTEM</span>
+            <strong>Show Assistant</strong>
+            <p>Future intros, track stories, quizzes and show preparation.</p>
+          </button>
+        </section>
+
+        <section class="stationFoundation">
+          <div>
+            <span>STABLE ADMIN</span>
+            <strong>Existing login and editors remain unchanged</strong>
           </div>
-          <div class="aiMusicDirector__summary">
-            <article><span>TRACKS</span><strong id="musicDirectorTrackCount">0</strong></article>
-            <article><span>DURATION</span><strong id="musicDirectorTotalTime">0 min</strong></article>
-            <article><span>PEAK ENERGY</span><strong id="musicDirectorPeak">0</strong></article>
-            <article><span>REQUEST SLOTS</span><strong id="musicDirectorRequestsCount">0</strong></article>
+          <div>
+            <span>EXISTING CONNECTION</span>
+            <strong>Website and Worker use the current setup</strong>
           </div>
-          <div class="aiMusicDirector__timeline" id="musicDirectorTimeline"></div>
-        </article>
-      </div>
-    </section>
+          <div>
+            <span>PROTECTED OVERLAY</span>
+            <strong>Logo, top ticker, theme ticker and chat stay intact</strong>
+          </div>
+        </section>
+      </section>
 
 
-    <section class="interactionAdmin" id="interactionAdmin">
-      <div class="interactionAdmin__head">
-        <div>
-          <span>V19400 · INTERACTIVE BROADCAST MODULES</span>
-          <h2>Let the audience shape the show</h2>
-          <p>Create polls, quizzes, battles, ratings, wheels and request votes for website and overlay.</p>
+      
+      <section data-screen-panel="composer" class="screen">
+        <div class="screenIntro composerHero">
+          <div>
+            <span>V1400.0 · SCENE COMPOSER</span>
+            <h2>Build the broadcast from separate, protected layers</h2>
+            <p>The Main Overlay remains the fixed foundation. Tickers, chat and future programme widgets stay as independent StreamElements or OBS sources.</p>
+          </div>
+          <div class="composerSafetyBadge">
+            <small>SAFE MODE</small>
+            <strong>ADDITIVE ONLY</strong>
+            <span>No Worker, website or overlay code replaced</span>
+          </div>
         </div>
-        <button type="button" id="interactionPublishBtn" class="bigPublish">Publish interaction</button>
-      </div>
-      <div class="interactionAdmin__grid">
-        <article class="interactionAdmin__panel">
-          <span>MODULE BUILDER</span>
-          <h3>Create interaction</h3>
-          <div class="interactionAdmin__templates">
-            <button type="button" data-interaction-template="poll">Poll</button>
-            <button type="button" data-interaction-template="quiz">Quiz</button>
-            <button type="button" data-interaction-template="battle">Battle</button>
-            <button type="button" data-interaction-template="rating">Rating</button>
-            <button type="button" data-interaction-template="wheel">Wheel</button>
-            <button type="button" data-interaction-template="request">Requests</button>
-          </div>
-          <div class="interactionAdmin__form">
-            <div class="interactionAdmin__field">
-              <label for="interactionState">State</label>
-              <select id="interactionState">
-                <option value="open">Voting open</option>
-                <option value="closed">Show result</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </div>
-            <div class="interactionAdmin__field">
-              <label for="interactionDuration">Overlay duration ms</label>
-              <input id="interactionDuration" type="number" value="12000" min="4000" max="30000">
-            </div>
-            <div class="interactionAdmin__field interactionAdmin__field--wide">
-              <label for="interactionQuestion">Question</label>
-              <input id="interactionQuestion">
-            </div>
-            <div class="interactionAdmin__field interactionAdmin__field--wide">
-              <label for="interactionDescription">Description</label>
-              <textarea id="interactionDescription"></textarea>
-            </div>
-            <div class="interactionAdmin__field"><label for="interactionOptionA">Option A</label><input id="interactionOptionA"></div>
-            <div class="interactionAdmin__field"><label for="interactionOptionB">Option B</label><input id="interactionOptionB"></div>
-            <div class="interactionAdmin__field"><label for="interactionOptionC">Option C</label><input id="interactionOptionC"></div>
-            <div class="interactionAdmin__field"><label for="interactionOptionD">Option D</label><input id="interactionOptionD"></div>
-          </div>
-          <div class="interactionAdmin__actions">
-            <button type="button" id="interactionPreviewBtn">Preview</button>
-            <button type="button" id="interactionResetVotesBtn">Reset votes</button>
-            <button type="button" id="interactionShowResultBtn">Show result</button>
-            <button type="button" id="interactionStopBtn">Stop module</button>
-          </div>
-        </article>
-        <article class="interactionAdmin__panel">
-          <span>TV PREVIEW</span>
-          <h3 id="interactionPreviewType">LIVE POLL</h3>
-          <div class="interactionAdmin__preview">
-            <span id="interactionPreviewLabel">VOTING OPEN</span>
-            <h4 id="interactionPreviewQuestion">Which track should play next?</h4>
-            <p id="interactionPreviewDescription">Vote on the website.</p>
-            <div id="interactionPreviewOptions" class="interactionAdmin__previewOptions"></div>
-          </div>
-          <pre id="interactionDiagnostics" class="interactionAdmin__diagnostics">Interactive Broadcast ready.</pre>
-        </article>
-      </div>
-    </section>
 
+        <section class="composerStatusStrip">
+          <div><span>Active theme</span><strong id="composerTheme">—</strong></div>
+          <div><span>Twitch</span><strong id="composerTwitch">OFFLINE</strong></div>
+          <div><span>Main Overlay</span><strong>LOCKED ON</strong></div>
+          <div><span>Configuration</span><strong>LOCAL PLAN</strong></div>
+        </section>
 
-    <section class="chartAdmin" id="chartAdmin">
-      <div class="chartAdmin__head">
-        <div>
-          <span>V19500 · MUSIC CHART TELEVISION ENGINE</span>
-          <h2>Build the weekly FOLSOE TOP 20</h2>
-          <p>Edit rankings, last week's positions, movement and weeks on chart. Website and overlay use the same data.</p>
+        <div class="composerLayout">
+          <section class="composerStagePanel">
+            <header class="composerPanelHeader">
+              <div><span>OBS LAYER MAP</span><h3>Scene stack</h3></div>
+              <button id="composerReset" class="secondary">Reset local plan</button>
+            </header>
+            <div class="composerStage">
+              <article class="composerLayer" data-composer-layer="chat"><span>04</span><div><small>SEPARATE STREAMELEMENTS OVERLAY</small><strong>Twitch Chat</strong><p>Profile image, badges, emotes, emojis and messages.</p></div><b id="composerStageChat">OFF</b></article>
+              <article class="composerLayer" data-composer-layer="topTicker"><span>03</span><div><small>SEPARATE STREAMELEMENTS OVERLAY</small><strong>Top Ticker</strong><p>Programme information, live status, next show and announcements.</p></div><b id="composerStageTopTicker">OFF</b></article>
+              <article class="composerLayer" data-composer-layer="bottomTicker"><span>02</span><div><small>SEPARATE STREAMELEMENTS OVERLAY</small><strong>Bottom Ticker</strong><p>Theme humour, Twitch activity, requests and community messages.</p></div><b id="composerStageBottomTicker">OFF</b></article>
+              <article class="composerLayer locked"><span>01</span><div><small>MAIN STREAMELEMENTS OVERLAY · LOCKED</small><strong>Theme Background + One Logo</strong><p>The theme background changes from admin. The existing top-left logo remains the only fixed logo.</p></div><b>ON</b></article>
+            </div>
+          </section>
+
+          <aside class="composerControlPanel">
+            <header class="composerPanelHeader"><div><span>LAYER CONTROLS</span><h3>Separate sources</h3></div></header>
+            <div class="composerControlList">
+              <article class="composerControlCard locked">
+                <div class="composerControlTitle"><i>01</i><div><small>FOUNDATION</small><strong>Main Overlay</strong></div><span class="composerSwitch on lockedSwitch"></span></div>
+                <p>Contains only the active theme background and the existing single logo.</p>
+                <div class="composerUrlRow"><input id="composerUrlMain" placeholder="Paste Main Overlay URL"><button data-composer-preview="main" class="secondary">Preview</button></div>
+              </article>
+              <article class="composerControlCard">
+                <div class="composerControlTitle"><i>02</i><div><small>INFORMATION</small><strong>Top Ticker</strong></div><button class="composerSwitch" data-composer-toggle="topTicker"></button></div>
+                <p>Programme information, automatic live status, Next Show, polls and announcements.</p>
+                <div class="composerUrlRow"><input id="composerUrlTopTicker" placeholder="Paste Top Ticker overlay URL"><button data-composer-preview="topTicker" class="secondary">Preview</button></div>
+              </article>
+              <article class="composerControlCard">
+                <div class="composerControlTitle"><i>03</i><div><small>COMMUNITY</small><strong>Bottom Ticker</strong></div><button class="composerSwitch" data-composer-toggle="bottomTicker"></button></div>
+                <p>Theme humour, latest follow, sub, bits, raid, request and activity information.</p>
+                <div class="composerUrlRow"><input id="composerUrlBottomTicker" placeholder="Paste Bottom Ticker overlay URL"><button data-composer-preview="bottomTicker" class="secondary">Preview</button></div>
+              </article>
+              <article class="composerControlCard">
+                <div class="composerControlTitle"><i>04</i><div><small>TWITCH CHAT</small><strong>Chat Overlay</strong></div><button class="composerSwitch" data-composer-toggle="chat"></button></div>
+                <p>Independent chat layer prepared for Twitch profile images, badges, emotes and emojis.</p>
+                <div class="composerUrlRow"><input id="composerUrlChat" placeholder="Paste Chat overlay URL"><button data-composer-preview="chat" class="secondary">Preview</button></div>
+              </article>
+            </div>
+            <button id="composerSaveLocal" class="composerSaveButton">Save local scene plan</button>
+            <p class="composerLocalNotice">This version saves the scene plan only in this browser. It does not publish or switch OBS sources yet.</p>
+          </aside>
         </div>
-        <button type="button" id="chartPublishBtn" class="bigPublish">Publish chart</button>
-      </div>
 
-      <div class="chartAdmin__grid">
-        <article class="chartAdmin__panel">
-          <span class="chartAdmin__label">CHART SETTINGS</span>
-          <h3>Weekly chart</h3>
-          <div class="chartAdmin__form">
-            <div class="chartAdmin__field">
-              <label for="chartWeekLabel">Week label</label>
-              <input id="chartWeekLabel" placeholder="Week 31 · 2026">
+        <section class="composerFutureWidgets">
+          <header class="composerPanelHeader"><div><span>PROGRAMME WIDGETS</span><h3>Separate sources added only when needed</h3></div></header>
+          <div class="composerWidgetGrid">
+            <article><i>20</i><strong>Top 20</strong><span>Future separate OBS source</span></article>
+            <article><i>10</i><strong>Retro Top 10</strong><span>Future separate OBS source</span></article>
+            <article><i>✓</i><strong>Poll</strong><span>Future separate OBS source</span></article>
+            <article><i>♫</i><strong>Now Playing</strong><span>Reserved for Serato</span></article>
+            <article><i>▣</i><strong>Poster</strong><span>Future event source</span></article>
+            <article><i>▤</i><strong>Music News</strong><span>Future breaking-news source</span></article>
+          </div>
+        </section>
+      </section>
+
+
+      <section data-screen-panel="homepage" class="screen">
+        <div class="screenIntro"><div><span>Homepage</span><h2>What visitors see first</h2><p>Edit the main message, next show and community call-to-action.</p></div><button id="saveHomepage">Save homepage</button></div>
+        <div class="editorLayout">
+          <div class="editorForm">
+            <article class="formCard">
+              <div class="formCardTitle"><span>01</span><div><h3>Main headline</h3><p>The opening message on folsoetv.dk.</p></div></div>
+              <label>Small heading<input id="heroEyebrowInput" maxlength="180"></label>
+              <label>Channel name<input id="heroTitleInput" maxlength="120"></label>
+              <label>Main message<input id="heroSubtitleInput" maxlength="220"></label>
+              <label>Introduction<textarea id="heroTextInput" maxlength="1200"></textarea></label>
+            </article>
+            <article class="formCard">
+              <div class="formCardTitle"><span>02</span><div><h3>Next show</h3><p>Tell visitors what is coming up.</p></div></div>
+              <div class="twoCols">
+                <label>Show title<input id="nextTitleInput"></label>
+                <label>Display time<input id="nextTimeLabelInput" placeholder="Sunday · 07:00"></label>
+              </div>
+              <label>Date and time<input id="nextDateInput" type="datetime-local"></label>
+              <label>Theme<select id="nextThemeInput"></select></label>
+              <label>Description<textarea id="nextDescriptionInput"></textarea></label>
+            </article>
+            <article class="formCard">
+              <div class="formCardTitle"><span>03</span><div><h3>Community</h3><p>Goals, request text and special announcements.</p></div></div>
+              <div class="twoCols">
+                <label>Follower goal<input id="followerGoalInput" type="number" min="0"></label>
+                <label>Subscriber goal<input id="subGoalInput" type="number" min="0"></label>
+              </div>
+              <label>Song request message<input id="requestTextInput"></label>
+              <label>Special announcement<textarea id="specialEventInput"></textarea></label>
+            </article>
+          </div>
+          <aside class="livePreview">
+            <span>Live preview</span>
+            <div class="previewHero">
+              <small id="previewEyebrow">LIVE MUSIC FROM DENMARK</small>
+              <h2 id="previewTitle">DJ FOLSOE</h2>
+              <h3 id="previewSubtitle">Live music, requests and good company</h3>
+              <p id="previewText"></p>
+              <button>Watch live</button>
             </div>
-            <div class="chartAdmin__field">
-              <label for="chartDisplayCount">Website entries</label>
-              <select id="chartDisplayCount">
-                <option value="10">Top 10</option>
-                <option value="20" selected>Top 20</option>
-              </select>
-            </div>
-            <div class="chartAdmin__field chartAdmin__field--wide">
-              <label for="chartSourceNote">Source note</label>
-              <input id="chartSourceNote" value="Danish airplay, BBC Radio 1 and international chart signals">
-            </div>
-          </div>
-          <div class="chartAdmin__actions">
-            <button type="button" id="chartLoadBtn">Load current</button>
-            <button type="button" id="chartRecalculateBtn">Calculate movement</button>
-            <button type="button" id="chartNumberOneBtn">Preview number 1</button>
-          </div>
-          <div class="chartAdmin__preview">
-            <span class="chartAdmin__label">NUMBER ONE PREVIEW</span>
-            <strong id="chartPreviewNumberOne">No chart loaded</strong>
-            <p id="chartPreviewMeta">Movement and week information appears here.</p>
-          </div>
-          <pre id="chartDiagnostics" class="chartAdmin__diag">Chart engine ready.</pre>
-        </article>
-
-        <article class="chartAdmin__panel">
-          <span class="chartAdmin__label">RUNNING ORDER</span>
-          <h3>Top 20 entries</h3>
-          <div id="chartEditorList" class="chartAdmin__list"></div>
-        </article>
-      </div>
-    </section>
-
-
-    <section class="seratoAdmin" id="seratoAdmin"><div class="seratoAdmin__head"><div><span>V19600 · ADVANCED SERATO BROADCAST BRIDGE</span><h2>Serato connection</h2><p>Monitor deck A/B, active deck, BPM, key, crossfader and bridge state.</p></div><button id="seratoAdminRefreshBtn" type="button" class="bigPublish">Refresh</button></div><div class="seratoGrid"><article class="seratoPanel"><span class="seratoLabel">BRIDGE HEALTH</span><h3 id="seratoAdminStatus">WAITING</h3><p id="seratoAdminSummary">No Serato data received</p><div class="seratoActions"><button id="seratoAdminTestBtn" type="button">Test</button><button id="seratoAdminReconnectBtn" type="button">Reconnect</button><button id="seratoAdminClearBtn" type="button">Clear</button></div><pre class="seratoDiag" id="seratoAdminDiagnostics">Ready.</pre></article><article class="seratoPanel"><span class="seratoLabel">DECK MONITOR</span><div class="seratoGrid"><article class="seratoDeck"><span>DECK A</span><strong id="seratoAdminDeckA">No track</strong><p id="seratoAdminDeckAMeta">Waiting</p></article><article class="seratoDeck"><span>DECK B</span><strong id="seratoAdminDeckB">No track</strong><p id="seratoAdminDeckBMeta">Waiting</p></article></div></article></div></section>
-
-    <section class="audienceAdmin" id="audienceAdmin">
-      <div class="audienceAdmin__head">
-        <div><span>V19700 · AUDIENCE IDENTITY & LOYALTY ENGINE</span><h2>Community profiles and recognition</h2><p>Track visits, roles, requests and loyalty while controlling recognition.</p></div>
-        <button type="button" id="audienceRefreshBtn" class="bigPublish">Refresh audience</button>
-      </div>
-      <div class="audienceAdmin__grid">
-        <article class="audienceAdmin__panel">
-          <span>LOYALTY CONTROL</span><h3>Audience engine</h3>
-          <div class="audienceAdmin__kpis">
-            <article><span>PROFILES</span><strong id="audienceProfileCount">0</strong></article>
-            <article><span>REGULARS</span><strong id="audienceRegularCount">0</strong></article>
-            <article><span>REQUESTS</span><strong id="audienceRequestCount">0</strong></article>
-            <article><span>RECOGNITIONS</span><strong id="audienceRecognitionCount">0</strong></article>
-          </div>
-          <div class="audienceAdmin__form">
-            <div class="audienceAdmin__field"><label for="audienceRecognitionCooldown">Cooldown minutes</label><input id="audienceRecognitionCooldown" type="number" min="1" max="240" value="30"></div>
-            <div class="audienceAdmin__field"><label for="audienceMinimumVisits">Regular viewer visits</label><input id="audienceMinimumVisits" type="number" min="2" max="100" value="10"></div>
-            <div class="audienceAdmin__field audienceAdmin__field--wide"><label for="audienceRecognitionMode">Automatic recognition</label><select id="audienceRecognitionMode"><option value="balanced">Balanced</option><option value="first-and-milestones">First visit and milestones</option><option value="roles-only">Mods, VIPs and DJs only</option><option value="off">Off</option></select></div>
-          </div>
-          <div class="audienceAdmin__actions">
-            <button type="button" id="audienceTestFirstBtn">Test first viewer</button>
-            <button type="button" id="audienceTestVipBtn">Test VIP</button>
-            <button type="button" id="audienceClearRecognitionBtn">Clear recognition</button>
-          </div>
-          <pre id="audienceDiagnostics" class="audienceAdmin__diag">Audience engine ready.</pre>
-        </article>
-        <article class="audienceAdmin__panel"><span>COMMUNITY DIRECTORY</span><h3>Viewer profiles</h3><div id="audienceProfileList" class="audienceAdmin__profiles"></div></article>
-      </div>
-    </section>
-
-
-    <section class="websiteCmsAdmin" id="websiteCmsAdmin">
-      <div class="websiteCmsAdmin__head">
-        <div>
-          <span>V19800 · WEBSITE CMS 2.0</span>
-          <h2>Control homepage content without code</h2>
-          <p>Create news, highlights and channel updates that publish through the same broadcast core.</p>
+          </aside>
         </div>
-        <button type="button" id="websiteCmsPublishBtn" class="bigPublish">Publish website CMS</button>
-      </div>
+      </section>
 
-      <div class="websiteCmsAdmin__grid">
-        <article class="websiteCmsAdmin__panel">
-          <span>CONTENT BUILDER</span>
-          <h3>Add content</h3>
-          <div class="websiteCmsAdmin__form">
-            <div class="websiteCmsAdmin__field">
-              <label for="websiteCmsType">Content type</label>
-              <select id="websiteCmsType">
-                <option value="news">News</option>
-                <option value="highlight">Highlight</option>
-                <option value="clip">Clip</option>
-                <option value="promo">Promo</option>
-              </select>
-            </div>
-            <div class="websiteCmsAdmin__field">
-              <label for="websiteCmsDate">Date label</label>
-              <input id="websiteCmsDate" placeholder="TODAY">
-            </div>
-            <div class="websiteCmsAdmin__field websiteCmsAdmin__field--wide">
-              <label for="websiteCmsTitle">Title</label>
-              <input id="websiteCmsTitle">
-            </div>
-            <div class="websiteCmsAdmin__field websiteCmsAdmin__field--wide">
-              <label for="websiteCmsBody">Body</label>
-              <textarea id="websiteCmsBody"></textarea>
-            </div>
-            <div class="websiteCmsAdmin__field websiteCmsAdmin__field--wide">
-              <label for="websiteCmsUrl">Optional URL</label>
-              <input id="websiteCmsUrl" placeholder="https://">
-            </div>
-          </div>
-          <div class="websiteCmsAdmin__actions">
-            <button type="button" id="websiteCmsAddBtn">Add item</button>
-            <button type="button" id="websiteCmsClearBtn">Clear form</button>
-            <button type="button" id="websiteCmsLoadBtn">Load current</button>
-          </div>
-          <pre id="websiteCmsDiagnostics" class="websiteCmsAdmin__diag">Website CMS ready.</pre>
+      <section data-screen-panel="modules" class="screen">
+        <div class="screenIntro"><div><span>Content blocks</span><h2>Build the website with blocks</h2><p>Drag blocks into order, duplicate them or publish when ready.</p></div><button data-quick-create="poster">New content block</button></div>
+        <div class="filterBar">
+          <button data-module-filter="all" class="active">All</button>
+          <button data-module-filter="published">Published</button>
+          <button data-module-filter="draft">Drafts</button>
+          <button data-module-filter="scheduled">Scheduled</button>
+        </div>
+        <div id="moduleList" class="sortableList"></div>
+      </section>
+
+      <section data-screen-panel="shows" class="screen">
+        <div class="screenIntro"><div><span>Shows</span><h2>Your programme lineup</h2><p>Add, reorder and style every programme shown on the website.</p></div><div><button id="addShow" class="secondary">Add show</button><button id="saveShows">Save shows</button></div></div>
+        <div id="showsEditor" class="cardEditorList"></div>
+      </section>
+
+      <section data-screen-panel="charts" class="screen">
+<div id="v26432ChartAdmin" class="v26432ChartAdmin">
+  <div class="v26432ChartHeader">
+    <div>
+      <span>UNIFIED CHART DATA</span>
+      <h3>Top 20 · Retro Top 10 · TIDAL</h3>
+      <p>This edits the same <code>data/charts.json</code> used by /charts/, Retro Hits and Weekend.</p>
+    </div>
+    <a href="/charts/" target="_blank">Open Chart Universe ↗</a>
+  </div>
+  <div class="v26432GithubRow">
+    <label>GitHub owner<input id="v26432Owner" value="folsoe"></label>
+    <label>Repository<input id="v26432Repo" value="djfolsoe-tv"></label>
+    <label>Branch<input id="v26432Branch" value="main"></label>
+    <label class="token">GitHub token<input id="v26432GithubToken" type="password" autocomplete="off" placeholder="Fine-grained token · Contents read/write"></label>
+  </div>
+  <div class="v26432ChartActions">
+    <button id="v26432LoadPublic" type="button">Load current website data</button>
+    <button id="v26432LoadGithub" type="button">Load from GitHub</button>
+    <button id="v26432SaveGithub" type="button" class="primary">Save & deploy charts</button>
+  </div>
+  <div class="v26432ChartMeta">
+    <label>Chart week<input id="v26432Week" placeholder="2026-W32"></label>
+    <label>Published date<input id="v26432Date" type="date"></label>
+  </div>
+  <div class="v26432ChartColumns">
+    <section><h4>DJ FOLSOE TOP 20</h4><div id="v26432Top20"></div></section>
+    <section><h4>RETRO HITS TOP 10</h4><div id="v26432Retro10"></div></section>
+  </div>
+  <section class="v26432PlaylistAdmin"><h4>TIDAL PLAYLISTS</h4><div id="v26432Playlists"></div></section>
+  <div id="v26432ChartMsg" class="v26432ChartMsg">Ready.</div>
+</div>
+
+        <div class="screenIntro"><div><span>Charts</span><h2>Top 10, Top 20 or any countdown</h2><p>Add tracks, cover art, movement and a short story.</p></div><div><select id="chartSize"><option value="10">Top 10</option><option value="20" selected>Top 20</option></select><button id="saveChart">Save chart</button></div></div>
+        <div id="chartEditor" class="chartEditor"></div>
+      </section>
+
+      <section data-screen-panel="news" class="screen">
+        <div class="screenIntro"><div><span>Music stories</span><h2>External news and your own articles</h2><p>Feature, hide or write stories in clear English.</p></div><div><button id="refreshNews" class="secondary">Fetch external stories</button><button id="newStory">Write a story</button></div></div>
+        <div class="newsAdminTabs"><button data-news-tab="editorial" class="active">Your stories</button><button data-news-tab="external">External stories</button><button data-news-tab="sources">Sources</button></div>
+        <div id="newsEditorial" class="newsPanel active"></div>
+        <div id="newsExternal" class="newsPanel"></div>
+        <div id="newsSources" class="newsPanel"></div>
+      </section>
+
+      <section data-screen-panel="polls" class="screen">
+        <div class="screenIntro"><div><span>Interaction</span><h2>Polls and viewer participation</h2><p>Create a question, add answers and choose the relevant show.</p></div><button data-quick-create="poll">Create poll</button></div>
+        <div id="pollList" class="contentCardGrid"></div>
+      </section>
+
+      <section data-screen-panel="playlists" class="screen">
+        <div class="screenIntro"><div><span>Playlists</span><h2>Feature a playlist for every show</h2><p>Add a cover, a short introduction and a Spotify link.</p></div><button data-quick-create="playlist">Add playlist</button></div>
+        <div id="playlistList" class="contentCardGrid"></div>
+      </section>
+
+      <section data-screen-panel="theme" class="screen">
+<div class="v26432ThemeNotice">
+  <strong>LIVE THEME CONTROL RESTORED</strong>
+  <span>Theme buttons below control the existing Broadcast Core used by website and overlay.</span>
+</div>
+
+        <div class="screenIntro"><div><span>Theme & Main Overlay</span><h2>One identity across website and stream</h2><p>The Main Overlay stays protected: one logo, top ticker, theme ticker and Twitch chat.</p></div><button id="saveTickers">Save ticker messages</button></div>
+        <article class="themePickerCard">
+          <h3>Choose the active theme</h3>
+          <div id="themePicker" class="themePicker"></div>
         </article>
-
-        <article class="websiteCmsAdmin__panel">
-          <span>CONTENT QUEUE</span>
-          <h3>Homepage items</h3>
-          <div id="websiteCmsItems" class="websiteCmsAdmin__items"></div>
+        <div class="overlayProtection">
+          <div><strong>✓ Logo / TV bug</strong><span>Protected</span></div>
+          <div><strong>✓ Top ticker</strong><span>Editable below</span></div>
+          <div><strong>✓ Theme ticker</strong><span>Changes with the show</span></div>
+          <div><strong>✓ Twitch chat</strong><span>Always protected</span></div>
+        </div>
+        <article class="formCard">
+          <div class="formCardTitle"><span>A</span><div><h3>General top ticker</h3><p>Messages that can appear for every show.</p></div></div>
+          <div id="topTickerEditor" class="simpleRows"></div>
+          <button id="addTopTicker" class="secondary">Add message</button>
         </article>
-      </div>
-    </section>
+        <article class="formCard">
+          <div class="formCardTitle"><span>B</span><div><h3>Theme ticker</h3><p>Specific messages for Retro, Trance, Eurodance and other themes.</p></div></div>
+          <div id="themeTickerEditor" class="simpleRows"></div>
+          <button id="addThemeTicker" class="secondary">Add theme message</button>
+        </article>
+      </section>
 
-    <pre id="statusBox">V921 ready. Every visible website/overlay field is mapped to one simple admin field.</pre>
-  </section>
+      <section data-screen-panel="schedule" class="screen">
+        <div class="screenIntro"><div><span>Publishing schedule</span><h2>What is coming and going live</h2><p>See drafts, scheduled blocks and active content.</p></div></div>
+        <div id="scheduleBoard" class="scheduleBoard"></div>
+      </section>
+    </div>
+  </main>
+</div>
 
-  <details id="advancedPanel" class="legacyAdvanced">
-    <summary>Advanced / Technical tools</summary>
-    <section class="panel">
-      <h2>⚙️ Technical Settings</h2>
-      <p class="note">Only use this when the API URL or token needs to be changed.</p>
-      <div class="v9185SettingsGrid">
-        <label>Cloudflare Worker API base
-          <input id="apiBase" placeholder="https://djfolsoe-tv-api.sunefolsoe.workers.dev">
-        </label>
-        <label>Admin token
-          <input id="advancedToken" type="password" placeholder="ADMIN_TOKEN">
-        </label>
-      </div>
-      <div class="v9185ButtonRow">
-        <button onclick="djfSaveSettings()">Save settings</button>
-        <button onclick="djfTestApi()">Test API</button>
-        <button onclick="djfOpenApi('/api/health')">Open health</button>
-        <button onclick="djfOpenApi('/api/broadcast')">Open unified data</button>
-      </div>
-      <pre id="advancedStatus">Advanced hidden by default. Old version-modules are no longer part of daily control.</pre>
-    </section>
-  </details>
-</main>
+<div id="editorModal" class="modal" aria-hidden="true">
+  <div class="modalBackdrop" data-close-modal></div>
+  <div class="modalWindow">
+    <header>
+      <div><span id="modalKicker">CONTENT BLOCK</span><h2 id="modalTitle">Create content</h2></div>
+      <button data-close-modal aria-label="Close">×</button>
+    </header>
+    <form id="contentForm">
+      <input id="contentId" type="hidden">
+      <input id="contentType" type="hidden">
+      <div id="contentFields"></div>
+      <section class="publishingPanel">
+        <h3>Publishing</h3>
+        <div class="threeCols">
+          <label>Status<select id="contentStatus"><option value="draft">Save as draft</option><option value="published">Publish now</option><option value="archived">Archive</option></select></label>
+          <label>Theme<select id="contentTheme"></select></label>
+          <label>Show<select id="contentShow"></select></label>
+        </div>
+        <div class="threeCols">
+          <label>Website position<select id="contentZone">
+            <option value="featured">Featured near the top</option>
+            <option value="editorial">Editorial section</option>
+            <option value="shows-after">After shows</option>
+            <option value="charts-after">After chart</option>
+            <option value="interactive">Interactive section</option>
+            <option value="archive">Archive</option>
+          </select></label>
+          <label>Start date<input id="contentStart" type="datetime-local"></label>
+          <label>End date<input id="contentEnd" type="datetime-local"></label>
+        </div>
+        <div class="switchRow">
+          <label><input id="contentWebsite" type="checkbox" checked><span>Show on website</span></label>
+          <label><input id="contentOverlay" type="checkbox"><span>Make available to a separate OBS widget</span></label>
+          <label><input id="contentPinned" type="checkbox"><span>Feature this content</span></label>
+        </div>
+      </section>
+      <footer class="modalActions">
+        <button type="button" data-close-modal class="secondary">Cancel</button>
+        <button type="button" id="saveDraft" class="secondary">Save draft</button>
+        <button type="submit">Save and publish</button>
+      </footer>
+    </form>
+  </div>
+</div>
 
-<script src="assets/js/admin.js?v=19100"></script>
-  <script src="assets/js/v18850-visual-system.js?v=19000"></script>
-  <script src="assets/js/graphics-studio.js?v=19200"></script>
-  <script src="assets/js/ai-music-director.js?v=19300"></script>
-  <script src="assets/js/interaction-admin.js?v=19400"></script>
-  <script src="assets/js/music-chart-admin.js?v=19500"></script>
-  <script src="assets/js/serato-admin.js?v=19600"></script>
-  <script src="assets/js/audience-identity-admin.js?v=19700"></script>
-  <script src="assets/js/website-cms-admin.js?v=19800"></script>
-<script src="assets/js/v26431-admin-rescue.js?v=26431"></script></body>
+
+<div id="createWizard" class="wizard" hidden>
+  <div class="wizardBackdrop" data-close-wizard></div>
+  <div class="wizardWindow">
+    <header class="wizardHeader">
+      <div>
+        <span>NEW CONTENT</span>
+        <h2 id="wizardTitle">Choose what you want to create</h2>
+      </div>
+      <button data-close-wizard aria-label="Close">×</button>
+    </header>
+
+    <div id="wizardStepChoose" class="wizardStep active">
+      <div class="wizardChoices">
+        <button data-wizard-type="poster"><i>▣</i><strong>Special event</strong><span>Poster, date, text and call-to-action</span></button>
+        <button data-wizard-type="ranked-list"><i>10</i><strong>Top 10 / Top 20</strong><span>Artist, track, year and story</span></button>
+        <button data-wizard-type="story"><i>✎</i><strong>Music story</strong><span>Your own article or show feature</span></button>
+        <button data-wizard-type="poll"><i>✓</i><strong>Poll</strong><span>Question, answers and schedule</span></button>
+        <button data-wizard-type="playlist"><i>♫</i><strong>Playlist</strong><span>Cover, text and Spotify link</span></button>
+        <button data-wizard-type="text"><i>T</i><strong>Text feature</strong><span>Announcement, history or editorial block</span></button>
+      </div>
+    </div>
+
+    <div id="wizardStepDetails" class="wizardStep">
+      <div class="wizardProgress">
+        <span class="active">1. Content</span>
+        <span>2. Placement</span>
+        <span>3. Publish</span>
+      </div>
+      <div id="wizardFields"></div>
+      <footer class="wizardActions">
+        <button id="wizardBack" class="secondary">Back</button>
+        <button id="wizardNext">Continue</button>
+      </footer>
+    </div>
+
+    <div id="wizardStepPlacement" class="wizardStep">
+      <div class="wizardProgress">
+        <span>1. Content</span>
+        <span class="active">2. Placement</span>
+        <span>3. Publish</span>
+      </div>
+      <div class="wizardPanel">
+        <h3>Where should it appear?</h3>
+        <div class="placementGrid">
+          <label><input type="radio" name="wizardZone" value="featured" checked><span><strong>Featured</strong><small>Near the top of the homepage</small></span></label>
+          <label><input type="radio" name="wizardZone" value="editorial"><span><strong>Editorial</strong><small>Among stories and features</small></span></label>
+          <label><input type="radio" name="wizardZone" value="shows-after"><span><strong>After shows</strong><small>Under the show lineup</small></span></label>
+          <label><input type="radio" name="wizardZone" value="charts-after"><span><strong>After chart</strong><small>Below the Top 20</small></span></label>
+          <label><input type="radio" name="wizardZone" value="interactive"><span><strong>Interactive</strong><small>Near commands and polls</small></span></label>
+          <label><input type="radio" name="wizardZone" value="archive"><span><strong>Archive</strong><small>Keep it available, but not prominent</small></span></label>
+        </div>
+        <div class="threeCols">
+          <label>Theme<select id="wizardTheme"></select></label>
+          <label>Show<select id="wizardShow"></select></label>
+          <label>Visibility<select id="wizardVisibility"><option value="website">Website only</option><option value="both">Website + separate OBS widget</option><option value="overlay">Separate OBS widget only</option></select></label>
+        </div>
+      </div>
+      <footer class="wizardActions">
+        <button id="wizardPlacementBack" class="secondary">Back</button>
+        <button id="wizardPlacementNext">Continue</button>
+      </footer>
+    </div>
+
+    <div id="wizardStepPublish" class="wizardStep">
+      <div class="wizardProgress">
+        <span>1. Content</span>
+        <span>2. Placement</span>
+        <span class="active">3. Publish</span>
+      </div>
+      <div class="wizardPanel">
+        <h3>When should it be visible?</h3>
+        <div class="publishChoiceGrid">
+          <label><input type="radio" name="wizardPublishMode" value="draft" checked><span><strong>Save as draft</strong><small>Keep working later</small></span></label>
+          <label><input type="radio" name="wizardPublishMode" value="published"><span><strong>Publish now</strong><small>Show it immediately</small></span></label>
+          <label><input type="radio" name="wizardPublishMode" value="scheduled"><span><strong>Schedule</strong><small>Choose start and end</small></span></label>
+        </div>
+        <div id="wizardScheduleFields" class="twoCols" hidden>
+          <label>Start<input id="wizardStart" type="datetime-local"></label>
+          <label>End<input id="wizardEnd" type="datetime-local"></label>
+        </div>
+        <label class="featureSwitch"><input id="wizardPinned" type="checkbox"><span>Feature this content prominently</span></label>
+      </div>
+      <footer class="wizardActions">
+        <button id="wizardPublishBack" class="secondary">Back</button>
+        <button id="wizardSave">Create content</button>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<div id="confirmModal" class="confirmModal" hidden>
+  <div><h3 id="confirmTitle">Are you sure?</h3><p id="confirmText"></p><footer><button id="confirmCancel" class="secondary">Cancel</button><button id="confirmOk" class="danger">Delete</button></footer></div>
+</div>
+
+<script src="assets/js/visual-cms.js?v=17010"></script>
+  <script src="assets/js/v26020-click-cms.js?v=26020"></script>
+  <script src="assets/js/v26030-live-preview-sync-recovery.js?v=26030"></script>
+  <script src="assets/js/v18850-visual-system.js?v=18850-1"></script>
+  <script src="assets/js/v26040-publish-validation-audit.js?v=26040"></script>
+<script src="assets/js/v26432-admin-legacy-bridge.js?v=26432"></script></body>
 </html>

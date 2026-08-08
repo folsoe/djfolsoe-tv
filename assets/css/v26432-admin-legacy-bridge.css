@@ -1,0 +1,36 @@
+
+/* V26432 — Preserve legacy Click CMS look, add unified chart/theme bridge */
+.v26432ThemeNotice{
+ margin:0 0 14px;padding:12px 14px;border:1px solid rgba(39,234,173,.24);
+ border-radius:12px;background:rgba(39,234,173,.06);display:flex;gap:10px;flex-wrap:wrap;align-items:center
+}
+.v26432ThemeNotice strong{color:#45efb6}.v26432ThemeNotice span{color:#9eabbd;font-size:12px}
+.v26432ChartAdmin{
+ margin:0 0 20px;padding:18px;border:1px solid rgba(255,255,255,.10);border-radius:18px;
+ background:radial-gradient(circle at 92% 8%,rgba(255,43,134,.10),transparent 28%),linear-gradient(145deg,#101522,#080b13)
+}
+.v26432ChartHeader{display:flex;justify-content:space-between;gap:16px;align-items:start;margin-bottom:12px}
+.v26432ChartHeader span{color:#18dcff;font-size:10px;font-weight:1000;letter-spacing:.15em}
+.v26432ChartHeader h3{margin:4px 0!important;color:#fff!important;font-size:26px!important}
+.v26432ChartHeader p{margin:0!important;color:#9aa7bb!important}
+.v26432ChartHeader a{padding:9px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:11px;font-weight:900}
+.v26432GithubRow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:12px 0}
+.v26432GithubRow .token{grid-column:1/-1}.v26432GithubRow label,.v26432ChartMeta label{display:grid;gap:5px;color:#8e9bae;font-size:10px;font-weight:800}
+.v26432GithubRow input,.v26432ChartMeta input,.v26432ChartRow input,.v26432PlaylistRow input{
+ width:100%;box-sizing:border-box;padding:9px;border-radius:8px;border:1px solid rgba(255,255,255,.11);background:#080c15;color:#fff
+}
+.v26432ChartActions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.v26432ChartActions button{padding:10px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.12);background:#101726;color:#fff;font-weight:900}.v26432ChartActions .primary{background:linear-gradient(90deg,#ff2b86,#ffb12b);border:0;color:#080a10}
+.v26432ChartMeta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.v26432ChartColumns{display:grid;grid-template-columns:1fr 1fr;gap:10px}.v26432ChartColumns h4,.v26432PlaylistAdmin h4{color:#fff!important}
+.v26432ChartRow{display:grid;grid-template-columns:34px 1fr 1fr 62px 58px 58px 78px;gap:4px;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.v26432ChartRow.retro{grid-template-columns:34px 1fr 1fr 58px 62px 58px 58px 78px}
+.v26432ChartRow b{color:#ffb12b;text-align:center}.v26432ChartRow select{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.11);background:#080c15;color:#fff}
+.v26432PlaylistGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.v26432PlaylistRow{padding:9px;border-radius:10px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);display:grid;gap:6px}
+.v26432ChartMsg{margin-top:10px;padding:10px;border-radius:9px;border:1px solid rgba(24,220,255,.18);background:rgba(24,220,255,.06);color:#bcefff}
+.v26432-live-theme{outline:2px solid #18dcff!important;box-shadow:0 0 20px rgba(24,220,255,.16)!important}
+/* Hide only the obsolete legacy chart editor content AFTER our panel; keep screen/nav itself. */
+[data-screen-panel="charts"] .screenIntro~.rankedEditor,
+[data-screen-panel="charts"] #chartEditor,
+[data-screen-panel="charts"] #chartList{display:none!important}
+@media(max-width:1000px){.v26432ChartColumns{grid-template-columns:1fr}.v26432GithubRow{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.v26432GithubRow,.v26432ChartMeta,.v26432PlaylistGrid{grid-template-columns:1fr}.v26432ChartHeader{flex-direction:column}.v26432ChartRow,.v26432ChartRow.retro{grid-template-columns:30px 1fr 1fr}.v26432ChartRow input:nth-of-type(n+3),.v26432ChartRow select{display:none}}
