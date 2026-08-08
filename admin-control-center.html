@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE · Unified Admin Control Center V26435</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/admin-control-center.css?v=26435">
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<aside class="sidebar">
+  <a class="brand" href="/"><span>TV</span><div><strong>DJ FOLSOE</strong><small>UNIFIED CONTROL</small></div></a>
+  <nav>
+    <button class="nav active" data-panel="dashboard">⌂ <span>Dashboard</span></button>
+    <button class="nav" data-panel="broadcast">◉ <span>Broadcast</span></button>
+    <button class="nav" data-panel="content">▦ <span>Website & CMS</span></button>
+    <button class="nav" data-panel="charts">20 <span>Charts</span></button>
+    <button class="nav" data-panel="requests">♫ <span>Requests</span></button>
+    <button class="nav" data-panel="commands">! <span>Commands</span></button>
+    <button class="nav" data-panel="audience">◎ <span>Audience</span></button>
+    <button class="nav" data-panel="twitch">◆ <span>Twitch</span></button>
+    <button class="nav" data-panel="diagnostics">⚙ <span>Diagnostics</span></button>
+  </nav>
+  <div class="sideStatus"><i id="globalDot"></i><div><strong id="globalStatus">Not connected</strong><small>Cloudflare + website</small></div></div>
+</aside>
+<main class="workspace">
+<header class="topbar">
+  <div><small>V26435 · ONE CONTROL ROOM</small><h1 id="pageTitle">Dashboard</h1></div>
+  <div class="topActions">
+    <label><span>Admin password</span><input id="adminToken" type="password" autocomplete="off" placeholder="ADMIN_TOKEN"></label>
+    <button id="connectBtn" class="primary">Connect</button>
+    <a href="/" target="_blank">Website ↗</a>
+  </div>
+</header>
+<section id="warning" class="warning" hidden></section>
+
+<section class="panel active" data-panel-view="dashboard">
+  <div class="hero"><div><small>DJ FOLSOE NETWORK</small><h2>Website, Worker og Main Overlay i ét kontrolcenter</h2><p>Hver del testes separat. En fejl i én service lukker ikke resten af adminen.</p></div><div class="heroState"><span id="heroMode">OFFLINE</span><strong id="heroTheme">—</strong><small id="heroUpdated">Ikke indlæst</small></div></div>
+  <div class="metrics">
+    <article><span>Website</span><strong id="mWebsite">Checking</strong></article>
+    <article><span>Worker</span><strong id="mWorker">Checking</strong></article>
+    <article><span>Twitch</span><strong id="mTwitch">Checking</strong></article>
+    <article><span>Schedule</span><strong id="mSchedule">Checking</strong></article>
+    <article><span>Requests</span><strong id="mRequests">Checking</strong></article>
+    <article><span>Commands</span><strong id="mCommands">Checking</strong></article>
+  </div>
+  <div class="sectionHead"><div><small>CONTROL SURFACES</small><h2>Alt det du bruger</h2></div><button id="refreshAll">Refresh all</button></div>
+  <div class="moduleGrid">
+    <button data-open-panel="broadcast"><b>LIVE</b><strong>Broadcast Control</strong><span>Theme, live data, next show og overlay-state</span></button>
+    <button data-open-url="/admin-cms.html"><b>CMS</b><strong>Content Studio</strong><span>Shows, homepage, content blocks, playlists og schedule</span></button>
+    <button data-open-panel="charts"><b>20</b><strong>Top 10 / Top 20</strong><span>Chart Universe og Retro countdown</span></button>
+    <button data-open-panel="requests"><b>♫</b><strong>Song Requests</strong><span>Queue, open/close og request handling</span></button>
+    <button data-open-panel="commands"><b>!</b><strong>Commands</strong><span>Registry, settings og command health</span></button>
+    <button data-open-panel="audience"><b>◎</b><strong>Audience Engine</strong><span>Presence, memory, intelligence og platform</span></button>
+  </div>
+  <div class="sectionHead"><div><small>SYSTEM MATRIX</small><h2>Backend status</h2></div></div>
+  <div id="systemMatrix" class="systemMatrix"></div>
+</section>
+
+<section class="panel" data-panel-view="broadcast">
+  <div class="sectionHead"><div><small>LIVE OPERATIONS</small><h2>Broadcast Control</h2></div><button data-action="refreshBroadcast">Refresh</button></div>
+  <div class="broadcastCard"><div><span>Current stream</span><h3 id="streamTitle">—</h3><p id="streamDetail">Connect to load Twitch and broadcast state.</p></div><div class="liveMetrics"><div><span>Viewers</span><strong id="viewerCount">0</strong></div><div><span>Followers</span><strong id="followerCount">—</strong></div><div><span>Theme</span><strong id="activeTheme">—</strong></div></div></div>
+  <div class="controlGrid">
+    <article><h3>Theme switch</h3><p>Skifter website/broadcast-core og request theme sammen.</p><select id="themeSelect"><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="retro">Retro</option><option value="fredagsbar">Fredagsbar</option><option value="weekend">Weekend</option><option value="popup">Pop Up</option><option value="summer">Summer</option><option value="danske">Danske</option><option value="top20">Top 20</option></select><button id="setTheme" class="primary">Set active theme</button></article>
+    <article><h3>Next show / schedule</h3><div id="nextShowBox" class="dataBox">—</div><button id="refreshSchedule">Force schedule refresh</button></article>
+    <article><h3>Main Overlay</h3><p>Overlayet ændres ikke af V26435. Åbn kun de eksisterende surface-filer.</p><div class="buttonRow"><a href="/overlay.html" target="_blank">Preview overlay ↗</a><a href="/presence.html" target="_blank">Presence ↗</a></div></article>
+  </div>
+  <div class="jsonCard"><div><h3>Broadcast state</h3><button data-copy="broadcastJson">Copy</button></div><pre id="broadcastJson">—</pre></div>
+</section>
+
+<section class="panel" data-panel-view="content">
+  <div class="sectionHead"><div><small>WEBSITE MANAGEMENT</small><h2>Content & Pages</h2></div></div>
+  <div class="moduleGrid wide">
+    <button data-open-url="/admin-cms.html"><b>CMS</b><strong>Stable Click CMS</strong><span>V26434.2 recovery CMS: Homepage, blocks, shows, playlists, themes and schedule.</span></button>
+    <button data-open-url="/admin-content-platform.html"><b>CP</b><strong>Content Platform</strong><span>Existing advanced content tools.</span></button>
+    <button data-open-url="/shows/"><b>▶</b><strong>Shows index</strong><span>Preview public programme universe.</span></button>
+    <button data-open-url="/music/"><b>♫</b><strong>Music</strong><span>Preview the public music surface.</span></button>
+    <button data-open-url="/watch-live/"><b>LIVE</b><strong>Watch Live</strong><span>Preview Twitch viewing page.</span></button>
+    <button data-open-url="https://djfolsoe-shop.fourthwall.com/"><b>SHOP</b><strong>Fourthwall</strong><span>Open external shop.</span></button>
+  </div>
+  <div class="jsonCard"><div><h3>CMS health</h3><button id="cmsPing">Run admin ping</button></div><pre id="cmsPingJson">—</pre></div>
+</section>
+
+<section class="panel" data-panel-view="charts">
+  <div class="sectionHead"><div><small>CHART UNIVERSE</small><h2>Top 10 / Top 20</h2></div><div class="buttonRow"><button id="loadChart">Load chart state</button><a href="/admin-cms.html#charts" target="_blank">Open visual editor ↗</a></div></div>
+  <p class="intro">Chart-data læses fra den store V26434.2 Worker. Selve visuelle editor ligger fortsat i den stabile Click CMS.</p>
+  <div id="chartSummary" class="metrics"></div>
+  <div class="jsonCard"><div><h3>Chart Universe backend</h3><button data-copy="chartJson">Copy</button></div><pre id="chartJson">—</pre></div>
+</section>
+
+<section class="panel" data-panel-view="requests">
+  <div class="sectionHead"><div><small>REQUEST ENGINE</small><h2>Song Requests</h2></div><div class="buttonRow"><button id="requestOpen">Open requests</button><button id="requestClose">Close requests</button><button id="requestClear" class="danger">Clear queue</button></div></div>
+  <div id="requestStatus" class="statusStrip">—</div><div id="requestQueue" class="queue"></div>
+</section>
+
+<section class="panel" data-panel-view="commands">
+  <div class="sectionHead"><div><small>EXT003</small><h2>Command Engine</h2></div><div class="buttonRow"><button id="loadCommands">Refresh</button><button id="resetCommands" class="danger">Reset defaults</button></div></div>
+  <div class="controlGrid"><article><h3>Command settings</h3><label class="switchline"><span>Commands enabled</span><input id="commandsEnabled" type="checkbox"></label><label>Active show<select id="commandsShow"><option value="all">All</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="retro">Retro</option><option value="fredagsbar">Fredagsbar</option><option value="weekend">Weekend</option><option value="popup">Pop Up</option></select></label><button id="saveCommandSettings" class="primary">Save settings</button></article><article><h3>Registry status</h3><div id="commandStats" class="dataBox">—</div></article></div>
+  <div id="commandList" class="commandList"></div>
+</section>
+
+<section class="panel" data-panel-view="audience">
+  <div class="sectionHead"><div><small>AUDIENCE OS</small><h2>Presence, Memory & Intelligence</h2></div><button id="loadAudience">Refresh</button></div>
+  <div id="audienceCards" class="metrics"></div>
+  <div class="moduleGrid wide">
+    <button data-endpoint="/api/ext001/leaderboard"><b>01</b><strong>Viewer Identity</strong><span>Known viewers and leaderboard.</span></button>
+    <button data-endpoint="/api/ext002/online"><b>02</b><strong>Presence</strong><span>Currently seen / online audience.</span></button>
+    <button data-endpoint="/api/memory/stats"><b>M</b><strong>Memory</strong><span>Long-term viewer memory stats.</span></button>
+    <button data-endpoint="/api/intelligence/insights"><b>AI</b><strong>Intelligence</strong><span>Audience insights and segments.</span></button>
+    <button data-endpoint="/api/platform/state"><b>P</b><strong>Platform</strong><span>Unified community platform state.</span></button>
+    <button data-endpoint="/api/ext004/feed"><b>04</b><strong>Live Activity</strong><span>Website/EventSub activity feed.</span></button>
+  </div>
+  <div class="jsonCard"><div><h3>Selected audience data</h3><button data-copy="audienceJson">Copy</button></div><pre id="audienceJson">Choose a module above.</pre></div>
+</section>
+
+<section class="panel" data-panel-view="twitch">
+  <div class="sectionHead"><div><small>TWITCH CORE</small><h2>Twitch & EventSub</h2></div><button id="loadTwitch">Refresh</button></div>
+  <div id="twitchCards" class="metrics"></div>
+  <div class="controlGrid">
+    <article><h3>App token</h3><p>Health check uden at ændre credentials.</p><button data-endpoint="/api/twitch-auth/health" data-target="twitchJson">Check auth</button><button id="refreshTwitchToken">Refresh app token</button></article>
+    <article><h3>EventSub</h3><p>EXT004 live activity integration.</p><button data-endpoint="/api/ext004/admin/auth-status" data-target="twitchJson">Auth status</button><button data-endpoint="/api/core/admin/subscriptions" data-target="twitchJson">Subscriptions</button></article>
+    <article><h3>Follower truth</h3><p>Uses the follower subsystem already present in the Worker.</p><button data-endpoint="/api/follower-truth" data-target="twitchJson">Read follower truth</button></article>
+  </div>
+  <div class="jsonCard"><div><h3>Twitch diagnostics</h3><button data-copy="twitchJson">Copy</button></div><pre id="twitchJson">—</pre></div>
+</section>
+
+<section class="panel" data-panel-view="diagnostics">
+  <div class="sectionHead"><div><small>NO MORE GUESSING</small><h2>Diagnostics</h2></div><button id="runDiagnostics" class="primary">Run full diagnostics</button></div>
+  <div id="diagnosticResults" class="diagnostics"></div>
+  <div class="jsonCard"><div><h3>Raw diagnostic report</h3><button data-copy="diagnosticJson">Copy</button></div><pre id="diagnosticJson">—</pre></div>
+</section>
+</main>
+<script src="assets/js/admin-control-center.js?v=26435"></script>
+</body>
+</html>
