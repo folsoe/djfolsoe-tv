@@ -1161,133 +1161,82 @@ window.addEventListener('online',()=>{
 
 
 
-/* V26434 — Chart Universe extension for the existing Click CMS */
-(() => {
-  "use strict";
-  const API = window.DJF_API_BASE || "https://djfolsoe-tv-api.sunefolsoe.workers.dev";
-  const $ = id => document.getElementById(id);
-  let state = null;
+/* V26434.1 — Unified Chart Universe inside the existing Click CMS */
+let chartUniverseState={};
 
-  function adminHeaders() {
-    const token = ($("adminToken")?.value || sessionStorage.getItem("djf-admin-token") || "").trim();
-    return {
-      "content-type":"application/json",
-      ...(token ? {"x-admin-token":token, "authorization":"Bearer "+token} : {})
-    };
+function chartUniverseSongRow(x={},i=0,retro=false){
+  const rank=Number(x.rank||i+1);
+  const status=String(x.status||'').toLowerCase();
+  return `<div class="chartUniverseRow ${retro?'retro':''}" data-cu-rank="${rank}">
+    <b>${String(rank).padStart(2,'0')}</b>
+    <input data-f="artist" value="${esc(x.artist||'')}" placeholder="Artist">
+    <input data-f="title" value="${esc(x.title||'')}" placeholder="Title">
+    ${retro?`<input data-f="year" value="${esc(x.year||'')}" placeholder="Year">`:''}
+    <input data-f="last_week" type="number" value="${x.last_week??''}" placeholder="Last">
+    <input data-f="peak" type="number" value="${x.peak??rank}" placeholder="Peak">
+    <input data-f="weeks" type="number" value="${x.weeks??1}" placeholder="Weeks">
+    <select data-f="status"><option value="" ${!status?'selected':''}>Normal</option><option value="new" ${status==='new'?'selected':''}>NEW</option><option value="re-entry" ${status==='re-entry'?'selected':''}>RE</option></select>
+  </div>`;
+}
+function chartUniverseFill(arr,count,retro=false){
+  const src=Array.isArray(arr)?arr:[];
+  return Array.from({length:count},(_,i)=>{
+    const rank=i+1,old=src.find(x=>Number(x.rank)===rank)||{};
+    return {rank,artist:old.artist||'',title:old.title||'',...(retro?{year:old.year||''}:{}),last_week:old.last_week??null,peak:old.peak??rank,weeks:old.weeks??1,status:old.status||'',tidal_url:old.tidal_url||''};
+  });
+}
+function renderChartUniverse(){
+  if(!$('chartUniverseEditor'))return;
+  const u=chartUniverseState||{};
+  $('chartUniverseWeek').value=u.chart_week||'';
+  $('chartUniverseDate').value=u.published_date||'';
+  $('chartUniverseTop20').innerHTML=chartUniverseFill(u.top20,20,false).map((x,i)=>chartUniverseSongRow(x,i,false)).join('');
+  $('chartUniverseRetro10').innerHTML=chartUniverseFill(u.retro_top10,10,true).map((x,i)=>chartUniverseSongRow(x,i,true)).join('');
+  const pls=Array.isArray(u.tidal_playlists)?u.tidal_playlists:[];
+  $('chartUniversePlaylists').innerHTML=pls.map((p,i)=>`<div class="chartUniversePlaylist" data-cu-playlist="${i}">
+    <input data-f="title" value="${esc(p.title||'')}" placeholder="Playlist title">
+    <input data-f="description" value="${esc(p.description||'')}" placeholder="Description">
+    <input data-f="url" value="${esc(p.url||'')}" placeholder="TIDAL URL">
+  </div>`).join('');
+}
+async function loadChartUniverse(){
+  try{
+    const result=await api('/api/cms/admin/state');
+    chartUniverseState=result.chartUniverse||{};
+    renderChartUniverse();
+    $('chartUniverseStatus').textContent='Chart Universe loaded from Cloudflare CMS.';
+  }catch(error){
+    $('chartUniverseStatus').textContent='Could not load Chart Universe: '+error.message;
   }
-
-  function esc(s) {
-    return String(s ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-  }
-
-  async function loadState() {
-    const r = await fetch(API + "/api/cms/admin/state?v=" + Date.now(), {headers:adminHeaders(), cache:"no-store"});
-    const d = await r.json();
-    if (!r.ok || d.ok === false) throw new Error(d.error || d.message || "Could not load CMS state");
-    state = d.chartUniverse || {};
-    render();
-  }
-
-  function songRow(x, retro=false) {
-    return `<div class="v26434ChartRow" data-rank="${x.rank}">
-      <b>${String(x.rank).padStart(2,"0")}</b>
-      <input data-f="artist" value="${esc(x.artist||"")}" placeholder="Artist">
-      <input data-f="title" value="${esc(x.title||"")}" placeholder="Title">
-      ${retro ? `<input data-f="year" value="${esc(x.year||"")}" placeholder="Year">` : ""}
-      <input data-f="last_week" type="number" value="${x.last_week??""}" placeholder="Last">
-      <input data-f="peak" type="number" value="${x.peak??x.rank}" placeholder="Peak">
-      <input data-f="weeks" type="number" value="${x.weeks??1}" placeholder="Weeks">
-      <select data-f="status">
-        <option value="" ${!x.status?"selected":""}>Normal</option>
-        <option value="new" ${x.status==="new"?"selected":""}>NEW</option>
-        <option value="re-entry" ${x.status==="re-entry"?"selected":""}>RE</option>
-      </select>
-    </div>`;
-  }
-
-  function ensureRows(arr, count, retro=false) {
-    const src = Array.isArray(arr) ? arr : [];
-    return Array.from({length:count}, (_,i) => {
-      const rank=i+1, old=src.find(x => Number(x.rank)===rank) || {};
-      return {
-        rank, artist:old.artist||"", title:old.title||"", ...(retro?{year:old.year||""}:{}),
-        last_week:old.last_week??null, peak:old.peak??rank, weeks:old.weeks??1, status:old.status||"", tidal_url:old.tidal_url||""
-      };
+}
+function collectChartUniverseRows(id,retro=false){
+  return [...$(id).querySelectorAll('[data-cu-rank]')].map(r=>{
+    const v=f=>r.querySelector(`[data-f="${f}"]`)?.value??'';
+    const rank=Number(r.dataset.cuRank),last=v('last_week');
+    return {rank,artist:v('artist'),title:v('title'),...(retro?{year:v('year')}:{ }),last_week:last===''?null:Number(last),peak:Number(v('peak')||rank),weeks:Number(v('weeks')||1),status:v('status')};
+  });
+}
+async function saveChartUniverse(){
+  try{
+    const playlists=[...$('chartUniversePlaylists').querySelectorAll('[data-cu-playlist]')].map(r=>{
+      const v=f=>r.querySelector(`[data-f="${f}"]`)?.value||'';
+      return {title:v('title'),description:v('description'),url:v('url')};
     });
-  }
-
-  function render() {
-    const box = $("v26434ChartUniverse");
-    if (!box) return;
-    const top20 = ensureRows(state?.top20,20,false);
-    const retro = ensureRows(state?.retro_top10,10,true);
-    box.querySelector("#v26434Week").value = state?.chart_week || "";
-    box.querySelector("#v26434Date").value = state?.published_date || "";
-    box.querySelector("#v26434Top20").innerHTML = top20.map(x=>songRow(x,false)).join("");
-    box.querySelector("#v26434Retro10").innerHTML = retro.map(x=>songRow(x,true)).join("");
-    const pls = Array.isArray(state?.tidal_playlists) ? state.tidal_playlists : [];
-    box.querySelector("#v26434Playlists").innerHTML = pls.map((p,i)=>`<div class="v26434Playlist" data-i="${i}">
-      <input data-f="title" value="${esc(p.title||"")}" placeholder="Playlist title">
-      <input data-f="description" value="${esc(p.description||"")}" placeholder="Description">
-      <input data-f="url" value="${esc(p.url||"")}" placeholder="TIDAL URL">
-    </div>`).join("") || '<p class="note">No playlists yet. Use Add playlist.</p>';
-  }
-
-  function collectRows(id, retro=false) {
-    return [...$(id).querySelectorAll("[data-rank]")].map(r => {
-      const v = f => r.querySelector(`[data-f="${f}"]`)?.value ?? "";
-      const rank=Number(r.dataset.rank), last=v("last_week");
-      return {
-        rank, artist:v("artist"), title:v("title"), ...(retro?{year:v("year")}:{ }),
-        last_week:last===""?null:Number(last), peak:Number(v("peak")||rank), weeks:Number(v("weeks")||1), status:v("status")
-      };
-    });
-  }
-
-  async function save() {
-    const box=$("v26434ChartUniverse");
-    const playlists=[...box.querySelectorAll(".v26434Playlist")].map(r => {
-      const v=f=>r.querySelector(`[data-f="${f}"]`)?.value||"";
-      return {title:v("title"),description:v("description"),url:v("url")};
-    });
-    const payload={
-      chart_week:box.querySelector("#v26434Week").value.trim(),
-      published_date:box.querySelector("#v26434Date").value,
-      top20:collectRows("v26434Top20",false),
-      retro_top10:collectRows("v26434Retro10",true),
-      tidal_playlists:playlists
-    };
-    const r=await fetch(API+"/api/cms/admin/chart-universe",{method:"POST",headers:adminHeaders(),body:JSON.stringify(payload)});
-    const d=await r.json();
-    if(!r.ok||d.ok===false) throw new Error(d.error||d.message||"Save failed");
-    state=d.chartUniverse; render();
-    const msg=$("v26434ChartMsg"); if(msg) msg.textContent="Saved to CMS / Broadcast Core.";
-  }
-
-  function mount() {
-    const chartsScreen=document.querySelector('[data-screen-panel="charts"]');
-    if(!chartsScreen || $("v26434ChartUniverse")) return;
-    const wrap=document.createElement("section");
-    wrap.id="v26434ChartUniverse";
-    wrap.className="v26434ChartUniverse";
-    wrap.innerHTML=`
-      <div class="v26434Head"><div><span>V26434 · SAME CMS · SAME DESIGN</span><h3>Chart Universe</h3>
-      <p>Top 20, Retro Top 10 and TIDAL playlists are stored in the same CMS as the rest of DJ FOLSOE TV.</p></div>
-      <button id="v26434Reload" type="button">Reload</button></div>
-      <div class="v26434Meta"><label>Chart week<input id="v26434Week"></label><label>Published date<input id="v26434Date" type="date"></label></div>
-      <div class="v26434Cols"><div><h4>DJ FOLSOE TOP 20</h4><div id="v26434Top20"></div></div><div><h4>RETRO HITS TOP 10</h4><div id="v26434Retro10"></div></div></div>
-      <div class="v26434Head"><h4>TIDAL Playlists</h4><button id="v26434AddPlaylist" type="button">Add playlist</button></div>
-      <div id="v26434Playlists" class="v26434Playlists"></div>
-      <div class="v26434Actions"><button id="v26434Save" type="button" class="primary">Save Chart Universe</button><a href="/charts/" target="_blank">Open /charts/ ↗</a></div>
-      <div id="v26434ChartMsg" class="note">Ready.</div>`;
-    chartsScreen.prepend(wrap);
-    $("v26434Reload").addEventListener("click",()=>loadState().catch(e=>alert(e.message)));
-    $("v26434Save").addEventListener("click",()=>save().catch(e=>alert(e.message)));
-    $("v26434AddPlaylist").addEventListener("click",()=>{
-      state=state||{};state.tidal_playlists=[...(state.tidal_playlists||[]),{title:"",description:"",url:""}];render();
-    });
-    loadState().catch(()=>{});
-  }
-
-  window.addEventListener("load", mount);
-})();
+    const payload={chart_week:$('chartUniverseWeek').value.trim(),published_date:$('chartUniverseDate').value,top20:collectChartUniverseRows('chartUniverseTop20',false),retro_top10:collectChartUniverseRows('chartUniverseRetro10',true),tidal_playlists:playlists};
+    const result=await api('/api/cms/admin/chart-universe',{method:'POST',body:JSON.stringify(payload)});
+    chartUniverseState=result.chartUniverse||payload;
+    if(result.core)state.core=result.core;
+    renderChartUniverse(); renderChart();
+    $('chartUniverseStatus').textContent='Saved. Homepage Top 20 and Chart Universe are synchronized.';
+    toast('Chart Universe saved.');
+  }catch(error){toast(error.message,true)}
+}
+window.addEventListener('load',()=>{
+  $('reloadChartUniverse')?.addEventListener('click',loadChartUniverse);
+  $('saveChartUniverse')?.addEventListener('click',saveChartUniverse);
+  $('addChartPlaylist')?.addEventListener('click',()=>{
+    chartUniverseState=chartUniverseState||{};
+    chartUniverseState.tidal_playlists=[...(chartUniverseState.tidal_playlists||[]),{title:'',description:'',url:''}];
+    renderChartUniverse();
+  });
+});

@@ -1,0 +1,9 @@
+/* V26430 mobile QA guard */
+@media(max-width:760px){
+  .v26400-show,.v26400-chartHero,.v26400-chartGrid,.v26410-retroFeature,.v26430Hub,.v26430Editorial{width:auto!important;max-width:none!important}
+  .v26400-chartGrid{margin-left:9px!important;margin-right:9px!important}
+  .v26400-chartHero{margin-left:9px!important;margin-right:9px!important}
+  .v26430HubHero,.v26430EditorialSection{overflow:hidden!important}
+  .v26430Card,.v26400-chartBox,.v26400-panel{min-width:0!important}
+  img,iframe,video{max-width:100%!important}
+}

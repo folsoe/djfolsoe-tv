@@ -1,0 +1,61 @@
+/* DJ FOLSOE V26430 — Complete Content, Show & Discovery Expansion */
+:root{
+  --v30-bg:#050711;--v30-panel:#0b101b;--v30-border:rgba(255,255,255,.10);
+  --v30-pink:#ff2b86;--v30-cyan:#18dcff;--v30-gold:#ffb12b;--v30-violet:#8b5cff;--v30-green:#35e79a;
+}
+.v26430Editorial{
+  max-width:1220px;margin:16px auto 42px;padding:0 14px;
+}
+.v26430EditorialSection{
+  position:relative;overflow:hidden;margin:10px 0;padding:clamp(22px,4vw,44px);
+  border:1px solid var(--v30-border);border-radius:20px;
+  background:
+    radial-gradient(circle at 100% 0%,color-mix(in srgb,var(--accent,#ff2b86) 12%,transparent),transparent 30%),
+    linear-gradient(145deg,#101522,#080b13);
+}
+.v26430EditorialSection:nth-child(even){
+  background:
+    radial-gradient(circle at 0 100%,color-mix(in srgb,var(--accent,#18dcff) 10%,transparent),transparent 30%),
+    linear-gradient(145deg,#0f1420,#080b13);
+}
+.v26430Eyebrow{font-size:10px;font-weight:1000;letter-spacing:.16em;color:var(--accent,#18dcff);text-transform:uppercase}
+.v26430Editorial h2{margin:7px 0 14px!important;color:#fff!important;font-size:clamp(28px,4vw,48px)!important;line-height:1!important}
+.v26430Editorial p{max-width:920px;margin:0 0 13px!important;color:#bcc6d7!important;font-size:clamp(15px,1.4vw,18px)!important;line-height:1.68!important}
+.v26430Editorial .lead{color:#fff!important;font-size:clamp(18px,1.8vw,22px)!important;font-weight:760}
+.v26430CTA{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.v26430CTA a{
+  min-height:42px;padding:10px 13px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:9px;border:1px solid rgba(255,255,255,.13);background:#090d16;color:#fff!important;
+  font-size:11px;font-weight:1000;text-decoration:none!important;
+}
+.v26430CTA a:first-child{background:linear-gradient(90deg,var(--accent,#ff2b86),var(--v30-gold));color:#090a10!important;border:0}
+.v26430Hub{
+  max-width:1320px;margin:18px auto 40px;padding:0 14px;
+}
+.v26430HubHero{
+  margin-bottom:12px;padding:clamp(24px,4vw,48px);border-radius:22px;border:1px solid var(--v30-border);
+  background:radial-gradient(circle at 80% 20%,rgba(255,43,134,.15),transparent 28%),linear-gradient(135deg,#11172a,#070a12);
+}
+.v26430HubHero small{color:var(--v30-cyan);font-weight:1000;letter-spacing:.16em}
+.v26430HubHero h1{margin:8px 0!important;color:#fff!important;font-size:clamp(44px,7vw,88px)!important;line-height:.86!important}
+.v26430HubHero p{max-width:850px;color:#bec8d9!important;font-size:clamp(16px,1.7vw,20px)!important;line-height:1.55!important}
+.v26430CardGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.v26430Card{
+  min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;border-radius:17px;
+  border:1px solid var(--v30-border);background:var(--cardbg,linear-gradient(145deg,#101522,#080b13));
+  color:#fff!important;text-decoration:none!important;overflow:hidden;position:relative;
+}
+.v26430Card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0 35%,rgba(4,7,13,.9) 82%);pointer-events:none}
+.v26430Card>*{position:relative;z-index:2}
+.v26430Card small{color:var(--cardaccent,var(--v30-cyan));font-size:9px;font-weight:1000;letter-spacing:.13em}
+.v26430Card strong{font-size:clamp(23px,2.6vw,38px);line-height:.95;margin-top:5px}
+.v26430Card p{margin:8px 0 0!important;color:#c3cbd8!important;line-height:1.45!important;font-size:13px!important}
+.v26430Ribbon{
+  max-width:1320px;margin:10px auto 18px;padding:10px 14px;display:grid;grid-template-columns:repeat(5,1fr);gap:7px;
+}
+.v26430Ribbon a{padding:11px;border-radius:11px;border:1px solid var(--v30-border);background:#0b101b;color:#fff!important;text-decoration:none!important;font-size:11px;font-weight:900;text-align:center}
+.v26430RetroLinks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.v26430RetroLinks a{padding:14px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid var(--v30-border);color:#fff!important;text-decoration:none!important}
+.v26430RetroLinks small{display:block;color:var(--v30-gold);font-size:9px;font-weight:1000;letter-spacing:.1em}.v26430RetroLinks strong{display:block;margin-top:4px}
+@media(max-width:900px){.v26430CardGrid{grid-template-columns:repeat(2,1fr)}.v26430Ribbon{grid-template-columns:repeat(3,1fr)}.v26430RetroLinks{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.v26430Editorial,.v26430Hub{padding:0 9px}.v26430EditorialSection{padding:20px 16px;border-radius:15px}.v26430CTA{display:grid;grid-template-columns:1fr}.v26430CardGrid{grid-template-columns:1fr}.v26430Card{min-height:190px}.v26430Ribbon{grid-template-columns:1fr 1fr;padding:8px 9px}.v26430RetroLinks{grid-template-columns:1fr}}

@@ -39,15 +39,13 @@
 
   async function init(){
     try{
-      /* V26434 CMS FIRST */
       let data;
-      try {
-        const cms = await loadJson("https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/cms/public/state");
-        data = cms.chartUniverse && (cms.chartUniverse.top20?.length || cms.chartUniverse.retro_top10?.length)
-          ? cms.chartUniverse
-          : await loadJson("/data/charts.json");
-      } catch (_) {
-        data = await loadJson("/data/charts.json");
+      try{
+        const cms=await loadJson("https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/cms/chart-universe");
+        data=cms.chartUniverse;
+        if(!data || (!data.top20?.length && !data.retro_top10?.length)) throw new Error("empty-cms-chart");
+      }catch(_){
+        data=await loadJson("/data/charts.json");
       }
       const top=document.getElementById("top20");
       const retro=document.getElementById("retro10");
