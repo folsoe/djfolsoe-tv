@@ -1,6 +1,8 @@
 const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev';
 const $=id=>document.getElementById(id);
 let state=null,currentModuleFilter='all',draggedModuleId='',pendingConfirm=null;
+let cmsConnectPromise=null;
+let cmsRenderGeneration=0;
 const SCENE_COMPOSER_KEY='djf_scene_composer_v1400';
 let wizardState={type:'',step:0,module:null};
 const themeColors={weekend:'#55e5ff',trance:'#4ce8ff',fredagsbar:'#72ffb7',eurodance:'#ff35b8',retro:'#ffd063',popup:'#ff496f',morning:'#ffd96a',summer:'#61efff',danske:'#ff5454',top20:'#8066ff'};
@@ -8,13 +10,14 @@ const typeIcons={poster:'▣','ranked-list':'10',story:'✎',poll:'✓',playlist
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const token=()=>localStorage.getItem('djf_cms_token')||$('adminToken').value.trim();
 function headers(){return {'Content-Type':'application/json','X-Admin-Token':token()}}
-async function api(path,options={}){let response;try{response=await fetch(API+path,{cache:'no-store',...options,headers:{...headers(),...(options.headers||{})}})}catch(error){const e=new Error('network-unreachable');e.cause=error;throw e}let data={};try{data=await response.json()}catch(_){data={ok:false,error:'invalid-server-response'}}if(!response.ok||data.ok===false){const e=new Error(data.message||data.error||`request-failed-${response.status}`);e.status=response.status;e.payload=data;throw e}return data}
+async function api(path,options={}){const controller=new AbortController();const timeoutMs=Number(options.timeout||12000);const timer=setTimeout(()=>controller.abort(),timeoutMs);let response;try{const clean={...options};delete clean.timeout;response=await fetch(API+path,{cache:'no-store',...clean,signal:controller.signal,headers:{...headers(),...(clean.headers||{})}})}catch(error){const e=new Error(error?.name==='AbortError'?'request-timeout':'network-unreachable');e.cause=error;throw e}finally{clearTimeout(timer)}let data={};try{data=await response.json()}catch(_){data={ok:false,error:'invalid-server-response'}}if(!response.ok||data.ok===false){const e=new Error(data.message||data.error||`request-failed-${response.status}`);e.status=response.status;e.payload=data;throw e}return data}
 function friendlyError(error){
   const code=String(error?.payload?.error||error?.message||'unknown-error').toLowerCase();
   const status=Number(error?.status||0);
   if(code.includes('unauthorized')||status===401)return{title:'The password does not match',message:'Use the value stored in the Cloudflare secret named ADMIN_TOKEN.',details:['Worker route is available','Your Twitch tokens do not need to change']};
   if(code.includes('not found')||code.includes('route-not-found')||status===404)return{title:'The CMS route is missing',message:'Deploy the complete V1002.2 Worker. Uploading the admin page alone cannot create Worker routes.',details:[error?.payload?.path||'/api/cms/admin/state','Expected Worker: V1002.2']};
   if(code.includes('kv put')||code.includes('limit exceeded'))return{title:'Cloudflare KV write limit reached',message:'Loading remains read-only. Saving and publishing must wait until the KV allowance resets.',details:['No password change is required','The CMS can still inspect existing content']};
+  if(code.includes('request-timeout'))return{title:'The Worker took too long to answer',message:'The CMS stopped waiting instead of freezing the browser. Try Connect again or use the Unified Admin Control Center while this module is unavailable.',details:['Request timeout: 12 seconds','Other admin modules remain available']};
   if(code.includes('network-unreachable')||code.includes('failed to fetch'))return{title:'The Worker cannot be reached',message:'Check the internet connection, Worker address and Cloudflare deployment.',details:[API]};
   if(code.includes('invalid-server-response'))return{title:'The Worker returned an unreadable response',message:'The deployed Worker may be incomplete or contain a runtime error.',details:['Open /api/cms/health to verify the build']};
   return{title:'The control room could not connect',message:error?.payload?.message||error?.message||'Unknown connection error.',details:[`HTTP ${status||'—'}`,code]};
@@ -159,27 +162,46 @@ async function quickToggleModule(id,patch){
 
 function openScreen(name){document.querySelectorAll('#cmsNav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===name));document.querySelectorAll('[data-screen-panel]').forEach(p=>p.classList.toggle('active',p.dataset.screenPanel===name));$('screenTitle').textContent=document.querySelector(`#cmsNav [data-screen="${name}"] span`)?.textContent||name}
 async function connect({silent=false}={}){
-  const entered=$('adminToken').value.trim();
-  if(entered)localStorage.setItem('djf_cms_token',entered);
-  if(!token()){if(!silent)toast('Enter the admin password first.',true);return false}
-  $('loadCms').disabled=true;$('loadCms').textContent='Connecting…';hideConnectionPanel();
-  try{
-    const health=await preflight();if(!health)return false;
-    state=await api('/api/cms/admin/state');
-    $('loadingState').hidden=true;$('cmsScreens').hidden=false;
-    $('connectionDot').classList.add('online');$('connectionText').textContent='Connected';
-    renderAll();
-    showConnectionPanel({title:'Broadcast Control Room connected',message:'Website, Worker, Twitch data, Music News and Main Overlay controls are ready.',details:[state.version||health.version,`${state.modules?.length||0} content blocks`,`${state.news?.articles?.length||0} music stories`,state.core?.twitch?.live?'Twitch live':'Twitch offline','Main Overlay protected']},true);
-    setTimeout(hideConnectionPanel,4500);
-    if(!silent)toast('Content studio connected.');
-    return true;
-  }catch(error){
-    $('cmsScreens').hidden=true;$('loadingState').hidden=false;
-    $('connectionDot').classList.remove('online');$('connectionText').textContent='Connection failed';
-    const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
-  }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
+  if(cmsConnectPromise)return cmsConnectPromise;
+  cmsConnectPromise=(async()=>{
+    const entered=$('adminToken').value.trim();
+    if(entered)localStorage.setItem('djf_cms_token',entered);
+    if(!token()){if(!silent)toast('Enter the admin password first.',true);return false}
+    $('loadCms').disabled=true;$('loadCms').textContent='Connecting…';hideConnectionPanel();
+    try{
+      const health=await preflight();if(!health)return false;
+      state=await api('/api/cms/admin/state',{timeout:15000});
+      $('loadingState').hidden=true;$('cmsScreens').hidden=false;
+      $('connectionDot').classList.add('online');$('connectionText').textContent='Connected';
+      await renderAllFaultTolerant();
+      showConnectionPanel({title:'Broadcast Control Room connected',message:'Website, Worker, Twitch data, Music News and Main Overlay controls are ready.',details:[state.version||health.version,`${state.modules?.length||0} content blocks`,`${state.news?.articles?.length||0} music stories`,state.core?.twitch?.live?'Twitch live':'Twitch offline','Main Overlay protected']},true);
+      setTimeout(hideConnectionPanel,4500);
+      if(!silent)toast('Content studio connected.');
+      return true;
+    }catch(error){
+      $('cmsScreens').hidden=true;$('loadingState').hidden=false;
+      $('connectionDot').classList.remove('online');$('connectionText').textContent='Connection failed';
+      const info=friendlyError(error);showConnectionPanel(info);if(!silent)toast(info.title,true);return false;
+    }finally{$('loadCms').disabled=false;$('loadCms').textContent='Connect'}
+  })();
+  try{return await cmsConnectPromise}finally{cmsConnectPromise=null}
 }
-function renderAll(){renderDashboard();renderSystemStatus();renderBroadcastContentPlatform();renderBroadcastExperience();renderTvStation();renderSceneComposer();renderHomepage();renderModules();renderShows();renderChart();renderNews();renderPolls();renderPlaylists();renderTheme();renderSchedule();populateGlobalSelects()}
+async function renderAllFaultTolerant(){
+  const generation=++cmsRenderGeneration;
+  const jobs=[
+    ['Dashboard',renderDashboard],['System status',renderSystemStatus],['Broadcast platform',renderBroadcastContentPlatform],
+    ['Broadcast experience',renderBroadcastExperience],['TV station',renderTvStation],['Scene composer',renderSceneComposer],
+    ['Homepage',renderHomepage],['Modules',renderModules],['Shows',renderShows],['Chart',renderChart],['News',renderNews],
+    ['Polls',renderPolls],['Playlists',renderPlaylists],['Theme',renderTheme],['Schedule',renderSchedule],['Selectors',populateGlobalSelects]
+  ];
+  for(const [label,fn] of jobs){
+    if(generation!==cmsRenderGeneration)return;
+    try{fn()}catch(error){console.warn('CMS renderer failed:',label,error)}
+    await new Promise(resolve=>requestAnimationFrame(()=>resolve()));
+  }
+}
+
+function renderAll(){for(const [label,fn] of [['Dashboard',renderDashboard],['System status',renderSystemStatus],['Broadcast platform',renderBroadcastContentPlatform],['Broadcast experience',renderBroadcastExperience],['TV station',renderTvStation],['Scene composer',renderSceneComposer],['Homepage',renderHomepage],['Modules',renderModules],['Shows',renderShows],['Chart',renderChart],['News',renderNews],['Polls',renderPolls],['Playlists',renderPlaylists],['Theme',renderTheme],['Schedule',renderSchedule],['Selectors',populateGlobalSelects]]){try{fn()}catch(error){console.warn('CMS renderer failed:',label,error)}}}
 function populateGlobalSelects(){$('nextThemeInput').innerHTML=themeOptions(state.core?.nextShow?.theme||'weekend',false);$('contentTheme').innerHTML=themeOptions('all');$('contentShow').innerHTML=showOptions('all')}
 function renderSystemStatus(){
   const dashboard=document.querySelector('[data-screen-panel="dashboard"]');
@@ -1106,7 +1128,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const editor=document.getElementById('editorModal');if(editor){editor.classList.remove('open');editor.setAttribute('aria-hidden','true')}
   v1002PublicHealth();
   const saved=localStorage.getItem('djf_cms_token');
-  if(saved){document.getElementById('adminToken').value=saved;setTimeout(()=>document.getElementById('loadCms')?.click(),180)}
+  if(saved)document.getElementById('adminToken').value=saved;
 });
 
 document.addEventListener('DOMContentLoaded',async()=>{
@@ -1121,8 +1143,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
     $('connectionDot').classList.remove('online');$('connectionText').textContent='Not connected';
     toast('Saved admin password removed.');
   });
-  await preflight();
   if(localStorage.getItem('djf_cms_token'))await connect({silent:true});
+  else await preflight();
 });
 
 document.addEventListener('DOMContentLoaded',()=>{
