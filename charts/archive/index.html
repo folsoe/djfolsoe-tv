@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DJ FOLSOE Chart Archive</title>
+<meta name="description" content="Weekly DJ FOLSOE Top 20 and Retro Hits Top 10 chart archive.">
+<link rel="canonical" href="https://folsoetv.dk/charts/archive/">
+<link rel="stylesheet" href="/assets/css/v26400-complete-universe.css?v=26400">
+<link rel="stylesheet" href="/assets/css/v26410-living-charts.css?v=26410">
+</head><body><main>
+<section class="v26400-chartHero"><div class="v26400-k">DJ FOLSOE CHART TELEVISION</div><h1>CHART <em>ARCHIVE</em></h1><p>Week-by-week history for DJ FOLSOE Top 20 and Retro Hits Top 10.</p></section>
+<div class="v26400-chartGrid">
+<section class="v26400-chartBox"><h2 id="archiveTitle">SELECTED WEEK</h2><div id="archiveTop20"></div></section>
+<section class="v26400-chartBox"><h2>RETRO TOP 10</h2><div id="archiveRetro10"></div></section>
+</div>
+<section class="v26410-retroFeature"><h2>AVAILABLE WEEKS</h2><div id="chartArchiveList" class="v26410-archiveList"></div></section>
+</main>
+<script>
+(async()=>{const esc=s=>String(s??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[m]));
+const params=new URLSearchParams(location.search);let week=params.get("week");
+const idx=await fetch("/data/chart-archive/index.json",{cache:"no-store"}).then(r=>r.json());
+if(!week&&idx.weeks?.length)week=idx.weeks[0].week;
+const row=(s,retro)=>`<div class="v26410-row"><div class="v26410-rank">${String(s.rank).padStart(2,"0")}</div><div class="v26410-song"><strong>${esc(s.artist)} — ${esc(s.title)}</strong><small>${retro?esc(s.year||""):"DJ FOLSOE chart"}</small></div><div class="v26410-move"><span class="v26410-status">${s.status||"—"}</span></div><div class="v26410-stat peak"><small>PEAK</small><b>${s.peak??"—"}</b></div><div class="v26410-stat weeks"><small>WEEKS</small><b>${s.weeks??"—"}</b></div></div>`;
+if(week){const d=await fetch(`/data/chart-archive/${week}.json`,{cache:"no-store"}).then(r=>r.json());document.getElementById("archiveTitle").textContent=`TOP 20 · ${d.week}`;document.getElementById("archiveTop20").innerHTML=(d.top20||[]).map(x=>row(x,false)).join("");document.getElementById("archiveRetro10").innerHTML=(d.retro_top10||[]).map(x=>row(x,true)).join("")}
+document.getElementById("chartArchiveList").innerHTML=(idx.weeks||[]).map(w=>`<a class="v26410-archiveLink" href="?week=${encodeURIComponent(w.week)}"><div><strong>${esc(w.label)}</strong><span>${esc(w.date)}</span></div><b>OPEN →</b></a>`).join("")
+})().catch(()=>{});
+</script></body></html>

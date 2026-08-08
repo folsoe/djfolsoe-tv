@@ -1,0 +1,59 @@
+/* DJ FOLSOE V26410 — Living Chart & Retro History Engine */
+:root{
+  --v10-pink:#ff2b86;
+  --v10-cyan:#18dcff;
+  --v10-gold:#ffb12b;
+  --v10-green:#33e59a;
+  --v10-red:#ff5d73;
+}
+.v26410-meta{
+  display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;
+}
+.v26410-chip{
+  padding:7px 10px;border:1px solid rgba(255,255,255,.11);border-radius:999px;
+  background:rgba(255,255,255,.035);color:#cbd4e4;font-size:10px;font-weight:900;letter-spacing:.08em;
+}
+.v26410-row{
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr) 82px 70px 68px;
+  gap:10px;align-items:center;padding:12px 13px;margin-bottom:6px;
+  border:1px solid rgba(255,255,255,.07);border-radius:12px;
+  background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.022));
+}
+.v26410-row:hover{border-color:rgba(255,255,255,.18)}
+.v26410-rank{font-size:30px;font-weight:1000;color:var(--v10-gold);line-height:1}
+.v26410-song strong{display:block;color:#fff;font-size:14px}
+.v26410-song small{display:block;color:#8f9bb0;margin-top:3px}
+.v26410-move{font-weight:1000;font-size:11px;text-align:center}
+.v26410-up{color:var(--v10-green)}
+.v26410-down{color:var(--v10-red)}
+.v26410-same{color:#8893a6}
+.v26410-new{color:var(--v10-cyan)}
+.v26410-re{color:var(--v10-pink)}
+.v26410-stat{text-align:center}.v26410-stat small{display:block;color:#707b8e;font-size:8px;letter-spacing:.1em}.v26410-stat b{color:#fff;font-size:13px}
+.v26410-status{
+  display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:4px 6px;border-radius:999px;
+  border:1px solid currentColor;font-size:8px;font-weight:1000;letter-spacing:.08em;
+}
+.v26410-archiveList{display:grid;gap:7px}
+.v26410-archiveLink{
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  padding:13px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);color:#fff!important;text-decoration:none!important;
+}
+.v26410-archiveLink span{color:#909bad;font-size:11px}
+.v26410-archiveLink b{color:var(--v10-cyan)}
+.v26410-legend{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;color:#8995aa;font-size:10px;font-weight:800}
+.v26410-empty{padding:18px;border:1px dashed rgba(255,255,255,.13);border-radius:12px;color:#8995aa;text-align:center}
+.v26410-retroFeature{
+  margin:10px auto;max-width:1320px;padding:22px;border-radius:20px;
+  border:1px solid rgba(255,177,43,.20);
+  background:radial-gradient(circle at 85% 15%,rgba(255,177,43,.14),transparent 28%),linear-gradient(145deg,#111421,#090c14);
+}
+.v26410-retroFeature h2{color:#fff!important;margin:0 0 8px!important}
+.v26410-retroFeature p{color:#adb8ca!important;line-height:1.55!important}
+@media(max-width:760px){
+  .v26410-row{grid-template-columns:48px minmax(0,1fr) 62px}
+  .v26410-stat.peak,.v26410-stat.weeks{display:none}
+  .v26410-rank{font-size:25px}
+}

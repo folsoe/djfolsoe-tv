@@ -1,0 +1,318 @@
+{
+  "week": "2026-W32",
+  "date": "2026-08-08",
+  "top20": [
+    {
+      "rank": 1,
+      "last_week": null,
+      "peak": 1,
+      "weeks": 1,
+      "status": "new",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 2,
+      "last_week": null,
+      "peak": 2,
+      "weeks": 1,
+      "status": "new",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 3,
+      "last_week": null,
+      "peak": 3,
+      "weeks": 1,
+      "status": "new",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 4,
+      "last_week": null,
+      "peak": 4,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 5,
+      "last_week": null,
+      "peak": 5,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 6,
+      "last_week": null,
+      "peak": 6,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 7,
+      "last_week": null,
+      "peak": 7,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 8,
+      "last_week": null,
+      "peak": 8,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 9,
+      "last_week": null,
+      "peak": 9,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 10,
+      "last_week": null,
+      "peak": 10,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 11,
+      "last_week": null,
+      "peak": 11,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 12,
+      "last_week": null,
+      "peak": 12,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 13,
+      "last_week": null,
+      "peak": 13,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 14,
+      "last_week": null,
+      "peak": 14,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 15,
+      "last_week": null,
+      "peak": 15,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 16,
+      "last_week": null,
+      "peak": 16,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 17,
+      "last_week": null,
+      "peak": 17,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 18,
+      "last_week": null,
+      "peak": 18,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 19,
+      "last_week": null,
+      "peak": 19,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    },
+    {
+      "rank": 20,
+      "last_week": null,
+      "peak": 20,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add artist",
+      "title": "Add title",
+      "tidal_url": ""
+    }
+  ],
+  "retro_top10": [
+    {
+      "rank": 1,
+      "last_week": null,
+      "peak": 1,
+      "weeks": 1,
+      "status": "new",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 2,
+      "last_week": null,
+      "peak": 2,
+      "weeks": 1,
+      "status": "new",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 3,
+      "last_week": null,
+      "peak": 3,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 4,
+      "last_week": null,
+      "peak": 4,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 5,
+      "last_week": null,
+      "peak": 5,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 6,
+      "last_week": null,
+      "peak": 6,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 7,
+      "last_week": null,
+      "peak": 7,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 8,
+      "last_week": null,
+      "peak": 8,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 9,
+      "last_week": null,
+      "peak": 9,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    },
+    {
+      "rank": 10,
+      "last_week": null,
+      "peak": 10,
+      "weeks": 1,
+      "status": "",
+      "artist": "Add retro artist",
+      "title": "Add retro title",
+      "year": "19__",
+      "tidal_url": ""
+    }
+  ]
+}
