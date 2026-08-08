@@ -1,0 +1,44 @@
+/* DJ FOLSOE V28110 — Global Facebook Dock */
+#djfFacebookDock{
+  position:fixed;right:14px;top:50%;transform:translateY(-50%);
+  z-index:2147483000;display:flex;flex-direction:column;gap:9px;
+  font-family:Arial,Helvetica,sans-serif;pointer-events:none
+}
+#djfFacebookDock .djfFbLink{
+  pointer-events:auto;width:48px;height:48px;display:flex;align-items:center;
+  overflow:hidden;border-radius:24px;text-decoration:none;color:#fff;
+  background:rgba(8,11,17,.94);border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 10px 35px rgba(0,0,0,.38);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:width .22s ease,transform .18s ease,border-color .18s ease
+}
+#djfFacebookDock .djfFbLink:hover,#djfFacebookDock .djfFbLink:focus-visible{
+  width:206px;transform:translateX(-3px);border-color:rgba(24,119,242,.85);outline:none
+}
+#djfFacebookDock .djfFbIcon{
+  width:46px;min-width:46px;height:46px;display:grid;place-items:center
+}
+#djfFacebookDock .djfFbIcon b{
+  width:29px;height:29px;border-radius:50%;display:grid;place-items:center;
+  background:#1877f2;color:white;font:bold 22px/1 Arial,sans-serif
+}
+#djfFacebookDock .djfFbText{
+  min-width:145px;padding:0 14px 0 2px;opacity:0;transform:translateX(7px);
+  transition:opacity .15s ease,transform .15s ease;white-space:nowrap
+}
+#djfFacebookDock .djfFbLink:hover .djfFbText,
+#djfFacebookDock .djfFbLink:focus-visible .djfFbText{opacity:1;transform:none}
+#djfFacebookDock .djfFbText strong{display:block;color:#fff;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+#djfFacebookDock .djfFbText small{display:block;margin-top:3px;color:#9ba6b5;font-size:9px}
+#djfFacebookDock .djfFbGroup{position:relative}
+#djfFacebookDock .djfFbGroup:after{
+  content:"";position:absolute;left:33px;top:6px;width:8px;height:8px;border-radius:50%;
+  background:#7cff64;border:2px solid #080b11;box-shadow:0 0 10px rgba(124,255,100,.6)
+}
+@media(max-width:760px){
+  #djfFacebookDock{right:10px;top:auto;bottom:12px;transform:none;flex-direction:row}
+  #djfFacebookDock .djfFbLink,#djfFacebookDock .djfFbLink:hover,#djfFacebookDock .djfFbLink:focus-visible{
+    width:46px;height:46px;transform:none
+  }
+  #djfFacebookDock .djfFbText{display:none}
+}

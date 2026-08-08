@@ -1,0 +1,227 @@
+
+/* ============================================================
+   DJ FOLSOE TV — UNIFIED SITE FOUNDATION V28200
+   Homepage = design master.
+   Shared family DNA only; show-specific universes remain intact.
+   ============================================================ */
+
+:root{
+  --djf-shell:1240px;
+  --djf-line:rgba(255,255,255,.12);
+  --djf-text:#f4f7fb;
+  --djf-muted:#8490a0;
+  --djf-accent:#ffffff;
+  --djf-accent-rgb:255,255,255;
+  --djf-radius:10px;
+}
+
+/* Page accent profiles */
+html[data-djf-section="fredagsbar"]{--djf-accent:#ff4e68;--djf-accent-rgb:255,78,104}
+html[data-djf-section="trance"]{--djf-accent:#4ef6ff;--djf-accent-rgb:78,246,255}
+html[data-djf-section="eurodance"]{--djf-accent:#ff4db6;--djf-accent-rgb:255,77,182}
+html[data-djf-section="retro"]{--djf-accent:#d9bc4b;--djf-accent-rgb:217,188,75}
+html[data-djf-section="morning"]{--djf-accent:#f2cc75;--djf-accent-rgb:242,204,117}
+html[data-djf-section="popup"]{--djf-accent:#ff5a45;--djf-accent-rgb:255,90,69}
+html[data-djf-section="weekend"]{--djf-accent:#c3ff35;--djf-accent-rgb:195,255,53}
+html[data-djf-section="nudisco"]{--djf-accent:#d9b66f;--djf-accent-rgb:217,182,111}
+html[data-djf-section="shows"]{--djf-accent:#ffffff;--djf-accent-rgb:255,255,255}
+html[data-djf-section="music"]{--djf-accent:#7ee8ff;--djf-accent-rgb:126,232,255}
+html[data-djf-section="live"]{--djf-accent:#ff405c;--djf-accent-rgb:255,64,92}
+html[data-djf-section="community"]{--djf-accent:#7ee8ff;--djf-accent-rgb:126,232,255}
+html[data-djf-section="guides"]{--djf-accent:#b6c8ff;--djf-accent-rgb:182,200,255}
+html[data-djf-section="about"]{--djf-accent:#ffffff;--djf-accent-rgb:255,255,255}
+html[data-djf-section="archive"]{--djf-accent:#d9bc4b;--djf-accent-rgb:217,188,75}
+
+html.djf-unified{
+  scroll-behavior:smooth;
+}
+html.djf-unified body{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+html.djf-unified :focus-visible{
+  outline:2px solid var(--djf-accent);
+  outline-offset:4px;
+}
+
+/* Homepage is the master: do not touch its geometry */
+html[data-djf-section="home"] .djf-unified-header,
+html[data-djf-section="home"] .djf-unified-footer{
+  all:revert-layer;
+}
+
+/* Shared navigation chrome for non-home pages */
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-header{
+  width:min(calc(100% - 32px),var(--djf-shell)) !important;
+  min-height:76px !important;
+  margin-inline:auto !important;
+  padding-inline:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:20px !important;
+  position:relative !important;
+  z-index:120 !important;
+  border-bottom:1px solid var(--djf-line) !important;
+  background:
+    linear-gradient(90deg,rgba(var(--djf-accent-rgb),.02),transparent 25%),
+    rgba(7,10,15,.58) !important;
+  backdrop-filter:blur(16px) saturate(1.08);
+  -webkit-backdrop-filter:blur(16px) saturate(1.08);
+}
+
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-header::after{
+  content:"";
+  position:absolute;left:0;bottom:-1px;width:68px;height:2px;
+  background:linear-gradient(90deg,var(--djf-accent),transparent);
+  pointer-events:none;
+}
+
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+  min-width:0;
+  color:var(--djf-text) !important;
+}
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-brand strong{
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:.05em !important;
+}
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-brand small{
+  color:var(--djf-muted) !important;
+  letter-spacing:.16em !important;
+  text-transform:uppercase;
+}
+
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:5px !important;
+  flex-wrap:wrap;
+}
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav a{
+  min-height:36px;
+  padding:0 11px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  border:1px solid transparent !important;
+  border-radius:999px !important;
+  color:#8e99a8 !important;
+  background:transparent !important;
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:800 !important;
+  letter-spacing:.11em !important;
+  text-transform:uppercase !important;
+  transition:color .18s ease,background .18s ease,border-color .18s ease,transform .18s ease !important;
+}
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav a:hover{
+  color:#fff !important;
+  border-color:rgba(var(--djf-accent-rgb),.30) !important;
+  background:rgba(var(--djf-accent-rgb),.08) !important;
+  transform:translateY(-1px);
+}
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav a[aria-current="page"],
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav a.active{
+  color:#fff !important;
+  border-color:rgba(var(--djf-accent-rgb),.34) !important;
+  background:rgba(var(--djf-accent-rgb),.10) !important;
+}
+
+/* Common CTA family */
+html.djf-unified:not([data-djf-section="home"]) :is(
+  .fbBtn,.trBtn,.trIActions a,.edActions a,.rhActions a,
+  .acts a,.wActs a,.nActs a,.suActions a
+){
+  border-radius:var(--djf-radius) !important;
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-weight:900 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease !important;
+}
+html.djf-unified:not([data-djf-section="home"]) :is(
+  .fbBtn,.trBtn,.trIActions a,.edActions a,.rhActions a,
+  .acts a,.wActs a,.nActs a,.suActions a
+):hover{
+  transform:translateY(-2px);
+}
+html.djf-unified:not([data-djf-section="home"]) :is(
+  .fbBtnPrimary,.trBtnPrimary,.trIPrimary,.edPrimary,.rhPrimary,
+  .acts .primary,.wPrimary,.nPrimary,.suPrimary
+){
+  box-shadow:0 10px 36px rgba(var(--djf-accent-rgb),.14) !important;
+}
+
+/* Shared section edge marker only */
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-section{
+  position:relative;
+}
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-section[data-djf-edge="1"]::before{
+  content:"";
+  position:absolute;left:0;top:0;width:54px;height:2px;
+  background:linear-gradient(90deg,var(--djf-accent),transparent);
+  opacity:.72;pointer-events:none;
+}
+
+/* Typography family only, no hero resizing */
+html.djf-unified:not([data-djf-section="home"]) :is(h1,h2,h3){
+  text-wrap:balance;
+}
+html.djf-unified:not([data-djf-section="home"]) :is(
+  .fbKicker,.trKicker,.trIKicker,.edKicker,.rhKicker,.wk,.nk,.suKicker
+){
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  letter-spacing:.18em !important;
+}
+
+/* Shared footer rhythm */
+html.djf-unified:not([data-djf-section="home"]) .djf-unified-footer{
+  width:min(calc(100% - 32px),var(--djf-shell)) !important;
+  margin-inline:auto !important;
+  padding:28px 0 40px !important;
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:20px !important;
+  flex-wrap:wrap !important;
+  position:relative;
+  border-top:1px solid var(--djf-line) !important;
+  color:#657181 !important;
+  background:transparent !important;
+  font-family:"Barlow Condensed",Impact,sans-serif !important;
+  font-size:9px !important;
+  line-height:1.5 !important;
+  font-weight:800 !important;
+  letter-spacing:.14em !important;
+  text-transform:uppercase;
+}
+
+/* Keep social dock above every show universe */
+#djfFacebookDock{
+  z-index:2147483000 !important;
+}
+
+@media(max-width:760px){
+  html.djf-unified:not([data-djf-section="home"]) .djf-unified-header{
+    width:min(calc(100% - 24px),var(--djf-shell)) !important;
+    min-height:68px !important;
+    gap:10px !important;
+  }
+  html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav{gap:2px !important}
+  html.djf-unified:not([data-djf-section="home"]) .djf-unified-nav a{
+    padding-inline:8px !important;
+    font-size:10px !important;
+  }
+  html.djf-unified:not([data-djf-section="home"]) .djf-unified-footer{
+    width:min(calc(100% - 24px),var(--djf-shell)) !important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html.djf-unified *{scroll-behavior:auto !important}
+}
