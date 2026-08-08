@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/admin-control-center.css?v=26435">
+<link rel="stylesheet" href="assets/css/admin-control-center.css?v=26440">
 </head>
 <body>
 <div id="toast" class="toast"></div>
@@ -86,9 +86,12 @@
 
 <section class="panel" data-panel-view="charts">
   <div class="sectionHead"><div><small>CHART UNIVERSE</small><h2>Top 10 / Top 20</h2></div><div class="buttonRow"><button id="loadChart">Load chart state</button><a href="/admin-cms.html#charts" target="_blank">Open visual editor ↗</a></div></div>
-  <p class="intro">Chart-data læses fra den store V26434.2 Worker. Selve visuelle editor ligger fortsat i den stabile Click CMS.</p>
+  <p class="intro">Redigér den offentlige /charts/ side direkte her. Data gemmes i den eksisterende Chart Universe-backend og bruges automatisk på relevante showsider.</p>
   <div id="chartSummary" class="metrics"></div>
-  <div class="jsonCard"><div><h3>Chart Universe backend</h3><button data-copy="chartJson">Copy</button></div><pre id="chartJson">—</pre></div>
+  <div class="chartAdminMeta"><label>Chart week<input id="chartWeekInput" placeholder="2026-W32"></label><label>Published date<input id="chartDateInput" type="date"></label><button id="saveChart" class="primary">Save charts</button><a href="/charts/" target="_blank">Preview /charts/ ↗</a></div>
+  <div class="chartAdminBlock"><div class="sectionHead"><div><small>CURRENT</small><h3>FOLSOE TOP 20</h3></div></div><div id="top20Editor" class="chartAdminRows"></div></div>
+  <div class="chartAdminBlock"><div class="sectionHead"><div><small>RETRO</small><h3>RETRO TOP 10</h3></div></div><div id="retro10Editor" class="chartAdminRows"></div></div>
+  <details class="jsonCard"><summary>Raw Chart Universe backend</summary><div><button data-copy="chartJson">Copy</button></div><pre id="chartJson">—</pre></details>
 </section>
 
 <section class="panel" data-panel-view="requests">
@@ -133,6 +136,6 @@
   <div class="jsonCard"><div><h3>Raw diagnostic report</h3><button data-copy="diagnosticJson">Copy</button></div><pre id="diagnosticJson">—</pre></div>
 </section>
 </main>
-<script src="assets/js/admin-control-center.js?v=26435"></script>
+<script src="assets/js/admin-control-center.js?v=26440"></script>
 </body>
 </html>
