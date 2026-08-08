@@ -427,9 +427,252 @@ async function handle(request, env) {
   return json({ ok: false, version: VERSION, error: 'Not found', path: url.pathname }, 404);
 }
 
+
+const DJF_CMS_DEFAULT = {
+  version: "V26434",
+  updatedAt: "",
+  modules: [],
+  news: { articles: [] },
+  featuredShows: [],
+  ticker: { top: [], theme: [] },
+  chart: [],
+  chartUniverse: {
+    chart_week: "",
+    published_date: "",
+    top20: [],
+    retro_top10: [],
+    tidal_playlists: []
+  }
+};
+
+function djfCmsJson(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "access-control-allow-origin": "*",
+      "access-control-allow-headers": "content-type, authorization, x-admin-token",
+      "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
+      "cache-control": "no-store"
+    }
+  });
+}
+
+function djfCmsToken(request, env) {
+  const h = request.headers;
+  const auth = (h.get("authorization") || "").replace(/^Bearer\s+/i, "").trim();
+  return (h.get("x-admin-token") || auth || "").trim();
+}
+
+function djfCmsAuthorized(request, env) {
+  const required = String(env.ADMIN_TOKEN || env.CMS_ADMIN_TOKEN || "").trim();
+  if (!required) return true;
+  return djfCmsToken(request, env) === required;
+}
+
+async function djfCmsRead(env) {
+  const base = structuredClone(DJF_CMS_DEFAULT);
+  try {
+    if (env.DJF_DATA && typeof env.DJF_DATA.get === "function") {
+      const raw = await env.DJF_DATA.get("cms_state", "json");
+      if (raw && typeof raw === "object") return {
+        ...base, ...raw,
+        news: { ...base.news, ...(raw.news || {}) },
+        ticker: { ...base.ticker, ...(raw.ticker || {}) },
+        chartUniverse: { ...base.chartUniverse, ...(raw.chartUniverse || {}) }
+      };
+    }
+  } catch (_) {}
+  return base;
+}
+
+async function djfCmsWrite(env, state) {
+  state.updatedAt = new Date().toISOString();
+  if (env.DJF_DATA && typeof env.DJF_DATA.put === "function") {
+    await env.DJF_DATA.put("cms_state", JSON.stringify(state));
+  }
+  return state;
+}
+
+async function djfCmsBroadcastCore(request, env) {
+  try {
+    const u = new URL(request.url);
+    const r = await fetch(u.origin + "/api/broadcast?cms=" + Date.now());
+    if (r.ok) {
+      const x = await r.json();
+      return x.core || x.data || x.broadcast?.core || x.broadcast?.data || x;
+    }
+  } catch (_) {}
+  return {};
+}
+
+async function djfCmsPublishCore(request, env, payload) {
+  const u = new URL(request.url);
+  const r = await fetch(u.origin + "/api/publish", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      ...(djfCmsToken(request, env) ? {"x-admin-token": djfCmsToken(request, env)} : {})
+    },
+    body: JSON.stringify(payload)
+  });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok || d.ok === false) throw new Error(d.error || d.message || ("HTTP " + r.status));
+  return d.core || d.data || d;
+}
+
+async function djfCmsRoute(request, env, ctx) {
+  const url = new URL(request.url);
+  const p = url.pathname;
+  const method = request.method.toUpperCase();
+
+  if (!p.startsWith("/api/cms/")) return null;
+  if (method === "OPTIONS") return djfCmsJson({ok:true});
+
+  if (p === "/api/cms/health") {
+    return djfCmsJson({ok:true, version:"V26434", cms:true, storage:!!env.DJF_DATA});
+  }
+
+  if (p === "/api/cms/public/state") {
+    const [cms, core] = await Promise.all([djfCmsRead(env), djfCmsBroadcastCore(request, env)]);
+    return djfCmsJson({ok:true, ...cms, core});
+  }
+
+  if (!djfCmsAuthorized(request, env)) {
+    return djfCmsJson({ok:false, error:"Unauthorized"}, 401);
+  }
+
+  if (p === "/api/cms/admin/state") {
+    const [cms, core] = await Promise.all([djfCmsRead(env), djfCmsBroadcastCore(request, env)]);
+    return djfCmsJson({ok:true, ...cms, core});
+  }
+
+  if (p === "/api/cms/admin/theme" && method === "POST") {
+    const body = await request.json().catch(() => ({}));
+    const u = new URL(request.url);
+    const r = await fetch(u.origin + "/api/set-theme", {
+      method:"POST",
+      headers:{
+        "content-type":"application/json",
+        ...(djfCmsToken(request, env) ? {"x-admin-token":djfCmsToken(request, env)} : {})
+      },
+      body:JSON.stringify({theme:body.theme})
+    });
+    const d = await r.json().catch(() => ({}));
+    return djfCmsJson({...d, ok:r.ok && d.ok !== false}, r.status);
+  }
+
+  const state = await djfCmsRead(env);
+  const body = method === "DELETE" ? {} : await request.json().catch(() => ({}));
+
+  if (p === "/api/cms/admin/homepage" && method === "POST") {
+    Object.assign(state, body);
+    try { await djfCmsPublishCore(request, env, body); } catch (_) {}
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, ...state});
+  }
+
+  if (p === "/api/cms/admin/shows" && method === "POST") {
+    state.featuredShows = Array.isArray(body.shows) ? body.shows : [];
+    try { await djfCmsPublishCore(request, env, {featuredShows:state.featuredShows}); } catch (_) {}
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, featuredShows:state.featuredShows, shows:state.featuredShows});
+  }
+
+  if (p === "/api/cms/admin/tickers" && method === "POST") {
+    state.ticker = {
+      top: Array.isArray(body.topTicker) ? body.topTicker : [],
+      theme: Array.isArray(body.themeTicker) ? body.themeTicker : []
+    };
+    try { await djfCmsPublishCore(request, env, {ticker:state.ticker}); } catch (_) {}
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, ticker:state.ticker, legacy:{topTicker:state.ticker.top,themeTicker:state.ticker.theme}});
+  }
+
+  if (p === "/api/cms/admin/chart" && method === "POST") {
+    state.chart = Array.isArray(body.items) ? body.items : [];
+    if (body.chartUniverse && typeof body.chartUniverse === "object") {
+      state.chartUniverse = {...state.chartUniverse, ...body.chartUniverse};
+    }
+    try { await djfCmsPublishCore(request, env, {chart:state.chart, chartUniverse:state.chartUniverse}); } catch (_) {}
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, chart:state.chart, chartUniverse:state.chartUniverse});
+  }
+
+  if (p === "/api/cms/admin/chart-universe" && method === "POST") {
+    state.chartUniverse = {
+      ...state.chartUniverse,
+      ...(body || {}),
+      top20: Array.isArray(body.top20) ? body.top20 : state.chartUniverse.top20,
+      retro_top10: Array.isArray(body.retro_top10) ? body.retro_top10 : state.chartUniverse.retro_top10,
+      tidal_playlists: Array.isArray(body.tidal_playlists) ? body.tidal_playlists : state.chartUniverse.tidal_playlists
+    };
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, chartUniverse:state.chartUniverse});
+  }
+
+  if (p === "/api/cms/admin/news") {
+    state.news = state.news || {articles:[]};
+    state.news.articles = Array.isArray(state.news.articles) ? state.news.articles : [];
+    if (method === "DELETE") {
+      const id = url.searchParams.get("id");
+      state.news.articles = state.news.articles.filter(x => String(x.id) !== String(id));
+      await djfCmsWrite(env, state);
+      return djfCmsJson({ok:true, news:state.news});
+    }
+    if (method === "POST") {
+      const article = body.article || body;
+      if (!article.id) article.id = "story-" + Date.now();
+      const i = state.news.articles.findIndex(x => String(x.id) === String(article.id));
+      if (i >= 0) state.news.articles[i] = article; else state.news.articles.unshift(article);
+      await djfCmsWrite(env, state);
+      return djfCmsJson({ok:true, article, news:state.news});
+    }
+  }
+
+  if (p === "/api/cms/admin/module/toggle" && method === "POST") {
+    state.modules = Array.isArray(state.modules) ? state.modules : [];
+    const i = state.modules.findIndex(x => String(x.id) === String(body.id));
+    if (i >= 0) state.modules[i] = {...state.modules[i], ...body};
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, modules:state.modules});
+  }
+
+  if (p === "/api/cms/admin/modules/reorder" && method === "POST") {
+    state.modules = Array.isArray(state.modules) ? state.modules : [];
+    const map = new Map(state.modules.map(x => [String(x.id), x]));
+    const ordered = (body.order || []).map(id => map.get(String(id))).filter(Boolean);
+    state.modules.forEach(x => { if (!ordered.includes(x)) ordered.push(x); });
+    state.modules = ordered;
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, modules:state.modules});
+  }
+
+  if (p === "/api/cms/admin/module/duplicate" && method === "POST") {
+    state.modules = Array.isArray(state.modules) ? state.modules : [];
+    const src = state.modules.find(x => String(x.id) === String(body.id));
+    if (!src) return djfCmsJson({ok:false,error:"Module not found"},404);
+    const copy = {...src, id:String(src.id)+"-copy-"+Date.now(), title:(src.title || "Module")+" copy", enabled:false};
+    state.modules.unshift(copy);
+    await djfCmsWrite(env, state);
+    return djfCmsJson({ok:true, module:copy, modules:state.modules});
+  }
+
+  return djfCmsJson({ok:false,error:"Unknown CMS route"},404);
+}
+
+
 export default {
   async fetch(request, env, ctx) {
+    const __cms = await djfCmsRoute(request, env, ctx);
+    if (__cms) return __cms;
+
+    async function __legacyFetch() {
+
     try { return await handle(request, env || {}); }
     catch (e) { return json({ ok: false, version: VERSION, error: String(e.message || e), stack: String(e.stack || '') }, 500); }
-  }
+  
+    }
+    return await __legacyFetch();
+}
 };

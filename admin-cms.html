@@ -9,7 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/visual-cms.css?v=17010">
   <link rel="stylesheet" href="assets/css/v18850-design-system.css?v=18850-1">
-<link rel="stylesheet" href="assets/css/v26432-admin-legacy-bridge.css?v=26432"></head>
+
+<style id="v26434-admin-chart-css">
+.v26434ChartUniverse{margin:0 0 20px;padding:16px;border:1px solid rgba(255,255,255,.10);border-radius:16px;background:linear-gradient(145deg,#101522,#080b13)}
+.v26434Head{display:flex;justify-content:space-between;gap:12px;align-items:center}.v26434Head span{color:#18dcff;font-size:10px;font-weight:1000;letter-spacing:.14em}.v26434Head h3,.v26434Head h4{margin:4px 0!important;color:#fff!important}.v26434Head p{color:#9eabbd!important;margin:0!important}
+.v26434Meta{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}.v26434Meta label{display:grid;gap:4px;color:#8e9bad;font-size:10px}
+.v26434Meta input,.v26434ChartRow input,.v26434ChartRow select,.v26434Playlist input{width:100%;box-sizing:border-box;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.11);background:#080c15;color:#fff}
+.v26434Cols{display:grid;grid-template-columns:1fr 1fr;gap:9px}.v26434Cols h4{color:#fff!important}.v26434ChartRow{display:grid;grid-template-columns:31px 1fr 1fr 58px 58px 58px 70px;gap:4px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}.v26434ChartRow b{color:#ffb12b;text-align:center;padding-top:8px}
+.v26434Playlists{display:grid;grid-template-columns:1fr 1fr;gap:7px}.v26434Playlist{display:grid;gap:5px;padding:8px;border:1px solid rgba(255,255,255,.07);border-radius:9px}.v26434Actions{display:flex;gap:8px;align-items:center;margin-top:12px}.v26434Actions button,.v26434Head button{padding:9px 11px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#111827;color:#fff;font-weight:900}.v26434Actions .primary{background:linear-gradient(90deg,#ff2b86,#ffb12b);color:#080a10;border:0}.v26434Actions a{color:#fff;font-weight:900}
+@media(max-width:900px){.v26434Cols{grid-template-columns:1fr}.v26434Playlists{grid-template-columns:1fr}}
+</style>
+
+</head>
 <body>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
@@ -748,38 +759,6 @@
       </section>
 
       <section data-screen-panel="charts" class="screen">
-<div id="v26432ChartAdmin" class="v26432ChartAdmin">
-  <div class="v26432ChartHeader">
-    <div>
-      <span>UNIFIED CHART DATA</span>
-      <h3>Top 20 · Retro Top 10 · TIDAL</h3>
-      <p>This edits the same <code>data/charts.json</code> used by /charts/, Retro Hits and Weekend.</p>
-    </div>
-    <a href="/charts/" target="_blank">Open Chart Universe ↗</a>
-  </div>
-  <div class="v26432GithubRow">
-    <label>GitHub owner<input id="v26432Owner" value="folsoe"></label>
-    <label>Repository<input id="v26432Repo" value="djfolsoe-tv"></label>
-    <label>Branch<input id="v26432Branch" value="main"></label>
-    <label class="token">GitHub token<input id="v26432GithubToken" type="password" autocomplete="off" placeholder="Fine-grained token · Contents read/write"></label>
-  </div>
-  <div class="v26432ChartActions">
-    <button id="v26432LoadPublic" type="button">Load current website data</button>
-    <button id="v26432LoadGithub" type="button">Load from GitHub</button>
-    <button id="v26432SaveGithub" type="button" class="primary">Save & deploy charts</button>
-  </div>
-  <div class="v26432ChartMeta">
-    <label>Chart week<input id="v26432Week" placeholder="2026-W32"></label>
-    <label>Published date<input id="v26432Date" type="date"></label>
-  </div>
-  <div class="v26432ChartColumns">
-    <section><h4>DJ FOLSOE TOP 20</h4><div id="v26432Top20"></div></section>
-    <section><h4>RETRO HITS TOP 10</h4><div id="v26432Retro10"></div></section>
-  </div>
-  <section class="v26432PlaylistAdmin"><h4>TIDAL PLAYLISTS</h4><div id="v26432Playlists"></div></section>
-  <div id="v26432ChartMsg" class="v26432ChartMsg">Ready.</div>
-</div>
-
         <div class="screenIntro"><div><span>Charts</span><h2>Top 10, Top 20 or any countdown</h2><p>Add tracks, cover art, movement and a short story.</p></div><div><select id="chartSize"><option value="10">Top 10</option><option value="20" selected>Top 20</option></select><button id="saveChart">Save chart</button></div></div>
         <div id="chartEditor" class="chartEditor"></div>
       </section>
@@ -803,11 +782,6 @@
       </section>
 
       <section data-screen-panel="theme" class="screen">
-<div class="v26432ThemeNotice">
-  <strong>LIVE THEME CONTROL RESTORED</strong>
-  <span>Theme buttons below control the existing Broadcast Core used by website and overlay.</span>
-</div>
-
         <div class="screenIntro"><div><span>Theme & Main Overlay</span><h2>One identity across website and stream</h2><p>The Main Overlay stays protected: one logo, top ticker, theme ticker and Twitch chat.</p></div><button id="saveTickers">Save ticker messages</button></div>
         <article class="themePickerCard">
           <h3>Choose the active theme</h3>
@@ -984,5 +958,5 @@
   <script src="assets/js/v26030-live-preview-sync-recovery.js?v=26030"></script>
   <script src="assets/js/v18850-visual-system.js?v=18850-1"></script>
   <script src="assets/js/v26040-publish-validation-audit.js?v=26040"></script>
-<script src="assets/js/v26432-admin-legacy-bridge.js?v=26432"></script></body>
+</body>
 </html>

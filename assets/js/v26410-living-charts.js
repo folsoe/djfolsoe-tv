@@ -39,7 +39,16 @@
 
   async function init(){
     try{
-      const data=await loadJson("/data/charts.json");
+      /* V26434 CMS FIRST */
+      let data;
+      try {
+        const cms = await loadJson("https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/cms/public/state");
+        data = cms.chartUniverse && (cms.chartUniverse.top20?.length || cms.chartUniverse.retro_top10?.length)
+          ? cms.chartUniverse
+          : await loadJson("/data/charts.json");
+      } catch (_) {
+        data = await loadJson("/data/charts.json");
+      }
       const top=document.getElementById("top20");
       const retro=document.getElementById("retro10");
       if(top) top.innerHTML=(data.top20||[]).map(x=>row(x,false)).join("");
