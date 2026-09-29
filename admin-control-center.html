@@ -64,7 +64,7 @@
   <div class="sectionHead"><div><small>LIVE OPERATIONS</small><h2>Broadcast Control</h2></div><button data-action="refreshBroadcast">Refresh</button></div>
   <div class="broadcastCard"><div><span>Current stream</span><h3 id="streamTitle">—</h3><p id="streamDetail">Connect to load Twitch and broadcast state.</p></div><div class="liveMetrics"><div><span>Viewers</span><strong id="viewerCount">0</strong></div><div><span>Followers</span><strong id="followerCount">—</strong></div><div><span>Theme</span><strong id="activeTheme">—</strong></div></div></div>
   <div class="controlGrid">
-    <article><h3>Theme switch</h3><p>Skifter website/broadcast-core og request theme sammen.</p><select id="themeSelect"><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="retro">Retro</option><option value="fredagsbar">Fredagsbar</option><option value="weekend">Weekend</option><option value="popup">Pop Up</option><option value="summer">Summer</option><option value="danske">Danske</option><option value="top20">Top 20</option></select><button id="setTheme" class="primary">Set active theme</button></article>
+    <article><h3>Theme switch</h3><p>Skifter website/broadcast-core og request theme sammen.</p><select id="themeSelect"><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Classic Dance</option><option value="retro">Retro</option><option value="fredagsbar">Fredagsbar</option><option value="weekend">Weekend</option><option value="popup">Pop Up</option><option value="summer">Summer</option><option value="danske">Danske</option><option value="top20">Top 20</option></select><button id="setTheme" class="primary">Set active theme</button></article>
     <article><h3>Next show / schedule</h3><div id="nextShowBox" class="dataBox">—</div><button id="refreshSchedule">Force schedule refresh</button></article>
     <article><h3>Main Overlay</h3><p>Overlayet ændres ikke af V26435. Åbn kun de eksisterende surface-filer.</p><div class="buttonRow"><a href="/overlay.html" target="_blank">Preview overlay ↗</a><a href="/presence.html" target="_blank">Presence ↗</a></div></article>
   </div>
@@ -92,7 +92,7 @@
   <div class="chartAdminMeta"><label>Chart week<input id="chartWeekInput" placeholder="2026-W32"></label><label>Published date<input id="chartDateInput" type="date"></label><button id="saveChart" class="primary">Save all charts</button><a href="/charts/" target="_blank">Preview /charts/ ↗</a></div>
   <div class="chartAdminBlock"><div class="sectionHead"><div><small>MAIN CHART</small><h3>FOLSOE TOP 20</h3></div></div><div id="top20Editor" class="chartAdminRows"></div></div>
   <div class="chartAdminBlock"><div class="sectionHead"><div><small>TRANCE TUESDAY</small><h3>YOUR FAVORITE TRANCE CHART</h3><p>Most requested trance tracks.</p></div></div><div id="trance10Editor" class="chartAdminRows"></div></div>
-  <div class="chartAdminBlock"><div class="sectionHead"><div><small>EURODANCE</small><h3>THIS WEEK'S FORGOTTEN EURODANCE TRACKS</h3></div></div><div id="eurodance10Editor" class="chartAdminRows"></div></div>
+  <div class="chartAdminBlock"><div class="sectionHead"><div><small>CLASSIC DANCE</small><h3>CLASSIC DANCE · GLEMTE FAVORITTER</h3></div></div><div id="eurodance10Editor" class="chartAdminRows"></div></div>
   <div class="chartAdminBlock"><div class="sectionHead"><div><small>RETRO HITS · BACK IN TIME</small><h3>RETRO HITS CHART</h3></div></div><div class="chartAdminMeta chartPeriodMeta"><label>Back in Time month<input id="retroMonthInput" placeholder="March"></label><label>Back in Time year<input id="retroYearInput" inputmode="numeric" placeholder="1994"></label></div><div id="retro10Editor" class="chartAdminRows"></div></div>
   <details class="jsonCard"><summary>Raw Chart Universe backend</summary><div><button data-copy="chartJson">Copy</button></div><pre id="chartJson">—</pre></details>
 </section>
@@ -104,7 +104,7 @@
 
 <section class="panel" data-panel-view="commands">
   <div class="sectionHead"><div><small>EXT003</small><h2>Command Engine</h2></div><div class="buttonRow"><button id="loadCommands">Refresh</button><button id="resetCommands" class="danger">Reset defaults</button></div></div>
-  <div class="controlGrid"><article><h3>Command settings</h3><label class="switchline"><span>Commands enabled</span><input id="commandsEnabled" type="checkbox"></label><label>Active show<select id="commandsShow"><option value="all">All</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Eurodance</option><option value="retro">Retro</option><option value="fredagsbar">Fredagsbar</option><option value="weekend">Weekend</option><option value="popup">Pop Up</option></select></label><button id="saveCommandSettings" class="primary">Save settings</button></article><article><h3>Registry status</h3><div id="commandStats" class="dataBox">—</div></article></div>
+  <div class="controlGrid"><article><h3>Command settings</h3><label class="switchline"><span>Commands enabled</span><input id="commandsEnabled" type="checkbox"></label><label>Active show<select id="commandsShow"><option value="all">All</option><option value="morning">Morning</option><option value="trance">Trance</option><option value="eurodance">Classic Dance</option><option value="retro">Retro</option><option value="fredagsbar">Fredagsbar</option><option value="weekend">Weekend</option><option value="popup">Pop Up</option></select></label><button id="saveCommandSettings" class="primary">Save settings</button></article><article><h3>Registry status</h3><div id="commandStats" class="dataBox">—</div></article></div>
   <div id="commandList" class="commandList"></div>
 </section>
 
@@ -139,6 +139,6 @@
   <div class="jsonCard"><div><h3>Raw diagnostic report</h3><button data-copy="diagnosticJson">Copy</button></div><pre id="diagnosticJson">—</pre></div>
 </section>
 </main>
-<script src="assets/js/admin-control-center.js?v=26441"></script>
+<script src="assets/js/admin-control-center.js?v=classic-dance-1"></script>
 </body>
 </html>

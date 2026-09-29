@@ -8,7 +8,7 @@ const THEME_CONFIG = {
   popup:{label:{da:'Popup',en:'Pop-up',de:'Pop-up'}, emoji:'⚡', image:'/themes/popup.jpg'},
   trance:{label:{da:'Trance Tuesday',en:'Trance Tuesday',de:'Trance Tuesday'}, emoji:'💙', image:'/themes/trance.jpg'},
   retro:{label:{da:'Retro Hits',en:'Retro Hits',de:'Retro Hits'}, emoji:'🕹️', image:'/themes/retro.jpg'},
-  eurodance:{label:{da:'Eurodance',en:'Eurodance',de:'Eurodance'}, emoji:'💛', image:'/themes/eurodance.jpg'},
+  eurodance:{label:{da:'Classic Dance',en:'Classic Dance',de:'Classic Dance'}, emoji:'💛', image:'/themes/eurodance.jpg'},
   morning:{label:{da:'Good Morning Twitch',en:'Good Morning Twitch',de:'Good Morning Twitch'}, emoji:'🌞', image:'/themes/morning.jpg'},
   summer:{label:{da:'Summer Beats',en:'Summer Beats',de:'Summer Beats'}, emoji:'🌴', image:'/themes/summer.jpg'},
   weekend:{label:{da:'Weekend Vibes',en:'Weekend Vibes',de:'Weekend Vibes'}, emoji:'🎉', image:'/themes/weekend.jpg'}

@@ -29,7 +29,7 @@ function cleanSegments(raw){
  const source=Array.isArray(raw?.segments)?raw.segments:Array.isArray(raw?.data?.segments)?raw.data.segments:Array.isArray(raw?.data)?raw.data:[];
  const now=Date.now();
  return source.map((s,i)=>({
-   id:String(s.id||i),title:String(s.title||s.category?.name||"DJ FOLSOE LIVE"),
+   id:String(s.id||i),title:String(s.title||s.category?.name||"DJ FOLSOE LIVE").replace(/^Eurodance$/i,"CLASSIC DANCE"),
    startTime:String(s.startTime||s.start_time||""),endTime:String(s.endTime||s.end_time||""),
    canceled:Boolean(s.canceledUntil||s.canceled_until)
  })).filter(s=>!s.canceled&&Date.parse(s.startTime)>now-60000).sort((a,b)=>Date.parse(a.startTime)-Date.parse(b.startTime));
@@ -130,10 +130,11 @@ function tick(){
 const V21000_STARTING_SOON_MS=30*60*1000;
 function detectShowTheme(title=""){
  const value=String(title).toLowerCase();
+ if(value.includes("classic dance"))return"eurodance";
  if(value.includes("morning")||value.includes("morgen"))return"morning";
  if(value.includes("trance"))return"trance";
  if(value.includes("fredagsbar")||value.includes("friday bar"))return"fredagsbar";
- if(value.includes("eurodance"))return"eurodance";
+ if(value.includes("eurodance")||value.includes("classic dance"))return"eurodance";
  if(value.includes("retro"))return"retro";
  if(value.includes("summer")||value.includes("sommer"))return"summer";
  if(value.includes("top 20")||value.includes("chart"))return"top20";

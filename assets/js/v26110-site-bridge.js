@@ -10,7 +10,7 @@
   const pick = (...values) => values.find(v => clean(v)) || '';
   const themeId = value => clean(value).toLowerCase().replace(/\s+/g, '-').replace(/_/g, '-');
   const byId = id => document.getElementById(id);
-  const text = (id, value) => { const node=byId(id), v=clean(value); if(node&&v) node.textContent=v; };
+  const text = (id, value) => { const node=byId(id), v=clean(value); if(node&&v) node.textContent=/^eurodance$/i.test(v)?'CLASSIC DANCE':v; };
   const safeUrl = value => { try { const u=new URL(clean(value), location.href); return ['http:','https:','#'].includes(u.protocol)||clean(value).startsWith('#') ? u.href : ''; } catch(_){ return clean(value).startsWith('#')?clean(value):''; } };
 
   function renderShows(shows) {
@@ -21,6 +21,7 @@
     if (!valid.length) return;
     const fragment = document.createDocumentFragment();
     valid.forEach(show => {
+      if(/^eurodance$/i.test(show.title||show.name||''))show={...show,title:'CLASSIC DANCE',name:'CLASSIC DANCE',description:"To årtier. Ét dansegulv. Dance fra 1990–2009: Eurodance, house, trance, hands up og hard dance. Store klubhits, glemte favoritter og hænderne i vejret."};
       const article=document.createElement('article'), small=document.createElement('small'), h3=document.createElement('h3'), p=document.createElement('p');
       small.textContent=pick(show.time,show.day,show.timeLabel,'LIVE SHOW');
       h3.textContent=pick(show.title,show.name);
