@@ -21,6 +21,7 @@
     if (!valid.length) return;
     const fragment = document.createDocumentFragment();
     valid.forEach(show => {
+      if((show.theme==='weekend'||/^weekend(?: vibes)?$/i.test(show.title||show.name||''))&&show.weekendFormatVersion!==1)show={...show,description:"Weekend på din måde. Et frit pop-up-show fra fredag eftermiddag til søndag aften: kendte hits, glemte favoritter, nye fund og musik, der passer til øjeblikket. Godt selskab, plads til ønsker og weekendstemning i top.",time:'Pop-up · fredag eftermiddag–søndag aften'};
       if(/^eurodance$/i.test(show.title||show.name||''))show={...show,title:'CLASSIC DANCE',name:'CLASSIC DANCE',description:"To årtier. Ét dansegulv. Dance fra 1990–2009: Eurodance, house, trance, hands up og hard dance. Store klubhits, glemte favoritter og hænderne i vejret."};
       const article=document.createElement('article'), small=document.createElement('small'), h3=document.createElement('h3'), p=document.createElement('p');
       small.textContent=pick(show.time,show.day,show.timeLabel,'LIVE SHOW');

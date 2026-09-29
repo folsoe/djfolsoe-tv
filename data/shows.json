@@ -54,8 +54,9 @@
       "key": "weekend",
       "title": "WEEKEND VIBES",
       "theme": "weekend",
-      "time": "Weekend",
-      "description": "Maximum music and community."
+      "time": "Pop-up · fredag eftermiddag til søndag aften",
+      "description": "Weekend på din måde. Et frit pop-up-show fra fredag eftermiddag til søndag aften: kendte hits, glemte favoritter, nye fund og musik, der passer til øjeblikket. Godt selskab, plads til ønsker og weekendstemning i top.",
+      "weekendFormatVersion": 1
     }
   ]
 }
