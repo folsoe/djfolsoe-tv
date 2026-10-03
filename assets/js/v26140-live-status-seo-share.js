@@ -12,7 +12,7 @@
 
   function snapshot() {
     const body = document.body;
-    const live = body?.dataset?.broadcastState === 'live' || /\blive\b/i.test(safe($('heroChannelState')?.textContent));
+    const live = body?.dataset?.broadcastState === 'live';
     const show = safe($('deskTitle')?.textContent, 'DJ FOLSOE');
     const lead = safe($('deskText')?.textContent || $('cmsHeroLead')?.textContent, 'Live music television from Denmark.');
     return { live, show, lead };

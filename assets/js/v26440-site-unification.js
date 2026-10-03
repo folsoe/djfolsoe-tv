@@ -22,3 +22,8 @@
  function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
  charts();
 })();
+
+/* Load the shared public music-TV identity exactly once. */
+(()=>{if(window.DJF_STATION_BOOT||/(?:admin|overlay|streamelements|twitch-connect)/i.test(location.pathname))return;window.DJF_STATION_BOOT=true;
+const css=document.createElement('link');css.rel='stylesheet';css.href='/assets/css/station-2026.css?v=1';document.head.append(css);
+const js=document.createElement('script');js.src='/assets/js/station-2026.js?v=1';js.defer=true;document.head.append(js);})();

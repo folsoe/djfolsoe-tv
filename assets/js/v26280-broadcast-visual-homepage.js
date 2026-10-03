@@ -11,7 +11,7 @@
     text('v26280Requests','OPEN');
     [['offDays','v26280Days'],['offHours','v26280Hours'],['offMinutes','v26280Minutes'],['offSeconds','v26280Seconds']].forEach(([a,b])=>text(b,read(a)||'00'));
     const state=(read('heroChannelState')||'').toUpperCase();
-    document.body.classList.toggle('v26280-is-live',state.includes('LIVE')&&!state.includes('OFF'));
+    document.body.classList.toggle('v26280-is-live',document.body.dataset.broadcastState === 'live');
   }
   // Reuse the existing Worker/API already used by the website for follower truth; no new backend.
   async function followerSync(){

@@ -22,7 +22,7 @@
         ".broadcastStatus strong"
       ]);
       if(liveText){
-        liveTarget.textContent = /live/i.test(liveText) && !/off/i.test(liveText)
+        liveTarget.textContent = document.body.dataset.broadcastState === 'live'
           ? "LIVE NOW"
           : "OFF AIR";
       }
