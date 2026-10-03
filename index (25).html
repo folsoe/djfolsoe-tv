@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b15">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://folsoetv.dk/showhub/">
+  <title>Showhub · DJ FOLSOE</title>
+  <meta name="description" content="Vælg dit DJ FOLSOE show, se den bekræftede sendetid, åbn chartet og gå direkte til Twitch.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./showhub.css">
+  <script src="./showhub.js?v=languages-1" defer></script>
+
+<!-- Shared language layer: public pages only; layout and show IDs unchanged. -->
+<link rel="stylesheet" href="/assets/css/site-i18n.css?v=1">
+<script defer src="/assets/js/site-i18n-catalog.js?v=1"></script>
+<script defer src="/assets/js/site-i18n.js?v=1"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="mast">
+      <a class="brand" href="https://folsoetv.dk/" aria-label="DJ FOLSOE TV forside"><span class="brand-mark">DJF</span><span><strong>DJ FOLSOE</strong><small>FOLSOE TV · SHOWHUB</small></span></a>
+      <div class="mast-center"><span class="frequency">FREQUENCY 2026</span><span class="mast-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <nav aria-label="Hovednavigation"><a href="https://folsoetv.dk/shows/">Alle shows</a><a href="https://folsoetv.dk/charts/">Charts</a><a class="mast-twitch" href="https://www.twitch.tv/djfolsoe" target="_blank" rel="noopener noreferrer">Twitch ↗</a></nav>
+    </header>
+
+    <main>
+      <div class="topline"><div><p class="eyebrow">LIVE MUSIC TELEVISION / DENMARK</p><h1>Vælg dit <em>show.</em></h1></div><div class="topline-right"><span>08 SIGNALER · 01 KANAL</span><span id="clock">KØBENHAVN · --:--</span></div></div>
+
+      <section class="signal-strip" aria-label="Live og næste udsendelse">
+        <div class="signal-status"><span id="liveDot" class="signal-dot checking"></span><span id="liveLabel">TJEKKER LIVE-STATUS</span><small id="liveDetail">Direkte fra DJ FOLSOE på Twitch</small></div>
+        <div class="signal-next"><span class="micro">NÆSTE BEKRÆFTEDE UDSENDELSE</span><strong id="globalNext">Henter Twitch-planen…</strong><small id="globalNextTime"></small></div>
+        <a class="signal-cta" href="https://www.twitch.tv/djfolsoe" target="_blank" rel="noopener noreferrer">ÅBN TWITCH <span>↗</span></a>
+      </section>
+
+      <section class="workspace" aria-label="Showvælger og detaljer">
+        <aside class="show-selector"><div class="rail-title"><span>PROGRAMVÆLGER</span><small>01 / 08</small></div><div id="showList" class="show-list" role="group" aria-label="Vælg show"></div><a class="rail-footer" href="https://www.twitch.tv/djfolsoe/schedule" target="_blank" rel="noopener noreferrer"><span>Twitch-planen er facit</span><b>SE HELE PLANEN ↗</b></a></aside>
+        <article id="showDetail" class="show-detail"><div class="detail-top"><span class="index" id="showIndex">01 / 08</span><span class="badge" id="showKind">UGENTLIG</span></div><div class="detail-body"><p class="eyebrow" id="showTag">TRANCE / MELODY / RELEASE</p><h2 id="showName">TRANCE<br>TUESDAY</h2><p class="description" id="showDescription">Uplifting, progressive og klassisk trance. Lange opbygninger og plads til det store øjeblik.</p></div><div class="detail-bottom"><div class="schedule-card"><span class="micro">NÆSTE SENDETID</span><strong id="showNext">Henter…</strong><p id="showNextNote">Twitch-planen opdateres automatisk.</p></div><div class="detail-actions"><a id="showPage" class="action secondary" href="https://folsoetv.dk/shows/trance-tuesday/" target="_blank" rel="noopener noreferrer">SHOWSIDE <span>↗</span></a><a class="action primary" href="https://www.twitch.tv/djfolsoe" target="_blank" rel="noopener noreferrer">GÅ TIL TWITCH <span>↗</span></a></div></div></article>
+        <aside class="right-column"><section class="chart-panel"><div class="panel-head"><span>CHART / <b id="chartType">TRANCE</b></span><span id="chartCount">—</span></div><h3 id="chartTitle">Your Favorite<br>Trance Chart</h3><p id="chartSubtitle">Direkte fra det eksisterende chart-univers.</p><div id="chartRows" class="chart-rows" aria-live="polite"><p class="muted">Henter chart…</p></div><a id="chartLink" class="panel-link" href="https://folsoetv.dk/charts/#trance10" target="_blank" rel="noopener noreferrer">ÅBN HELE CHARTET <span>↗</span></a></section><section class="live-panel"><div><span class="micro">NU PÅ KANALEN</span><strong id="channelTitle">DJ FOLSOE</strong><p id="channelNote">Live-status hentes fra den eksisterende Twitch-integration.</p></div><a href="https://folsoetv.dk/watch-live/" target="_blank" rel="noopener noreferrer">SE LIVE-SIDEN ↗</a></section></aside>
+      </section>
+      <p class="data-note" id="dataNote" role="status" aria-live="polite">Sendetider kommer fra Twitch-planen. Pop-up shows vises, når de er planlagt.</p>
+    </main>
+    <footer><span>DJ FOLSOE · FOLSOE TV</span><a href="/shows/">ALLE SHOWS ↗</a><span>LIVE SHOWS · FOLSOETV.DK</span></footer>
+  </div>
+</body>
+</html>

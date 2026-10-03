@@ -4,7 +4,7 @@ const API="https://djfolsoe-tv-api.sunefolsoe.workers.dev";
 const SCHEDULE_URL="https://djfolsoe-tv-api.sunefolsoe.workers.dev/api/twitch-schedule";
 const CHANNEL="djfolsoe";
 const $=id=>document.getElementById(id);
-const state={live:false,viewers:0,followers:0,title:"",theme:"GOOD MORNING",schedule:[],next:null,scheduleUpdated:"",scheduleError:""};
+const state={live:false,viewers:0,title:"",theme:"GOOD MORNING",schedule:[],next:null,scheduleUpdated:"",scheduleError:""};
 
 function parents(){const s=new Set(["folsoetv.dk","www.folsoetv.dk"]);if(location.hostname&&!["localhost","127.0.0.1"].includes(location.hostname))s.add(location.hostname);return [...s]}
 function pq(){return parents().map(x=>"parent="+encodeURIComponent(x)).join("&")}
@@ -29,7 +29,7 @@ function cleanSegments(raw){
  const source=Array.isArray(raw?.segments)?raw.segments:Array.isArray(raw?.data?.segments)?raw.data.segments:Array.isArray(raw?.data)?raw.data:[];
  const now=Date.now();
  return source.map((s,i)=>({
-   id:String(s.id||i),title:String(s.title||s.category?.name||"DJ FOLSOE LIVE"),
+   id:String(s.id||i),title:String(s.title||s.category?.name||"DJ FOLSOE LIVE").replace(/^Eurodance$/i,"CLASSIC DANCE"),
    startTime:String(s.startTime||s.start_time||""),endTime:String(s.endTime||s.end_time||""),
    canceled:Boolean(s.canceledUntil||s.canceled_until)
  })).filter(s=>!s.canceled&&Date.parse(s.startTime)>now-60000).sort((a,b)=>Date.parse(a.startTime)-Date.parse(b.startTime));
@@ -43,15 +43,6 @@ async function refresh(){
  ]);
  state.live=bool(tw)||bool(bc);
  state.viewers=Number(pick(tw.viewerCount,tw.viewers,tw.viewer_count,bc.viewers,0));
- {
- const githubFollowers=window.DJF_GITHUB_FOLLOWERS?.get?.();
- const unifiedFollowers=Number(
-   githubFollowers?.count ?? pick(tw.followers,tw.followerCount,0)
- );
- if(Number.isFinite(unifiedFollowers)&&unifiedFollowers>=0){
-   state.followers=Math.floor(unifiedFollowers);
- }
-}
  state.title=String(pick(tw.title,tw.streamTitle,bc.streamTitle,bc.showTitle,""));
  state.theme=String(pick(bc.theme?.title,bc.activeTheme,bc.theme,state.theme)).replace(/[_-]/g," ").toUpperCase();
  if(sch){
@@ -66,7 +57,7 @@ async function refresh(){
 }
 function fmtDate(iso){
  const d=new Date(iso);if(isNaN(d))return"TIME TO BE ANNOUNCED";
- return d.toLocaleString("en-GB",{weekday:"long",day:"2-digit",month:"long",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Copenhagen",timeZoneName:"short"}).toUpperCase();
+ return d.toLocaleString(window.DJF_I18N?.locale || "en-GB",{weekday:"long",day:"2-digit",month:"long",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Copenhagen",timeZoneName:"short"}).toUpperCase();
 }
 function renderSchedule(){
  const n=state.next;
@@ -77,17 +68,16 @@ function renderSchedule(){
 }
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){
- $("followers").textContent=state.followers.toLocaleString("en-US");$("viewers").textContent=state.viewers.toLocaleString("en-US");$("theme").textContent=state.theme;
- $("channelStats") && ($("channelStats").textContent=`${state.followers.toLocaleString("en-US")} FOLLOWERS · ${state.viewers.toLocaleString("en-US")} VIEWERS`);
- $("heroFollowers").textContent=state.followers.toLocaleString("en-US");
- $("heroViewers").textContent=state.viewers.toLocaleString("en-US");
+ $("viewers")&&($("viewers").textContent=state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB"));$("theme")&&($("theme").textContent=state.theme);
+ $("channelStats")&&($("channelStats").textContent=`${state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB")} VIEWERS`);
+ $("heroViewers")&&($("heroViewers").textContent=state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB"));
  $("heroChannelState").textContent=state.live?"DJ FOLSOE · LIVE NOW":"DJ FOLSOE · OFF AIR";
  $("heroChannelText").textContent=state.live?(state.title||"Watch the live show below."):(state.next?`Next: ${state.next.title}`:"The next show is displayed in the live channel below.");
  const b=$("watchButton"),p=$("livePill");b.classList.toggle("isLive",state.live);b.querySelector("span").textContent=state.live?"SE MED NU · WATCH LIVE":"SEE THE NEXT SHOW";
  p.classList.toggle("live",state.live);p.querySelector("b").textContent=state.live?"LIVE NOW":"OFFLINE";
  $("liveHeading").textContent=state.live?(state.title||"DJ FOLSOE IS LIVE NOW"):"DJ FOLSOE LIVE CHANNEL";
  $("streamTitle").textContent=state.live?(state.title||"DJ FOLSOE LIVE"):(state.next?`NEXT: ${state.next.title}`:"DJ FOLSOE · OFF AIR");
- $("streamMeta").textContent=state.live&&state.viewers?`${state.viewers.toLocaleString("en-US")} watching now · Twitch chat is open`:"Next show is synchronized from the official Twitch schedule";
+ $("streamMeta").textContent=state.live&&state.viewers?`${state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB")} watching now · Twitch chat is open`:"Next show is synchronized from the official Twitch schedule";
  $("customOffline").hidden=state.live;$("offlineMessage").hidden=state.live;
  $("deskTitle").textContent=state.live?"DJ FOLSOE IS LIVE NOW":(state.next?`UP NEXT: ${state.next.title}`:"WELCOME TO DJ FOLSOE");
  $("deskText").textContent=state.live?"Watch the stream and join the Twitch chat directly above.":(state.next?fmtDate(state.next.startTime):"Follow the channel and become part of the community.");
@@ -140,10 +130,11 @@ function tick(){
 const V21000_STARTING_SOON_MS=30*60*1000;
 function detectShowTheme(title=""){
  const value=String(title).toLowerCase();
+ if(value.includes("classic dance"))return"eurodance";
  if(value.includes("morning")||value.includes("morgen"))return"morning";
  if(value.includes("trance"))return"trance";
  if(value.includes("fredagsbar")||value.includes("friday bar"))return"fredagsbar";
- if(value.includes("eurodance"))return"eurodance";
+ if(value.includes("eurodance")||value.includes("classic dance"))return"eurodance";
  if(value.includes("retro"))return"retro";
  if(value.includes("summer")||value.includes("sommer"))return"summer";
  if(value.includes("top 20")||value.includes("chart"))return"top20";
@@ -182,7 +173,7 @@ function applyBroadcastAutomation(){
   if(textNode)textNode.textContent="THE BROADCAST IS ON AIR";
   if(kicker)kicker.textContent="NOW PLAYING";
   if(titleNode)titleNode.textContent=a.title;
-  if(dateNode)dateNode.textContent=state.viewers?`${state.viewers.toLocaleString("en-US")} WATCHING NOW`:"WATCH · CHAT · JOIN THE SHOW";
+  if(dateNode)dateNode.textContent=state.viewers?`${state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB")} WATCHING NOW`:"WATCH · CHAT · JOIN THE SHOW";
   if(action){action.textContent="WATCH LIVE ON TWITCH ↗";action.href="https://twitch.tv/djfolsoe"}
   if(watchButton)watchButton.querySelector("span").textContent="SE MED NU · WATCH LIVE";
  }else if(a.mode==="starting"){
@@ -205,6 +196,7 @@ function applyBroadcastAutomation(){
  }
 }
 
+window.addEventListener("djf:languagechange",()=>render());
 mountChat();refresh();setInterval(tick,1000);setInterval(refresh,60000);
 window.DJF_V21000=Object.freeze({
  version:"V21001",
