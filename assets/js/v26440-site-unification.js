@@ -12,7 +12,7 @@
    mast.querySelectorAll('a').forEach(a=>{try{if(a.pathname===path)a.setAttribute('aria-current','page')}catch(_){}});
    Promise.allSettled([fetch(API+'/api/twitch',{cache:'no-store'}).then(r=>r.json()),fetch(API+'/api/twitch-schedule',{cache:'no-store'}).then(r=>r.json())]).then(([tw,sc])=>{
      const t=tw.value||{}, s=sc.value||{}; const live=!!(t.live||t.isLive||t.stream?.live); const st=document.getElementById('djfUnifiedStatus'); if(st)st.textContent=live?'DJ FOLSOE · LIVE':'DJ FOLSOE · OFF AIR';
-     const n=s.next||s.nextShow||s.segments?.[0]||s.data?.segments?.[0]; const nx=document.getElementById('djfUnifiedNext'); if(nx&&n)nx.textContent=`NEXT · ${n.title||n.name||'SHOW'}`;
+     const n=s.next||s.nextShow||s.segments?.[0]||s.data?.segments?.[0]; const nx=document.getElementById('djfUnifiedNext'); if(nx&&n)nx.textContent=(window.DJF_I18N ? window.DJF_I18N.t('NEXT · {title}', {title:n.title||n.name||'SHOW'}) : `NEXT · ${n.title||n.name||'SHOW'}`);
    });
  }
  async function charts(){

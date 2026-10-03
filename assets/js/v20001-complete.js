@@ -57,7 +57,7 @@ async function refresh(){
 }
 function fmtDate(iso){
  const d=new Date(iso);if(isNaN(d))return"TIME TO BE ANNOUNCED";
- return d.toLocaleString("en-GB",{weekday:"long",day:"2-digit",month:"long",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Copenhagen",timeZoneName:"short"}).toUpperCase();
+ return d.toLocaleString(window.DJF_I18N?.locale || "en-GB",{weekday:"long",day:"2-digit",month:"long",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Copenhagen",timeZoneName:"short"}).toUpperCase();
 }
 function renderSchedule(){
  const n=state.next;
@@ -68,16 +68,16 @@ function renderSchedule(){
 }
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function render(){
- $("viewers")&&($("viewers").textContent=state.viewers.toLocaleString("en-US"));$("theme")&&($("theme").textContent=state.theme);
- $("channelStats")&&($("channelStats").textContent=`${state.viewers.toLocaleString("en-US")} VIEWERS`);
- $("heroViewers")&&($("heroViewers").textContent=state.viewers.toLocaleString("en-US"));
+ $("viewers")&&($("viewers").textContent=state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB"));$("theme")&&($("theme").textContent=state.theme);
+ $("channelStats")&&($("channelStats").textContent=`${state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB")} VIEWERS`);
+ $("heroViewers")&&($("heroViewers").textContent=state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB"));
  $("heroChannelState").textContent=state.live?"DJ FOLSOE · LIVE NOW":"DJ FOLSOE · OFF AIR";
  $("heroChannelText").textContent=state.live?(state.title||"Watch the live show below."):(state.next?`Next: ${state.next.title}`:"The next show is displayed in the live channel below.");
  const b=$("watchButton"),p=$("livePill");b.classList.toggle("isLive",state.live);b.querySelector("span").textContent=state.live?"SE MED NU · WATCH LIVE":"SEE THE NEXT SHOW";
  p.classList.toggle("live",state.live);p.querySelector("b").textContent=state.live?"LIVE NOW":"OFFLINE";
  $("liveHeading").textContent=state.live?(state.title||"DJ FOLSOE IS LIVE NOW"):"DJ FOLSOE LIVE CHANNEL";
  $("streamTitle").textContent=state.live?(state.title||"DJ FOLSOE LIVE"):(state.next?`NEXT: ${state.next.title}`:"DJ FOLSOE · OFF AIR");
- $("streamMeta").textContent=state.live&&state.viewers?`${state.viewers.toLocaleString("en-US")} watching now · Twitch chat is open`:"Next show is synchronized from the official Twitch schedule";
+ $("streamMeta").textContent=state.live&&state.viewers?`${state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB")} watching now · Twitch chat is open`:"Next show is synchronized from the official Twitch schedule";
  $("customOffline").hidden=state.live;$("offlineMessage").hidden=state.live;
  $("deskTitle").textContent=state.live?"DJ FOLSOE IS LIVE NOW":(state.next?`UP NEXT: ${state.next.title}`:"WELCOME TO DJ FOLSOE");
  $("deskText").textContent=state.live?"Watch the stream and join the Twitch chat directly above.":(state.next?fmtDate(state.next.startTime):"Follow the channel and become part of the community.");
@@ -173,7 +173,7 @@ function applyBroadcastAutomation(){
   if(textNode)textNode.textContent="THE BROADCAST IS ON AIR";
   if(kicker)kicker.textContent="NOW PLAYING";
   if(titleNode)titleNode.textContent=a.title;
-  if(dateNode)dateNode.textContent=state.viewers?`${state.viewers.toLocaleString("en-US")} WATCHING NOW`:"WATCH · CHAT · JOIN THE SHOW";
+  if(dateNode)dateNode.textContent=state.viewers?`${state.viewers.toLocaleString(window.DJF_I18N?.locale || "en-GB")} WATCHING NOW`:"WATCH · CHAT · JOIN THE SHOW";
   if(action){action.textContent="WATCH LIVE ON TWITCH ↗";action.href="https://twitch.tv/djfolsoe"}
   if(watchButton)watchButton.querySelector("span").textContent="SE MED NU · WATCH LIVE";
  }else if(a.mode==="starting"){
@@ -196,6 +196,7 @@ function applyBroadcastAutomation(){
  }
 }
 
+window.addEventListener("djf:languagechange",()=>render());
 mountChat();refresh();setInterval(tick,1000);setInterval(refresh,60000);
 window.DJF_V21000=Object.freeze({
  version:"V21001",
