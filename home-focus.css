@@ -1,0 +1,49 @@
+/* Homepage only. Loaded alongside the latest overlay identity, no subpage redesign. */
+body.djfHomeFocused{scroll-padding-top:20px}
+body.djfHomeFocused.djfStation26 .broadcastPage{display:flex!important;flex-direction:column!important;gap:34px!important}
+body.djfHomeFocused #hero{order:0!important}
+body.djfHomeFocused #home-player{order:1!important}
+body.djfHomeFocused #featured-shows{order:2!important}
+body.djfHomeFocused #home-person{order:3!important}
+body.djfHomeFocused #home-join{order:4!important}
+body.djfHomeFocused #home-more{order:5!important}
+body.djfHomeFocused.djfStation26 .broadcastHeader{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:0!important}
+body.djfHomeFocused.djfStation26 :is(.broadcastShow,.broadcastSignal){display:none!important}
+body.djfHomeFocused.djfStation26 .broadcastBrand{border:0!important;padding-left:0!important;min-height:90px!important}
+body.djfHomeFocused.djfStation26 .broadcastSupport{min-height:90px!important;border:0!important;padding-right:0!important}
+body.djfHomeFocused.djfStation26 .broadcastNav{grid-column:1/-1!important}
+body.djfHomeFocused .v26300MobileRibbon{display:none!important}
+body.djfHomeFocused.djfStation26 #hero .heroGrid{grid-template-columns:1.1fr .9fr!important}
+body.djfHomeFocused.djfStation26 #hero .heroCopy{padding:clamp(24px,4vw,52px)!important}
+body.djfHomeFocused.djfStation26 #cmsHeroTitle{font-size:clamp(52px,6.5vw,100px)!important}
+body.djfHomeFocused.djfStation26 #hero .s26ChannelArt{min-height:350px!important}
+body.djfHomeFocused.djfStation26 #hero .nextCard{display:block!important;padding:24px 32px!important;background:color-mix(in srgb,var(--s26-show-bg) 28%,#111019)!important;border-top:3px solid var(--s26-accent)!important}
+body.djfHomeFocused.djfStation26 #hero .nextCard>small{display:block;margin-bottom:8px}
+body.djfHomeFocused.djfStation26 #offlineNextTitle{display:block;font-size:clamp(24px,3vw,36px)!important;line-height:1.25!important;margin-bottom:8px}
+body.djfHomeFocused.djfStation26 #offlineNextDate{display:block;font-size:15px!important;line-height:1.5!important}
+body.djfHomeFocused.djfStation26 .homePlayer,body.djfHomeFocused.djfStation26 .homeMore{border:1px solid var(--s26-line);border-radius:4px;background:#111019;min-width:0}
+body.djfHomeFocused :is(.homePlayer,.homeMore)>summary{padding:20px 24px;cursor:pointer;font-weight:800;list-style-position:inside;color:var(--s26-accent,#eaff46)}
+body.djfHomeFocused :is(.homePlayer,.homeMore)>summary:focus-visible{outline:3px solid var(--s26-tertiary,#60e6ed);outline-offset:3px}
+body.djfHomeFocused.djfStation26 #live{margin:0!important;padding:20px!important}
+body.djfHomeFocused.djfStation26 #featured-shows{padding:15px 0!important}
+body.djfHomeFocused.djfStation26 .s26ProgramCopy{padding:16px!important}
+body.djfHomeFocused.djfStation26 .s26ProgramCopy strong{font-size:clamp(24px,2vw,31px)!important}
+body.djfHomeFocused.djfStation26 .homePerson{display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px 40px;align-items:center;padding:32px;border:1px solid var(--s26-line);background:linear-gradient(120deg,color-mix(in srgb,var(--s26-show-bg) 35%,#111019),#111019);border-radius:4px}
+body.djfHomeFocused .homePerson>img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:50%;border:5px solid var(--s26-secondary,#fc5ea6)}
+body.djfHomeFocused :is(.homePerson,.homeJoin) h2{font:900 clamp(32px,4vw,56px)/1.05 'Barlow Condensed',Impact,sans-serif;margin:12px 0 18px;letter-spacing:-.02em}
+body.djfHomeFocused :is(.homePerson,.homeJoin) p{line-height:1.7;max-width:65ch;color:#dbd6df}
+body.djfHomeFocused :is(.homeTextLink,.homeJoin a){display:inline-block;margin-top:10px;color:var(--s26-accent,#eaff46);font-weight:800;text-decoration-thickness:2px;text-underline-offset:5px}
+body.djfHomeFocused.djfStation26 .homePerson>.v26310SocialConnect{grid-column:1/-1;background:none!important;border:0!important;padding:8px 0 0!important;margin:0!important}
+body.djfHomeFocused.djfStation26 .homeJoin{display:grid;grid-template-columns:1fr 1.2fr;gap:30px;padding:30px 0;border-top:3px solid var(--s26-secondary,#fc5ea6)}
+body.djfHomeFocused .homeMoreContent{padding:0 24px 24px;display:flex;flex-direction:column;gap:24px;min-width:0}
+body.djfHomeFocused.djfStation26 .homeMoreContent>section{margin:0!important;padding:20px 0!important;width:100%!important;max-width:100%!important}
+body.djfHomeFocused.djfStation26 .homeMoreContent .v26280SignalRail,body.djfHomeFocused.djfStation26 .homeMoreContent .webBroadcastDock{display:none!important}
+body.djfHomeFocused [data-home-secondary-nav]{display:none!important}
+body.djfHomeFocused.djfStation26 .mobileBroadcastDock{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+body.djfHomeFocused.djfStation26 .mobileBroadcastDock a{min-height:52px!important}
+@media(max-width:760px){body.djfHomeFocused.djfStation26 .broadcastPage{width:calc(100% - 24px)!important;gap:24px!important}body.djfHomeFocused.djfStation26 .broadcastHeader{width:calc(100% - 24px)!important}body.djfHomeFocused.djfStation26 #hero .heroGrid{grid-template-columns:1fr!important}body.djfHomeFocused.djfStation26 #hero .s26ChannelArt{display:none!important}body.djfHomeFocused.djfStation26 #hero .heroCopy{padding:28px 22px!important}body.djfHomeFocused.djfStation26 #hero .nextCard{padding:22px!important}body.djfHomeFocused.djfStation26 .broadcastSupport{display:none!important}body.djfHomeFocused.djfStation26 .homePerson{grid-template-columns:100px minmax(0,1fr);gap:20px;padding:22px}body.djfHomeFocused .homePerson>img{align-self:start}body.djfHomeFocused.djfStation26 .homeJoin{grid-template-columns:1fr;gap:0}body.djfHomeFocused .homeMoreContent{padding:0 16px 16px}body.djfHomeFocused.djfStation26 #live{padding:12px!important}body.djfHomeFocused.djfStation26 .djfHomeShowGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}body.djfHomeFocused.djfStation26 .s26ProgramCopy{padding:12px!important}}
+@media(max-width:420px){body.djfHomeFocused.djfStation26 .homePerson{grid-template-columns:1fr}body.djfHomeFocused .homePerson>img{width:130px}body.djfHomeFocused.djfStation26 .heroActions a{width:100%;text-align:center}body.djfHomeFocused.djfStation26 #cmsHeroTitle{font-size:52px!important}}
+body.djfHomeFocused #home-clips{order:3!important}body.djfHomeFocused #home-person{order:4!important}body.djfHomeFocused #home-join{order:5!important}body.djfHomeFocused #home-more{order:6!important}
+body.djfHomeFocused .homeClips[hidden]{display:none!important}body.djfHomeFocused .homeClips h2{font:900 clamp(30px,4vw,52px)/1.1 'Barlow Condensed',Impact,sans-serif}
+body.djfHomeFocused #home-clips-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}body.djfHomeFocused #home-clips-grid article{min-width:0;background:#1a1825;border:1px solid var(--s26-line);padding:12px}body.djfHomeFocused #home-clips-grid video{display:block;width:100%;aspect-ratio:16/9;background:#08080c;object-fit:contain}body.djfHomeFocused #home-clips-grid h3{font-size:17px;line-height:1.4}
+@media(max-width:760px){body.djfHomeFocused #home-clips-grid{grid-template-columns:1fr}}
