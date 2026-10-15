@@ -3,7 +3,7 @@
 @font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url("/assets/fonts/manrope-latin-wght-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url("/assets/fonts/manrope-latin-ext-wght-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 /* DJ FOLSOE / MUSIC TELEVISION 2026. Scoped to public pages by station-2026.js. */
-body.djfStation26{--s26-accent:#ff334b;--s26-paper:#f0f1ed;--s26-ink:#08090b;--s26-line:#ffffff22;background:#08090b!important;color:var(--s26-paper);font-family:Manrope,Arial,sans-serif}
+body.djfStation26{--s26-accent:#eaff46;--s26-paper:#f0f1ed;--s26-ink:#08090b;--s26-line:#ffffff22;background:#08090b!important;color:var(--s26-paper);font-family:Manrope,Arial,sans-serif}
 .djfStation26 *{box-sizing:border-box}.djfStation26 ::selection{background:var(--s26-accent);color:#08090b}
 .djfStation26 a:focus-visible,.djfStation26 button:focus-visible{outline:2px solid var(--s26-accent);outline-offset:5px}
 /* Channel header: compact identity, clear programme status, an editorial navigation line. */
@@ -21,7 +21,7 @@ body.djfStation26{--s26-accent:#ff334b;--s26-paper:#f0f1ed;--s26-ink:#08090b;--s
 .djfStation26 :is(.broadcastNav,.djfMastNav) a:hover{color:#fff!important;background:#ffffff0c}
 .djfStation26 :is(.broadcastNav,.djfMastNav) i{display:none!important}
 .djfStation26 .djfLanguageBar{max-width:1600px;margin:auto;background:transparent;border-bottom:0;padding:7px 24px}
-.djfStation26 .djfLanguageBar button[aria-pressed=true]{border-color:#ff334b;background:#ff334b;color:#fff}
+.djfStation26 .djfLanguageBar button[aria-pressed=true]{border-color:var(--s26-accent);background:var(--s26-accent);color:#fff}
 /* Front-page ident. Art is vector + transforms, with no autoplay media or canvas. */
 .djfStation26 .broadcastPage{max-width:1552px!important;width:calc(100% - 48px)!important;margin:auto!important;padding:0!important}
 .djfStation26 #hero{background:#101115!important;border:1px solid var(--s26-line)!important;border-radius:6px!important;padding:0!important;box-shadow:none!important;overflow:hidden;isolation:isolate}
@@ -36,7 +36,7 @@ body.djfStation26{--s26-accent:#ff334b;--s26-paper:#f0f1ed;--s26-ink:#08090b;--s
 .djfStation26 :is(.heroActions a,.djfCrossLink a){border-radius:3px!important;padding:15px 19px!important;font:800 12px/1.4 Manrope,Arial,sans-serif!important;letter-spacing:.02em!important;box-shadow:none!important}
 .djfStation26 .heroActions a.primary{background:var(--s26-accent)!important;color:#fff!important;border:1px solid var(--s26-accent)!important}
 .djfStation26 .heroActions a.secondary{background:transparent!important;color:#fff!important;border:1px solid #ffffff40!important}
-.s26ChannelArt{position:relative;min-height:485px;overflow:hidden;isolation:isolate;background:#ff334b;color:#08090b;display:flex;align-items:center;padding:40px}
+.s26ChannelArt{position:relative;min-height:485px;overflow:hidden;isolation:isolate;background:var(--s26-accent);color:#08090b;display:flex;align-items:center;padding:40px}
 .s26ChannelArt::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,#0000 0 3px,#00000006 3px 4px);pointer-events:none}
 .s26Orbit{position:absolute;width:630px;height:630px;right:-215px;top:-100px;transform:rotate(-22deg);z-index:-1}
 .s26Orbit i{position:absolute;inset:0;border:80px solid #08090b;border-radius:50%;opacity:.93}.s26Orbit i:nth-child(2){inset:120px;border-width:2px;border-color:#fff;opacity:.6}.s26Orbit i:nth-child(3){inset:160px;border-width:30px;border-color:#fff;opacity:.95}
@@ -72,15 +72,15 @@ body.djfStation26{--s26-accent:#ff334b;--s26-paper:#f0f1ed;--s26-ink:#08090b;--s
 .djfStation26 :is(.liveSection,.cmsChartSection,.cmsStoryGrid){margin-top:45px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
 .djfStation26 :is(.playerCard,.chatCard,.cmsFeatureStory,.cmsChartGrid article,.djfChartTeaser,.djfChartMini,.djfCrossLinkInner){border-radius:4px!important;border-color:var(--s26-line)!important;background:#101115!important;box-shadow:none!important}
 .djfStation26 .playerFrame{border-radius:3px!important;background:#07080a!important}
-.djfStation26 .customOffline{background:radial-gradient(ellipse at 80% 20%,#ff334b25,transparent 55%),#101115!important}
+.djfStation26 .customOffline{background:radial-gradient(ellipse at 80% 20%,color-mix(in srgb,var(--s26-accent) 15%,transparent),transparent 55%),#101115!important}
 .djfStation26 .offlineCountdown span{border-radius:3px!important;background:#08090b!important;border:1px solid var(--s26-line)!important}.djfStation26 .offlineCountdown b{color:#f0f1ed!important}
-.djfStation26 .chatCard>header{background:#16181d!important;border-bottom:2px solid #ff334b;color:#fff}
+.djfStation26 .chatCard>header{background:#16181d!important;border-bottom:2px solid var(--s26-accent);color:#fff}
 .djfStation26 .cmsChartGrid article>b,.djfStation26 .chartRank,.djfStation26 .djfChartMini>b{color:var(--s26-accent)!important}
 .djfStation26 :is(.chartHero,.chartBlock,.chartRow,.tidalCard){border-radius:4px!important;border-color:var(--s26-line)!important;background:#111318!important;box-shadow:none!important}
 .djfStation26 .chartHero{border-left:5px solid var(--s26-accent)!important}.djfStation26 .chartHero h1 span{color:var(--s26-accent)!important}
 .djfStation26 :is(.content-shell,.guide-shell,.archive-shell,.music-shell,.entityBand,.topicPath){border-radius:4px!important;border-color:var(--s26-line)!important;background:#101115!important;box-shadow:none!important}
 .djfStation26 :is(.content-shell,.guide-shell,.archive-shell) p{line-height:1.85;max-width:78ch}
-.djfStation26 .v26340SubHero{border-radius:4px!important;background:linear-gradient(105deg,#101115 30%,#101115cc),url('/assets/img/station/trance.svg') right/cover!important;border:1px solid var(--s26-line)!important;border-left:5px solid var(--s26-accent)!important;box-shadow:none!important}
+.djfStation26 .v26340SubHero{border-radius:4px!important;background:linear-gradient(105deg,#101115 30%,#101115cc),url('/assets/img/station/trance.png') right/cover!important;border:1px solid var(--s26-line)!important;border-left:5px solid var(--s26-accent)!important;box-shadow:none!important}
 .djfStation26 .v26340SubHero h1{font:900 clamp(38px,6vw,84px)/.98 'Barlow Condensed',Impact,sans-serif!important;letter-spacing:-.035em!important}
 .djfStation26 .v26340BroadcastRail{gap:1px!important}.djfStation26 .v26340BroadcastRail>a{border-radius:0!important;background:#15171c!important;border-color:var(--s26-line)!important;box-shadow:none!important}
 /* Show pages retain their stories, with a coherent title treatment and individual art. */
@@ -94,7 +94,7 @@ body.djfStation26{--s26-accent:#ff334b;--s26-paper:#f0f1ed;--s26-ink:#08090b;--s
 .djfStation26 .s26ShowHero :is(p,.cdLead){max-width:660px!important;line-height:1.7!important}
 .s26ShowIdent{position:absolute;right:24px;bottom:22px;font:800 10px/1 Manrope,Arial,sans-serif;letter-spacing:.17em;color:var(--s26-accent);border-top:2px solid var(--s26-accent);padding-top:12px}
 .djfStation26 :is(.trIPrimary,.rhPrimary,.fbActions a:first-child,.cdActions a:first-child,.wPrimary,.nPrimary,.pHero .primary){border-radius:3px!important;background:var(--s26-accent)!important;color:#08090b!important;box-shadow:none!important;border-color:var(--s26-accent)!important}
-.djfStation26 .suHero{background:#101115!important;border-bottom:3px solid #ff334b!important}.djfStation26 .suCard{border-radius:4px!important;border-color:var(--s26-accent,#ffffff22)!important;background:#101115!important;box-shadow:none!important}
+.djfStation26 .suHero{background:#101115!important;border-bottom:3px solid var(--s26-accent)!important}.djfStation26 .suCard{border-radius:4px!important;border-color:var(--s26-accent,#ffffff22)!important;background:#101115!important;box-shadow:none!important}
 .djfStation26 .suCard[data-station-show] .suCardArt{background:var(--s26-art) center/cover!important}.djfStation26 .suCard[data-station-show] .suCardArt>*{visibility:hidden}
 .djfStation26 .suCard h3{color:var(--s26-accent,#fff)!important}
 /* Interactive showhub */
@@ -132,12 +132,53 @@ body.djfStation26 .v26300MobileRibbon{display:none!important}
 .djfStation26 :is(.broadcastShowCopy,.broadcastSignal,.djfMastCell) :is(strong,b){white-space:normal!important;text-overflow:clip!important;overflow:visible!important;overflow-wrap:anywhere;max-width:100%}
 .djfStation26 :is(.broadcastPage,.broadcastNav)::before,.djfStation26 :is(.broadcastPage,.broadcastNav)::after{display:none!important;content:none!important}
 .djfStation26 .broadcastNav{box-shadow:none!important;border-image:none!important}
-.djfStation26 .broadcastSignalDot{background:#727781!important;box-shadow:none!important}.djfStation26[data-broadcast-state=live] .broadcastSignalDot{background:#ff334b!important;box-shadow:0 0 12px #ff334b70!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="trance"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/trance.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="eurodance"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/eurodance.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="retro"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/retro.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="fredagsbar"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/fredagsbar.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="morning"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/morning.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="weekend"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/weekend.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="nudisco"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/nudisco.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
-.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="popup"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/popup.svg")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 .broadcastSignalDot{background:#727781!important;box-shadow:none!important}.djfStation26[data-broadcast-state=live] .broadcastSignalDot{background:var(--s26-accent)!important;box-shadow:0 0 12px var(--s26-accent)70!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="trance"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/trance.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="eurodance"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/eurodance.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="retro"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/retro.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="fredagsbar"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/fredagsbar.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="morning"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/morning.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="weekend"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/weekend.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="nudisco"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/nudisco.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+.djfStation26 :is(.v26280Shows,.seoAuthorityGrid) [data-visual="popup"]{background-image:linear-gradient(0deg,#08090bf0,transparent 85%),url("/assets/img/station/popup.png")!important;background-size:cover!important;background-position:center!important;border-radius:4px!important}
+
+/* Exact overlay spectrum shared by all public routes. */
+body.djfStation26{--s26-secondary:#fc5ea6;--s26-tertiary:#60e6ed;--s26-show-bg:#32185d;--s26-show-ink:#fff2ce;--accent:var(--s26-accent);--accent2:var(--s26-secondary);--accent3:var(--s26-tertiary);--primary:var(--s26-accent);--secondary:var(--s26-secondary);--gold:var(--s26-accent);--cyan:var(--s26-tertiary);background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--s26-show-bg) 50%,transparent),transparent 70%),#111019!important;color:#fff5e8}
+.djfStation26 .djfOverlayLogo{display:block;width:100%;height:auto!important;max-width:100%;object-fit:contain;filter:none!important}
+.djfStation26 :is(.broadcastBrandCopy strong,.djfMastBrand strong,.mast .brand strong){display:block!important;width:clamp(145px,16vw,220px)!important;max-width:100%;line-height:1!important}
+.djfStation26 :is(.broadcastBrand,.djfMastBrand,.mast .brand){min-width:0;gap:0!important}
+.djfStation26 :is(.broadcastAvatar,.djfMastBrandMark,.mast .brand-mark){display:none!important}
+.djfStation26 :is(.broadcastBrandCopy,.djfMastBrand>span:last-child){min-width:0}
+.djfStation26 .djfFooterLogo{display:block;width:190px;max-width:80%;margin:0 0 25px}
+.djfStation26 .djfSimpleBrand{display:block;width:200px;max-width:80%;margin:25px auto}
+.djfStation26 .s26ChannelArt{background:var(--s26-show-bg);color:var(--s26-show-ink)}
+.djfStation26 .s26Ident{transform:none;width:100%;padding:20px 0;z-index:2}.djfStation26 .s26Ident>.djfOverlayLogo{filter:drop-shadow(0 5px 18px #0005)!important}
+.djfStation26 .s26Orbit i{border-color:var(--s26-accent);opacity:.45}.djfStation26 .s26Orbit i:nth-child(2){border-color:var(--s26-secondary);opacity:.85}.djfStation26 .s26Orbit i:nth-child(3){border-color:var(--s26-tertiary);opacity:.7}
+.djfStation26 .s26ArtBase{color:var(--s26-show-ink);border-color:currentColor}
+.djfStation26 .s26Strap{background:var(--s26-accent);color:#111019}
+.djfStation26 :is(.heroActions a.primary,.action.primary,.signal-cta,.mast-twitch,.djfLanguageBar button[aria-pressed=true]){background:var(--s26-accent)!important;color:#111019!important;border-color:var(--s26-accent)!important}
+.djfStation26 :is(.broadcastNav,.djfMastNav){border-bottom:3px solid transparent!important;border-image:linear-gradient(90deg,var(--s26-accent),var(--s26-secondary),var(--s26-tertiary)) 1!important}
+.djfStation26 :is(.broadcastNav,.djfMastNav) a[aria-current=page]{color:var(--s26-accent)!important}
+.djfStation26 :is(h1,h2,h3) em{color:var(--s26-accent)!important}
+.djfStation26 :is(.djfChartTeaser,.chartHero,.v26400-chartHero,.v26400-chartBox,.chart-panel,.live-panel,.signal-strip,.show-detail,.suCard,.s26Program){border-color:color-mix(in srgb,var(--s26-secondary) 35%,#111019)!important}
+.djfStation26 :is(.v26400-chartHero,.v26400-chartBox,.chart-panel,.live-panel,.signal-strip){background:linear-gradient(135deg,color-mix(in srgb,var(--s26-show-bg) 30%,#111019),#111019)!important;color:#fff5e8!important}
+.djfStation26 :is(.v26400-k,.v26400-strip,.index,.frequency,.panel-link,.eyebrow){color:var(--s26-accent)!important}
+.djfStation26 :is(.show-button.active,.show-card.active,[aria-selected=true]){border-color:var(--s26-accent)!important}
+.djfStation26 :is(.s26ProgramVisual,.chatCard>header){border-bottom-color:var(--s26-secondary)!important}
+.djfStation26 .v26340SubHero{background:linear-gradient(105deg,#111019 30%,#111019cc),var(--s26-route-art,url('/assets/img/station/eurodance.png')) right/cover!important}
+.djfStation26 :is(.s26Program,.suCard):hover{box-shadow:0 4px 0 var(--s26-tertiary)!important}
+@media(max-width:600px){.djfStation26 :is(.broadcastBrandCopy strong,.djfMastBrand strong,.mast .brand strong){width:150px!important}.djfStation26 .s26ChannelArt{min-height:290px!important}.djfStation26 .s26Ident{padding:15px}}
+@media(prefers-reduced-motion:reduce){.djfStation26 .s26Orbit{animation:none!important}.djfStation26 :is(.s26Program,.suCard){transition:none!important}}
+body.djfStation26[data-overlay-theme="morning"],.djfStation26 [data-station-show="morning"]{--s26-accent:#ffbb74!important;--s26-secondary:#e87561;--s26-tertiary:#66bdb3;--s26-show-bg:#f5e9d5;--s26-show-ink:#402d38;--s26-route-art:url('/assets/img/station/morning.png');}
+body.djfStation26[data-overlay-theme="trance"],.djfStation26 [data-station-show="trance"]{--s26-accent:#9bf9ff!important;--s26-secondary:#a285ff;--s26-tertiary:#3357fa;--s26-show-bg:#090924;--s26-show-ink:#f4f4ff;--s26-route-art:url('/assets/img/station/trance.png');}
+body.djfStation26[data-overlay-theme="eurodance"],.djfStation26 [data-station-show="eurodance"]{--s26-accent:#eaff46!important;--s26-secondary:#fc5ea6;--s26-tertiary:#60e6ed;--s26-show-bg:#32185d;--s26-show-ink:#fff2ce;--s26-route-art:url('/assets/img/station/eurodance.png');}
+body.djfStation26[data-overlay-theme="retro"],.djfStation26 [data-station-show="retro"]{--s26-accent:#f7cd7d!important;--s26-secondary:#dc683e;--s26-tertiary:#8dab96;--s26-show-bg:#472d29;--s26-show-ink:#fff0d1;--s26-route-art:url('/assets/img/station/retro.png');}
+body.djfStation26[data-overlay-theme="fredagsbar"],.djfStation26 [data-station-show="fredagsbar"]{--s26-accent:#ff586f!important;--s26-secondary:#ffb947;--s26-tertiary:#8b78ff;--s26-show-bg:#291129;--s26-show-ink:#fff0da;--s26-route-art:url('/assets/img/station/fredagsbar.png');}
+body.djfStation26[data-overlay-theme="popup"],.djfStation26 [data-station-show="popup"]{--s26-accent:#ff744c!important;--s26-secondary:#e7f84f;--s26-tertiary:#a489ff;--s26-show-bg:#282058;--s26-show-ink:#fff6df;--s26-route-art:url('/assets/img/station/popup.png');}
+body.djfStation26[data-overlay-theme="weekend"],.djfStation26 [data-station-show="weekend"]{--s26-accent:#ffb58d!important;--s26-secondary:#c0b2ff;--s26-tertiary:#8cf0dc;--s26-show-bg:#4c295e;--s26-show-ink:#fff1e3;--s26-route-art:url('/assets/img/station/weekend.png');}
+body.djfStation26[data-overlay-theme="nudisco"],.djfStation26 [data-station-show="nudisco"]{--s26-accent:#f1ce83!important;--s26-secondary:#e69fbc;--s26-tertiary:#ae96ed;--s26-show-bg:#271d2e;--s26-show-ink:#fff0ce;--s26-route-art:url('/assets/img/station/nudisco.png');}
+body.djfStation26[data-overlay-theme="summer"],.djfStation26 [data-station-show="summer"]{--s26-accent:#ffdd75!important;--s26-secondary:#38cfd2;--s26-tertiary:#ff899e;--s26-show-bg:#fff0cb;--s26-show-ink:#154c5c;--s26-route-art:url('/assets/img/station/summer.png');}
+body.djfStation26[data-overlay-theme="top20"],.djfStation26 [data-station-show="top20"]{--s26-accent:#bcff53!important;--s26-secondary:#b1a0ff;--s26-tertiary:#ff849c;--s26-show-bg:#20173d;--s26-show-ink:#f4f5df;--s26-route-art:url('/assets/img/station/top20.png');}
+body.djfStation26[data-overlay-theme="danske"],.djfStation26 [data-station-show="danske"]{--s26-accent:#e84158!important;--s26-secondary:#efcba0;--s26-tertiary:#aac8b1;--s26-show-bg:#eee3d1;--s26-show-ink:#632d3a;--s26-route-art:url('/assets/img/station/danske.png');}
+/* Keep the exact white overlay mark legible on the light Morning/Summer palettes. */
+.djfStation26 .s26Ident{background:#111019;padding:28px 24px;box-shadow:12px 12px 0 color-mix(in srgb,var(--s26-tertiary) 65%,transparent)}
