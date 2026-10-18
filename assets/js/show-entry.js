@@ -1,26 +1,7 @@
 /* DJ FOLSOE 20–29. Existing read-only endpoints; no credentials or new service. */
 (()=>{'use strict';
 const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev',langs=['da','en','de'],locales=['da-DK','en-GB','de-DE'],key='djf.site.language.v1';
-function unwrap(raw){return raw?.data&&!Array.isArray(raw.data)?raw.data:raw?.twitch||raw;}
-function liveState(raw,now=Date.now()){
- if(!raw||typeof raw!=='object'||raw.error)return 'unknown';
- const stamp=raw.generatedAt||raw.updatedAt;if(stamp&&(!Number.isFinite(Date.parse(stamp))||now-Date.parse(stamp)>600000))return 'unknown';
- const d=unwrap(raw);if(!d||d.error)return 'unknown';
- for(const v of [d.live,d.isLive,d.online,d.stream?.live]){if(v===true||v===1||v==='true')return 'live';if(v===false||v===0||v==='false')return 'offline';}
- if(d.type==='live'||d.stream?.type==='live')return 'live';if(d.type==='offline'||Object.hasOwn(d,'stream')&&d.stream===null)return 'offline';
- if(Array.isArray(raw.data))return raw.data.length&&raw.data[0]?.type==='live'?'live':raw.data.length===0?'offline':'unknown';
- return 'unknown';
-}
-function nextShow(raw,now=Date.now()){
- if(!raw||typeof raw!=='object'||raw.error)return {state:'error'};
- const stamp=raw.generatedAt;if(stamp&&(!Number.isFinite(Date.parse(stamp))||now-Date.parse(stamp)>86400000))return {state:'error'};
- const d=unwrap(raw);if(!d||d.error)return {state:'error'};
- const list=Array.isArray(d.segments)?d.segments:Array.isArray(raw.data)?raw.data:null;
- const direct=d.next||d.nextShow;
- if(!list&&!direct)return {state:'error'};
- const rows=[...(list||[]),...(direct?[direct]:[])].filter(x=>x&&!x.canceled_until&&!x.canceledUntil&&!x.cancelled&&!x.canceled).map(x=>({title:String(x.title||x.name||'DJ FOLSOE'),at:Date.parse(x.startTime||x.start_time||'')})).filter(x=>Number.isFinite(x.at)&&x.at>now).sort((a,b)=>a.at-b.at);
- return rows.length?{state:'ready',...rows[0]}:{state:'empty'};
-}
+const {liveState,nextShow}=window.DJF_BRIDGE;
 window.DJF_ENTRY_STATUS={liveState,nextShow};
 if(typeof document==='undefined')return;
 const data=window.DJF_ENTRY_COPY;if(!data)return;
@@ -30,7 +11,8 @@ const i=()=>langs.indexOf(lang),word=k=>data[k]?.[i()]||k;
 function renderStatus(){
  const live=document.getElementById('live-state'),node=document.getElementById('next-show');
  if(live){live.textContent=word(status);live.dataset.state=status;}
- if(node)node.textContent=next.state==='ready'?next.title+' · '+new Intl.DateTimeFormat(locales[i()],{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Copenhagen',timeZoneName:'short'}).format(next.at):word(next.state==='empty'?'noschedule':'schedulefail');
+ if(node)node.textContent=next.state==='ready'?window.DJF_BRIDGE.nextText({next:{title:next.title,startTime:new Date(next.at).toISOString()}},i()):window.DJF_BRIDGE.nextText(null,i());
+ const offline=document.getElementById('offline-visit');if(offline)offline.hidden=status!=='offline';
 }
 function render(){document.documentElement.lang=lang;const path=location.pathname;const titleKey=path==='/'||path==='/index.html'?'hero':/^\/(?:shows|showhub)\/(?:index.html)?$/.test(path)?'all':path.startsWith('/music/')?'music':path.startsWith('/commands/')?'join':null;if(titleKey)document.title=word(titleKey).replace(/\n/g,' ')+' | DJ FOLSOE';document.querySelectorAll('[data-copy]').forEach(n=>n.textContent=word(n.dataset.copy));document.querySelectorAll('[data-lang]').forEach(n=>n.setAttribute('aria-pressed',String(n.dataset.lang===lang)));document.querySelectorAll('a[href^="/"]').forEach(a=>{const u=new URL(a.getAttribute('href'),location.origin);u.searchParams.set('lang',lang);a.href=u.pathname+u.search+u.hash;});
  const desc=path.startsWith('/shows/')&&data['desc_'+document.documentElement.dataset.show]||data.lead;document.querySelector('meta[name="description"]')?.setAttribute('content',desc[i()]);renderStatus();}
