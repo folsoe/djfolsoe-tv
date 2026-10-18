@@ -27,12 +27,13 @@ const locales=['da-DK','en-GB','de-DE'];
 function canonical(title){return /^(eurodance|classic dance(?: #90 #00)?)$/i.test(title.trim())?'Classic Dance #90 #00':title;}
 function nextText(raw,i=0,now=Date.now()){const n=nextShow(raw,now);return n.state==='ready'?canonical(n.title)+' · '+new Intl.DateTimeFormat(locales[i],{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Copenhagen',timeZoneName:'short'}).format(n.at):fallback[i];}
 function chartRows(raw,key){if(!raw||raw.error||!key)return [];const stamp=raw.generatedAt||raw.updatedAt;if(stamp&&(!Number.isFinite(Date.parse(stamp))||Date.now()-Date.parse(stamp)>86400000))return [];const u=raw.chartUniverse||raw;return Array.isArray(u[key])?u[key].filter(x=>x&&typeof x.artist==='string'&&x.artist.trim()&&typeof x.title==='string'&&x.title.trim()).slice(0,20):[];}
-let schedule=null,charts=null,received=0,busy=false,timer;
+window.DJF_BRIDGE?.stop?.();
+let schedule=null,charts=null,received=0,busy=false,timer,epoch=0;const controllers=new Set();
 const fresh=()=>Date.now()-received<600000;
-async function get(path){const c=new AbortController(),id=setTimeout(()=>c.abort(),8000);try{const r=await fetch('https://djfolsoe-tv-api.sunefolsoe.workers.dev'+path,{cache:'no-store',credentials:'omit',signal:c.signal});if(!r.ok)throw Error('unavailable');return await r.json();}finally{clearTimeout(id);}}
-async function refresh(){if(busy)return;busy=true;try{const r=await Promise.allSettled([get('/api/twitch-schedule'),get('/api/cms/chart-universe')]);schedule=r[0].status==='fulfilled'?r[0].value:null;charts=r[1].status==='fulfilled'?r[1].value:null;received=Date.now();window.dispatchEvent?.(new CustomEvent('djf:bridge'));}finally{busy=false;}}
+async function get(path){const c=new AbortController();controllers.add(c);const id=setTimeout(()=>c.abort(),8000);try{const r=await fetch('https://djfolsoe-tv-api.sunefolsoe.workers.dev'+path,{cache:'no-store',credentials:'omit',signal:c.signal});if(!r.ok)throw Error('unavailable');return await r.json();}finally{clearTimeout(id);controllers.delete(c);}}
+async function refresh(){if(busy)return;busy=true;const generation=epoch;try{const r=await Promise.allSettled([get('/api/twitch-schedule'),get('/api/cms/chart-universe')]);if(generation!==epoch)return;schedule=r[0].status==='fulfilled'?r[0].value:null;charts=r[1].status==='fulfilled'?r[1].value:null;received=Date.now();window.dispatchEvent?.(new CustomEvent('djf:bridge'));}finally{if(generation===epoch)busy=false;}}
 window.DJF_BRIDGE={shows,request,liveState,nextShow,nextText,canonical,chartRows,
  show:key=>shows[key]||null,next:i=>nextText(fresh()?schedule:null,i),
  chart:key=>fresh()?chartRows(charts,shows[key]?.chart):[],
- start(){if(timer)return;refresh();timer=setInterval(refresh,300000);},stop(){clearInterval(timer);timer=null;},refresh};
+ start(){if(timer)return;refresh();timer=setInterval(refresh,300000);},stop(){epoch++;clearInterval(timer);timer=null;controllers.forEach(c=>c.abort());controllers.clear();busy=false;schedule=null;charts=null;received=0;},refresh};
 })();
