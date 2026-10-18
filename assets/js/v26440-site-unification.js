@@ -1,5 +1,6 @@
 
 (()=>{
+ if(/(?:admin|overlay|streamelements|twitch-connect)/i.test(location.pathname))return;
  const API='https://djfolsoe-tv-api.sunefolsoe.workers.dev';
  const path=location.pathname;
  const isHome=path==='/'||path.endsWith('/index.html')&&path.split('/').filter(Boolean).length===1;
@@ -10,10 +11,14 @@
    mast.innerHTML=`<div class="djfMastTop"><a class="djfMastCell djfMastBrand" href="/"><span class="djfMastBrandMark">DJF</span><span><strong>DJ FOLSOE</strong><small>ON TWITCH · LIVE MUSIC TV</small></span></a><section class="djfMastCell"><span class="djfMastIcon">♫</span><span><small>FOLSOE TV</small><strong>${document.title.split('|')[0].split('·')[0].trim()||'DJ FOLSOE'}</strong><b>Music · shows · community</b></span></section><section class="djfMastCell"><span class="djfMastIcon">●</span><span><small>CHANNEL STATUS</small><strong id="djfUnifiedStatus">DJ FOLSOE</strong><b id="djfUnifiedNext">Official Twitch schedule</b></span></section><section class="djfMastCell djfMastSupport"><span class="djfMastIcon">♥</span><span><small>SUPPORT THE STREAM</small><strong>MOBILEPAY / VIPPS</strong><b>1267PN</b></span></section></div><nav class="djfMastNav"><a href="/">HOME</a><i></i><a href="/watch-live/">LIVE</a><i></i><a href="/shows/">SHOWS</a><i></i><a href="https://twitch.tv/djfolsoe/schedule" target="_blank" rel="noopener">SCHEDULE</a><i></i><a href="/music/">MUSIC</a><i></i><a href="/guides/">GUIDES</a><i></i><a href="/charts/">CHARTS</a><i></i><a href="/archive/">ARCHIVE</a><i></i><a href="/about-dj-folsoe/">ABOUT</a><i></i><a href="https://djfolsoe-shop.fourthwall.com/" target="_blank" rel="noopener">SHOP ↗</a><i></i><a href="https://twitch.tv/djfolsoe" target="_blank" rel="noopener">TWITCH ↗</a></nav>`;
    document.body.prepend(mast);
    mast.querySelectorAll('a').forEach(a=>{try{if(a.pathname===path)a.setAttribute('aria-current','page')}catch(_){}});
-   Promise.allSettled([fetch(API+'/api/twitch',{cache:'no-store'}).then(r=>r.json()),fetch(API+'/api/twitch-schedule',{cache:'no-store'}).then(r=>r.json())]).then(([tw,sc])=>{
-     const t=tw.value||{}, s=sc.value||{}; const live=!!(t.live||t.isLive||t.stream?.live); const st=document.getElementById('djfUnifiedStatus'); if(st)st.textContent=live?'DJ FOLSOE · LIVE':'DJ FOLSOE · OFF AIR';
-     const n=s.next||s.nextShow||s.segments?.[0]||s.data?.segments?.[0]; const nx=document.getElementById('djfUnifiedNext'); if(nx&&n)nx.textContent=(window.DJF_I18N ? window.DJF_I18N.t('NEXT · {title}', {title:n.title||n.name||'SHOW'}) : `NEXT · ${n.title||n.name||'SHOW'}`);
-   });
+   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8000);
+   Promise.allSettled([fetch(API+'/api/twitch',{cache:'no-store',signal:controller.signal}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}),fetch(API+'/api/twitch-schedule',{cache:'no-store',signal:controller.signal}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()})]).then(([tw,sc])=>{
+     const raw=tw.value,t=raw?.data||raw?.twitch||raw, s=sc.value?.data||sc.value;let state='STATUS UNKNOWN';
+     const stamp=raw?.generatedAt||raw?.updatedAt,stale=stamp&&(!Number.isFinite(Date.parse(stamp))||Date.now()-Date.parse(stamp)>600000);
+     if(tw.status==='fulfilled'&&t&&!t.error&&!raw.error&&!stale){const v=t.live??t.isLive??t.online??t.stream?.live;if(v===true||v===1||v==='true'||t.type==='live'||t.stream?.type==='live')state='LIVE';else if(v===false||v===0||v==='false'||t.type==='offline'||Object.hasOwn(t,'stream')&&t.stream===null)state='OFF AIR';}
+     const st=document.getElementById('djfUnifiedStatus');if(st)st.textContent='DJ FOLSOE · '+state;
+     const nx=document.getElementById('djfUnifiedNext');if(nx){const source=s?.segments,rows=[...(Array.isArray(source)?source:[]),s?.next||s?.nextShow].filter(x=>x&&!x.canceledUntil&&!x.canceled_until&&!x.cancelled&&!x.canceled&&Date.parse(x.startTime||x.start_time)>Date.now()).sort((a,b)=>Date.parse(a.startTime||a.start_time)-Date.parse(b.startTime||b.start_time));const n=rows[0];nx.textContent=n?'NEXT · '+(n.title||n.name||'DJ FOLSOE'):sc.status==='fulfilled'&&Array.isArray(source)&&!s.error?'No upcoming show announced':'Schedule unavailable — check Twitch';}
+   }).finally(()=>clearTimeout(timeout));
  }
  async function charts(){
    const nodes=[...document.querySelectorAll('.djfChartTeaser[data-chart-kind]')]; if(!nodes.length)return;
@@ -27,3 +32,10 @@
 (()=>{if(window.DJF_STATION_BOOT||/(?:admin|overlay|streamelements|twitch-connect)/i.test(location.pathname))return;window.DJF_STATION_BOOT=true;
 const css=document.createElement('link');css.rel='stylesheet';css.href='/assets/css/station-2026.css?v=overlay-20261015';document.head.append(css);
 const js=document.createElement('script');js.src='/assets/js/station-2026.js?v=overlay-20261015';js.defer=true;document.head.append(js);})();
+
+/* Share one language preference across the existing public pages. */
+(()=>{if(/(?:admin|overlay|streamelements|twitch-connect)/i.test(location.pathname)||window.DJF_I18N||document.querySelector('script[src*="/site-i18n.js"]'))return;
+ const css=document.createElement('link');css.rel='stylesheet';css.href='/assets/css/site-i18n.css?v=1';document.head.append(css);
+ const start=()=>{if(window.DJF_I18N)return;const script=document.createElement('script');script.src='/assets/js/site-i18n.js?v=20-29';document.head.append(script);};
+ if(window.DJF_SITE_TRANSLATIONS)start();else{const catalog=document.createElement('script');catalog.src='/assets/js/site-i18n-catalog.js?v=20-29';catalog.onload=start;document.head.append(catalog);}
+})();
