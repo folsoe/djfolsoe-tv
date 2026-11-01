@@ -1,0 +1,61 @@
+{
+  "design": "Real licensed photographs, no AI imagery. No Music TV/Music Television wording. Replacement graphics for existing scheduled posts; preserve dates, platforms and copy.",
+  "photos": [
+    {
+      "slug": "01-mandag",
+      "mediaPath": "assets/social/2026-W45-photo-v2/01-mandag.jpg",
+      "photographer": "Boris Hamer",
+      "source": "https://www.pexels.com/photo/close-up-of-dj-mixer-13599831/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. DJ FOLSOE. MUSIK & GODT SELSKAB. FIND DIN STEMNING PÅ FOLSOETV.DK. Ægte foto: Boris Hamer / Pexels."
+    },
+    {
+      "slug": "02-trance",
+      "mediaPath": "assets/social/2026-W45-photo-v2/02-trance.jpg",
+      "photographer": "ismail cem aycan",
+      "source": "https://www.pexels.com/photo/people-dancing-on-the-stage-5610120/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. TRANCE TUESDAY. OM EN TIME. TIRSDAG 18:30–21:30 · DANSK TID. Ægte foto: ismail cem aycan / Pexels."
+    },
+    {
+      "slug": "03-hjemmeside",
+      "mediaPath": "assets/social/2026-W45-photo-v2/03-hjemmeside.jpg",
+      "photographer": "Sound On",
+      "source": "https://www.pexels.com/photo/white-headphones-3394652/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. FIND DIT SHOW.. MUSIKKEN FORTSÆTTER HER. SHOWS · PROGRAM · UGENS PLAYLISTER. Ægte foto: Sound On / Pexels."
+    },
+    {
+      "slug": "04-classic",
+      "mediaPath": "assets/social/2026-W45-photo-v2/04-classic.jpg",
+      "photographer": "Anna Pou",
+      "source": "https://www.pexels.com/photo/a-disco-mirror-ball-8132441/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. CLASSIC DANCE #90 #00. OM EN TIME. TORSDAG 19:00–21:00 · DANSK TID. Ægte foto: Anna Pou / Pexels."
+    },
+    {
+      "slug": "05-faellesskab",
+      "mediaPath": "assets/social/2026-W45-photo-v2/05-faellesskab.jpg",
+      "photographer": "Atlantic Ambience",
+      "source": "https://www.pexels.com/photo/close-up-shot-of-a-disco-ball-10611756/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. ÉT NUMMER. ET MINDE.. MUSIKKEN BLIVER HOS OS. HVILKEN SANG TAGER DIG TILBAGE?. Ægte foto: Atlantic Ambience / Pexels."
+    },
+    {
+      "slug": "06-twitch",
+      "mediaPath": "assets/social/2026-W45-photo-v2/06-twitch.jpg",
+      "photographer": "Boris Hamer",
+      "source": "https://www.pexels.com/photo/close-up-of-dj-mixer-13599831/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. VI SES PÅ TWITCH.. MUSIK. CHAT. GODT SELSKAB.. FØLG KANALEN · TWITCH.TV/DJFOLSOE. Ægte foto: Boris Hamer / Pexels."
+    },
+    {
+      "slug": "07-retro",
+      "mediaPath": "assets/social/2026-W45-photo-v2/07-retro.jpg",
+      "photographer": "Brett Jordan",
+      "source": "https://www.pexels.com/photo/a-vinyl-record-on-a-turntable-4371576/",
+      "license": "https://www.pexels.com/license/",
+      "alt": "DJ FOLSOE. RETRO HITS. OM EN TIME. SØNDAG 08:00–12:00 · DANSK TID. Ægte foto: Brett Jordan / Pexels."
+    }
+  ]
+}
