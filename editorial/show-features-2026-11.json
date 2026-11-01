@@ -1,0 +1,1116 @@
+{
+  "schema": 1,
+  "date": "2026-11-01",
+  "languages": [
+    "da",
+    "en",
+    "de"
+  ],
+  "kind": "evergreen",
+  "shows": [
+    {
+      "id": "trance",
+      "slug": "trance-tuesday",
+      "title": "Trance Tuesday",
+      "accent": "#9bf9ff",
+      "tag": [
+        "Melodier, der får tirsdagen til at løfte sig.",
+        "Melodies that lift your Tuesday.",
+        "Melodien, die deinen Dienstag tragen."
+      ],
+      "sections": [
+        [
+          [
+            "En rejse ind i musikken",
+            "A journey into the music",
+            "Eine Reise in die Musik"
+          ],
+          [
+            [
+              "Trance Tuesday er aftenen til dig, der holder af musik, som bygger et helt rum omkring en melodi. Vi giver plads til de langsomme opbygninger, det svævende mellemspil og forløsningen, når rytmen vender tilbage. Det er både til hovedtelefonerne, køkkenets lille dansegulv og de øjeblikke, hvor du bare lukker øjnene og lytter.",
+              "Trance Tuesday is for anyone who loves music that builds a whole space around a melody. There is room for gradual builds, floating breakdowns and the release when the rhythm returns. Bring your headphones, turn the kitchen into a dance floor or simply close your eyes and listen.",
+              "Trance Tuesday ist für alle, die Musik lieben, die um eine Melodie einen ganzen Raum entstehen lässt. Langsame Steigerungen, schwebende Breaks und die Erlösung, wenn der Rhythmus zurückkehrt, bekommen Zeit. Mit Kopfhörern, auf der kleinen Küchentanzfläche oder einfach mit geschlossenen Augen."
+            ],
+            [
+              "Musikken skal hænge sammen som en fortælling. Et tilbageholdt groove kan åbne døren, en vokal give aftenen en stemme, og et stort melodisk tema samle det hele. Kendte tranceudtryk og nye opdagelser får lov at mødes; pointen er ikke at nå flest mulige drops, men at mærke vejen mellem dem.",
+              "The music should feel like a story. A restrained groove opens the door, a vocal gives the evening a voice and a broad melodic theme brings it together. Familiar trance sounds meet new discoveries; the pleasure is in the journey between the peaks.",
+              "Die Musik soll sich wie eine Geschichte anfühlen. Ein zurückhaltender Groove öffnet die Tür, eine Stimme gibt dem Abend ein Gesicht und ein großes melodisches Thema verbindet alles. Vertraute Trance-Klänge treffen auf Entdeckungen; der Weg zwischen den Höhepunkten gehört dazu."
+            ]
+          ]
+        ],
+        [
+          [
+            "Det kan du lytte efter",
+            "What to listen for",
+            "Darauf kannst du achten"
+          ],
+          [
+            [
+              "Læg mærke til, hvordan et lille motiv ændrer betydning, når bassen forsvinder under det. Hør efter de ekstra lag i en gentagelse: en lysere synth, et kor i baggrunden eller et trommefill, der varsler næste kapitel. Selv et enkelt tema kan vokse, hvis spændingen får tid.",
+              "Notice how a short motif changes when the bass drops away. Listen for the extra layer on a repetition: a brighter synth, a distant vocal or a drum fill signalling the next chapter. A simple theme can grow when the tension has room.",
+              "Achte darauf, wie ein kurzes Motiv anders wirkt, sobald der Bass verschwindet. Bei der Wiederholung kommt vielleicht eine hellere Synthesizerstimme, ein Chor oder ein Drumfill hinzu. Auch ein einfaches Thema kann wachsen, wenn die Spannung Zeit bekommt."
+            ]
+          ]
+        ],
+        [
+          [
+            "Gåsehud er også noget, vi deler",
+            "Goosebumps are better shared",
+            "Gänsehaut kann man teilen"
+          ],
+          [
+            [
+              "Du behøver ikke kende remixnavne eller kunne skelne undergenrer for at være med. Et enkelt “den rammer” i chatten kan sige lige så meget som en lang forklaring. Fortæl gerne, hvilken melodi der blev hængende, eller hvor du lyttede til trance første gang. Der er også plads til dig, der bare følger med i stilhed.",
+              "You do not need to know remix names or subgenres to join in. A simple “that one hits” in chat can say as much as a long explanation. Tell us which melody stayed with you or where you first heard trance. Quiet listeners are equally welcome.",
+              "Du musst weder Remixnamen noch Untergenres kennen. Ein kurzes „der trifft mich“ im Chat sagt manchmal mehr als eine lange Erklärung. Welche Melodie bleibt bei dir, wo hast du zum ersten Mal Trance gehört? Auch stilles Zuhören gehört dazu."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Find pulsen: giv det første groove et øjeblik, før du beslutter dig.",
+          "Find the pulse: give the opening groove a moment.",
+          "Finde den Puls: Gib dem ersten Groove einen Moment."
+        ],
+        [
+          "Følg melodien: lyt til det, der gentages og ændrer sig.",
+          "Follow the melody: hear what repeats and what changes.",
+          "Folge der Melodie: Höre, was sich wiederholt und verändert."
+        ],
+        [
+          "Bliv til forløsningen: et breakdown er en del af rejsen.",
+          "Stay for the release: the breakdown is part of the journey.",
+          "Bleib bis zur Auflösung: Der Break gehört zur Reise."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "Fra klubber til store melodier",
+            "From clubs to big melodies",
+            "Von Clubs zu großen Melodien"
+          ],
+          [
+            "Armada beskriver trancens gennembrud i de tidlige 1990’ere med den tyske klubscene som et vigtigt udgangspunkt. Genren bredte sig derfra videre i Europa.",
+            "Armada traces trance’s emergence in the early 1990s through Germany’s club scene, before its wider spread across Europe.",
+            "Armada beschreibt den Aufstieg des Trance in den frühen 1990ern mit der deutschen Clubszene als wichtigem Ausgangspunkt und der anschließenden Verbreitung in Europa."
+          ],
+          "https://www.armadamusic.com/news/trance-music",
+          "Armada Music"
+        ],
+        [
+          [
+            "Flere veje til samme følelse",
+            "Different routes to the same feeling",
+            "Verschiedene Wege zum selben Gefühl"
+          ],
+          [
+            "I Armadas genreoversigt står progressive, uplifting og vocal trance side om side. Det er forskellige indgange til den melodiske verden, du kan udforske her.",
+            "Armada’s guide includes progressive, uplifting and vocal trance: different entry points into the melodic world you can explore here.",
+            "Armadas Übersicht führt Progressive, Uplifting und Vocal Trance auf: unterschiedliche Zugänge zu der melodischen Welt, die du hier entdecken kannst."
+          ],
+          "https://www.armadamusic.com/news/trance-music",
+          "Armada Music"
+        ]
+      ],
+      "question": [
+        "Hvilket trance-øjeblik kan du stadig mærke, når du tænker på det?",
+        "Which trance moment can you still feel when you remember it?",
+        "Welchen Trance-Moment spürst du heute noch?"
+      ],
+      "faq": [
+        [
+          [
+            "Skal jeg kende musikken på forhånd?",
+            "Do I need to know the music?",
+            "Muss ich die Musik schon kennen?"
+          ],
+          [
+            "Nej. Lad melodierne præsentere sig selv. Spørg gerne til en titel i chatten, hvis noget fanger dig.",
+            "No. Let the melodies introduce themselves, and ask in chat if a track catches your ear.",
+            "Nein. Lass die Melodien für sich sprechen und frage im Chat nach einem Titel, der dich anspricht."
+          ]
+        ],
+        [
+          [
+            "Hvornår og hvor er vi sammen?",
+            "When and where do we meet?",
+            "Wann und wo treffen wir uns?"
+          ],
+          [
+            "Tirsdag 18.30–21.30, dansk tid, på twitch.tv/djfolsoe. Se næste annoncerede udsendelse ovenfor; programændringer kan forekomme.",
+            "Tuesday 18:30–21:30 Copenhagen time on twitch.tv/djfolsoe. Check the next announced broadcast above for any changes.",
+            "Dienstags 18:30–21:30 Uhr Kopenhagener Zeit auf twitch.tv/djfolsoe. Die nächste angekündigte Sendung oben zeigt mögliche Änderungen."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "eurodance",
+      "slug": "eurodance",
+      "title": "Classic Dance #90 #00",
+      "accent": "#eaff46",
+      "tag": [
+        "To årtier. Mange dansegulve. Ét fælles nik med hovedet.",
+        "Two decades. Many dance floors. One shared nod.",
+        "Zwei Jahrzehnte. Viele Tanzflächen. Ein gemeinsames Nicken."
+      ],
+      "sections": [
+        [
+          [
+            "Tilbage til følelsen, videre med festen",
+            "Back to the feeling, on with the party",
+            "Zurück zum Gefühl, weiter mit der Party"
+          ],
+          [
+            [
+              "Classic Dance #90 #00 åbner døren til 1990–2009: årene med store omkvæd, klubnætter, CD-mapper og musik, der kunne få hele rummet til at bevæge sig. Her er både det, du sang med på, og de numre, du først genkender, når introen har fået nogle sekunder. Det må gerne være velkendt uden at blive forudsigeligt.",
+              "Classic Dance #90 #00 opens the door to 1990–2009: big choruses, club nights, CD wallets and music that could move an entire room. Expect the songs you sang along to and tracks that only reveal themselves a few seconds into the intro. Familiar does not have to mean predictable.",
+              "Classic Dance #90 #00 öffnet die Tür zu 1990–2009: große Refrains, Clubnächte, CD-Mappen und Musik, die einen ganzen Raum in Bewegung bringt. Hier treffen Mitsingfavoriten auf Titel, die du erst nach ein paar Sekunden wiedererkennst. Vertraut darf trotzdem überraschend sein."
+            ],
+            [
+              "Showet favner bredere end eurodance alene. House, trance, hands up og hard dance kan alle høre hjemme her, når de passer til aftenens retning. En god vokal, en skæv synthfigur eller et hårdtarbejdende klaver kan være lige så vigtigt som tempoet. Det er stemningen og sammenhængen, der binder de to årtier sammen.",
+              "The show reaches beyond eurodance alone. House, trance, hands up and hard dance all have a place when they suit the evening. A great vocal, an unusual synth riff or a driving piano can matter as much as the tempo. Mood and flow connect the two decades.",
+              "Die Show reicht über Eurodance hinaus. House, Trance, Hands Up und Hard Dance passen dazu, wenn sie den Abend weiterführen. Eine gute Stimme, ein schräges Synthesizermotiv oder ein treibendes Klavier zählt ebenso wie das Tempo. Stimmung und Zusammenhang verbinden die Jahrzehnte."
+            ]
+          ]
+        ],
+        [
+          [
+            "Mellem radiominde og klubenergi",
+            "Between radio memories and club energy",
+            "Zwischen Radioerinnerung und Clubenergie"
+          ],
+          [
+            [
+              "Prøv at lytte efter forskellen mellem den del, der gjorde sangen let at huske, og den del, der holder dansegulvet i gang. Et omkvæd samler os hurtigt; et instrumentalt mellemspil giver rytmen plads. Vi bevæger os mellem begge dele, så der både er genkendelse og en grund til at blive til næste nummer.",
+              "Listen for the difference between the part that made a song memorable and the part that keeps a dance floor moving. A chorus brings everyone together; an instrumental passage gives the rhythm space. The show moves between both, balancing recognition with a reason to stay.",
+              "Hör auf den Unterschied zwischen dem Teil, den man sofort behält, und dem Teil, der die Tanzfläche trägt. Ein Refrain verbindet schnell, eine instrumentale Passage gibt dem Rhythmus Raum. Beides sorgt für Wiedererkennen und Lust auf den nächsten Titel."
+            ]
+          ]
+        ],
+        [
+          [
+            "Din klub, dit ungdomsværelse, din historie",
+            "Your club, your bedroom, your story",
+            "Dein Club, dein Jugendzimmer, deine Geschichte"
+          ],
+          [
+            [
+              "Måske kendte du musikken fra et diskotek, måske fra radioen på vej hjem. Begge dele tæller. Del gerne et kort minde om en sang eller en aften, men lad også andre få deres eget forhold til musikken. Vi behøver ikke være enige om årtiets bedste hit for at dele et godt torsdagsmix.",
+              "Perhaps you knew the music from a club, perhaps from the radio on the way home. Both count. Share a short memory of a song or a night, while leaving room for other people’s connections. We do not need to agree on the decade’s best hit to enjoy a Thursday mix.",
+              "Vielleicht kennst du die Musik aus dem Club, vielleicht aus dem Radio auf dem Heimweg. Beides zählt. Teile eine kurze Erinnerung und lass auch andere ihre Verbindung zur Musik finden. Für einen guten Donnerstag müssen wir uns nicht auf den größten Hit einigen."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Genkend: giv introen chancen for at overraske dig.",
+          "Recognise: let the intro surprise you.",
+          "Wiedererkennen: Lass dich von der Einleitung überraschen."
+        ],
+        [
+          "Genopdag: bliv hængende ved favoritten, du næsten havde glemt.",
+          "Rediscover: stay with the favourite you nearly forgot.",
+          "Wiederentdecken: Bleib bei dem fast vergessenen Favoriten."
+        ],
+        [
+          "Dans videre: følg energien gennem de forskellige dance-udtryk.",
+          "Keep moving: follow the energy across dance styles.",
+          "Weitertanzen: Folge der Energie durch verschiedene Dance-Stile."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "1990: SNAP! rykker ind",
+            "1990: SNAP! arrives",
+            "1990: SNAP! ist da"
+          ],
+          [
+            "Official Charts registrerer The Power på den britiske singleliste fra marts 1990. Nummeret nåede førstepladsen og blev der i to uger.",
+            "Official Charts records The Power entering the UK singles chart in March 1990. It reached number one and stayed there for two weeks.",
+            "Official Charts verzeichnet The Power ab März 1990 in den britischen Singlecharts. Der Titel erreichte Platz eins und hielt ihn zwei Wochen."
+          ],
+          "https://www.officialcharts.com/songs/snap-the-power/",
+          "Official Charts"
+        ],
+        [
+          [
+            "Et hit med lang hale",
+            "A hit that stayed around",
+            "Ein Hit, der blieb"
+          ],
+          [
+            "Samme chartarkiv tæller 23 uger i Top 100 for The Power. Et godt eksempel på et dance-hit, der rakte langt ud over én klubaften.",
+            "The same archive counts 23 weeks in the Top 100 for The Power: a dance hit whose life stretched far beyond one club night.",
+            "Dasselbe Archiv zählt 23 Wochen in den Top 100 für The Power: ein Dance-Hit mit einem Leben weit über eine Clubnacht hinaus."
+          ],
+          "https://www.officialcharts.com/songs/snap-the-power/",
+          "Official Charts"
+        ]
+      ],
+      "question": [
+        "Hvilket dance-nummer får dig tilbage på dansegulvet på ét sekund?",
+        "Which dance track takes you back to the floor in a second?",
+        "Welcher Dance-Titel bringt dich in einer Sekunde zurück auf die Tanzfläche?"
+      ],
+      "faq": [
+        [
+          [
+            "Er det kun eurodance?",
+            "Is it only eurodance?",
+            "Läuft nur Eurodance?"
+          ],
+          [
+            "Nej. Rammen er bred dance fra 1990–2009 med plads til flere klubgenrer og forskellige energier.",
+            "No. The frame is dance from 1990–2009, with room for several club genres and energy levels.",
+            "Nein. Der Rahmen ist Dance von 1990–2009 mit verschiedenen Clubgenres und Energien."
+          ]
+        ],
+        [
+          [
+            "Hvornår kan jeg være med?",
+            "When can I join?",
+            "Wann kann ich dabei sein?"
+          ],
+          [
+            "Torsdag 19.00–21.00, dansk tid, på Twitch. Brug næste annoncerede show ovenfor, hvis en udsendelse bliver flyttet.",
+            "Thursday 19:00–21:00 Copenhagen time on Twitch. Check the next announced show above in case a broadcast moves.",
+            "Donnerstags 19:00–21:00 Uhr Kopenhagener Zeit auf Twitch. Falls sich eine Sendung verschiebt, gilt die nächste Ankündigung oben."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "retro",
+      "slug": "retro-hits",
+      "title": "Retro Hits",
+      "accent": "#f7cd7d",
+      "tag": [
+        "Den har jeg ikke hørt længe. Og nu sidder den der igen.",
+        "You have not heard it in ages. Now it is back in your head.",
+        "Ewig nicht gehört. Und schon ist der Song wieder im Kopf."
+      ],
+      "sections": [
+        [
+          [
+            "Søndagsmusik med hukommelse",
+            "Sunday music with a memory",
+            "Sonntagsmusik mit Erinnerungen"
+          ],
+          [
+            [
+              "Retro Hits er fire timer med musikken fra 70’erne, 80’erne og de tidlige 90’ere. Det er årtier med meget forskellige lyde, men én fælles evne: få takter kan åbne en hel skuffe med minder. Vi går efter både det store gensyn og den lille overraskelse, som ikke altid får plads mellem de mest oplagte klassikere.",
+              "Retro Hits brings four hours of music from the 70s, 80s and early 90s. These decades sound very different, yet share one gift: a few bars can open a whole drawer of memories. There is room for the big reunion and the little surprise that gets overlooked beside the obvious classics.",
+              "Retro Hits bringt vier Stunden Musik aus den 70ern, 80ern und frühen 90ern. Sehr unterschiedliche Klangwelten mit derselben Gabe: Wenige Takte öffnen eine ganze Schublade voller Erinnerungen. Neben großen Klassikern bekommen auch kleine, weniger offensichtliche Überraschungen Platz."
+            ],
+            [
+              "Discoens bevægelse, poppens omkvæd og synthens kølige glimt kan mødes i samme udsendelse. Danske og internationale favoritter får plads i rejsen, når de passer sammen. Du behøver ikke kunne sætte årstal på alt; det interessante er ofte, at en sang føles både helt velkendt og overraskende frisk.",
+              "Disco’s movement, pop’s choruses and the cool shimmer of synths can meet in one show. Danish and international favourites join the journey when they fit together. You do not need to date every record: a song can feel completely familiar and unexpectedly fresh at once.",
+              "Disco-Bewegung, Pop-Refrains und kühler Synthesizerglanz können in derselben Sendung zusammenfinden. Dänische und internationale Favoriten gehören dazu, wenn sie passen. Du musst nicht jedes Erscheinungsjahr wissen: Ein Lied kann vertraut und gleichzeitig erstaunlich frisch wirken."
+            ]
+          ]
+        ],
+        [
+          [
+            "Hør en gammel favorit på en ny måde",
+            "Hear an old favourite differently",
+            "Einen alten Favoriten neu hören"
+          ],
+          [
+            [
+              "Lyt efter den bas, du aldrig fik helt med på den lille radio. Eller opdag, hvordan en sang allerede i introen lover sit omkvæd. Trommelyde, kor og små instrumentale svar giver pladerne deres personlighed. Her må en velkendt sang gerne være mere end baggrund: prøv at følge ét instrument gennem hele nummeret.",
+              "Listen for the bass you missed on that small radio, or the way an intro quietly promises the chorus. Drum sounds, harmonies and instrumental replies give records their personality. A familiar song can be more than background: try following one instrument all the way through.",
+              "Hör auf den Bass, der im kleinen Radio unterging, oder darauf, wie die Einleitung den Refrain ankündigt. Schlagzeugklänge, Chöre und instrumentale Antworten geben jeder Aufnahme Persönlichkeit. Folge einmal einem einzigen Instrument durch den ganzen Song."
+            ]
+          ]
+        ],
+        [
+          [
+            "Kaffe, køkken og fælles tilbageblik",
+            "Coffee, kitchens and shared memories",
+            "Kaffee, Küche und gemeinsame Erinnerungen"
+          ],
+          [
+            [
+              "Søndag morgen behøver ikke starte med store planer. Måske er du i køkkenet, måske på sofaen, måske allerede i fuld gang. Et hej i chatten er nok til at være en del af selskabet. Fortæl gerne, om nummeret minder dig om et kassettebånd, en ferie eller et bestemt sted. Minderne tilhører jer; ingen behøver have den samme historie.",
+              "Sunday morning does not need a big plan. You might be in the kitchen, on the sofa or already busy. A hello in chat makes you part of the company. Does a song remind you of a cassette, a holiday or a particular place? The memories are yours; they do not have to match anyone else’s.",
+              "Der Sonntagmorgen braucht keinen großen Plan. Vielleicht bist du in der Küche, auf dem Sofa oder schon unterwegs. Ein Hallo im Chat reicht. Erinnert dich ein Lied an eine Kassette, einen Urlaub oder einen Ort? Eure Erinnerungen dürfen ganz verschieden sein."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Land i søndagen: lad en kendt melodi sætte stemningen.",
+          "Settle into Sunday with a familiar melody.",
+          "Komm mit einer vertrauten Melodie im Sonntag an."
+        ],
+        [
+          "Tag omvejen: en glemt favorit kan gemme sig mellem de store hits.",
+          "Take a detour: a forgotten favourite may be waiting.",
+          "Nimm den Umweg: Ein vergessener Favorit wartet vielleicht schon."
+        ],
+        [
+          "Tag et minde med videre: skriv titlen ned, når noget rammer.",
+          "Take a memory with you: note the title when a song hits.",
+          "Nimm eine Erinnerung mit: Notiere den Titel, der dich berührt."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "1990: stilheden får en single",
+            "1990: silence becomes a single",
+            "1990: Die Stille wird zur Single"
+          ],
+          [
+            "Depeche Modes eget arkiv daterer den britiske single Enjoy The Silence til 5. februar 1990. Et konkret holdepunkt i overgangen fra 80’erne til 90’erne.",
+            "Depeche Mode’s own archive dates the UK single Enjoy The Silence to 5 February 1990, right at the turn of the decade.",
+            "Depeche Modes eigenes Archiv datiert die britische Single Enjoy The Silence auf den 5. Februar 1990: direkt am Übergang der Jahrzehnte."
+          ],
+          "https://archives.depechemode.com/discography/singles/25_enjoythesilence.html",
+          "Depeche Mode Archives"
+        ],
+        [
+          [
+            "Samme sang, flere indgange",
+            "One song, several ways in",
+            "Ein Song, mehrere Zugänge"
+          ],
+          [
+            "Arkivet viser både singleversionen og mix som Hands And Feet og Ecstatic Dub. Versionsnavne er derfor værd at kigge efter, når et kendt nummer lyder anderledes.",
+            "The archive lists the single version alongside mixes including Hands And Feet and Ecstatic Dub. Version names can explain why a familiar track sounds different.",
+            "Das Archiv führt neben der Singleversion auch Hands And Feet und Ecstatic Dub auf. Versionsnamen erklären manchmal, warum ein vertrauter Titel anders klingt."
+          ],
+          "https://archives.depechemode.com/discography/singles/25_enjoythesilence.html",
+          "Depeche Mode Archives"
+        ]
+      ],
+      "question": [
+        "Hvilken sang får dig til at huske et sted, du ikke har tænkt på i årevis?",
+        "Which song brings back a place you have not thought about in years?",
+        "Welcher Song erinnert dich an einen lange vergessenen Ort?"
+      ],
+      "faq": [
+        [
+          [
+            "Hvor langt tilbage går vi?",
+            "How far back do we go?",
+            "Wie weit geht die Reise zurück?"
+          ],
+          [
+            "Tyngden ligger i 70’erne, 80’erne og de tidlige 90’ere. Musikken skal hænge sammen, så et årstal alene bestemmer ikke rækkefølgen.",
+            "The focus is the 70s, 80s and early 90s. Musical flow matters, so dates alone do not determine the order.",
+            "Im Mittelpunkt stehen die 70er, 80er und frühen 90er. Der musikalische Zusammenhang zählt mehr als eine streng chronologische Reihenfolge."
+          ]
+        ],
+        [
+          [
+            "Hvornår starter søndagen her?",
+            "When does Sunday start here?",
+            "Wann beginnt hier der Sonntag?"
+          ],
+          [
+            "Normalt søndag 08.00–12.00, dansk tid, på Twitch. Særlige arrangementer kan flytte udsendelsen; se den aktuelle annoncering ovenfor.",
+            "Normally Sunday 08:00–12:00 Copenhagen time on Twitch. Special events may move the show; check the current announcement above.",
+            "Normalerweise sonntags 08:00–12:00 Uhr Kopenhagener Zeit auf Twitch. Besondere Veranstaltungen können den Termin verschieben; die aktuelle Ankündigung steht oben."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "fredagsbar",
+      "slug": "fredagsbar",
+      "title": "Fredagsbar",
+      "accent": "#ff586f",
+      "tag": [
+        "Slip ugen. Behold selskabet.",
+        "Let go of the week. Keep the company.",
+        "Lass die Woche los. Bleib in guter Gesellschaft."
+      ],
+      "sections": [
+        [
+          [
+            "Et musikalsk frikvarter",
+            "A musical break",
+            "Eine musikalische Auszeit"
+          ],
+          [
+            [
+              "Fredagsbar er stedet, hvor skuldrene gerne må falde et par centimeter. Arbejdsugen kan blive udenfor, mens musikken og samtalen finder deres eget tempo. Her er plads til et stort omkvæd, en funky bas og en sang, der sætter gang i en helt uventet historie. Du behøver hverken dresscode eller et glas med noget bestemt i.",
+              "Fredagsbar is a place to let your shoulders drop. Leave the working week outside while music and conversation find their own pace. A big chorus, a funky bass line or a song can start an unexpected story. There is no dress code and no required drink.",
+              "In der Fredagsbar dürfen die Schultern sinken. Die Arbeitswoche bleibt draußen, Musik und Gespräche finden ihr eigenes Tempo. Ein großer Refrain, eine funkige Basslinie oder ein Lied kann eine unerwartete Geschichte auslösen. Es gibt weder Kleiderordnung noch ein vorgeschriebenes Getränk."
+            ],
+            [
+              "Musikken vælger vi efter fredagens humør: noget med varme, genkendelse, rytme og plads til et smil. Det kan være pop, disco, dance eller et sidespring, der lige passer ind. Det vigtigste er, at man har lyst til at blive lidt længere, også når man egentlig bare kom forbi for at sige hej.",
+              "The music follows Friday’s mood: warmth, recognition, rhythm and room for a smile. Pop, disco, dance or a well-placed detour can all belong. The idea is to make you want to stay a little longer, even if you only dropped in to say hello.",
+              "Die Musik folgt der Freitagsstimmung: Wärme, Wiedererkennen, Rhythmus und ein Lächeln. Pop, Disco, Dance oder ein passender Abstecher gehören dazu. Man darf gern länger bleiben, auch wenn man eigentlich nur kurz Hallo sagen wollte."
+            ]
+          ]
+        ],
+        [
+          [
+            "Et groove med plads omkring",
+            "A groove with room around it",
+            "Ein Groove mit Platz zum Atmen"
+          ],
+          [
+            [
+              "Hør efter samspillet mellem bas og trommer, når en ellers enkel sang pludselig føles uimodståelig. En lille guitarfigur kan løfte et helt omkvæd, og et kor kan få et rum til at føles større. Fredagsbar handler også om de detaljer, som gør en sang hyggelig at vende tilbage til.",
+              "Listen to bass and drums working together when a simple song suddenly feels irresistible. A small guitar figure can lift a whole chorus, and backing vocals can make a room feel larger. These details are part of the pleasure of returning to a song.",
+              "Achte auf das Zusammenspiel von Bass und Schlagzeug, wenn ein einfaches Lied plötzlich unwiderstehlich wird. Eine kleine Gitarrenfigur trägt einen Refrain, ein Chor macht den Raum größer. Solche Details machen das Wiederhören schön."
+            ]
+          ]
+        ],
+        [
+          [
+            "Du må gerne komme, som du er",
+            "Come as you are",
+            "Komm so, wie du bist"
+          ],
+          [
+            [
+              "Chatten er en del af bordet. Fortæl om ugens lille sejr, et musikminde eller det nummer, du trænger til at høre. Humoren må gerne være skæv, men selskabet skal være rart at lande i. Du kan også lade samtalen køre og bare have musikken med dig, mens du laver noget andet.",
+              "Chat is part of the table. Share a small win from the week, a musical memory or the song you feel like hearing. The humour can be offbeat, while the company stays welcoming. You can also let the conversation run and keep the music beside you.",
+              "Der Chat gehört mit an den Tisch. Erzähle von einem kleinen Erfolg der Woche, einer Musikerinnerung oder einem Wunsch. Der Humor darf schräg sein, das Miteinander bleibt freundlich. Du kannst auch einfach zuhören und nebenbei etwas anderes tun."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Læg ugen fra dig med et nummer, du kender.",
+          "Put the week down with a song you know.",
+          "Leg die Woche mit einem vertrauten Lied ab."
+        ],
+        [
+          "Følg snakken, når musikken vækker en historie.",
+          "Follow the conversation when music starts a story.",
+          "Folge dem Gespräch, wenn Musik eine Geschichte weckt."
+        ],
+        [
+          "Bliv til det uventede gensyn med en gammel favorit.",
+          "Stay for the unexpected return of an old favourite.",
+          "Bleib für das unerwartete Wiedersehen mit einem alten Favoriten."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "En lukket dør blev til Le Freak",
+            "A closed door became Le Freak",
+            "Eine verschlossene Tür wurde zu Le Freak"
+          ],
+          [
+            "Ifølge Rhino begyndte historien om Le Freak, da Nile Rodgers og Bernard Edwards blev afvist ved Studio 54 nytårsaften. Frustrationen fandt vej ind i musikken.",
+            "Rhino traces Le Freak to Nile Rodgers and Bernard Edwards being refused entry to Studio 54 on New Year’s Eve. Frustration became music.",
+            "Laut Rhino begann Le Freak damit, dass Nile Rodgers und Bernard Edwards an Silvester nicht ins Studio 54 kamen. Aus Frust wurde Musik."
+          ],
+          "https://www.rhino.com/aod/cest-chic-chic",
+          "Rhino"
+        ],
+        [
+          [
+            "Et mere radiovenligt udbrud",
+            "A more radio-friendly outburst",
+            "Ein radiotauglicherer Ausruf"
+          ],
+          [
+            "Rhino fortæller, at det oprindelige vrede udbrud blev ændret til et radiovenligt omkvæd. Le Freak blev et amerikansk nummer ét i 1978.",
+            "Rhino says the original angry outburst became a radio-friendly refrain. Le Freak reached number one in the US in 1978.",
+            "Rhino beschreibt, wie der ursprüngliche Wutausbruch zu einem radiotauglichen Refrain wurde. Le Freak erreichte 1978 Platz eins in den USA."
+          ],
+          "https://www.rhino.com/aod/cest-chic-chic",
+          "Rhino"
+        ]
+      ],
+      "question": [
+        "Hvad er ugens lille ting, der fortjener et godt soundtrack?",
+        "What small moment from your week deserves a good soundtrack?",
+        "Welcher kleine Moment deiner Woche verdient einen guten Soundtrack?"
+      ],
+      "faq": [
+        [
+          [
+            "Skal man være med i chatten?",
+            "Do I have to chat?",
+            "Muss ich mitchatten?"
+          ],
+          [
+            "Nej. Fredagsbar er også for dig, der bare vil lytte. Selskab kan sagtens være stille.",
+            "No. Fredagsbar is also for quiet listeners. Good company does not always need words.",
+            "Nein. Auch stille Zuhörer gehören dazu. Gute Gesellschaft braucht nicht immer Worte."
+          ]
+        ],
+        [
+          [
+            "Hvornår åbner baren?",
+            "When does the bar open?",
+            "Wann öffnet die Bar?"
+          ],
+          [
+            "Den sidste fredag i måneden fra 19.00, dansk tid. Se altid Twitch-programmet for den konkrete dato og eventuelle ændringer.",
+            "The last Friday of the month from 19:00 Copenhagen time. Check the Twitch schedule for the date and any changes.",
+            "Am letzten Freitag des Monats ab 19:00 Uhr Kopenhagener Zeit. Datum und Änderungen findest du im Twitch-Programm."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "morning",
+      "slug": "good-morning-twitch",
+      "title": "Good Morning Twitch",
+      "accent": "#ffbb74",
+      "tag": [
+        "En blød start. Et godt nummer. Så er dagen i gang.",
+        "A gentle start. A good song. The day is yours.",
+        "Ein sanfter Start. Ein guter Song. Der Tag kann kommen."
+      ],
+      "sections": [
+        [
+          [
+            "Morgenen må gerne tage lidt tid",
+            "Let the morning take its time",
+            "Der Morgen darf sich Zeit lassen"
+          ],
+          [
+            [
+              "Good Morning Twitch er selskab til den første kop, den sene morgenmad eller den morgen, der allerede er i fuld gang. Musikken skal give dagen en venlig begyndelse med pop, varme melodier og favoritter, man kan falde til ro i. Kaffe er valgfri. Det er lysten til at dele en god start på dagen, der samler os.",
+              "Good Morning Twitch keeps you company with your first cup, a late breakfast or a morning already in motion. Pop, warm melodies and comfortable favourites give the day a friendly beginning. Coffee is optional; sharing a good start is what brings us together.",
+              "Good Morning Twitch begleitet die erste Tasse, das späte Frühstück oder einen längst laufenden Morgen. Pop, warme Melodien und vertraute Favoriten geben dem Tag einen freundlichen Anfang. Kaffee ist freiwillig; gemeinsam gut anzukommen ist das Wesentliche."
+            ],
+            [
+              "Her behøver energien ikke stå på maksimum fra første minut. En blød vokal eller et let groove kan være nok, før der kommer mere bevægelse i musikken. Nogle numre kender du måske fra radioen; andre bliver et lille fund til resten af dagen. Det må gerne føles som en morgenudsendelse, der har tid til både musikken og menneskene.",
+              "The energy does not need to peak in the first minute. A gentle vocal or an easy groove can be enough before the music starts moving more. Some songs will be radio memories; others may become a discovery to carry through the day. There is time for both music and people.",
+              "Die Energie muss nicht in der ersten Minute am Anschlag sein. Eine sanfte Stimme oder ein leichter Groove reicht, bevor mehr Bewegung entsteht. Manche Songs kennst du aus dem Radio, andere nimmst du als Entdeckung mit in den Tag. Musik und Menschen bekommen Zeit."
+            ]
+          ]
+        ],
+        [
+          [
+            "De små detaljer i en let sang",
+            "The little details in an easy song",
+            "Die kleinen Details eines leichten Songs"
+          ],
+          [
+            [
+              "Prøv at høre, hvordan en sang skaber varme uden at blive højere: måske med et ekstra kor, en guitar i kanten af lydbilledet eller en bas, der svarer vokalen. Den slags detaljer er lette at overse, når en favorit bare kører i baggrunden. Morgenen er en fin anledning til at opdage dem igen.",
+              "Listen to how a song adds warmth without getting louder: an extra harmony, a guitar at the edge of the mix or a bass line answering the vocal. Such details disappear when favourites become background music. A morning is a good time to notice them again.",
+              "Hör darauf, wie ein Lied wärmer wird, ohne lauter zu werden: ein zusätzlicher Chor, eine Gitarre am Rand oder ein Bass, der der Stimme antwortet. Solche Details gehen im Hintergrund leicht unter. Am Morgen lassen sie sich neu entdecken."
+            ]
+          ]
+        ],
+        [
+          [
+            "Et godmorgen er rigeligt",
+            "A good morning is enough",
+            "Ein Guten Morgen reicht"
+          ],
+          [
+            [
+              "Der er ingen forventning om at være hurtig på tasterne. Sig godmorgen, fortæl hvor langt du er kommet med dagen, eller lad os bare være selskab i baggrunden. Det er også et show til dig, der først vågner undervejs. I chatten er en venlig hilsen mindst lige så velkommen som en stor musikhistorie.",
+              "There is no pressure to be quick on the keyboard. Say good morning, tell us how your day is going or let the show keep you company in the background. You are welcome even if you wake up halfway through. A friendly hello matters as much as a big music story.",
+              "Du musst nicht schnell auf der Tastatur sein. Sag Guten Morgen, erzähle von deinem Tag oder lass die Show im Hintergrund laufen. Auch wer erst unterwegs richtig wach wird, ist willkommen. Ein freundlicher Gruß zählt genauso wie eine große Musikgeschichte."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Vågn stille: find en melodi, du kan lande i.",
+          "Wake gently: settle into a melody.",
+          "Wach sanft auf: Komm in einer Melodie an."
+        ],
+        [
+          "Få lidt bevægelse: lad et let groove følge dine gøremål.",
+          "Find a little movement: take a groove into your morning.",
+          "Komm in Bewegung: Nimm einen leichten Groove in den Morgen mit."
+        ],
+        [
+          "Tag en favorit med: gem en titel til senere på dagen.",
+          "Take a favourite with you: save a title for later.",
+          "Nimm einen Favoriten mit: Merke dir einen Titel für später."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "1987: flere favoritter på samme album",
+            "1987: several favourites on one album",
+            "1987: mehrere Favoriten auf einem Album"
+          ],
+          [
+            "Rhino placerer Everywhere, Big Love og Little Lies på Fleetwood Macs Tango In The Night fra 1987. Et albumspor kan altså åbne døren til flere genkendelige sange.",
+            "Rhino lists Everywhere, Big Love and Little Lies among the songs on Fleetwood Mac’s 1987 album Tango In The Night. One album can lead to several familiar songs.",
+            "Rhino nennt Everywhere, Big Love und Little Lies auf Fleetwood Macs Album Tango In The Night von 1987. Ein Album führt zu mehreren vertrauten Songs."
+          ],
+          "https://media.rhino.com/index.php/press-release/fleetwood-mac-1975-1987",
+          "Rhino / Fleetwood Mac"
+        ],
+        [
+          [
+            "Fra 1975 til 1987",
+            "From 1975 to 1987",
+            "Von 1975 bis 1987"
+          ],
+          [
+            "Rhinos oversigt samler Fleetwood Mac, Rumours, Tusk, Mirage og Tango In The Night. Udgivelsesårene spænder fra 1975 til 1987: en lille lytterejse i sig selv.",
+            "Rhino’s overview brings together Fleetwood Mac, Rumours, Tusk, Mirage and Tango In The Night, released between 1975 and 1987: a listening journey in its own right.",
+            "Rhinos Übersicht verbindet Fleetwood Mac, Rumours, Tusk, Mirage und Tango In The Night aus den Jahren 1975 bis 1987: eine kleine Hörreise für sich."
+          ],
+          "https://media.rhino.com/index.php/press-release/fleetwood-mac-1975-1987",
+          "Rhino / Fleetwood Mac"
+        ]
+      ],
+      "question": [
+        "Hvilken sang vil du helst have, at dagen begynder med?",
+        "Which song would you like the day to begin with?",
+        "Mit welchem Lied soll dein Tag beginnen?"
+      ],
+      "faq": [
+        [
+          [
+            "Er det altid helt roligt?",
+            "Is it always very quiet?",
+            "Ist es immer ganz ruhig?"
+          ],
+          [
+            "Nej. En blød begyndelse kan godt få mere rytme undervejs. Morgenstemningen er rammen, ikke et forbud mod at danse.",
+            "No. A gentle start can pick up a rhythm. A morning mood does not rule out dancing.",
+            "Nein. Ein sanfter Anfang darf Rhythmus bekommen. Morgenstimmung schließt Tanzen nicht aus."
+          ]
+        ],
+        [
+          [
+            "Hvordan finder jeg næste morgen?",
+            "How do I find the next morning show?",
+            "Wie finde ich die nächste Morgensendung?"
+          ],
+          [
+            "Se næste annoncerede show og Twitch-programmet. Der er morgenudsendelser lørdag og pop-up-morgener, når de bliver annonceret; det konkrete klokkeslæt står i programmet.",
+            "Check the next announced show and Twitch schedule. Look for Saturday mornings and announced pop-up mornings; the schedule gives the actual starting time.",
+            "Sieh in die nächste Ankündigung und das Twitch-Programm. Dort stehen Samstagmorgen und angekündigte Pop-up-Morgen mit ihrer konkreten Startzeit."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "weekend",
+      "slug": "weekend",
+      "title": "Weekend",
+      "accent": "#ffb58d",
+      "tag": [
+        "Det er ikke ugedagen alene. Det er følelsen.",
+        "It is more than a day. It is a feeling.",
+        "Es ist mehr als ein Wochentag. Es ist ein Gefühl."
+      ],
+      "sections": [
+        [
+          [
+            "Et frirum fra fredag til søndag",
+            "A little freedom from Friday to Sunday",
+            "Ein Freiraum von Freitag bis Sonntag"
+          ],
+          [
+            [
+              "Weekend er et frit pop-up-show, der kan dukke op fra fredag eftermiddag til søndag aften, når tiden og lysten er der. Nogle gange skal musikken sætte gang i noget; andre gange skal den bare gøre en god stund lidt bedre. Det er den brede weekendfølelse, vi går efter, med plads til både gamle favoritter, kendte hits og nye fund.",
+              "Weekend is a free-ranging pop-up show that can appear from Friday afternoon to Sunday evening when time and inspiration allow. Sometimes the music gets things started; sometimes it simply makes a good moment better. Old favourites, familiar hits and new finds share a broad weekend feeling.",
+              "Weekend ist eine freie Pop-up-Show zwischen Freitagnachmittag und Sonntagabend, wenn Zeit und Lust zusammenkommen. Manchmal bringt die Musik etwas in Gang, manchmal macht sie einen guten Moment noch schöner. Alte Favoriten, bekannte Hits und neue Entdeckungen teilen dieses Wochenendgefühl."
+            ],
+            [
+              "Det er ikke et show, der låser sig til ny EDM eller én bestemt type house. En varm popsang kan være det rigtige sted at starte, en discofavorit kan dreje energien, og et mere elektronisk nummer kan føre os videre. Vi følger stemningen, så musikken føles valgt til øjeblikket frem for presset ned i en enkelt genre.",
+              "The show is not tied to new EDM or one kind of house. A warm pop song can open the door, a disco favourite can turn the energy and an electronic track can take it further. The music follows the moment rather than being squeezed into a single genre.",
+              "Die Show ist weder auf neue EDM noch auf eine House-Spielart festgelegt. Ein warmer Popsong kann beginnen, ein Disco-Favorit die Energie drehen, ein elektronischer Titel weiterführen. Die Musik folgt dem Moment und nicht einer engen Genregrenze."
+            ]
+          ]
+        ],
+        [
+          [
+            "Når kontraster får det til at hænge sammen",
+            "When contrasts make the connection",
+            "Wenn Kontraste verbinden"
+          ],
+          [
+            [
+              "Lyt efter det, to forskellige sange kan have til fælles: en bestemt basbevægelse, et klaver, et smil i vokalen eller bare den samme fremdrift. Et godt sidespring behøver ikke ødelægge et flow. Det kan være netop dét, som gør, at et gammelt hit og et nyt fund pludselig føles hjemme i samme show.",
+              "Listen for what two different songs share: a bass movement, a piano, a smile in the vocal or a similar drive. A detour need not break the flow. It can be the thing that makes an old hit and a new discovery feel at home together.",
+              "Hör darauf, was zwei unterschiedliche Songs verbindet: eine Bassbewegung, ein Klavier, ein Lächeln in der Stimme oder ähnlicher Vorwärtsdrang. Ein Abstecher muss den Fluss nicht brechen. Er kann alte Hits und neue Entdeckungen zusammenbringen."
+            ]
+          ]
+        ],
+        [
+          [
+            "Selskab til din version af weekenden",
+            "Company for your kind of weekend",
+            "Gesellschaft für dein Wochenende"
+          ],
+          [
+            [
+              "Weekend kan være madlavning, oprydning, sofa eller en aften, der skal i gang. Der er ikke én rigtig måde at være med på. Fortæl gerne, hvad du laver, og hvilket nummer der passer til din stemning. Det er de små hilsner og musikalske gensyn, der gør en spontan udsendelse til noget, vi er fælles om.",
+              "Your weekend might mean cooking, tidying, the sofa or getting an evening started. There is no right way to join. Tell us what you are doing and which song fits your mood. Small greetings and musical reunions make a spontaneous broadcast something shared.",
+              "Wochenende kann Kochen, Aufräumen, Sofa oder der Beginn eines Abends sein. Es gibt keine richtige Art mitzumachen. Was machst du gerade, welcher Song passt? Kleine Grüße und musikalische Wiedersehen machen aus einer spontanen Sendung einen gemeinsamen Moment."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Find stemningen, du kom med.",
+          "Find the mood you arrived with.",
+          "Finde die Stimmung, mit der du ankommst."
+        ],
+        [
+          "Giv et uventet nummer en chance.",
+          "Give an unexpected track a chance.",
+          "Gib einem unerwarteten Titel eine Chance."
+        ],
+        [
+          "Lad weekenden skifte retning sammen med musikken.",
+          "Let the weekend change direction with the music.",
+          "Lass das Wochenende mit der Musik die Richtung wechseln."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "En invitation fra 1987",
+            "An invitation from 1987",
+            "Eine Einladung aus dem Jahr 1987"
+          ],
+          [
+            "Whitney Houstons officielle side daterer I Wanna Dance With Somebody til 2. maj 1987. Det var den første single fra hendes andet album, Whitney.",
+            "Whitney Houston’s official site dates I Wanna Dance With Somebody to 2 May 1987, the first single from her second album, Whitney.",
+            "Whitney Houstons offizielle Seite datiert I Wanna Dance With Somebody auf den 2. Mai 1987, die erste Single ihres zweiten Albums Whitney."
+          ],
+          "https://www.whitneyhouston.com/en-ca/news/whitney-houstons-i-wanna-dance-with-somebody-released-this-day-in-1987/",
+          "Whitney Houston Official"
+        ],
+        [
+          [
+            "Et velkendt sangskriverpar",
+            "A familiar songwriting partnership",
+            "Ein bekanntes Songwriter-Duo"
+          ],
+          [
+            "George Merrill og Shannon Rubicam skrev sangen og havde også skrevet How Will I Know. Narada Michael Walden producerede indspilningen, oplyser Whitneys officielle arkiv.",
+            "George Merrill and Shannon Rubicam wrote the song and had also written How Will I Know. Narada Michael Walden produced the recording, according to Whitney’s official archive.",
+            "George Merrill und Shannon Rubicam schrieben den Song und zuvor auch How Will I Know. Laut Whitneys offiziellem Archiv produzierte Narada Michael Walden die Aufnahme."
+          ],
+          "https://www.whitneyhouston.com/en-ca/news/whitney-houstons-i-wanna-dance-with-somebody-released-this-day-in-1987/",
+          "Whitney Houston Official"
+        ]
+      ],
+      "question": [
+        "Er din weekend et stort omkvæd, et roligt groove eller lidt af det hele?",
+        "Is your weekend a big chorus, a gentle groove or a bit of both?",
+        "Ist dein Wochenende ein großer Refrain, ein ruhiger Groove oder beides?"
+      ],
+      "faq": [
+        [
+          [
+            "Har Weekend en fast sendetid?",
+            "Does Weekend have a fixed slot?",
+            "Hat Weekend einen festen Sendeplatz?"
+          ],
+          [
+            "Nej. Det er et pop-up-show i weekenden. En konkret udsendelse gælder først, når den er annonceret i Twitch-programmet.",
+            "No. It is a weekend pop-up show. A specific broadcast is only confirmed once it appears in the Twitch schedule.",
+            "Nein. Es ist eine Pop-up-Show am Wochenende. Eine konkrete Sendung gilt erst mit der Ankündigung im Twitch-Programm."
+          ]
+        ],
+        [
+          [
+            "Er det kun klubmusik?",
+            "Is it only club music?",
+            "Läuft nur Clubmusik?"
+          ],
+          [
+            "Nej. Pop, klassikere og nye fund kan være lige så rigtige som dance. Weekendstemningen bestemmer retningen.",
+            "No. Pop, classics and new finds can fit just as well as dance. The weekend mood sets the direction.",
+            "Nein. Pop, Klassiker und Entdeckungen passen genauso wie Dance. Die Wochenendstimmung gibt die Richtung vor."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "nudisco",
+      "slug": "nu-disco",
+      "title": "Nu Disco",
+      "accent": "#f1ce83",
+      "tag": [
+        "Gammel discosjæl. Friske sko på dansegulvet.",
+        "An old disco soul with fresh dancing shoes.",
+        "Eine alte Disco-Seele in frischen Tanzschuhen."
+      ],
+      "sections": [
+        [
+          [
+            "Groovet får lov at føre an",
+            "Let the groove lead",
+            "Der Groove geht voran"
+          ],
+          [
+            [
+              "Nu Disco er til dig, der mærker musikken i skuldrene, før du tænker over genren. Vi tager discosjæl, funk, house, edits og remixes med ind i et lyst og rytmisk rum. En levende bas, et glimt af strygere eller et klaver med det rigtige sving kan være begyndelsen på en hel udsendelse. Det må gerne være elegant og let på fødderne samtidig.",
+              "Nu Disco is for anyone who feels the music in their shoulders before thinking about genre. Disco soul, funk, house, edits and remixes meet in a bright rhythmic space. A lively bass, a flash of strings or a swinging piano can start a whole show. Elegant music can still be light on its feet.",
+              "Nu Disco ist für alle, die Musik in den Schultern spüren, bevor sie über Genres nachdenken. Disco-Seele, Funk, House, Edits und Remixe treffen aufeinander. Ein lebendiger Bass, ein Streicherblitz oder ein swingendes Klavier kann den Anfang machen. Elegant und leichtfüßig passt gut zusammen."
+            ],
+            [
+              "Musikken kigger gerne bagud, men skal føles levende her og nu. En velkendt farve kan dukke op i en ny sammenhæng, og et nummer kan holde os fast med sit groove frem for et stort drop. Pointen er at finde det sving, der føles ubesværet, selv når der sker mange små ting i arrangementet.",
+              "The music can look back while feeling alive now. A familiar colour appears in a new setting, and a track can hold attention with its groove rather than a huge drop. The pleasure is in finding a swing that feels effortless even when the arrangement is full of little details.",
+              "Die Musik darf zurückblicken und trotzdem im Jetzt leben. Vertraute Klangfarben erscheinen in neuem Zusammenhang, ein Groove hält uns auch ohne großes Drop fest. Gesucht wird ein Schwung, der mühelos wirkt, selbst wenn das Arrangement voller kleiner Details steckt."
+            ]
+          ]
+        ],
+        [
+          [
+            "Lyt ned i rytmen",
+            "Listen into the rhythm",
+            "Hör in den Rhythmus hinein"
+          ],
+          [
+            [
+              "Følg bassen et øjeblik og læg mærke til, hvordan den møder stortrommen. Hør så efter guitaren mellem slagene eller de små svar fra klaver og percussion. Det er ikke altid det højeste instrument, der gør nummeret til noget særligt. Nogle gange er det en diskret gentagelse, der bliver ved med at trække dig tilbage.",
+              "Follow the bass and hear how it meets the kick drum. Then notice the guitar between beats or little replies from piano and percussion. The loudest instrument is not always the important one. Sometimes a quiet repeating figure keeps pulling you back.",
+              "Folge dem Bass und seinem Zusammenspiel mit der Bassdrum. Dann hör auf die Gitarre zwischen den Schlägen und kleine Antworten von Klavier und Percussion. Nicht immer ist das lauteste Instrument entscheidend. Manchmal zieht eine leise Wiederholung immer wieder an."
+            ]
+          ]
+        ],
+        [
+          [
+            "Smil med i dit eget tempo",
+            "Join the smile at your own pace",
+            "Lächle in deinem eigenen Tempo mit"
+          ],
+          [
+            [
+              "Du kan danse, nikke med hovedet eller bare lade groovet følge det, du laver. Chatten er til de små opdagelser: den baslinje, det break eller det nummer, der pludselig fik dig til at skrue op. Del gerne, hvad du hører. Vi behøver ikke bruge de samme musikord for at finde den samme glæde.",
+              "Dance, nod or let the groove accompany whatever you are doing. Chat is for small discoveries: a bass line, a break or the track that made you turn it up. Share what you hear. We do not need the same musical vocabulary to share the pleasure.",
+              "Tanz, nicke mit oder lass den Groove deine Beschäftigung begleiten. Der Chat ist für kleine Entdeckungen: eine Basslinie, einen Break, den Titel, den du lauter drehen musstest. Wir brauchen nicht dieselben Fachwörter, um dieselbe Freude zu teilen."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Find bassen: begynd med det, der får dig til at bevæge dig.",
+          "Find the bass: start with what makes you move.",
+          "Finde den Bass: Beginne mit dem, was dich bewegt."
+        ],
+        [
+          "Opdag detaljen: guitar, strygere eller en lille klaverfigur.",
+          "Find the detail: guitar, strings or a little piano figure.",
+          "Entdecke das Detail: Gitarre, Streicher oder eine kleine Klavierfigur."
+        ],
+        [
+          "Bliv i groovet: gentagelsen kan være hele pointen.",
+          "Stay in the groove: repetition can be the point.",
+          "Bleib im Groove: Die Wiederholung kann der eigentliche Reiz sein."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "Forbindelsen mellem disco og house",
+            "The connection between disco and house",
+            "Die Verbindung von Disco und House"
+          ],
+          [
+            "Choose Chicagos historie beskriver, hvordan Chicagos sorte og queer DJs udviklede house i 1970’erne og 80’erne og skabte inkluderende rum omkring musikken.",
+            "Choose Chicago describes Black and queer DJs developing house in the 1970s and 80s while creating inclusive spaces around the music.",
+            "Choose Chicago beschreibt, wie Schwarze und queere DJs House in den 1970ern und 80ern entwickelten und dabei inklusive Räume schufen."
+          ],
+          "https://www.choosechicago.com/blog/music/the-history-of-house-music-in-chicago/",
+          "Choose Chicago"
+        ],
+        [
+          [
+            "Da egne plader blev næste skridt",
+            "When making records became the next step",
+            "Als eigene Platten der nächste Schritt wurden"
+          ],
+          [
+            "I samme historie fortæller Chip E, at de fortsat spillede disco, men begyndte at skabe deres egen musik. Det giver et fint perspektiv på forbindelsen mellem arv og nye grooves.",
+            "In the same history, Chip E recalls continuing to play disco while starting to make new music: a useful perspective on heritage and fresh grooves.",
+            "In derselben Geschichte erinnert sich Chip E daran, weiter Disco gespielt und zugleich eigene Musik entwickelt zu haben: ein Blick auf Erbe und neue Grooves."
+          ],
+          "https://www.choosechicago.com/blog/music/the-history-of-house-music-in-chicago/",
+          "Choose Chicago"
+        ]
+      ],
+      "question": [
+        "Hvad får dig først med: bassen, guitaren eller klaveret?",
+        "What gets you first: bass, guitar or piano?",
+        "Was packt dich zuerst: Bass, Gitarre oder Klavier?"
+      ],
+      "faq": [
+        [
+          [
+            "Skal jeg kende forskel på disco og nu disco?",
+            "Do I need to know disco from nu disco?",
+            "Muss ich Disco und Nu Disco unterscheiden können?"
+          ],
+          [
+            "Nej. Brug ørerne og stemningen. Du er lige velkommen, om du jagter nye edits eller bare holder af et godt groove.",
+            "No. Follow your ears and the mood, whether you collect edits or simply enjoy a good groove.",
+            "Nein. Folge deinen Ohren und der Stimmung, ob du neue Edits suchst oder einfach einen guten Groove liebst."
+          ]
+        ],
+        [
+          [
+            "Hvornår sender Nu Disco?",
+            "When is Nu Disco on?",
+            "Wann läuft Nu Disco?"
+          ],
+          [
+            "Nu Disco er et pop-up-show. Følg Twitch-kanalen og se programmet, når en udsendelse bliver annonceret.",
+            "Nu Disco is a pop-up show. Follow the Twitch channel and check the schedule for announced broadcasts.",
+            "Nu Disco ist eine Pop-up-Show. Folge dem Twitch-Kanal und sieh nach angekündigten Sendungen im Programm."
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "popup",
+      "slug": "pop-up",
+      "title": "Pop Up",
+      "accent": "#ff744c",
+      "tag": [
+        "Ingen fast opskrift. Masser af lyst til musik.",
+        "No fixed recipe. Plenty of appetite for music.",
+        "Kein festes Rezept. Viel Lust auf Musik."
+      ],
+      "sections": [
+        [
+          [
+            "Det spontane musikbesøg",
+            "A spontaneous musical visit",
+            "Ein spontaner Musikbesuch"
+          ],
+          [
+            [
+              "Pop Up er døren, der åbner, når der er lyst og plads til en ekstra udsendelse. Vi begynder med en stemning, en sang eller en god idé og ser, hvor musikken fører os hen. Her er ingen fast genre, der på forhånd skal bestemme alle valg. Det gør plads til både det sikre gensyn og det nummer, ingen lige havde regnet med.",
+              "Pop Up opens the door when there is time and appetite for an extra broadcast. We start with a mood, a song or an idea and follow where the music leads. No fixed genre has to decide everything in advance. There is room for a familiar reunion and the track nobody expected.",
+              "Pop Up öffnet die Tür, wenn Zeit und Lust für eine zusätzliche Sendung da sind. Ausgangspunkt ist eine Stimmung, ein Lied oder eine Idee. Kein festes Genre bestimmt alle Entscheidungen. So bleibt Platz für vertraute Wiedersehen und den Titel, mit dem niemand gerechnet hat."
+            ],
+            [
+              "Friheden betyder ikke, at numrene bare skal komme i tilfældig rækkefølge. En lyd, en rytme eller en fælles følelse kan forbinde noget, der på papiret ser meget forskelligt ud. Et godt pop-up-show må gerne tage en omvej, så længe man stadig har lyst til at følge med. Det er nysgerrigheden, der holder døren åben.",
+              "Freedom does not mean random order. A sound, a rhythm or a shared feeling can connect tracks that look very different on paper. A good pop-up show can take a detour as long as you still want to follow. Curiosity keeps the door open.",
+              "Freiheit heißt nicht beliebige Reihenfolge. Ein Klang, ein Rhythmus oder ein gemeinsames Gefühl kann sehr unterschiedliche Titel verbinden. Eine gute Pop-up-Show darf einen Umweg nehmen, solange man mitgehen möchte. Neugier hält die Tür offen."
+            ]
+          ]
+        ],
+        [
+          [
+            "Giv overraskelsen nogle sekunder",
+            "Give the surprise a few seconds",
+            "Gib der Überraschung ein paar Sekunden"
+          ],
+          [
+            [
+              "Når et uventet nummer kommer på, så prøv at vente lidt med at sætte det i bås. Måske er det melodien, der forbinder det med sangen før, måske en basfigur eller en særlig måde at synge på. Man kan godt blive glad for en sang, før man ved, hvilken hylde den skal stå på. Det er noget af fornøjelsen ved denne åbne form.",
+              "When an unexpected track arrives, give it a moment before labelling it. A melody, a bass figure or a vocal attitude might connect it with the song before. You can enjoy a song before knowing which shelf it belongs on. That is part of the pleasure of this open format.",
+              "Wenn ein unerwarteter Titel beginnt, warte einen Moment mit der Schublade. Vielleicht verbindet ihn eine Melodie, eine Bassfigur oder die Stimme mit dem vorigen Song. Man kann ein Lied mögen, bevor man sein Genre kennt. Das gehört zum Reiz dieser offenen Form."
+            ]
+          ]
+        ],
+        [
+          [
+            "Et lille hej kan blive aftenens begyndelse",
+            "A little hello can start the evening",
+            "Ein kleines Hallo kann den Abend eröffnen"
+          ],
+          [
+            [
+              "Kom forbi uden at skulle kende et bestemt tema. Fortæl gerne, hvad du hører, hvad du laver, eller hvilken musikalsk omvej du selv kunne tænke dig. Sune vælger retningen, og ønsker er inspiration frem for en bestillingsliste. Du kan lige så fint være den stille gæst, der lader sig overraske af næste nummer.",
+              "Drop in without needing to know a theme. Tell us what you hear, what you are doing or which musical detour you fancy. Sune chooses the direction; requests are inspiration rather than a running order. Quiet guests can simply enjoy the next surprise.",
+              "Komm vorbei, ohne ein bestimmtes Thema kennen zu müssen. Was hörst du, was machst du, welchen musikalischen Umweg wünschst du dir? Sune bestimmt die Richtung; Wünsche sind Inspiration und keine Bestellliste. Stille Gäste dürfen sich einfach überraschen lassen."
+            ]
+          ]
+        ]
+      ],
+      "journey": [
+        [
+          "Kom ind: du behøver ikke kende planen.",
+          "Come in: no need to know the plan.",
+          "Komm herein: Du musst den Plan nicht kennen."
+        ],
+        [
+          "Følg forbindelsen mellem to uventede sange.",
+          "Follow the connection between two unexpected songs.",
+          "Folge der Verbindung zwischen zwei unerwarteten Songs."
+        ],
+        [
+          "Tag et nyt fund med hjem fra det spontane besøg.",
+          "Take a discovery home from your spontaneous visit.",
+          "Nimm eine Entdeckung von deinem spontanen Besuch mit."
+        ]
+      ],
+      "stories": [
+        [
+          [
+            "Før Dancing Queen hed Boogaloo",
+            "Before Dancing Queen was Boogaloo",
+            "Vor Dancing Queen stand Boogaloo"
+          ],
+          [
+            "ABBAs officielle historie fortæller, at Dancing Queen begyndte med arbejdstitlen Boogaloo under indspilninger i august 1975. Et stort hit behøver ikke starte med sit endelige navn.",
+            "ABBA’s official history says Dancing Queen began as Boogaloo during recording in August 1975. A big hit need not start with its final name.",
+            "ABBAs offizielle Geschichte nennt Boogaloo als Arbeitstitel von Dancing Queen bei den Aufnahmen im August 1975. Auch große Hits beginnen mit vorläufigen Namen."
+          ],
+          "https://abbasite.com/articles/dancing-queen/",
+          "ABBA Official"
+        ],
+        [
+          [
+            "En dronning måtte vente",
+            "A queen had to wait",
+            "Eine Königin musste warten"
+          ],
+          [
+            "Ifølge samme ABBA-artikel blev Fernando valgt som single før Dancing Queen. Dancing Queen udkom i Sverige 16. august 1976, efter at have ventet yderligere fem måneder.",
+            "The same ABBA article says Fernando was chosen as a single first. Dancing Queen waited another five months, reaching Swedish shops on 16 August 1976.",
+            "Laut demselben ABBA-Artikel wurde zuerst Fernando als Single gewählt. Dancing Queen wartete weitere fünf Monate bis zur schwedischen Veröffentlichung am 16. August 1976."
+          ],
+          "https://abbasite.com/articles/dancing-queen/",
+          "ABBA Official"
+        ]
+      ],
+      "question": [
+        "Hvilket nummer ville være den bedste uventede gæst i aften?",
+        "Which track would make the best unexpected guest tonight?",
+        "Welcher Titel wäre heute Abend der beste Überraschungsgast?"
+      ],
+      "faq": [
+        [
+          [
+            "Hvordan ved jeg, at der er et Pop Up-show?",
+            "How do I know a Pop Up show is on?",
+            "Woher weiß ich von einer Pop-up-Sendung?"
+          ],
+          [
+            "Se live-status og næste annoncerede show her på siden, eller følg DJ FOLSOE på Twitch. Der er ingen fast ugentlig starttid.",
+            "Check live status and the next announced show here, or follow DJ FOLSOE on Twitch. There is no fixed weekly start time.",
+            "Prüfe hier den Live-Status und die nächste Ankündigung oder folge DJ FOLSOE auf Twitch. Es gibt keine feste wöchentliche Startzeit."
+          ]
+        ],
+        [
+          [
+            "Hvad er forskellen på Pop Up og Weekend?",
+            "How is Pop Up different from Weekend?",
+            "Was unterscheidet Pop Up von Weekend?"
+          ],
+          [
+            "Weekend har weekendstemningen som fælles ramme fra fredag til søndag. Pop Up er den helt åbne ekstra udsendelse, når den bliver annonceret.",
+            "Weekend has a shared Friday-to-Sunday mood. Pop Up is the completely open extra broadcast whenever it is announced.",
+            "Weekend hat das gemeinsame Freitags-bis-Sonntags-Gefühl. Pop Up ist die völlig offene zusätzliche Sendung, sobald sie angekündigt wird."
+          ]
+        ]
+      ]
+    }
+  ]
+}
