@@ -1,0 +1,482 @@
+{
+  "schema": 1,
+  "coverage": "New weekly series starts at 2026-W45; older playlists are not fully imported.",
+  "weeks": {
+    "2026-W45": {
+      "retro": [
+        {
+          "artist": "Danseorkestret",
+          "title": "Kom Tilbage Nu"
+        },
+        {
+          "artist": "Nu Shooz",
+          "title": "I Can't Wait"
+        },
+        {
+          "artist": "Madonna",
+          "title": "La Isla Bonita"
+        },
+        {
+          "artist": "George Benson",
+          "title": "Give Me the Night"
+        },
+        {
+          "artist": "Patrice Rushen",
+          "title": "Forget Me Nots - Remastered"
+        },
+        {
+          "artist": "Shalamar",
+          "title": "A Night to Remember"
+        },
+        {
+          "artist": "The Whispers",
+          "title": "And the Beat Goes On"
+        },
+        {
+          "artist": "Change",
+          "title": "A Lover's Holiday - Single Version"
+        },
+        {
+          "artist": "Sister Sledge",
+          "title": "He's the Greatest Dancer - 1995 Remaster"
+        },
+        {
+          "artist": "Earth, Wind & Fire",
+          "title": "September"
+        },
+        {
+          "artist": "Kool & The Gang",
+          "title": "Get Down On It"
+        },
+        {
+          "artist": "Imagination",
+          "title": "Just an Illusion"
+        },
+        {
+          "artist": "Shannon",
+          "title": "Let the Music Play"
+        },
+        {
+          "artist": "Thomas Helmig",
+          "title": "Det Er Mig Der Står Herude Og Banker På"
+        },
+        {
+          "artist": "Ray Dee Ohh",
+          "title": "Jeg Vil La' Lyset Brænde"
+        },
+        {
+          "artist": "One Two",
+          "title": "Den bedste tid"
+        },
+        {
+          "artist": "Rocazino",
+          "title": "Ridder Lykke"
+        },
+        {
+          "artist": "Laid Back",
+          "title": "White Horse"
+        },
+        {
+          "artist": "Pet Shop Boys",
+          "title": "West End Girls"
+        },
+        {
+          "artist": "Depeche Mode",
+          "title": "Enjoy the Silence"
+        },
+        {
+          "artist": "Tears For Fears",
+          "title": "Everybody Wants To Rule The World"
+        },
+        {
+          "artist": "Fleetwood Mac",
+          "title": "Everywhere"
+        },
+        {
+          "artist": "Sandra",
+          "title": "Maria Magdalena"
+        },
+        {
+          "artist": "Baltimora",
+          "title": "Tarzan Boy"
+        },
+        {
+          "artist": "Rick Astley",
+          "title": "Never Gonna Give You Up"
+        },
+        {
+          "artist": "Mel & Kim",
+          "title": "Respectable"
+        },
+        {
+          "artist": "Kylie Minogue",
+          "title": "I Should Be so Lucky"
+        },
+        {
+          "artist": "Bananarama",
+          "title": "Venus"
+        },
+        {
+          "artist": "Hazell Dean",
+          "title": "Whatever I Do (Wherever I Go)"
+        },
+        {
+          "artist": "The Communards",
+          "title": "Never Can Say Goodbye"
+        },
+        {
+          "artist": "Erasure",
+          "title": "A Little Respect"
+        },
+        {
+          "artist": "Yazoo",
+          "title": "Don't Go"
+        },
+        {
+          "artist": "Bronski Beat",
+          "title": "Smalltown Boy"
+        },
+        {
+          "artist": "Eurythmics / Annie Lennox / Dave Stewart",
+          "title": "Sweet Dreams (Are Made of This)"
+        },
+        {
+          "artist": "Donna Summer",
+          "title": "Hot Stuff"
+        },
+        {
+          "artist": "Gloria Gaynor",
+          "title": "I Will Survive"
+        },
+        {
+          "artist": "Lipps Inc.",
+          "title": "Funkytown"
+        },
+        {
+          "artist": "Anita Ward",
+          "title": "Ring My Bell"
+        },
+        {
+          "artist": "Michael Jackson",
+          "title": "Rock with You - Single Version"
+        },
+        {
+          "artist": "Shakatak",
+          "title": "Down on the Street"
+        },
+        {
+          "artist": "Level 42",
+          "title": "Lessons In Love"
+        },
+        {
+          "artist": "ABC",
+          "title": "The Look Of Love, Pt.1"
+        },
+        {
+          "artist": "Billy Ocean",
+          "title": "Caribbean Queen (No More Love On the Run)"
+        },
+        {
+          "artist": "Womack & Womack",
+          "title": "Teardrops"
+        },
+        {
+          "artist": "Sister Sledge",
+          "title": "Thinking of You - 1995 Remaster"
+        },
+        {
+          "artist": "Lis Sørensen",
+          "title": "Tæt På Ækvator"
+        },
+        {
+          "artist": "Tøsedrengene",
+          "title": "Indianer"
+        },
+        {
+          "artist": "Nik Kershaw",
+          "title": "I Won't Let The Sun Go Down On Me"
+        },
+        {
+          "artist": "Thompson Twins",
+          "title": "Hold Me Now"
+        },
+        {
+          "artist": "Scritti Politti",
+          "title": "Wood Beez"
+        },
+        {
+          "artist": "Mai Tai",
+          "title": "History"
+        },
+        {
+          "artist": "Five Star",
+          "title": "System Addict"
+        },
+        {
+          "artist": "Jaki Graham",
+          "title": "Set Me Free"
+        },
+        {
+          "artist": "Gwen Guthrie",
+          "title": "Ain't Nothin' Goin' On But The Rent"
+        }
+      ],
+      "trance": [
+        {
+          "artist": "Chicane / Moya Brennan",
+          "title": "Saltwater"
+        },
+        {
+          "artist": "Energy 52 / Three 'N One",
+          "title": "Café Del Mar - Three 'N One Radio Edit"
+        },
+        {
+          "artist": "Solarstone",
+          "title": "Seven Cities - Original Atlantis Mix"
+        },
+        {
+          "artist": "Lange / Skye",
+          "title": "Drifting Away"
+        },
+        {
+          "artist": "YORK / Mauro Picotto",
+          "title": "On The Beach - Mauro Picotto's CRW Remix"
+        },
+        {
+          "artist": "ATB",
+          "title": "9Pm (Till I Come)"
+        },
+        {
+          "artist": "Robert Miles",
+          "title": "Children"
+        },
+        {
+          "artist": "Paul van Dyk",
+          "title": "For An Angel - PvD Angel In Heaven Radio Edit"
+        },
+        {
+          "artist": "Above & Beyond / OceanLab",
+          "title": "Satellite - Original Above & Beyond Mix"
+        },
+        {
+          "artist": "Armin van Buuren",
+          "title": "Communication"
+        },
+        {
+          "artist": "Gouryella / Ferry Corsten",
+          "title": "Gouryella - Extended Mix"
+        },
+        {
+          "artist": "System F / Ferry Corsten",
+          "title": "Out Of The Blue"
+        },
+        {
+          "artist": "Rank 1",
+          "title": "Airwave - Radio Vocal Edit"
+        },
+        {
+          "artist": "Push",
+          "title": "Universal Nation"
+        },
+        {
+          "artist": "Binary Finary / Paul van Dyk",
+          "title": "1998 - Paul van Dyk Remix"
+        },
+        {
+          "artist": "Veracocha",
+          "title": "Carte Blanche - Extended Mix"
+        },
+        {
+          "artist": "Delerium / Sarah McLachlan / Tiësto",
+          "title": "Silence (feat. Sarah McLachlan) - DJ Tiësto's in Search of Sunrise Remix"
+        },
+        {
+          "artist": "Motorcycle / JES / Gabriel & Dresden",
+          "title": "As The Rush Comes"
+        },
+        {
+          "artist": "Andain",
+          "title": "Beautiful Things - Radio Edit"
+        },
+        {
+          "artist": "Above & Beyond / Zoë Johnston",
+          "title": "Good For Me - Above & Beyond Extended Club Mix"
+        },
+        {
+          "artist": "Tiësto",
+          "title": "Adagio for Strings"
+        },
+        {
+          "artist": "Ferry Corsten",
+          "title": "Beautiful"
+        },
+        {
+          "artist": "Above & Beyond / OceanLab / Armin van Buuren",
+          "title": "Sky Falls Down - Armin van Buuren Remix"
+        },
+        {
+          "artist": "Gabriel & Dresden / Molly Bancroft",
+          "title": "Tracking Treasure Down"
+        },
+        {
+          "artist": "Markus Schulz",
+          "title": "The New World - Album Mix"
+        },
+        {
+          "artist": "Cosmic Gate",
+          "title": "Exploration of Space"
+        },
+        {
+          "artist": "Svenson & Gielen / Johan Gielen",
+          "title": "The Beauty of Silence - Remastered"
+        },
+        {
+          "artist": "The Rocketman / Push / M.I.K.E. / M.I.K.E. Push",
+          "title": "Strange World"
+        },
+        {
+          "artist": "Aly & Fila / Jwaydan",
+          "title": "We Control The Sunlight"
+        },
+        {
+          "artist": "Giuseppe Ottaviani",
+          "title": "Through Your Eyes - Original Mix"
+        },
+        {
+          "artist": "Gareth Emery / Christina Novelli",
+          "title": "Concrete Angel - Radio Edit"
+        },
+        {
+          "artist": "Andrew Rayel",
+          "title": "550 Senta - Extended Aether Mix"
+        },
+        {
+          "artist": "RAM / Jorn Van Deynhoven",
+          "title": "RAMsterdam - Jorn van Deynhoven Extended Remix"
+        },
+        {
+          "artist": "Agnelli & Nelson",
+          "title": "Everyday"
+        }
+      ],
+      "eurodance": [
+        {
+          "artist": "SNAP!",
+          "title": "The Power (7\" Version)"
+        },
+        {
+          "artist": "C & C Music Factory / Freedom Williams",
+          "title": "Gonna Make You Sweat (Everybody Dance Now) (feat. Freedom Williams)"
+        },
+        {
+          "artist": "Deee-Lite",
+          "title": "Groove Is in the Heart"
+        },
+        {
+          "artist": "Robin S",
+          "title": "Show Me Love"
+        },
+        {
+          "artist": "Nightcrawlers / MK",
+          "title": "Push The Feeling On - Mk Dub Revisited Edit"
+        },
+        {
+          "artist": "Dr. Alban",
+          "title": "It's My Life"
+        },
+        {
+          "artist": "Culture Beat",
+          "title": "Mr. Vain"
+        },
+        {
+          "artist": "Haddaway",
+          "title": "What Is Love - 7\" Mix"
+        },
+        {
+          "artist": "Corona",
+          "title": "The Rhythm Of The Night"
+        },
+        {
+          "artist": "2 Unlimited",
+          "title": "No Limit"
+        },
+        {
+          "artist": "La Bouche",
+          "title": "Be My Lover"
+        },
+        {
+          "artist": "Real McCoy",
+          "title": "Another Night"
+        },
+        {
+          "artist": "Cut 'N' Move",
+          "title": "Give It Up"
+        },
+        {
+          "artist": "Whigfield",
+          "title": "Saturday Night"
+        },
+        {
+          "artist": "Aqua",
+          "title": "My Oh My"
+        },
+        {
+          "artist": "Sash!",
+          "title": "Encore Une Fois"
+        },
+        {
+          "artist": "Gala / Molella / Phil Jay",
+          "title": "Freed From Desire"
+        },
+        {
+          "artist": "Eiffel 65 / Gabry Ponte",
+          "title": "Blue (Da Ba Dee) - Gabry Ponte Video Edit"
+        },
+        {
+          "artist": "GIGI D'AGOSTINO",
+          "title": "L'Amour Toujours"
+        },
+        {
+          "artist": "Alice Deejay",
+          "title": "Better Off Alone"
+        },
+        {
+          "artist": "Fragma",
+          "title": "Toca's Miracle - Radio Edit"
+        },
+        {
+          "artist": "Ian van Dahl / Marsha",
+          "title": "Castles In The Sky"
+        },
+        {
+          "artist": "Lasgo",
+          "title": "Something"
+        },
+        {
+          "artist": "DJ Sammy / Yanou / Do",
+          "title": "Heaven"
+        },
+        {
+          "artist": "Infernal",
+          "title": "From Paris to Berlin"
+        },
+        {
+          "artist": "Junior Senior",
+          "title": "Move Your Feet"
+        },
+        {
+          "artist": "Modjo",
+          "title": "Lady - Hear Me Tonight"
+        },
+        {
+          "artist": "The Shapeshifters",
+          "title": "Lola's Theme - Radio Edit"
+        },
+        {
+          "artist": "Daft Punk",
+          "title": "One More Time"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "mode": "stable-playlist-ids",
+  "shows": {
+    "retro": {
+      "name": "Retro Hits",
+      "id": "7l6PFQwtGbVJwTd5vHE0zE",
+      "path": "/shows/retro-hits/",
+      "schedule": {
+        "day": "SU",
+        "start": "08:00",
+        "end": "12:00",
+        "timezone": "Europe/Copenhagen",
+        "durationMinutes": 240,
+        "confirmedBy": "user",
+        "confirmedAt": "2026-11-01"
+      }
+    },
+    "trance": {
+      "name": "Trance Tuesday",
+      "id": "0x6ynnN468f6kya88ufKu8",
+      "path": "/shows/trance-tuesday/",
+      "schedule": {
+        "day": "TU",
+        "start": "18:30",
+        "end": "21:30",
+        "timezone": "Europe/Copenhagen",
+        "durationMinutes": 180,
+        "confirmedBy": "user",
+        "confirmedAt": "2026-11-01"
+      }
+    },
+    "eurodance": {
+      "name": "Classic Dance #90 #00",
+      "id": "2oOwvfLNb2wYxbOTCdfiEE",
+      "path": "/shows/eurodance/",
+      "schedule": {
+        "day": "TH",
+        "start": "19:00",
+        "end": "21:00",
+        "timezone": "Europe/Copenhagen",
+        "durationMinutes": 120,
+        "confirmedBy": "user",
+        "confirmedAt": "2026-11-01"
+      }
+    }
+  }
+}
