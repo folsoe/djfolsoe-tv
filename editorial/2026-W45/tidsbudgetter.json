@@ -1,0 +1,977 @@
+{
+  "retro": {
+    "show": "Retro Hits",
+    "date": "2026-11-08",
+    "start": "08:00",
+    "end": "12:00",
+    "musicSeconds": 14508,
+    "speechBudgetSeconds": 1120,
+    "mixBudgetSeconds": 1228,
+    "totalSeconds": 14400,
+    "timingBasis": "planned model; musical cue points not verified",
+    "tracks": [
+      {
+        "number": 1,
+        "artist": "Danseorkestret",
+        "title": "Kom Tilbage Nu",
+        "durationSeconds": 300,
+        "start": "08:00:30",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 2,
+        "artist": "Nu Shooz",
+        "title": "I Can't Wait",
+        "durationSeconds": 326,
+        "start": "08:05:26",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 3,
+        "artist": "Madonna",
+        "title": "La Isla Bonita",
+        "durationSeconds": 242,
+        "start": "08:10:48",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 4,
+        "artist": "George Benson",
+        "title": "Give Me the Night",
+        "durationSeconds": 301,
+        "start": "08:14:46",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 5,
+        "artist": "Patrice Rushen",
+        "title": "Forget Me Nots - Remastered",
+        "durationSeconds": 284,
+        "start": "08:19:43",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 6,
+        "artist": "Shalamar",
+        "title": "A Night to Remember",
+        "durationSeconds": 313,
+        "start": "08:24:23",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 7,
+        "artist": "The Whispers",
+        "title": "And the Beat Goes On",
+        "durationSeconds": 296,
+        "start": "08:29:32",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 8,
+        "artist": "Change",
+        "title": "A Lover's Holiday - Single Version",
+        "durationSeconds": 253,
+        "start": "08:34:24",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 9,
+        "artist": "Sister Sledge",
+        "title": "He's the Greatest Dancer - 1995 Remaster",
+        "durationSeconds": 375,
+        "start": "08:38:33",
+        "overlapToNextSeconds": 24
+      },
+      {
+        "number": 10,
+        "artist": "Earth, Wind & Fire",
+        "title": "September",
+        "durationSeconds": 215,
+        "start": "08:44:44",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 11,
+        "artist": "Kool & The Gang",
+        "title": "Get Down On It",
+        "durationSeconds": 293,
+        "start": "08:48:16",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 12,
+        "artist": "Imagination",
+        "title": "Just an Illusion",
+        "durationSeconds": 387,
+        "start": "08:53:06",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 13,
+        "artist": "Shannon",
+        "title": "Let the Music Play",
+        "durationSeconds": 213,
+        "start": "08:59:30",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 14,
+        "artist": "Thomas Helmig",
+        "title": "Det Er Mig Der Står Herude Og Banker På",
+        "durationSeconds": 209,
+        "start": "09:03:00",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 15,
+        "artist": "Ray Dee Ohh",
+        "title": "Jeg Vil La' Lyset Brænde",
+        "durationSeconds": 272,
+        "start": "09:06:26",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 16,
+        "artist": "One Two",
+        "title": "Den bedste tid",
+        "durationSeconds": 298,
+        "start": "09:10:55",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 17,
+        "artist": "Rocazino",
+        "title": "Ridder Lykke",
+        "durationSeconds": 215,
+        "start": "09:15:50",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 18,
+        "artist": "Laid Back",
+        "title": "White Horse",
+        "durationSeconds": 237,
+        "start": "09:19:22",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 19,
+        "artist": "Pet Shop Boys",
+        "title": "West End Girls",
+        "durationSeconds": 240,
+        "start": "09:23:16",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 20,
+        "artist": "Depeche Mode",
+        "title": "Enjoy the Silence",
+        "durationSeconds": 255,
+        "start": "09:27:13",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 21,
+        "artist": "Tears For Fears",
+        "title": "Everybody Wants To Rule The World",
+        "durationSeconds": 251,
+        "start": "09:31:25",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 22,
+        "artist": "Fleetwood Mac",
+        "title": "Everywhere",
+        "durationSeconds": 222,
+        "start": "09:35:33",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 23,
+        "artist": "Sandra",
+        "title": "Maria Magdalena",
+        "durationSeconds": 237,
+        "start": "09:39:12",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 24,
+        "artist": "Baltimora",
+        "title": "Tarzan Boy",
+        "durationSeconds": 378,
+        "start": "09:43:06",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 25,
+        "artist": "Rick Astley",
+        "title": "Never Gonna Give You Up",
+        "durationSeconds": 213,
+        "start": "09:49:21",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 26,
+        "artist": "Mel & Kim",
+        "title": "Respectable",
+        "durationSeconds": 202,
+        "start": "09:52:51",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 27,
+        "artist": "Kylie Minogue",
+        "title": "I Should Be so Lucky",
+        "durationSeconds": 204,
+        "start": "09:56:10",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 28,
+        "artist": "Bananarama",
+        "title": "Venus",
+        "durationSeconds": 229,
+        "start": "09:59:31",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 29,
+        "artist": "Hazell Dean",
+        "title": "Whatever I Do (Wherever I Go)",
+        "durationSeconds": 223,
+        "start": "10:03:17",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 30,
+        "artist": "The Communards",
+        "title": "Never Can Say Goodbye",
+        "durationSeconds": 291,
+        "start": "10:06:57",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 31,
+        "artist": "Erasure",
+        "title": "A Little Respect",
+        "durationSeconds": 211,
+        "start": "10:11:45",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 32,
+        "artist": "Yazoo",
+        "title": "Don't Go",
+        "durationSeconds": 188,
+        "start": "10:15:13",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 33,
+        "artist": "Bronski Beat",
+        "title": "Smalltown Boy",
+        "durationSeconds": 302,
+        "start": "10:18:18",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 34,
+        "artist": "Eurythmics / Annie Lennox / Dave Stewart",
+        "title": "Sweet Dreams (Are Made of This)",
+        "durationSeconds": 211,
+        "start": "10:23:17",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 35,
+        "artist": "Donna Summer",
+        "title": "Hot Stuff",
+        "durationSeconds": 314,
+        "start": "10:26:45",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 36,
+        "artist": "Gloria Gaynor",
+        "title": "I Will Survive",
+        "durationSeconds": 296,
+        "start": "10:31:56",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 37,
+        "artist": "Lipps Inc.",
+        "title": "Funkytown",
+        "durationSeconds": 470,
+        "start": "10:36:49",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 38,
+        "artist": "Anita Ward",
+        "title": "Ring My Bell",
+        "durationSeconds": 491,
+        "start": "10:44:36",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 39,
+        "artist": "Michael Jackson",
+        "title": "Rock with You - Single Version",
+        "durationSeconds": 219,
+        "start": "10:52:44",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 40,
+        "artist": "Shakatak",
+        "title": "Down on the Street",
+        "durationSeconds": 202,
+        "start": "10:56:20",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 41,
+        "artist": "Level 42",
+        "title": "Lessons In Love",
+        "durationSeconds": 246,
+        "start": "10:59:39",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 42,
+        "artist": "ABC",
+        "title": "The Look Of Love, Pt.1",
+        "durationSeconds": 209,
+        "start": "11:03:42",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 43,
+        "artist": "Billy Ocean",
+        "title": "Caribbean Queen (No More Love On the Run)",
+        "durationSeconds": 244,
+        "start": "11:07:08",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 44,
+        "artist": "Womack & Womack",
+        "title": "Teardrops",
+        "durationSeconds": 303,
+        "start": "11:11:09",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 45,
+        "artist": "Sister Sledge",
+        "title": "Thinking of You - 1995 Remaster",
+        "durationSeconds": 266,
+        "start": "11:16:09",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 46,
+        "artist": "Lis Sørensen",
+        "title": "Tæt På Ækvator",
+        "durationSeconds": 283,
+        "start": "11:20:32",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 47,
+        "artist": "Tøsedrengene",
+        "title": "Indianer",
+        "durationSeconds": 251,
+        "start": "11:25:12",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 48,
+        "artist": "Nik Kershaw",
+        "title": "I Won't Let The Sun Go Down On Me",
+        "durationSeconds": 203,
+        "start": "11:29:20",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 49,
+        "artist": "Thompson Twins",
+        "title": "Hold Me Now",
+        "durationSeconds": 286,
+        "start": "11:32:40",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 50,
+        "artist": "Scritti Politti",
+        "title": "Wood Beez",
+        "durationSeconds": 288,
+        "start": "11:37:23",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 51,
+        "artist": "Mai Tai",
+        "title": "History",
+        "durationSeconds": 232,
+        "start": "11:42:08",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 52,
+        "artist": "Five Star",
+        "title": "System Addict",
+        "durationSeconds": 244,
+        "start": "11:45:57",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 53,
+        "artist": "Jaki Graham",
+        "title": "Set Me Free",
+        "durationSeconds": 216,
+        "start": "11:49:58",
+        "overlapToNextSeconds": 23
+      },
+      {
+        "number": 54,
+        "artist": "Gwen Guthrie",
+        "title": "Ain't Nothin' Goin' On But The Rent",
+        "durationSeconds": 359,
+        "start": "11:53:31",
+        "overlapToNextSeconds": 0
+      }
+    ]
+  },
+  "trance": {
+    "show": "Trance Tuesday",
+    "date": "2026-11-03",
+    "start": "18:30",
+    "end": "21:30",
+    "musicSeconds": 10662,
+    "speechBudgetSeconds": 720,
+    "mixBudgetSeconds": 582,
+    "totalSeconds": 10800,
+    "timingBasis": "planned model; musical cue points not verified",
+    "tracks": [
+      {
+        "number": 1,
+        "artist": "Chicane / Moya Brennan",
+        "title": "Saltwater",
+        "durationSeconds": 202,
+        "start": "18:30:30",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 2,
+        "artist": "Energy 52 / Three 'N One",
+        "title": "Café Del Mar - Three 'N One Radio Edit",
+        "durationSeconds": 229,
+        "start": "18:33:54",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 3,
+        "artist": "Solarstone",
+        "title": "Seven Cities - Original Atlantis Mix",
+        "durationSeconds": 535,
+        "start": "18:37:45",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 4,
+        "artist": "Lange / Skye",
+        "title": "Drifting Away",
+        "durationSeconds": 201,
+        "start": "18:46:42",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 5,
+        "artist": "YORK / Mauro Picotto",
+        "title": "On The Beach - Mauro Picotto's CRW Remix",
+        "durationSeconds": 197,
+        "start": "18:50:05",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 6,
+        "artist": "ATB",
+        "title": "9Pm (Till I Come)",
+        "durationSeconds": 193,
+        "start": "18:53:24",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 7,
+        "artist": "Robert Miles",
+        "title": "Children",
+        "durationSeconds": 243,
+        "start": "18:56:39",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 8,
+        "artist": "Paul van Dyk",
+        "title": "For An Angel - PvD Angel In Heaven Radio Edit",
+        "durationSeconds": 233,
+        "start": "19:00:44",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 9,
+        "artist": "Above & Beyond / OceanLab",
+        "title": "Satellite - Original Above & Beyond Mix",
+        "durationSeconds": 447,
+        "start": "19:04:39",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 10,
+        "artist": "Armin van Buuren",
+        "title": "Communication",
+        "durationSeconds": 199,
+        "start": "19:12:08",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 11,
+        "artist": "Gouryella / Ferry Corsten",
+        "title": "Gouryella - Extended Mix",
+        "durationSeconds": 645,
+        "start": "19:15:29",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 12,
+        "artist": "System F / Ferry Corsten",
+        "title": "Out Of The Blue",
+        "durationSeconds": 233,
+        "start": "19:26:16",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 13,
+        "artist": "Rank 1",
+        "title": "Airwave - Radio Vocal Edit",
+        "durationSeconds": 179,
+        "start": "19:30:11",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 14,
+        "artist": "Push",
+        "title": "Universal Nation",
+        "durationSeconds": 225,
+        "start": "19:33:12",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 15,
+        "artist": "Binary Finary / Paul van Dyk",
+        "title": "1998 - Paul van Dyk Remix",
+        "durationSeconds": 210,
+        "start": "19:36:59",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 16,
+        "artist": "Veracocha",
+        "title": "Carte Blanche - Extended Mix",
+        "durationSeconds": 424,
+        "start": "19:40:31",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 17,
+        "artist": "Delerium / Sarah McLachlan / Tiësto",
+        "title": "Silence (feat. Sarah McLachlan) - DJ Tiësto's in Search of Sunrise Remix",
+        "durationSeconds": 693,
+        "start": "19:47:37",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 18,
+        "artist": "Motorcycle / JES / Gabriel & Dresden",
+        "title": "As The Rush Comes",
+        "durationSeconds": 212,
+        "start": "19:59:12",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 19,
+        "artist": "Andain",
+        "title": "Beautiful Things - Radio Edit",
+        "durationSeconds": 197,
+        "start": "20:02:46",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 20,
+        "artist": "Above & Beyond / Zoë Johnston",
+        "title": "Good For Me - Above & Beyond Extended Club Mix",
+        "durationSeconds": 532,
+        "start": "20:06:05",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 21,
+        "artist": "Tiësto",
+        "title": "Adagio for Strings",
+        "durationSeconds": 443,
+        "start": "20:14:59",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 22,
+        "artist": "Ferry Corsten",
+        "title": "Beautiful",
+        "durationSeconds": 354,
+        "start": "20:22:24",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 23,
+        "artist": "Above & Beyond / OceanLab / Armin van Buuren",
+        "title": "Sky Falls Down - Armin van Buuren Remix",
+        "durationSeconds": 620,
+        "start": "20:28:21",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 24,
+        "artist": "Gabriel & Dresden / Molly Bancroft",
+        "title": "Tracking Treasure Down",
+        "durationSeconds": 189,
+        "start": "20:38:44",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 25,
+        "artist": "Markus Schulz",
+        "title": "The New World - Album Mix",
+        "durationSeconds": 159,
+        "start": "20:41:56",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 26,
+        "artist": "Cosmic Gate",
+        "title": "Exploration of Space",
+        "durationSeconds": 216,
+        "start": "20:44:38",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 27,
+        "artist": "Svenson & Gielen / Johan Gielen",
+        "title": "The Beauty of Silence - Remastered",
+        "durationSeconds": 181,
+        "start": "20:48:17",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 28,
+        "artist": "The Rocketman / Push / M.I.K.E. / M.I.K.E. Push",
+        "title": "Strange World",
+        "durationSeconds": 184,
+        "start": "20:51:21",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 29,
+        "artist": "Aly & Fila / Jwaydan",
+        "title": "We Control The Sunlight",
+        "durationSeconds": 226,
+        "start": "20:54:28",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 30,
+        "artist": "Giuseppe Ottaviani",
+        "title": "Through Your Eyes - Original Mix",
+        "durationSeconds": 483,
+        "start": "20:58:17",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 31,
+        "artist": "Gareth Emery / Christina Novelli",
+        "title": "Concrete Angel - Radio Edit",
+        "durationSeconds": 234,
+        "start": "21:06:23",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 32,
+        "artist": "Andrew Rayel",
+        "title": "550 Senta - Extended Aether Mix",
+        "durationSeconds": 466,
+        "start": "21:10:20",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 33,
+        "artist": "RAM / Jorn Van Deynhoven",
+        "title": "RAMsterdam - Jorn van Deynhoven Extended Remix",
+        "durationSeconds": 455,
+        "start": "21:18:09",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 34,
+        "artist": "Agnelli & Nelson",
+        "title": "Everyday",
+        "durationSeconds": 223,
+        "start": "21:25:47",
+        "overlapToNextSeconds": 0
+      }
+    ]
+  },
+  "eurodance": {
+    "show": "Classic Dance #90 #00",
+    "date": "2026-11-05",
+    "start": "19:00",
+    "end": "21:00",
+    "musicSeconds": 7081,
+    "speechBudgetSeconds": 620,
+    "mixBudgetSeconds": 501,
+    "totalSeconds": 7200,
+    "timingBasis": "planned model; musical cue points not verified",
+    "tracks": [
+      {
+        "number": 1,
+        "artist": "SNAP!",
+        "title": "The Power (7\" Version)",
+        "durationSeconds": 227,
+        "start": "19:00:30",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 2,
+        "artist": "C & C Music Factory / Freedom Williams",
+        "title": "Gonna Make You Sweat (Everybody Dance Now) (feat. Freedom Williams)",
+        "durationSeconds": 244,
+        "start": "19:04:19",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 3,
+        "artist": "Deee-Lite",
+        "title": "Groove Is in the Heart",
+        "durationSeconds": 231,
+        "start": "19:08:25",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 4,
+        "artist": "Robin S",
+        "title": "Show Me Love",
+        "durationSeconds": 252,
+        "start": "19:12:18",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 5,
+        "artist": "Nightcrawlers / MK",
+        "title": "Push The Feeling On - Mk Dub Revisited Edit",
+        "durationSeconds": 243,
+        "start": "19:16:32",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 6,
+        "artist": "Dr. Alban",
+        "title": "It's My Life",
+        "durationSeconds": 239,
+        "start": "19:20:37",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 7,
+        "artist": "Culture Beat",
+        "title": "Mr. Vain",
+        "durationSeconds": 336,
+        "start": "19:24:38",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 8,
+        "artist": "Haddaway",
+        "title": "What Is Love - 7\" Mix",
+        "durationSeconds": 270,
+        "start": "19:30:16",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 9,
+        "artist": "Corona",
+        "title": "The Rhythm Of The Night",
+        "durationSeconds": 264,
+        "start": "19:34:48",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 10,
+        "artist": "2 Unlimited",
+        "title": "No Limit",
+        "durationSeconds": 223,
+        "start": "19:39:14",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 11,
+        "artist": "La Bouche",
+        "title": "Be My Lover",
+        "durationSeconds": 240,
+        "start": "19:42:59",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 12,
+        "artist": "Real McCoy",
+        "title": "Another Night",
+        "durationSeconds": 236,
+        "start": "19:47:01",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 13,
+        "artist": "Cut 'N' Move",
+        "title": "Give It Up",
+        "durationSeconds": 265,
+        "start": "19:50:59",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 14,
+        "artist": "Whigfield",
+        "title": "Saturday Night",
+        "durationSeconds": 223,
+        "start": "19:55:26",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 15,
+        "artist": "Aqua",
+        "title": "My Oh My",
+        "durationSeconds": 204,
+        "start": "19:59:11",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 16,
+        "artist": "Sash!",
+        "title": "Encore Une Fois",
+        "durationSeconds": 390,
+        "start": "20:02:37",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 17,
+        "artist": "Gala / Molella / Phil Jay",
+        "title": "Freed From Desire",
+        "durationSeconds": 213,
+        "start": "20:09:09",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 18,
+        "artist": "Eiffel 65 / Gabry Ponte",
+        "title": "Blue (Da Ba Dee) - Gabry Ponte Video Edit",
+        "durationSeconds": 219,
+        "start": "20:12:44",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 19,
+        "artist": "GIGI D'AGOSTINO",
+        "title": "L'Amour Toujours",
+        "durationSeconds": 242,
+        "start": "20:16:25",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 20,
+        "artist": "Alice Deejay",
+        "title": "Better Off Alone",
+        "durationSeconds": 214,
+        "start": "20:20:29",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 21,
+        "artist": "Fragma",
+        "title": "Toca's Miracle - Radio Edit",
+        "durationSeconds": 200,
+        "start": "20:24:05",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 22,
+        "artist": "Ian van Dahl / Marsha",
+        "title": "Castles In The Sky",
+        "durationSeconds": 227,
+        "start": "20:27:27",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 23,
+        "artist": "Lasgo",
+        "title": "Something",
+        "durationSeconds": 220,
+        "start": "20:31:16",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 24,
+        "artist": "DJ Sammy / Yanou / Do",
+        "title": "Heaven",
+        "durationSeconds": 235,
+        "start": "20:34:58",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 25,
+        "artist": "Infernal",
+        "title": "From Paris to Berlin",
+        "durationSeconds": 209,
+        "start": "20:38:55",
+        "overlapToNextSeconds": 18
+      },
+      {
+        "number": 26,
+        "artist": "Junior Senior",
+        "title": "Move Your Feet",
+        "durationSeconds": 181,
+        "start": "20:42:26",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 27,
+        "artist": "Modjo",
+        "title": "Lady - Hear Me Tonight",
+        "durationSeconds": 307,
+        "start": "20:45:30",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 28,
+        "artist": "The Shapeshifters",
+        "title": "Lola's Theme - Radio Edit",
+        "durationSeconds": 207,
+        "start": "20:50:40",
+        "overlapToNextSeconds": 17
+      },
+      {
+        "number": 29,
+        "artist": "Daft Punk",
+        "title": "One More Time",
+        "durationSeconds": 320,
+        "start": "20:54:10",
+        "overlapToNextSeconds": 0
+      }
+    ]
+  }
+}
