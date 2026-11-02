@@ -1,8 +1,231 @@
 {
   "schema": 1,
   "week": "2026-W45",
-  "status": "awaiting-first-edition",
-  "publishedAt": null,
-  "expiresAt": null,
-  "shows": {"retro": [], "trance": [], "eurodance": []}
+  "status": "published",
+  "publishedAt": "2026-11-02T17:00:00Z",
+  "expiresAt": "2026-11-09T12:00:00Z",
+  "shows": {
+    "retro": [
+      {
+        "artist": "Depeche Mode",
+        "title": "Enjoy the Silence",
+        "text": [
+          "Enjoy The Silence udkom som britisk single 5. februar 1990.",
+          "Enjoy The Silence was released as a UK single on 5 February 1990.",
+          "Enjoy The Silence erschien am 5. Februar 1990 als britische Single."
+        ],
+        "sources": [
+          "https://archives.depechemode.com/discography/singles/25_enjoythesilence.html"
+        ]
+      },
+      {
+        "artist": "Fleetwood Mac",
+        "title": "Everywhere",
+        "text": [
+          "Everywhere er med på Fleetwood Macs Tango In The Night fra 1987.",
+          "Everywhere appears on Fleetwood Mac’s 1987 album Tango In The Night.",
+          "Everywhere steht auf Fleetwood Macs Album Tango In The Night von 1987."
+        ],
+        "sources": [
+          "https://media.rhino.com/index.php/press-release/fleetwood-mac-1975-1987"
+        ]
+      },
+      {
+        "artist": "Rick Astley",
+        "title": "Never Gonna Give You Up",
+        "text": [
+          "Never Gonna Give You Up nåede førstepladsen på den britiske singleliste.",
+          "Never Gonna Give You Up reached number one on the UK singles chart.",
+          "Never Gonna Give You Up erreichte Platz eins der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/rick-astley-never-gonna-give-you-up/"
+        ]
+      },
+      {
+        "artist": "Donna Summer",
+        "title": "Hot Stuff",
+        "text": [
+          "Hot Stuff kom på den britiske singleliste i maj 1979 og nåede nummer 11.",
+          "Hot Stuff entered the UK singles chart in May 1979 and peaked at number 11.",
+          "Hot Stuff kam im Mai 1979 in die britischen Singlecharts und erreichte Platz elf."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/donna-summer-hot-stuff/"
+        ]
+      },
+      {
+        "artist": "Gloria Gaynor",
+        "title": "I Will Survive",
+        "text": [
+          "I Will Survive lå fire uger som nummer ét i Storbritannien ved udgivelsen i 1979.",
+          "I Will Survive spent four weeks at UK number one on its original 1979 release.",
+          "I Will Survive stand bei seiner Veröffentlichung 1979 vier Wochen auf Platz eins in Großbritannien."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/gloria-gaynor-i-will-survive/"
+        ]
+      },
+      {
+        "artist": "Earth, Wind & Fire",
+        "title": "September",
+        "text": [
+          "September kom på den britiske singleliste i december 1978 og nåede tredjepladsen.",
+          "September entered the UK singles chart in December 1978 and reached number three.",
+          "September kam im Dezember 1978 in die britischen Singlecharts und erreichte Platz drei."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/earth-wind-and-fire-september/"
+        ]
+      }
+    ],
+    "trance": [
+      {
+        "artist": "Chicane / Moya Brennan",
+        "title": "Saltwater",
+        "text": [
+          "Saltwater med Chicane og Máire Brennan nåede nummer seks på den britiske singleliste i 1999.",
+          "Saltwater by Chicane featuring Máire Brennan reached number six on the UK singles chart in 1999.",
+          "Saltwater von Chicane mit Máire Brennan erreichte 1999 Platz sechs der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/chicane-ft-maire-brennan-saltwater/"
+        ]
+      },
+      {
+        "artist": "ATB",
+        "title": "9Pm (Till I Come)",
+        "text": [
+          "ATBs 9PM (Till I Come) nåede førstepladsen på den britiske singleliste i 1999.",
+          "ATB’s 9PM (Till I Come) reached number one on the UK singles chart in 1999.",
+          "ATBs 9PM (Till I Come) erreichte 1999 Platz eins der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/atb-9pm-till-i-come-0/"
+        ]
+      },
+      {
+        "artist": "Robert Miles",
+        "title": "Children",
+        "text": [
+          "Children udkom i november 1995 og nåede nummer to på den britiske singleliste.",
+          "Children was released in November 1995 and reached number two on the UK singles chart.",
+          "Children erschien im November 1995 und erreichte Platz zwei der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/robert-miles-children/"
+        ]
+      },
+      {
+        "artist": "Above & Beyond / OceanLab",
+        "title": "Satellite - Original Above & Beyond Mix",
+        "text": [
+          "OceanLabs Satellite nåede nummer 19 på den britiske singleliste.",
+          "OceanLab’s Satellite reached number 19 on the UK singles chart.",
+          "OceanLabs Satellite erreichte Platz 19 der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/oceanlab-satellite/"
+        ]
+      },
+      {
+        "artist": "System F / Ferry Corsten",
+        "title": "Out Of The Blue",
+        "text": [
+          "System Fs Out Of The Blue nåede nummer 14 på den britiske singleliste i 1999.",
+          "System F’s Out Of The Blue reached number 14 on the UK singles chart in 1999.",
+          "System Fs Out Of The Blue erreichte 1999 Platz 14 der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/system-f-out-of-the-blue/"
+        ]
+      },
+      {
+        "artist": "Rank 1",
+        "title": "Airwave - Radio Vocal Edit",
+        "text": [
+          "Rank 1s Airwave nåede Top 10 på den britiske singleliste i 2000.",
+          "Rank 1’s Airwave reached the UK singles Top 10 in 2000.",
+          "Rank 1s Airwave erreichte 2000 die Top 10 der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/rank-1-airwave/"
+        ]
+      }
+    ],
+    "eurodance": [
+      {
+        "artist": "SNAP!",
+        "title": "The Power (7\" Version)",
+        "text": [
+          "The Power lå to uger som nummer ét på den britiske singleliste i 1990.",
+          "The Power spent two weeks at number one on the UK singles chart in 1990.",
+          "The Power stand 1990 zwei Wochen auf Platz eins der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/snap-the-power/"
+        ]
+      },
+      {
+        "artist": "Culture Beat",
+        "title": "Mr. Vain",
+        "text": [
+          "Culture Beats Mr. Vain nåede førstepladsen på den britiske singleliste i 1993.",
+          "Culture Beat’s Mr. Vain reached number one on the UK singles chart in 1993.",
+          "Culture Beats Mr. Vain erreichte 1993 Platz eins der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/culture-beat-mr-vain/"
+        ]
+      },
+      {
+        "artist": "Haddaway",
+        "title": "What Is Love - 7\" Mix",
+        "text": [
+          "Haddaways What Is Love nåede nummer to på den britiske singleliste i 1993.",
+          "Haddaway’s What Is Love reached number two on the UK singles chart in 1993.",
+          "Haddaways What Is Love erreichte 1993 Platz zwei der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/haddaway-what-is-love/"
+        ]
+      },
+      {
+        "artist": "2 Unlimited",
+        "title": "No Limit",
+        "text": [
+          "2 Unlimiteds No Limit nåede førstepladsen på den britiske singleliste i 1993.",
+          "2 Unlimited’s No Limit reached number one on the UK singles chart in 1993.",
+          "2 Unlimiteds No Limit erreichte 1993 Platz eins der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/2-unlimited-no-limit/"
+        ]
+      },
+      {
+        "artist": "Whigfield",
+        "title": "Saturday Night",
+        "text": [
+          "Whigfields Saturday Night gik ind som nummer ét ved den officielle britiske singleudgivelse i 1994.",
+          "Whigfield’s Saturday Night debuted at number one on its official UK single release in 1994.",
+          "Whigfields Saturday Night stieg bei seiner offiziellen britischen Singleveröffentlichung 1994 auf Platz eins ein."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/whigfield-saturday-night/"
+        ]
+      },
+      {
+        "artist": "Daft Punk",
+        "title": "One More Time",
+        "text": [
+          "Daft Punks One More Time nåede nummer to på den britiske singleliste.",
+          "Daft Punk’s One More Time reached number two on the UK singles chart.",
+          "Daft Punks One More Time erreichte Platz zwei der britischen Singlecharts."
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/daft-punk-one-more-time/"
+        ]
+      }
+    ]
+  }
 }
