@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "week": "2026-W45",
+  "observedAt": "2026-11-08",
+  "source": "Spotify authenticated playlist UI",
+  "playlistId": "0x6ynnN468f6kya88ufKu8",
+  "observedCount": 36,
+  "archiveCount": 34,
+  "additions": [
+    {
+      "position": 35,
+      "artist": "Art Of Trance / Ferry Corsten",
+      "title": "Madagascar - Ferry Corsten Remix",
+      "durationSeconds": 361
+    },
+    {
+      "position": 36,
+      "artist": "Delerium / Leigh Nash",
+      "title": "Innocente - Mr. Sam's The Space Between Us Mix",
+      "durationSeconds": 592
+    }
+  ],
+  "note": "Reconciliation supplement only; preserve the original week45 selection and include these additions in future exclusion checks. Full current playlist differs from the earlier selection and must be captured before replacement."
+}
