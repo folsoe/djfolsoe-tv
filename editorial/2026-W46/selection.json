@@ -1,0 +1,726 @@
+{
+  "week": "2026-W46",
+  "shows": {
+    "trance": [
+      {
+        "order": 1,
+        "artist": "Chicane",
+        "title": "Offshore - Extended Mix",
+        "spotifyTrackId": "4jy7tsWx2FZjXspLV5uZkQ",
+        "durationSeconds": 417
+      },
+      {
+        "order": 2,
+        "artist": "Three Drives On A Vinyl, Three Drives",
+        "title": "Greece 2000 - Extended Mix",
+        "spotifyTrackId": "7pe7JWmS5Ek4pOiKcSU25H",
+        "durationSeconds": 483
+      },
+      {
+        "order": 3,
+        "artist": "Grum",
+        "title": "Stay With Me",
+        "spotifyTrackId": "2ByIQbGXbR7Ru379xea9Gg",
+        "durationSeconds": 201
+      },
+      {
+        "order": 4,
+        "artist": "Reflekt, delline bass, Adam K & Soha",
+        "title": "Need To Feel Loved - Adam K & Soha Vocal Mix",
+        "spotifyTrackId": "30cjLreSF4Xq0uAB89i2Ac",
+        "durationSeconds": 396
+      },
+      {
+        "order": 5,
+        "artist": "Chakra",
+        "title": "Love Shines Through - Extended Mix",
+        "spotifyTrackId": "3xgckatLzl2HyWjiMyB75e",
+        "durationSeconds": 490
+      },
+      {
+        "order": 6,
+        "artist": "The Thrillseekers, Sheryl Deane",
+        "title": "Synaesthesia (Fly Away)",
+        "spotifyTrackId": "5QdgpcfAw8EbsupH0B6BpI",
+        "durationSeconds": 229
+      },
+      {
+        "order": 7,
+        "artist": "BT",
+        "title": "Flaming June",
+        "spotifyTrackId": "5Vh9T9b7t7764fDEWMd9Fs",
+        "durationSeconds": 505
+      },
+      {
+        "order": 8,
+        "artist": "Lustral, The Space Brothers, Nalin & Kane",
+        "title": "Everytime - Nalin & Kane Extended Mix",
+        "spotifyTrackId": "62OBEGGO9mKWXxylwLpkyP",
+        "durationSeconds": 512
+      },
+      {
+        "order": 9,
+        "artist": "Chicane, Justine Suissa, The Thrillseekers",
+        "title": "Autumn Tactics - The Thrillseekers Remix",
+        "spotifyTrackId": "60iQ75aP8VjfQMInz1mBpw",
+        "durationSeconds": 442
+      },
+      {
+        "order": 10,
+        "artist": "Lange, The Morrighan",
+        "title": "Follow Me - Lange's Club Mix",
+        "spotifyTrackId": "7bbY135gafWRikvA2f9jjA",
+        "durationSeconds": 392
+      },
+      {
+        "order": 11,
+        "artist": "Armin van Buuren",
+        "title": "Blue Fear - Original Mix",
+        "spotifyTrackId": "7aCd2uFGS9Z7TnC64bIgqq",
+        "durationSeconds": 474
+      },
+      {
+        "order": 12,
+        "artist": "Signum",
+        "title": "Love Forever",
+        "spotifyTrackId": "2YSRt4rV7g1iZlHIGxPucI",
+        "durationSeconds": 208
+      },
+      {
+        "order": 13,
+        "artist": "Tiësto",
+        "title": "Suburban Train",
+        "spotifyTrackId": "2T9PGrtlySSHnwT9t1JUEI",
+        "durationSeconds": 622
+      },
+      {
+        "order": 14,
+        "artist": "Paul Oakenfold, Carla Werner, DJ Tiesto, Tiësto",
+        "title": "Southern Sun - DJ Tiësto Remix",
+        "spotifyTrackId": "3Q7z1Aa4sdrPtVyRwNam0D",
+        "durationSeconds": 584
+      },
+      {
+        "order": 15,
+        "artist": "Solarstone, Andy Bury",
+        "title": "Solarcoaster - Original Mix",
+        "spotifyTrackId": "5NF8qRfWXGRgYeoiq1yoRJ",
+        "durationSeconds": 527
+      },
+      {
+        "order": 16,
+        "artist": "Ferry Corsten",
+        "title": "Punk",
+        "spotifyTrackId": "74BSVo5XxxlOOWKstr8doF",
+        "durationSeconds": 219
+      },
+      {
+        "order": 17,
+        "artist": "Nitrous Oxide, Seb Hennig, Hikari_no",
+        "title": "Temeria",
+        "spotifyTrackId": "46ONznemNlPtinnqdMSQEn",
+        "durationSeconds": 225
+      },
+      {
+        "order": 18,
+        "artist": "Push",
+        "title": "The Legacy - Club Mix",
+        "spotifyTrackId": "2RpGTuM5XINRHqRiXMLOn5",
+        "durationSeconds": 536
+      },
+      {
+        "order": 19,
+        "artist": "Above & Beyond, OceanLab, Ferry Corsten",
+        "title": "Clear Blue Water - Ferry Corsten Remix",
+        "spotifyTrackId": "3BCegDTqa5YfDljMksFLSS",
+        "durationSeconds": 438
+      },
+      {
+        "order": 20,
+        "artist": "Above & Beyond, Zoë Johnston",
+        "title": "No One On Earth - Gabriel & Dresden Remix",
+        "spotifyTrackId": "2iS5us96UxLtV2gC1BDKUV",
+        "durationSeconds": 559
+      },
+      {
+        "order": 21,
+        "artist": "Doppenberg",
+        "title": "Mysteria",
+        "spotifyTrackId": "0WkWBVjIWja9BJATaSFM81",
+        "durationSeconds": 179
+      },
+      {
+        "order": 22,
+        "artist": "Aly & Fila",
+        "title": "Rosaires",
+        "spotifyTrackId": "7iyHSCn6tvqhnl3rkJnjJD",
+        "durationSeconds": 397
+      },
+      {
+        "order": 23,
+        "artist": "John O'Callaghan, Audrey Gallagher, Agnelli & Nelson",
+        "title": "Big Sky - Agnelli & Nelson Extended Remix",
+        "spotifyTrackId": "2y5bhecj9eEXy9IzMVdiud",
+        "durationSeconds": 515
+      },
+      {
+        "order": 24,
+        "artist": "Daniel Kandi",
+        "title": "What Happens When We End",
+        "spotifyTrackId": "0cicTuDWTEMDhGYvZ3wLYu",
+        "durationSeconds": 261
+      },
+      {
+        "order": 25,
+        "artist": "Sean Tyas",
+        "title": "Lift - Extended Mix",
+        "spotifyTrackId": "4KYHpUBVJGh1RBtgeqTZrX",
+        "durationSeconds": 505
+      },
+      {
+        "order": 26,
+        "artist": "Giuseppe Ottaviani",
+        "title": "Linking People - Original Mix",
+        "spotifyTrackId": "0P7UFTJUB4pMtlXjIqRl4S",
+        "durationSeconds": 514
+      },
+      {
+        "order": 27,
+        "artist": "L.S.G.",
+        "title": "Netherworld",
+        "spotifyTrackId": "0SI2oISkB5I9tPrJjaxuH3",
+        "durationSeconds": 435
+      },
+      {
+        "order": 28,
+        "artist": "Ascension",
+        "title": "Someone - Original Mix",
+        "spotifyTrackId": "2IZnE8sBqz4X8zgaRiAM7p",
+        "durationSeconds": 536
+      }
+    ],
+    "eurodance": [
+      {
+        "order": 1,
+        "artist": "Captain Hollywood Project",
+        "title": "More And More - Extended Mix",
+        "spotifyTrackId": "5Sd0Y2tVJUii4HRB44bAvx",
+        "durationSeconds": 420
+      },
+      {
+        "order": 2,
+        "artist": "Masterboy",
+        "title": "Feel the heat of the night - Sunshine Mix",
+        "spotifyTrackId": "7rIDPf18b9d0FPgmtgFmfj",
+        "durationSeconds": 404
+      },
+      {
+        "order": 3,
+        "artist": "Me & My, Hartmann, Langhoff",
+        "title": "Dub-I-Dub - Club Remix",
+        "spotifyTrackId": "19eMkJXsBcEVTbMA73Ndht",
+        "durationSeconds": 320
+      },
+      {
+        "order": 4,
+        "artist": "Alice Deejay",
+        "title": "Back In My Life - Club Vocal Mix",
+        "spotifyTrackId": "2GVdTxfIE74wVyON8c95nr",
+        "durationSeconds": 338
+      },
+      {
+        "order": 5,
+        "artist": "Milk Inc., Peter Luts",
+        "title": "Walk On Water - Peter Luts Remix",
+        "spotifyTrackId": "2UzlMP5b7MZUQ8UUBBo0HC",
+        "durationSeconds": 380
+      },
+      {
+        "order": 6,
+        "artist": "Kate Ryan",
+        "title": "Désenchantée - Extended Mix",
+        "spotifyTrackId": "3tGAp6CpME7bOBhRwiJPUZ",
+        "durationSeconds": 509
+      },
+      {
+        "order": 7,
+        "artist": "Novaspace",
+        "title": "Time After Time - After Time Mix",
+        "spotifyTrackId": "63pAxj7N2GBuvCgyi9eCdn",
+        "durationSeconds": 391
+      },
+      {
+        "order": 8,
+        "artist": "Kelly Llorenna, Flip & Fill",
+        "title": "Tell It To My Heart - Flip & Fill Remix",
+        "spotifyTrackId": "7tmWYpAv41kQelcnpaKWqS",
+        "durationSeconds": 355
+      },
+      {
+        "order": 9,
+        "artist": "Flip & Fill, Karen Parry",
+        "title": "Shooting Star - Extended Mix",
+        "spotifyTrackId": "0tFyQW1ATWRnsSKSB05iIL",
+        "durationSeconds": 327
+      },
+      {
+        "order": 10,
+        "artist": "Ultrabeat",
+        "title": "Pretty Green Eyes - Extended Mix",
+        "spotifyTrackId": "4cmtzpUp918D4XOGD43fzo",
+        "durationSeconds": 413
+      },
+      {
+        "order": 11,
+        "artist": "Cascada",
+        "title": "Everytime We Touch - Club Mix",
+        "spotifyTrackId": "0QC44MbV3gz3QLDjOLWAdF",
+        "durationSeconds": 331
+      },
+      {
+        "order": 12,
+        "artist": "Groove Coverage, Rocco",
+        "title": "Moonlight Shadow - Rocco Remix",
+        "spotifyTrackId": "4hlYK0zN6Pqzp3aaCfDccz",
+        "durationSeconds": 417
+      },
+      {
+        "order": 13,
+        "artist": "Special D., Rob Mayth",
+        "title": "Come With Me - Rob Mayth Remix",
+        "spotifyTrackId": "3aoH5iws8TCIdodAExp4m1",
+        "durationSeconds": 332
+      },
+      {
+        "order": 14,
+        "artist": "Basshunter, DJ Mental Theos Bazzheadz",
+        "title": "Now You're Gone (feat. DJ Mental Theos Bazzheadz) - DJ Alex Extended Mix",
+        "spotifyTrackId": "3Od03esYMrE67g4JysxvnY",
+        "durationSeconds": 344
+      },
+      {
+        "order": 15,
+        "artist": "ItaloBrothers",
+        "title": "Stamp On The Ground - Extended Mix",
+        "spotifyTrackId": "5aTLZr3tPiMz2tLO16p4vG",
+        "durationSeconds": 305
+      },
+      {
+        "order": 16,
+        "artist": "DHT, Edmée, Hardbounze",
+        "title": "I Go Crazy - Hardbounze Extended",
+        "spotifyTrackId": "4Ca9KRgtlDKHUY097M3YvR",
+        "durationSeconds": 332
+      },
+      {
+        "order": 17,
+        "artist": "Scooter",
+        "title": "Nessaja - Flip & Fill Mix",
+        "spotifyTrackId": "3TYZGc0uAOm2vsSiTcxRA7",
+        "durationSeconds": 378
+      },
+      {
+        "order": 18,
+        "artist": "Styles & Breeze",
+        "title": "You're Shining - Hardcore Mix",
+        "spotifyTrackId": "3jTPC7HWVKkJL1nG0jG1E8",
+        "durationSeconds": 419
+      },
+      {
+        "order": 19,
+        "artist": "Jessy",
+        "title": "Look at me now - Milc Inc Remix",
+        "spotifyTrackId": "3tt3YtFKvyQnOG1pkC98bb",
+        "durationSeconds": 382
+      }
+    ],
+    "retro": [
+      {
+        "order": 1,
+        "artist": "Laid Back",
+        "title": "Sunshine Reggae",
+        "spotifyTrackId": "0z0JSkE5Nw3i3nin3BBSuG",
+        "durationSeconds": 257
+      },
+      {
+        "order": 2,
+        "artist": "Sade",
+        "title": "Smooth Operator - Single Version",
+        "spotifyTrackId": "1Hv1VTm8zeOeybub15mA2R",
+        "durationSeconds": 258
+      },
+      {
+        "order": 3,
+        "artist": "Soul II Soul, Caron Wheeler",
+        "title": "Back To Life",
+        "spotifyTrackId": "7vvRkLPIvfjjmCIqNxBuEZ",
+        "durationSeconds": 228
+      },
+      {
+        "order": 4,
+        "artist": "George Michael",
+        "title": "Freedom! '90 - Remastered",
+        "spotifyTrackId": "4dT3qLUU6fFUmomLzk2cUA",
+        "durationSeconds": 388
+      },
+      {
+        "order": 5,
+        "artist": "The S.O.S Band",
+        "title": "Just Be Good To Me",
+        "spotifyTrackId": "1482bMc9Tn0uQxsJqV7eSP",
+        "durationSeconds": 549
+      },
+      {
+        "order": 6,
+        "artist": "Thomas Helmig",
+        "title": "Nu Hvor Du Har Brændt Mig Af",
+        "spotifyTrackId": "11qFfHuutYvRGLrX0NFyGh",
+        "durationSeconds": 281
+      },
+      {
+        "order": 7,
+        "artist": "News",
+        "title": "Du Er",
+        "spotifyTrackId": "0OlfLzNAJ68fRKNHBziFEw",
+        "durationSeconds": 225
+      },
+      {
+        "order": 8,
+        "artist": "Luther Vandross",
+        "title": "Never Too Much",
+        "spotifyTrackId": "3nFJbZCHP4d9vduKjJLdBL",
+        "durationSeconds": 230
+      },
+      {
+        "order": 9,
+        "artist": "Evelyn \"Champagne\" King",
+        "title": "Love Come Down - Single Version",
+        "spotifyTrackId": "2RCOWNCxDIphjhqTtkwtwR",
+        "durationSeconds": 220
+      },
+      {
+        "order": 10,
+        "artist": "Alexander O'Neal",
+        "title": "Criticize",
+        "spotifyTrackId": "18ZRmY7kNZQQHpopsSVxwJ",
+        "durationSeconds": 247
+      },
+      {
+        "order": 11,
+        "artist": "Cameo",
+        "title": "Word Up",
+        "spotifyTrackId": "7LoGfKBAaOl0nxhodJ1240",
+        "durationSeconds": 260
+      },
+      {
+        "order": 12,
+        "artist": "Michael Jackson",
+        "title": "Billie Jean",
+        "spotifyTrackId": "7J1uxwnxfQLu4APicE5Rnj",
+        "durationSeconds": 293
+      },
+      {
+        "order": 13,
+        "artist": "Cheryl Lynn",
+        "title": "Got to Be Real - Single Version",
+        "spotifyTrackId": "3eudp9ZxZAGaDBOuWGrW2D",
+        "durationSeconds": 223
+      },
+      {
+        "order": 14,
+        "artist": "Diana Ross",
+        "title": "Upside Down",
+        "spotifyTrackId": "3pbtBomO4Zt5gGiqsYeiBH",
+        "durationSeconds": 245
+      },
+      {
+        "order": 15,
+        "artist": "Tøsedrengene",
+        "title": "Sig Du Ka' Li' Mig",
+        "spotifyTrackId": "6foG41XuloHv82btsxFdMo",
+        "durationSeconds": 230
+      },
+      {
+        "order": 16,
+        "artist": "Rocazino",
+        "title": "All My Love",
+        "spotifyTrackId": "49clGe0PtbYUx3vB7tyk3A",
+        "durationSeconds": 214
+      },
+      {
+        "order": 17,
+        "artist": "Indeep",
+        "title": "Last Night a D.J. Saved My Life",
+        "spotifyTrackId": "6NSqiyQWIyZLouviktad9X",
+        "durationSeconds": 341
+      },
+      {
+        "order": 18,
+        "artist": "D-Train",
+        "title": "You're the One for Me",
+        "spotifyTrackId": "66i1lieIMso7ef4P7KdWcE",
+        "durationSeconds": 309
+      },
+      {
+        "order": 19,
+        "artist": "The Brothers Johnson",
+        "title": "Stomp! - Single Version",
+        "spotifyTrackId": "3EG65y2LtxWjfydabHdItb",
+        "durationSeconds": 247
+      },
+      {
+        "order": 20,
+        "artist": "McFadden & Whitehead",
+        "title": "Ain't No Stoppin' Us Now - Single Version",
+        "spotifyTrackId": "352zgXSWzF85TvLhzJ7kkK",
+        "durationSeconds": 217
+      },
+      {
+        "order": 21,
+        "artist": "CHIC",
+        "title": "Good Times",
+        "spotifyTrackId": "0G3fbPbE1vGeABDEZF0jeG",
+        "durationSeconds": 495
+      },
+      {
+        "order": 22,
+        "artist": "CHIC",
+        "title": "Le Freak - 2018 Remaster",
+        "spotifyTrackId": "7Kszjzps0xbQXyo1pO4KfE",
+        "durationSeconds": 331
+      },
+      {
+        "order": 23,
+        "artist": "ABBA",
+        "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+        "spotifyTrackId": "3vkQ5DAB1qQMYO4Mr9zJN6",
+        "durationSeconds": 292
+      },
+      {
+        "order": 24,
+        "artist": "Laban",
+        "title": "Hvor ska' vi sove i nat? - 2009 - Remaster",
+        "spotifyTrackId": "1VaKAul2PvFy383BHIhUAn",
+        "durationSeconds": 185
+      },
+      {
+        "order": 25,
+        "artist": "Halberg - Larsen",
+        "title": "Magi I Luften",
+        "spotifyTrackId": "4gXhg6q90f3VLKtdyUEPkG",
+        "durationSeconds": 211
+      },
+      {
+        "order": 26,
+        "artist": "Madonna",
+        "title": "Into the Groove",
+        "spotifyTrackId": "3y2Y3Bc6GDxAWAMIpbW7RU",
+        "durationSeconds": 283
+      },
+      {
+        "order": 27,
+        "artist": "Whitney Houston",
+        "title": "How Will I Know",
+        "spotifyTrackId": "5tdKaKLnC4SgtDZ6RlWeal",
+        "durationSeconds": 269
+      },
+      {
+        "order": 28,
+        "artist": "Nik Kershaw",
+        "title": "The Riddle",
+        "spotifyTrackId": "6sLvGL7JsXb6iE2on6t6qI",
+        "durationSeconds": 232
+      },
+      {
+        "order": 29,
+        "artist": "Orchestral Manoeuvres In The Dark",
+        "title": "If You Leave",
+        "spotifyTrackId": "05oFyvdztPdpwSwpoclD4c",
+        "durationSeconds": 268
+      },
+      {
+        "order": 30,
+        "artist": "The Human League",
+        "title": "Don't You Want Me",
+        "spotifyTrackId": "3AIEEEIDJFnqv8rozNVCRZ",
+        "durationSeconds": 238
+      },
+      {
+        "order": 31,
+        "artist": "Soft Cell",
+        "title": "Tainted Love",
+        "spotifyTrackId": "0cGG2EouYCEEC3xfa0tDFV",
+        "durationSeconds": 153
+      },
+      {
+        "order": 32,
+        "artist": "Depeche Mode",
+        "title": "Just Can't Get Enough",
+        "spotifyTrackId": "0qi4b1l0eT3jpzeNHeFXDT",
+        "durationSeconds": 220
+      },
+      {
+        "order": 33,
+        "artist": "New Order",
+        "title": "Blue Monday",
+        "spotifyTrackId": "6hHc7Pks7wtBIW8Z6A0iFq",
+        "durationSeconds": 449
+      },
+      {
+        "order": 34,
+        "artist": "Erasure",
+        "title": "Sometimes",
+        "spotifyTrackId": "3hSD1WQGMFOq08DnnRm2eC",
+        "durationSeconds": 220
+      },
+      {
+        "order": 35,
+        "artist": "Pet Shop Boys",
+        "title": "Always on My Mind",
+        "spotifyTrackId": "07ABETRdek3ACMpRPvQuaT",
+        "durationSeconds": 234
+      },
+      {
+        "order": 36,
+        "artist": "Sneakers",
+        "title": "Sui-Sui",
+        "spotifyTrackId": "2YGjOfjaXmLKxoeUQSys3J",
+        "durationSeconds": 227
+      },
+      {
+        "order": 37,
+        "artist": "Mel & Kim",
+        "title": "Showing Out (Get Fresh At the Weekend) [7''Version]",
+        "spotifyTrackId": "1eZYPl1jqsPG2IeVenCIwb",
+        "durationSeconds": 214
+      },
+      {
+        "order": 38,
+        "artist": "Rick Astley",
+        "title": "Together Forever",
+        "spotifyTrackId": "00isIFJWVpXIQ8HkGICSQp",
+        "durationSeconds": 205
+      },
+      {
+        "order": 39,
+        "artist": "Kylie Minogue",
+        "title": "Hand on Your Heart",
+        "spotifyTrackId": "3pS5eiuBPsQn5ID6RElg9G",
+        "durationSeconds": 231
+      },
+      {
+        "order": 40,
+        "artist": "Jason Donovan",
+        "title": "Too Many Broken Hearts",
+        "spotifyTrackId": "0MFEyNAn08HvzfbteolLWT",
+        "durationSeconds": 208
+      },
+      {
+        "order": 41,
+        "artist": "Sinitta",
+        "title": "Toy Boy",
+        "spotifyTrackId": "1jmy1wkbCs4YpeBrNfORM4",
+        "durationSeconds": 207
+      },
+      {
+        "order": 42,
+        "artist": "Bananarama",
+        "title": "Love in the First Degree",
+        "spotifyTrackId": "2qjWA8QruRCkoFZUQJR4SQ",
+        "durationSeconds": 211
+      },
+      {
+        "order": 43,
+        "artist": "Donna Summer",
+        "title": "This Time I Know It's for Real",
+        "spotifyTrackId": "6ez4yXpLini3DSbaLR10qZ",
+        "durationSeconds": 218
+      },
+      {
+        "order": 44,
+        "artist": "Kim Wilde",
+        "title": "You Came",
+        "spotifyTrackId": "4EA4ybyDidKtkER5IhasZe",
+        "durationSeconds": 273
+      },
+      {
+        "order": 45,
+        "artist": "Black Box",
+        "title": "Ride on Time",
+        "spotifyTrackId": "3pgainA2dH9c7e8JVYGRCN",
+        "durationSeconds": 272
+      },
+      {
+        "order": 46,
+        "artist": "Crystal Waters",
+        "title": "Gypsy Woman (She's Homeless) (La Da Dee La Da Da) - Radio Edit",
+        "spotifyTrackId": "4UJ1AKSbXAbPlPVFe66wK7",
+        "durationSeconds": 217
+      },
+      {
+        "order": 47,
+        "artist": "CeCe Peniston",
+        "title": "Finally",
+        "spotifyTrackId": "0uqvSVhGgQTIdj9G51vhvv",
+        "durationSeconds": 245
+      },
+      {
+        "order": 48,
+        "artist": "Chaka Khan",
+        "title": "I Feel for You",
+        "spotifyTrackId": "5yR9u8QiOt8hJaddv32oo7",
+        "durationSeconds": 343
+      },
+      {
+        "order": 49,
+        "artist": "Deacon Blue",
+        "title": "Real Gone Kid",
+        "spotifyTrackId": "1kBTjMOQcmrI5tW94GpdYG",
+        "durationSeconds": 243
+      },
+      {
+        "order": 50,
+        "artist": "Simple Minds",
+        "title": "Alive And Kicking",
+        "spotifyTrackId": "471SXWs7Ko4d2rkKOk7oPF",
+        "durationSeconds": 326
+      },
+      {
+        "order": 51,
+        "artist": "Sanne Salomonsen",
+        "title": "Kærligheden Kalder",
+        "spotifyTrackId": "4fJyuZM1uvNQEiLMH1PQ8n",
+        "durationSeconds": 265
+      },
+      {
+        "order": 52,
+        "artist": "Lis Sørensen",
+        "title": "Mine Øjne De Skal Se",
+        "spotifyTrackId": "46C29hsnFiIAkyAZVf9DSu",
+        "durationSeconds": 250
+      },
+      {
+        "order": 53,
+        "artist": "Anne Linnet",
+        "title": "Tusind stykker",
+        "spotifyTrackId": "3wqYQbDzFYKytO7uVLQtHD",
+        "durationSeconds": 261
+      },
+      {
+        "order": 54,
+        "artist": "Ray Dee Ohh",
+        "title": "Elskes Af Dig",
+        "spotifyTrackId": "6sd9yBq6oIAy8U80FJx67d",
+        "durationSeconds": 309
+      },
+      {
+        "order": 55,
+        "artist": "Dead Or Alive",
+        "title": "You Spin Me Round (Like a Record)",
+        "spotifyTrackId": "1ChulFMnwxoD74Me8eX2TU",
+        "durationSeconds": 195
+      }
+    ]
+  },
+  "historyCoverage": "Incomplete before W45; 365-day rule applies, full absence cannot be certified."
+}
