@@ -1,0 +1,22 @@
+{
+  "week": "2026-W46",
+  "show": "trance",
+  "playlistId": "0x6ynnN468f6kya88ufKu8",
+  "status": "Spotify UI verified: 28 songs, about 3 hr",
+  "added": [
+    {
+      "artist": "L.S.G.",
+      "title": "Netherworld",
+      "spotifyTrackId": "0SI2oISkB5I9tPrJjaxuH3",
+      "displayedDuration": "7:15"
+    },
+    {
+      "artist": "Ascension",
+      "title": "Someone - Original Mix",
+      "spotifyTrackId": "2IZnE8sBqz4X8zgaRiAM7p",
+      "displayedDuration": "8:56"
+    }
+  ],
+  "important": "User explicitly requested matching Spotify aggregate display. Previous individual row sum was 3:00:30; adding 16:11 yields 3:16:41 by row durations. Difference to Spotify aggregate remains unresolved. Do not claim exactly 3h or reuse prior 26-track host budget. Prior provisional manuscript is superseded and must be revised to 28-track order.",
+  "history": "No match against registered W45; full 365-day history remains incomplete."
+}
