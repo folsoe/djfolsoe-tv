@@ -1,0 +1,2092 @@
+{
+  "trance": {
+    "week": "2026-W46",
+    "show": "trance",
+    "start": "2026-11-10T18:30:00+01:00",
+    "end": "2026-11-10T21:30:00+01:00",
+    "timeZone": "Europe/Copenhagen",
+    "scheduleBasis": "User-confirmed times; only Retro present in current Twitch-Helix schedule. Absence is not a cancellation.",
+    "rawMusicSeconds": 11801,
+    "openingSeconds": 30,
+    "closingSeconds": 25,
+    "standaloneSpeechSeconds": 0,
+    "talkoverSpeechSeconds": 351,
+    "hourIdentSeconds": 30,
+    "overlapBudgetSeconds": 1056,
+    "netSeconds": 10800,
+    "verification": "Mathematical row-duration budget only. No audio audition, beat/key analysis or verified Serato cues. Spotify aggregate discrepancy remains for Trance and Retro. Exact runtime depends on rehearsal and actual licensed playback versions.",
+    "tracks": [
+      {
+        "order": 1,
+        "artist": "Chicane",
+        "title": "Offshore - Extended Mix",
+        "spotifyTrackId": "4jy7tsWx2FZjXspLV5uZkQ",
+        "durationSeconds": 417,
+        "start": "2026-11-10T18:30:30+01:00",
+        "end": "2026-11-10T18:37:27+01:00",
+        "speakAt": "2026-11-10T18:30:30+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Chicane beskrev Offshore som stranden ved sommerens slutning, når alle andre var taget hjem. Inspirationen kom ikke kun fra Ibiza, men også Isle of Wight. En åben horisont at starte på. Hvor tager musikken dig hen?",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.dmcworld.net/features/chicane/",
+            "https://www.armadamusic.com/music/behind-the-sun-1"
+          ]
+        }
+      },
+      {
+        "order": 2,
+        "artist": "Three Drives On A Vinyl, Three Drives",
+        "title": "Greece 2000 - Extended Mix",
+        "spotifyTrackId": "7pe7JWmS5Ek4pOiKcSU25H",
+        "durationSeconds": 483,
+        "start": "2026-11-10T18:36:47+01:00",
+        "end": "2026-11-10T18:44:50+01:00",
+        "speakAt": "2026-11-10T18:37:27+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 40,
+        "speak": {
+          "text": "Greece 2000 er faktisk fra 1997. Three Drives er den hollandske duo bag, og vi bruger deres oprindelige extended mix. Min egen rejseplan er lidt enklere: Vi starter i melodien og ser, hvor langt aftenen vil tage os.",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://shop.armadamusic.com/collections/all/products/three-drives-greece-2000"
+          ]
+        }
+      },
+      {
+        "order": 3,
+        "artist": "Grum",
+        "title": "Stay With Me",
+        "spotifyTrackId": "2ByIQbGXbR7Ru379xea9Gg",
+        "durationSeconds": 201,
+        "start": "2026-11-10T18:44:10+01:00",
+        "end": "2026-11-10T18:47:31+01:00",
+        "speakAt": "2026-11-10T18:44:50+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 40,
+        "speak": {
+          "text": "Grum tager os videre med Stay With Me. Bliv lige i den her stemning et øjeblik. Der er ingen præmie for at nå hurtigst frem til næste drop.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 4,
+        "artist": "Reflekt, delline bass, Adam K & Soha",
+        "title": "Need To Feel Loved - Adam K & Soha Vocal Mix",
+        "spotifyTrackId": "30cjLreSF4Xq0uAB89i2Ac",
+        "durationSeconds": 396,
+        "start": "2026-11-10T18:46:51+01:00",
+        "end": "2026-11-10T18:53:27+01:00",
+        "speakAt": "2026-11-10T18:47:31+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 40,
+        "speak": {
+          "text": "Vi giver plads til stemmen hos Reflekt. Nogle aftener behøver man ikke forklare følelsen; et omkvæd må gerne tage den vagt. Her er Adam K & Soha Vocal Mix.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 5,
+        "artist": "Chakra",
+        "title": "Love Shines Through - Extended Mix",
+        "spotifyTrackId": "3xgckatLzl2HyWjiMyB75e",
+        "durationSeconds": 490,
+        "start": "2026-11-10T18:52:48+01:00",
+        "end": "2026-11-10T19:00:58+01:00",
+        "speakAt": "2026-11-10T18:53:27+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Chakra står klar med Love Shines Through. Hvis din tirsdag har været lidt grå, må musikken gerne prøve at åbne et vindue. Du bestemmer selv udsigten.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 6,
+        "artist": "The Thrillseekers, Sheryl Deane",
+        "title": "Synaesthesia (Fly Away)",
+        "spotifyTrackId": "5QdgpcfAw8EbsupH0B6BpI",
+        "durationSeconds": 229,
+        "start": "2026-11-10T19:00:19+01:00",
+        "end": "2026-11-10T19:04:08+01:00",
+        "speakAt": "2026-11-10T19:00:58+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Steve Helstrip fik melodien til Synaesthesia på få minutter. Så brugte han omkring seks måneder på at få nummeret færdigt i hjemmestudiet. Det meste af lyden kom fra én Roland JP-8000. Inspiration er hurtig; færdig-knappen kan være langsom.",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.davepearce.co.uk/interviews/thrillseekers/"
+          ]
+        }
+      },
+      {
+        "order": 7,
+        "artist": "BT",
+        "title": "Flaming June",
+        "spotifyTrackId": "5Vh9T9b7t7764fDEWMd9Fs",
+        "durationSeconds": 505,
+        "start": "2026-11-10T19:03:29+01:00",
+        "end": "2026-11-10T19:11:54+01:00",
+        "speakAt": "2026-11-10T19:04:08+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "BT fortæller, at en taxachaufførs bemærkning gav ham titlen Flaming June. Melodien havde han haft i hovedet i ugevis. Min chauffør siger mest kvittering, så jeg har et stykke vej til mit eget gennembrud. Her er BT.",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://edm.com/features/bt-most-influential-songs/"
+          ]
+        }
+      },
+      {
+        "order": 8,
+        "artist": "Lustral, The Space Brothers, Nalin & Kane",
+        "title": "Everytime - Nalin & Kane Extended Mix",
+        "spotifyTrackId": "62OBEGGO9mKWXxylwLpkyP",
+        "durationSeconds": 512,
+        "start": "2026-11-10T19:11:15+01:00",
+        "end": "2026-11-10T19:19:47+01:00",
+        "speakAt": "2026-11-10T19:11:54+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Lustral og Nalin & Kane er næste stop. Læg dagens små notifikationer fra dig et øjeblik. De kan få deres eget breakdown senere; det her er vores.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 9,
+        "artist": "Chicane, Justine Suissa, The Thrillseekers",
+        "title": "Autumn Tactics - The Thrillseekers Remix",
+        "spotifyTrackId": "60iQ75aP8VjfQMInz1mBpw",
+        "durationSeconds": 442,
+        "start": "2026-11-10T19:19:08+01:00",
+        "end": "2026-11-10T19:26:30+01:00",
+        "speakAt": "2026-11-10T19:19:47+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Titlen Autumn Tactics passer fint til kalenderen. Min egen efterårstaktik er mest at lede efter det andet par handsker. Chicane får heldigvis hjælp af The Thrillseekers med musikken.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 10,
+        "artist": "Lange, The Morrighan",
+        "title": "Follow Me - Lange's Club Mix",
+        "spotifyTrackId": "7bbY135gafWRikvA2f9jjA",
+        "durationSeconds": 392,
+        "start": "2026-11-10T19:25:51+01:00",
+        "end": "2026-11-10T19:32:23+01:00",
+        "speakAt": "2026-11-10T19:26:30+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Follow Me lyder som en god instruktion lige nu. Lange og The Morrighan tager over. Du behøver ikke kende ruten; et lille nik til rytmen er en fin billet.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 11,
+        "artist": "Armin van Buuren",
+        "title": "Blue Fear - Original Mix",
+        "spotifyTrackId": "7aCd2uFGS9Z7TnC64bIgqq",
+        "durationSeconds": 474,
+        "start": "2026-11-10T19:31:44+01:00",
+        "end": "2026-11-10T19:39:38+01:00",
+        "speakAt": "2026-11-10T19:32:23+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Armins egen udgivelsesside daterer Blue Fear til april 1997. Vi tager Original Mix. Hvis du var der dengang, hvilket sted dukker først op i dit hoved?",
+          "seconds": 11,
+          "kind": "Kildebelagt udgivelsesår + chatinvitation",
+          "sources": [
+            "https://www.arminvanbuuren.com/music/armin-blue-fear/"
+          ]
+        }
+      },
+      {
+        "order": 12,
+        "artist": "Signum",
+        "title": "Love Forever",
+        "spotifyTrackId": "2YSRt4rV7g1iZlHIGxPucI",
+        "durationSeconds": 208,
+        "start": "2026-11-10T19:38:59+01:00",
+        "end": "2026-11-10T19:42:27+01:00",
+        "speakAt": "2026-11-10T19:39:38+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Signum møder os med Love Forever. Her er plads til et nyt indtryk mellem de velkendte navne. Ingen eksamen i titler; bare lyt efter det, der bliver hængende.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 13,
+        "artist": "Tiësto",
+        "title": "Suburban Train",
+        "spotifyTrackId": "2T9PGrtlySSHnwT9t1JUEI",
+        "durationSeconds": 622,
+        "start": "2026-11-10T19:41:48+01:00",
+        "end": "2026-11-10T19:52:10+01:00",
+        "speakAt": "2026-11-10T19:42:27+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Næste afgang er Suburban Train. Jeg lover hverken sporændringer eller erstatningsbus. Tiësto står for turen, og du må gerne lade hverdagen blive på perronen et øjeblik.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 14,
+        "artist": "Paul Oakenfold, Carla Werner, DJ Tiesto, Tiësto",
+        "title": "Southern Sun - DJ Tiësto Remix",
+        "spotifyTrackId": "3Q7z1Aa4sdrPtVyRwNam0D",
+        "durationSeconds": 584,
+        "start": "2026-11-10T19:51:31+01:00",
+        "end": "2026-11-10T20:01:15+01:00",
+        "speakAt": "2026-11-10T19:52:10+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Vi vender os mod Southern Sun med Carla Werners stemme i Tiëstos remix. Hvilken vokal kan få et helt rum til at føles større for dig?",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 15,
+        "artist": "Solarstone, Andy Bury",
+        "title": "Solarcoaster - Original Mix",
+        "spotifyTrackId": "5NF8qRfWXGRgYeoiq1yoRJ",
+        "durationSeconds": 527,
+        "start": "2026-11-10T20:00:36+01:00",
+        "end": "2026-11-10T20:09:23+01:00",
+        "speakAt": "2026-11-10T20:01:15+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Solarcoaster er næste kapitel. Hvis stolen føles lidt mindre end musikken, er det helt i orden. Man kan godt rejse langt uden at flytte sin kaffekop.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 16,
+        "artist": "Ferry Corsten",
+        "title": "Punk",
+        "spotifyTrackId": "74BSVo5XxxlOOWKstr8doF",
+        "durationSeconds": 219,
+        "start": "2026-11-10T20:08:44+01:00",
+        "end": "2026-11-10T20:12:23+01:00",
+        "speakAt": "2026-11-10T20:09:23+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Ferry Corsten kommer med Punk. Det er tid til lidt mere kant i vores musikalske sætning. Studiets fiktive tegnsætning har nu skiftet fra komma til udråbstegn.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 17,
+        "artist": "Nitrous Oxide, Seb Hennig, Hikari_no",
+        "title": "Temeria",
+        "spotifyTrackId": "46ONznemNlPtinnqdMSQEn",
+        "durationSeconds": 225,
+        "start": "2026-11-10T20:11:44+01:00",
+        "end": "2026-11-10T20:15:29+01:00",
+        "speakAt": "2026-11-10T20:12:23+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Temeria giver os et nyt navn på turen. Nitrous Oxide, Seb Hennig og Hikari_no står på udgaven. Del gerne et lille tegn i chatten, hvis stemningen rammer.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 18,
+        "artist": "Push",
+        "title": "The Legacy - Club Mix",
+        "spotifyTrackId": "2RpGTuM5XINRHqRiXMLOn5",
+        "durationSeconds": 536,
+        "start": "2026-11-10T20:14:50+01:00",
+        "end": "2026-11-10T20:23:46+01:00",
+        "speakAt": "2026-11-10T20:15:29+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Vi samler trådene med Push og The Legacy. Du må gerne tænke på en særlig aften, men du behøver ikke have en stor historie klar. Et stednavn er rigeligt.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 19,
+        "artist": "Above & Beyond, OceanLab, Ferry Corsten",
+        "title": "Clear Blue Water - Ferry Corsten Remix",
+        "spotifyTrackId": "3BCegDTqa5YfDljMksFLSS",
+        "durationSeconds": 438,
+        "start": "2026-11-10T20:23:07+01:00",
+        "end": "2026-11-10T20:30:25+01:00",
+        "speakAt": "2026-11-10T20:23:46+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Clear Blue Water samler Justine Suissas stemme og Ferry Corstens remixarbejde. Lyt til, hvordan vokalen bliver et holdepunkt, mens energien løftes rundt om den. Det sidste er min lytteinvitation: Du behøver ikke vælge mellem følelse og fremdrift.",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.armadamusic.com/news/the-100-best-vocal-trance-classics-1997-2011"
+          ]
+        }
+      },
+      {
+        "order": 20,
+        "artist": "Above & Beyond, Zoë Johnston",
+        "title": "No One On Earth - Gabriel & Dresden Remix",
+        "spotifyTrackId": "2iS5us96UxLtV2gC1BDKUV",
+        "durationSeconds": 559,
+        "start": "2026-11-10T20:29:46+01:00",
+        "end": "2026-11-10T20:39:05+01:00",
+        "speakAt": "2026-11-10T20:30:25+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Zoë Johnston fik en cd med instrumentaler fra Above & Beyond. Hun valgte én og skrev No One on Earth over den. Her møder hendes sang Gabriel & Dresdens remix. En god påmindelse om, hvor meget én stemme kan bære.",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://rickyleepotts.com/2018/01/zoe-johnston-interview.html",
+            "https://anjunabeats.com/products/582277-anjunabeats-archive-01"
+          ]
+        }
+      },
+      {
+        "order": 21,
+        "artist": "Doppenberg",
+        "title": "Mysteria",
+        "spotifyTrackId": "0WkWBVjIWja9BJATaSFM81",
+        "durationSeconds": 179,
+        "start": "2026-11-10T20:38:26+01:00",
+        "end": "2026-11-10T20:41:25+01:00",
+        "speakAt": "2026-11-10T20:39:05+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Doppenberg tager over med Mysteria. Jeg har stadig ikke løst mysteriet om, hvor alle mine adaptere forsvinder hen. Heldigvis kræver det her kun, at vi holder ørerne åbne.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 22,
+        "artist": "Aly & Fila",
+        "title": "Rosaires",
+        "spotifyTrackId": "7iyHSCn6tvqhnl3rkJnjJD",
+        "durationSeconds": 397,
+        "start": "2026-11-10T20:40:46+01:00",
+        "end": "2026-11-10T20:47:23+01:00",
+        "speakAt": "2026-11-10T20:41:25+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Aly & Fila får næste plads med Rosaires. Vi giver musikken lidt luft og lader stemningen arbejde. Hvad hører du først i sådan et nummer: klang, melodi eller rytme?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 23,
+        "artist": "John O'Callaghan, Audrey Gallagher, Agnelli & Nelson",
+        "title": "Big Sky - Agnelli & Nelson Extended Remix",
+        "spotifyTrackId": "2y5bhecj9eEXy9IzMVdiud",
+        "durationSeconds": 515,
+        "start": "2026-11-10T20:46:44+01:00",
+        "end": "2026-11-10T20:55:19+01:00",
+        "speakAt": "2026-11-10T20:47:23+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Big Sky lyder som et godt sted at være sammen. Her kommer John O’Callaghan og Audrey Gallagher i Agnelli & Nelsons extended remix. Tag gerne udsigten helt ind.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 24,
+        "artist": "Daniel Kandi",
+        "title": "What Happens When We End",
+        "spotifyTrackId": "0cicTuDWTEMDhGYvZ3wLYu",
+        "durationSeconds": 261,
+        "start": "2026-11-10T20:54:40+01:00",
+        "end": "2026-11-10T20:59:01+01:00",
+        "speakAt": "2026-11-10T20:55:19+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Daniel Kandi giver os What Happens When We End. Vi er ikke færdige endnu. Men titlen er en fin anledning til at sige tak til jer, der deler tirsdagen med mig.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 25,
+        "artist": "Sean Tyas",
+        "title": "Lift - Extended Mix",
+        "spotifyTrackId": "4KYHpUBVJGh1RBtgeqTZrX",
+        "durationSeconds": 505,
+        "start": "2026-11-10T20:58:22+01:00",
+        "end": "2026-11-10T21:06:47+01:00",
+        "speakAt": "2026-11-10T20:59:01+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Sean Tyas står klar med Lift. Titlen har allerede gjort det meste af min introduktion. Hvis skuldrene stadig sidder oppe ved ørerne, må de gerne få en anden opgave nu.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 26,
+        "artist": "Giuseppe Ottaviani",
+        "title": "Linking People - Original Mix",
+        "spotifyTrackId": "0P7UFTJUB4pMtlXjIqRl4S",
+        "durationSeconds": 514,
+        "start": "2026-11-10T21:06:08+01:00",
+        "end": "2026-11-10T21:14:42+01:00",
+        "speakAt": "2026-11-10T21:06:47+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Giuseppe Ottaviani forbinder os med Linking People. Om du skriver i chatten eller bare lytter stille med, er du en del af rummet. Det er en ret god ting.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 27,
+        "artist": "L.S.G.",
+        "title": "Netherworld",
+        "spotifyTrackId": "0SI2oISkB5I9tPrJjaxuH3",
+        "durationSeconds": 435,
+        "start": "2026-11-10T21:14:03+01:00",
+        "end": "2026-11-10T21:21:18+01:00",
+        "speakAt": "2026-11-10T21:14:42+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Vi tager en omvej gennem Netherworld med L.S.G. Bliv i musikken lidt endnu. Det sidste stykke af en rejse må også gerne have sin egen farve og sine egne sving.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 28,
+        "artist": "Ascension",
+        "title": "Someone - Original Mix",
+        "spotifyTrackId": "2IZnE8sBqz4X8zgaRiAM7p",
+        "durationSeconds": 536,
+        "start": "2026-11-10T21:20:39+01:00",
+        "end": "2026-11-10T21:29:35+01:00",
+        "speakAt": "2026-11-10T21:21:18+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 39,
+        "speak": {
+          "text": "Ascension får aftenens sidste musikalske ord med Someone. Find lige det lille øjeblik, du helst vil tage med videre. Det behøver ikke være et stort drop; en melodi kan være nok.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      }
+    ],
+    "hourIdents": [
+      {
+        "at": "2026-11-10T19:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 19. Du lytter til Trance Tuesday hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      },
+      {
+        "at": "2026-11-10T20:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 20. Du lytter til Trance Tuesday hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      },
+      {
+        "at": "2026-11-10T21:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 21. Du lytter til Trance Tuesday hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      }
+    ]
+  },
+  "eurodance": {
+    "week": "2026-W46",
+    "show": "eurodance",
+    "start": "2026-11-12T19:00:00+01:00",
+    "end": "2026-11-12T21:00:00+01:00",
+    "timeZone": "Europe/Copenhagen",
+    "scheduleBasis": "User-confirmed times; only Retro present in current Twitch-Helix schedule. Absence is not a cancellation.",
+    "rawMusicSeconds": 7097,
+    "openingSeconds": 30,
+    "closingSeconds": 25,
+    "standaloneSpeechSeconds": 116,
+    "talkoverSpeechSeconds": 130,
+    "hourIdentSeconds": 10,
+    "overlapBudgetSeconds": 68,
+    "netSeconds": 7200,
+    "verification": "Mathematical row-duration budget only. No audio audition, beat/key analysis or verified Serato cues. Spotify aggregate discrepancy remains for Trance and Retro. Exact runtime depends on rehearsal and actual licensed playback versions.",
+    "tracks": [
+      {
+        "order": 1,
+        "artist": "Captain Hollywood Project",
+        "title": "More And More - Extended Mix",
+        "spotifyTrackId": "5Sd0Y2tVJUii4HRB44bAvx",
+        "durationSeconds": 420,
+        "start": "2026-11-12T19:00:30+01:00",
+        "end": "2026-11-12T19:07:30+01:00",
+        "speakAt": "2026-11-12T19:00:30+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Vi åbner med Captain Hollywood Project i Extended Mix. Aftenen skal føles som én samlet tur gennem dance, med god plads til klubbens lange veje mellem omkvædene.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 2,
+        "artist": "Masterboy",
+        "title": "Feel the heat of the night - Sunshine Mix",
+        "spotifyTrackId": "7rIDPf18b9d0FPgmtgFmfj",
+        "durationSeconds": 404,
+        "start": "2026-11-12T19:07:41+01:00",
+        "end": "2026-11-12T19:14:25+01:00",
+        "speakAt": "2026-11-12T19:07:30+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Masterboy får temperaturen til at stige i Sunshine Mix. Hvis din torsdag stadig har kontorsko på, kan den godt begynde at løsne snørebåndene. Dansegulvet er en sindstilstand.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 3,
+        "artist": "Me & My, Hartmann, Langhoff",
+        "title": "Dub-I-Dub - Club Remix",
+        "spotifyTrackId": "19eMkJXsBcEVTbMA73Ndht",
+        "durationSeconds": 320,
+        "start": "2026-11-12T19:14:17+01:00",
+        "end": "2026-11-12T19:19:37+01:00",
+        "speakAt": "2026-11-12T19:14:25+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 8,
+        "speak": {
+          "text": "Susanne Georgi gemte idéen til Dub-I-Dub på sin telefonsvarer efter en julefrokost. Pernille hjalp siden med at gøre den til en sang. Min telefonsvarer har mest tandlægebeskeder. Her er søstrenes noget mere dansable resultat i Club Remix.",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.musikbrevkassen.dk/2025/03/05/verdenshit-paa-telefonsvareren/"
+          ]
+        }
+      },
+      {
+        "order": 4,
+        "artist": "Alice Deejay",
+        "title": "Back In My Life - Club Vocal Mix",
+        "spotifyTrackId": "2GVdTxfIE74wVyON8c95nr",
+        "durationSeconds": 338,
+        "start": "2026-11-12T19:19:49+01:00",
+        "end": "2026-11-12T19:25:27+01:00",
+        "speakAt": "2026-11-12T19:19:37+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Alice Deejay er næste navn i Club Vocal Mix. Vi glider fra den danske popgenkendelse og videre ind i det vokale klubspor. Hvilken stemme har du savnet at høre?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 5,
+        "artist": "Milk Inc., Peter Luts",
+        "title": "Walk On Water - Peter Luts Remix",
+        "spotifyTrackId": "2UzlMP5b7MZUQ8UUBBo0HC",
+        "durationSeconds": 380,
+        "start": "2026-11-12T19:25:19+01:00",
+        "end": "2026-11-12T19:31:39+01:00",
+        "speakAt": "2026-11-12T19:25:27+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 8,
+        "speak": {
+          "text": "Milk Inc. kommer med Walk On Water i Peter Luts’ remix. Jeg bliver på et helt almindeligt gulv, men musikken må gerne tage større skridt. Følg med, hvor du er.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 6,
+        "artist": "Kate Ryan",
+        "title": "Désenchantée - Extended Mix",
+        "spotifyTrackId": "3tGAp6CpME7bOBhRwiJPUZ",
+        "durationSeconds": 509,
+        "start": "2026-11-12T19:31:55+01:00",
+        "end": "2026-11-12T19:40:24+01:00",
+        "speakAt": "2026-11-12T19:31:39+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Kate Ryans Désenchantée er en dancefortolkning af Mylène Farmers sang. Her får vi Extended Mix, så både vokalen og klubbens lange bevægelse får plads. Du behøver ikke kunne alle de franske ord for at kende følelsen i det omkvæd.",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.nporadio2.nl/muziek/nummers/cbc0b3c5-af39-4c8b-b685-66cc97a1450e/desenchantee",
+            "https://www.qobuz.com/be-nl/album/desenchantee-kate-ryan/eefxhkccovg8b"
+          ]
+        }
+      },
+      {
+        "order": 7,
+        "artist": "Novaspace",
+        "title": "Time After Time - After Time Mix",
+        "spotifyTrackId": "63pAxj7N2GBuvCgyi9eCdn",
+        "durationSeconds": 391,
+        "start": "2026-11-12T19:40:16+01:00",
+        "end": "2026-11-12T19:46:47+01:00",
+        "speakAt": "2026-11-12T19:40:24+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 8,
+        "speak": {
+          "text": "Novaspace tager os videre med Time After Time. Det er ikke et signal om, at vi starter forfra. Vi giver bare et genkendeligt hook lidt ekstra plads i After Time Mix.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 8,
+        "artist": "Kelly Llorenna, Flip & Fill",
+        "title": "Tell It To My Heart - Flip & Fill Remix",
+        "spotifyTrackId": "7tmWYpAv41kQelcnpaKWqS",
+        "durationSeconds": 355,
+        "start": "2026-11-12T19:47:01+01:00",
+        "end": "2026-11-12T19:52:56+01:00",
+        "speakAt": "2026-11-12T19:46:47+01:00",
+        "speechSeconds": 14,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Tell It to My Heart var Taylor Daynes debutsingle i 1987. Nu tager Kelly Llorenna og Flip & Fills remix sangen ind i vores Clubland-spor. Hjertet kender omkvædet. Knæene vil bare gerne have lidt forhandlingstid.",
+          "seconds": 14,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.taylordayne.com/bio",
+            "https://www.youtube.com/watch?v=LzSnYtKdQ6E"
+          ]
+        }
+      },
+      {
+        "order": 9,
+        "artist": "Flip & Fill, Karen Parry",
+        "title": "Shooting Star - Extended Mix",
+        "spotifyTrackId": "0tFyQW1ATWRnsSKSB05iIL",
+        "durationSeconds": 327,
+        "start": "2026-11-12T19:52:48+01:00",
+        "end": "2026-11-12T19:58:15+01:00",
+        "speakAt": "2026-11-12T19:52:56+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 8,
+        "speak": {
+          "text": "Flip & Fill og Karen Parry sender Shooting Star afsted. Hvis du har en gammel klubtur gemt i hukommelsen, er chatten åben. Vi tager de korte minder og de store smil.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 10,
+        "artist": "Ultrabeat",
+        "title": "Pretty Green Eyes - Extended Mix",
+        "spotifyTrackId": "4cmtzpUp918D4XOGD43fzo",
+        "durationSeconds": 413,
+        "start": "2026-11-12T19:58:26+01:00",
+        "end": "2026-11-12T20:05:19+01:00",
+        "speakAt": "2026-11-12T19:58:15+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Nu er det Ultrabeat og Pretty Green Eyes i Extended Mix. Det her er en af aftenens tydelige Clubland-indgange. Hvad er din egen genvej til den stemning?",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 11,
+        "artist": "Cascada",
+        "title": "Everytime We Touch - Club Mix",
+        "spotifyTrackId": "0QC44MbV3gz3QLDjOLWAdF",
+        "durationSeconds": 331,
+        "start": "2026-11-12T20:05:11+01:00",
+        "end": "2026-11-12T20:10:42+01:00",
+        "speakAt": "2026-11-12T20:05:19+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 8,
+        "speak": {
+          "text": "Cascadas omkvæd kommer fra Maggie Reillys Everytime We Touch. Reilly fortalte, at inspirationen til hendes sang kom efter et statisk stød under et kram. Min sweater knitrer også. Den mangler bare stadig at skrive et hit.",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://radiox.cms.socastsrm.com/2025/04/18/how-cascadas-everytime-we-touch-turned-a-1992-scottish-single-into-a-duke-basketball-anthem/",
+            "https://shorefire.com/releases/entry/steve-aoki-reimagines-cascadas-iconic-everytime-we-touch-for-2025"
+          ]
+        }
+      },
+      {
+        "order": 12,
+        "artist": "Groove Coverage, Rocco",
+        "title": "Moonlight Shadow - Rocco Remix",
+        "spotifyTrackId": "4hlYK0zN6Pqzp3aaCfDccz",
+        "durationSeconds": 417,
+        "start": "2026-11-12T20:10:54+01:00",
+        "end": "2026-11-12T20:17:51+01:00",
+        "speakAt": "2026-11-12T20:10:42+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Groove Coverage møder Rocco i Moonlight Shadow. Lad det velkendte omkvæd være holdepunktet, mens klubudgaven arbejder videre. Du må godt synge med; min mikrofon holder fri et øjeblik.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 13,
+        "artist": "Special D., Rob Mayth",
+        "title": "Come With Me - Rob Mayth Remix",
+        "spotifyTrackId": "3aoH5iws8TCIdodAExp4m1",
+        "durationSeconds": 332,
+        "start": "2026-11-12T20:17:44+01:00",
+        "end": "2026-11-12T20:23:16+01:00",
+        "speakAt": "2026-11-12T20:17:51+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 7,
+        "speak": {
+          "text": "Come With Me står på næste invitation, fra Special D. i Rob Mayths remix. Jeg tager det som en venlig opfordring til lige at blive lidt længere i rytmen.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 14,
+        "artist": "Basshunter, DJ Mental Theos Bazzheadz",
+        "title": "Now You're Gone (feat. DJ Mental Theos Bazzheadz) - DJ Alex Extended Mix",
+        "spotifyTrackId": "3Od03esYMrE67g4JysxvnY",
+        "durationSeconds": 344,
+        "start": "2026-11-12T20:23:32+01:00",
+        "end": "2026-11-12T20:29:16+01:00",
+        "speakAt": "2026-11-12T20:23:16+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Basshunter fortalte, at Boten Anna startede som en sjov idé, han selv lagde på nettet. Så begyndte telefonen at ringe fra branchefolk. Derfra går forbindelsen til Now You’re Gone. Her tager vi DJ Alex Extended Mix og holder dansegulvet åbent.",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.outlineonline.co.uk/reviews/interview-with-basshunter"
+          ]
+        }
+      },
+      {
+        "order": 15,
+        "artist": "ItaloBrothers",
+        "title": "Stamp On The Ground - Extended Mix",
+        "spotifyTrackId": "5aTLZr3tPiMz2tLO16p4vG",
+        "durationSeconds": 305,
+        "start": "2026-11-12T20:29:09+01:00",
+        "end": "2026-11-12T20:34:14+01:00",
+        "speakAt": "2026-11-12T20:29:16+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 7,
+        "speak": {
+          "text": "ItaloBrothers begyndte ifølge deres egen historie som et sjovt kælderprojekt i Nordhorn i 2005. I 2009 kom Stamp on the Ground. Her får du Extended Mix. Studiets fiktive underbo har allerede ønsket en lidt mere forsigtig titel.",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.italobrothersmusic.com/kopi-af-home"
+          ]
+        }
+      },
+      {
+        "order": 16,
+        "artist": "DHT, Edmée, Hardbounze",
+        "title": "I Go Crazy - Hardbounze Extended",
+        "spotifyTrackId": "4Ca9KRgtlDKHUY097M3YvR",
+        "durationSeconds": 332,
+        "start": "2026-11-12T20:34:26+01:00",
+        "end": "2026-11-12T20:39:58+01:00",
+        "speakAt": "2026-11-12T20:34:14+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "DHT og Edmée får næste tur med I Go Crazy i Hardbounze Extended. Hvis humøret er steget undervejs, behøver vi ikke indsende en fejlrapport. Det er en god bivirkning.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 17,
+        "artist": "Scooter",
+        "title": "Nessaja - Flip & Fill Mix",
+        "spotifyTrackId": "3TYZGc0uAOm2vsSiTcxRA7",
+        "durationSeconds": 378,
+        "start": "2026-11-12T20:39:51+01:00",
+        "end": "2026-11-12T20:46:09+01:00",
+        "speakAt": "2026-11-12T20:39:58+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 7,
+        "speak": {
+          "text": "Scooter i Flip & Fills mix af Nessaja er næste kapitel. Der er plads til både genkendelse og lidt overdrivelse. Studiets fiktive alvorlige afdeling har lukket for i aften.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 18,
+        "artist": "Styles & Breeze",
+        "title": "You're Shining - Hardcore Mix",
+        "spotifyTrackId": "3jTPC7HWVKkJL1nG0jG1E8",
+        "durationSeconds": 419,
+        "start": "2026-11-12T20:46:21+01:00",
+        "end": "2026-11-12T20:53:20+01:00",
+        "speakAt": "2026-11-12T20:46:09+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Separat radiolink før nummeret",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Styles & Breeze kommer med You’re Shining i Hardcore Mix. Vi tager det sidste store energiløft sammen. Hvem skal have en lille torsdagshilsen i chatten, hvis du har lyst?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 19,
+        "artist": "Jessy",
+        "title": "Look at me now - Milc Inc Remix",
+        "spotifyTrackId": "3tt3YtFKvyQnOG1pkC98bb",
+        "durationSeconds": 382,
+        "start": "2026-11-12T20:53:13+01:00",
+        "end": "2026-11-12T20:59:35+01:00",
+        "speakAt": "2026-11-12T20:53:20+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 7,
+        "speak": {
+          "text": "Jessy får den sidste musikplads med Look at Me Now i remixudgaven på listen. Gem lige lidt af den gode stemning til resten af aftenen. Vi lander sammen herfra.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      }
+    ],
+    "hourIdents": [
+      {
+        "at": "2026-11-12T20:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 20. Du lytter til Classic Dance #90 #00 hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      }
+    ]
+  },
+  "retro": {
+    "week": "2026-W46",
+    "show": "retro",
+    "start": "2026-11-15T08:00:00+01:00",
+    "end": "2026-11-15T12:00:00+01:00",
+    "timeZone": "Europe/Copenhagen",
+    "scheduleBasis": "Twitch-Helix schedule observed 2026-11-08",
+    "rawMusicSeconds": 14462,
+    "openingSeconds": 30,
+    "closingSeconds": 25,
+    "standaloneSpeechSeconds": 0,
+    "talkoverSpeechSeconds": 698,
+    "hourIdentSeconds": 30,
+    "overlapBudgetSeconds": 117,
+    "netSeconds": 14400,
+    "verification": "Mathematical row-duration budget only. No audio audition, beat/key analysis or verified Serato cues. Spotify aggregate discrepancy remains for Trance and Retro. Exact runtime depends on rehearsal and actual licensed playback versions.",
+    "tracks": [
+      {
+        "order": 1,
+        "artist": "Laid Back",
+        "title": "Sunshine Reggae",
+        "spotifyTrackId": "0z0JSkE5Nw3i3nin3BBSuG",
+        "durationSeconds": 257,
+        "start": "2026-11-15T08:00:30+01:00",
+        "end": "2026-11-15T08:04:47+01:00",
+        "speakAt": "2026-11-15T08:00:30+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 0,
+        "speak": {
+          "text": "Laid Back fandt deres lyd gennem jams i et københavnsk baggårdsstudie. Sunshine Reggae blev et dansk sommerhit i 1982. Og min egen novemberprognose? Musikalsk solskin, med risiko for kaffe. Velkommen til søndagen.",
+          "seconds": 13,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.laidbackofficial.com/our-story"
+          ]
+        }
+      },
+      {
+        "order": 2,
+        "artist": "Sade",
+        "title": "Smooth Operator - Single Version",
+        "spotifyTrackId": "1Hv1VTm8zeOeybub15mA2R",
+        "durationSeconds": 258,
+        "start": "2026-11-15T08:04:44+01:00",
+        "end": "2026-11-15T08:09:02+01:00",
+        "speakAt": "2026-11-15T08:04:47+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "Sade kommer ind med Smooth Operator. En rolig hånd på søndagsrattet; vi behøver ikke sætte rekord i noget. Hvad er din helt enkle opskrift på en god morgen?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 3,
+        "artist": "Soul II Soul, Caron Wheeler",
+        "title": "Back To Life",
+        "spotifyTrackId": "7vvRkLPIvfjjmCIqNxBuEZ",
+        "durationSeconds": 228,
+        "start": "2026-11-15T08:08:59+01:00",
+        "end": "2026-11-15T08:12:47+01:00",
+        "speakAt": "2026-11-15T08:09:02+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "Soul II Soul og Caron Wheeler giver os Back to Life. Vi lader søndagen vågne i sit eget tempo. Hverdagen må gerne stå udenfor og vente lidt endnu.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 4,
+        "artist": "George Michael",
+        "title": "Freedom! '90 - Remastered",
+        "spotifyTrackId": "4dT3qLUU6fFUmomLzk2cUA",
+        "durationSeconds": 388,
+        "start": "2026-11-15T08:12:44+01:00",
+        "end": "2026-11-15T08:19:12+01:00",
+        "speakAt": "2026-11-15T08:12:47+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "George Michael får os videre med Freedom! ’90. Tag et lille pusterum fra alt det, du burde. Der er god plads til et omkvæd, du måske allerede kender med hele kroppen.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 5,
+        "artist": "The S.O.S Band",
+        "title": "Just Be Good To Me",
+        "spotifyTrackId": "1482bMc9Tn0uQxsJqV7eSP",
+        "durationSeconds": 549,
+        "start": "2026-11-15T08:19:09+01:00",
+        "end": "2026-11-15T08:28:18+01:00",
+        "speakAt": "2026-11-15T08:19:12+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "The S.O.S Band kommer med Just Be Good to Me. Her får albumversionen lov til at folde sig ud. Jeg holder introduktionen kort; det er musikken, der skal have pladsen.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 6,
+        "artist": "Thomas Helmig",
+        "title": "Nu Hvor Du Har Brændt Mig Af",
+        "spotifyTrackId": "11qFfHuutYvRGLrX0NFyGh",
+        "durationSeconds": 281,
+        "start": "2026-11-15T08:28:15+01:00",
+        "end": "2026-11-15T08:32:56+01:00",
+        "speakAt": "2026-11-15T08:28:18+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "Thomas Helmig tager over med Nu Hvor Du Har Brændt Mig Af. Nogle titler kræver ikke en lang forklaring. Hvilken dansk sang har fulgt dig gennem mere end én livsfase?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 7,
+        "artist": "News",
+        "title": "Du Er",
+        "spotifyTrackId": "0OlfLzNAJ68fRKNHBziFEw",
+        "durationSeconds": 225,
+        "start": "2026-11-15T08:32:53+01:00",
+        "end": "2026-11-15T08:36:38+01:00",
+        "speakAt": "2026-11-15T08:32:56+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "News står på næste plads med Du Er. Vi bliver i den danske afdeling et øjeblik. Et gammelt omkvæd kan godt føles som at møde nogen, man ikke har set længe.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 8,
+        "artist": "Luther Vandross",
+        "title": "Never Too Much",
+        "spotifyTrackId": "3nFJbZCHP4d9vduKjJLdBL",
+        "durationSeconds": 230,
+        "start": "2026-11-15T08:36:35+01:00",
+        "end": "2026-11-15T08:40:25+01:00",
+        "speakAt": "2026-11-15T08:36:38+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "Luther Vandross kommer med Never Too Much. Det er en udmærket holdning til godt selskab. Kaffemængden vil jeg dog stadig gerne have lov til at forhandle om.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 9,
+        "artist": "Evelyn \"Champagne\" King",
+        "title": "Love Come Down - Single Version",
+        "spotifyTrackId": "2RCOWNCxDIphjhqTtkwtwR",
+        "durationSeconds": 220,
+        "start": "2026-11-15T08:40:22+01:00",
+        "end": "2026-11-15T08:44:02+01:00",
+        "speakAt": "2026-11-15T08:40:25+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "Evelyn Champagne King giver os Love Come Down i singleudgaven. Vi holder bevægelsen let og giver plads til det lille smil, man kan høre helt uden at se hinanden.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 10,
+        "artist": "Alexander O'Neal",
+        "title": "Criticize",
+        "spotifyTrackId": "18ZRmY7kNZQQHpopsSVxwJ",
+        "durationSeconds": 247,
+        "start": "2026-11-15T08:43:59+01:00",
+        "end": "2026-11-15T08:48:06+01:00",
+        "speakAt": "2026-11-15T08:44:02+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 3,
+        "speak": {
+          "text": "Alexander O’Neal står klar med Criticize. Herinde er kritikken sat på lydløs et øjeblik. Hvis din fod allerede har fundet rytmen, behøver den ikke bede resten af kroppen om tilladelse.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 11,
+        "artist": "Cameo",
+        "title": "Word Up",
+        "spotifyTrackId": "7LoGfKBAaOl0nxhodJ1240",
+        "durationSeconds": 260,
+        "start": "2026-11-15T08:48:04+01:00",
+        "end": "2026-11-15T08:52:24+01:00",
+        "speakAt": "2026-11-15T08:48:06+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Cameo får næste ord med Word Up. Mit eget ordvalg før kaffen er lidt mere begrænset. Heldigvis kan en basgang nogle gange forklare stemningen bedre end et helt foredrag.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 12,
+        "artist": "Michael Jackson",
+        "title": "Billie Jean",
+        "spotifyTrackId": "7J1uxwnxfQLu4APicE5Rnj",
+        "durationSeconds": 293,
+        "start": "2026-11-15T08:52:22+01:00",
+        "end": "2026-11-15T08:57:15+01:00",
+        "speakAt": "2026-11-15T08:52:24+01:00",
+        "speechSeconds": 14,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Bruce Swedien fortalte, at han lavede hele 91 mix af Billie Jean. Og hvilket valgte de? Nummer to. Det er trøst til alle, der har en mappe fuld af sidste version. Hør lige den rytme.",
+          "seconds": 14,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.soundonsound.com/people/bruce-swedien-recording-michael-jackson",
+            "https://bobbyowsinskiblog.com/bruce-swedien-interview/"
+          ]
+        }
+      },
+      {
+        "order": 13,
+        "artist": "Cheryl Lynn",
+        "title": "Got to Be Real - Single Version",
+        "spotifyTrackId": "3eudp9ZxZAGaDBOuWGrW2D",
+        "durationSeconds": 223,
+        "start": "2026-11-15T08:57:13+01:00",
+        "end": "2026-11-15T09:00:56+01:00",
+        "speakAt": "2026-11-15T08:57:15+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Cheryl Lynn kommer med Got to Be Real i singleudgaven. Der er plads til både det velkendte og det, du måske havde glemt. Del gerne et lille musikminde, hvis det dukker op.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 14,
+        "artist": "Diana Ross",
+        "title": "Upside Down",
+        "spotifyTrackId": "3pbtBomO4Zt5gGiqsYeiBH",
+        "durationSeconds": 245,
+        "start": "2026-11-15T09:00:54+01:00",
+        "end": "2026-11-15T09:04:59+01:00",
+        "speakAt": "2026-11-15T09:00:56+01:00",
+        "speechSeconds": 11,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Diana Ross vender os videre med Upside Down. Søndagen behøver heldigvis ikke stå på hovedet, for at vi må danse lidt. Et diskret køkkentrin tæller også med.",
+          "seconds": 11,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 15,
+        "artist": "Tøsedrengene",
+        "title": "Sig Du Ka' Li' Mig",
+        "spotifyTrackId": "6foG41XuloHv82btsxFdMo",
+        "durationSeconds": 230,
+        "start": "2026-11-15T09:04:57+01:00",
+        "end": "2026-11-15T09:08:47+01:00",
+        "speakAt": "2026-11-15T09:04:59+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Tøsedrengene giver os Sig Du Ka’ Li’ Mig. Vi tager en dansk hilsen midt i groovet. Hvem ville du sende det her nummer til, hvis du skulle sige hej med musik?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 16,
+        "artist": "Rocazino",
+        "title": "All My Love",
+        "spotifyTrackId": "49clGe0PtbYUx3vB7tyk3A",
+        "durationSeconds": 214,
+        "start": "2026-11-15T09:08:45+01:00",
+        "end": "2026-11-15T09:12:19+01:00",
+        "speakAt": "2026-11-15T09:08:47+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Rocazino står klar med All My Love. Nogle sange kan åbne et helt rum af minder med det samme. Du behøver ikke vælge det største; et lille hverdagsminde er også velkomment.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 17,
+        "artist": "Indeep",
+        "title": "Last Night a D.J. Saved My Life",
+        "spotifyTrackId": "6NSqiyQWIyZLouviktad9X",
+        "durationSeconds": 341,
+        "start": "2026-11-15T09:12:17+01:00",
+        "end": "2026-11-15T09:17:58+01:00",
+        "speakAt": "2026-11-15T09:12:19+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Indeep minder os om, at en DJ godt kan gøre en forskel. Jeg lover foreløbig bare at passe på søndagsstemningen. Her er Last Night a D.J. Saved My Life.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 18,
+        "artist": "D-Train",
+        "title": "You're the One for Me",
+        "spotifyTrackId": "66i1lieIMso7ef4P7KdWcE",
+        "durationSeconds": 309,
+        "start": "2026-11-15T09:17:56+01:00",
+        "end": "2026-11-15T09:23:05+01:00",
+        "speakAt": "2026-11-15T09:17:58+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "D-Train giver os You’re the One for Me. Vi holder os i det rytmiske spor og lader de små figurer finde plads. Hvad er din favoritdel af et godt groove?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 19,
+        "artist": "The Brothers Johnson",
+        "title": "Stomp! - Single Version",
+        "spotifyTrackId": "3EG65y2LtxWjfydabHdItb",
+        "durationSeconds": 247,
+        "start": "2026-11-15T09:23:03+01:00",
+        "end": "2026-11-15T09:27:10+01:00",
+        "speakAt": "2026-11-15T09:23:05+01:00",
+        "speechSeconds": 10,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "The Brothers Johnson kommer med Stomp i singleversionen. Studiets imaginære gulvinspektør foreslår forsigtige tramp før morgenmaden. Du bestemmer selv styrken; sangen tager sig af resten.",
+          "seconds": 10,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 20,
+        "artist": "McFadden & Whitehead",
+        "title": "Ain't No Stoppin' Us Now - Single Version",
+        "spotifyTrackId": "352zgXSWzF85TvLhzJ7kkK",
+        "durationSeconds": 217,
+        "start": "2026-11-15T09:27:08+01:00",
+        "end": "2026-11-15T09:30:45+01:00",
+        "speakAt": "2026-11-15T09:27:10+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "McFadden & Whitehead er næste navn med Ain’t No Stoppin’ Us Now. Det er en fin erklæring til en søndag, der stadig har meget musik foran sig. Bliv bare hængende.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 21,
+        "artist": "CHIC",
+        "title": "Good Times",
+        "spotifyTrackId": "0G3fbPbE1vGeABDEZF0jeG",
+        "durationSeconds": 495,
+        "start": "2026-11-15T09:30:43+01:00",
+        "end": "2026-11-15T09:38:58+01:00",
+        "speakAt": "2026-11-15T09:30:45+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "CHIC kommer med Good Times i albumversionen. Vi giver groovet god tid. Har du et sted eller en person, som den her slags musik altid får dig til at tænke på?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 22,
+        "artist": "CHIC",
+        "title": "Le Freak - 2018 Remaster",
+        "spotifyTrackId": "7Kszjzps0xbQXyo1pO4KfE",
+        "durationSeconds": 331,
+        "start": "2026-11-15T09:38:56+01:00",
+        "end": "2026-11-15T09:44:27+01:00",
+        "speakAt": "2026-11-15T09:38:58+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Nile Rodgers og Bernard Edwards blev afvist ved Studio 54 en nytårsaften. Den frustration blev til Le Freak. Det er en ret god måde at få det sidste ord på. Min egen dørmand kan nøjes med en kop kaffe.",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.rhino.com/aod/cest-chic-chic-0"
+          ]
+        }
+      },
+      {
+        "order": 23,
+        "artist": "ABBA",
+        "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+        "spotifyTrackId": "3vkQ5DAB1qQMYO4Mr9zJN6",
+        "durationSeconds": 292,
+        "start": "2026-11-15T09:44:25+01:00",
+        "end": "2026-11-15T09:49:17+01:00",
+        "speakAt": "2026-11-15T09:44:27+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Gimme! Gimme! Gimme! var det nye nummer på Greatest Hits Vol. 2 i 1979. I dag kan vi finde det på en senere Voulez-Vous-udgave. Sanghistorie og streaminghylde er altså ikke altid det samme. Hvilken opsamling sled du op?",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://abbasite.com/discography/",
+            "https://abbasite.com/story/"
+          ]
+        }
+      },
+      {
+        "order": 24,
+        "artist": "Laban",
+        "title": "Hvor ska' vi sove i nat? - 2009 - Remaster",
+        "spotifyTrackId": "1VaKAul2PvFy383BHIhUAn",
+        "durationSeconds": 185,
+        "start": "2026-11-15T09:49:15+01:00",
+        "end": "2026-11-15T09:52:20+01:00",
+        "speakAt": "2026-11-15T09:49:17+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Laban spørger Hvor ska’ vi sove i nat? Lige nu håber jeg mest, at ingen tager en lur på mixerbordet. Vi holder den danske popdør åben med den almindelige indspilning som remaster.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 25,
+        "artist": "Halberg - Larsen",
+        "title": "Magi I Luften",
+        "spotifyTrackId": "4gXhg6q90f3VLKtdyUEPkG",
+        "durationSeconds": 211,
+        "start": "2026-11-15T09:52:18+01:00",
+        "end": "2026-11-15T09:55:49+01:00",
+        "speakAt": "2026-11-15T09:52:20+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Halberg-Larsen giver os Magi i Luften. Studiets egen magi består mest af kabler, der virker første gang. Resten må musikken stå for. Hvilken sang gør en almindelig dag lidt større?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 26,
+        "artist": "Madonna",
+        "title": "Into the Groove",
+        "spotifyTrackId": "3y2Y3Bc6GDxAWAMIpbW7RU",
+        "durationSeconds": 283,
+        "start": "2026-11-15T09:55:47+01:00",
+        "end": "2026-11-15T10:00:30+01:00",
+        "speakAt": "2026-11-15T09:55:49+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Madonna tager os Into the Groove. Det lyder som en ret præcis adresse til den her del af søndagen. Man behøver ikke have gemt sine gamle dansesko for at kende følelsen.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 27,
+        "artist": "Whitney Houston",
+        "title": "How Will I Know",
+        "spotifyTrackId": "5tdKaKLnC4SgtDZ6RlWeal",
+        "durationSeconds": 269,
+        "start": "2026-11-15T10:00:28+01:00",
+        "end": "2026-11-15T10:04:57+01:00",
+        "speakAt": "2026-11-15T10:00:30+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Whitney Houston spørger How Will I Know. Vi har ikke en svarformular klar, men et stort omkvæd er et godt sted at begynde. Syng med, hvis du har lyst.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 28,
+        "artist": "Nik Kershaw",
+        "title": "The Riddle",
+        "spotifyTrackId": "6sLvGL7JsXb6iE2on6t6qI",
+        "durationSeconds": 232,
+        "start": "2026-11-15T10:04:55+01:00",
+        "end": "2026-11-15T10:08:47+01:00",
+        "speakAt": "2026-11-15T10:04:57+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Nik Kershaw lægger The Riddle på bordet. Jeg har allerede brugt morgenens hjernegymnastik på at finde den rigtige fjernbetjening. Den her gåde må vi gerne nyde uden at løse den.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 29,
+        "artist": "Orchestral Manoeuvres In The Dark",
+        "title": "If You Leave",
+        "spotifyTrackId": "05oFyvdztPdpwSwpoclD4c",
+        "durationSeconds": 268,
+        "start": "2026-11-15T10:08:45+01:00",
+        "end": "2026-11-15T10:13:13+01:00",
+        "speakAt": "2026-11-15T10:08:47+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Orchestral Manoeuvres in the Dark giver os If You Leave. Vi tager et lille melodisk sving, før turen fortsætter. Hvilket nummer ville du sætte på et gammelt mixbånd til en ven?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 30,
+        "artist": "The Human League",
+        "title": "Don't You Want Me",
+        "spotifyTrackId": "3AIEEEIDJFnqv8rozNVCRZ",
+        "durationSeconds": 238,
+        "start": "2026-11-15T10:13:11+01:00",
+        "end": "2026-11-15T10:17:09+01:00",
+        "speakAt": "2026-11-15T10:13:13+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "The Human League stiller det næste spørgsmål med Don’t You Want Me. I chatten er et lille hej rigeligt; vi kræver hverken et helt refræn eller en forklaring på din frisure dengang.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 31,
+        "artist": "Soft Cell",
+        "title": "Tainted Love",
+        "spotifyTrackId": "0cGG2EouYCEEC3xfa0tDFV",
+        "durationSeconds": 153,
+        "start": "2026-11-15T10:17:07+01:00",
+        "end": "2026-11-15T10:19:40+01:00",
+        "speakAt": "2026-11-15T10:17:09+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Soft Cell kommer med Tainted Love i den korte udgave. Nogle sange behøver ikke lang tid for at sætte et tydeligt mærke. Hvilket nummer kan du genkende næsten med det samme?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 32,
+        "artist": "Depeche Mode",
+        "title": "Just Can't Get Enough",
+        "spotifyTrackId": "0qi4b1l0eT3jpzeNHeFXDT",
+        "durationSeconds": 220,
+        "start": "2026-11-15T10:19:38+01:00",
+        "end": "2026-11-15T10:23:18+01:00",
+        "speakAt": "2026-11-15T10:19:40+01:00",
+        "speechSeconds": 15,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Just Can’t Get Enough var både Depeche Modes første musikvideo og deres sidste single med Vince Clarke som medlem. Et lille stykke musikhistorie med et meget stort omkvæd. Og ja, kaffemaskinen herinde kan godt få nok.",
+          "seconds": 15,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://archives.depechemode.com/specials/september_7_1981.html",
+            "https://archives.depechemode.com/discography/singles/03_justcantgetenough.html"
+          ]
+        }
+      },
+      {
+        "order": 33,
+        "artist": "New Order",
+        "title": "Blue Monday",
+        "spotifyTrackId": "6hHc7Pks7wtBIW8Z6A0iFq",
+        "durationSeconds": 449,
+        "start": "2026-11-15T10:23:16+01:00",
+        "end": "2026-11-15T10:30:45+01:00",
+        "speakAt": "2026-11-15T10:23:18+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "New Order giver os Blue Monday. Heldigvis er det stadig søndag her. Vi tager nummerets lange oprindelige forløb og lader den elektroniske side af retroen få lidt mere plads.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 34,
+        "artist": "Erasure",
+        "title": "Sometimes",
+        "spotifyTrackId": "3hSD1WQGMFOq08DnnRm2eC",
+        "durationSeconds": 220,
+        "start": "2026-11-15T10:30:43+01:00",
+        "end": "2026-11-15T10:34:23+01:00",
+        "speakAt": "2026-11-15T10:30:45+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Erasure følger med Sometimes. Der er noget rart ved, at et omkvæd kan dukke op igen efter mange år og stadig finde den samme lille plads i hukommelsen.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 35,
+        "artist": "Pet Shop Boys",
+        "title": "Always on My Mind",
+        "spotifyTrackId": "07ABETRdek3ACMpRPvQuaT",
+        "durationSeconds": 234,
+        "start": "2026-11-15T10:34:21+01:00",
+        "end": "2026-11-15T10:38:15+01:00",
+        "speakAt": "2026-11-15T10:34:23+01:00",
+        "speechSeconds": 16,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Always on My Mind begyndte hos Pet Shop Boys som et bidrag til en tv-hyldest til Elvis. I november 1987 kom deres single. Samme sang, helt anden puls. Hvilken coverversion har du taget til dig som din egen favorit?",
+          "seconds": 16,
+          "kind": "Kildehistorie + værtspointer",
+          "sources": [
+            "https://www.youtube.com/watch?v=bDMCwSP5nf0",
+            "https://www.petshopboys.co.uk/product/single/always-on-my-mind"
+          ]
+        }
+      },
+      {
+        "order": 36,
+        "artist": "Sneakers",
+        "title": "Sui-Sui",
+        "spotifyTrackId": "2YGjOfjaXmLKxoeUQSys3J",
+        "durationSeconds": 227,
+        "start": "2026-11-15T10:38:13+01:00",
+        "end": "2026-11-15T10:42:00+01:00",
+        "speakAt": "2026-11-15T10:38:15+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Sneakers tager over med Sui-Sui. Vi sender en dansk hilsen gennem studiet, før turen fortsætter. Hvilken dansk stemme ville du altid kunne kende, selv gennem en gammel transistorradio?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 37,
+        "artist": "Mel & Kim",
+        "title": "Showing Out (Get Fresh At the Weekend) [7''Version]",
+        "spotifyTrackId": "1eZYPl1jqsPG2IeVenCIwb",
+        "durationSeconds": 214,
+        "start": "2026-11-15T10:41:58+01:00",
+        "end": "2026-11-15T10:45:32+01:00",
+        "speakAt": "2026-11-15T10:42:00+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Mel & Kim gør klar til Showing Out i syvtommerversionen. Titlen siger weekend; søndag siger, at den heldigvis ikke er slut endnu. Vi bruger den sidste del af den ordentligt.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 38,
+        "artist": "Rick Astley",
+        "title": "Together Forever",
+        "spotifyTrackId": "00isIFJWVpXIQ8HkGICSQp",
+        "durationSeconds": 205,
+        "start": "2026-11-15T10:45:30+01:00",
+        "end": "2026-11-15T10:48:55+01:00",
+        "speakAt": "2026-11-15T10:45:32+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Rick Astley giver os Together Forever. Jeg kan ikke love evighed, men jeg kan love mere musik i dag. Et lille vink til alle, der deler deres søndag med os.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 39,
+        "artist": "Kylie Minogue",
+        "title": "Hand on Your Heart",
+        "spotifyTrackId": "3pS5eiuBPsQn5ID6RElg9G",
+        "durationSeconds": 231,
+        "start": "2026-11-15T10:48:53+01:00",
+        "end": "2026-11-15T10:52:44+01:00",
+        "speakAt": "2026-11-15T10:48:55+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Kylie Minogue kommer med Hand on Your Heart. Mit eget hjerte siger musik, mens resten af mig siger mere kaffe. De to afdelinger er heldigvis blevet enige indtil videre.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 40,
+        "artist": "Jason Donovan",
+        "title": "Too Many Broken Hearts",
+        "spotifyTrackId": "0MFEyNAn08HvzfbteolLWT",
+        "durationSeconds": 208,
+        "start": "2026-11-15T10:52:42+01:00",
+        "end": "2026-11-15T10:56:10+01:00",
+        "speakAt": "2026-11-15T10:52:44+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Jason Donovan står klar med Too Many Broken Hearts. Vi holder omkvædene samlet, selv når titlerne handler om det modsatte. Hvilken popplade kunne du høre igen og igen dengang?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 41,
+        "artist": "Sinitta",
+        "title": "Toy Boy",
+        "spotifyTrackId": "1jmy1wkbCs4YpeBrNfORM4",
+        "durationSeconds": 207,
+        "start": "2026-11-15T10:56:08+01:00",
+        "end": "2026-11-15T10:59:35+01:00",
+        "speakAt": "2026-11-15T10:56:10+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Sinitta kommer med Toy Boy. Søndagens legetøj er stadig drejeknapper og gode melodier. Hvis du har et gammelt yndlingsnummer på lager i hukommelsen, må det gerne dukke op i chatten.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 42,
+        "artist": "Bananarama",
+        "title": "Love in the First Degree",
+        "spotifyTrackId": "2qjWA8QruRCkoFZUQJR4SQ",
+        "durationSeconds": 211,
+        "start": "2026-11-15T10:59:33+01:00",
+        "end": "2026-11-15T11:03:04+01:00",
+        "speakAt": "2026-11-15T10:59:35+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Bananarama giver os Love in the First Degree. Studiets fiktive domstol har allerede kendt omkvædet skyldigt i at sætte sig fast. Straffen er et par minutters fællessang, hvis du har lyst.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 43,
+        "artist": "Donna Summer",
+        "title": "This Time I Know It's for Real",
+        "spotifyTrackId": "6ez4yXpLini3DSbaLR10qZ",
+        "durationSeconds": 218,
+        "start": "2026-11-15T11:03:02+01:00",
+        "end": "2026-11-15T11:06:40+01:00",
+        "speakAt": "2026-11-15T11:03:04+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Donna Summer tager os videre med This Time I Know It’s for Real. Vi holder farverne varme og tempoet i bevægelse. Hvornår opdagede du første gang, at du godt kunne lide dance?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 44,
+        "artist": "Kim Wilde",
+        "title": "You Came",
+        "spotifyTrackId": "4EA4ybyDidKtkER5IhasZe",
+        "durationSeconds": 273,
+        "start": "2026-11-15T11:06:38+01:00",
+        "end": "2026-11-15T11:11:11+01:00",
+        "speakAt": "2026-11-15T11:06:40+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Kim Wilde kommer med You Came i albumudgaven. Det er tid til endnu et velkendt møde. Nogle af de bedste genhør kommer, før man overhovedet har nået at lede efter sangen.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 45,
+        "artist": "Black Box",
+        "title": "Ride on Time",
+        "spotifyTrackId": "3pgainA2dH9c7e8JVYGRCN",
+        "durationSeconds": 272,
+        "start": "2026-11-15T11:11:09+01:00",
+        "end": "2026-11-15T11:15:41+01:00",
+        "speakAt": "2026-11-15T11:11:11+01:00",
+        "speechSeconds": 14,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Black Box står klar med Ride on Time. Vi tager et skridt ind i den mere klubprægede del af turen. Hvis din søndag har fået lidt ekstra fart på, er det helt efter humøret.",
+          "seconds": 14,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 46,
+        "artist": "Crystal Waters",
+        "title": "Gypsy Woman (She's Homeless) (La Da Dee La Da Da) - Radio Edit",
+        "spotifyTrackId": "4UJ1AKSbXAbPlPVFe66wK7",
+        "durationSeconds": 217,
+        "start": "2026-11-15T11:15:39+01:00",
+        "end": "2026-11-15T11:19:16+01:00",
+        "speakAt": "2026-11-15T11:15:41+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Crystal Waters giver os Gypsy Woman i radio edit. Her er det genkendelsen, der er invitationen. Du behøver ikke kunne titlen for at have et bestemt sted gemt sammen med melodien.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 47,
+        "artist": "CeCe Peniston",
+        "title": "Finally",
+        "spotifyTrackId": "0uqvSVhGgQTIdj9G51vhvv",
+        "durationSeconds": 245,
+        "start": "2026-11-15T11:19:14+01:00",
+        "end": "2026-11-15T11:23:19+01:00",
+        "speakAt": "2026-11-15T11:19:16+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "CeCe Peniston kommer med Finally. Titlen kan passende være en hilsen til alle, der endelig har sat sig ned. Eller til dem, der nu endelig har rejst sig for at danse.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 48,
+        "artist": "Chaka Khan",
+        "title": "I Feel for You",
+        "spotifyTrackId": "5yR9u8QiOt8hJaddv32oo7",
+        "durationSeconds": 343,
+        "start": "2026-11-15T11:23:17+01:00",
+        "end": "2026-11-15T11:29:00+01:00",
+        "speakAt": "2026-11-15T11:23:19+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Chaka Khan giver os I Feel for You. Vi lader vokalen få sin plads i den her del af rejsen. Hvilken sanger kan ændre stemningen i et rum for dig?",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 49,
+        "artist": "Deacon Blue",
+        "title": "Real Gone Kid",
+        "spotifyTrackId": "1kBTjMOQcmrI5tW94GpdYG",
+        "durationSeconds": 243,
+        "start": "2026-11-15T11:28:58+01:00",
+        "end": "2026-11-15T11:33:01+01:00",
+        "speakAt": "2026-11-15T11:29:00+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Deacon Blue tager over med Real Gone Kid. Vi giver plads til en anden farve i retroen, før vi nærmer os den sidste del. Hvilken gammel plade overraskede dig ved et genhør?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 50,
+        "artist": "Simple Minds",
+        "title": "Alive And Kicking",
+        "spotifyTrackId": "471SXWs7Ko4d2rkKOk7oPF",
+        "durationSeconds": 326,
+        "start": "2026-11-15T11:32:59+01:00",
+        "end": "2026-11-15T11:38:25+01:00",
+        "speakAt": "2026-11-15T11:33:01+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Simple Minds kommer med Alive and Kicking. Det er en fin status for vores søndag sammen. Man må gerne have brugt både stemmen, minderne og et par forsigtige dansetrin undervejs.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 51,
+        "artist": "Sanne Salomonsen",
+        "title": "Kærligheden Kalder",
+        "spotifyTrackId": "4fJyuZM1uvNQEiLMH1PQ8n",
+        "durationSeconds": 265,
+        "start": "2026-11-15T11:38:23+01:00",
+        "end": "2026-11-15T11:42:48+01:00",
+        "speakAt": "2026-11-15T11:38:25+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Sanne Salomonsen giver os Kærligheden Kalder. Vi sender en varm dansk hilsen ud af studiet. Hvis du vil sige tak til nogen i chatten, er det et fint øjeblik at gøre det.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 52,
+        "artist": "Lis Sørensen",
+        "title": "Mine Øjne De Skal Se",
+        "spotifyTrackId": "46C29hsnFiIAkyAZVf9DSu",
+        "durationSeconds": 250,
+        "start": "2026-11-15T11:42:46+01:00",
+        "end": "2026-11-15T11:46:56+01:00",
+        "speakAt": "2026-11-15T11:42:48+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Lis Sørensen tager næste plads med Mine Øjne De Skal Se. Vi holder fast i de danske stemmer et øjeblik. Hvilken sang har fået en helt ny betydning for dig med årene?",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 53,
+        "artist": "Anne Linnet",
+        "title": "Tusind stykker",
+        "spotifyTrackId": "3wqYQbDzFYKytO7uVLQtHD",
+        "durationSeconds": 261,
+        "start": "2026-11-15T11:46:54+01:00",
+        "end": "2026-11-15T11:51:15+01:00",
+        "speakAt": "2026-11-15T11:46:56+01:00",
+        "speechSeconds": 12,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Anne Linnet kommer med Tusind stykker. Nogle sange må gerne få os til at høre lidt mere efter. Jeg giver ordene plads og lader den næste lille stund være musikkens.",
+          "seconds": 12,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 54,
+        "artist": "Ray Dee Ohh",
+        "title": "Elskes Af Dig",
+        "spotifyTrackId": "6sd9yBq6oIAy8U80FJx67d",
+        "durationSeconds": 309,
+        "start": "2026-11-15T11:51:13+01:00",
+        "end": "2026-11-15T11:56:22+01:00",
+        "speakAt": "2026-11-15T11:51:15+01:00",
+        "speechSeconds": 14,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Ray Dee Ohh følger med Elskes af Dig. Her er endnu en dansk stemme at mødes omkring. Om du lytter alene eller sammen med nogen, er der også en plads til dig her.",
+          "seconds": 14,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      },
+      {
+        "order": 55,
+        "artist": "Dead Or Alive",
+        "title": "You Spin Me Round (Like a Record)",
+        "spotifyTrackId": "1ChulFMnwxoD74Me8eX2TU",
+        "durationSeconds": 195,
+        "start": "2026-11-15T11:56:20+01:00",
+        "end": "2026-11-15T11:59:35+01:00",
+        "speakAt": "2026-11-15T11:56:22+01:00",
+        "speechSeconds": 13,
+        "speechMode": "Talkover ved overgangen; vælg et egnet instrumentalt sted ved lydprøven",
+        "overlapSeconds": 2,
+        "speak": {
+          "text": "Dead Or Alive får det sidste musikalske sving med You Spin Me Round. Vi slutter med et løft, og du må gerne tage resten af søndagen med rundt på den energi.",
+          "seconds": 13,
+          "kind": "Original værtstekst; ingen historisk faktapåstand",
+          "sources": []
+        }
+      }
+    ],
+    "hourIdents": [
+      {
+        "at": "2026-11-15T09:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 9. Du lytter til Retro Hits hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      },
+      {
+        "at": "2026-11-15T10:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 10. Du lytter til Retro Hits hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      },
+      {
+        "at": "2026-11-15T11:00:00+01:00",
+        "seconds": 10,
+        "mode": "Kort ident over musik; ikke ekstra tid",
+        "text": "Klokken er 11. Du lytter til Retro Hits hos DJ FOLSOE. Musikken fortsætter, og du er velkommen i chatten."
+      }
+    ]
+  }
+}
