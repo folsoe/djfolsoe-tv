@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "confirmedAt": "2026-11-08",
+  "shows": {
+    "trance": {
+      "direction": "Mix new releases and older progressive, melodic and uplifting trance; include Danish productions where suitable.",
+      "requirement": "Do not use an all-classics selection; verify release date and nationality before describing a track as new or Danish."
+    },
+    "retro": {
+      "direction": "Late 1970s, all of the 1980s and early 1990s; Danish and international; standard original/single/album versions."
+    },
+    "eurodance": {
+      "direction": "1990–2009 dance hits: bubblegum pop, eurodance, hard dance, hands up, UK Clubland style and Scandinavian/Danish internet-radio atmosphere.",
+      "userStyleReferences": [
+        "Clubland",
+        "Radio7 (Sweden)",
+        "MM Radio (Denmark)"
+      ],
+      "qualification": "References express user taste; do not claim documented station airplay without sources."
+    }
+  },
+  "repeatPolicy": "music-repeat-policy.json",
+  "workflow": "Music selection and fixed Spotify playlists first; scripts and public weekly notes must follow the final verified order."
+}
