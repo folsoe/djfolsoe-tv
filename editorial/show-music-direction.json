@@ -16,7 +16,8 @@
         "Radio7 (Sweden)",
         "MM Radio (Denmark)"
       ],
-      "qualification": "References express user taste; do not claim documented station airplay without sources."
+      "qualification": "References express user taste; do not claim documented station airplay without sources.",
+      "versionPreference": "Use remix, club and extended versions rather than radio edits or single versions. Adapt track count to the two-hour Spotify target; verify actual versions and durations. Confirmed by user 2026-11-08."
     }
   },
   "repeatPolicy": "music-repeat-policy.json",
