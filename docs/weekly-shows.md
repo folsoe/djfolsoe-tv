@@ -56,3 +56,7 @@ Ingen musik downloads, cache af lyd, viderestreaming eller ændring af afspiller
 ## Første udvalg, uge 45
 
 Brugerbekræftede sendetider (Europe/Copenhagen): Retro søndag 08.00–12.00, Trance tirsdag 18.30–21.30 og Classic Dance torsdag 19.00–21.00. Verificeret rå musiktid i Spotify: Retro 54 numre / 4:01:48; Trance 34 numre / 2:57:42; Classic Dance 29 numre / 1:58:01. Det er musiklængder, ikke færdigmixede udsendelser; værtsspeak og overlap skal indgå i manuskriptets samlede tidsbudget. Fravalgte numre i reservefilen tæller ikke som brugt. Første manuskripter og faktakontrollerede anekdoter er ikke leveret med denne første tekniske integration; søndagsopgaven er oprettet til at færdiggøre dem.
+
+## Publikumsudgaver — præciseret 8. november 2026
+
+Værtsjokes er kun valgfrie manuskriptindslag og må ikke udstilles som særskilte værtsjoke-afsnit på hjemmesiden eller som værtsjoke-tekster i overlays. Offentlige historiefelter må ikke indeholde jokeText. Fyldige, kildebelagte sang- og kunstnerhistorier bliver på den relevante showside. Overlayhistorier skal være én kort pointe med henvisning til samme showside, på DA/EN/DE; undgå gentagne lange kunstner-/versionstitler. Brug mereUrl til den fulde https-adresse og en kort læsbar henvisning i tekstversionen. Denne regel ændrer ikke de særskilt bestilte temalinjer og chatspørgsmål.
