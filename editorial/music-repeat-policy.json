@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "effectiveFrom": "2026-11-08",
+  "minimumRepeatDistanceDays": 365,
+  "scope": "per-show",
+  "matching": "Exclude same song/recording across compilations and remasters; do not bypass exclusion by alternate release IDs.",
+  "historyCoverage": "Recorded series starts 2026-W45; earlier 365-day coverage is incomplete and must be reported. Import available dated prior selections before claiming complete verification.",
+  "workflow": "Select and verify music before manuscripts, notes and overlays; preserve stable Spotify playlist IDs and update week titles after replacing and verifying music."
+}
