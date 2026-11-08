@@ -632,5 +632,1202 @@
         "validUntil": "2026-11-16T11:00:00Z"
       }
     ]
+  },
+  "ticker": {
+    "trance": [
+      {
+        "id": "2026-W46-trance-offshore-ticker",
+        "kind": "fact",
+        "text": [
+          "Chicane · Offshore - Extended Mix — Chicane fortalte, at Offshore handlede om stranden ved sommerens slutning, da alle andre var taget hjem. Også Isle of Wight inspirerede ham.",
+          "Chicane · Offshore - Extended Mix — Chicane said Offshore was about the beach at summer’s end, after everyone else had gone home. The Isle of Wight also inspired him.",
+          "Chicane · Offshore - Extended Mix — Chicane erzählte, Offshore handle vom Strand am Sommerende, als alle anderen schon heimgefahren waren. Auch die Isle of Wight inspirierte ihn."
+        ],
+        "sources": [
+          "https://www.dmcworld.net/features/chicane/",
+          "https://www.armadamusic.com/music/behind-the-sun-1"
+        ],
+        "trackId": "4jy7tsWx2FZjXspLV5uZkQ",
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-offshore-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Jeg er også sidste mand på stranden. Jeg leder stadig efter min parkeringsbillet.",
+          "Host joke: I am the last one on the beach too. Still looking for the parking ticket.",
+          "Moderatorenwitz: Ich bin auch der Letzte am Strand. Suche noch den Parkschein."
+        ],
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-greece2000-ticker",
+        "kind": "fact",
+        "text": [
+          "Three Drives On A Vinyl / Three Drives · Greece 2000 - Extended Mix — Three Drives er en hollandsk progressive-tranceduo. Greece 2000s oprindelige extended mix er fra 1997 — årstallet i titlen er ikke udgivelsesåret.",
+          "Three Drives On A Vinyl / Three Drives · Greece 2000 - Extended Mix — Three Drives are a Dutch progressive-trance duo. Greece 2000’s original extended mix dates from 1997 — its title is not its release year.",
+          "Three Drives On A Vinyl / Three Drives · Greece 2000 - Extended Mix — Three Drives sind ein niederländisches Progressive-Trance-Duo. Der ursprüngliche Extended Mix von Greece 2000 stammt von 1997 — die Titelzahl ist nicht das Erscheinungsjahr."
+        ],
+        "sources": [
+          "https://shop.armadamusic.com/collections/all/products/three-drives-greece-2000"
+        ],
+        "trackId": "7pe7JWmS5Ek4pOiKcSU25H",
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-greece2000-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Studiets rejsebureau tilbyder kun én destination: næste breakdown.",
+          "Host joke: The studio travel agency has one destination: the next breakdown.",
+          "Moderatorenwitz: Das Studio-Reisebüro hat nur ein Ziel: den nächsten Breakdown."
+        ],
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-synaesthesia-ticker",
+        "kind": "fact",
+        "text": [
+          "The Thrillseekers / Sheryl Deane · Synaesthesia (Fly Away) — Steve Helstrip siger, at Synaesthesia-melodien kom på få minutter. Derefter brugte han omkring seks måneder på at finpudse nummeret i sit hjemmestudie.",
+          "The Thrillseekers / Sheryl Deane · Synaesthesia (Fly Away) — Steve Helstrip says the Synaesthesia melody arrived in minutes. He then spent around six months refining the track in his home studio.",
+          "The Thrillseekers / Sheryl Deane · Synaesthesia (Fly Away) — Steve Helstrip erzählt, die Synaesthesia-Melodie sei in wenigen Minuten entstanden. Danach feilte er etwa sechs Monate im Heimstudio an dem Stück."
+        ],
+        "sources": [
+          "https://www.davepearce.co.uk/interviews/thrillseekers/"
+        ],
+        "trackId": "5QdgpcfAw8EbsupH0B6BpI",
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-synaesthesia-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Tre minutter til idéen, seks måneder til færdig. Mit rengøringsprojekt følger samme model.",
+          "Host joke: Minutes for the idea, months to finish. My housework uses the same model.",
+          "Moderatorenwitz: Minuten für die Idee, Monate bis zum Ende. So läuft mein Hausputz auch."
+        ],
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-flamingjune-ticker",
+        "kind": "fact",
+        "text": [
+          "BT · Flaming June — BT fortæller, at navnet Flaming June kom fra en taxachaufførs bemærkning i England. Melodien havde han allerede haft i hovedet i ugevis.",
+          "BT · Flaming June — BT recalls that the name Flaming June came from a taxi driver’s remark in England. The melody had already been in his head for weeks.",
+          "BT · Flaming June — BT erzählt, der Name Flaming June gehe auf die Bemerkung eines Taxifahrers in England zurück. Die Melodie hatte er schon seit Wochen im Kopf."
+        ],
+        "sources": [
+          "https://edm.com/features/bt-most-influential-songs/"
+        ],
+        "trackId": "5Vh9T9b7t7764fDEWMd9Fs",
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-flamingjune-question",
+        "kind": "question",
+        "text": [
+          "Hvad skulle din egen tranceklassiker hedde?",
+          "What would you call your own trance classic?",
+          "Wie würde euer eigener Tranceklassiker heißen?"
+        ],
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-clearbluewater-ticker",
+        "kind": "fact",
+        "text": [
+          "Above & Beyond / OceanLab · Clear Blue Water - Ferry Corsten Remix — På Clear Blue Water møder OceanLabs Justine Suissa-vokal Ferry Corstens remix. Armada fremhæver netop mødet mellem stemmen og hans uplifting-fortolkning.",
+          "Above & Beyond / OceanLab · Clear Blue Water - Ferry Corsten Remix — On Clear Blue Water, OceanLab’s Justine Suissa vocal meets Ferry Corsten’s remix. Armada highlights that combination of voice and uplifting interpretation.",
+          "Above & Beyond / OceanLab · Clear Blue Water - Ferry Corsten Remix — Bei Clear Blue Water trifft OceanLabs Gesang von Justine Suissa auf Ferry Corstens Remix. Armada betont die Verbindung von Stimme und Uplifting-Interpretation."
+        ],
+        "sources": [
+          "https://www.armadamusic.com/news/the-100-best-vocal-trance-classics-1997-2011"
+        ],
+        "trackId": "3BCegDTqa5YfDljMksFLSS",
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-clearbluewater-question",
+        "kind": "question",
+        "text": [
+          "Vokal eller instrumental: hvad løfter dig mest?",
+          "Vocals or instrumental: which lifts you most?",
+          "Gesang oder instrumental: Was hebt euch mehr?"
+        ],
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-nooneonearth-ticker",
+        "kind": "fact",
+        "text": [
+          "Above & Beyond / Zoë Johnston · No One On Earth - Gabriel & Dresden Remix — Zoë Johnston fortæller, at Above & Beyond sendte hende en cd med instrumentaler. Hun valgte én og skrev No One on Earth over den.",
+          "Above & Beyond / Zoë Johnston · No One On Earth - Gabriel & Dresden Remix — Zoë Johnston recalls that Above & Beyond sent her a CD of instrumentals. She chose one and wrote No One on Earth over it.",
+          "Above & Beyond / Zoë Johnston · No One On Earth - Gabriel & Dresden Remix — Zoë Johnston erzählt, Above & Beyond hätten ihr eine CD mit Instrumentals geschickt. Sie wählte eines aus und schrieb darauf No One on Earth."
+        ],
+        "sources": [
+          "https://rickyleepotts.com/2018/01/zoe-johnston-interview.html",
+          "https://anjunabeats.com/products/582277-anjunabeats-archive-01"
+        ],
+        "trackId": "2iS5us96UxLtV2gC1BDKUV",
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-trance-nooneonearth-question",
+        "kind": "question",
+        "text": [
+          "Hvilken trancestemme rammer dig hver gang?",
+          "Which trance voice gets you every time?",
+          "Welche Trance-Stimme berührt euch jedes Mal?"
+        ],
+        "week": "2026-W46",
+        "show": "trance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "eurodance": [
+      {
+        "id": "2026-W46-eurodance-memy-ticker",
+        "kind": "fact",
+        "text": [
+          "Me & My · Dub-I-Dub - Club Remix — Susanne Georgi gemte idéen til Dub-I-Dub på sin telefonsvarer efter en julefrokost. Søsteren Pernille hjalp siden med at gøre idéen til en sang.",
+          "Me & My · Dub-I-Dub - Club Remix — Susanne Georgi saved the idea for Dub-I-Dub on her answering machine after a Christmas party. Her sister Pernille then helped turn it into a song.",
+          "Me & My · Dub-I-Dub - Club Remix — Susanne Georgi sicherte die Idee zu Dub-I-Dub nach einer Weihnachtsfeier auf ihrem Anrufbeantworter. Ihre Schwester Pernille half dann, daraus einen Song zu machen."
+        ],
+        "sources": [
+          "https://www.musikbrevkassen.dk/2025/03/05/verdenshit-paa-telefonsvareren/"
+        ],
+        "trackId": "19eMkJXsBcEVTbMA73Ndht",
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-memy-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Min telefonsvarer har kun gemt tandlægens remix. Det har et virkelig ubehageligt drop.",
+          "Host joke: My answering machine only kept the dentist’s remix. Terrifying drop.",
+          "Moderatorenwitz: Mein Anrufbeantworter hat nur den Zahnarzt-Remix. Ein schmerzhafter Drop."
+        ],
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-kateryan-ticker",
+        "kind": "fact",
+        "text": [
+          "Kate Ryan · Désenchantée - Extended Mix — Kate Ryans Désenchantée er en dancefortolkning af Mylène Farmers sang. Udgivelsens producerkrediteringer omfatter Phil Wilde og AJ Duncan.",
+          "Kate Ryan · Désenchantée - Extended Mix — Kate Ryan’s Désenchantée is a dance interpretation of Mylène Farmer’s song. The release’s production credits include Phil Wilde and AJ Duncan.",
+          "Kate Ryan · Désenchantée - Extended Mix — Kate Ryans Désenchantée ist eine Dance-Interpretation von Mylène Farmers Song. Zu den Produzenten der Veröffentlichung gehören Phil Wilde und AJ Duncan."
+        ],
+        "sources": [
+          "https://www.nporadio2.nl/muziek/nummers/cbc0b3c5-af39-4c8b-b685-66cc97a1450e/desenchantee",
+          "https://www.qobuz.com/be-nl/album/desenchantee-kate-ryan/eefxhkccovg8b"
+        ],
+        "trackId": "3tGAp6CpME7bOBhRwiJPUZ",
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-kateryan-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Mit franske er begrænset. Mit omkvædssprog er til gengæld internationalt.",
+          "Host joke: My French is limited. My chorus language is international.",
+          "Moderatorenwitz: Mein Französisch ist begrenzt. Meine Refrainsprache ist international."
+        ],
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-kellyllorenna-ticker",
+        "kind": "fact",
+        "text": [
+          "Kelly Llorenna / Flip & Fill · Tell It To My Heart - Flip & Fill Remix — Tell It to My Heart var Taylor Daynes debutsingle i 1987. Hos Kelly Llorenna møder sangen Clubland-sporet, her i Flip & Fills remix.",
+          "Kelly Llorenna / Flip & Fill · Tell It To My Heart - Flip & Fill Remix — Tell It to My Heart was Taylor Dayne’s debut single in 1987. Kelly Llorenna brings the song into our Clubland thread, here remixed by Flip & Fill.",
+          "Kelly Llorenna / Flip & Fill · Tell It To My Heart - Flip & Fill Remix — Tell It to My Heart war 1987 Taylor Daynes Debütsingle. Kelly Llorenna bringt den Song in unsere Clubland-Linie, hier im Remix von Flip & Fill."
+        ],
+        "sources": [
+          "https://www.taylordayne.com/bio",
+          "https://www.youtube.com/watch?v=LzSnYtKdQ6E"
+        ],
+        "trackId": "7tmWYpAv41kQelcnpaKWqS",
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-kellyllorenna-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Hjertet siger ja. Knæene beder om en skriftlig aftale.",
+          "Host joke: The heart says yes. The knees want it in writing.",
+          "Moderatorenwitz: Das Herz sagt ja. Die Knie verlangen einen Vertrag."
+        ],
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-cascada-ticker",
+        "kind": "fact",
+        "text": [
+          "Cascada · Everytime We Touch - Club Mix — Cascada lånte omkvædet fra Maggie Reillys Everytime We Touch og gav sangen nye vers. Reilly fortalte, at idéen bag hendes sang kom efter et statisk stød ved et kram.",
+          "Cascada · Everytime We Touch - Club Mix — Cascada borrowed Maggie Reilly’s Everytime We Touch chorus and added new verses. Reilly recalled that her song’s inspiration followed a static shock during a hug.",
+          "Cascada · Everytime We Touch - Club Mix — Cascada übernahmen den Refrain von Maggie Reillys Everytime We Touch und ergänzten neue Strophen. Reilly erzählte, ein statischer Schlag bei einer Umarmung habe ihre Songidee angestoßen."
+        ],
+        "sources": [
+          "https://radiox.cms.socastsrm.com/2025/04/18/how-cascadas-everytime-we-touch-turned-a-1992-scottish-single-into-a-duke-basketball-anthem/",
+          "https://shorefire.com/releases/entry/steve-aoki-reimagines-cascadas-iconic-everytime-we-touch-for-2025"
+        ],
+        "trackId": "0QC44MbV3gz3QLDjOLWAdF",
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-cascada-question",
+        "kind": "question",
+        "text": [
+          "Hvilket omkvæd kan få hele rummet med?",
+          "Which chorus gets the whole room singing?",
+          "Welcher Refrain bringt den ganzen Raum zum Mitsingen?"
+        ],
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-basshunter-ticker",
+        "kind": "fact",
+        "text": [
+          "Basshunter / DJ Mental Theos Bazzheadz · Now You're Gone (feat. DJ Mental Theos Bazzheadz) - DJ Alex Extended Mix — Basshunter fortalte, at Boten Anna begyndte som en sjov idé, han selv skrev, indspillede og lagde på nettet. Den blev grundlaget for Now You’re Gone.",
+          "Basshunter / DJ Mental Theos Bazzheadz · Now You're Gone (feat. DJ Mental Theos Bazzheadz) - DJ Alex Extended Mix — Basshunter recalled that Boten Anna began as a fun idea he wrote, recorded and uploaded himself. It became the starting point for Now You’re Gone.",
+          "Basshunter / DJ Mental Theos Bazzheadz · Now You're Gone (feat. DJ Mental Theos Bazzheadz) - DJ Alex Extended Mix — Basshunter erzählte, Boten Anna habe als Spaßidee begonnen, die er selbst schrieb, aufnahm und ins Netz stellte. Sie wurde zum Ausgangspunkt für Now You’re Gone."
+        ],
+        "sources": [
+          "https://www.outlineonline.co.uk/reviews/interview-with-basshunter"
+        ],
+        "trackId": "3Od03esYMrE67g4JysxvnY",
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-basshunter-question",
+        "kind": "question",
+        "text": [
+          "Hvilken sang fandt du først gennem en netradio eller en ven online?",
+          "Which song did you first find through online radio or a friend online?",
+          "Welchen Song habt ihr zuerst über Webradio oder Onlinefreunde entdeckt?"
+        ],
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-italobrothers-ticker",
+        "kind": "fact",
+        "text": [
+          "ItaloBrothers · Stamp On The Ground - Extended Mix — ItaloBrothers beskriver starten i 2005 som et sjovt projekt i en lille kælder i Nordhorn. Stamp on the Ground fulgte i 2009.",
+          "ItaloBrothers · Stamp On The Ground - Extended Mix — ItaloBrothers describe their 2005 beginnings as a fun project in a small Nordhorn basement. Stamp on the Ground followed in 2009.",
+          "ItaloBrothers · Stamp On The Ground - Extended Mix — ItaloBrothers beschreiben ihren Start 2005 als Spaßprojekt in einem kleinen Keller in Nordhorn. Stamp on the Ground folgte 2009."
+        ],
+        "sources": [
+          "https://www.italobrothersmusic.com/kopi-af-home"
+        ],
+        "trackId": "5aTLZr3tPiMz2tLO16p4vG",
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-eurodance-italobrothers-question",
+        "kind": "question",
+        "text": [
+          "Hvilket nummer giver dig mest lyst til at hoppe med?",
+          "Which track makes you want to jump along?",
+          "Bei welchem Track wollt ihr sofort mithüpfen?"
+        ],
+        "week": "2026-W46",
+        "show": "eurodance",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "retro": [
+      {
+        "id": "2026-W46-retro-laidback-ticker",
+        "kind": "fact",
+        "text": [
+          "Laid Back · Sunshine Reggae — Laid Back begyndte med jams i et københavnsk baggårdsstudie. Sunshine Reggae blev deres danske sommerhit i 1982.",
+          "Laid Back · Sunshine Reggae — Laid Back began by jamming in a Copenhagen backyard studio. Sunshine Reggae became their Danish summer hit in 1982.",
+          "Laid Back · Sunshine Reggae — Laid Back begannen mit Jams in einem Kopenhagener Hinterhofstudio. Sunshine Reggae wurde 1982 ihr dänischer Sommerhit."
+        ],
+        "sources": [
+          "https://www.laidbackofficial.com/our-story"
+        ],
+        "trackId": "0z0JSkE5Nw3i3nin3BBSuG",
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-laidback-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Solen er bestilt. Leveringstiden er desværre dansk november.",
+          "Host joke: Sunshine ordered. Delivery may take one Danish November.",
+          "Moderatorenwitz: Sonne ist bestellt. Lieferzeit: ein dänischer November."
+        ],
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-michaeljackson-ticker",
+        "kind": "fact",
+        "text": [
+          "Michael Jackson · Billie Jean — Teknikeren Bruce Swedien lavede 91 mix af Billie Jean. Til sidst vendte holdet tilbage til mix nummer to.",
+          "Michael Jackson · Billie Jean — Engineer Bruce Swedien made 91 mixes of Billie Jean. In the end, the team returned to mix number two.",
+          "Michael Jackson · Billie Jean — Toningenieur Bruce Swedien fertigte 91 Mixe von Billie Jean an. Am Ende kehrte das Team zu Mix Nummer zwei zurück."
+        ],
+        "sources": [
+          "https://www.soundonsound.com/people/bruce-swedien-recording-michael-jackson",
+          "https://bobbyowsinskiblog.com/bruce-swedien-interview/"
+        ],
+        "trackId": "7J1uxwnxfQLu4APicE5Rnj",
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-michaeljackson-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Jeg gemmer også version to. Den hedder normalt sidste-udgave-helt-sidste.",
+          "Host joke: I keep version two as well. Usually labelled final-final-really-final.",
+          "Moderatorenwitz: Ich behalte auch Version zwei. Dateiname: endgültig-wirklich-endgültig."
+        ],
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-chic-ticker",
+        "kind": "fact",
+        "text": [
+          "CHIC · Le Freak - 2018 Remaster — Le Freak voksede ud af Nile Rodgers og Bernard Edwards’ afvisning ved Studio 54 en nytårsaften. Frustration blev til disco.",
+          "CHIC · Le Freak - 2018 Remaster — Le Freak grew out of Nile Rodgers and Bernard Edwards being turned away from Studio 54 one New Year’s Eve. Frustration became disco.",
+          "CHIC · Le Freak - 2018 Remaster — Le Freak entstand nach Nile Rodgers’ und Bernard Edwards’ Abweisung am Studio 54 an einem Silvesterabend. Aus Frust wurde Disco."
+        ],
+        "sources": [
+          "https://www.rhino.com/aod/cest-chic-chic-0"
+        ],
+        "trackId": "7Kszjzps0xbQXyo1pO4KfE",
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-chic-joke",
+        "kind": "humour",
+        "text": [
+          "Værtsjoke: Her i studiet har selv dørmanden fået danseforbud. Han holder ikke takten.",
+          "Host joke: Our imaginary doorman has been banned from dancing. Wrong beat.",
+          "Moderatorenwitz: Unser erfundener Türsteher hat Tanzverbot. Er steht neben dem Takt."
+        ],
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-abba-ticker",
+        "kind": "fact",
+        "text": [
+          "ABBA · Gimme! Gimme! Gimme! (A Man After Midnight) — Gimme! Gimme! Gimme! var det nye nummer på ABBAs Greatest Hits Vol. 2 i 1979. En opsamling kunne altså også rumme noget helt nyt.",
+          "ABBA · Gimme! Gimme! Gimme! (A Man After Midnight) — Gimme! Gimme! Gimme! was the new song on ABBA’s Greatest Hits Vol. 2 in 1979. A greatest-hits collection could also introduce something new.",
+          "ABBA · Gimme! Gimme! Gimme! (A Man After Midnight) — Gimme! Gimme! Gimme! war 1979 der neue Titel auf ABBAs Greatest Hits Vol. 2. Eine Hitsammlung konnte also auch etwas Neues vorstellen."
+        ],
+        "sources": [
+          "https://abbasite.com/discography/",
+          "https://abbasite.com/story/"
+        ],
+        "trackId": "3vkQ5DAB1qQMYO4Mr9zJN6",
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-abba-question",
+        "kind": "question",
+        "text": [
+          "Hvilken opsamling sled du op?",
+          "Which greatest-hits collection did you wear out?",
+          "Welche Hitsammlung habt ihr rauf und runter gehört?"
+        ],
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-depechemode-ticker",
+        "kind": "fact",
+        "text": [
+          "Depeche Mode · Just Can't Get Enough — Just Can’t Get Enough var Depeche Modes første musikvideo og sidste single med Vince Clarke som medlem. Den britiske single kom i september 1981.",
+          "Depeche Mode · Just Can't Get Enough — Just Can’t Get Enough was Depeche Mode’s first music video and last single with Vince Clarke as a member. The UK single arrived in September 1981.",
+          "Depeche Mode · Just Can't Get Enough — Just Can’t Get Enough war Depeche Modes erstes Musikvideo und die letzte Single mit Vince Clarke als Mitglied. Die britische Single erschien im September 1981."
+        ],
+        "sources": [
+          "https://archives.depechemode.com/specials/september_7_1981.html",
+          "https://archives.depechemode.com/discography/singles/03_justcantgetenough.html"
+        ],
+        "trackId": "0qi4b1l0eT3jpzeNHeFXDT",
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-depechemode-question",
+        "kind": "question",
+        "text": [
+          "Kan du genkende en sang på én synthlyd?",
+          "Can you recognise a song from one synth sound?",
+          "Erkennt ihr einen Song an einem einzigen Synthklang?"
+        ],
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-petshopboys-ticker",
+        "kind": "fact",
+        "text": [
+          "Pet Shop Boys · Always on My Mind — Pet Shop Boys spillede først Always on My Mind til en tv-hyldest til Elvis. Deres nyindspillede single fulgte i november 1987.",
+          "Pet Shop Boys · Always on My Mind — Pet Shop Boys first performed Always on My Mind for an Elvis TV tribute. Their re-recorded single followed in November 1987.",
+          "Pet Shop Boys · Always on My Mind — Pet Shop Boys spielten Always on My Mind zunächst bei einer TV-Hommage an Elvis. Die neu eingespielte Single folgte im November 1987."
+        ],
+        "sources": [
+          "https://www.youtube.com/watch?v=bDMCwSP5nf0",
+          "https://www.petshopboys.co.uk/product/single/always-on-my-mind"
+        ],
+        "trackId": "07ABETRdek3ACMpRPvQuaT",
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-retro-petshopboys-question",
+        "kind": "question",
+        "text": [
+          "Hvilken coverversion føles som sin helt egen sang?",
+          "Which cover feels like a song of its own?",
+          "Welches Cover fühlt sich wie ein ganz eigener Song an?"
+        ],
+        "week": "2026-W46",
+        "show": "retro",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "morning": [
+      {
+        "id": "2026-W46-morning-01",
+        "kind": "humour",
+        "text": [
+          "Vækkeuret har ringet. Jeg har bedt det sende en mail.",
+          "The alarm rang. I asked it to email instead.",
+          "Der Wecker klingelte. Ich bat um eine E-Mail."
+        ],
+        "week": "2026-W46",
+        "show": "morning",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-morning-02",
+        "kind": "humour",
+        "text": [
+          "Morgenens dresscode: noget der kan tåle krummer.",
+          "Morning dress code: something crumb-proof.",
+          "Morgendresscode: möglichst krümelfest."
+        ],
+        "week": "2026-W46",
+        "show": "morning",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-morning-03",
+        "kind": "humour",
+        "text": [
+          "Kaffeskeen er dagens mindste trommestik.",
+          "The teaspoon is today’s tiniest drumstick.",
+          "Der Kaffeelöffel ist heute der kleinste Drumstick."
+        ],
+        "week": "2026-W46",
+        "show": "morning",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-morning-04",
+        "kind": "question",
+        "text": [
+          "Hvad er dit første lille lyspunkt i dag?",
+          "What is your first little bright spot today?",
+          "Was ist heute euer erster kleiner Lichtblick?"
+        ],
+        "week": "2026-W46",
+        "show": "morning",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-morning-05",
+        "kind": "question",
+        "text": [
+          "Er du allerede på farten eller stadig under dynen?",
+          "Already on the move or still under the duvet?",
+          "Schon unterwegs oder noch unter der Decke?"
+        ],
+        "week": "2026-W46",
+        "show": "morning",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-morning-06",
+        "kind": "humour",
+        "text": [
+          "En blød start er også en start. Musikken holder pladsen.",
+          "An easy start still counts. The music saves your seat.",
+          "Ein sanfter Start zählt auch. Die Musik hält euch den Platz frei."
+        ],
+        "week": "2026-W46",
+        "show": "morning",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "fredagsbar": [
+      {
+        "id": "2026-W46-fredagsbar-01",
+        "kind": "humour",
+        "text": [
+          "Ugens sidste punkt: glem lige de første sytten punkter.",
+          "Last item this week: forget the first seventeen items.",
+          "Letzter Wochenpunkt: die ersten siebzehn Punkte vergessen."
+        ],
+        "week": "2026-W46",
+        "show": "fredagsbar",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-fredagsbar-02",
+        "kind": "humour",
+        "text": [
+          "Studiets stempelur har stemplet ud til en basgang.",
+          "The studio time clock has clocked out to a bassline.",
+          "Die Studio-Stechuhr hat sich zu einer Basslinie ausgestempelt."
+        ],
+        "week": "2026-W46",
+        "show": "fredagsbar",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-fredagsbar-03",
+        "kind": "humour",
+        "text": [
+          "Fredagspynten er en skjorte uden mødeindkaldelse.",
+          "Friday finery: a shirt with no meeting invitation.",
+          "Freitagsoutfit: ein Hemd ohne Termineinladung."
+        ],
+        "week": "2026-W46",
+        "show": "fredagsbar",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-fredagsbar-04",
+        "kind": "question",
+        "text": [
+          "Hvilken lille sejr tager du med ind i weekenden?",
+          "Which little win are you taking into the weekend?",
+          "Welchen kleinen Erfolg nehmt ihr ins Wochenende mit?"
+        ],
+        "week": "2026-W46",
+        "show": "fredagsbar",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-fredagsbar-05",
+        "kind": "question",
+        "text": [
+          "Skal fredagen have sneakers på eller hjemmesko?",
+          "Is Friday wearing trainers or slippers?",
+          "Trägt der Freitag Sneaker oder Hausschuhe?"
+        ],
+        "week": "2026-W46",
+        "show": "fredagsbar",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-fredagsbar-06",
+        "kind": "humour",
+        "text": [
+          "Her må en lang uge godt få en kort forklaring: pyha.",
+          "A long week can have a short review: phew.",
+          "Eine lange Woche darf kurz bewertet werden: puh."
+        ],
+        "week": "2026-W46",
+        "show": "fredagsbar",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "weekend": [
+      {
+        "id": "2026-W46-weekend-01",
+        "kind": "humour",
+        "text": [
+          "Weekenden har taget en omvej. Den så hyggelig ud.",
+          "The weekend took a detour. It looked inviting.",
+          "Das Wochenende macht einen Umweg. Der sah gemütlich aus."
+        ],
+        "week": "2026-W46",
+        "show": "weekend",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-weekend-02",
+        "kind": "question",
+        "text": [
+          "Dagens store beslutning: skal vi overhovedet beslutte noget?",
+          "Today’s big decision: do we need to decide anything?",
+          "Die große Tagesfrage: Müssen wir überhaupt etwas entscheiden?"
+        ],
+        "week": "2026-W46",
+        "show": "weekend",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-weekend-03",
+        "kind": "humour",
+        "text": [
+          "Sofaen har første parket. Køkkenet har ståpladser.",
+          "The sofa has front-row seats. Standing room in the kitchen.",
+          "Das Sofa sitzt in Reihe eins. In der Küche gibt es Stehplätze."
+        ],
+        "week": "2026-W46",
+        "show": "weekend",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-weekend-04",
+        "kind": "question",
+        "text": [
+          "Hvad vil du gerne have mere tid til denne weekend?",
+          "What would you like more time for this weekend?",
+          "Wofür hättet ihr dieses Wochenende gern mehr Zeit?"
+        ],
+        "week": "2026-W46",
+        "show": "weekend",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-weekend-05",
+        "kind": "question",
+        "text": [
+          "Hvor er din lille weekendpause lige nu?",
+          "Where is your little weekend break happening?",
+          "Wo findet eure kleine Wochenendpause gerade statt?"
+        ],
+        "week": "2026-W46",
+        "show": "weekend",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-weekend-06",
+        "kind": "humour",
+        "text": [
+          "Vi blander stemninger som bland selv-slik. Ingen fast opskrift.",
+          "We mix moods like pick-and-mix sweets. No fixed recipe.",
+          "Wir mischen Stimmungen wie eine bunte Tüte. Ohne festes Rezept."
+        ],
+        "week": "2026-W46",
+        "show": "weekend",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "popup": [
+      {
+        "id": "2026-W46-popup-01",
+        "kind": "humour",
+        "text": [
+          "Studiet åbnede på en indskydelse. Indskydelsen kræver nu kaffe.",
+          "The studio opened on impulse. The impulse now wants coffee.",
+          "Das Studio öffnete spontan. Die Spontaneität verlangt jetzt Kaffee."
+        ],
+        "week": "2026-W46",
+        "show": "popup",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-popup-02",
+        "kind": "humour",
+        "text": [
+          "Køreplanen er tegnet på bagsiden af en god idé.",
+          "The running order is drawn on the back of a good idea.",
+          "Der Ablauf steht auf der Rückseite einer guten Idee."
+        ],
+        "week": "2026-W46",
+        "show": "popup",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-popup-03",
+        "kind": "humour",
+        "text": [
+          "Uventet selskab er bedst, når man ikke skal støvsuge først.",
+          "Surprise company is best without emergency vacuuming.",
+          "Spontaner Besuch ist am besten ohne vorherigen Staubsaugeralarm."
+        ],
+        "week": "2026-W46",
+        "show": "popup",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-popup-04",
+        "kind": "question",
+        "text": [
+          "Hvad blev dagens bedste uplanlagte øjeblik?",
+          "What was today’s best unplanned moment?",
+          "Was war heute euer bester ungeplanter Moment?"
+        ],
+        "week": "2026-W46",
+        "show": "popup",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-popup-05",
+        "kind": "question",
+        "text": [
+          "Kom du forbi tilfældigt, eller ledte du efter musik?",
+          "Passing by by chance, or looking for music?",
+          "Zufällig vorbeigekommen oder auf Musiksuche?"
+        ],
+        "week": "2026-W46",
+        "show": "popup",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-popup-06",
+        "kind": "humour",
+        "text": [
+          "Et lille musikalsk mellemrum er hermed åbnet.",
+          "A little musical breathing space is now open.",
+          "Ein kleiner musikalischer Freiraum ist eröffnet."
+        ],
+        "week": "2026-W46",
+        "show": "popup",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "nudisco": [
+      {
+        "id": "2026-W46-nudisco-01",
+        "kind": "humour",
+        "text": [
+          "Diskokuglen har pudset én plet. Resten kalder den vintage.",
+          "The disco ball polished one spot. The rest is vintage.",
+          "Die Discokugel hat eine Stelle poliert. Der Rest heißt Vintage."
+        ],
+        "week": "2026-W46",
+        "show": "nudisco",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-nudisco-02",
+        "kind": "humour",
+        "text": [
+          "Basgangen går så pænt, at den hilser på naboerne.",
+          "This bassline walks so politely it greets the neighbours.",
+          "Diese Basslinie geht so höflich, dass sie die Nachbarn grüßt."
+        ],
+        "week": "2026-W46",
+        "show": "nudisco",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-nudisco-03",
+        "kind": "humour",
+        "text": [
+          "Funkens dresscode: løse skuldre, stramme grooves.",
+          "Funk dress code: loose shoulders, tight grooves.",
+          "Funk-Dresscode: lockere Schultern, straffe Grooves."
+        ],
+        "week": "2026-W46",
+        "show": "nudisco",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-nudisco-04",
+        "kind": "question",
+        "text": [
+          "Hvad fanger dig først: bas, guitar eller vokal?",
+          "What catches you first: bass, guitar or vocals?",
+          "Was packt euch zuerst: Bass, Gitarre oder Gesang?"
+        ],
+        "week": "2026-W46",
+        "show": "nudisco",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-nudisco-05",
+        "kind": "question",
+        "text": [
+          "Er dit dansegulv stort nok til et lille sidestep?",
+          "Does your dancefloor have room for a little sidestep?",
+          "Hat eure Tanzfläche Platz für einen kleinen Seitenschritt?"
+        ],
+        "week": "2026-W46",
+        "show": "nudisco",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-nudisco-06",
+        "kind": "humour",
+        "text": [
+          "Et lille nik med hovedet tæller også som deltagelse.",
+          "A little nod counts as joining in too.",
+          "Ein kleines Kopfnicken zählt auch als Mitmachen."
+        ],
+        "week": "2026-W46",
+        "show": "nudisco",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "chart": [
+      {
+        "id": "2026-W46-chart-01",
+        "kind": "humour",
+        "text": [
+          "Hitlistens elevator er i drift. Ingen har bestilt kælderen.",
+          "The chart lift is running. Nobody ordered the basement.",
+          "Der Chartaufzug fährt. Niemand hat den Keller bestellt."
+        ],
+        "week": "2026-W46",
+        "show": "chart",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-chart-02",
+        "kind": "humour",
+        "text": [
+          "Min indre hitdommer er inhabil. Han kan lide omkvæd.",
+          "My inner chart judge is biased. He likes choruses.",
+          "Mein innerer Chartrichter ist befangen. Er mag Refrains."
+        ],
+        "week": "2026-W46",
+        "show": "chart",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-chart-03",
+        "kind": "humour",
+        "text": [
+          "En personlig favorit behøver ingen medaljeceremoni.",
+          "A personal favourite needs no medal ceremony.",
+          "Ein persönlicher Favorit braucht keine Siegerehrung."
+        ],
+        "week": "2026-W46",
+        "show": "chart",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-chart-04",
+        "kind": "question",
+        "text": [
+          "Hvilken ny opdagelse ville du sende videre til en ven?",
+          "Which new discovery would you send to a friend?",
+          "Welche Neuentdeckung würdet ihr Freunden schicken?"
+        ],
+        "week": "2026-W46",
+        "show": "chart",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-chart-05",
+        "kind": "question",
+        "text": [
+          "Fanger et nummer dig første gang, eller skal det vokse?",
+          "Does a song grab you immediately, or grow on you?",
+          "Packt euch ein Song sofort oder wächst er mit der Zeit?"
+        ],
+        "week": "2026-W46",
+        "show": "chart",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-chart-06",
+        "kind": "question",
+        "text": [
+          "Hvem er ugens største overraskelse for dig?",
+          "Who is your biggest surprise this week?",
+          "Wer ist diese Woche eure größte Überraschung?"
+        ],
+        "week": "2026-W46",
+        "show": "chart",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "danske": [
+      {
+        "id": "2026-W46-danske-01",
+        "kind": "humour",
+        "text": [
+          "Studiets ordbog har fået rytme. Den slår op på omkvæd.",
+          "The studio dictionary found its rhythm under chorus.",
+          "Das Studiowörterbuch hat den Rhythmus unter Refrain gefunden."
+        ],
+        "week": "2026-W46",
+        "show": "danske",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-danske-02",
+        "kind": "humour",
+        "text": [
+          "Danske gloser kan også tage dansesko på.",
+          "Danish words can put their dancing shoes on too.",
+          "Auch dänische Wörter können Tanzschuhe anziehen."
+        ],
+        "week": "2026-W46",
+        "show": "danske",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-danske-03",
+        "kind": "humour",
+        "text": [
+          "Vi har luftet æ, ø og å. De er klar til fællessang.",
+          "We have warmed up æ, ø and å for a singalong.",
+          "Æ, ø und å sind aufgewärmt fürs Mitsingen."
+        ],
+        "week": "2026-W46",
+        "show": "danske",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-danske-04",
+        "kind": "question",
+        "text": [
+          "Hvilken dansk tekstlinje bliver altid hængende hos dig?",
+          "Which Danish lyric stays with you?",
+          "Welche dänische Liedzeile bleibt euch im Kopf?"
+        ],
+        "week": "2026-W46",
+        "show": "danske",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-danske-05",
+        "kind": "question",
+        "text": [
+          "Hvilken dansk kunstner viste en ven dig først?",
+          "Which Danish artist did a friend introduce you to?",
+          "Welchen dänischen Act habt ihr durch Freunde entdeckt?"
+        ],
+        "week": "2026-W46",
+        "show": "danske",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-danske-06",
+        "kind": "humour",
+        "text": [
+          "Genkendelse må gerne begynde med: nå ja, den dér!",
+          "Recognition may start with: oh yes, that one!",
+          "Wiedererkennen darf beginnen mit: Ach ja, der Song!"
+        ],
+        "week": "2026-W46",
+        "show": "danske",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ],
+    "summer": [
+      {
+        "id": "2026-W46-summer-01",
+        "kind": "humour",
+        "text": [
+          "Den musikalske parasol står skævt. Det giver bedre groove.",
+          "The musical parasol leans a little. Better groove that way.",
+          "Der musikalische Sonnenschirm steht schief. Das groovt besser."
+        ],
+        "week": "2026-W46",
+        "show": "summer",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-summer-02",
+        "kind": "humour",
+        "text": [
+          "Studiets feriekuffert indeholder mest gode intentioner.",
+          "The studio holiday suitcase mostly contains good intentions.",
+          "Im Studio-Urlaubskoffer liegen vor allem gute Vorsätze."
+        ],
+        "week": "2026-W46",
+        "show": "summer",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-summer-03",
+        "kind": "humour",
+        "text": [
+          "Sommerstemningen rejser let. Ingen overvægt i omkvædet.",
+          "Summer mood travels light. No excess chorus baggage.",
+          "Sommerstimmung reist leicht. Kein Übergepäck im Refrain."
+        ],
+        "week": "2026-W46",
+        "show": "summer",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-summer-04",
+        "kind": "question",
+        "text": [
+          "Hvilket sted skal musikken sende dig hen?",
+          "Where should the music take you?",
+          "Wohin soll euch die Musik bringen?"
+        ],
+        "week": "2026-W46",
+        "show": "summer",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-summer-05",
+        "kind": "question",
+        "text": [
+          "Strandtur eller altanferie: hvor lander din tanke?",
+          "Beach trip or balcony break: where does your mind land?",
+          "Strandurlaub oder Balkonien: Wo landen eure Gedanken?"
+        ],
+        "week": "2026-W46",
+        "show": "summer",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      },
+      {
+        "id": "2026-W46-summer-06",
+        "kind": "humour",
+        "text": [
+          "Sol i lyden, også når vinduet er uenig.",
+          "Sunshine in the sound, even when the window disagrees.",
+          "Sonne im Klang, auch wenn das Fenster widerspricht."
+        ],
+        "week": "2026-W46",
+        "show": "summer",
+        "validFrom": "2026-11-08T20:00:00Z",
+        "validUntil": "2026-11-16T11:00:00Z"
+      }
+    ]
   }
 }
