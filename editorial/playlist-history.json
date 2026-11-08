@@ -219,6 +219,10 @@
         {
           "artist": "Gwen Guthrie",
           "title": "Ain't Nothin' Goin' On But The Rent"
+        },
+        {
+          "artist": "Stevie Wonder",
+          "title": "Part-Time Lover"
         }
       ],
       "trance": [
@@ -357,6 +361,22 @@
         {
           "artist": "Agnelli & Nelson",
           "title": "Everyday"
+        },
+        {
+          "artist": "System F / Armin van Buuren",
+          "title": "Exhale"
+        },
+        {
+          "artist": "Paul van Dyk / Johnny McDaid",
+          "title": "Home"
+        },
+        {
+          "artist": "Art of Trance",
+          "title": "Madagascar"
+        },
+        {
+          "artist": "Delerium",
+          "title": "Innocente"
         }
       ],
       "eurodance": [
@@ -475,8 +495,535 @@
         {
           "artist": "Daft Punk",
           "title": "One More Time"
+        },
+        {
+          "artist": "Technotronic",
+          "title": "Pump Up The Jam"
+        }
+      ]
+    },
+    "2026-W46": {
+      "trance": [
+        {
+          "artist": "Chicane",
+          "title": "Offshore - Extended Mix",
+          "spotifyTrackId": "4jy7tsWx2FZjXspLV5uZkQ"
+        },
+        {
+          "artist": "Three Drives On A Vinyl, Three Drives",
+          "title": "Greece 2000 - Extended Mix",
+          "spotifyTrackId": "7pe7JWmS5Ek4pOiKcSU25H"
+        },
+        {
+          "artist": "Grum",
+          "title": "Stay With Me",
+          "spotifyTrackId": "2ByIQbGXbR7Ru379xea9Gg"
+        },
+        {
+          "artist": "Reflekt, delline bass, Adam K & Soha",
+          "title": "Need To Feel Loved - Adam K & Soha Vocal Mix",
+          "spotifyTrackId": "30cjLreSF4Xq0uAB89i2Ac"
+        },
+        {
+          "artist": "Chakra",
+          "title": "Love Shines Through - Extended Mix",
+          "spotifyTrackId": "3xgckatLzl2HyWjiMyB75e"
+        },
+        {
+          "artist": "The Thrillseekers, Sheryl Deane",
+          "title": "Synaesthesia (Fly Away)",
+          "spotifyTrackId": "5QdgpcfAw8EbsupH0B6BpI"
+        },
+        {
+          "artist": "BT",
+          "title": "Flaming June",
+          "spotifyTrackId": "5Vh9T9b7t7764fDEWMd9Fs"
+        },
+        {
+          "artist": "Lustral, The Space Brothers, Nalin & Kane",
+          "title": "Everytime - Nalin & Kane Extended Mix",
+          "spotifyTrackId": "62OBEGGO9mKWXxylwLpkyP"
+        },
+        {
+          "artist": "Chicane, Justine Suissa, The Thrillseekers",
+          "title": "Autumn Tactics - The Thrillseekers Remix",
+          "spotifyTrackId": "60iQ75aP8VjfQMInz1mBpw"
+        },
+        {
+          "artist": "Lange, The Morrighan",
+          "title": "Follow Me - Lange's Club Mix",
+          "spotifyTrackId": "7bbY135gafWRikvA2f9jjA"
+        },
+        {
+          "artist": "Armin van Buuren",
+          "title": "Blue Fear - Original Mix",
+          "spotifyTrackId": "7aCd2uFGS9Z7TnC64bIgqq"
+        },
+        {
+          "artist": "Signum",
+          "title": "Love Forever",
+          "spotifyTrackId": "2YSRt4rV7g1iZlHIGxPucI"
+        },
+        {
+          "artist": "Tiësto",
+          "title": "Suburban Train",
+          "spotifyTrackId": "2T9PGrtlySSHnwT9t1JUEI"
+        },
+        {
+          "artist": "Paul Oakenfold, Carla Werner, DJ Tiesto, Tiësto",
+          "title": "Southern Sun - DJ Tiësto Remix",
+          "spotifyTrackId": "3Q7z1Aa4sdrPtVyRwNam0D"
+        },
+        {
+          "artist": "Solarstone, Andy Bury",
+          "title": "Solarcoaster - Original Mix",
+          "spotifyTrackId": "5NF8qRfWXGRgYeoiq1yoRJ"
+        },
+        {
+          "artist": "Ferry Corsten",
+          "title": "Punk",
+          "spotifyTrackId": "74BSVo5XxxlOOWKstr8doF"
+        },
+        {
+          "artist": "Nitrous Oxide, Seb Hennig, Hikari_no",
+          "title": "Temeria",
+          "spotifyTrackId": "46ONznemNlPtinnqdMSQEn"
+        },
+        {
+          "artist": "Push",
+          "title": "The Legacy - Club Mix",
+          "spotifyTrackId": "2RpGTuM5XINRHqRiXMLOn5"
+        },
+        {
+          "artist": "Above & Beyond, OceanLab, Ferry Corsten",
+          "title": "Clear Blue Water - Ferry Corsten Remix",
+          "spotifyTrackId": "3BCegDTqa5YfDljMksFLSS"
+        },
+        {
+          "artist": "Above & Beyond, Zoë Johnston",
+          "title": "No One On Earth - Gabriel & Dresden Remix",
+          "spotifyTrackId": "2iS5us96UxLtV2gC1BDKUV"
+        },
+        {
+          "artist": "Doppenberg",
+          "title": "Mysteria",
+          "spotifyTrackId": "0WkWBVjIWja9BJATaSFM81"
+        },
+        {
+          "artist": "Aly & Fila",
+          "title": "Rosaires",
+          "spotifyTrackId": "7iyHSCn6tvqhnl3rkJnjJD"
+        },
+        {
+          "artist": "John O'Callaghan, Audrey Gallagher, Agnelli & Nelson",
+          "title": "Big Sky - Agnelli & Nelson Extended Remix",
+          "spotifyTrackId": "2y5bhecj9eEXy9IzMVdiud"
+        },
+        {
+          "artist": "Daniel Kandi",
+          "title": "What Happens When We End",
+          "spotifyTrackId": "0cicTuDWTEMDhGYvZ3wLYu"
+        },
+        {
+          "artist": "Sean Tyas",
+          "title": "Lift - Extended Mix",
+          "spotifyTrackId": "4KYHpUBVJGh1RBtgeqTZrX"
+        },
+        {
+          "artist": "Giuseppe Ottaviani",
+          "title": "Linking People - Original Mix",
+          "spotifyTrackId": "0P7UFTJUB4pMtlXjIqRl4S"
+        },
+        {
+          "artist": "L.S.G.",
+          "title": "Netherworld",
+          "spotifyTrackId": "0SI2oISkB5I9tPrJjaxuH3"
+        },
+        {
+          "artist": "Ascension",
+          "title": "Someone - Original Mix",
+          "spotifyTrackId": "2IZnE8sBqz4X8zgaRiAM7p"
+        }
+      ],
+      "eurodance": [
+        {
+          "artist": "Captain Hollywood Project",
+          "title": "More And More - Extended Mix",
+          "spotifyTrackId": "5Sd0Y2tVJUii4HRB44bAvx"
+        },
+        {
+          "artist": "Masterboy",
+          "title": "Feel the heat of the night - Sunshine Mix",
+          "spotifyTrackId": "7rIDPf18b9d0FPgmtgFmfj"
+        },
+        {
+          "artist": "Me & My, Hartmann, Langhoff",
+          "title": "Dub-I-Dub - Club Remix",
+          "spotifyTrackId": "19eMkJXsBcEVTbMA73Ndht"
+        },
+        {
+          "artist": "Alice Deejay",
+          "title": "Back In My Life - Club Vocal Mix",
+          "spotifyTrackId": "2GVdTxfIE74wVyON8c95nr"
+        },
+        {
+          "artist": "Milk Inc., Peter Luts",
+          "title": "Walk On Water - Peter Luts Remix",
+          "spotifyTrackId": "2UzlMP5b7MZUQ8UUBBo0HC"
+        },
+        {
+          "artist": "Kate Ryan",
+          "title": "Désenchantée - Extended Mix",
+          "spotifyTrackId": "3tGAp6CpME7bOBhRwiJPUZ"
+        },
+        {
+          "artist": "Novaspace",
+          "title": "Time After Time - After Time Mix",
+          "spotifyTrackId": "63pAxj7N2GBuvCgyi9eCdn"
+        },
+        {
+          "artist": "Kelly Llorenna, Flip & Fill",
+          "title": "Tell It To My Heart - Flip & Fill Remix",
+          "spotifyTrackId": "7tmWYpAv41kQelcnpaKWqS"
+        },
+        {
+          "artist": "Flip & Fill, Karen Parry",
+          "title": "Shooting Star - Extended Mix",
+          "spotifyTrackId": "0tFyQW1ATWRnsSKSB05iIL"
+        },
+        {
+          "artist": "Ultrabeat",
+          "title": "Pretty Green Eyes - Extended Mix",
+          "spotifyTrackId": "4cmtzpUp918D4XOGD43fzo"
+        },
+        {
+          "artist": "Cascada",
+          "title": "Everytime We Touch - Club Mix",
+          "spotifyTrackId": "0QC44MbV3gz3QLDjOLWAdF"
+        },
+        {
+          "artist": "Groove Coverage, Rocco",
+          "title": "Moonlight Shadow - Rocco Remix",
+          "spotifyTrackId": "4hlYK0zN6Pqzp3aaCfDccz"
+        },
+        {
+          "artist": "Special D., Rob Mayth",
+          "title": "Come With Me - Rob Mayth Remix",
+          "spotifyTrackId": "3aoH5iws8TCIdodAExp4m1"
+        },
+        {
+          "artist": "Basshunter, DJ Mental Theos Bazzheadz",
+          "title": "Now You're Gone (feat. DJ Mental Theos Bazzheadz) - DJ Alex Extended Mix",
+          "spotifyTrackId": "3Od03esYMrE67g4JysxvnY"
+        },
+        {
+          "artist": "ItaloBrothers",
+          "title": "Stamp On The Ground - Extended Mix",
+          "spotifyTrackId": "5aTLZr3tPiMz2tLO16p4vG"
+        },
+        {
+          "artist": "DHT, Edmée, Hardbounze",
+          "title": "I Go Crazy - Hardbounze Extended",
+          "spotifyTrackId": "4Ca9KRgtlDKHUY097M3YvR"
+        },
+        {
+          "artist": "Scooter",
+          "title": "Nessaja - Flip & Fill Mix",
+          "spotifyTrackId": "3TYZGc0uAOm2vsSiTcxRA7"
+        },
+        {
+          "artist": "Styles & Breeze",
+          "title": "You're Shining - Hardcore Mix",
+          "spotifyTrackId": "3jTPC7HWVKkJL1nG0jG1E8"
+        },
+        {
+          "artist": "Jessy",
+          "title": "Look at me now - Milc Inc Remix",
+          "spotifyTrackId": "3tt3YtFKvyQnOG1pkC98bb"
+        }
+      ],
+      "retro": [
+        {
+          "artist": "Laid Back",
+          "title": "Sunshine Reggae",
+          "spotifyTrackId": "0z0JSkE5Nw3i3nin3BBSuG"
+        },
+        {
+          "artist": "Sade",
+          "title": "Smooth Operator - Single Version",
+          "spotifyTrackId": "1Hv1VTm8zeOeybub15mA2R"
+        },
+        {
+          "artist": "Soul II Soul, Caron Wheeler",
+          "title": "Back To Life",
+          "spotifyTrackId": "7vvRkLPIvfjjmCIqNxBuEZ"
+        },
+        {
+          "artist": "George Michael",
+          "title": "Freedom! '90 - Remastered",
+          "spotifyTrackId": "4dT3qLUU6fFUmomLzk2cUA"
+        },
+        {
+          "artist": "The S.O.S Band",
+          "title": "Just Be Good To Me",
+          "spotifyTrackId": "1482bMc9Tn0uQxsJqV7eSP"
+        },
+        {
+          "artist": "Thomas Helmig",
+          "title": "Nu Hvor Du Har Brændt Mig Af",
+          "spotifyTrackId": "11qFfHuutYvRGLrX0NFyGh"
+        },
+        {
+          "artist": "News",
+          "title": "Du Er",
+          "spotifyTrackId": "0OlfLzNAJ68fRKNHBziFEw"
+        },
+        {
+          "artist": "Luther Vandross",
+          "title": "Never Too Much",
+          "spotifyTrackId": "3nFJbZCHP4d9vduKjJLdBL"
+        },
+        {
+          "artist": "Evelyn \"Champagne\" King",
+          "title": "Love Come Down - Single Version",
+          "spotifyTrackId": "2RCOWNCxDIphjhqTtkwtwR"
+        },
+        {
+          "artist": "Alexander O'Neal",
+          "title": "Criticize",
+          "spotifyTrackId": "18ZRmY7kNZQQHpopsSVxwJ"
+        },
+        {
+          "artist": "Cameo",
+          "title": "Word Up",
+          "spotifyTrackId": "7LoGfKBAaOl0nxhodJ1240"
+        },
+        {
+          "artist": "Michael Jackson",
+          "title": "Billie Jean",
+          "spotifyTrackId": "7J1uxwnxfQLu4APicE5Rnj"
+        },
+        {
+          "artist": "Cheryl Lynn",
+          "title": "Got to Be Real - Single Version",
+          "spotifyTrackId": "3eudp9ZxZAGaDBOuWGrW2D"
+        },
+        {
+          "artist": "Diana Ross",
+          "title": "Upside Down",
+          "spotifyTrackId": "3pbtBomO4Zt5gGiqsYeiBH"
+        },
+        {
+          "artist": "Tøsedrengene",
+          "title": "Sig Du Ka' Li' Mig",
+          "spotifyTrackId": "6foG41XuloHv82btsxFdMo"
+        },
+        {
+          "artist": "Rocazino",
+          "title": "All My Love",
+          "spotifyTrackId": "49clGe0PtbYUx3vB7tyk3A"
+        },
+        {
+          "artist": "Indeep",
+          "title": "Last Night a D.J. Saved My Life",
+          "spotifyTrackId": "6NSqiyQWIyZLouviktad9X"
+        },
+        {
+          "artist": "D-Train",
+          "title": "You're the One for Me",
+          "spotifyTrackId": "66i1lieIMso7ef4P7KdWcE"
+        },
+        {
+          "artist": "The Brothers Johnson",
+          "title": "Stomp! - Single Version",
+          "spotifyTrackId": "3EG65y2LtxWjfydabHdItb"
+        },
+        {
+          "artist": "McFadden & Whitehead",
+          "title": "Ain't No Stoppin' Us Now - Single Version",
+          "spotifyTrackId": "352zgXSWzF85TvLhzJ7kkK"
+        },
+        {
+          "artist": "CHIC",
+          "title": "Good Times",
+          "spotifyTrackId": "0G3fbPbE1vGeABDEZF0jeG"
+        },
+        {
+          "artist": "CHIC",
+          "title": "Le Freak - 2018 Remaster",
+          "spotifyTrackId": "7Kszjzps0xbQXyo1pO4KfE"
+        },
+        {
+          "artist": "ABBA",
+          "title": "Gimme! Gimme! Gimme! (A Man After Midnight)",
+          "spotifyTrackId": "3vkQ5DAB1qQMYO4Mr9zJN6"
+        },
+        {
+          "artist": "Laban",
+          "title": "Hvor ska' vi sove i nat? - 2009 - Remaster",
+          "spotifyTrackId": "1VaKAul2PvFy383BHIhUAn"
+        },
+        {
+          "artist": "Halberg - Larsen",
+          "title": "Magi I Luften",
+          "spotifyTrackId": "4gXhg6q90f3VLKtdyUEPkG"
+        },
+        {
+          "artist": "Madonna",
+          "title": "Into the Groove",
+          "spotifyTrackId": "3y2Y3Bc6GDxAWAMIpbW7RU"
+        },
+        {
+          "artist": "Whitney Houston",
+          "title": "How Will I Know",
+          "spotifyTrackId": "5tdKaKLnC4SgtDZ6RlWeal"
+        },
+        {
+          "artist": "Nik Kershaw",
+          "title": "The Riddle",
+          "spotifyTrackId": "6sLvGL7JsXb6iE2on6t6qI"
+        },
+        {
+          "artist": "Orchestral Manoeuvres In The Dark",
+          "title": "If You Leave",
+          "spotifyTrackId": "05oFyvdztPdpwSwpoclD4c"
+        },
+        {
+          "artist": "The Human League",
+          "title": "Don't You Want Me",
+          "spotifyTrackId": "3AIEEEIDJFnqv8rozNVCRZ"
+        },
+        {
+          "artist": "Soft Cell",
+          "title": "Tainted Love",
+          "spotifyTrackId": "0cGG2EouYCEEC3xfa0tDFV"
+        },
+        {
+          "artist": "Depeche Mode",
+          "title": "Just Can't Get Enough",
+          "spotifyTrackId": "0qi4b1l0eT3jpzeNHeFXDT"
+        },
+        {
+          "artist": "New Order",
+          "title": "Blue Monday",
+          "spotifyTrackId": "6hHc7Pks7wtBIW8Z6A0iFq"
+        },
+        {
+          "artist": "Erasure",
+          "title": "Sometimes",
+          "spotifyTrackId": "3hSD1WQGMFOq08DnnRm2eC"
+        },
+        {
+          "artist": "Pet Shop Boys",
+          "title": "Always on My Mind",
+          "spotifyTrackId": "07ABETRdek3ACMpRPvQuaT"
+        },
+        {
+          "artist": "Sneakers",
+          "title": "Sui-Sui",
+          "spotifyTrackId": "2YGjOfjaXmLKxoeUQSys3J"
+        },
+        {
+          "artist": "Mel & Kim",
+          "title": "Showing Out (Get Fresh At the Weekend) [7''Version]",
+          "spotifyTrackId": "1eZYPl1jqsPG2IeVenCIwb"
+        },
+        {
+          "artist": "Rick Astley",
+          "title": "Together Forever",
+          "spotifyTrackId": "00isIFJWVpXIQ8HkGICSQp"
+        },
+        {
+          "artist": "Kylie Minogue",
+          "title": "Hand on Your Heart",
+          "spotifyTrackId": "3pS5eiuBPsQn5ID6RElg9G"
+        },
+        {
+          "artist": "Jason Donovan",
+          "title": "Too Many Broken Hearts",
+          "spotifyTrackId": "0MFEyNAn08HvzfbteolLWT"
+        },
+        {
+          "artist": "Sinitta",
+          "title": "Toy Boy",
+          "spotifyTrackId": "1jmy1wkbCs4YpeBrNfORM4"
+        },
+        {
+          "artist": "Bananarama",
+          "title": "Love in the First Degree",
+          "spotifyTrackId": "2qjWA8QruRCkoFZUQJR4SQ"
+        },
+        {
+          "artist": "Donna Summer",
+          "title": "This Time I Know It's for Real",
+          "spotifyTrackId": "6ez4yXpLini3DSbaLR10qZ"
+        },
+        {
+          "artist": "Kim Wilde",
+          "title": "You Came",
+          "spotifyTrackId": "4EA4ybyDidKtkER5IhasZe"
+        },
+        {
+          "artist": "Black Box",
+          "title": "Ride on Time",
+          "spotifyTrackId": "3pgainA2dH9c7e8JVYGRCN"
+        },
+        {
+          "artist": "Crystal Waters",
+          "title": "Gypsy Woman (She's Homeless) (La Da Dee La Da Da) - Radio Edit",
+          "spotifyTrackId": "4UJ1AKSbXAbPlPVFe66wK7"
+        },
+        {
+          "artist": "CeCe Peniston",
+          "title": "Finally",
+          "spotifyTrackId": "0uqvSVhGgQTIdj9G51vhvv"
+        },
+        {
+          "artist": "Chaka Khan",
+          "title": "I Feel for You",
+          "spotifyTrackId": "5yR9u8QiOt8hJaddv32oo7"
+        },
+        {
+          "artist": "Deacon Blue",
+          "title": "Real Gone Kid",
+          "spotifyTrackId": "1kBTjMOQcmrI5tW94GpdYG"
+        },
+        {
+          "artist": "Simple Minds",
+          "title": "Alive And Kicking",
+          "spotifyTrackId": "471SXWs7Ko4d2rkKOk7oPF"
+        },
+        {
+          "artist": "Sanne Salomonsen",
+          "title": "Kærligheden Kalder",
+          "spotifyTrackId": "4fJyuZM1uvNQEiLMH1PQ8n"
+        },
+        {
+          "artist": "Lis Sørensen",
+          "title": "Mine Øjne De Skal Se",
+          "spotifyTrackId": "46C29hsnFiIAkyAZVf9DSu"
+        },
+        {
+          "artist": "Anne Linnet",
+          "title": "Tusind stykker",
+          "spotifyTrackId": "3wqYQbDzFYKytO7uVLQtHD"
+        },
+        {
+          "artist": "Ray Dee Ohh",
+          "title": "Elskes Af Dig",
+          "spotifyTrackId": "6sd9yBq6oIAy8U80FJx67d"
+        },
+        {
+          "artist": "Dead Or Alive",
+          "title": "You Spin Me Round (Like a Record)",
+          "spotifyTrackId": "1ChulFMnwxoD74Me8eX2TU"
         }
       ]
     }
-  }
+  },
+  "repeatPolicyDays": 365,
+  "supplementaryArchives": [
+    "editorial/2026-W45/retro-observed-55.json",
+    "editorial/2026-W45/trance-observed-36.json"
+  ]
 }
