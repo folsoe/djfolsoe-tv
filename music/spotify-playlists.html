@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Spotify-udskiftning · DJ FOLSOE</title>
+<style>
+:root{color-scheme:dark;font:17px/1.5 system-ui,sans-serif;background:#171321;color:#f7f4fc}
+body{max-width:49rem;margin:auto;padding:1.5rem}
+section{margin:1rem 0;padding:clamp(1rem,4vw,1.65rem);border:1px solid #594a6c;border-radius:1rem;background:#211a30}
+h1,h2,p{margin:.35rem 0 .8rem}
+label{display:block;margin:.9rem 0 .25rem}
+input,textarea,select,button{font:inherit;border:1px solid #706282;border-radius:.4rem;padding:.5rem .7rem}
+input,textarea,select{width:100%;box-sizing:border-box;background:#191322;color:inherit}
+textarea{min-height:11rem;resize:vertical}
+button{margin:.65rem .35rem 0 0;background:#dcccff;color:#1e152e;font-weight:700;cursor:pointer}
+li{margin:.45rem 0}#results button{margin:.2rem .4rem .25rem 0;text-align:left}
+button:disabled{opacity:.55;cursor:default}
+a{color:#dcccff}
+code{overflow-wrap:anywhere}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>Spotify-udskiftning</h1>
+<p>Udskift sporene på en fast DJ FOLSOE-playliste og behold dens link.</p>
+<section aria-labelledby="setup">
+<h2 id="setup">Forbind Spotify</h2>
+<p>Registrér denne redirect-URI i din eksisterende Spotify Developer-app.</p>
+<p><code id="redirect"></code></p>
+<form id="login-form">
+<label for="client">Spotify Client ID</label>
+<input id="client" required pattern="[A-Fa-f0-9]{32}" autocomplete="off" spellcheck="false">
+<button type="submit">Log ind på Spotify</button>
+<button id="logout" type="button" hidden>Afbryd forbindelse</button>
+</form>
+</section>
+
+<section aria-labelledby="edit">
+<h2 id="edit">Skift uge</h2>
+<label for="show">Fast playliste</label>
+<select id="show">
+<option value="trance">Trance Tuesday</option>
+<option value="classic">Classic Dance #90 #00</option>
+<option value="retro">Retro Hits</option>
+</select>
+<p><a id="playlist-link" target="_blank" rel="noopener noreferrer">Åbn den faste playliste i Spotify</a></p>
+<label for="week">ISO-uge</label>
+<input id="week" type="week" value="2026-W47" required>
+<details id="curation">
+<summary>Find de kuraterede uge 47-numre</summary>
+<p>Find og vælg hver konkrete version. Spotify-resultater kan variere efter konto og land.</p>
+<label for="candidate">Nummer i den planlagte spilleorden</label>
+<select id="candidate"></select>
+<button id="search" type="button" disabled>Søg i Spotify</button>
+<ul id="results"></ul>
+<p id="progress" role="status"></p>
+<button id="use-selection" type="button" disabled>Brug hele det valgte udvalg</button>
+</details>
+<label for="tracks">Spotify-sporlinks eller track-URI’er i spilleorden</label>
+<p id="track-help">Sæt ét spor på hver linje. Spotify-søgelinks skal åbnes og erstattes med linket til det konkrete nummer.</p>
+<textarea id="tracks" aria-describedby="track-help" spellcheck="false" placeholder="spotify:track:…"></textarea>
+<button id="preview" type="button" disabled>Kontrollér udvalg og hent ugearkiv</button>
+<button id="apply" type="button" disabled>Udskift hele playlisten</button>
+<p id="review" hidden></p>
+</section>
+<p id="status" role="status" aria-live="polite">Forbind Spotify for at kontrollere en playliste.</p>
+</main>
+<script type="module">
+const shows = {
+  trance: { name: 'Trance Tuesday', id: '0x6ynnN468f6kya88ufKu8' },
+  classic: { name: 'Classic Dance #90 #00', id: '2oOwvfLNb2wYxbOTCdfiEE' },
+  retro: { name: 'Retro Hits', id: '7l6PFQwtGbVJwTd5vHE0zE' },
+};
+const week47 = {
+  "trance": [
+    [
+      "BT",
+      "Mercury & Solace",
+      "Quivver's Transatlantic Remix",
+      "spotify:track:6crPRDvtoMLBA5Igp4ulXl"
+    ],
+    [
+      "Sasha",
+      "Xpander",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Tilt",
+      "Invisible",
+      "Tilt's Supernatural Dub",
+      ""
+    ],
+    [
+      "Breeder",
+      "The Chain",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Bedrock",
+      "Heaven Scent",
+      "Original Mix",
+      ""
+    ],
+    [
+      "L.S.G.",
+      "Fontana",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Cass & Slide",
+      "Perception",
+      "Vocal Mix",
+      ""
+    ],
+    [
+      "Ayla",
+      "Ayla",
+      "Taucher Remix",
+      ""
+    ],
+    [
+      "BBE",
+      "Seven Days and One Week",
+      "Club Mix",
+      ""
+    ],
+    [
+      "ATB",
+      "Don't Stop!",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Paul van Dyk",
+      "Nothing But You",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Ralph Fridge",
+      "Angel",
+      "Club Mix",
+      ""
+    ],
+    [
+      "System F",
+      "Cry",
+      "Original Extended Mix",
+      ""
+    ],
+    [
+      "Signum",
+      "What Ya Got 4 Me",
+      "Vocal Mix",
+      ""
+    ],
+    [
+      "The Thrillseekers",
+      "Dreaming of You",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Airbase",
+      "Escape",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Above & Beyond feat. Zoë Johnston",
+      "Can't Sleep",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Armin van Buuren feat. Justine Suissa",
+      "Burned With Desire",
+      "Rising Star Vocal Mix",
+      ""
+    ],
+    [
+      "Darren Tate & Jono Grant",
+      "Let the Light Shine In",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Super8 & Tab",
+      "Helsinki Scorchin'",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Aly & Fila",
+      "Eye of Horus",
+      "Ronski Speed Remix",
+      ""
+    ],
+    [
+      "OceanLab",
+      "Sirens of the Sea",
+      "Above & Beyond Club Mix",
+      ""
+    ],
+    [
+      "Cosmic Gate",
+      "Fire Wire",
+      "Club Mix",
+      ""
+    ],
+    [
+      "Rank 1",
+      "Such Is Life",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Duderstadt",
+      "Muhanjala",
+      "Original Mix",
+      ""
+    ],
+    [
+      "John O'Callaghan feat. Audrey Gallagher",
+      "Find Yourself",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Gareth Emery feat. Christina Novelli",
+      "Save Me",
+      "Extended Mix",
+      ""
+    ]
+  ],
+  "retro": [
+    [
+      "Fleetwood Mac",
+      "Dreams",
+      "Single/album",
+      ""
+    ],
+    [
+      "Toto",
+      "Rosanna",
+      "Single/album",
+      ""
+    ],
+    [
+      "Christopher Cross",
+      "Ride Like the Wind",
+      "Single/album",
+      ""
+    ],
+    [
+      "Steely Dan",
+      "Peg",
+      "Single/album",
+      ""
+    ],
+    [
+      "Boz Scaggs",
+      "Lowdown",
+      "Single/album",
+      ""
+    ],
+    [
+      "Gino Vannelli",
+      "I Just Wanna Stop",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Doobie Brothers",
+      "What a Fool Believes",
+      "Single/album",
+      ""
+    ],
+    [
+      "Paul Simon",
+      "Late in the Evening",
+      "Single/album",
+      ""
+    ],
+    [
+      "Paul McCartney & Wings",
+      "Silly Love Songs",
+      "Single/album",
+      ""
+    ],
+    [
+      "Bee Gees",
+      "Nights on Broadway",
+      "Single/album",
+      ""
+    ],
+    [
+      "Electric Light Orchestra",
+      "Livin' Thing",
+      "Single/album",
+      ""
+    ],
+    [
+      "10cc",
+      "Dreadlock Holiday",
+      "Single/album",
+      ""
+    ],
+    [
+      "Boney M.",
+      "Sunny",
+      "Single/album",
+      ""
+    ],
+    [
+      "Earth, Wind & Fire",
+      "Fantasy",
+      "Single/album",
+      ""
+    ],
+    [
+      "Chic",
+      "Everybody Dance",
+      "Single/album",
+      ""
+    ],
+    [
+      "Sister Sledge",
+      "We Are Family",
+      "Single/album",
+      ""
+    ],
+    [
+      "Diana Ross",
+      "I'm Coming Out",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Jacksons",
+      "Blame It on the Boogie",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Pointer Sisters",
+      "Jump (For My Love)",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Weather Girls",
+      "It's Raining Men",
+      "Single/album",
+      ""
+    ],
+    [
+      "Kool & The Gang",
+      "Fresh",
+      "Single/album",
+      ""
+    ],
+    [
+      "Change",
+      "Searching",
+      "Single/album",
+      ""
+    ],
+    [
+      "Shalamar",
+      "I Can Make You Feel Good",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Whispers",
+      "It's a Love Thing",
+      "Single/album",
+      ""
+    ],
+    [
+      "Delegation",
+      "You and I",
+      "Single/album",
+      ""
+    ],
+    [
+      "D-Train",
+      "Keep On",
+      "Single/album",
+      ""
+    ],
+    [
+      "Imagination",
+      "Music and Lights",
+      "Single/album",
+      ""
+    ],
+    [
+      "Michael McDonald",
+      "I Keep Forgettin'",
+      "Single/album",
+      ""
+    ],
+    [
+      "Al Jarreau",
+      "Mornin'",
+      "Single/album",
+      ""
+    ],
+    [
+      "George Benson",
+      "Turn Your Love Around",
+      "Single/album",
+      ""
+    ],
+    [
+      "Steve Winwood",
+      "Higher Love",
+      "Single/album",
+      ""
+    ],
+    [
+      "Hall & Oates",
+      "Out of Touch",
+      "Single/album",
+      ""
+    ],
+    [
+      "Michael Sembello",
+      "Maniac",
+      "Single/album",
+      ""
+    ],
+    [
+      "Philip Bailey & Phil Collins",
+      "Easy Lover",
+      "Single/album",
+      ""
+    ],
+    [
+      "Miami Sound Machine",
+      "Conga",
+      "Single/album",
+      ""
+    ],
+    [
+      "Belinda Carlisle",
+      "Heaven Is a Place on Earth",
+      "Single/album",
+      ""
+    ],
+    [
+      "Kim Wilde",
+      "Kids in America",
+      "Single/album",
+      ""
+    ],
+    [
+      "Cyndi Lauper",
+      "Girls Just Want to Have Fun",
+      "Single/album",
+      ""
+    ],
+    [
+      "Bananarama",
+      "Cruel Summer",
+      "Single/album",
+      ""
+    ],
+    [
+      "Eurythmics",
+      "Here Comes the Rain Again",
+      "Single/album",
+      ""
+    ],
+    [
+      "Depeche Mode",
+      "People Are People",
+      "Single/album",
+      ""
+    ],
+    [
+      "Pet Shop Boys",
+      "It's a Sin",
+      "Single/album",
+      ""
+    ],
+    [
+      "New Order",
+      "Bizarre Love Triangle",
+      "Singleversion",
+      ""
+    ],
+    [
+      "Erasure",
+      "Chains of Love",
+      "Single/album",
+      ""
+    ],
+    [
+      "ABC",
+      "Poison Arrow",
+      "Single/album",
+      ""
+    ],
+    [
+      "OMD",
+      "Enola Gay",
+      "Single/album",
+      ""
+    ],
+    [
+      "Yazoo",
+      "Only You",
+      "Single/album",
+      ""
+    ],
+    [
+      "A-ha",
+      "The Sun Always Shines on T.V.",
+      "Single/album",
+      ""
+    ],
+    [
+      "Duran Duran",
+      "Notorious",
+      "Single/album",
+      ""
+    ],
+    [
+      "INXS",
+      "Need You Tonight",
+      "Single/album",
+      ""
+    ],
+    [
+      "TV-2",
+      "Bag duggede ruder",
+      "Single/album",
+      ""
+    ],
+    [
+      "Sneakers",
+      "Sådan er det",
+      "Single/album",
+      ""
+    ],
+    [
+      "Rocazino",
+      "Elsk mig i nat",
+      "Single/album",
+      ""
+    ],
+    [
+      "Dodo & The Dodos",
+      "Vågner i nat",
+      "Single/album",
+      ""
+    ],
+    [
+      "Ray Dee Ohh",
+      "Mandags-stævnemøde",
+      "Single/album",
+      "spotify:track:32CrCq1yYkeF5vYhYtylLE"
+    ],
+    [
+      "One Two",
+      "Midt i en drøm",
+      "Single/album",
+      ""
+    ],
+    [
+      "Shu-bi-dua",
+      "Danmark",
+      "Single/album",
+      ""
+    ],
+    [
+      "Kim Larsen",
+      "Jutlandia",
+      "Single/album",
+      ""
+    ],
+    [
+      "Gnags",
+      "Vilde kaniner",
+      "Single/album",
+      ""
+    ],
+    [
+      "Michael Learns to Rock",
+      "The Actor",
+      "Single/album",
+      ""
+    ]
+  ],
+  "classic": [
+    [
+      "Maxx",
+      "Get a Way",
+      "Club Mix",
+      "spotify:track:2ItOo66xuIaj638koUqPJd"
+    ],
+    [
+      "Ice MC",
+      "Think About the Way",
+      "Extended Mix",
+      ""
+    ],
+    [
+      "2 Brothers on the 4th Floor",
+      "Dreams (Will Come Alive)",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Magic Affair",
+      "Omen III",
+      "Maxi Version",
+      ""
+    ],
+    [
+      "E-Rotic",
+      "Max Don't Have Sex with Your Ex",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Mr. President",
+      "Coco Jamboo",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Toy-Box",
+      "Tarzan & Jane",
+      "Maxi Version",
+      ""
+    ],
+    [
+      "Aqua",
+      "Barbie Girl",
+      "Perky Park Club Mix",
+      ""
+    ],
+    [
+      "DJ Jean",
+      "The Launch",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Klubbheads",
+      "Kickin' Hard",
+      "Central Seven Extended Remix",
+      ""
+    ],
+    [
+      "Barcode Brothers",
+      "Flute",
+      "Albumversion",
+      ""
+    ],
+    [
+      "Brooklyn Bounce",
+      "Bass, Beats & Melody",
+      "Extended Remix",
+      ""
+    ],
+    [
+      "DJ Aligator Project",
+      "Lollipop",
+      "Albumversion",
+      ""
+    ],
+    [
+      "DJ Encore feat. Engelina",
+      "I See Right Through To You",
+      "Albumversion",
+      ""
+    ],
+    [
+      "Safri Duo",
+      "Played-A-Live (The Bongo Song)",
+      "Episode II-albumversion",
+      ""
+    ],
+    [
+      "Sylver",
+      "Turn the Tide",
+      "Chances-albumversion",
+      ""
+    ],
+    [
+      "N-Trance",
+      "Set You Free",
+      "Extended Mix",
+      ""
+    ],
+    [
+      "Manian",
+      "Welcome to the Club",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Megastylez",
+      "Jump with Me",
+      "Extended Mix",
+      ""
+    ],
+    [
+      "Rocco",
+      "Everybody",
+      "Club Mix",
+      ""
+    ]
+  ]
+};
+const resolved = Object.fromEntries(Object.entries(week47).map(([key, songs]) => [key, songs.map(song => song[3])]));
+const field = id => document.getElementById(id);
+const redirect = location.origin + location.pathname;
+const pendingKey = 'djf-spotify-replace-pkce';
+const clientKey = 'djf-spotify-replace-client';
+const scopes = 'playlist-read-private playlist-modify-public playlist-modify-private';
+let session;
+let plan;
+let busy = false;
+
+field('redirect').textContent = redirect;
+field('client').value = sessionStorage.getItem(clientKey) || '';
+
+function report(message) {
+  field('status').textContent = message;
+}
+
+function sync() {
+  const { id } = shows[field('show').value];
+  field('playlist-link').href = 'https://open.spotify.com/playlist/' + id;
+  field('preview').disabled = busy || !session;
+  field('apply').disabled = busy || !session || !plan;
+  field('review').hidden = !plan;
+  field('logout').hidden = !session;
+  field('logout').disabled = busy;
+  field('search').disabled = busy || !session;
+  field('use-selection').disabled = busy || !resolved[field('show').value].every(Boolean);
+}
+
+function clearPlan() {
+  plan = undefined;
+  sync();
+}
+
+function reportError(error) {
+  report(error.message || 'Spotify-handlingen kunne ikke gennemføres.');
+}
+
+async function run(action) {
+  if (busy) return;
+  busy = true;
+  sync();
+  try {
+    await action();
+  } catch (error) {
+    reportError(error);
+  } finally {
+    busy = false;
+    sync();
+  }
+}
+
+function base64url(bytes) {
+  return btoa(String.fromCharCode(...bytes)).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '');
+}
+
+async function startLogin() {
+  const clientId = field('client').value.trim();
+  const state = base64url(crypto.getRandomValues(new Uint8Array(24)));
+  const verifier = base64url(crypto.getRandomValues(new Uint8Array(64)));
+  const bytes = new TextEncoder().encode(verifier);
+  const challenge = base64url(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)));
+  sessionStorage.setItem(clientKey, clientId);
+  sessionStorage.setItem(pendingKey, JSON.stringify({ state, verifier, clientId, created: Date.now() }));
+  const url = new URL('https://accounts.spotify.com/authorize');
+  url.search = new URLSearchParams({
+    client_id: clientId, response_type: 'code', redirect_uri: redirect, scope: scopes, state,
+    code_challenge_method: 'S256', code_challenge: challenge,
+  });
+  location.assign(url.href);
+}
+
+async function finishLogin() {
+  const query = new URLSearchParams(location.search);
+  if (!query.has('code') && !query.has('error')) return;
+  const pending = JSON.parse(sessionStorage.getItem(pendingKey) || 'null');
+  sessionStorage.removeItem(pendingKey);
+  history.replaceState(null, '', redirect);
+  if (!pending || pending.state !== query.get('state') || Date.now() - pending.created > 600000) {
+    throw new Error('Loginforsøget kunne ikke valideres. Start et nyt login.');
+  }
+  if (query.has('error')) throw new Error('Spotify gav ikke adgang. Start et nyt login ved behov.');
+  const body = new URLSearchParams({
+    client_id: pending.clientId, grant_type: 'authorization_code', code: query.get('code'),
+    redirect_uri: redirect, code_verifier: pending.verifier,
+  });
+  const response = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', body });
+  if (!response.ok) throw new Error('Spotify afviste login (' + response.status + '). Kontrollér Client ID og redirect-URI.');
+  const data = await response.json();
+  if (!data.access_token || !Number.isFinite(data.expires_in)) throw new Error('Spotify returnerede ingen gyldig adgang.');
+  session = { token: data.access_token, expires: Date.now() + data.expires_in * 1000 };
+  report('Spotify er forbundet. Vælg den faste playliste og indsæt sporene.');
+}
+
+async function api(path, method = 'GET', body) {
+  if (!session || Date.now() >= session.expires) throw new Error('Spotify-login er udløbet. Log ind igen.');
+  const response = await fetch('https://api.spotify.com/v1' + path, {
+    method,
+    headers: { Authorization: 'Bearer ' + session.token, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!response.ok) {
+    if (response.status === 401) {
+      session = undefined;
+      plan = undefined;
+      throw new Error('Spotify-login er udløbet. Log ind igen.');
+    }
+    if (response.status === 403) throw new Error('Spotify afviste adgangen (403). Kontrollér konto og appens rettigheder til playlisten.');
+    if (response.status === 429) throw new Error('Spotify har midlertidigt begrænset forespørgsler. Vent, og kontrollér den faste liste før et nyt forsøg.');
+    throw new Error('Spotify returnerede HTTP ' + response.status + '.');
+  }
+  const result = await response.text();
+  return result ? JSON.parse(result) : undefined;
+}
+
+function parseTracks(text) {
+  const lines = text.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+  if (!lines.length || lines.length > 100) throw new Error('Indsæt mellem 1 og 100 konkrete sporlinks.');
+  const uris = lines.map((line, index) => {
+    const match = /^(?:spotify:track:|https:\/\/open\.spotify\.com\/(?:intl-[a-z-]+\/)?track\/)([A-Za-z0-9]{22})(?:\?[^\s]*)?$/.exec(line);
+    if (!match) throw new Error('Linje ' + (index + 1) + ' er ikke et Spotify-sporlink eller en track-URI.');
+    return 'spotify:track:' + match[1];
+  });
+  if (new Set(uris).size !== uris.length) throw new Error('Udvalget indeholder samme Spotify-spor flere gange.');
+  return uris;
+}
+
+async function readPlaylist(id) {
+  const path = '/playlists/' + id;
+  const metadata = await api(path + '?fields=id,name,snapshot_id');
+  const uris = [];
+  let offset = 0;
+  while (true) {
+    const page = await api(path + '/items?limit=50&offset=' + offset);
+    if (!Array.isArray(page?.items)) throw new Error('Spotify returnerede ikke det eksisterende indhold.');
+    for (const entry of page.items) {
+      const item = entry.item || entry.track;
+      const uri = item?.linked_from?.uri || item?.uri;
+      if (!uri || entry.is_local || item.is_local) {
+        throw new Error('Det eksisterende udvalg indeholder et lokalt eller utilgængeligt spor. Ugearkivet kan ikke gendannes sikkert.');
+      }
+      uris.push(uri);
+    }
+    if (!page.next) break;
+    if (!page.items.length) throw new Error('Spotify returnerede et ufuldstændigt udvalg.');
+    offset += page.items.length;
+  }
+  const current = await api(path + '?fields=id,name,snapshot_id');
+  if (!metadata.snapshot_id || metadata.snapshot_id !== current.snapshot_id || metadata.name !== current.name) {
+    throw new Error('Playlisten ændrede sig under læsningen. Kontrollér udvalget igen.');
+  }
+  return { ...current, uris };
+}
+
+function saveArchive(playlist) {
+  const archive = { archivedAt: new Date().toISOString(), playlist };
+  const blob = new Blob([JSON.stringify(archive, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'DJF-Spotify-arkiv-' + playlist.id + '-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function readInputs() {
+  const show = shows[field('show').value];
+  const week = /^(\d{4})-W(0[1-9]|[1-4]\d|5[0-3])$/.exec(field('week').value);
+  if (!week) throw new Error('Vælg en gyldig ISO-uge.');
+  return {
+    id: show.id,
+    name: 'DJ FOLSOE · ' + show.name + ' · Uge ' + week[2] + ' / ' + week[1],
+    uris: parseTracks(field('tracks').value),
+  };
+}
+
+async function preview() {
+  clearPlan();
+  const next = readInputs();
+  const before = await readPlaylist(next.id);
+  if (before.id !== next.id) throw new Error('Spotify returnerede en anden playliste end den valgte.');
+  saveArchive(before);
+  plan = { next, before };
+  field('review').textContent = before.name + ' (' + before.uris.length + ' spor) → ' + next.name + ' (' + next.uris.length + ' spor).';
+  report('Ugearkivet er klargjort til download. Kontrollér antal spor før udskiftning.');
+}
+
+function renderCandidates(start = 0) {
+  const key = field('show').value;
+  const songs = week47[key];
+  const options = songs.map(([artist, title, version], index) => {
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = (index + 1) + '. ' + artist + ' – ' + title + ' · ' + version
+      + (resolved[key][index] ? ' ✓' : '');
+    return option;
+  });
+  field('candidate').replaceChildren(...options);
+  const next = resolved[key].findIndex((uri, index) => !uri && index >= start);
+  field('candidate').value = String(next >= 0 ? next : Math.min(start, songs.length - 1));
+  field('progress').textContent = resolved[key].filter(Boolean).length + ' af ' + songs.length + ' spor valgt.';
+  field('results').replaceChildren();
+  sync();
+}
+
+async function searchCandidate() {
+  const key = field('show').value;
+  const index = Number(field('candidate').value);
+  const [artist, title, version] = week47[key][index];
+  const query = new URLSearchParams({ q: artist + ' ' + title, type: 'track', limit: '5' });
+  const data = await api('/search?' + query);
+  if (field('show').value !== key || Number(field('candidate').value) !== index) return;
+  const tracks = data.tracks?.items || [];
+  const options = tracks.map(track => {
+    const entry = document.createElement('li');
+    const choice = document.createElement('button');
+    const artists = track.artists.map(person => person.name).join(', ');
+    const minutes = Math.floor(track.duration_ms / 60000);
+    const seconds = String(Math.floor(track.duration_ms / 1000) % 60).padStart(2, '0');
+    choice.type = 'button';
+    choice.textContent = track.name + ' · ' + artists + ' · ' + minutes + ':' + seconds;
+    choice.addEventListener('click', () => {
+      if (busy || field('show').value !== key || Number(field('candidate').value) !== index) return;
+      resolved[key][index] = track.uri;
+      renderCandidates(index + 1);
+      report('Valgte ' + track.name + '.');
+    });
+    entry.append(choice);
+    return entry;
+  });
+  field('results').replaceChildren(...options);
+  report(options.length ? 'Vælg det ønskede Spotify-spor. Planlagt version: ' + version + '.' :
+    'Spotify fandt ingen versioner. Find det konkrete spor i Spotify og indsæt linket manuelt.');
+}
+
+field('candidate').addEventListener('change', () => field('results').replaceChildren());
+field('show').addEventListener('change', () => renderCandidates());
+field('search').addEventListener('click', () => void run(searchCandidate));
+field('use-selection').addEventListener('click', () => {
+  const selected = resolved[field('show').value];
+  if (!selected.every(Boolean)) return;
+  field('week').value = '2026-W47';
+  field('tracks').value = selected.join('\n');
+  clearPlan();
+});
+
+function sameTracks(left, right) {
+  return left.length === right.length && left.every((uri, index) => uri === right[index]);
+}
+
+async function apply() {
+  const { next, before } = plan;
+  clearPlan();
+  const input = readInputs();
+  if (input.id !== next.id || input.name !== next.name || !sameTracks(input.uris, next.uris)) {
+    throw new Error('Udvalget er ændret. Kontrollér det igen.');
+  }
+  const path = '/playlists/' + next.id;
+  const current = await readPlaylist(next.id);
+  if (current.snapshot_id !== before.snapshot_id || current.name !== before.name) {
+    throw new Error('Playlisten er ændret efter arkivering. Hent et nyt arkiv først.');
+  }
+  try {
+    await api(path + '/items', 'PUT', { uris: next.uris });
+    const after = await readPlaylist(next.id);
+    if (!sameTracks(after.uris, next.uris)) {
+      throw new Error('Den nye spilleorden kunne ikke verificeres.');
+    }
+  } catch (error) {
+    throw new Error('Udskiftningen kunne ikke bekræftes. Åbn Spotify og kontrollér sporene før et nyt forsøg. ' + error.message);
+  }
+  try {
+    await api(path, 'PUT', { name: next.name });
+    const renamed = await api(path + '?fields=id,name,snapshot_id');
+    if (renamed.name !== next.name) throw new Error('Spotify returnerede et andet navn.');
+  } catch (error) {
+    throw new Error('Alle ' + next.uris.length + ' spor er verificeret i den nye rækkefølge. Ugenavnet kunne ikke bekræftes. ' + error.message);
+  }
+  report(next.name + ' er opdateret og verificeret med ' + next.uris.length + ' spor på det faste link.');
+}
+
+field('login-form').addEventListener('submit', event => {
+  event.preventDefault();
+  void run(startLogin);
+});
+field('logout').addEventListener('click', () => {
+  session = undefined;
+  clearPlan();
+  report('Spotify-forbindelsen er afbrudt for denne fane.');
+});
+for (const id of ['show', 'week', 'tracks']) field(id).addEventListener('input', clearPlan);
+field('preview').addEventListener('click', () => void run(preview));
+field('apply').addEventListener('click', () => void run(apply));
+renderCandidates();
+void run(finishLogin);
+</script>
+</body>
+</html>
