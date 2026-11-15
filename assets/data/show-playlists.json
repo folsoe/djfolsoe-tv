@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "mode": "stable-playlist-ids",
+  "mode": "weekly-playlist-ids",
   "shows": {
     "retro": {
       "name": "Retro Hits",
-      "id": "7l6PFQwtGbVJwTd5vHE0zE",
+      "id": "5GKDTSyP6fpKs1ohOA5Nh9",
       "path": "/shows/retro-hits/",
       "schedule": {
         "day": "SU",
@@ -18,7 +18,7 @@
     },
     "trance": {
       "name": "Trance Tuesday",
-      "id": "0x6ynnN468f6kya88ufKu8",
+      "id": "16ggsXSTDYT2XnpdGFGX34",
       "path": "/shows/trance-tuesday/",
       "schedule": {
         "day": "TU",
@@ -32,7 +32,7 @@
     },
     "eurodance": {
       "name": "Classic Dance #90 #00",
-      "id": "2oOwvfLNb2wYxbOTCdfiEE",
+      "id": "082OWGgiLIS23QwF7o2FyI",
       "path": "/shows/eurodance/",
       "schedule": {
         "day": "TH",
@@ -44,5 +44,6 @@
         "confirmedAt": "2026-11-01"
       }
     }
-  }
+  },
+  "week": "2026-W47"
 }

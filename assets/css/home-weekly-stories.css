@@ -1,0 +1,18 @@
+.djf-home-week{margin:1.1rem 0 2.25rem}
+.djf-home-week h3{margin:.25rem 0 1.15rem;font-size:clamp(1.8rem,4vw,3rem);line-height:1.06}
+.djf-home-week-grid,.djf-home-week-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;align-items:start}
+.djf-home-week-card,.djf-home-week-columns article{padding:clamp(1rem,2vw,1.55rem);border:1px solid #4f435f;border-top:3px solid var(--weekly-accent,#c6a4f4);background:#211a2d;color:#f7f2ff;border-radius:1rem;overflow-wrap:anywhere}
+.djf-home-week-card[data-show=trance]{--weekly-accent:#9bf9ff}
+.djf-home-week-card[data-show=eurodance]{--weekly-accent:#edff83}
+.djf-home-week-card[data-show=retro]{--weekly-accent:#ffd89d}
+.djf-home-week-card article+article{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid #51415e}
+.djf-home-week-label{font-size:.82rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase;color:var(--weekly-accent,#dac2ff)}
+.djf-home-week-track{font-size:.85rem;color:#ded1eb}
+.djf-home-week h4{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.15;margin:.45rem 0 .7rem}
+.djf-home-week article p{margin:.65rem 0}
+.djf-home-week-question{font-weight:650}
+.djf-home-week a{color:var(--weekly-accent,#dac2ff);text-decoration:underline;text-underline-offset:.2em}
+.djf-home-week-actions{margin-top:1.2rem;display:flex;gap:.75rem;flex-wrap:wrap}
+.djf-home-week-columns{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1rem}
+@media(max-width:62rem){.djf-home-week-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:42rem){.djf-home-week-grid,.djf-home-week-columns{grid-template-columns:minmax(0,1fr)}}
