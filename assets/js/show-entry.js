@@ -159,3 +159,104 @@ render();refresh();
   window.addEventListener('djf:languagechange', render);
   render();
 })();
+
+
+/* The weekly show selector lends the public front page the rhythm of a TV programme. */
+(() => {
+  'use strict';
+  const main = document.getElementById('main');
+  if (document.documentElement.dataset.editorialPage !== 'home' || !main) return;
+  const signal = main.querySelector('.signal');
+  if (!signal) return;
+
+  const langIndex = () => Math.max(0, ['da', 'en', 'de'].indexOf(document.documentElement.lang.split('-')[0]));
+  const labels = {
+    title: ['Find din lyd', 'Find your sound', 'Finde deinen Sound'],
+    open: ['Gå til showet', 'Explore the show', 'Zur Show'],
+    music: ['Ugens playliste', 'This week’s playlist', 'Playlist der Woche'],
+    time: ['Dansk tid', 'Denmark time', 'Dänische Zeit'],
+  };
+  const shows = [
+    {
+      name: 'Trance Tuesday', id: 'trance', path: 'trance-tuesday',
+      genre: ['Melodisk trance', 'Melodic trance', 'Melodic Trance'],
+      day: ['Tirsdag', 'Tuesday', 'Dienstag'], time: '18.30–21.30',
+      line: ['Fra det første pulsslag til det drop, du har ventet på hele aftenen.', 'From the first pulse to the drop you’ve been waiting for all night.', 'Vom ersten Puls bis zum Drop, auf den du den ganzen Abend gewartet hast.'],
+    },
+    {
+      name: 'Classic Dance #90 #00', id: 'eurodance', path: 'eurodance',
+      genre: ['Klubklassikere', 'Club classics', 'Clubklassiker'],
+      day: ['Torsdag', 'Thursday', 'Donnerstag'], time: '19.00–21.00',
+      line: ['To årtier med store omkvæd, danske klubhits og numre, der stadig fylder gulvet.', 'Two decades of big choruses, Danish club hits and records that still fill the floor.', 'Zwei Jahrzehnte voller großer Refrains, dänischer Clubhits und Songs, die heute noch die Tanzfläche füllen.'],
+    },
+    {
+      name: 'Retro Hits', id: 'retro', path: 'retro-hits',
+      genre: ['Pop, soul og disco', 'Pop, soul and disco', 'Pop, Soul und Disco'],
+      day: ['Søndag', 'Sunday', 'Sonntag'], time: '08.00–12.00',
+      line: ['Radiofavoritter, de glemte B-sider og sangene, der stadig kan åbne et helt musikminde.', 'Radio favourites, forgotten B-sides and songs that can bring a whole memory back.', 'Radiofavoriten, vergessene B-Seiten und Songs, die eine ganze Erinnerung zurückholen.'],
+    },
+  ];
+
+  function node(tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text) element.textContent = text;
+    return element;
+  }
+
+  const section = node('section', 'sound-stage');
+  section.setAttribute('aria-labelledby', 'sound-stage-heading');
+  const heading = node('h2');
+  heading.id = 'sound-stage-heading';
+  const row = node('div', 'sound-stage-row');
+  const choices = node('div', 'sound-stage-choices');
+  const stage = node('div', 'sound-stage-feature');
+  stage.id = 'sound-stage-feature';
+  const title = node('h3');
+  const time = node('p', 'sound-stage-time');
+  const description = node('p', 'sound-stage-description');
+  const actions = node('div', 'sound-stage-actions');
+  const detail = node('a');
+  const playlist = node('a');
+  actions.append(detail, playlist);
+  stage.append(time, title, description, actions);
+  row.append(choices, stage);
+  section.append(heading, row);
+
+  let selected = 0;
+  const buttons = shows.map((show, index) => {
+    const button = node('button', 'sound-stage-choice');
+    button.type = 'button';
+    button.dataset.channel = show.id;
+    button.setAttribute('aria-controls', stage.id);
+    button.append(node('span', '', show.name), node('small'));
+    button.addEventListener('click', () => {
+      selected = index;
+      render();
+    });
+    choices.append(button);
+    return button;
+  });
+
+  function render() {
+    const lang = langIndex();
+    const show = shows[selected];
+    heading.textContent = labels.title[lang];
+    stage.dataset.channel = show.id;
+    buttons.forEach((button, index) => {
+      button.setAttribute('aria-pressed', String(index === selected));
+      button.lastElementChild.textContent = shows[index].genre[lang];
+    });
+    time.textContent = show.day[lang] + ' · ' + show.time + ' · ' + labels.time[lang];
+    title.textContent = show.name;
+    description.textContent = show.line[lang];
+    detail.textContent = labels.open[lang];
+    detail.href = '/shows/' + show.path + '/?lang=' + document.documentElement.lang;
+    playlist.textContent = labels.music[lang];
+    playlist.href = '#playlist-' + show.id;
+  }
+
+  signal.after(section);
+  window.addEventListener('djf:languagechange', render);
+  render();
+})();
