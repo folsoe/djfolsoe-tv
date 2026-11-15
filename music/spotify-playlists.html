@@ -15,6 +15,7 @@ input,textarea,select,button{font:inherit;border:1px solid #706282;border-radius
 input,textarea,select{width:100%;box-sizing:border-box;background:#191322;color:inherit}
 textarea{min-height:11rem;resize:vertical}
 button{margin:.65rem .35rem 0 0;background:#dcccff;color:#1e152e;font-weight:700;cursor:pointer}
+li{margin:.45rem 0}#results button{margin:.2rem .4rem .25rem 0;text-align:left}
 button:disabled{opacity:.55;cursor:default}
 a{color:#dcccff}
 code{overflow-wrap:anywhere}
@@ -48,6 +49,16 @@ code{overflow-wrap:anywhere}
 <p><a id="playlist-link" target="_blank" rel="noopener noreferrer">Åbn den faste playliste i Spotify</a></p>
 <label for="week">ISO-uge</label>
 <input id="week" type="week" value="2026-W47" required>
+<details id="curation">
+<summary>Find de kuraterede uge 47-numre</summary>
+<p>Find og vælg hver konkrete version. Spotify-resultater kan variere efter konto og land.</p>
+<label for="candidate">Nummer i den planlagte spilleorden</label>
+<select id="candidate"></select>
+<button id="search" type="button" disabled>Søg i Spotify</button>
+<ul id="results"></ul>
+<p id="progress" role="status"></p>
+<button id="use-selection" type="button" disabled>Brug hele det valgte udvalg</button>
+</details>
 <label for="tracks">Spotify-sporlinks eller track-URI’er i spilleorden</label>
 <p id="track-help">Sæt ét spor på hver linje. Spotify-søgelinks skal åbnes og erstattes med linket til det konkrete nummer.</p>
 <textarea id="tracks" aria-describedby="track-help" spellcheck="false" placeholder="spotify:track:…"></textarea>
@@ -63,6 +74,657 @@ const shows = {
   classic: { name: 'Classic Dance #90 #00', id: '2oOwvfLNb2wYxbOTCdfiEE' },
   retro: { name: 'Retro Hits', id: '7l6PFQwtGbVJwTd5vHE0zE' },
 };
+const week47 = {
+  "trance": [
+    [
+      "BT",
+      "Mercury & Solace",
+      "Quivver's Transatlantic Remix",
+      "spotify:track:6crPRDvtoMLBA5Igp4ulXl"
+    ],
+    [
+      "Sasha",
+      "Xpander",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Tilt",
+      "Invisible",
+      "Tilt's Supernatural Dub",
+      ""
+    ],
+    [
+      "Breeder",
+      "The Chain",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Bedrock",
+      "Heaven Scent",
+      "Original Mix",
+      ""
+    ],
+    [
+      "L.S.G.",
+      "Fontana",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Cass & Slide",
+      "Perception",
+      "Vocal Mix",
+      ""
+    ],
+    [
+      "Ayla",
+      "Ayla",
+      "Taucher Remix",
+      ""
+    ],
+    [
+      "BBE",
+      "Seven Days and One Week",
+      "Club Mix",
+      ""
+    ],
+    [
+      "ATB",
+      "Don't Stop!",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Paul van Dyk",
+      "Nothing But You",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Ralph Fridge",
+      "Angel",
+      "Club Mix",
+      ""
+    ],
+    [
+      "System F",
+      "Cry",
+      "Original Extended Mix",
+      ""
+    ],
+    [
+      "Signum",
+      "What Ya Got 4 Me",
+      "Vocal Mix",
+      ""
+    ],
+    [
+      "The Thrillseekers",
+      "Dreaming of You",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Airbase",
+      "Escape",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Above & Beyond feat. Zoë Johnston",
+      "Can't Sleep",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Armin van Buuren feat. Justine Suissa",
+      "Burned With Desire",
+      "Rising Star Vocal Mix",
+      ""
+    ],
+    [
+      "Darren Tate & Jono Grant",
+      "Let the Light Shine In",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Super8 & Tab",
+      "Helsinki Scorchin'",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Aly & Fila",
+      "Eye of Horus",
+      "Ronski Speed Remix",
+      ""
+    ],
+    [
+      "OceanLab",
+      "Sirens of the Sea",
+      "Above & Beyond Club Mix",
+      ""
+    ],
+    [
+      "Cosmic Gate",
+      "Fire Wire",
+      "Club Mix",
+      ""
+    ],
+    [
+      "Rank 1",
+      "Such Is Life",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Duderstadt",
+      "Muhanjala",
+      "Original Mix",
+      ""
+    ],
+    [
+      "John O'Callaghan feat. Audrey Gallagher",
+      "Find Yourself",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Gareth Emery feat. Christina Novelli",
+      "Save Me",
+      "Extended Mix",
+      ""
+    ]
+  ],
+  "retro": [
+    [
+      "Fleetwood Mac",
+      "Dreams",
+      "Single/album",
+      ""
+    ],
+    [
+      "Toto",
+      "Rosanna",
+      "Single/album",
+      ""
+    ],
+    [
+      "Christopher Cross",
+      "Ride Like the Wind",
+      "Single/album",
+      ""
+    ],
+    [
+      "Steely Dan",
+      "Peg",
+      "Single/album",
+      ""
+    ],
+    [
+      "Boz Scaggs",
+      "Lowdown",
+      "Single/album",
+      ""
+    ],
+    [
+      "Gino Vannelli",
+      "I Just Wanna Stop",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Doobie Brothers",
+      "What a Fool Believes",
+      "Single/album",
+      ""
+    ],
+    [
+      "Paul Simon",
+      "Late in the Evening",
+      "Single/album",
+      ""
+    ],
+    [
+      "Paul McCartney & Wings",
+      "Silly Love Songs",
+      "Single/album",
+      ""
+    ],
+    [
+      "Bee Gees",
+      "Nights on Broadway",
+      "Single/album",
+      ""
+    ],
+    [
+      "Electric Light Orchestra",
+      "Livin' Thing",
+      "Single/album",
+      ""
+    ],
+    [
+      "10cc",
+      "Dreadlock Holiday",
+      "Single/album",
+      ""
+    ],
+    [
+      "Boney M.",
+      "Sunny",
+      "Single/album",
+      ""
+    ],
+    [
+      "Earth, Wind & Fire",
+      "Fantasy",
+      "Single/album",
+      ""
+    ],
+    [
+      "Chic",
+      "Everybody Dance",
+      "Single/album",
+      ""
+    ],
+    [
+      "Sister Sledge",
+      "We Are Family",
+      "Single/album",
+      ""
+    ],
+    [
+      "Diana Ross",
+      "I'm Coming Out",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Jacksons",
+      "Blame It on the Boogie",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Pointer Sisters",
+      "Jump (For My Love)",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Weather Girls",
+      "It's Raining Men",
+      "Single/album",
+      ""
+    ],
+    [
+      "Kool & The Gang",
+      "Fresh",
+      "Single/album",
+      ""
+    ],
+    [
+      "Change",
+      "Searching",
+      "Single/album",
+      ""
+    ],
+    [
+      "Shalamar",
+      "I Can Make You Feel Good",
+      "Single/album",
+      ""
+    ],
+    [
+      "The Whispers",
+      "It's a Love Thing",
+      "Single/album",
+      ""
+    ],
+    [
+      "Delegation",
+      "You and I",
+      "Single/album",
+      ""
+    ],
+    [
+      "D-Train",
+      "Keep On",
+      "Single/album",
+      ""
+    ],
+    [
+      "Imagination",
+      "Music and Lights",
+      "Single/album",
+      ""
+    ],
+    [
+      "Michael McDonald",
+      "I Keep Forgettin'",
+      "Single/album",
+      ""
+    ],
+    [
+      "Al Jarreau",
+      "Mornin'",
+      "Single/album",
+      ""
+    ],
+    [
+      "George Benson",
+      "Turn Your Love Around",
+      "Single/album",
+      ""
+    ],
+    [
+      "Steve Winwood",
+      "Higher Love",
+      "Single/album",
+      ""
+    ],
+    [
+      "Hall & Oates",
+      "Out of Touch",
+      "Single/album",
+      ""
+    ],
+    [
+      "Michael Sembello",
+      "Maniac",
+      "Single/album",
+      ""
+    ],
+    [
+      "Philip Bailey & Phil Collins",
+      "Easy Lover",
+      "Single/album",
+      ""
+    ],
+    [
+      "Miami Sound Machine",
+      "Conga",
+      "Single/album",
+      ""
+    ],
+    [
+      "Belinda Carlisle",
+      "Heaven Is a Place on Earth",
+      "Single/album",
+      ""
+    ],
+    [
+      "Kim Wilde",
+      "Kids in America",
+      "Single/album",
+      ""
+    ],
+    [
+      "Cyndi Lauper",
+      "Girls Just Want to Have Fun",
+      "Single/album",
+      ""
+    ],
+    [
+      "Bananarama",
+      "Cruel Summer",
+      "Single/album",
+      ""
+    ],
+    [
+      "Eurythmics",
+      "Here Comes the Rain Again",
+      "Single/album",
+      ""
+    ],
+    [
+      "Depeche Mode",
+      "People Are People",
+      "Single/album",
+      ""
+    ],
+    [
+      "Pet Shop Boys",
+      "It's a Sin",
+      "Single/album",
+      ""
+    ],
+    [
+      "New Order",
+      "Bizarre Love Triangle",
+      "Singleversion",
+      ""
+    ],
+    [
+      "Erasure",
+      "Chains of Love",
+      "Single/album",
+      ""
+    ],
+    [
+      "ABC",
+      "Poison Arrow",
+      "Single/album",
+      ""
+    ],
+    [
+      "OMD",
+      "Enola Gay",
+      "Single/album",
+      ""
+    ],
+    [
+      "Yazoo",
+      "Only You",
+      "Single/album",
+      ""
+    ],
+    [
+      "A-ha",
+      "The Sun Always Shines on T.V.",
+      "Single/album",
+      ""
+    ],
+    [
+      "Duran Duran",
+      "Notorious",
+      "Single/album",
+      ""
+    ],
+    [
+      "INXS",
+      "Need You Tonight",
+      "Single/album",
+      ""
+    ],
+    [
+      "TV-2",
+      "Bag duggede ruder",
+      "Single/album",
+      ""
+    ],
+    [
+      "Sneakers",
+      "Sådan er det",
+      "Single/album",
+      ""
+    ],
+    [
+      "Rocazino",
+      "Elsk mig i nat",
+      "Single/album",
+      ""
+    ],
+    [
+      "Dodo & The Dodos",
+      "Vågner i nat",
+      "Single/album",
+      ""
+    ],
+    [
+      "Ray Dee Ohh",
+      "Mandags-stævnemøde",
+      "Single/album",
+      "spotify:track:32CrCq1yYkeF5vYhYtylLE"
+    ],
+    [
+      "One Two",
+      "Midt i en drøm",
+      "Single/album",
+      ""
+    ],
+    [
+      "Shu-bi-dua",
+      "Danmark",
+      "Single/album",
+      ""
+    ],
+    [
+      "Kim Larsen",
+      "Jutlandia",
+      "Single/album",
+      ""
+    ],
+    [
+      "Gnags",
+      "Vilde kaniner",
+      "Single/album",
+      ""
+    ],
+    [
+      "Michael Learns to Rock",
+      "The Actor",
+      "Single/album",
+      ""
+    ]
+  ],
+  "classic": [
+    [
+      "Maxx",
+      "Get a Way",
+      "Club Mix",
+      "spotify:track:2ItOo66xuIaj638koUqPJd"
+    ],
+    [
+      "Ice MC",
+      "Think About the Way",
+      "Extended Mix",
+      ""
+    ],
+    [
+      "2 Brothers on the 4th Floor",
+      "Dreams (Will Come Alive)",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Magic Affair",
+      "Omen III",
+      "Maxi Version",
+      ""
+    ],
+    [
+      "E-Rotic",
+      "Max Don't Have Sex with Your Ex",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Mr. President",
+      "Coco Jamboo",
+      "Extended Version",
+      ""
+    ],
+    [
+      "Toy-Box",
+      "Tarzan & Jane",
+      "Maxi Version",
+      ""
+    ],
+    [
+      "Aqua",
+      "Barbie Girl",
+      "Perky Park Club Mix",
+      ""
+    ],
+    [
+      "DJ Jean",
+      "The Launch",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Klubbheads",
+      "Kickin' Hard",
+      "Central Seven Extended Remix",
+      ""
+    ],
+    [
+      "Barcode Brothers",
+      "Flute",
+      "Albumversion",
+      ""
+    ],
+    [
+      "Brooklyn Bounce",
+      "Bass, Beats & Melody",
+      "Extended Remix",
+      ""
+    ],
+    [
+      "DJ Aligator Project",
+      "Lollipop",
+      "Albumversion",
+      ""
+    ],
+    [
+      "DJ Encore feat. Engelina",
+      "I See Right Through To You",
+      "Albumversion",
+      ""
+    ],
+    [
+      "Safri Duo",
+      "Played-A-Live (The Bongo Song)",
+      "Episode II-albumversion",
+      ""
+    ],
+    [
+      "Sylver",
+      "Turn the Tide",
+      "Chances-albumversion",
+      ""
+    ],
+    [
+      "N-Trance",
+      "Set You Free",
+      "Extended Mix",
+      ""
+    ],
+    [
+      "Manian",
+      "Welcome to the Club",
+      "Original Mix",
+      ""
+    ],
+    [
+      "Megastylez",
+      "Jump with Me",
+      "Extended Mix",
+      ""
+    ],
+    [
+      "Rocco",
+      "Everybody",
+      "Club Mix",
+      ""
+    ]
+  ]
+};
+const resolved = Object.fromEntries(Object.entries(week47).map(([key, songs]) => [key, songs.map(song => song[3])]));
 const field = id => document.getElementById(id);
 const redirect = location.origin + location.pathname;
 const pendingKey = 'djf-spotify-replace-pkce';
@@ -86,6 +748,9 @@ function sync() {
   field('apply').disabled = busy || !session || !plan;
   field('review').hidden = !plan;
   field('logout').hidden = !session;
+  field('logout').disabled = busy;
+  field('search').disabled = busy || !session;
+  field('use-selection').disabled = busy || !resolved[field('show').value].every(Boolean);
 }
 
 function clearPlan() {
@@ -248,6 +913,65 @@ async function preview() {
   report('Ugearkivet er klargjort til download. Kontrollér antal spor før udskiftning.');
 }
 
+function renderCandidates(start = 0) {
+  const key = field('show').value;
+  const songs = week47[key];
+  const options = songs.map(([artist, title, version], index) => {
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = (index + 1) + '. ' + artist + ' – ' + title + ' · ' + version
+      + (resolved[key][index] ? ' ✓' : '');
+    return option;
+  });
+  field('candidate').replaceChildren(...options);
+  const next = resolved[key].findIndex((uri, index) => !uri && index >= start);
+  field('candidate').value = String(next >= 0 ? next : Math.min(start, songs.length - 1));
+  field('progress').textContent = resolved[key].filter(Boolean).length + ' af ' + songs.length + ' spor valgt.';
+  field('results').replaceChildren();
+  sync();
+}
+
+async function searchCandidate() {
+  const key = field('show').value;
+  const index = Number(field('candidate').value);
+  const [artist, title, version] = week47[key][index];
+  const query = new URLSearchParams({ q: artist + ' ' + title, type: 'track', limit: '5' });
+  const data = await api('/search?' + query);
+  if (field('show').value !== key || Number(field('candidate').value) !== index) return;
+  const tracks = data.tracks?.items || [];
+  const options = tracks.map(track => {
+    const entry = document.createElement('li');
+    const choice = document.createElement('button');
+    const artists = track.artists.map(person => person.name).join(', ');
+    const minutes = Math.floor(track.duration_ms / 60000);
+    const seconds = String(Math.floor(track.duration_ms / 1000) % 60).padStart(2, '0');
+    choice.type = 'button';
+    choice.textContent = track.name + ' · ' + artists + ' · ' + minutes + ':' + seconds;
+    choice.addEventListener('click', () => {
+      if (busy || field('show').value !== key || Number(field('candidate').value) !== index) return;
+      resolved[key][index] = track.uri;
+      renderCandidates(index + 1);
+      report('Valgte ' + track.name + '.');
+    });
+    entry.append(choice);
+    return entry;
+  });
+  field('results').replaceChildren(...options);
+  report(options.length ? 'Vælg det ønskede Spotify-spor. Planlagt version: ' + version + '.' :
+    'Spotify fandt ingen versioner. Find det konkrete spor i Spotify og indsæt linket manuelt.');
+}
+
+field('candidate').addEventListener('change', () => field('results').replaceChildren());
+field('show').addEventListener('change', () => renderCandidates());
+field('search').addEventListener('click', () => void run(searchCandidate));
+field('use-selection').addEventListener('click', () => {
+  const selected = resolved[field('show').value];
+  if (!selected.every(Boolean)) return;
+  field('week').value = '2026-W47';
+  field('tracks').value = selected.join('\n');
+  clearPlan();
+});
+
 function sameTracks(left, right) {
   return left.length === right.length && left.every((uri, index) => uri === right[index]);
 }
@@ -295,7 +1019,7 @@ field('logout').addEventListener('click', () => {
 for (const id of ['show', 'week', 'tracks']) field(id).addEventListener('input', clearPlan);
 field('preview').addEventListener('click', () => void run(preview));
 field('apply').addEventListener('click', () => void run(apply));
-sync();
+renderCandidates();
 void run(finishLogin);
 </script>
 </body>
