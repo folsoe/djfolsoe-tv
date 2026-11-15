@@ -1,0 +1,60 @@
+#djf-christmas[hidden] { display: none; }
+
+#djf-christmas {
+  --jul-accent: #ffcc83;
+  --jul-tint: #a3412d;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.25rem, 4vw, 4rem);
+  align-items: center;
+  padding: clamp(1.25rem, 4vw, 3.75rem);
+  margin-block: 1.5rem;
+  color: #fff7ea;
+  isolation: isolate;
+  border: 1px solid var(--jul-accent);
+  border-radius: 1.4rem;
+  background: radial-gradient(ellipse at 0 0, var(--jul-tint), transparent 65%), #211326;
+}
+
+#djf-christmas[data-chapter="1"] { --jul-accent: #9ff5ff; --jul-tint: #2a4068; }
+#djf-christmas[data-chapter="2"] { --jul-accent: #ffbaf1; --jul-tint: #67345d; }
+#djf-christmas[data-chapter="3"] { --jul-accent: #b7edb6; --jul-tint: #235449; }
+#djf-christmas[data-chapter="4"] { --jul-accent: #ffe19a; --jul-tint: #854d24; }
+
+#djf-christmas h2, #djf-christmas h3 { margin: 0; line-height: 1.1; }
+#djf-christmas p { margin: 0; color: inherit; }
+#djf-christmas .jul-calendar { display: grid; gap: .7rem; }
+#djf-christmas .jul-chapter { color: var(--jul-accent); font-weight: 700; }
+#djf-christmas .jul-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 .65rem;
+  color: var(--jul-accent);
+  font-size: clamp(1.12rem, 3vw, 1.5rem);
+  font-weight: 700;
+}
+#djf-christmas [data-jul-field="number"] {
+  font-size: clamp(3.6rem, 11vw, 8rem);
+  line-height: .95;
+  font-variant-numeric: tabular-nums;
+}
+#djf-christmas [data-jul-field="number"]:empty { display: none; }
+#djf-christmas .jul-story { display: grid; gap: .8rem; }
+#djf-christmas [data-jul-field="punchline"] { color: var(--jul-accent); }
+#djf-christmas .jul-controls { display: flex; flex-wrap: wrap; gap: .65rem 1rem; align-items: center; }
+#djf-christmas button {
+  min-height: 44px;
+  padding: .6rem 1rem;
+  border: 1px solid var(--jul-accent);
+  border-radius: .6rem;
+  background: var(--jul-accent);
+  color: #251528;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+#djf-christmas button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+@media (max-width: 42rem) {
+  #djf-christmas { grid-template-columns: minmax(0, 1fr); }
+}
