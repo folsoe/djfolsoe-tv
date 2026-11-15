@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Spotify-udskiftning · DJ FOLSOE</title>
+<style>
+:root{color-scheme:dark;font:17px/1.5 system-ui,sans-serif;background:#171321;color:#f7f4fc}
+body{max-width:49rem;margin:auto;padding:1.5rem}
+section{margin:1rem 0;padding:clamp(1rem,4vw,1.65rem);border:1px solid #594a6c;border-radius:1rem;background:#211a30}
+h1,h2,p{margin:.35rem 0 .8rem}
+label{display:block;margin:.9rem 0 .25rem}
+input,textarea,select,button{font:inherit;border:1px solid #706282;border-radius:.4rem;padding:.5rem .7rem}
+input,textarea,select{width:100%;box-sizing:border-box;background:#191322;color:inherit}
+textarea{min-height:11rem;resize:vertical}
+button{margin:.65rem .35rem 0 0;background:#dcccff;color:#1e152e;font-weight:700;cursor:pointer}
+button:disabled{opacity:.55;cursor:default}
+a{color:#dcccff}
+code{overflow-wrap:anywhere}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>Spotify-udskiftning</h1>
+<p>Udskift sporene på en fast DJ FOLSOE-playliste og behold dens link.</p>
+<section aria-labelledby="setup">
+<h2 id="setup">Forbind Spotify</h2>
+<p>Registrér denne redirect-URI i din eksisterende Spotify Developer-app.</p>
+<p><code id="redirect"></code></p>
+<form id="login-form">
+<label for="client">Spotify Client ID</label>
+<input id="client" required pattern="[A-Fa-f0-9]{32}" autocomplete="off" spellcheck="false">
+<button type="submit">Log ind på Spotify</button>
+<button id="logout" type="button" hidden>Afbryd forbindelse</button>
+</form>
+</section>
+
+<section aria-labelledby="edit">
+<h2 id="edit">Skift uge</h2>
+<label for="show">Fast playliste</label>
+<select id="show">
+<option value="trance">Trance Tuesday</option>
+<option value="classic">Classic Dance #90 #00</option>
+<option value="retro">Retro Hits</option>
+</select>
+<p><a id="playlist-link" target="_blank" rel="noopener noreferrer">Åbn den faste playliste i Spotify</a></p>
+<label for="week">ISO-uge</label>
+<input id="week" type="week" value="2026-W47" required>
+<label for="tracks">Spotify-sporlinks eller track-URI’er i spilleorden</label>
+<p id="track-help">Sæt ét spor på hver linje. Spotify-søgelinks skal åbnes og erstattes med linket til det konkrete nummer.</p>
+<textarea id="tracks" aria-describedby="track-help" spellcheck="false" placeholder="spotify:track:…"></textarea>
+<button id="preview" type="button" disabled>Kontrollér udvalg og hent ugearkiv</button>
+<button id="apply" type="button" disabled>Udskift hele playlisten</button>
+<p id="review" hidden></p>
+</section>
+<p id="status" role="status" aria-live="polite">Forbind Spotify for at kontrollere en playliste.</p>
+</main>
+<script type="module">
+const shows = {
+  trance: { name: 'Trance Tuesday', id: '0x6ynnN468f6kya88ufKu8' },
+  classic: { name: 'Classic Dance #90 #00', id: '2oOwvfLNb2wYxbOTCdfiEE' },
+  retro: { name: 'Retro Hits', id: '7l6PFQwtGbVJwTd5vHE0zE' },
+};
+const field = id => document.getElementById(id);
+const redirect = location.origin + location.pathname;
+const pendingKey = 'djf-spotify-replace-pkce';
+const clientKey = 'djf-spotify-replace-client';
+const scopes = 'playlist-read-private playlist-modify-public playlist-modify-private';
+let session;
+let plan;
+let busy = false;
+
+field('redirect').textContent = redirect;
+field('client').value = sessionStorage.getItem(clientKey) || '';
+
+function report(message) {
+  field('status').textContent = message;
+}
+
+function sync() {
+  const { id } = shows[field('show').value];
+  field('playlist-link').href = 'https://open.spotify.com/playlist/' + id;
+  field('preview').disabled = busy || !session;
+  field('apply').disabled = busy || !session || !plan;
+  field('review').hidden = !plan;
+  field('logout').hidden = !session;
+}
+
+function clearPlan() {
+  plan = undefined;
+  sync();
+}
+
+function reportError(error) {
+  report(error.message || 'Spotify-handlingen kunne ikke gennemføres.');
+}
+
+async function run(action) {
+  if (busy) return;
+  busy = true;
+  sync();
+  try {
+    await action();
+  } catch (error) {
+    reportError(error);
+  } finally {
+    busy = false;
+    sync();
+  }
+}
+
+function base64url(bytes) {
+  return btoa(String.fromCharCode(...bytes)).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '');
+}
+
+async function startLogin() {
+  const clientId = field('client').value.trim();
+  const state = base64url(crypto.getRandomValues(new Uint8Array(24)));
+  const verifier = base64url(crypto.getRandomValues(new Uint8Array(64)));
+  const bytes = new TextEncoder().encode(verifier);
+  const challenge = base64url(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)));
+  sessionStorage.setItem(clientKey, clientId);
+  sessionStorage.setItem(pendingKey, JSON.stringify({ state, verifier, clientId, created: Date.now() }));
+  const url = new URL('https://accounts.spotify.com/authorize');
+  url.search = new URLSearchParams({
+    client_id: clientId, response_type: 'code', redirect_uri: redirect, scope: scopes, state,
+    code_challenge_method: 'S256', code_challenge: challenge,
+  });
+  location.assign(url.href);
+}
+
+async function finishLogin() {
+  const query = new URLSearchParams(location.search);
+  if (!query.has('code') && !query.has('error')) return;
+  const pending = JSON.parse(sessionStorage.getItem(pendingKey) || 'null');
+  sessionStorage.removeItem(pendingKey);
+  history.replaceState(null, '', redirect);
+  if (!pending || pending.state !== query.get('state') || Date.now() - pending.created > 600000) {
+    throw new Error('Loginforsøget kunne ikke valideres. Start et nyt login.');
+  }
+  if (query.has('error')) throw new Error('Spotify gav ikke adgang. Start et nyt login ved behov.');
+  const body = new URLSearchParams({
+    client_id: pending.clientId, grant_type: 'authorization_code', code: query.get('code'),
+    redirect_uri: redirect, code_verifier: pending.verifier,
+  });
+  const response = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', body });
+  if (!response.ok) throw new Error('Spotify afviste login (' + response.status + '). Kontrollér Client ID og redirect-URI.');
+  const data = await response.json();
+  if (!data.access_token || !Number.isFinite(data.expires_in)) throw new Error('Spotify returnerede ingen gyldig adgang.');
+  session = { token: data.access_token, expires: Date.now() + data.expires_in * 1000 };
+  report('Spotify er forbundet. Vælg den faste playliste og indsæt sporene.');
+}
+
+async function api(path, method = 'GET', body) {
+  if (!session || Date.now() >= session.expires) throw new Error('Spotify-login er udløbet. Log ind igen.');
+  const response = await fetch('https://api.spotify.com/v1' + path, {
+    method,
+    headers: { Authorization: 'Bearer ' + session.token, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!response.ok) {
+    if (response.status === 401) {
+      session = undefined;
+      plan = undefined;
+      throw new Error('Spotify-login er udløbet. Log ind igen.');
+    }
+    if (response.status === 403) throw new Error('Spotify afviste adgangen (403). Kontrollér konto og appens rettigheder til playlisten.');
+    if (response.status === 429) throw new Error('Spotify har midlertidigt begrænset forespørgsler. Vent, og kontrollér den faste liste før et nyt forsøg.');
+    throw new Error('Spotify returnerede HTTP ' + response.status + '.');
+  }
+  const result = await response.text();
+  return result ? JSON.parse(result) : undefined;
+}
+
+function parseTracks(text) {
+  const lines = text.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+  if (!lines.length || lines.length > 100) throw new Error('Indsæt mellem 1 og 100 konkrete sporlinks.');
+  const uris = lines.map((line, index) => {
+    const match = /^(?:spotify:track:|https:\/\/open\.spotify\.com\/(?:intl-[a-z-]+\/)?track\/)([A-Za-z0-9]{22})(?:\?[^\s]*)?$/.exec(line);
+    if (!match) throw new Error('Linje ' + (index + 1) + ' er ikke et Spotify-sporlink eller en track-URI.');
+    return 'spotify:track:' + match[1];
+  });
+  if (new Set(uris).size !== uris.length) throw new Error('Udvalget indeholder samme Spotify-spor flere gange.');
+  return uris;
+}
+
+async function readPlaylist(id) {
+  const path = '/playlists/' + id;
+  const metadata = await api(path + '?fields=id,name,snapshot_id');
+  const uris = [];
+  let offset = 0;
+  while (true) {
+    const page = await api(path + '/items?limit=50&offset=' + offset);
+    if (!Array.isArray(page?.items)) throw new Error('Spotify returnerede ikke det eksisterende indhold.');
+    for (const entry of page.items) {
+      const item = entry.item || entry.track;
+      const uri = item?.linked_from?.uri || item?.uri;
+      if (!uri || entry.is_local || item.is_local) {
+        throw new Error('Det eksisterende udvalg indeholder et lokalt eller utilgængeligt spor. Ugearkivet kan ikke gendannes sikkert.');
+      }
+      uris.push(uri);
+    }
+    if (!page.next) break;
+    if (!page.items.length) throw new Error('Spotify returnerede et ufuldstændigt udvalg.');
+    offset += page.items.length;
+  }
+  const current = await api(path + '?fields=id,name,snapshot_id');
+  if (!metadata.snapshot_id || metadata.snapshot_id !== current.snapshot_id || metadata.name !== current.name) {
+    throw new Error('Playlisten ændrede sig under læsningen. Kontrollér udvalget igen.');
+  }
+  return { ...current, uris };
+}
+
+function saveArchive(playlist) {
+  const archive = { archivedAt: new Date().toISOString(), playlist };
+  const blob = new Blob([JSON.stringify(archive, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'DJF-Spotify-arkiv-' + playlist.id + '-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function readInputs() {
+  const show = shows[field('show').value];
+  const week = /^(\d{4})-W(0[1-9]|[1-4]\d|5[0-3])$/.exec(field('week').value);
+  if (!week) throw new Error('Vælg en gyldig ISO-uge.');
+  return {
+    id: show.id,
+    name: 'DJ FOLSOE · ' + show.name + ' · Uge ' + week[2] + ' / ' + week[1],
+    uris: parseTracks(field('tracks').value),
+  };
+}
+
+async function preview() {
+  clearPlan();
+  const next = readInputs();
+  const before = await readPlaylist(next.id);
+  if (before.id !== next.id) throw new Error('Spotify returnerede en anden playliste end den valgte.');
+  saveArchive(before);
+  plan = { next, before };
+  field('review').textContent = before.name + ' (' + before.uris.length + ' spor) → ' + next.name + ' (' + next.uris.length + ' spor).';
+  report('Ugearkivet er klargjort til download. Kontrollér antal spor før udskiftning.');
+}
+
+function sameTracks(left, right) {
+  return left.length === right.length && left.every((uri, index) => uri === right[index]);
+}
+
+async function apply() {
+  const { next, before } = plan;
+  clearPlan();
+  const input = readInputs();
+  if (input.id !== next.id || input.name !== next.name || !sameTracks(input.uris, next.uris)) {
+    throw new Error('Udvalget er ændret. Kontrollér det igen.');
+  }
+  const path = '/playlists/' + next.id;
+  const current = await readPlaylist(next.id);
+  if (current.snapshot_id !== before.snapshot_id || current.name !== before.name) {
+    throw new Error('Playlisten er ændret efter arkivering. Hent et nyt arkiv først.');
+  }
+  try {
+    await api(path + '/items', 'PUT', { uris: next.uris });
+    const after = await readPlaylist(next.id);
+    if (!sameTracks(after.uris, next.uris)) {
+      throw new Error('Den nye spilleorden kunne ikke verificeres.');
+    }
+  } catch (error) {
+    throw new Error('Udskiftningen kunne ikke bekræftes. Åbn Spotify og kontrollér sporene før et nyt forsøg. ' + error.message);
+  }
+  try {
+    await api(path, 'PUT', { name: next.name });
+    const renamed = await api(path + '?fields=id,name,snapshot_id');
+    if (renamed.name !== next.name) throw new Error('Spotify returnerede et andet navn.');
+  } catch (error) {
+    throw new Error('Alle ' + next.uris.length + ' spor er verificeret i den nye rækkefølge. Ugenavnet kunne ikke bekræftes. ' + error.message);
+  }
+  report(next.name + ' er opdateret og verificeret med ' + next.uris.length + ' spor på det faste link.');
+}
+
+field('login-form').addEventListener('submit', event => {
+  event.preventDefault();
+  void run(startLogin);
+});
+field('logout').addEventListener('click', () => {
+  session = undefined;
+  clearPlan();
+  report('Spotify-forbindelsen er afbrudt for denne fane.');
+});
+for (const id of ['show', 'week', 'tracks']) field(id).addEventListener('input', clearPlan);
+field('preview').addEventListener('click', () => void run(preview));
+field('apply').addEventListener('click', () => void run(apply));
+sync();
+void run(finishLogin);
+</script>
+</body>
+</html>
