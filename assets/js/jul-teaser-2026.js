@@ -101,7 +101,7 @@
     #jul-teaser-2026 .teaser-date,#jul-teaser-2026 .teaser-foot{color:#ffda99;font-weight:700}
     #jul-teaser-2026 ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));gap:.6rem;list-style:none;margin:1.25rem 0;padding:0}
     #jul-teaser-2026 li{display:grid;justify-items:center;text-align:center;align-content:start;padding:.45rem;border-radius:8px;background:#fff3}
-    #jul-teaser-2026 .teaser-face{display:block;width:min(100%,10rem);aspect-ratio:1;background:url('/assets/img/jul-nissehold-10.webp') var(--face) center / 1000% 100% no-repeat}
+    #jul-teaser-2026 .teaser-face{display:block;width:min(100%,10rem);aspect-ratio:1;background:url('/assets/img/jul-nissehold-10-v3.webp') var(--face) center / 1000% 100% no-repeat}
     #jul-teaser-2026 .teaser-role{font-size:.9rem;line-height:1.35}
     @media(min-width:850px){#jul-teaser-2026 ul{grid-template-columns:repeat(5,minmax(0,1fr))}}
   </style><p class="teaser-date"></p><h2 id="jul-teaser-title"></h2><p class="teaser-copy"></p>
