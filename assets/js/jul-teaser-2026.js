@@ -5,9 +5,9 @@
   const start = Date.parse('2026-11-21T00:00:00+01:00');
   const end = Date.parse('2026-11-29T00:00:00+01:00');
   const strings = {
-    da: ['Juleføljeton hos DJ FOLSOE · Fra 29. november', 'Nisserne og det sidste omkvæd', 'Et rødt kabel er forsvundet blandt 37 ens pakker. Bøje har nummereret dem alle med ét. Nu skal nisserne finde kablet og få det sidste omkvæd i æteren inden juleaften kl. 23. Hvad kan dog gå galt?', 'Et nyt kapitel hver dag frem til juleaften.'],
-    en: ['Christmas serial at DJ FOLSOE · From 29 November', 'The Elves and the Last Chorus', 'A red cable has vanished among 37 identical parcels. Every parcel is marked number one. Now the elves have to find the cable and get the last chorus on air by 11 p.m. on Christmas Eve. What could possibly go wrong?', 'A new chapter every day through Christmas Eve.'],
-    de: ['Weihnachtsgeschichte bei DJ FOLSOE · Ab 29. November', 'Die Wichtel und der letzte Refrain', 'Ein rotes Kabel ist zwischen 37 identischen Paketen verschwunden. Auf jedem Paket steht die Nummer eins. Jetzt müssen die Wichtel das Kabel finden und den letzten Refrain bis Heiligabend um 23 Uhr auf Sendung bringen. Was soll da schon schiefgehen?', 'Jeden Tag ein neues Kapitel bis Heiligabend.']
+    da: ['Juleføljeton hos DJ FOLSOE · Fra 29. november', 'Nisserne og den sidste Karen Wolf-småkage', 'Juleglæden er gået i stå på dansk Twitch. Nisserne har til juleaften kl. 23 til at få chatten til at grine sammen igen, finde det røde kabel og sørge for småkager til alle. Bøje har meldt sig til at passe lageret. Det var måske den første fejl', 'Et nyt kapitel hver dag frem til juleaften.'],
+    en: ['Christmas serial at DJ FOLSOE · From 29 November', 'The Elves and the Last Karen Wolf Biscuit', 'Christmas cheer has stalled on Danish Twitch. The elves have until 11 p.m. on Christmas Eve to get chat laughing together, find the red cable and save enough biscuits for everyone. Bøje volunteered to guard the tins. That might have been their first mistake', 'A new chapter every day through Christmas Eve.'],
+    de: ['Weihnachtsgeschichte bei DJ FOLSOE · Ab 29. November', 'Die Wichtel und der letzte Karen-Wolf-Keks', 'Auf Twitch-Dänemark ist die Weihnachtsfreude ins Stocken geraten. Bis Heiligabend um 23 Uhr müssen die Wichtel den Chat wieder zum Lachen bringen, das rote Kabel finden und Kekse für alle retten. Bøje hat sich als Hüter der Dosen gemeldet. Das war vielleicht der erste Fehler', 'Jeden Tag ein neues Kapitel bis Heiligabend.']
   };
   const cast = [
   [
