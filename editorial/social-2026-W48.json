@@ -1,0 +1,28 @@
+{
+  "photos": [
+    {
+      "path": "assets/social/2026-W48/trance.jpg",
+      "photographer": "Boris Hamer",
+      "source": "https://www.pexels.com/photo/close-up-of-dj-mixer-13599831/",
+      "license": "https://www.pexels.com/license/"
+    },
+    {
+      "path": "assets/social/2026-W48/classic.jpg",
+      "photographer": "Atlantic Ambience",
+      "source": "https://www.pexels.com/photo/close-up-shot-of-a-disco-ball-10611756/",
+      "license": "https://www.pexels.com/license/"
+    },
+    {
+      "path": "assets/social/2026-W48/retro.jpg",
+      "photographer": "Brett Jordan",
+      "source": "https://www.pexels.com/photo/a-vinyl-record-on-a-turntable-4371576/",
+      "license": "https://www.pexels.com/license/"
+    },
+    {
+      "path": "assets/social/2026-W48/community.jpg",
+      "photographer": "Sound On",
+      "source": "https://www.pexels.com/photo/white-headphones-3394652/",
+      "license": "https://www.pexels.com/license/"
+    }
+  ]
+}
