@@ -4,7 +4,7 @@
   "shows": {
     "retro": {
       "name": "Retro Hits",
-      "id": "5GKDTSyP6fpKs1ohOA5Nh9",
+      "id": "5oznky7tUFQLClJtUlE2h4",
       "path": "/shows/retro-hits/",
       "schedule": {
         "day": "SU",
@@ -18,7 +18,7 @@
     },
     "trance": {
       "name": "Trance Tuesday",
-      "id": "16ggsXSTDYT2XnpdGFGX34",
+      "id": "0eURg5urlKxaQKWwL1Kakg",
       "path": "/shows/trance-tuesday/",
       "schedule": {
         "day": "TU",
@@ -32,7 +32,7 @@
     },
     "eurodance": {
       "name": "Classic Dance #90 #00",
-      "id": "082OWGgiLIS23QwF7o2FyI",
+      "id": "3A26cKn8SHrYF7dDuOymKx",
       "path": "/shows/eurodance/",
       "schedule": {
         "day": "TH",
@@ -45,5 +45,5 @@
       }
     }
   },
-  "week": "2026-W47"
+  "week": "2026-W48"
 }

@@ -1,0 +1,601 @@
+{
+  "week": "2026-W48",
+  "playlists": {
+    "trance": "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg",
+    "eurodance": "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx",
+    "retro": "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+  },
+  "rawSeconds": {
+    "trance": 10669,
+    "eurodance": 7197,
+    "retro": 14419
+  },
+  "shows": {
+    "trance": [
+      {
+        "title": "Amsterdam - Smith & Pledger Remix",
+        "artist": "Luminary",
+        "seconds": 466
+      },
+      {
+        "title": "Xpander",
+        "artist": "Sasha",
+        "seconds": 690
+      },
+      {
+        "title": "High On Love - Extended Mix",
+        "artist": "Armin van Buuren, Anne Gudrun",
+        "seconds": 367
+      },
+      {
+        "title": "Halcyon",
+        "artist": "Andy Moor",
+        "seconds": 212
+      },
+      {
+        "title": "Via Infinita - Extended Mix",
+        "artist": "Estiva",
+        "seconds": 406
+      },
+      {
+        "title": "Trance & Acid",
+        "artist": "Kai Tracid",
+        "seconds": 424
+      },
+      {
+        "title": "Drafting",
+        "artist": "Veracocha, Ferry Corsten, Vincent de Moor",
+        "seconds": 209
+      },
+      {
+        "title": "Alone Tonight",
+        "artist": "Above & Beyond, Richard Bedford",
+        "seconds": 383
+      },
+      {
+        "title": "Shivers",
+        "artist": "Armin van Buuren, Susana",
+        "seconds": 189
+      },
+      {
+        "title": "Mystery Land",
+        "artist": "Y-Traxx",
+        "seconds": 241
+      },
+      {
+        "title": "Dance Valley Theme 2001",
+        "artist": "System F",
+        "seconds": 224
+      },
+      {
+        "title": "Rock Your Body Rock",
+        "artist": "Ferry Corsten",
+        "seconds": 181
+      },
+      {
+        "title": "Ocean Drive Boulevard",
+        "artist": "Leon Bolier",
+        "seconds": 404
+      },
+      {
+        "title": "Drop",
+        "artist": "Sean Tyas",
+        "seconds": 250
+      },
+      {
+        "title": "The Witch",
+        "artist": "John Askew",
+        "seconds": 500
+      },
+      {
+        "title": "Coming On Strong",
+        "artist": "Signum, Scott Mac",
+        "seconds": 199
+      },
+      {
+        "title": "Close Cover",
+        "artist": "Minimalistix",
+        "seconds": 189
+      },
+      {
+        "title": "Lizard",
+        "artist": "Mauro Picotto",
+        "seconds": 313
+      },
+      {
+        "title": "The Drums",
+        "artist": "Cosmic Gate, Maxim Lany",
+        "seconds": 254
+      },
+      {
+        "title": "Massive",
+        "artist": "Ralphie B",
+        "seconds": 559
+      },
+      {
+        "title": "Cloudwalking",
+        "artist": "Pulser",
+        "seconds": 210
+      },
+      {
+        "title": "Happiness Happening",
+        "artist": "Lost Witness",
+        "seconds": 233
+      },
+      {
+        "title": "Flesh",
+        "artist": "Jan Johnston",
+        "seconds": 487
+      },
+      {
+        "title": "Stringer",
+        "artist": "Riva, Chocolate Puma",
+        "seconds": 239
+      },
+      {
+        "title": "Here Once Again",
+        "artist": "Sneijder",
+        "seconds": 285
+      },
+      {
+        "title": "Yet Another Day",
+        "artist": "Armin van Buuren, Ray Wilson",
+        "seconds": 207
+      },
+      {
+        "title": "Magnitude",
+        "artist": "Johan Gielen",
+        "seconds": 419
+      },
+      {
+        "title": "Simulated",
+        "artist": "Marco V",
+        "seconds": 191
+      },
+      {
+        "title": "Sunset On Ibiza",
+        "artist": "Three Drives On A Vinyl, Three Drives",
+        "seconds": 208
+      },
+      {
+        "title": "La Guitarra",
+        "artist": "Orjan Nilsen",
+        "seconds": 228
+      },
+      {
+        "title": "Sun & Moon",
+        "artist": "Above & Beyond, Richard Bedford",
+        "seconds": 195
+      },
+      {
+        "title": "Crush",
+        "artist": "Paul van Dyk, Second Sun",
+        "seconds": 466
+      },
+      {
+        "title": "Ecstasy",
+        "artist": "ATB",
+        "seconds": 261
+      },
+      {
+        "title": "In And Out Of Love",
+        "artist": "Armin van Buuren, Sharon Den Adel",
+        "seconds": 181
+      },
+      {
+        "title": "Advanced",
+        "artist": "Marcel Woods",
+        "seconds": 199
+      }
+    ],
+    "eurodance": [
+      {
+        "title": "Feelin' Fine - Extended Mix",
+        "artist": "Ultrabeat",
+        "seconds": 449
+      },
+      {
+        "title": "Miracle - Extended Mix",
+        "artist": "Cascada",
+        "seconds": 368
+      },
+      {
+        "title": "Dreaming - Ruff Driverz Ruff Radio Edit",
+        "artist": "Ruff Driverz",
+        "seconds": 240
+      },
+      {
+        "title": "Let Me Be Your Fantasy",
+        "artist": "Baby D",
+        "seconds": 470
+      },
+      {
+        "title": "Make The World Go Round - Deep Dish Round The World Remix",
+        "artist": "Sandy B, Deep Dish",
+        "seconds": 560
+      },
+      {
+        "title": "Always Something There To Remind Me",
+        "artist": "Tin Tin Out",
+        "seconds": 419
+      },
+      {
+        "title": "U Sure Do",
+        "artist": "Strike",
+        "seconds": 298
+      },
+      {
+        "title": "Come Into My Life",
+        "artist": "Gala",
+        "seconds": 215
+      },
+      {
+        "title": "Heartbeatz",
+        "artist": "Styles & Breeze, Karen Danzig",
+        "seconds": 173
+      },
+      {
+        "title": "The Sun Always Shines On TV",
+        "artist": "Milk Inc.",
+        "seconds": 243
+      },
+      {
+        "title": "There's Nothing I Won't Do - JX Original Mix",
+        "artist": "JX",
+        "seconds": 405
+      },
+      {
+        "title": "Be Cool - Club Mix",
+        "artist": "Paffendorf",
+        "seconds": 364
+      },
+      {
+        "title": "Ecuador - Original 12\" Mix",
+        "artist": "Sash!",
+        "seconds": 325
+      },
+      {
+        "title": "You Are Alive",
+        "artist": "Fragma",
+        "seconds": 286
+      },
+      {
+        "title": "The Boys of Summer",
+        "artist": "DJ Sammy, Loona, Mel",
+        "seconds": 295
+      },
+      {
+        "title": "True Love Never Dies",
+        "artist": "Flip & Fill, Kelly Llorenna",
+        "seconds": 183
+      },
+      {
+        "title": "Alone",
+        "artist": "Lasgo",
+        "seconds": 241
+      },
+      {
+        "title": "Twilight Zone",
+        "artist": "2 Unlimited",
+        "seconds": 246
+      },
+      {
+        "title": "Got to Get It",
+        "artist": "Culture Beat",
+        "seconds": 321
+      },
+      {
+        "title": "Baby Baby",
+        "artist": "Corona",
+        "seconds": 228
+      },
+      {
+        "title": "Sunchyme",
+        "artist": "Dario G",
+        "seconds": 235
+      },
+      {
+        "title": "Fable",
+        "artist": "Robert Miles",
+        "seconds": 233
+      },
+      {
+        "title": "Time To Burn",
+        "artist": "Storm",
+        "seconds": 400
+      }
+    ],
+    "retro": [
+      {
+        "title": "You Can Call Me Al",
+        "artist": "Paul Simon",
+        "seconds": 280
+      },
+      {
+        "title": "Driving Home for Christmas",
+        "artist": "Chris Rea",
+        "seconds": 240,
+        "christmas": true
+      },
+      {
+        "title": "Gnags' Julesang",
+        "artist": "GNAGS",
+        "seconds": 216,
+        "christmas": true
+      },
+      {
+        "title": "Den Himmelblå",
+        "artist": "Shu-Bi-Dua",
+        "seconds": 193,
+        "christmas": true
+      },
+      {
+        "title": "Last Christmas",
+        "artist": "Wham!",
+        "seconds": 262,
+        "christmas": true
+      },
+      {
+        "title": "Life's What You Make It",
+        "artist": "Talk Talk",
+        "seconds": 269
+      },
+      {
+        "title": "Når Sneen Falder",
+        "artist": "Thomas Helmig, Søs Fenger",
+        "seconds": 261,
+        "christmas": true
+      },
+      {
+        "title": "Valerie",
+        "artist": "Steve Winwood",
+        "seconds": 246
+      },
+      {
+        "title": "Biggest Part of Me",
+        "artist": "Ambrosia",
+        "seconds": 324
+      },
+      {
+        "title": "Sweet Freedom",
+        "artist": "Michael McDonald",
+        "seconds": 459
+      },
+      {
+        "title": "Hold Me",
+        "artist": "Fleetwood Mac",
+        "seconds": 225
+      },
+      {
+        "title": "Keeping the Faith",
+        "artist": "Billy Joel",
+        "seconds": 279
+      },
+      {
+        "title": "Wired for Sound",
+        "artist": "Cliff Richard",
+        "seconds": 221
+      },
+      {
+        "title": "This Is It",
+        "artist": "Kenny Loggins",
+        "seconds": 236
+      },
+      {
+        "title": "Temptation",
+        "artist": "Heaven 17",
+        "seconds": 278
+      },
+      {
+        "title": "Somewhere in My Heart",
+        "artist": "Aztec Camera",
+        "seconds": 241
+      },
+      {
+        "title": "The Word Girl",
+        "artist": "Scritti Politti",
+        "seconds": 264
+      },
+      {
+        "title": "Wide Boy",
+        "artist": "Nik Kershaw",
+        "seconds": 208
+      },
+      {
+        "title": "Mirror Man",
+        "artist": "The Human League",
+        "seconds": 231
+      },
+      {
+        "title": "Love Blonde",
+        "artist": "Kim Wilde",
+        "seconds": 211
+      },
+      {
+        "title": "Shy Boy",
+        "artist": "Bananarama",
+        "seconds": 193
+      },
+      {
+        "title": "The First Picture of You",
+        "artist": "The Lotus Eaters",
+        "seconds": 218
+      },
+      {
+        "title": "Kys Det Nu (Det Satans Liv)",
+        "artist": "TV-2",
+        "seconds": 193
+      },
+      {
+        "title": "Neutron Dance",
+        "artist": "The Pointer Sisters",
+        "seconds": 253
+      },
+      {
+        "title": "This Is My Night",
+        "artist": "Chaka Khan",
+        "seconds": 280
+      },
+      {
+        "title": "Midas Touch",
+        "artist": "Midnight Star",
+        "seconds": 313
+      },
+      {
+        "title": "Candy",
+        "artist": "Cameo",
+        "seconds": 339
+      },
+      {
+        "title": "One Step",
+        "artist": "Kissing The Pink",
+        "seconds": 274
+      },
+      {
+        "title": "Rhythm Of The Night",
+        "artist": "DeBarge",
+        "seconds": 229
+      },
+      {
+        "title": "Hvor End Jeg Går Hen",
+        "artist": "Søs Fenger",
+        "seconds": 228
+      },
+      {
+        "title": "Weather With You",
+        "artist": "Crowded House",
+        "seconds": 224
+      },
+      {
+        "title": "Good Thing",
+        "artist": "Fine Young Cannibals",
+        "seconds": 201
+      },
+      {
+        "title": "The Whole of the Moon",
+        "artist": "The Waterboys",
+        "seconds": 299
+      },
+      {
+        "title": "Everyday I Write The Book",
+        "artist": "Elvis Costello & The Attractions",
+        "seconds": 234
+      },
+      {
+        "title": "In A Big Country",
+        "artist": "Big Country",
+        "seconds": 283
+      },
+      {
+        "title": "Dressed For Success",
+        "artist": "Roxette",
+        "seconds": 249
+      },
+      {
+        "title": "Lev Livet Nu",
+        "artist": "Dodo & the Dodos",
+        "seconds": 263
+      },
+      {
+        "title": "Tempted",
+        "artist": "Squeeze",
+        "seconds": 240
+      },
+      {
+        "title": "Sowing The Seeds Of Love",
+        "artist": "Tears For Fears",
+        "seconds": 379
+      },
+      {
+        "title": "Every Little Step",
+        "artist": "Bobby Brown",
+        "seconds": 237
+      },
+      {
+        "title": "Something About You",
+        "artist": "Level 42",
+        "seconds": 265
+      },
+      {
+        "title": "Dr. Beat",
+        "artist": "Miami Sound Machine",
+        "seconds": 262
+      },
+      {
+        "title": "Georgy Porgy",
+        "artist": "TOTO",
+        "seconds": 247
+      },
+      {
+        "title": "Digging Your Scene",
+        "artist": "The Blow Monkeys",
+        "seconds": 254
+      },
+      {
+        "title": "Walking On Sunshine",
+        "artist": "Katrina & The Waves",
+        "seconds": 238
+      },
+      {
+        "title": "Regndans",
+        "artist": "Danseorkestret",
+        "seconds": 232
+      },
+      {
+        "title": "Would I Lie to You?",
+        "artist": "Eurythmics, Annie Lennox, Dave Stewart",
+        "seconds": 263
+      },
+      {
+        "title": "I Wish It Could Be Christmas Everyday",
+        "artist": "Wizzard",
+        "seconds": 278,
+        "christmas": true
+      },
+      {
+        "title": "Fairytale of New York (feat. Kirsty MacColl)",
+        "artist": "The Pogues, Kirsty MacColl",
+        "seconds": 272,
+        "christmas": true
+      },
+      {
+        "title": "Lille Messias",
+        "artist": "Anne Linnet",
+        "seconds": 303,
+        "christmas": true
+      },
+      {
+        "title": "Jul Det' Cool",
+        "artist": "Mc Einar",
+        "seconds": 359,
+        "christmas": true
+      },
+      {
+        "title": "Merry Christmas Everyone",
+        "artist": "Shakin' Stevens",
+        "seconds": 220,
+        "christmas": true
+      },
+      {
+        "title": "Pull Up To The Bumper",
+        "artist": "Grace Jones",
+        "seconds": 281
+      },
+      {
+        "title": "Oblivious",
+        "artist": "Aztec Camera",
+        "seconds": 190
+      },
+      {
+        "title": "A Good Heart",
+        "artist": "Feargal Sharkey",
+        "seconds": 281
+      },
+      {
+        "title": "Chequered Love",
+        "artist": "Kim Wilde",
+        "seconds": 201
+      }
+    ]
+  }
+}

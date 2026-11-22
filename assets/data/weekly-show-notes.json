@@ -1,1249 +1,1786 @@
 {
   "schema": 1,
-  "week": "2026-W47",
+  "week": "2026-W48",
   "status": "published",
-  "publishedAt": "2026-11-15T12:00:00Z",
-  "expiresAt": "2026-11-22T18:00:00Z",
+  "publishedAt": "2026-11-22T11:00:00Z",
+  "expiresAt": "2026-11-29T18:00:00Z",
   "shows": {
     "trance": [
       {
-        "id": "2026-W47-trance-mercury-solace",
+        "id": "2026-W48-trance-xpander",
         "show": "trance",
-        "artist": "BT, Jan Johnston, Quivver",
-        "title": "Mercury & Solace · Quivver’s Transatlantic Mix",
+        "artist": "Sasha",
+        "title": "Xpander",
         "headline": [
-          "Tre navne bag åbningsnummeret",
-          "Three names behind the opener",
-          "Drei Namen hinter dem Auftakt"
+          "Én titel, to meget forskellige længder",
+          "One title, two very different lengths",
+          "Ein Titel, zwei sehr unterschiedliche Längen"
         ],
         "text": [
-          "BT producerede nummeret. Ugens åbningsversion er Quivvers remix med Jan Johnston.",
-          "BT produced the track. This week’s opener is Quivver’s remix with Jan Johnston.",
-          "BT produzierte den Track. Zum Auftakt läuft Quivvers Remix mit Jan Johnston."
+          "På EP’en fra 1999 varer Xpander 11:30. Det korte edit varer 3:22.",
+          "On the 1999 EP, Xpander runs 11:30. The short edit runs 3:22.",
+          "Auf der EP von 1999 dauert Xpander 11:30. Der kurze Edit läuft 3:22."
         ],
         "longText": [
-          "Black Hole Recordings krediterer Brian Transeau, kendt som BT, som komponist og producer. Jan Johnston er krediteret som kunstner sammen med BT, og Quivver står for Transatlantic Mix. Den version åbner ugens show og varer 9:33. Lyt efter, hvordan stemmen giver dig noget at holde fast i, mens der stadig er plads til, at mixet kan bygge op.",
-          "Black Hole Recordings credits Brian Transeau, better known as BT, as composer and producer. Jan Johnston shares the artist credit with BT, and Quivver made the Transatlantic Mix. This 9:33 version opens the show. Listen for the way the voice gives you something to hold on to while the mix has room to build.",
-          "Black Hole Recordings nennt Brian Transeau, besser bekannt als BT, als Komponisten und Produzenten. Jan Johnston wird neben BT als Künstlerin geführt. Der Transatlantic Mix stammt von Quivver. Diese 9:33 Minuten lange Fassung eröffnet die Sendung. Achtet darauf, wie die Stimme Halt gibt, während sich der Mix entfaltet."
+          "Deconstruction udgav EP’en i juli 1999. Spotify viser begge versioner side om side, og den lange er den, der ligger i ugens udgave. Der er mere end otte minutters forskel. Prøv at lytte efter, hvornår du først fornemmer, hvor melodien er på vej hen.",
+          "Deconstruction released the EP in July 1999. Spotify lists both versions together, and the long one is in this week’s playlist. The difference is more than eight minutes. Listen for the first moment you can sense where the melody is headed.",
+          "Deconstruction veröffentlichte die EP im Juli 1999. Spotify führt beide Fassungen nebeneinander. In der Wochenplaylist steht die lange. Der Unterschied beträgt mehr als acht Minuten. Achtet darauf, wann ihr zum ersten Mal spürt, wohin die Melodie führt."
         ],
         "questionText": [
-          "Hvad fanger dig først i et langt mix – stemmen eller rytmen?",
-          "What catches you first in a long mix, the voice or the rhythm?",
-          "Was packt euch in einem langen Mix zuerst – Stimme oder Rhythmus?"
+          "Hvornår mærker du bedst opbygningen i et langt mix?",
+          "When do you really feel the build in a long mix?",
+          "Wann spürst du den Aufbau in einem langen Mix am stärksten?"
         ],
         "sources": [
-          "https://www.youtube.com/watch?v=NOMKerNzozo",
-          "https://www.beatport.com/track/mercury-solace/20739667"
+          "https://open.spotify.com/album/2xnwMwLUMQOquTnjLOuh6Q"
         ],
         "moreUrl": "https://folsoetv.dk/shows/trance-tuesday/",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-escape",
+        "id": "2026-W48-trance-sun-moon",
         "show": "trance",
-        "artist": "Airbase",
-        "title": "Escape",
+        "artist": "Above & Beyond, Richard Bedford",
+        "title": "Sun & Moon",
         "headline": [
-          "Fra svensk tracker til trance på det store gulv",
-          "From a Swedish tracker to the trance floor",
-          "Vom Tracker auf die große Trance-Tanzfläche"
+          "Fra Group Therapy til en ny, langsom version",
+          "From Group Therapy to a slower take",
+          "Von Group Therapy zur langsameren Fassung"
         ],
         "text": [
-          "Airbase begyndte at lave musik med Scream Tracker. Escape blev siden et af hans mest genkendelige numre.",
-          "Airbase started making music with Scream Tracker. Escape became one of his best-known tracks.",
-          "Airbase begann mit Scream Tracker. Escape wurde später eines seiner bekanntesten Stücke."
+          "Sun & Moon udkom på Group Therapy i 2011 med Richard Bedford på vokal.",
+          "Sun & Moon appeared on Group Therapy in 2011 with Richard Bedford on vocals.",
+          "Sun & Moon erschien 2011 auf Group Therapy mit Richard Bedford am Mikrofon."
         ],
         "longText": [
-          "Jezper Lorné, der står bag Airbase, beskriver en musikalsk opvækst med eurotechno, happy hardcore og tidlige tranceopsamlinger. Han lærte at bygge elektronisk musik i trackerprogrammet Scream Tracker. I Escape kan du lytte efter, hvordan melodien får lov at stå klart, selv når trommer og bas sætter farten op.",
-          "Airbase producer Jezper Lorné describes growing up on Euro techno, happy hardcore and early trance compilations. He learned to build electronic music in Scream Tracker. In Escape, listen to the clarity of the melody as the drums and bass pick up the pace.",
-          "Airbase-Produzent Jezper Lorné erzählt von Eurotechno, Happy Hardcore und frühen Trance-Compilations. Mit Scream Tracker baute er seine ersten elektronischen Stücke. In Escape bleibt die Melodie klar, auch wenn Schlagzeug und Bass das Tempo antreiben."
+          "Anjunabeats fører sangen tilbage til Group Therapy fra 2011. I 2026 kom en downtempo-version med et ekstra vers fra trioens akustiske udgave. Ugens Spotify-liste har den korte version med Bedford. Det er oplagt at lytte efter, om ordene opleves forskelligt, når arrangementet får mindre fart.",
+          "Anjunabeats traces the track to 2011’s Group Therapy. A 2026 downtempo version adds a verse from the trio’s acoustic rendition. The weekly playlist has the short version with Bedford. Listen for how the words land when the arrangement slows down.",
+          "Anjunabeats verweist auf Group Therapy von 2011. Die Downtempo-Fassung von 2026 ergänzt eine Strophe aus der Akustikversion des Trios. Die Wochenplaylist enthält die kurze Fassung mit Bedford. Achtet darauf, wie der Text bei geringerem Tempo wirkt."
         ],
         "questionText": [
-          "Kan du genkende et nummer på de første tre toner?",
-          "Can you recognise a song from its first three notes?",
-          "Erkennt ihr einen Song an seinen ersten drei Tönen?"
+          "Husker du først stemmen eller melodien?",
+          "Do you remember the voice or the melody first?",
+          "Erinnerst du dich zuerst an die Stimme oder an die Melodie?"
         ],
         "sources": [
-          "https://airbasemusic.com/about"
+          "https://anjunabeats.com/products/613107-sun-moon-downtempo-version"
         ],
         "moreUrl": "https://folsoetv.dk/shows/trance-tuesday/",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-amsterdam-smith-pledger-remix",
+        "show": "trance",
+        "artist": "Luminary",
+        "title": "Amsterdam - Smith & Pledger Remix",
+        "headline": [
+          "Amsterdam - Smith & Pledger Remix",
+          "Amsterdam - Smith & Pledger Remix",
+          "Amsterdam - Smith & Pledger Remix"
+        ],
+        "text": [
+          "Luminary · Amsterdam - Smith & Pledger Remix · Ugens Spotify-udgave varer 7:46.",
+          "Luminary · Amsterdam - Smith & Pledger Remix · This week’s Spotify version runs 7:46.",
+          "Luminary · Amsterdam - Smith & Pledger Remix · Die Spotify-Fassung dieser Woche läuft 7:46."
+        ],
+        "longText": [
+          "Luminary · Amsterdam - Smith & Pledger Remix · Ugens Spotify-udgave varer 7:46.",
+          "Luminary · Amsterdam - Smith & Pledger Remix · This week’s Spotify version runs 7:46.",
+          "Luminary · Amsterdam - Smith & Pledger Remix · Die Spotify-Fassung dieser Woche läuft 7:46."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/trance-tuesday/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-high-on-love-extended-mix",
+        "show": "trance",
+        "artist": "Armin van Buuren, Anne Gudrun",
+        "title": "High On Love - Extended Mix",
+        "headline": [
+          "High On Love - Extended Mix",
+          "High On Love - Extended Mix",
+          "High On Love - Extended Mix"
+        ],
+        "text": [
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · Ugens Spotify-udgave varer 6:07.",
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · This week’s Spotify version runs 6:07.",
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · Die Spotify-Fassung dieser Woche läuft 6:07."
+        ],
+        "longText": [
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · Ugens Spotify-udgave varer 6:07.",
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · This week’s Spotify version runs 6:07.",
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · Die Spotify-Fassung dieser Woche läuft 6:07."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/trance-tuesday/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-via-infinita-extended-mix",
+        "show": "trance",
+        "artist": "Estiva",
+        "title": "Via Infinita - Extended Mix",
+        "headline": [
+          "Via Infinita - Extended Mix",
+          "Via Infinita - Extended Mix",
+          "Via Infinita - Extended Mix"
+        ],
+        "text": [
+          "Estiva · Via Infinita - Extended Mix · Ugens Spotify-udgave varer 6:46.",
+          "Estiva · Via Infinita - Extended Mix · This week’s Spotify version runs 6:46.",
+          "Estiva · Via Infinita - Extended Mix · Die Spotify-Fassung dieser Woche läuft 6:46."
+        ],
+        "longText": [
+          "Estiva · Via Infinita - Extended Mix · Ugens Spotify-udgave varer 6:46.",
+          "Estiva · Via Infinita - Extended Mix · This week’s Spotify version runs 6:46.",
+          "Estiva · Via Infinita - Extended Mix · Die Spotify-Fassung dieser Woche läuft 6:46."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/trance-tuesday/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-massive",
+        "show": "trance",
+        "artist": "Ralphie B",
+        "title": "Massive",
+        "headline": [
+          "Massive",
+          "Massive",
+          "Massive"
+        ],
+        "text": [
+          "Ralphie B · Massive · Ugens Spotify-udgave varer 9:19.",
+          "Ralphie B · Massive · This week’s Spotify version runs 9:19.",
+          "Ralphie B · Massive · Die Spotify-Fassung dieser Woche läuft 9:19."
+        ],
+        "longText": [
+          "Ralphie B · Massive · Ugens Spotify-udgave varer 9:19.",
+          "Ralphie B · Massive · This week’s Spotify version runs 9:19.",
+          "Ralphie B · Massive · Die Spotify-Fassung dieser Woche läuft 9:19."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/trance-tuesday/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "eurodance": [
       {
-        "id": "2026-W47-eurodance-barbie",
+        "id": "2026-W48-eurodance-let-me-be-your-fantasy",
         "show": "eurodance",
-        "artist": "Aqua",
-        "title": "Barbie Girl · Perky Park Club Mix",
+        "artist": "Baby D",
+        "title": "Let Me Be Your Fantasy",
         "headline": [
-          "Da Barbie Girl gik under navnet Burger King",
-          "When Barbie Girl went by Burger King",
-          "Als Barbie Girl noch Burger King hieß"
+          "Baby D indtog førstepladsen",
+          "Baby D took the top spot",
+          "Baby D stand ganz oben"
         ],
         "text": [
-          "Aqua holdt titlen på Barbie Girl tæt til kroppen. Undervejs brugte de Burger King som dæknavn.",
-          "Aqua kept the title of Barbie Girl under wraps. One of their cover names was Burger King.",
-          "Aqua hielt den Titel von Barbie Girl geheim. Einer ihrer Decknamen war Burger King."
+          "Baby D toppede den britiske singlehitliste i november 1994.",
+          "Baby D topped the UK singles chart in November 1994.",
+          "Baby D stand im November 1994 an der Spitze der britischen Singlecharts."
         ],
         "longText": [
-          "Aqua har fortalt, at de troede så meget på idéen til Barbie Girl, at de gav nummeret andre navne i studiet for at holde titlen hemmelig. Burger King var et af dem. I ugens Perky Park Club Mix får klubrytmen mere plads, men det er stadig vekslen mellem de to stemmer, der gør nummeret oplagt at synge med på.",
-          "Aqua say they believed in the idea behind Barbie Girl enough to give it other names in the studio and keep the real title secret. Burger King was one of them. The Perky Park Club Mix gives the beat more room, while the back-and-forth between the two voices still makes the track a singalong.",
-          "Aqua war so überzeugt von der Idee zu Barbie Girl, dass das Stück im Studio andere Namen bekam und der eigentliche Titel geheim blieb. Burger King war einer davon. Im Perky Park Club Mix bekommt der Beat mehr Platz, und der Wechsel zwischen beiden Stimmen lädt immer noch zum Mitsingen ein."
+          "På Official Charts’ liste for 20. november 1994 ligger Baby D øverst. Nummeret dukkede op på listen igen i 2000. Ugens udgave fra Deliverance varer 7:50, så der er plads til både klaveret og vokalen, inden der mikses videre.",
+          "Official Charts lists Baby D at number one on 20 November 1994. The track charted again in 2000. This week’s recording from Deliverance runs 7:50, leaving plenty of room for the piano and vocals before the next mix.",
+          "In den Official Charts vom 20. November 1994 steht Baby D auf Platz eins. 2000 kam der Track erneut in die Charts. Die Wochenfassung von Deliverance läuft 7:50 und lässt dem Klavier und dem Gesang Zeit, bevor es weitergeht."
         ],
         "questionText": [
-          "Hvilken sang ville du give det mest misvisende dæknavn, du kan finde på?",
-          "What song would you give the most misleading cover name you can think of?",
-          "Welchem Song würdet ihr den irreführendsten Decknamen geben?"
+          "Husker du klaveret eller omkvædet bedst?",
+          "Do you remember the piano or the chorus best?",
+          "Was ist dir stärker im Kopf geblieben, das Klavier oder der Refrain?"
         ],
         "sources": [
-          "https://www.musicradar.com/artists/we-were-very-secretive-about-the-song-title-it-was-such-a-great-idea-and-we-didnt-want-anyone-else-to-know-about-it-so-for-a-long-time-we-called-the-song-burger-king-the-story-of-controversial-90s-pop-banger-barbie-girl"
+          "https://www.officialcharts.com/charts/singles-chart/19941120/7501/"
         ],
         "moreUrl": "https://folsoetv.dk/shows/eurodance/",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-bongo",
+        "id": "2026-W48-eurodance-sunchyme",
         "show": "eurodance",
-        "artist": "Safri Duo",
-        "title": "Played-A-Live (The Bongo Song)",
+        "artist": "Dario G",
+        "title": "Sunchyme",
         "headline": [
-          "Da slagtøjet rykkede ind på dansegulvet",
-          "When percussion took over the dance floor",
-          "Als das Schlagwerk die Tanzfläche übernahm"
+          "En lang tur på den britiske hitliste",
+          "A long run on the UK chart",
+          "Lange in den britischen Charts"
         ],
         "text": [
-          "Safri Duo tog deres klassiske slagtøjsbaggrund med ind i klubmusikken på Played-A-Live.",
-          "Safri Duo brought their classical percussion background into club music with Played-A-Live.",
-          "Mit Played-A-Live brachte Safri Duo klassisches Schlagwerk in die Clubmusik."
+          "Sunchyme nåede nummer to og havde 18 uger på den britiske singlehitliste.",
+          "Sunchyme reached number two and spent 18 weeks on the UK singles chart.",
+          "Sunchyme erreichte Platz zwei und stand 18 Wochen in den britischen Singlecharts."
         ],
         "longText": [
-          "Uffe Savery og Morten Friis kom fra det klassiske slagtøj, før de gik ind i klubmusikken. På Played-A-Live bærer de akustiske trommer nummeret, mens den elektroniske bund holder gulvet samlet. Prøv at følge trommerne hele vejen gennem nummeret. Der er mindst lige så meget at lytte efter i rytmen som i melodien.",
-          "Uffe Savery and Morten Friis came from classical percussion before moving into club music. In Played-A-Live, the acoustic drums carry the track while the electronic pulse keeps the floor together. Try following the drums all the way through. The rhythm rewards just as much attention as the melody.",
-          "Uffe Savery und Morten Friis kamen vom klassischen Schlagwerk zur Clubmusik. Bei Played-A-Live tragen die akustischen Trommeln das Stück, während der elektronische Puls die Tanzfläche zusammenhält. Folgt den Trommeln durch den ganzen Track. Im Rhythmus steckt genauso viel wie in der Melodie."
+          "Official Charts registrerer den første britiske hitlisteuge i september 1997. Syv af de 18 uger var i top ti. I vores udgave ligger nummeret hen mod slutningen, hvor det giver plads til at synge med før det sidste klubstræk.",
+          "Official Charts records its first UK chart week in September 1997. Seven of its 18 weeks were in the top ten. In our playlist it comes near the end, a chance to sing along before the final club stretch.",
+          "Official Charts nennt September 1997 als erste britische Chartwoche. Sieben der 18 Wochen lagen in den Top Ten. Bei uns kommt der Track gegen Ende und lädt vor dem letzten Clubabschnitt zum Mitsingen ein."
         ],
         "questionText": [
-          "Hvilket instrument genkender du med det samme på et dansegulv?",
-          "What instrument do you recognise instantly on a dance floor?",
-          "Welches Instrument erkennt ihr auf der Tanzfläche sofort?"
+          "Hvilket klubhit lyder stadig som sommer for dig?",
+          "Which club hit still sounds like summer to you?",
+          "Welcher Clubhit klingt für dich immer noch nach Sommer?"
         ],
         "sources": [
-          "https://wwwassets.pdh.dk/press_releases/25/017fe2f04f764ea964b42a18ed1a4d5af79c4281_en.pdf"
+          "https://www.officialcharts.com/songs/dario-g-sunchyme/"
         ],
         "moreUrl": "https://folsoetv.dk/shows/eurodance/",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-eurodance-feelin-fine-extended-mix",
+        "show": "eurodance",
+        "artist": "Ultrabeat",
+        "title": "Feelin' Fine - Extended Mix",
+        "headline": [
+          "Feelin' Fine - Extended Mix",
+          "Feelin' Fine - Extended Mix",
+          "Feelin' Fine - Extended Mix"
+        ],
+        "text": [
+          "Ultrabeat · Feelin' Fine - Extended Mix · Ugens Spotify-udgave varer 7:29.",
+          "Ultrabeat · Feelin' Fine - Extended Mix · This week’s Spotify version runs 7:29.",
+          "Ultrabeat · Feelin' Fine - Extended Mix · Die Spotify-Fassung dieser Woche läuft 7:29."
+        ],
+        "longText": [
+          "Ultrabeat · Feelin' Fine - Extended Mix · Ugens Spotify-udgave varer 7:29.",
+          "Ultrabeat · Feelin' Fine - Extended Mix · This week’s Spotify version runs 7:29.",
+          "Ultrabeat · Feelin' Fine - Extended Mix · Die Spotify-Fassung dieser Woche läuft 7:29."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/eurodance/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-eurodance-miracle-extended-mix",
+        "show": "eurodance",
+        "artist": "Cascada",
+        "title": "Miracle - Extended Mix",
+        "headline": [
+          "Miracle - Extended Mix",
+          "Miracle - Extended Mix",
+          "Miracle - Extended Mix"
+        ],
+        "text": [
+          "Cascada nåede nummer otte i Storbritannien med Miracle i 2007.",
+          "Cascada reached UK number eight with Miracle in 2007.",
+          "Cascada erreichte 2007 mit Miracle Platz acht in Großbritannien."
+        ],
+        "longText": [
+          "Cascada nåede nummer otte i Storbritannien med Miracle i 2007.",
+          "Cascada reached UK number eight with Miracle in 2007.",
+          "Cascada erreichte 2007 mit Miracle Platz acht in Großbritannien."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/cascada-miracle/",
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/eurodance/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-eurodance-make-the-world-go-round-deep-dish-round-the-world-remix",
+        "show": "eurodance",
+        "artist": "Sandy B, Deep Dish",
+        "title": "Make The World Go Round - Deep Dish Round The World Remix",
+        "headline": [
+          "Make The World Go Round - Deep Dish Round The World Remix",
+          "Make The World Go Round - Deep Dish Round The World Remix",
+          "Make The World Go Round - Deep Dish Round The World Remix"
+        ],
+        "text": [
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · Ugens Spotify-udgave varer 9:20.",
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · This week’s Spotify version runs 9:20.",
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · Die Spotify-Fassung dieser Woche läuft 9:20."
+        ],
+        "longText": [
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · Ugens Spotify-udgave varer 9:20.",
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · This week’s Spotify version runs 9:20.",
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · Die Spotify-Fassung dieser Woche läuft 9:20."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/eurodance/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-eurodance-ecuador-original-12-mix",
+        "show": "eurodance",
+        "artist": "Sash!",
+        "title": "Ecuador - Original 12\" Mix",
+        "headline": [
+          "Ecuador - Original 12\" Mix",
+          "Ecuador - Original 12\" Mix",
+          "Ecuador - Original 12\" Mix"
+        ],
+        "text": [
+          "Sash! · Ecuador - Original 12\" Mix · Ugens Spotify-udgave varer 5:25.",
+          "Sash! · Ecuador - Original 12\" Mix · This week’s Spotify version runs 5:25.",
+          "Sash! · Ecuador - Original 12\" Mix · Die Spotify-Fassung dieser Woche läuft 5:25."
+        ],
+        "longText": [
+          "Sash! · Ecuador - Original 12\" Mix · Ugens Spotify-udgave varer 5:25.",
+          "Sash! · Ecuador - Original 12\" Mix · This week’s Spotify version runs 5:25.",
+          "Sash! · Ecuador - Original 12\" Mix · Die Spotify-Fassung dieser Woche läuft 5:25."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/eurodance/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "retro": [
       {
-        "id": "2026-W47-retro-dreams",
+        "id": "2026-W48-retro-last-christmas",
         "show": "retro",
-        "artist": "Fleetwood Mac",
-        "title": "Dreams",
+        "artist": "Wham!",
+        "title": "Last Christmas",
         "headline": [
-          "Fem minutters fred og en sang, der blev hængende",
-          "Five quiet minutes and a song that stuck",
-          "Fünf ruhige Minuten und ein Song, der blieb"
+          "Juleførsteplads to år i træk",
+          "Christmas number one two years running",
+          "Weihnachtsnummer eins in zwei Jahren"
         ],
         "text": [
-          "Stevie Nicks tog et Fender Rhodes ind i et andet studie under Rumours-sessionerne. Der begyndte Dreams.",
-          "Stevie Nicks took a Fender Rhodes into another studio during the Rumours sessions. That's where Dreams began.",
-          "Während der Rumours-Sessions nahm Stevie Nicks ein Fender Rhodes mit in ein anderes Studio. Dort begann Dreams."
+          "Last Christmas blev britisk julenummer ét både i 2023 og 2024.",
+          "Last Christmas was UK Christmas number one in 2023 and 2024.",
+          "Last Christmas war 2023 und 2024 die britische Weihnachtsnummer eins."
         ],
         "longText": [
-          "Mens de andre arbejdede i hovedstudiet, gik Stevie Nicks ind i et rum, der var knyttet til Sly Stone. Hun skrev Dreams på et Fender Rhodes og tog idéen tilbage til bandet. Den færdige indspilning har stadig den ro, man forbinder med historien. Bassen og trommerne holder et enkelt mønster, så stemmen kan få plads til alle de små skift.",
-          "While the others worked in the main studio, Stevie Nicks went into a room associated with Sly Stone. She wrote Dreams on a Fender Rhodes and took the idea back to the band. The finished record still carries that sense of quiet. Bass and drums keep a simple pattern so the voice has room for every little shift.",
-          "Während die anderen im Hauptstudio arbeiteten, ging Stevie Nicks in einen Raum, der mit Sly Stone verbunden war. Sie schrieb Dreams auf einem Fender Rhodes und brachte die Idee zurück zur Band. Die Aufnahme hat bis heute diese Ruhe. Bass und Schlagzeug halten ein einfaches Muster, in dem jede kleine Wendung der Stimme Platz findet."
+          "Official Charts registrerer, at Wham! med samme sang blev den første til at tage den britiske juleførsteplads to år i træk. Ugens indspilning varer 4:22. Hør efter, hvor hurtigt du genkender sangen, inden George Michael begynder at synge.",
+          "Official Charts records that Wham! became the first act to take the UK Christmas number one two years in a row with the same song. This week’s recording runs 4:22. See how quickly you recognise it before George Michael starts singing.",
+          "Laut Official Charts holten Wham! mit demselben Song als Erste zweimal in Folge die britische Weihnachtsnummer eins. Die Wochenfassung läuft 4:22. Wie schnell erkennt ihr sie, bevor George Michael zu singen beginnt?"
         ],
         "questionText": [
-          "Hvilken sang får et helt rum til at falde til ro?",
-          "What song makes a whole room settle down?",
-          "Bei welchem Song kommt ein ganzer Raum zur Ruhe?"
+          "Hvor mange sekunder behøver du for at genkende Last Christmas?",
+          "How many seconds do you need to recognise Last Christmas?",
+          "Nach wie vielen Sekunden erkennst du Last Christmas?"
         ],
         "sources": [
-          "https://www.rhino.com/article/once-upon-a-time-in-the-top-spot-fleetwood-mac-dreams-0"
+          "https://www.officialcharts.com/artist/19823/wham/"
         ],
         "moreUrl": "https://folsoetv.dk/shows/retro-hits/",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-peg",
+        "id": "2026-W48-retro-gnags-julesang",
         "show": "retro",
-        "artist": "Steely Dan",
-        "title": "Peg",
+        "artist": "GNAGS",
+        "title": "Gnags' Julesang",
         "headline": [
-          "Én guitarsolo og et tilbud om hele turnéen",
-          "One guitar solo and an offer to tour",
-          "Ein Gitarrensolo und ein Tourangebot"
+          "Jul på dansk i 1982",
+          "Christmas in Danish in 1982",
+          "Weihnachten auf Dänisch im Jahr 1982"
         ],
         "text": [
-          "Jay Graydon indspillede guitarsoloen på Peg. Bagefter fik han tilbud om at tage på turné med Steely Dan.",
-          "Jay Graydon played the solo on Peg. He was later asked to tour with Steely Dan.",
-          "Jay Graydon spielte das Solo auf Peg. Später fragte man ihn, ob er mit Steely Dan auf Tour gehen wollte."
+          "Lex placerer Gnags’ Julesang i 1982 og regner den blandt de danske julehits.",
+          "Lex dates Gnags’ Julesang to 1982 and lists it among Danish Christmas hits.",
+          "Lex datiert Gnags’ Julesang auf 1982 und zählt sie zu den dänischen Weihnachtsklassikern."
         ],
         "longText": [
-          "Jay Graydon fortæller, at guitarsoloen på Peg var hans eneste musikalske bidrag til Steely Dan. Kort efter ringede manager Irving Azoff og spurgte, om han ville med på turné. Graydon havde masser af studiejob og brød sig ikke om at flyve, så han takkede nej. Næste gang du hører sangen, så giv soloen et ekstra øjeblik. Den var nok til at åbne døren til hele turnéen.",
-          "Jay Graydon says the guitar solo on Peg was his only musical contribution to Steely Dan. Soon afterwards, manager Irving Azoff called to ask him to tour with the band. Graydon had plenty of studio work and did not like flying, so he declined. Give that solo an extra moment next time you hear it. It was enough to open the door to a whole tour.",
-          "Jay Graydon sagt, dass das Gitarrensolo auf Peg sein einziger musikalischer Beitrag für Steely Dan war. Kurz darauf rief Manager Irving Azoff an und fragte ihn für die Tour an. Graydon hatte viele Studiojobs und flog ungern, also lehnte er ab. Achtet beim nächsten Hören besonders auf dieses Solo. Es reichte für ein Angebot, mit auf Tour zu gehen."
+          "Musikforskeren Jens Hesselager nævner Gnags’ Julesang i Lex som en del af den danske julepoptradition. På samme liste finder du også Shu-bi-dua, MC Einar og Anne Linnet, som alle er med i Retro Hits denne uge. Lyt efter, hvor forskelligt de kan få julen til at lyde.",
+          "Music scholar Jens Hesselager includes Gnags’ Julesang in Lex’s account of Danish Christmas pop. The same list includes Shu-bi-dua, MC Einar and Anne Linnet, all on Retro Hits this week. Listen to how differently each of them makes Christmas sound.",
+          "Der Musikwissenschaftler Jens Hesselager nennt Gnags’ Julesang bei Lex als Beispiel für dänischen Weihnachtspop. Dort stehen auch Shu-bi-dua, MC Einar und Anne Linnet, die diese Woche ebenfalls bei Retro Hits zu hören sind. Achtet darauf, wie unterschiedlich Weihnachten bei ihnen klingt."
         ],
         "questionText": [
-          "Hvilken guitarsolo stopper du altid op for?",
-          "Which guitar solo always makes you stop and listen?",
-          "Bei welchem Gitarrensolo hört ihr immer besonders hin?"
+          "Hvilken dansk julesang lyder mest af hjemme hos dig?",
+          "Which Danish Christmas song sounds most like home?",
+          "Welches dänische Weihnachtslied klingt für dich am meisten nach Zuhause?"
         ],
         "sources": [
-          "https://jaygraydon.com/interviewtxt.htm"
+          "https://lex.dk/julemusik"
         ],
         "moreUrl": "https://folsoetv.dk/shows/retro-hits/",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-den-himmelbla",
+        "show": "retro",
+        "artist": "Shu-Bi-Dua",
+        "title": "Den Himmelblå",
+        "headline": [
+          "Den Himmelblå",
+          "Den Himmelblå",
+          "Den Himmelblå"
+        ],
+        "text": [
+          "Lex daterer Shu-bi-duas Den Himmelblå til 1980.",
+          "Lex dates Den Himmelblå by Shu-bi-dua to 1980.",
+          "Lex datiert Den Himmelblå von Shu-bi-dua auf 1980."
+        ],
+        "longText": [
+          "Lex daterer Shu-bi-duas Den Himmelblå til 1980.",
+          "Lex dates Den Himmelblå by Shu-bi-dua to 1980.",
+          "Lex datiert Den Himmelblå von Shu-bi-dua auf 1980."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik",
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/retro-hits/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-nar-sneen-falder",
+        "show": "retro",
+        "artist": "Thomas Helmig, Søs Fenger",
+        "title": "Når Sneen Falder",
+        "headline": [
+          "Når Sneen Falder",
+          "Når Sneen Falder",
+          "Når Sneen Falder"
+        ],
+        "text": [
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · Ugens Spotify-udgave varer 4:21.",
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · This week’s Spotify version runs 4:21.",
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · Die Spotify-Fassung dieser Woche läuft 4:21."
+        ],
+        "longText": [
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · Ugens Spotify-udgave varer 4:21.",
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · This week’s Spotify version runs 4:21.",
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · Die Spotify-Fassung dieser Woche läuft 4:21."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/retro-hits/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-lille-messias",
+        "show": "retro",
+        "artist": "Anne Linnet",
+        "title": "Lille Messias",
+        "headline": [
+          "Lille Messias",
+          "Lille Messias",
+          "Lille Messias"
+        ],
+        "text": [
+          "Lex daterer Anne Linnets Lille Messias til 1989.",
+          "Lex dates Lille Messias by Anne Linnet to 1989.",
+          "Lex datiert Lille Messias von Anne Linnet auf 1989."
+        ],
+        "longText": [
+          "Lex daterer Anne Linnets Lille Messias til 1989.",
+          "Lex dates Lille Messias by Anne Linnet to 1989.",
+          "Lex datiert Lille Messias von Anne Linnet auf 1989."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik",
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/retro-hits/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-jul-det-cool",
+        "show": "retro",
+        "artist": "Mc Einar",
+        "title": "Jul Det' Cool",
+        "headline": [
+          "Jul Det' Cool",
+          "Jul Det' Cool",
+          "Jul Det' Cool"
+        ],
+        "text": [
+          "Lex daterer MC Einars Jul Det' Cool til 1988.",
+          "Lex dates Jul Det' Cool by MC Einar to 1988.",
+          "Lex datiert Jul Det' Cool von MC Einar auf 1988."
+        ],
+        "longText": [
+          "Lex daterer MC Einars Jul Det' Cool til 1988.",
+          "Lex dates Jul Det' Cool by MC Einar to 1988.",
+          "Lex datiert Jul Det' Cool von MC Einar auf 1988."
+        ],
+        "questionText": [
+          "Hvad lægger du mærke til i denne udgave?",
+          "What stands out to you in this version?",
+          "Was fällt dir an dieser Version auf?"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik",
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+        ],
+        "moreUrl": "https://folsoetv.dk/shows/retro-hits/",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ]
   },
   "ticker": {
     "trance": [
       {
-        "id": "2026-W47-trance-01",
-        "kind": "humor",
-        "text": [
-          "Breakdownet har bedt om flextid.",
-          "The breakdown has asked for flexible hours.",
-          "Der Break hat Gleitzeit beantragt."
-        ],
-        "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-trance-02",
+        "id": "2026-W48-trance-01",
         "kind": "question",
         "text": [
-          "Melodi eller bas først? Skriv M eller B.",
-          "Melody or bass first? Type M or B.",
-          "Melodie oder Bass zuerst? Schreibt M oder B."
+          "Hvor længe må et breakdown holde vejret?",
+          "How long can a breakdown hold its breath?",
+          "Wie lange darf ein Break die Luft anhalten?"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-03",
-        "kind": "humor",
-        "text": [
-          "Drop klar. Kaffekoppen har spændt selen.",
-          "Drop incoming. The coffee mug has buckled up.",
-          "Der Drop kommt. Die Kaffeetasse ist angeschnallt."
-        ],
-        "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-trance-04",
+        "id": "2026-W48-trance-02",
         "kind": "question",
         "text": [
-          "Hvad åbner dansegulvet for dig?",
-          "What gets you onto the dance floor?",
-          "Was zieht euch auf die Tanzfläche?"
+          "Hvilket nummer ville du høre med lyset slukket?",
+          "What track would you hear with the lights out?",
+          "Welchen Track würdest du im Dunkeln hören?"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-05",
-        "kind": "humor",
+        "id": "2026-W48-trance-03",
+        "kind": "humour",
         "text": [
-          "Stroboskopet holder pause. Bassen dækker vagten.",
-          "The strobe is on break. The bass is covering its shift.",
-          "Das Stroboskop macht Pause. Der Bass übernimmt."
+          "Chatten er klar. Bassen finder først sit adgangskort.",
+          "Chat is ready. The bass is still looking for its pass.",
+          "Der Chat ist bereit. Der Bass sucht noch seinen Ausweis."
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-06",
+        "id": "2026-W48-trance-04",
+        "kind": "humour",
+        "text": [
+          "Melodien gik en tur. Vi gav den elleve minutter.",
+          "The melody went for a walk. We gave it eleven minutes.",
+          "Die Melodie ist spazieren. Sie hat elf Minuten."
+        ],
+        "show": "trance",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-05",
         "kind": "question",
         "text": [
-          "Vokal eller instrumental i aften?",
-          "Vocals or instrumental tonight?",
-          "Heute mit Gesang oder instrumental?"
+          "Hvad virker bedst i høretelefoner, vokaler eller synth?",
+          "What works best in headphones, vocals or synths?",
+          "Was klingt im Kopfhörer besser, Gesang oder Synths?"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-07",
-        "kind": "humor",
-        "text": [
-          "Værten har mistet tidsfornemmelsen i breakdownet.",
-          "The host lost track of time in the breakdown.",
-          "Der Moderator hat im Break die Zeit vergessen."
-        ],
-        "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-trance-08",
+        "id": "2026-W48-trance-06",
         "kind": "question",
         "text": [
-          "Hvor hørte du trance første gang?",
-          "Where did you first hear trance?",
-          "Wo habt ihr zum ersten Mal Trance gehört?"
+          "Hvilket drop fik dig sidst til at glemme klokken?",
+          "Which drop last made you lose track of time?",
+          "Bei welchem Drop hast du zuletzt die Zeit vergessen?"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-09",
-        "kind": "humor",
+        "id": "2026-W48-trance-xpander-ticker",
+        "kind": "fact",
         "text": [
-          "Synthesizeren fik gåsehud før os andre.",
-          "The synth got goosebumps before the rest of us.",
-          "Der Synth hatte vor uns allen Gänsehaut."
+          "På EP’en fra 1999 varer Xpander 11:30. Det korte edit varer 3:22. · Mere på folsoetv.dk",
+          "On the 1999 EP, Xpander runs 11:30. The short edit runs 3:22. · More at folsoetv.dk",
+          "Auf der EP von 1999 dauert Xpander 11:30. Der kurze Edit läuft 3:22. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/album/2xnwMwLUMQOquTnjLOuh6Q"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-10",
-        "kind": "question",
+        "id": "2026-W48-trance-sun-moon-ticker",
+        "kind": "fact",
         "text": [
-          "Lang opbygning eller hurtigt drop?",
-          "Long build or quick drop?",
-          "Langer Aufbau oder schneller Drop?"
+          "Sun & Moon udkom på Group Therapy i 2011 med Richard Bedford på vokal. · Mere på folsoetv.dk",
+          "Sun & Moon appeared on Group Therapy in 2011 with Richard Bedford on vocals. · More at folsoetv.dk",
+          "Sun & Moon erschien 2011 auf Group Therapy mit Richard Bedford am Mikrofon. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://anjunabeats.com/products/613107-sun-moon-downtempo-version"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-11",
-        "kind": "humor",
+        "id": "2026-W48-trance-amsterdam-smith-pledger-remix-ticker",
+        "kind": "fact",
         "text": [
-          "Vi sendte bassen til lydprøve. Den kom aldrig tilbage.",
-          "We sent the bass to soundcheck. It never came back.",
-          "Der Bass ging zum Soundcheck und kam nie zurück."
+          "Luminary · Amsterdam - Smith & Pledger Remix · Ugens Spotify-udgave varer 7:46. · Mere på folsoetv.dk",
+          "Luminary · Amsterdam - Smith & Pledger Remix · This week’s Spotify version runs 7:46. · More at folsoetv.dk",
+          "Luminary · Amsterdam - Smith & Pledger Remix · Die Spotify-Fassung dieser Woche läuft 7:46. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-trance-12",
-        "kind": "question",
+        "id": "2026-W48-trance-high-on-love-extended-mix-ticker",
+        "kind": "fact",
         "text": [
-          "Beskriv din yndlingsmelodi med én emoji.",
-          "Describe your favourite melody with one emoji.",
-          "Beschreibt eure Lieblingsmelodie mit einem Emoji."
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · Ugens Spotify-udgave varer 6:07. · Mere på folsoetv.dk",
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · This week’s Spotify version runs 6:07. · More at folsoetv.dk",
+          "Armin van Buuren, Anne Gudrun · High On Love - Extended Mix · Die Spotify-Fassung dieser Woche läuft 6:07. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
         ],
         "show": "trance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-via-infinita-extended-mix-ticker",
+        "kind": "fact",
+        "text": [
+          "Estiva · Via Infinita - Extended Mix · Ugens Spotify-udgave varer 6:46. · Mere på folsoetv.dk",
+          "Estiva · Via Infinita - Extended Mix · This week’s Spotify version runs 6:46. · More at folsoetv.dk",
+          "Estiva · Via Infinita - Extended Mix · Die Spotify-Fassung dieser Woche läuft 6:46. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
+        ],
+        "show": "trance",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-trance-massive-ticker",
+        "kind": "fact",
+        "text": [
+          "Ralphie B · Massive · Ugens Spotify-udgave varer 9:19. · Mere på folsoetv.dk",
+          "Ralphie B · Massive · This week’s Spotify version runs 9:19. · More at folsoetv.dk",
+          "Ralphie B · Massive · Die Spotify-Fassung dieser Woche läuft 9:19. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/0eURg5urlKxaQKWwL1Kakg"
+        ],
+        "show": "trance",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "eurodance": [
       {
-        "id": "2026-W47-eurodance-01",
-        "kind": "humor",
-        "text": [
-          "Glowsticken har meldt sig klar til overarbejde.",
-          "The glow stick has volunteered for overtime.",
-          "Der Leuchtstab hat sich für Überstunden gemeldet."
-        ],
-        "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-eurodance-02",
+        "id": "2026-W48-eurodance-01",
         "kind": "question",
         "text": [
-          "90’erne eller 00’erne? Vælg dit dansegulv.",
-          "The ’90s or the ’00s? Pick your dance floor.",
-          "90er oder 00er? Wählt eure Tanzfläche."
+          "Hvilket klubnummer kan du genkende gennem en lukket dør?",
+          "Which club track could you recognise through a closed door?",
+          "Welchen Clubtrack erkennst du durch eine geschlossene Tür?"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-03",
-        "kind": "humor",
+        "id": "2026-W48-eurodance-02",
+        "kind": "humour",
         "text": [
-          "CD-mappen knirker. Den er bare spændt.",
-          "The CD wallet is creaking. It’s just excited.",
-          "Die CD-Tasche knarzt. Sie ist nur aufgeregt."
+          "Dansegulvet åbnede. Jakken blev væk i første omkvæd.",
+          "The floor opened. The coat vanished by the first chorus.",
+          "Die Tanzfläche ist offen. Die Jacke war beim ersten Refrain weg."
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-04",
+        "id": "2026-W48-eurodance-03",
         "kind": "question",
         "text": [
-          "Hvilket omkvæd kan du stadig udenad?",
-          "Which chorus do you still know by heart?",
-          "Welchen Refrain könnt ihr heute noch auswendig?"
+          "Hvilken klub husker du for anlægget?",
+          "Which club do you remember for its sound system?",
+          "Welcher Club ist dir wegen seiner Anlage im Kopf geblieben?"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-05",
-        "kind": "humor",
-        "text": [
-          "Diskokuglen har bedt om kilometerpenge.",
-          "The disco ball wants a mileage allowance.",
-          "Die Discokugel will Kilometergeld."
-        ],
-        "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-eurodance-06",
+        "id": "2026-W48-eurodance-04",
         "kind": "question",
         "text": [
-          "Piano-house eller eurodance? Hvad samler gulvet?",
-          "Piano house or Eurodance? What fills the floor?",
-          "Piano House oder Eurodance? Was füllt die Tanzfläche?"
+          "Klubmix eller radioedit, hvad gemte du på cd?",
+          "Club mix or radio edit, which did you keep on CD?",
+          "Clubmix oder Radioedit, was hast du auf CD behalten?"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-07",
-        "kind": "humor",
+        "id": "2026-W48-eurodance-05",
+        "kind": "humour",
         "text": [
-          "Dørmanden har godkendt hjemmesko på dansegulvet.",
-          "The bouncer has cleared slippers for the dance floor.",
-          "Der Türsteher erlaubt heute Hausschuhe auf der Tanzfläche."
+          "Stroboskopet blinkede to gange. Det tæller som en velkomst.",
+          "The strobe flashed twice. That counts as a welcome.",
+          "Das Strobo hat zweimal geblitzt. Das gilt als Begrüßung."
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-08",
+        "id": "2026-W48-eurodance-06",
         "kind": "question",
         "text": [
-          "Hvad var dit første dansegulvshit?",
-          "What was your first dance floor anthem?",
-          "Was war euer erster Tanzflächenhit?"
+          "Hvilket nummer fortjener en tur tilbage på gulvet?",
+          "Which track deserves another spin on the floor?",
+          "Welcher Track gehört zurück auf die Tanzfläche?"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-09",
-        "kind": "humor",
+        "id": "2026-W48-eurodance-let-me-be-your-fantasy-ticker",
+        "kind": "fact",
         "text": [
-          "SMS’en skulle være kort. Omkvædet må gerne vare.",
-          "Texts had to be short. The chorus can take its time.",
-          "Die SMS musste kurz sein. Der Refrain darf dauern."
+          "Baby D toppede den britiske singlehitliste i november 1994. · Mere på folsoetv.dk",
+          "Baby D topped the UK singles chart in November 1994. · More at folsoetv.dk",
+          "Baby D stand im November 1994 an der Spitze der britischen Singlecharts. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://www.officialcharts.com/charts/singles-chart/19941120/7501/"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-10",
-        "kind": "question",
+        "id": "2026-W48-eurodance-sunchyme-ticker",
+        "kind": "fact",
         "text": [
-          "Hvilket nummer ville du have spillet til skolefesten?",
-          "What would you have played at the school disco?",
-          "Was hättet ihr auf der Schuldisco aufgelegt?"
+          "Sunchyme nåede nummer to og havde 18 uger på den britiske singlehitliste. · Mere på folsoetv.dk",
+          "Sunchyme reached number two and spent 18 weeks on the UK singles chart. · More at folsoetv.dk",
+          "Sunchyme erreichte Platz zwei und stand 18 Wochen in den britischen Singlecharts. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/dario-g-sunchyme/"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-11",
-        "kind": "humor",
+        "id": "2026-W48-eurodance-feelin-fine-extended-mix-ticker",
+        "kind": "fact",
         "text": [
-          "Vi fandt en klubstempling fra i går. Året er uklart.",
-          "We found last night’s club stamp. The year is unclear.",
-          "Wir haben den Clubstempel von gestern gefunden. Welches Jahr, ist unklar."
+          "Ultrabeat · Feelin' Fine - Extended Mix · Ugens Spotify-udgave varer 7:29. · Mere på folsoetv.dk",
+          "Ultrabeat · Feelin' Fine - Extended Mix · This week’s Spotify version runs 7:29. · More at folsoetv.dk",
+          "Ultrabeat · Feelin' Fine - Extended Mix · Die Spotify-Fassung dieser Woche läuft 7:29. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-eurodance-12",
-        "kind": "question",
+        "id": "2026-W48-eurodance-miracle-extended-mix-ticker",
+        "kind": "fact",
         "text": [
-          "Melder dit indre dansegulv om fuldt hus?",
-          "Is your inner dance floor packed tonight?",
-          "Meldet eure innere Tanzfläche heute volles Haus?"
+          "Cascada nåede nummer otte i Storbritannien med Miracle i 2007. · Mere på folsoetv.dk",
+          "Cascada reached UK number eight with Miracle in 2007. · More at folsoetv.dk",
+          "Cascada erreichte 2007 mit Miracle Platz acht in Großbritannien. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://www.officialcharts.com/songs/cascada-miracle/",
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
         ],
         "show": "eurodance",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-eurodance-make-the-world-go-round-deep-dish-round-the-world-remix-ticker",
+        "kind": "fact",
+        "text": [
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · Ugens Spotify-udgave varer 9:20. · Mere på folsoetv.dk",
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · This week’s Spotify version runs 9:20. · More at folsoetv.dk",
+          "Sandy B, Deep Dish · Make The World Go Round - Deep Dish Round The World Remix · Die Spotify-Fassung dieser Woche läuft 9:20. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
+        ],
+        "show": "eurodance",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-eurodance-ecuador-original-12-mix-ticker",
+        "kind": "fact",
+        "text": [
+          "Sash! · Ecuador - Original 12\" Mix · Ugens Spotify-udgave varer 5:25. · Mere på folsoetv.dk",
+          "Sash! · Ecuador - Original 12\" Mix · This week’s Spotify version runs 5:25. · More at folsoetv.dk",
+          "Sash! · Ecuador - Original 12\" Mix · Die Spotify-Fassung dieser Woche läuft 5:25. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/3A26cKn8SHrYF7dDuOymKx"
+        ],
+        "show": "eurodance",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "retro": [
       {
-        "id": "2026-W47-retro-01",
-        "kind": "humor",
-        "text": [
-          "Kassettebåndet bad om en blyant og fred.",
-          "The cassette asked for a pencil and some peace.",
-          "Die Kassette bat um einen Bleistift und etwas Ruhe."
-        ],
-        "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-retro-02",
+        "id": "2026-W48-retro-01",
         "kind": "question",
         "text": [
-          "Hvilken plade lå øverst hjemme hos jer?",
-          "Which record was always on top of the pile at home?",
-          "Welche Platte lag bei euch immer obenauf?"
+          "Hvilken julesang markerer din første decembermorgen?",
+          "Which song marks your first December morning?",
+          "Welcher Song eröffnet für dich den Dezember?"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-03",
-        "kind": "humor",
+        "id": "2026-W48-retro-02",
+        "kind": "humour",
         "text": [
-          "Pladespilleren vil gerne kaldes morgenfrisk.",
-          "The turntable insists it’s a morning person.",
-          "Der Plattenspieler behauptet, er sei Frühaufsteher."
+          "Knas har indført krummeregnskab. Bøje har spist bilagene.",
+          "Knas is counting the crumbs. Bøje ate the receipts.",
+          "Knas zählt die Krümel. Bøje hat die Belege gegessen."
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-04",
+        "id": "2026-W48-retro-03",
+        "kind": "humour",
+        "text": [
+          "Første advent. Kaffen er varm, og småkagedåsen har vagt.",
+          "First Advent. Coffee is hot and the biscuit tin is guarded.",
+          "Erster Advent. Der Kaffee ist heiß, und die Keksdose wird bewacht."
+        ],
+        "show": "retro",
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-04",
         "kind": "question",
         "text": [
-          "Skriv ét nummer, der minder dig om en biltur.",
-          "Name one song that reminds you of a road trip.",
-          "Nennt einen Song, der euch an eine Autofahrt erinnert."
+          "Hvilken julesang ville du redde fra en ridset cd?",
+          "Which Christmas song would you rescue from a scratched CD?",
+          "Welches Weihnachtslied würdest du von einer zerkratzten CD retten?"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-05",
-        "kind": "humor",
-        "text": [
-          "Studiet fandt en B-side med bedre hukommelse end værten.",
-          "The studio found a B-side with a better memory than the host.",
-          "Das Studio fand eine B-Seite mit besserem Gedächtnis als der Moderator."
-        ],
-        "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-retro-06",
+        "id": "2026-W48-retro-05",
         "kind": "question",
         "text": [
-          "Hvad stod der på dit første mixtape?",
-          "What was written on your first mixtape?",
-          "Was stand auf eurem ersten Mixtape?"
+          "Hører du julen mest på dansk eller engelsk?",
+          "Do you hear Christmas mostly in Danish or English?",
+          "Klingt Weihnachten für dich eher dänisch oder englisch?"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-07",
-        "kind": "humor",
-        "text": [
-          "Kaffefilteret nægter at genudgive første kande.",
-          "The coffee filter refuses to reissue the first pot.",
-          "Der Kaffeefilter verweigert die Neuauflage der ersten Kanne."
-        ],
-        "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-retro-08",
+        "id": "2026-W48-retro-06",
         "kind": "question",
         "text": [
-          "Hvilket omkvæd ville få hele køkkenet til at synge?",
-          "Which chorus would get the whole kitchen singing?",
-          "Bei welchem Refrain singt die ganze Küche mit?"
+          "Har du et gammelt radiohit, der lugter af gran og kaffe?",
+          "Got an old radio hit that smells of pine and coffee?",
+          "Welcher Radiohit riecht für dich nach Tanne und Kaffee?"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-09",
-        "kind": "humor",
+        "id": "2026-W48-retro-last-christmas-ticker",
+        "kind": "fact",
         "text": [
-          "En plade gik i arv. Ridserne fulgte med.",
-          "A record was handed down. The scratches came with it.",
-          "Eine Platte wurde vererbt. Die Kratzer gab’s dazu."
+          "Last Christmas blev britisk julenummer ét både i 2023 og 2024. · Mere på folsoetv.dk",
+          "Last Christmas was UK Christmas number one in 2023 and 2024. · More at folsoetv.dk",
+          "Last Christmas war 2023 und 2024 die britische Weihnachtsnummer eins. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://www.officialcharts.com/artist/19823/wham/"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-10",
-        "kind": "question",
+        "id": "2026-W48-retro-gnags-julesang-ticker",
+        "kind": "fact",
         "text": [
-          "70’erne, 80’erne eller tidlige 90’ere til morgenkaffen?",
-          "’70s, ’80s or early ’90s with your morning coffee?",
-          "70er, 80er oder frühe 90er zum Morgenkaffee?"
+          "Lex placerer Gnags’ Julesang i 1982 og regner den blandt de danske julehits. · Mere på folsoetv.dk",
+          "Lex dates Gnags’ Julesang to 1982 and lists it among Danish Christmas hits. · More at folsoetv.dk",
+          "Lex datiert Gnags’ Julesang auf 1982 und zählt sie zu den dänischen Weihnachtsklassikern. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-11",
-        "kind": "humor",
+        "id": "2026-W48-retro-den-himmelbla-ticker",
+        "kind": "fact",
         "text": [
-          "Båndoptageren er klar. Værten prøver at tie stille.",
-          "The tape recorder is ready. The host is trying to stay quiet.",
-          "Das Tonband läuft. Der Moderator versucht, still zu sein."
+          "Lex daterer Shu-bi-duas Den Himmelblå til 1980. · Mere på folsoetv.dk",
+          "Lex dates Den Himmelblå by Shu-bi-dua to 1980. · More at folsoetv.dk",
+          "Lex datiert Den Himmelblå von Shu-bi-dua auf 1980. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik",
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-retro-12",
-        "kind": "question",
+        "id": "2026-W48-retro-nar-sneen-falder-ticker",
+        "kind": "fact",
         "text": [
-          "Hvilket hit gemte sig på bagsiden af din single?",
-          "Which gem was hiding on the flip side of your single?",
-          "Welcher Schatz steckte auf der Rückseite eurer Single?"
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · Ugens Spotify-udgave varer 4:21. · Mere på folsoetv.dk",
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · This week’s Spotify version runs 4:21. · More at folsoetv.dk",
+          "Thomas Helmig, Søs Fenger · Når Sneen Falder · Die Spotify-Fassung dieser Woche läuft 4:21. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
         ],
         "show": "retro",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-lille-messias-ticker",
+        "kind": "fact",
+        "text": [
+          "Lex daterer Anne Linnets Lille Messias til 1989. · Mere på folsoetv.dk",
+          "Lex dates Lille Messias by Anne Linnet to 1989. · More at folsoetv.dk",
+          "Lex datiert Lille Messias von Anne Linnet auf 1989. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik",
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+        ],
+        "show": "retro",
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-retro-jul-det-cool-ticker",
+        "kind": "fact",
+        "text": [
+          "Lex daterer MC Einars Jul Det' Cool til 1988. · Mere på folsoetv.dk",
+          "Lex dates Jul Det' Cool by MC Einar to 1988. · More at folsoetv.dk",
+          "Lex datiert Jul Det' Cool von MC Einar auf 1988. · Mehr auf folsoetv.dk"
+        ],
+        "sources": [
+          "https://lex.dk/julemusik",
+          "https://open.spotify.com/playlist/5oznky7tUFQLClJtUlE2h4"
+        ],
+        "show": "retro",
+        "week": "2026-W48",
+        "validFrom": "2026-11-29T00:00:00+01:00",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "morning": [
       {
-        "id": "2026-W47-morning-01",
-        "kind": "humor",
+        "id": "2026-W48-morning-01",
+        "kind": "humour",
         "text": [
-          "Kaffen er på programmet. Vækkeuret er fyret.",
-          "Coffee is on the schedule. The alarm clock is fired.",
-          "Kaffee steht im Programm. Der Wecker ist gefeuert."
+          "Kaffen fik første ønske. Den bad om en ny kop.",
+          "Coffee got the first request. It asked for another cup.",
+          "Der Kaffee durfte zuerst wünschen. Er wollte noch eine Tasse."
         ],
         "show": "morning",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-morning-02",
+        "id": "2026-W48-morning-02",
         "kind": "question",
         "text": [
-          "Hvilket hit får dig ud af sengen?",
-          "Which hit gets you out of bed?",
-          "Welcher Hit holt euch aus dem Bett?"
+          "Hvad er det første, du spiller på en fri morgen?",
+          "What do you play first on a morning off?",
+          "Was legst du an einem freien Morgen zuerst auf?"
         ],
         "show": "morning",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-morning-03",
-        "kind": "humor",
+        "id": "2026-W48-morning-03",
+        "kind": "humour",
         "text": [
-          "Brødristeren vil gerne være medvært.",
-          "The toaster wants to co-host.",
-          "Der Toaster möchte mitmoderieren."
+          "Toasten er poppet. Studiet fulgte efter.",
+          "The toast popped. So did the studio.",
+          "Der Toast ist hochgesprungen. Das Studio gleich mit."
         ],
         "show": "morning",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-morning-04",
+        "id": "2026-W48-morning-04",
+        "kind": "humour",
+        "text": [
+          "Morgenradio med plads til folk, der stadig leder efter sokker.",
+          "Morning radio for anyone still looking for their socks.",
+          "Morgenradio für alle, die noch ihre Socken suchen."
+        ],
+        "show": "morning",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-morning-05",
         "kind": "question",
         "text": [
-          "Kaffe, te eller bare højere musik?",
-          "Coffee, tea or just louder music?",
-          "Kaffee, Tee oder einfach lautere Musik?"
+          "Byder din morgen på havregrød eller gårsdagens pizza?",
+          "Oats or yesterday’s pizza for breakfast?",
+          "Haferbrei oder Pizza von gestern zum Frühstück?"
         ],
         "show": "morning",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-morning-05",
-        "kind": "humor",
-        "text": [
-          "Morgenhår tæller som antenne.",
-          "Bedhead counts as an antenna.",
-          "Die Schlaffrisur zählt als Antenne."
-        ],
-        "show": "morning",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-morning-06",
+        "id": "2026-W48-morning-06",
         "kind": "question",
         "text": [
-          "Hvad skal med på morgenbordet?",
-          "What belongs on the breakfast table?",
-          "Was gehört auf euren Frühstückstisch?"
+          "Første kop var opvarmning. Hvad skal anden kop høre?",
+          "Cup one was the warm-up. What should cup two hear?",
+          "Tasse eins war zum Aufwärmen. Was hört Tasse zwei?"
         ],
         "show": "morning",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "fredagsbar": [
       {
-        "id": "2026-W47-fredagsbar-01",
-        "kind": "humor",
-        "text": [
-          "Fredagsbaren har sat autosvar på mandag.",
-          "The Friday bar has put Monday on auto-reply.",
-          "Die Freitagsbar hat für Montag eine Abwesenheitsnotiz eingerichtet."
-        ],
-        "show": "fredagsbar",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-fredagsbar-02",
+        "id": "2026-W48-fredagsbar-01",
         "kind": "question",
         "text": [
-          "Hvad er dit fyraftensnummer?",
-          "What’s your clocking-off song?",
-          "Was ist euer Feierabendsong?"
+          "Hvilken sang hører til det øjeblik, du lukker arbejdscomputeren?",
+          "What song goes with shutting your work laptop?",
+          "Welcher Song passt zum Zuklappen des Arbeitslaptops?"
         ],
         "show": "fredagsbar",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-fredagsbar-03",
-        "kind": "humor",
+        "id": "2026-W48-fredagsbar-02",
+        "kind": "humour",
         "text": [
-          "Kontorstolen bad om én sidste omgang.",
-          "The office chair asked for one last round.",
-          "Der Bürostuhl hat um eine letzte Runde gebeten."
+          "Baren fører to slags is. Terninger og den fra fryseren.",
+          "The bar serves two kinds of ice. Cubes and dessert.",
+          "Die Bar hat zwei Sorten Eis. Würfel und Nachtisch."
         ],
         "show": "fredagsbar",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-fredagsbar-04",
+        "id": "2026-W48-fredagsbar-03",
         "kind": "question",
         "text": [
-          "Hvem starter fællessangen i chatten?",
-          "Who starts the singalong in chat?",
-          "Wer stimmt im Chat das erste Lied an?"
+          "Hvad bestiller du først, en sang eller noget at drikke?",
+          "What do you order first, a song or a drink?",
+          "Was bestellst du zuerst, einen Song oder ein Getränk?"
         ],
         "show": "fredagsbar",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-fredagsbar-05",
-        "kind": "humor",
+        "id": "2026-W48-fredagsbar-04",
+        "kind": "humour",
         "text": [
-          "Vi skåler for alle, der lukkede regnearket.",
-          "Here’s to everyone who closed the spreadsheet.",
-          "Prost auf alle, die die Tabelle geschlossen haben."
+          "Dagens tilbud er et omkvæd, du kan uden at øve dig.",
+          "Today’s special is a chorus you already know.",
+          "Heute gibt’s einen Refrain, den du längst kannst."
         ],
         "show": "fredagsbar",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-fredagsbar-06",
-        "kind": "question",
+        "id": "2026-W48-fredagsbar-05",
+        "kind": "humour",
         "text": [
-          "Dansegulv, barstol eller sofa?",
-          "Dance floor, bar stool or sofa?",
-          "Tanzfläche, Barhocker oder Sofa?"
+          "Fredagsbaren er åben. Dørmanden er en karklud.",
+          "The Friday bar is open. A dishcloth is on the door.",
+          "Die Freitagsbar ist offen. Ein Spültuch macht den Einlass."
         ],
         "show": "fredagsbar",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-fredagsbar-06",
+        "kind": "humour",
+        "text": [
+          "Send et fredagshit til én, der stadig svarer på mails.",
+          "Send a Friday tune to someone still answering email.",
+          "Schick einen Freitagshit an jemanden, der noch Mails beantwortet."
+        ],
+        "show": "fredagsbar",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "weekend": [
       {
-        "id": "2026-W47-weekend-01",
-        "kind": "humor",
-        "text": [
-          "Weekendplanen har plads til en ekstra sang.",
-          "There’s room for one more song in the weekend plan.",
-          "Im Wochenendplan ist Platz für einen weiteren Song."
-        ],
-        "show": "weekend",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-weekend-02",
+        "id": "2026-W48-weekend-01",
         "kind": "question",
         "text": [
-          "Hvilken sang får dig i weekendhumør?",
-          "What song puts you in weekend mode?",
-          "Welcher Song bringt euch in Wochenendstimmung?"
+          "Er det sofa, køkken eller dansegulv hos dig i dag?",
+          "Sofa, kitchen or dance floor today?",
+          "Heute Sofa, Küche oder Tanzfläche?"
         ],
         "show": "weekend",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-weekend-03",
-        "kind": "humor",
+        "id": "2026-W48-weekend-02",
+        "kind": "humour",
         "text": [
-          "Sofaen stemte for en omgang til.",
-          "The sofa voted for one more round.",
-          "Das Sofa hat für eine weitere Runde gestimmt."
+          "Weekendplanen har ét punkt. Musik på.",
+          "One thing on the weekend agenda. Music on.",
+          "Ein Punkt auf dem Wochenendplan. Musik an."
         ],
         "show": "weekend",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-weekend-04",
+        "id": "2026-W48-weekend-03",
         "kind": "question",
         "text": [
-          "Roadtrip, køkkenfest eller ro på?",
-          "Road trip, kitchen party or taking it easy?",
-          "Roadtrip, Küchenparty oder einfach entspannen?"
+          "Hvilken sang fungerer både til brunch og på vej hjem sent?",
+          "Which song works at brunch and on a late ride home?",
+          "Welcher Song passt zum Brunch und zur späten Heimfahrt?"
         ],
         "show": "weekend",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-weekend-05",
-        "kind": "humor",
+        "id": "2026-W48-weekend-04",
+        "kind": "humour",
         "text": [
-          "Værten fandt en ledig lørdag. Den er nu booket.",
-          "The host found a free Saturday. It’s booked now.",
-          "Der Moderator hatte einen Samstag frei. Jetzt ist er verplant."
+          "Weekenden er åben. Du behøver ingen anledning.",
+          "The weekend is open. No occasion required.",
+          "Das Wochenende ist offen. Einen Anlass brauchst du nicht."
         ],
         "show": "weekend",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-weekend-06",
+        "id": "2026-W48-weekend-05",
         "kind": "question",
         "text": [
-          "Hvad er dagens uofficielle weekenduniform?",
-          "What’s today’s unofficial weekend uniform?",
-          "Was ist heute eure inoffizielle Wochenenduniform?"
+          "Hvad skal vi spille, mens maden er i ovnen?",
+          "What should we play while dinner’s in the oven?",
+          "Was spielen wir, während das Essen im Ofen ist?"
         ],
         "show": "weekend",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-weekend-06",
+        "kind": "humour",
+        "text": [
+          "Kom for et nummer. Bliv til opvasken er færdig.",
+          "Come for a song. Stay until the dishes are done.",
+          "Komm für einen Song. Bleib bis nach dem Abwasch."
+        ],
+        "show": "weekend",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "popup": [
       {
-        "id": "2026-W47-popup-01",
-        "kind": "humor",
+        "id": "2026-W48-popup-01",
+        "kind": "humour",
         "text": [
-          "Studiet er åbnet på en indskydelse. Typisk.",
-          "The studio opened on a whim. Typical.",
-          "Das Studio hat spontan geöffnet. Typisch."
+          "Studiet åbnede, fordi nogen kom til at lægge en plade på.",
+          "The studio opened when someone put a record on.",
+          "Das Studio ist offen, weil jemand eine Platte aufgelegt hat."
         ],
         "show": "popup",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-popup-02",
+        "id": "2026-W48-popup-02",
         "kind": "question",
         "text": [
-          "Hvilket humør skal vi skrue op for?",
-          "What mood should we turn up?",
-          "Welche Stimmung sollen wir aufdrehen?"
+          "Hvad spiller du, hvis du får ét spontant ønske?",
+          "You get one spontaneous request. What is it?",
+          "Du hast einen spontanen Musikwunsch. Welchen?"
         ],
         "show": "popup",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-popup-03",
-        "kind": "humor",
+        "id": "2026-W48-popup-03",
+        "kind": "humour",
         "text": [
-          "Kameraet blev opdaget med tøfler på.",
-          "The camera was caught wearing slippers.",
-          "Die Kamera wurde in Hausschuhen erwischt."
+          "Vi har ingen dresscode. Høretelefoner tæller som pynt.",
+          "No dress code. Headphones count as accessories.",
+          "Kein Dresscode. Kopfhörer zählen als Schmuck."
         ],
         "show": "popup",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-popup-04",
+        "id": "2026-W48-popup-04",
         "kind": "question",
         "text": [
-          "Hvor landede streamen hos dig i dag?",
-          "Where are you tuning in from today?",
-          "Von wo schaltet ihr heute ein?"
+          "Hvis du lige kom ind, hvad fik dig til at blive?",
+          "If you just dropped in, what made you stay?",
+          "Wenn du gerade reingekommen bist, was hält dich hier?"
         ],
         "show": "popup",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-popup-05",
-        "kind": "humor",
+        "id": "2026-W48-popup-05",
+        "kind": "humour",
         "text": [
-          "Dagens manuskript står på bagsiden af en kvittering.",
-          "Today’s script is on the back of a receipt.",
-          "Das heutige Skript steht auf der Rückseite eines Kassenzettels."
+          "Pop Up Live. Kalenderen fandt først ud af det nu.",
+          "Pop Up Live. The calendar only just found out.",
+          "Pop Up Live. Der Kalender hat’s gerade erst erfahren."
         ],
         "show": "popup",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-popup-06",
-        "kind": "question",
+        "id": "2026-W48-popup-06",
+        "kind": "humour",
         "text": [
-          "Hvad fortjener et spontant omkvæd?",
-          "What deserves a spontaneous singalong?",
-          "Wofür sollten wir spontan einen Refrain anstimmen?"
+          "Et hurtigt hej i chatten tæller som entré.",
+          "A quick hello in chat gets you in.",
+          "Ein kurzes Hallo im Chat ist deine Eintrittskarte."
         ],
         "show": "popup",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
-    "nu-disco": [
+    "nudisco": [
       {
-        "id": "2026-W47-nu-disco-01",
-        "kind": "humor",
-        "text": [
-          "Diskokuglen er på rulleskøjter i aften.",
-          "The mirror ball is on roller skates tonight.",
-          "Die Discokugel ist heute auf Rollschuhen unterwegs."
-        ],
-        "show": "nu-disco",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-nu-disco-02",
+        "id": "2026-W48-nudisco-01",
         "kind": "question",
         "text": [
-          "Basgang eller strygere? Hvad rammer først?",
-          "Bassline or strings? What hits you first?",
-          "Basslinie oder Streicher? Was erwischt euch zuerst?"
+          "Hvilken basgang kan få dig til at danse ved komfuret?",
+          "Which bassline gets you dancing by the stove?",
+          "Bei welcher Bassline tanzt du am Herd?"
         ],
-        "show": "nu-disco",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "show": "nudisco",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-nu-disco-03",
-        "kind": "humor",
+        "id": "2026-W48-nudisco-02",
+        "kind": "humour",
         "text": [
-          "Glitteret har sneget sig ind på masteren.",
-          "Glitter has snuck onto the master channel.",
-          "Glitzer hat sich auf den Masterkanal geschlichen."
+          "Spejlkuglen har taget refleksvest på.",
+          "The mirror ball is wearing a hi-vis vest.",
+          "Die Discokugel trägt jetzt Warnweste."
         ],
-        "show": "nu-disco",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "show": "nudisco",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-nu-disco-04",
+        "id": "2026-W48-nudisco-03",
+        "kind": "humour",
+        "text": [
+          "Find trommen. Bassen skal nok finde dig.",
+          "Find the drum. The bass will find you.",
+          "Such das Schlagzeug. Der Bass findet dich."
+        ],
+        "show": "nudisco",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-nudisco-04",
         "kind": "question",
         "text": [
-          "Hvem har de bedste dansemoves hjemme hos jer?",
-          "Who has the best moves at your place?",
-          "Wer hat bei euch die besten Tanzmoves?"
+          "Hvilken gammel discoplade fortjener et nyt edit?",
+          "Which old disco record deserves a fresh edit?",
+          "Welche alte Discoplatte verdient einen neuen Edit?"
         ],
-        "show": "nu-disco",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "show": "nudisco",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-nu-disco-05",
-        "kind": "humor",
+        "id": "2026-W48-nudisco-05",
+        "kind": "humour",
         "text": [
-          "Vippen med foden er officielt godkendt.",
-          "Foot tapping is officially approved.",
-          "Mit dem Fuß wippen ist offiziell erlaubt."
+          "Glitter kommer med hjem. Det står i musikkens købsbetingelser.",
+          "Glitter follows you home. It’s in the terms.",
+          "Glitzer kommt mit nach Hause. Steht im Kleingedruckten."
         ],
-        "show": "nu-disco",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "show": "nudisco",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-nu-disco-06",
+        "id": "2026-W48-nudisco-06",
         "kind": "question",
         "text": [
-          "Hvad er din go-to sang, når der skal groove på?",
-          "What’s your go-to song when you need a groove?",
-          "Welchen Song legt ihr auf, wenn’s grooven soll?"
+          "Foretrækker du strygere eller en sprød guitar i dit disco?",
+          "Strings or a crisp guitar in your disco?",
+          "Streicher oder knackige Gitarre zum Disco?"
         ],
-        "show": "nu-disco",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "show": "nudisco",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "chart": [
       {
-        "id": "2026-W47-chart-01",
-        "kind": "humor",
-        "text": [
-          "Hitlisten har taget trappen. Der er tæt løb.",
-          "The chart took the stairs. It’s a close race.",
-          "Die Charts nehmen die Treppe. Es ist ein Kopf-an-Kopf-Rennen."
-        ],
-        "show": "chart",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-chart-02",
+        "id": "2026-W48-chart-01",
         "kind": "question",
         "text": [
-          "Hvad ville du sætte på førstepladsen?",
-          "What would you put at number one?",
-          "Was würdet ihr auf Platz eins setzen?"
+          "Hvilken placering ville overraske dig mest?",
+          "Which chart position would surprise you most?",
+          "Welche Platzierung würde dich am meisten überraschen?"
         ],
         "show": "chart",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-chart-03",
-        "kind": "humor",
-        "text": [
-          "Top 20 er klar. Regnemaskinen vil have rulletekst.",
-          "The Top 20 is ready. The calculator wants a credit.",
-          "Die Top 20 steht. Der Taschenrechner will in den Abspann."
-        ],
-        "show": "chart",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-chart-04",
+        "id": "2026-W48-chart-02",
         "kind": "question",
         "text": [
-          "Hvem fortjener et comeback på listen?",
-          "Who deserves a chart comeback?",
-          "Wer verdient ein Comeback in den Charts?"
+          "Hvad vil du sende fra nummer tyve til top tre?",
+          "What would you move from number twenty into the top three?",
+          "Wen würdest du von Platz zwanzig in die Top drei schicken?"
         ],
         "show": "chart",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-chart-05",
-        "kind": "humor",
+        "id": "2026-W48-chart-03",
+        "kind": "humour",
         "text": [
-          "Podiet knirker. Det er spændingen, siger vi.",
-          "The podium’s creaking. We’re calling it suspense.",
-          "Das Podium knarzt. Das ist die Spannung, sagen wir."
+          "Kurven går op. Værtens blyant kan ikke følge med.",
+          "The chart is climbing faster than the host’s pencil.",
+          "Die Kurve steigt schneller, als der Stift mitschreiben kann."
         ],
         "show": "chart",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-chart-06",
+        "id": "2026-W48-chart-04",
         "kind": "question",
         "text": [
-          "Hvad tæller mest for dig, beat eller omkvæd?",
-          "What matters more to you, beat or chorus?",
-          "Was zählt für euch mehr, Beat oder Refrain?"
+          "Har du en outsider til ugens Top 20?",
+          "Got a dark horse for this week’s Top 20?",
+          "Hast du einen Geheimtipp für die Top 20 dieser Woche?"
         ],
         "show": "chart",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-chart-05",
+        "kind": "question",
+        "text": [
+          "Hvilket hit ville holde længst på din egen liste?",
+          "Which hit would last longest on your own chart?",
+          "Welcher Hit hielte sich am längsten in deinen Charts?"
+        ],
+        "show": "chart",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-chart-06",
+        "kind": "humour",
+        "text": [
+          "Nedtællingen starter. Nummer ét holder pokerfjæs.",
+          "The countdown starts. Number one keeps a poker face.",
+          "Der Countdown läuft. Platz eins verzieht keine Miene."
+        ],
+        "show": "chart",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      }
+    ],
+    "danske": [
+      {
+        "id": "2026-W48-danske-01",
+        "kind": "question",
+        "text": [
+          "Hvilket dansk omkvæd kunne dit bord synge uden hjælp?",
+          "Which Danish chorus could your table sing unaided?",
+          "Welchen dänischen Refrain könnte euer Tisch auswendig singen?"
+        ],
+        "show": "danske",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-danske-02",
+        "kind": "humour",
+        "text": [
+          "Den danske udtale har fået sit eget studiepopfilter.",
+          "Danish pronunciation has its own studio pop filter.",
+          "Die dänische Aussprache hat ihren eigenen Popschutz."
+        ],
+        "show": "danske",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-danske-03",
+        "kind": "question",
+        "text": [
+          "Hvilket dansk nummer har stadig din foretrukne guitarintro?",
+          "Which Danish song still has your favourite guitar intro?",
+          "Welcher dänische Song hat dein Lieblings-Gitarrenintro?"
+        ],
+        "show": "danske",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-danske-04",
+        "kind": "humour",
+        "text": [
+          "Tag et nummer med fra din del af Danmark.",
+          "Bring a song from your corner of Denmark.",
+          "Bring einen Song aus deiner Ecke Dänemarks mit."
+        ],
+        "show": "danske",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-danske-05",
+        "kind": "humour",
+        "text": [
+          "Danske hits. Også dem, der blev væk i handskerummet.",
+          "Danish hits, including the ones lost in the glove box.",
+          "Dänische Hits, auch die aus dem Handschuhfach."
+        ],
+        "show": "danske",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-danske-06",
+        "kind": "question",
+        "text": [
+          "Hvem sang du med på, før du forstod hele teksten?",
+          "Who did you sing along to before you knew what it meant?",
+          "Bei wem hast du mitgesungen, bevor du den Text verstanden hast?"
+        ],
+        "show": "danske",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ],
     "summer": [
       {
-        "id": "2026-W47-summer-01",
-        "kind": "humor",
-        "text": [
-          "Solbrillerne har fået plads ved mixeren.",
-          "The sunglasses have a spot by the mixer.",
-          "Die Sonnenbrille hat einen Platz am Mischpult."
-        ],
-        "show": "summer",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
-      },
-      {
-        "id": "2026-W47-summer-02",
+        "id": "2026-W48-summer-01",
         "kind": "question",
         "text": [
-          "Hvilken sang lyder af ferie?",
-          "What song sounds like a holiday?",
-          "Welcher Song klingt nach Urlaub?"
+          "Hvilket hit lyder som en åben bilrude?",
+          "Which hit sounds like an open car window?",
+          "Welcher Hit klingt nach offenem Autofenster?"
         ],
         "show": "summer",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-summer-03",
-        "kind": "humor",
+        "id": "2026-W48-summer-02",
+        "kind": "humour",
         "text": [
-          "Køleboksen bad om et dansegulvspas.",
-          "The cooler asked for a dance floor pass.",
-          "Die Kühlbox wollte einen Pass für die Tanzfläche."
+          "Solstolen har meldt sig til ekstranummeret.",
+          "The deckchair signed up for the encore.",
+          "Der Liegestuhl hat sich für die Zugabe gemeldet."
         ],
         "show": "summer",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-summer-04",
+        "id": "2026-W48-summer-03",
         "kind": "question",
         "text": [
-          "Strand, have eller bil med ruderne nede?",
-          "Beach, garden or car with the windows down?",
-          "Strand, Garten oder Auto mit offenen Fenstern?"
+          "Hvilket omkvæd vil du høre på en færge?",
+          "Which chorus would you play on a ferry?",
+          "Welchen Refrain willst du auf einer Fähre hören?"
         ],
         "show": "summer",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-summer-05",
-        "kind": "humor",
+        "id": "2026-W48-summer-04",
+        "kind": "humour",
         "text": [
-          "Studiet melder om solpletter på vinyl.",
-          "The studio reports sunny patches on the vinyl.",
-          "Das Studio meldet sonnige Stellen auf dem Vinyl."
+          "Picnic-tæppet er ledigt. Det er højttaleren også.",
+          "The picnic blanket is free. So is the speaker.",
+          "Die Picknickdecke ist frei. Der Lautsprecher auch."
         ],
         "show": "summer",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       },
       {
-        "id": "2026-W47-summer-06",
+        "id": "2026-W48-summer-05",
         "kind": "question",
         "text": [
-          "Hvilket hit skal med i bilen på vej mod vandet?",
-          "Which hit belongs in the car on the way to the water?",
-          "Welcher Hit gehört auf die Fahrt ans Wasser?"
+          "Hvad skal vi spille, når grillen endelig er varm?",
+          "What should we play when the barbecue finally heats up?",
+          "Was spielen wir, wenn der Grill endlich heiß ist?"
         ],
         "show": "summer",
-        "week": "2026-W47",
-        "validFrom": "2026-11-15T12:00:00Z",
-        "validUntil": "2026-11-22T18:00:00Z"
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
+      },
+      {
+        "id": "2026-W48-summer-06",
+        "kind": "question",
+        "text": [
+          "Sand i skoene, musik i hovedet. Hvilket nummer?",
+          "Sand in your shoes, music in your head. Which track?",
+          "Sand in den Schuhen, Musik im Kopf. Welcher Track?"
+        ],
+        "show": "summer",
+        "week": "2026-W48",
+        "validFrom": "2026-11-22T11:00:00Z",
+        "validUntil": "2026-11-29T18:00:00Z"
       }
     ]
   },
@@ -1251,27 +1788,27 @@
     {
       "kind": "life",
       "title": [
-        "Bilturen, hvor bagsædet havde stemmeret",
-        "The road trip where the back seat got a vote",
-        "Die Autofahrt, bei der die Rückbank mitbestimmte"
+        "Da albummet skulle vendes",
+        "When the record needed turning over",
+        "Als die Platte gewendet werden musste"
       ],
       "text": [
-        "Forestil dig en mørk søndag, regn på ruden og en kassette, der har spillet samme side tre gange. Foran sidder nogen, der kender vejen. Bagi sidder nogen, der ved præcis, hvilket nummer der skal på bagefter. Når du hører sangen igen som voksen, kommer bilens varmeapparat næsten med i lyden. Hvilket nummer sad fast i jeres bil?",
-        "Picture a dark Sunday, rain on the window and a cassette that has played the same side three times. Someone up front knows the way. Someone in the back knows exactly what song ought to come next. Hear it again as an adult and you can almost hear the car heater, too. What song was stuck in your family car?",
-        "Stellt euch einen dunklen Sonntag vor, Regen an der Scheibe und eine Kassette, deren Seite schon dreimal durchgelaufen ist. Vorn weiß jemand den Weg. Hinten weiß jemand genau, welcher Song als Nächstes kommen muss. Hört ihr ihn Jahre später, klingt die Autoheizung fast mit. Welcher Song lief bei euch im Auto immer wieder?"
+        "Tænk på en søndag, hvor pladespilleren klikker, og ingen vil rejse sig for at vende pladen. Så opdager du, at sangen på den anden side er den, alle egentlig ventede på. Hvilken B-side ville få dig op af stolen?",
+        "Picture a Sunday when the record player clicks and nobody wants to get up to flip the record. Then you remember the song on the other side is the one everyone was waiting for. Which B-side would get you out of the chair?",
+        "Stellt euch einen Sonntag vor. Der Plattenspieler klickt, und niemand will zum Umdrehen aufstehen. Dann fällt euch ein, dass auf Seite B der Song ist, auf den alle warten. Welche B-Seite würde euch aus dem Sessel holen?"
       ]
     },
     {
       "kind": "humor",
       "title": [
-        "Da breakdownet ansøgte om flextid",
-        "When the breakdown asked for flexible hours",
-        "Als der Break Gleitzeit beantragte"
+        "Knas fører krummeregnskab",
+        "Knas counts the crumbs",
+        "Knas zählt die Krümel"
       ],
       "text": [
-        "Studiet bad om et kort breakdown. Det svarede med en kalenderinvitation på torsdag og en note om, at bassen var velkommen til at deltage. Kaffekoppen var den eneste, der accepterede. Hun er nu ansvarlig for tempoet og har sat alle møder til 138.",
-        "The studio asked for a short breakdown. It sent a calendar invite for Thursday and said the bass was welcome to join. The coffee mug was the only one who accepted. It now runs the tempo and has set every meeting to 138.",
-        "Das Studio bat um einen kurzen Break. Zurück kam eine Termineinladung für Donnerstag mit dem Hinweis, dass der Bass gern dazukommen könne. Nur die Kaffeetasse sagte zu. Sie ist jetzt fürs Tempo zuständig und hat alle Termine auf 138 gesetzt."
+        "Fiktivt fra studiet. Knas indførte lagerstyring for Karen Volf-småkager. Bøje oplyste, at beholdningen var overført til en ekstern partner. Partneren viste sig at være hans overkrop. Sagen er sendt til chatten, hvor den allerede har tre meninger og ingen vidner.",
+        "Fiction from the studio. Knas started tracking the Karen Volf biscuits. Bøje said the stock had been transferred to an outside partner. The partner turned out to be his torso. The matter went to chat, where there are already three opinions and no witnesses.",
+        "Fiktion aus dem Studio. Knas führte eine Bestandsliste für Karen-Volf-Kekse ein. Bøje meldete, der Vorrat sei an einen externen Partner gegangen. Gemeint war sein eigener Oberkörper. Der Fall liegt jetzt im Chat. Drei Meinungen, keine Zeugen."
       ]
     }
   ]
