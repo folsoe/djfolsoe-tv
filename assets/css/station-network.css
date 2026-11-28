@@ -518,7 +518,9 @@ html[data-station-network] body main :is(.guideArticle,.editorial-prose) {
   padding:clamp(1.1rem,3vw,2.8rem);
 }
 html[data-station-network] body :is(main>section,main>article) {scroll-margin-top:1.4rem}
-.station-directory {
+html[data-station-network] body main nav.station-directory {
+  display:block;
+  font-weight:400;
   margin:clamp(1rem,3vw,2.4rem) 0;
   padding:clamp(.95rem,2.2vw,1.65rem);
   border:1px solid var(--station-line);
@@ -531,8 +533,8 @@ html[data-station-network] body main .station-directory-title {
   letter-spacing:.03em;
   margin:0 0 .75rem;
 }
-.station-directory ul {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(10.5rem,100%),1fr));
+.station-directory > ul {
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;
   padding:0;margin:0;gap:.55rem;list-style:none;
 }
 .station-directory li {min-width:0;margin:0}
@@ -573,8 +575,14 @@ html[data-station-network] body > :is(footer,.seoFooter) {
   border-top:1px solid var(--station-line);
   padding-block:clamp(1.2rem,3vw,2.4rem);
 }
-@media(max-width:520px) {
-  .station-directory ul {grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:1020px) {
+  .station-directory > ul {grid-template-columns:repeat(6,minmax(0,1fr))}
+  .station-directory li {grid-column:span 2}
+  .station-directory li:nth-child(n+4) {grid-column:span 3}
+}
+@media(max-width:620px) {
+  .station-directory > ul {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .station-directory li,.station-directory li:nth-child(n+4) {grid-column:auto}
   .station-directory li:first-child {grid-column:1/-1}
   html[data-station-network] body main .station-directory a {padding:.65rem}
 }
