@@ -174,7 +174,7 @@
   (stories || news).after(section);
 
   // Keep the station and schedule first, then present the seasonal stories together.
-  for (const id of ['djf-jul-historie','jul-teaser-2026','jul-2026']) {
+  for (const id of ['jul-teaser-2026','jul-2026']) {
     const seasonal = document.getElementById(id);
     if (seasonal) section.before(seasonal);
   }
