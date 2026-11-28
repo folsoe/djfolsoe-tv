@@ -1,1 +1,24 @@
-KCgpID0+IHsKJ3VzZSBzdHJpY3QnOwpjb25zdCBwYXJ0cz1PYmplY3QuZnJvbUVudHJpZXMobmV3IEludGwuRGF0ZVRpbWVGb3JtYXQoJ2VuLUNBJyx7eWVhcjonbnVtZXJpYycsbW9udGg6JzItZGlnaXQnLGRheTonMi1kaWdpdCcsdGltZVpvbmU6J0V1cm9wZS9Db3BlbmhhZ2VuJ30pLmZvcm1hdFRvUGFydHMoKS5tYXAocD0+W3AudHlwZSxwLnZhbHVlXSkpOwpjb25zdCBkYXk9W3BhcnRzLnllYXIscGFydHMubW9udGgscGFydHMuZGF5XS5qb2luKCctJyk7CmlmKGRheTwnMjAyNi0xMS0yOSd8fGRheT4nMjAyNi0xMi0yNCcpcmV0dXJuOwpjb25zdCBzZWN0aW9uPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdqdWwtMjAyNicpLHJvdz13aW5kb3cuREpGX0pVTF9FUElTT0RFUz8uY2FsZW5kYXI/LltkYXldOwppZighc2VjdGlvbnx8IXJvd3x8ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2RqZi1qdWwtaGlzdG9yaWUnKSlyZXR1cm47CmNvbnN0IGluc2VydD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhc2lkZScpOwppbnNlcnQuaWQ9J2RqZi1qdWwtaGlzdG9yaWUnOwppbnNlcnQuY2xhc3NOYW1lPSdkamYtanVsLWZvcnNpZGUnOwpjb25zdCBoZWFkaW5nPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2gyJyksdGVhc2VyPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3AnKSxsaW5rPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2EnKTsKaW5zZXJ0LmFwcGVuZChoZWFkaW5nLHRlYXNlcixsaW5rKTsKc2VjdGlvbi5iZWZvcmUoaW5zZXJ0KTsKZnVuY3Rpb24gdXBkYXRlKCl7CiBjb25zdCBjb2RlPWRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5sYW5nPy5zbGljZSgwLDIpOwogY29uc3QgaT1NYXRoLm1heCgwLFsnZGEnLCdlbicsJ2RlJ10uaW5kZXhPZihjb2RlKSk7CiBoZWFkaW5nLnRleHRDb250ZW50PXJvdy50aXRsZVtpXTsKIHRlYXNlci50ZXh0Q29udGVudD1yb3cudGVhc2VyW2ldOwogbGluay5ocmVmPScvanVsLz9sYW5nPScrWydkYScsJ2VuJywnZGUnXVtpXTsKIGxpbmsudGV4dENvbnRlbnQ9WydMw6ZzIGRhZ2VucyBhZnNuaXQnLCdSZWFkIHRvZGF54oCZcyBlcGlzb2RlJywnSGV1dGUgd2VpdGVybGVzZW4nXVtpXTsKfQpuZXcgTXV0YXRpb25PYnNlcnZlcih1cGRhdGUpLm9ic2VydmUoZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LHthdHRyaWJ1dGVzOnRydWUsYXR0cmlidXRlRmlsdGVyOlsnbGFuZyddfSk7CnVwZGF0ZSgpOwp9KSgpOwo=
+(() => {
+'use strict';
+const parts=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Copenhagen'}).formatToParts().map(p=>[p.type,p.value]));
+const day=[parts.year,parts.month,parts.day].join('-');
+if(day<'2026-11-29'||day>'2026-12-24')return;
+const section=document.getElementById('jul-2026'),row=window.DJF_JUL_EPISODES?.calendar?.[day];
+if(!section||!row||document.getElementById('djf-jul-historie'))return;
+const insert=document.createElement('aside');
+insert.id='djf-jul-historie';
+insert.className='djf-jul-forside';
+const heading=document.createElement('h2'),teaser=document.createElement('p'),link=document.createElement('a');
+insert.append(heading,teaser,link);
+section.before(insert);
+function update(){
+ const code=document.documentElement.lang?.slice(0,2);
+ const i=Math.max(0,['da','en','de'].indexOf(code));
+ heading.textContent=row.title[i];
+ teaser.textContent=row.teaser[i];
+ link.href='/jul/?lang='+['da','en','de'][i];
+ link.textContent=['Læs dagens afsnit','Read today’s episode','Heute weiterlesen'][i];
+}
+new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+update();
+})();
