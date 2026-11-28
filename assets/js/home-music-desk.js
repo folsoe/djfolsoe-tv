@@ -16,6 +16,9 @@
     sources: ['Kilder og lytning', 'Sources and listening', 'Quellen und Hörtipps'],
     release: ['Ny single', 'New single', 'Neue Single'],
     set: ['DJ-sæt', 'DJ set', 'DJ-Set'],
+    upcoming: ['På vej', 'Coming up', 'Demnächst'],
+    studioPhoto: ['Studieillustration', 'Studio illustration', 'Studioillustration'],
+    updated: ['Redaktionen opdateret', 'Desk updated', 'Redaktion aktualisiert'],
     ep: ['Ny EP', 'New EP', 'Neue EP'],
     archive: ['Fra arkivet', 'From the archive', 'Aus dem Archiv'],
     station: ['MUSIK-TV PÅ TWITCH', 'MUSIC TV ON TWITCH', 'MUSIK-TV AUF TWITCH'],
@@ -41,6 +44,11 @@
   };
   let entries = [];
   let failed = false;
+  let updated = '';
+  let fingerprint = '';
+  let inFlight = false;
+  let checked = 0;
+  const interval = 180000;
 
   function render() {
     const index = language();
@@ -49,15 +57,25 @@
       item.textContent = t(item.dataset.musicDeskCopy);
     }
     const results = root.querySelector('[data-music-desk-stories]');
+    const dates = new Intl.DateTimeFormat(['da-DK','en-GB','de-DE'][index], { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+    const dateline = root.querySelector('[data-music-desk-updated]');
+    if (dateline) {
+      dateline.hidden = !updated;
+      if (updated) dateline.textContent = t('updated') + ' · ' + dates.format(new Date(updated+'T12:00:00Z'));
+    }
     if (failed) {
       results.replaceChildren(node('p', t('unavailable')));
       return;
     }
     const open = new Set([...results.querySelectorAll('details[open]')].map(el => el.dataset.story));
-    const dates = new Intl.DateTimeFormat(['da-DK','en-GB','de-DE'][index], { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
     results.replaceChildren(...entries.map((story, position) => {
       const card = node('article', '', 'djf-desk-story');
-      if (position === 0) card.classList.add('djf-desk-lead');
+      if (position === 0) {
+        card.classList.add('djf-desk-lead');
+        const figure = node('figure', '', 'djf-desk-photo');
+        figure.append(node('figcaption', t('studioPhoto')));
+        card.append(figure);
+      }
       card.dataset.kind = story.kind;
       const metadata = node('div', '', 'djf-desk-meta');
       const time = node('time', dates.format(new Date(story.date + 'T12:00:00Z')));
@@ -82,20 +100,40 @@
   }
   new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   render();
-  const controller = new AbortController();
-  const deadline = setTimeout(() => controller.abort(), 7500);
-  fetch('/assets/data/music-desk.json', { credentials: 'omit', signal: controller.signal })
-    .then(response => {
+  const dateOk = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) && Number.isFinite(Date.parse(value));
+  async function refresh(){
+    if (inFlight || document.hidden) return;
+    inFlight = true;
+    checked = Date.now();
+    const controller = new AbortController();
+    const deadline = setTimeout(() => controller.abort(), 7500);
+    try {
+      const response = await fetch('/assets/data/music-desk.json', { credentials: 'omit', cache: 'no-cache', signal: controller.signal });
       if (!response.ok) throw Error('Unavailable');
-      return response.json();
-    })
-    .then(data => {
+      const data = await response.json();
       if (data.schema !== 1 || !Array.isArray(data.stories)) throw Error('Invalid feed');
-      entries = data.stories.filter(item => item && typeof item.id === 'string' && ['release','set','ep','archive'].includes(item.kind)
-        && /^\d{4}-\d{2}-\d{2}$/.test(item.date) && Number.isFinite(Date.parse(item.date))
-        && [item.title,item.intro,item.story].every(validText)
+      const valid = data.stories.filter(item => item && typeof item.id === 'string' && ['release','set','ep','archive','upcoming'].includes(item.kind)
+        && dateOk(item.date) && [item.title,item.intro,item.story].every(validText)
         && Array.isArray(item.sources) && item.sources.length && item.sources.every(validLink)).slice(0, 12);
-      if (!entries.length) throw Error('Empty feed');
+      if (!valid.length) throw Error('Empty feed');
+      const stamp = dateOk(data.updated) ? data.updated : '';
+      const signature = JSON.stringify([stamp, valid]);
+      if (signature === fingerprint) return;
+      updated = stamp;
+      entries = valid;
+      fingerprint = signature;
+      failed = false;
       render();
-    }).catch(() => { failed = true; render(); }).finally(() => clearTimeout(deadline));
+    } catch {
+      if (!entries.length && !failed) { failed = true; render(); }
+    } finally {
+      clearTimeout(deadline);
+      inFlight = false;
+    }
+  }
+  setInterval(refresh, interval);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && (!entries.length || Date.now()-checked >= interval)) refresh();
+  });
+  refresh();
 })();
