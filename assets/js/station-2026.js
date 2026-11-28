@@ -1,4 +1,4 @@
-/* DJ FOLSOE • Music television identity. Existing players, data and controls stay live. */
+/* DJ FOLSOE • DJ FOLSOE identity. Existing players, data and controls stay live. */
 (() => {
   'use strict';
   if (window.DJF_STATION_2026 || /(?:admin|overlay|streamelements|twitch-connect)/i.test(location.pathname)) return;

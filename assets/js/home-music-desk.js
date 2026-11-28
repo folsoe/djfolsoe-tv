@@ -17,12 +17,11 @@
     release: ['Ny single', 'New single', 'Neue Single'],
     set: ['DJ-sæt', 'DJ set', 'DJ-Set'],
     upcoming: ['På vej', 'Coming up', 'Demnächst'],
-    studioPhoto: ['Studieillustration', 'Studio illustration', 'Studioillustration'],
     related: ['Lyt videre hos DJ FOLSOE', 'Keep listening with DJ FOLSOE', 'Weiterhören bei DJ FOLSOE'],
     updated: ['Redaktionen opdateret', 'Desk updated', 'Redaktion aktualisiert'],
     ep: ['Ny EP', 'New EP', 'Neue EP'],
     archive: ['Fra arkivet', 'From the archive', 'Aus dem Archiv'],
-    station: ['MUSIK-TV PÅ TWITCH', 'MUSIC TV ON TWITCH', 'MUSIK-TV AUF TWITCH'],
+    station: ['DJ FOLSOE PÅ TWITCH', 'DJ FOLSOE ON TWITCH', 'DJ FOLSOE AUF TWITCH'],
     hero: ['Musik på sendefladen', 'Music on the air', 'Musik auf Sendung'],
     lead: ['Se DJ FOLSOE live på Twitch. Mellem udsendelserne finder du nye udgivelser, musikhistorier og næste show på samme kanal.', 'Watch DJ FOLSOE live on Twitch. Between broadcasts, find new releases, music stories and the next show on the same channel.', 'Sieh DJ FOLSOE live auf Twitch. Zwischen den Sendungen findest du hier neue Musik, Geschichten und das nächste Showdatum.'],
     program: ['Se sendeplanen', 'See the schedule', 'Zum Sendeplan'],
@@ -49,6 +48,11 @@
     ep: ['nudisco', '/music/nu-disco/'],
     archive: ['retro', '/archive/retro-hits/'],
     upcoming: ['popup', '/shows/']
+  };
+  const storyPhotos = {
+    'tiesto-reflekt-2026':'tiesto', 'morten-london':'morten', 'group-therapy-compilation':'copenhagen',
+    'anna-lunoe-everything':'anna', washa:'club', 'sidney-bret':'set', 'andy-replica':'studio',
+    'northern-exposure':'sasha'
   };
   let entries = [];
   let failed = false;
@@ -78,22 +82,14 @@
     const open = new Set([...results.querySelectorAll('details[open]')].map(el => el.dataset.story));
     results.replaceChildren(...entries.map((story, position) => {
       const card = node('article', '', 'djf-desk-story');
-      const [art, href] = listening[story.kind];
-      if (position !== 0) {
-        const image = node('img', '', 'station-picture');
-        image.src = '/assets/img/station/' + art + '.png';
-        image.alt = '';
-        image.width = 1000;
-        image.height = 500;
-        image.loading = 'lazy';
-        image.decoding = 'async';
-        card.append(image);
-      }
-      if (position === 0) {
-        card.classList.add('djf-desk-lead');
-        const figure = node('figure', '', 'djf-desk-photo');
-        figure.append(node('figcaption', t('studioPhoto')));
+      const [, href] = listening[story.kind];
+      const photoKey = storyPhotos[story.id];
+      if (photoKey && window.djfEditorialPhoto) {
+        const figure = node('figure', '', position === 0 ? 'djf-desk-photo station-news-photo' : 'station-news-photo');
+        const photo = window.djfEditorialPhoto(photoKey);
+        figure.append(photo, node('figcaption', photo.alt));
         card.append(figure);
+        if (position === 0) card.classList.add('djf-desk-lead');
       }
       card.dataset.kind = story.kind;
       const metadata = node('div', '', 'djf-desk-meta');

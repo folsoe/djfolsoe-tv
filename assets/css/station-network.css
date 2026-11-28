@@ -270,17 +270,6 @@ html[data-djf-station][data-station-network] #main .person:has(>.station-person-
 }
 
 html[data-station-network] body main :is(.muted,.seoEyebrow,.djfMastIcon,.show-card small) {color:var(--station-muted)!important}
-html[data-station-network] .djf-home-week-card[data-show]::before {
-  content:"";
-  display:block;
-  aspect-ratio:3 / 1;
-  border-radius:8px;
-  margin-bottom:.75rem;
-  background:var(--station-tint) var(--station-week-image) center / cover no-repeat;
-}
-html[data-station-network] .djf-home-week-card[data-show="trance"] {--station-week-image:url('/themes/trance.jpg')}
-html[data-station-network] .djf-home-week-card[data-show="eurodance"] {--station-week-image:url('/themes/eurodance.jpg')}
-html[data-station-network] .djf-home-week-card[data-show="retro"] {--station-week-image:url('/themes/retro.jpg')}
 html[data-station-network] body a[href*="facebook.com"] b {color:inherit!important}
 html[data-station-network] body .seoHero :is(.seoEyebrow,.seoLead) {color:var(--station-muted)!important}
 
@@ -308,3 +297,74 @@ html[data-station-network] body #djfFacebookDock .djfFbText {
   border-color:var(--station-line)!important;
 }
 html[data-station-network] body #djfFacebookDock .djfFbText :is(strong,small) {color:var(--station-ink)!important}
+
+html[data-station-network] body header .brand {
+  display:inline-flex;
+  align-items:center;
+  flex:none;
+  overflow:visible!important;
+  background:transparent!important;
+}
+html[data-station-network] body header .brand img[src*="/brand/"] {
+  display:block!important;
+  width:clamp(145px,17vw,236px)!important;
+  height:auto!important;
+  max-height:none!important;
+  padding:0!important;
+  background:none!important;
+  filter:none!important;
+  mask:none!important;
+  opacity:1!important;
+}
+html[data-djf-station][data-station-network] #main .hero-art {
+  width:100%!important;
+  min-height:0!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  display:block!important;
+  background:var(--station-sea)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+html[data-djf-station][data-station-network] #main .hero-art::before,
+html[data-djf-station][data-station-network] #main .hero-art::after {display:none!important}
+html[data-djf-station][data-station-network] #main .hero-art > .station-hero-photo {
+  position:static!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  aspect-ratio:3 / 2!important;
+  object-fit:cover!important;
+  filter:none!important;
+  opacity:1!important;
+}
+html[data-djf-station][data-station-network] #main .hero-art :is(.djf-studio-caption,.djf-presenter) {
+  background:var(--station-surface)!important;
+  color:var(--station-ink)!important;
+}
+html[data-djf-station][data-station-network] #main .hero :is(.intro a,.hero-jump a,.actions a:not(.primary),a[href^="#"]) {
+  color:var(--station-ink)!important;
+  background:var(--station-surface)!important;
+  border:1px solid #a68fb6!important;
+  text-shadow:none!important;
+}
+html[data-station-network] .station-news-photo {
+  margin:0 0 .8rem;
+  background:none!important;
+  min-height:0!important;
+}
+html[data-station-network] .station-news-photo figcaption {
+  position:static!important;
+  display:block;
+  margin-top:.4rem;
+  color:var(--station-muted)!important;
+  background:none!important;
+  font-size:.85rem;
+}
+html[data-station-network] .djf-desk-lead .station-news-photo img {aspect-ratio:4/3}
+html[data-station-network] .station-photo-credits {display:block;text-align:center;padding:1rem}
+html[data-station-network] .station-week-photo {margin:.25rem 0 .75rem}
+html[data-station-network] .station-week-photo figcaption {font-size:.85rem;color:var(--station-muted);margin-top:.3rem}
+
+html[data-station-network] .djf-playlist-motif {display:none!important}
+html[data-station-network] .djf-playlist-card > .station-picture {margin-bottom:1rem}
