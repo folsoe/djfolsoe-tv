@@ -429,3 +429,40 @@ html[data-station-network] body button.station-header-pause {
 .station-header-card[data-live="true"] strong::before {
   content:"";display:inline-block;width:7px;height:7px;margin-right:.38rem;border-radius:50%;background:#11825e;
 }
+
+html[data-djf-station][data-station-network] #main > #djf-jul-historie[hidden] {display:none!important}
+html[data-djf-station][data-station-network] #main > #djf-jul-historie {
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(16rem,1fr);
+  align-items:center;gap:clamp(1rem,3vw,2.5rem);margin:0 0 clamp(1rem,3vw,2.25rem);
+  padding:clamp(2.3rem,5vw,3.5rem) clamp(1rem,4vw,3rem) clamp(1rem,3vw,2.5rem);
+  background-color:#f8e9df!important;border-color:#bc8b8d!important;box-shadow:none!important;
+  border-radius:18px!important;
+}
+html[data-djf-station][data-station-network] #main #djf-jul-historie h2 {
+  font-size:clamp(1.6rem,3vw,3.25rem);max-width:20ch;line-height:1.08;letter-spacing:-.035em;
+}
+.station-advent-promo-kicker {font-size:.76rem;font-weight:850;letter-spacing:.1em}
+.station-advent-episode {font-weight:800}
+.station-advent-actions {display:flex;flex-wrap:wrap;gap:.55rem}
+html[data-station-network] #djf-jul-historie .station-advent-primary {
+  background:#72283e;color:#fff!important;border-radius:7px;padding:.65rem .85rem;
+}
+html[data-station-network] #djf-jul-historie .station-advent-cast {
+  background:#fff6ed;border:1px solid #b48b88;border-radius:7px;padding:.65rem .85rem;
+}
+.station-advent-schedule h3 {font-size:clamp(1rem,1.6vw,1.4rem);margin:0 0 .65rem}
+.station-advent-dates {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem;padding:0;margin:0;list-style:none}
+#djf-jul-historie .station-advent-dates li > :is(a,span) {
+  display:grid;justify-items:center;gap:.3rem;margin:0;min-height:100%;
+  border:1px solid #d7b6b1;border-radius:8px;background:#fff6ed;
+  padding:.6rem .25rem;text-align:center;font-size:.76rem;line-height:1.2;
+}
+.station-advent-candle {width:9px;height:18px;margin:.4rem 0 .1rem;border-radius:2px;background:#7f5d57;position:relative}
+.station-advent-candle[data-lit="true"] {background:#9a3850}
+.station-advent-candle[data-lit="true"]::before {
+  content:"";width:7px;height:9px;border-radius:70% 45% 55% 55%;
+  background:#b35920;position:absolute;left:1px;top:-10px;
+}
+@media(max-width:760px) {
+  html[data-djf-station][data-station-network] #main > #djf-jul-historie {grid-template-columns:1fr}
+}

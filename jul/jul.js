@@ -13,7 +13,8 @@ const copy={
 };
 const cast=[["Knas","Studieteknikeren følger det røde kabel.","The studio technician follows the red cable.","Der Studiotechniker folgt dem roten Kabel."],["Tilde","Hun holder styr på sporene i den blå notesbog.","She keeps track of the clues in her blue notebook.","Sie sammelt die Spuren in ihrem blauen Notizbuch."],["Bøje","Hans vafler er både bevismateriale og fristelse.","His waffles are both evidence and temptation.","Seine Waffeln sind Beweismittel und Versuchung zugleich."],["Mulle","Hun fanger det på kamera, de andre overser.","She catches what the others miss on camera.","Sie hält fest, was die anderen übersehen."],["Mads Minus","Han hører, når et slag eller en pause mangler.","He notices when a beat or a pause is missing.","Ihm fällt auf, wenn ein Schlag oder eine Pause fehlt."],["Ester","De gyldne hovedtelefoner opfanger lyd fra det gamle studie.","Her golden headphones pick up sound from the old studio.","Ihre goldenen Kopfhörer fangen Töne aus dem alten Studio auf."],["Pip","De kedelige ting, han låner, viser sig at være afgørende.","The dull things he borrows turn out to be crucial.","Die langweiligen Dinge, die er ausleiht, erweisen sich als entscheidend."],["Lydprøven","Rensdyret spiser papirfejl og finder spor, der er værd at beholde.","The reindeer eats mistakes on paper and spots clues worth keeping.","Das Rentier frisst Fehler auf Papier und entdeckt wertvolle Spuren."],["Urmageren","Hun passer forsvundne visere og husker den gamle julesending.","She takes care of missing clock hands and remembers the old Christmas broadcast.","Sie hütet verschwundene Uhrzeiger und erinnert sich an die alte Weihnachtssendung."],["Sune / DJ FOLSOE","Han holder udsendelsen i gang og giver chatten plads i mysteriet.","He keeps the show going and gives chat a part in the mystery.","Er hält die Sendung am Laufen und gibt dem Chat eine Rolle im Rätsel."]];
 let calendar=window.DJF_JUL_EPISODES?.calendar??{};
-let chosen='',lang=Math.max(0,langs.indexOf(new URL(location.href).searchParams.get('lang')||document.documentElement.lang));
+const params = new URLSearchParams(location.search);
+let chosen=params.get('episode')||'',lang=Math.max(0,langs.indexOf(params.get('lang')||document.documentElement.lang));
 const preview=window.DJF_JUL_PREVIEW === true || location.protocol==='file:';
 const formatter=new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Copenhagen'});
 function today(){
@@ -28,6 +29,7 @@ function renderCast(){
   box.append(document.createElement('summary'),document.createElement('dl'));
   $('episode-body').closest('section').after(box);
  }
+ if (location.hash==='#jul-medvirkende') box.open=true;
  const [label,list]=box.children;
  label.textContent=['Mød de 10 medvirkende','Meet the ten characters','Die zehn Figuren kennenlernen'][lang];
  list.replaceChildren(...cast.flatMap(([name,...role])=>{
