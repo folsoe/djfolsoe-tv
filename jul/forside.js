@@ -3,6 +3,7 @@
 const parts=Object.fromEntries(new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Copenhagen'}).formatToParts().map(p=>[p.type,p.value]));
 const day=[parts.year,parts.month,parts.day].join('-');
 if(day<'2026-11-29'||day>'2026-12-24')return;
+document.documentElement.classList.add('djf-jul-live');
 const section=document.getElementById('jul-2026'),row=window.DJF_JUL_EPISODES?.calendar?.[day];
 if(!section||!row||document.getElementById('djf-jul-historie'))return;
 const insert=document.createElement('aside');
