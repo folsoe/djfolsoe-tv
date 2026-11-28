@@ -389,3 +389,43 @@ html[data-station-network] body .station-advent {
 .station-advent-link {display:inline-block;font-weight:750;text-underline-offset:.2em}
 html[data-station-network] #shows .show-card:has(>.station-picture) {align-self:stretch}
 html[data-station-network] #shows .show-card:not(:has(>.station-picture)) {border-left:4px solid var(--station-accent)!important}
+
+/* Compact station strip, anchored before the logo. */
+html[data-djf-station][data-station-network] body > header:has(.station-header-extra) {
+  gap:clamp(8px,1.2vw,22px);
+  padding-inline:clamp(14px,2vw,38px);
+}
+html[data-djf-station][data-station-network] body > header .station-header-extra {
+  order:-1; flex:0 0 auto; flex-wrap:nowrap; gap:0;
+  border:1px solid #d6c9e2;border-radius:10px;
+  background:#faf6f3;overflow:hidden;min-height:53px;
+}
+.station-header-time {
+  display:grid;align-content:center;gap:2px;min-width:88px;
+  padding:.35rem .7rem;background:#27183e;color:#fff;
+}
+.station-header-date {font-size:.67rem;line-height:1.2;color:#f3eaff;white-space:nowrap}
+.station-header-time .station-clock {font-size:1.2rem;line-height:1;color:#fff;letter-spacing:.025em}
+.station-header-ticker {display:flex;align-items:stretch;min-width:0}
+.station-header-card {width:152px;display:grid;align-items:center;min-width:0}
+.station-header-card > :is(a,div) {display:grid;gap:.15rem;padding:.35rem .6rem;line-height:1.16}
+.station-header-card strong {font-size:.71rem;text-transform:uppercase;letter-spacing:.04em}
+.station-header-card span {font-size:.78rem;color:#483755;overflow-wrap:anywhere}
+.station-header-card[data-kind="vipps"] {background:#ffe6d9}
+.station-header-card[data-kind="vipps"] strong {color:#80321b}
+html[data-station-network] body button.station-header-pause {
+  min-height:0;min-width:34px;padding:0;border:none;border-left:1px solid #ddd1e6;
+  color:#44296a;background:#f0e8f7;font-size:.85rem;cursor:pointer;
+}
+@media(max-width:940px) {
+  html[data-djf-station][data-station-network] body > header:has(.station-header-extra) nav {order:2;flex-basis:100%}
+}
+@media(max-width:630px) {
+  html[data-djf-station][data-station-network] body > header .station-header-extra {flex-basis:100%;justify-content:space-between}
+  .station-header-ticker {flex:1}
+  .station-header-card {width:auto;flex:1}
+}
+.station-header-card[data-live="true"] strong {color:#096047}
+.station-header-card[data-live="true"] strong::before {
+  content:"";display:inline-block;width:7px;height:7px;margin-right:.38rem;border-radius:50%;background:#11825e;
+}
