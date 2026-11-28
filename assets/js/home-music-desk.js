@@ -18,6 +18,7 @@
     set: ['DJ-sæt', 'DJ set', 'DJ-Set'],
     upcoming: ['På vej', 'Coming up', 'Demnächst'],
     studioPhoto: ['Studieillustration', 'Studio illustration', 'Studioillustration'],
+    related: ['Lyt videre hos DJ FOLSOE', 'Keep listening with DJ FOLSOE', 'Weiterhören bei DJ FOLSOE'],
     updated: ['Redaktionen opdateret', 'Desk updated', 'Redaktion aktualisiert'],
     ep: ['Ny EP', 'New EP', 'Neue EP'],
     archive: ['Fra arkivet', 'From the archive', 'Aus dem Archiv'],
@@ -41,6 +42,13 @@
       const link = new URL(source.url);
       return link.protocol === 'https:' && !link.username && !link.password && typeof source.label === 'string';
     } catch { return false; }
+  };
+  const listening = {
+    release: ['trance', '/music/trance/'],
+    set: ['weekend', '/shows/weekend/'],
+    ep: ['nudisco', '/music/nu-disco/'],
+    archive: ['retro', '/archive/retro-hits/'],
+    upcoming: ['popup', '/shows/']
   };
   let entries = [];
   let failed = false;
@@ -70,6 +78,17 @@
     const open = new Set([...results.querySelectorAll('details[open]')].map(el => el.dataset.story));
     results.replaceChildren(...entries.map((story, position) => {
       const card = node('article', '', 'djf-desk-story');
+      const [art, href] = listening[story.kind];
+      if (position !== 0) {
+        const image = node('img', '', 'station-picture');
+        image.src = '/assets/img/station/' + art + '.png';
+        image.alt = '';
+        image.width = 1000;
+        image.height = 500;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        card.append(image);
+      }
       if (position === 0) {
         card.classList.add('djf-desk-lead');
         const figure = node('figure', '', 'djf-desk-photo');
@@ -94,6 +113,9 @@
         li.append(link);
         sources.append(li);
       }
+      const related = node('a', t('related'), 'station-desk-related');
+      related.href = href;
+      detail.append(related);
       card.append(metadata, node('h3', story.title[index]), node('p', story.intro[index]), detail, sources);
       return card;
     }));

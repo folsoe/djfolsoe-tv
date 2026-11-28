@@ -1,0 +1,172 @@
+/* Public station palette. Broadcast video and artwork retain their original colors. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Zalando+Sans+Expanded:wght@600..900&display=swap');
+
+html[data-station-network] {
+  --station-ink:#201733;
+  --station-muted:#514761;
+  --station-link:#4d2b87;
+  --station-line:#ddd3ed;
+  --station-surface:#fff;
+  --station-tint:#f7f3fc;
+  --station-accent:#b099eb;
+  --station-display:"Zalando Sans Expanded",system-ui,sans-serif;
+  --station-text:"Instrument Sans",system-ui,sans-serif;
+  color-scheme:light;
+  color:var(--station-ink);
+  background:#f4f0f8;
+}
+html[data-station-network] body {
+  color:var(--station-ink)!important;
+  background:linear-gradient(170deg,#e9e1f6,#f7f4fa 37rem)!important;
+  font-family:var(--station-text)!important;
+}
+html[data-station-network] body :is(h1,h2,h3) {
+  font-family:var(--station-display);
+  color:var(--station-ink)!important;
+  text-shadow:none!important;
+}
+html[data-station-network] body :is(p,li,summary,label,time,small,.lead,.eyebrow,.quiet) {
+  color:var(--station-muted)!important;
+  text-shadow:none!important;
+}
+html[data-station-network] body :is(a:not(.skip),.text-link) {color:var(--station-link)!important}
+html[data-station-network] body :is(a,button,input,select,textarea,summary):focus-visible {
+  outline:3px solid #7045b8!important;
+  outline-offset:3px;
+}
+html[data-station-network] body :is(.primary,.languages button[aria-pressed="true"],button[type="submit"]) {
+  background:#4d2b87!important;
+  border-color:#4d2b87!important;
+  color:#fff!important;
+}
+html[data-station-network] body :is(.secondary,.languages button:not([aria-pressed="true"]),input:not([type="checkbox"]):not([type="radio"]),textarea,select) {
+  color:var(--station-ink)!important;
+  background:#fff!important;
+  border:1px solid var(--station-line)!important;
+}
+html[data-station-network] body > :is(header,footer),
+html[data-station-network] body :is(.seoTopbar,.seoFooter) {
+  background:var(--station-surface)!important;
+  color:var(--station-ink)!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body :is(header .brand img,.seoTopbar img) {
+  background:#211934;
+  border-radius:8px;
+  padding:5px 9px;
+  box-sizing:border-box;
+}
+html[data-station-network] body :is(header nav,.seoTopbar) a {text-shadow:none!important}
+html[data-station-network] body > main {
+  width:100%;
+  max-width:1440px;
+  margin-inline:auto;
+  box-sizing:border-box;
+  padding-inline:clamp(14px,4vw,56px);
+}
+html[data-station-network] body main :is(.hero,.page-hero,.v26340SubHero,.show-card,.sound-stage-feature,.sound-stage-choice,.djf-home-week-card,.djf-home-week-question,.djf-playlist-card,.home-editorial-card,.signal,.djf-jul-forside,.jul-promo,#jul-2026,.jul-hero,.episode,.v26350Authority,.v26340BroadcastRail,.editorial-opening,.editorial-story-grid article,.editorial-listening,.editorial-next,.guideArticle,.relatedGuide,.searchEntry,.searchEntryPanel) {
+  color:var(--station-ink)!important;
+  background:var(--station-surface)!important;
+  border:1px solid var(--station-line)!important;
+  box-shadow:none!important;
+  border-radius:14px!important;
+}
+html[data-station-network] body main :is(.hero,.page-hero,.v26340SubHero) {
+  background:linear-gradient(135deg,#fff,#eee4fa)!important;
+  padding:clamp(18px,4vw,52px)!important;
+}
+html[data-station-network] body main .v26340SubHero::before,
+html[data-station-network] body main .v26340SubHero::after {opacity:0!important}
+html[data-station-network] body main :is(.sound-stage-feature,.djf-home-week-card,.home-editorial-card,.djf-playlist-card) :is(h3,h4,span,small) {
+  color:var(--station-link)!important;
+}
+html[data-station-network] body main #jul-2026 :is(button,details),
+html[data-station-network] body main :is(.djf-jul-forside,.jul-promo,[id*="teaser"]) button {
+  background:var(--station-tint)!important;
+  color:var(--station-ink)!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body main :is([id*="jul-teaser"],.djf-jul-forside,.jul-promo) {
+  background:#fff7ef!important;
+  color:#452039!important;
+  border:1px solid #e7c4c1!important;
+}
+html[data-station-network] body main .home-live-video,
+html[data-station-network] body main .home-live-screen {background:#15111e!important}
+html[data-station-network] body main :is(.home-live-status,.home-live-note) {color:#fff!important}
+html[data-station-network] body main a.home-live-twitch {color:#4d2b87!important;background:#fff!important}
+
+.station-picture {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:2 / 1;
+  object-fit:cover;
+  border-radius:10px;
+}
+.station-page-picture {margin:1rem 0 0;width:min(100%,31rem);position:relative}
+html[data-station-network] .show-card .station-picture {margin:0 0 1rem}
+html[data-station-network] .djf-desk-story .station-picture {margin-bottom:.75rem}
+html[data-station-network] .station-picture-portrait {aspect-ratio:4 / 3;object-position:center 33%}
+html[data-station-network] .station-explore {
+  padding:clamp(16px,3vw,36px);
+  border:1px solid var(--station-line);
+  border-radius:14px;
+  background:var(--station-surface);
+}
+.station-explore-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,2vw,24px);
+}
+.station-explore-card {
+  display:flex;
+  flex-direction:column;
+  gap:.65rem;
+  padding:12px;
+  border:1px solid var(--station-line);
+  border-radius:12px;
+  background:var(--station-tint);
+}
+.station-explore-card h3,.station-explore-card p {margin:0}
+.station-explore-card a {margin-top:auto;font-weight:700}
+.station-desk-related {display:inline-block;margin-top:.65rem;font-weight:700}
+@media(max-width:680px) {
+  .station-explore-grid {grid-template-columns:1fr}
+  .station-page-picture {width:100%}
+}
+
+html[data-station-network] body main :is(#jul-teaser-2026 li,.chartRow,.tidalCard,.v26400-chartBox,.v26400-chartHero,.v26410-row,.v26351Story__section,.v26351Story__signature,.topicCard,.seoHero) {
+  background:var(--station-tint)!important;
+  color:var(--station-ink)!important;
+  border-color:var(--station-line)!important;
+  box-shadow:none!important;
+}
+html[data-station-network] body main :is(.chartArtist,.chartTitle,.chartRank,.chartMeta,.v26410-song) {color:var(--station-ink)!important}
+html[data-station-network] body :is(.seoTop,nav.seoTop) {
+  background:#fff!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body :is(main a.primary,#main a.primary,main a.tidalBtn,main .seoActions a:first-child) {
+  color:#fff!important;
+  background:#4d2b87!important;
+}
+@media(min-width:850px) {
+  html[data-station-network] body main .v26340SubHero:has(>.station-page-picture) {
+    display:grid;
+    grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+    align-items:center;
+    gap:clamp(12px,3vw,36px);
+  }
+  html[data-station-network] .v26340SubHero > .station-page-picture {margin:0}
+}
+
+html[data-station-network] body header :is(.brand img,.station-brand) {
+  background:none!important;
+  border-radius:0;
+  padding:0;
+  width:clamp(146px,16vw,224px);
+  height:auto;
+  max-height:54px;
+  object-fit:contain;
+}
