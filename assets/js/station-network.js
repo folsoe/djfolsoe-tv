@@ -12,22 +12,32 @@
     press:'portrait', 'twitch-music-requests-guide':'morning'
   };
 
-  function picture(key) {
-    const img = document.createElement('img');
-    img.className = 'station-picture';
-    img.alt = '';
+  const photos = {"studio": ["Radio studio", 1000, 666], "tiesto": ["Tiësto", 420, 300], "morten": ["David Guetta & MORTEN · Hï Ibiza, 2022", 1000, 660], "anna": ["Anna Lunoe", 830, 700], "sasha": ["Sasha & John Digweed · Bristol, 2025", 1000, 663], "trance": ["Above & Beyond · Trance Energy, 2010", 800, 534], "club": ["Weekend Club · Berlin", 933, 700], "copenhagen": ["Nyhavn · København", 933, 700], "decks": ["DJ booth · Bob Beaman, München", 1000, 477], "vinyl": ["Jaume Pujagut · Vinyl collection", 933, 700], "wham": ["Wham! · 1984", 620, 700], "set": ["DJ booth · Bob Beaman, München", 1000, 463]};
+  const photoByTheme = {
+    trance:'trance', eurodance:'club', retro:'vinyl', fredagsbar:'club',
+    morning:'studio', nudisco:'decks', weekend:'set', popup:'decks',
+    top20:'vinyl', danske:'copenhagen'
+  };
+  const picture = key => editorialPicture(photoByTheme[key] || key);
+
+  function editorialPicture(key, img = document.createElement('img')) {
+    img.classList.add('station-picture');
     img.loading = 'lazy';
     img.decoding = 'async';
     if (key === 'portrait') {
       img.classList.add('station-picture-portrait');
       img.src = '/assets/img/dj-folsoe-portrait.png';
     } else {
-      img.width = 1000;
-      img.height = 500;
-      img.src = '/assets/img/station/' + key + '.png';
+      const [caption, width, height] = photos[key] || photos.decks;
+      img.alt = caption;
+      img.width = width;
+      img.height = height;
+      img.src = '/assets/img/editorial/' + (photos[key] ? key : 'decks') + '.jpg';
     }
     return img;
   }
+
+  window.djfEditorialPhoto = editorialPicture;
 
   function pageArtwork(path) {
     const segments = path.split('/').filter(Boolean);
@@ -57,6 +67,16 @@
       }
     }
   }
+  const credits = document.createElement('a');
+  credits.className = 'station-photo-credits';
+  credits.href = '/fotokreditering/';
+  document.body.append(credits);
+  function updateCredits() {
+    credits.textContent = {da:'Fotokreditering', en:'Photo credits', de:'Bildnachweise'}[document.documentElement.lang.slice(0, 2)] || 'Photo credits';
+  }
+  updateCredits();
+  new MutationObserver(updateCredits).observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
+
   const hero = document.querySelector('main .page-hero, main .v26340SubHero, main .v26400-chartHero, main .archive-hero, main .editorial-hero');
   if (hero && key) {
     const figure = document.createElement('figure');
@@ -89,11 +109,47 @@
     feature.prepend(artwork);
     const updateArtwork = () => {
       const key = feature.dataset.channel;
-      if (['trance','eurodance','retro'].includes(key)) artwork.src = '/themes/' + key + '.jpg';
+      editorialPicture(photoByTheme[key] || 'decks', artwork);
     };
     new MutationObserver(updateArtwork).observe(feature, {attributes:true, attributeFilter:['data-channel']});
     updateArtwork();
   }
+  const weekly = document.querySelector('[data-home-weekly-stories]');
+  const addWeeklyPhotos = () => {
+    for (const card of weekly.querySelectorAll('.djf-home-week-card')) {
+      for (const article of card.querySelectorAll('article')) {
+        if (article.querySelector('img')) continue;
+        const track = article.querySelector('.djf-home-week-track')?.textContent || '';
+        const key = /^Sasha ·/i.test(track) ? 'sasha'
+          : /^Above & Beyond/i.test(track) ? 'trance'
+          : /^Wham!/i.test(track) ? 'wham'
+          : ({trance:'decks',eurodance:'club',retro:'vinyl'}[card.dataset.show] || 'decks');
+        const image = editorialPicture(key);
+        const figure = document.createElement('figure');
+        figure.className = 'station-week-photo';
+        const caption = document.createElement('figcaption');
+        caption.textContent = image.alt;
+        figure.append(image, caption);
+        article.prepend(figure);
+      }
+    }
+  };
+  if (weekly) {
+    new MutationObserver(addWeeklyPhotos).observe(weekly, {childList:true});
+    addWeeklyPhotos();
+  }
+
+  const playlists = document.getElementById('show-playlists');
+  const addPlaylistPhotos = () => {
+    for (const card of playlists.querySelectorAll('.djf-playlist-card[id^="playlist-"]')) {
+      if (!card.querySelector('.station-picture')) card.prepend(picture(card.id.slice(9)));
+    }
+  };
+  if (playlists) {
+    new MutationObserver(addPlaylistPhotos).observe(playlists, {childList:true, subtree:true});
+    addPlaylistPhotos();
+  }
+
   const paths = [
     {
       href:'/guides/trance-music-explained/', image:'trance',
