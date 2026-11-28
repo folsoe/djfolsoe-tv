@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "updated": "2026-11-28",
+  "stories": [
+    {
+      "id": "washa",
+      "kind": "release",
+      "date": "2026-11-27",
+      "title": ["Enoo Napa, T-Man og SOMMERS mødes på Washa", "Enoo Napa, T-Man and SOMMERS meet on Washa", "Enoo Napa, T-Man und SOMMERS treffen sich auf Washa"],
+      "intro": ["Washa udkom 27. november på NO LAND RECORDS. Enoo Napa og SOMMERS (UK) har T-Man med på vokal på den nye house-single.", "Washa arrived on NO LAND RECORDS on 27 November. Enoo Napa and SOMMERS (UK) are joined by vocalist T-Man on the new house single.", "Washa erschien am 27. November auf NO LAND RECORDS. Auf der neuen House-Single treffen Enoo Napa und SOMMERS (UK) auf Sänger T-Man."],
+      "story": ["Enoo Napa kommer fra Umlazi ved Durban og har arbejdet med den mørkere, mere strippede ende af afro-tech. Her synger T-Man på isiZulu. Prøv at lytte til, hvordan stemmen skifter plads med rytmen. Den kan både trække dig tættere på teksten og fungere som en del af groovet.", "Enoo Napa comes from Umlazi near Durban and is associated with a darker, stripped-back side of Afro tech. T-Man sings in isiZulu here. Listen for how the voice changes places with the rhythm: it can draw you closer to the words and work as part of the groove.", "Enoo Napa stammt aus Umlazi bei Durban und steht für eine dunklere, reduzierte Seite des Afro Tech. T-Man singt hier auf isiZulu. Hör darauf, wie die Stimme mit dem Rhythmus zusammenspielt: Mal rückt der Text näher, mal wird die Stimme selbst Teil des Grooves."],
+      "sources": [{"label":"Apple Music","url":"https://music.apple.com/us/album/washa-single/6824756136"},{"label":"ElectroWow","url":"https://www.electrowow.net/enoo-napa-key-force-afro-tech-t-man-sommers-washa"}]
+    },
+    {
+      "id": "sidney-bret",
+      "kind": "set",
+      "date": "2026-11-27",
+      "title": ["Fem timers house med Sidney Charles", "Five hours of house with Sidney Charles", "Fünf Stunden House mit Sidney Charles"],
+      "intro": ["PILOT Amsterdams Black Box Radio har udgivet et fem timers DJ-sæt med Sidney Charles, optaget på klubben BRET den 25. september.", "PILOT Amsterdam’s Black Box Radio has released a five-hour Sidney Charles set recorded at BRET on 25 September.", "PILOT Amsterdams Black Box Radio hat ein fünfstündiges Set von Sidney Charles veröffentlicht. Aufgenommen wurde es am 25. September im BRET."],
+      "story": ["Det er anden udsendelse i serien. Fem timer giver plads til at høre, hvordan en DJ arbejder med energien over tid. Et godt lyttespørgsmål er, hvornår du opdager en ændring i stemningen: allerede i basgangen, i overgangene eller først, når et helt nyt nummer står frem?", "This is the second edition in the series. Five hours gives you room to hear a DJ work with energy over time. Ask yourself when you notice a change in mood: in the bassline, in the transitions or only once the next track fully emerges?", "Das Set ist die zweite Ausgabe der Reihe. In fünf Stunden lässt sich gut hören, wie ein DJ mit der Energie im Raum arbeitet. Wann bemerkst du einen Stimmungswechsel: schon an der Basslinie, beim Übergang oder erst, wenn der nächste Track ganz im Vordergrund steht?"],
+      "sources":[{"label":"UFO Network","url":"https://ufo-network.com/sidney-charles-five-hour-set-amsterdam/"}]
+    },
+    {
+      "id": "andy-replica",
+      "kind": "ep",
+      "date": "2026-11-27",
+      "title": ["Andy Replica bygger house af nære stemmer", "Andy Replica builds house from familiar voices", "Andy Replica baut House aus vertrauten Stimmen"],
+      "intro": ["På Spend Most Of My Time blander Andy Replica house med bedroom pop og elektroniske afstikkere. EP’en har fire numre.", "On Spend Most Of My Time, Andy Replica combines house with bedroom pop and electronic detours across four tracks.", "Auf Spend Most Of My Time verbindet Andy Replica House mit Bedroom-Pop und elektronischen Abzweigungen. Die EP umfasst vier Tracks."],
+      "story": ["Samples af venner og familie er en del af materialet. De små optagelser giver et personligt modspil til danserytmen. Lyt efter de øjeblikke, hvor en melodi glider væk fra beatet, eller hvor en stemme får dig til at høre et nyt mønster i det samme groove.", "Samples of friends and family are part of the material. These small recordings bring a personal counterpoint to the dance rhythm. Listen for moments when a melody drifts away from the beat, or a voice reveals a new pattern in the same groove.", "Samples von Freunden und Familie gehören zum Material. Die kleinen Aufnahmen setzen einen persönlichen Kontrapunkt zum Tanzrhythmus. Achte darauf, wann sich eine Melodie vom Beat löst oder eine Stimme im selben Groove ein neues Muster hörbar macht."],
+      "sources":[{"label":"Andy Replica · Bandcamp","url":"https://andyreplica.bandcamp.com/album/spend-most-of-my-time-ep"},{"label":"EDM Cave","url":"https://edmcave.com/andy-replica-returns-with-new-ep-of-hazy-off-kilter-house-music/"}]
+    },
+    {
+      "id": "northern-exposure",
+      "kind": "archive",
+      "date": "2026-11-13",
+      "title": ["Sasha og John Digweed åbner Northern Exposure igen", "Sasha and John Digweed revisit Northern Exposure", "Sasha und John Digweed kehren zu Northern Exposure zurück"],
+      "intro": ["Northern Exposure Redux (Dub Mix) kom digitalt 13. november. De ti numre genbesøger duoens mixalbum fra 1996.", "Northern Exposure Redux (Dub Mix) arrived digitally on 13 November. Its ten tracks revisit the duo’s 1996 mix album.", "Northern Exposure Redux (Dub Mix) erschien am 13. November digital. Die zehn Tracks greifen das Mixalbum des Duos von 1996 wieder auf."],
+      "story": ["Jubilæumsprojektet omfatter nye dub- og ambientbearbejdelser. Hvis du kender originalen, er det værd at sætte et par passager op mod hinanden. Prøv at lægge mærke til, hvad der stadig føles genkendeligt, når et beat træder tilbage, og ekko eller klang får mere plads.", "The anniversary project includes new dub and ambient reworkings. If you know the original, compare a couple of passages side by side. Notice what still feels familiar when a beat recedes and echoes or textures get more room.", "Zum Jubiläumsprojekt gehören neue Dub- und Ambient-Bearbeitungen. Wenn du das Original kennst, vergleiche ein paar Passagen direkt. Achte darauf, was vertraut bleibt, wenn der Beat zurücktritt und Echo oder Klangflächen mehr Raum bekommen."],
+      "sources":[{"label":"Apple Music","url":"https://music.apple.com/us/album/northern-exposure-redux-dub-mix-dj-mix/6827087090"},{"label":"Resident Advisor","url":"https://ra.co/news/85631"}]
+    }
+  ]
+}
