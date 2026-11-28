@@ -14,7 +14,7 @@ section.before(insert);
 function update(){
  const code=document.documentElement.lang?.slice(0,2);
  const i=Math.max(0,['da','en','de'].indexOf(code));
- heading.textContent=row.title[i];
+ heading.textContent=row.advent?[row.advent+'. advent · '+row.title[i],'Advent '+row.advent+' · '+row.title[i],row.advent+'. Advent · '+row.title[i]][i]:row.title[i];
  teaser.textContent=row.teaser[i];
  link.href='/jul/?lang='+['da','en','de'][i];
  link.textContent=['Læs dagens afsnit','Read today’s episode','Heute weiterlesen'][i];
