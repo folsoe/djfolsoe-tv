@@ -10,3 +10,9 @@ body{background:radial-gradient(ellipse at top,#33232d,#151219 58%);background-a
 .advent-lys{display:flex;align-items:end;gap:.56rem;min-height:2.5rem;margin:.7rem 0 .4rem}
 .advent-lys[hidden]{display:none}.advent-lys i{position:relative;width:.63rem;height:1.54rem;background:#76515c;border-radius:2px}
 .advent-lys .taendt{background:#eec99d}.advent-lys .taendt::before{content:"";position:absolute;left:50%;top:-.69rem;width:.31rem;height:.63rem;transform:translateX(-50%);background:#ffdb84;border-radius:60% 45% 65% 48%;box-shadow:0 0 12px 4px #f2ad4b8c}
+
+.jul-medvirkende{margin-top:1.2rem;padding:1rem 1.25rem;background:#241d25;border:1px solid #6d4c4a}
+.jul-medvirkende summary{cursor:pointer;color:#ffd595;font-weight:700}
+.jul-medvirkende summary:focus-visible{outline:2px solid #ffce83;outline-offset:3px}
+.jul-medvirkende dt{font-weight:700;color:#fff1da;margin-top:.8rem}
+.jul-medvirkende dd{margin:0;color:#e3d5cd}

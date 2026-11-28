@@ -11,6 +11,7 @@ const copy={
  archive:['Vælg afsnit','Choose an episode','Folge auswählen'],
  wait:['Første afsnit åbner 29. november.','The first episode opens on 29 November.','Die erste Folge öffnet am 29. November.']
 };
+const cast=[["Knas","Studieteknikeren følger det røde kabel.","The studio technician follows the red cable.","Der Studiotechniker folgt dem roten Kabel."],["Tilde","Hun holder styr på sporene i den blå notesbog.","She keeps track of the clues in her blue notebook.","Sie sammelt die Spuren in ihrem blauen Notizbuch."],["Bøje","Hans vafler er både bevismateriale og fristelse.","His waffles are both evidence and temptation.","Seine Waffeln sind Beweismittel und Versuchung zugleich."],["Mulle","Hun fanger det på kamera, de andre overser.","She catches what the others miss on camera.","Sie hält fest, was die anderen übersehen."],["Mads Minus","Han hører, når et slag eller en pause mangler.","He notices when a beat or a pause is missing.","Ihm fällt auf, wenn ein Schlag oder eine Pause fehlt."],["Ester","De gyldne hovedtelefoner opfanger lyd fra det gamle studie.","Her golden headphones pick up sound from the old studio.","Ihre goldenen Kopfhörer fangen Töne aus dem alten Studio auf."],["Pip","De kedelige ting, han låner, viser sig at være afgørende.","The dull things he borrows turn out to be crucial.","Die langweiligen Dinge, die er ausleiht, erweisen sich als entscheidend."],["Lydprøven","Rensdyret spiser papirfejl og finder spor, der er værd at beholde.","The reindeer eats mistakes on paper and spots clues worth keeping.","Das Rentier frisst Fehler auf Papier und entdeckt wertvolle Spuren."],["Urmageren","Han passer forsvundne visere og husker den gamle julesending.","He takes care of missing clock hands and remembers the old Christmas broadcast.","Er hütet verschwundene Uhrzeiger und erinnert sich an die alte Weihnachtssendung."],["Sune / DJ FOLSOE","Han holder udsendelsen i gang og giver chatten plads i mysteriet.","He keeps the show going and gives chat a part in the mystery.","Er hält die Sendung am Laufen und gibt dem Chat eine Rolle im Rätsel."]];
 let calendar=window.DJF_JUL_EPISODES?.calendar??{};
 let chosen='',lang=Math.max(0,langs.indexOf(new URL(location.href).searchParams.get('lang')||document.documentElement.lang));
 const preview=window.DJF_JUL_PREVIEW === true || location.protocol==='file:';
@@ -20,6 +21,20 @@ function today(){
  return preview?'2026-12-24':[f.year,f.month,f.day].join('-');
 }
 function put(id,text){$(id).textContent=text;}
+function renderCast(){
+ let box=$('jul-medvirkende');
+ if(!box){
+  box=document.createElement('details');box.id='jul-medvirkende';box.className='jul-medvirkende';
+  box.append(document.createElement('summary'),document.createElement('dl'));
+  $('episode-body').closest('section').after(box);
+ }
+ const [label,list]=box.children;
+ label.textContent=['Mød de 10 medvirkende','Meet the ten characters','Die zehn Figuren kennenlernen'][lang];
+ list.replaceChildren(...cast.flatMap(([name,...role])=>{
+  const term=document.createElement('dt'),definition=document.createElement('dd');
+  term.textContent=name;definition.textContent=role[lang];return [term,definition];
+ }));
+}
 function render(){
  const allowed=Object.keys(calendar).sort().filter(date=>date<=today());
  if(!allowed.includes(chosen))chosen=preview?allowed[0]:allowed.at(-1);
@@ -27,6 +42,7 @@ function render(){
  document.documentElement.lang=langs[lang];
  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===langs[lang])));
  for(const id of ['series','season','intro','watch'])put(id,copy[id][lang]);
+ renderCast();
  put('archive-label',copy.archive[lang]);
  const count=record?.advent??0;
  const headline=count?[count+'. søndag i advent','Advent Sunday '+count,count+'. Advent'][lang]:copy.label[lang];
