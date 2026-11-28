@@ -12,13 +12,7 @@
     en: ['Christmas with DJ FOLSOE', 'Today’s chapter', 'Christmas archive', 'Next scene', 'days until Christmas Eve', 'Christmas Eve', 'Back to today’s chapter'],
     de: ['Weihnachten mit DJ FOLSOE', 'Heutiges Kapitel', 'Weihnachtsarchiv', 'Nächste Szene', 'Tage bis Heiligabend', 'Heiligabend', 'Zurück zum heutigen Kapitel']
   };
-  const promoCopy = {
-    da: ['Jul hos DJCOSMODK', 'Hver dag 1.–24. december kl. 16.00–18.00 dansk tid', 'Se DJCOSMODK på Twitch'],
-    en: ['Christmas with DJCOSMODK', 'Daily, 1–24 December, 16:00–18:00 Copenhagen time', 'Watch DJCOSMODK on Twitch'],
-    de: ['Weihnachten bei DJCOSMODK', 'Täglich, 1.–24. Dezember, 16:00–18:00 Uhr Kopenhagen', 'DJCOSMODK auf Twitch ansehen']
-  };
-  const promoCutoff = Date.parse('2026-12-24T18:00:00+01:00');
-  let today, chosen, sceneIndex = 0, promoVisible = false;
+  let today, chosen, sceneIndex = 0;
   function element(tag, value, className) {
     const node = document.createElement(tag);
     if (value) node.textContent = value;
@@ -92,35 +86,11 @@
     const hero = element('div', '', 'jul-hero');
     hero.append(contents, artwork);
     container.replaceChildren(hero, details);
-    if (promoVisible) {
-      const [heading, schedule, action] = promoCopy[lang];
-      const promo = element('aside', '', 'jul-promo');
-      const poster = element('img');
-      poster.src = '/assets/img/cosmo-jul-2026.jpg';
-      poster.alt = '';
-      poster.width = 540;
-      poster.height = 779;
-      poster.loading = 'lazy';
-      const promoCopyBlock = element('div');
-      const link = element('a', action);
-      link.href = 'https://www.twitch.tv/djcosmodk';
-      promoCopyBlock.append(element('h3', heading), element('p', schedule), link);
-      promo.append(poster, promoCopyBlock);
-      container.append(promo);
-    }
   }
   function updateDate() {
     const fields = Object.fromEntries(clock.formatToParts(new Date()).map(part => [part.type, part.value]));
     const key = [fields.year, fields.month, fields.day].join('-');
-    const showPromo = Object.hasOwn(daily, key) && Date.now() < promoCutoff;
-    if (today === key) {
-      if (promoVisible !== showPromo) {
-        promoVisible = showPromo;
-        render();
-      }
-      return;
-    }
-    promoVisible = showPromo;
+    if (today === key) return;
     today = key;
     chosen = key;
     sceneIndex = 0;
