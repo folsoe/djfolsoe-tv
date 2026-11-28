@@ -1,1 +1,42 @@
-KCgpID0+IHsKJ3VzZSBzdHJpY3QnOwpjb25zdCAkPWlkPT5kb2N1bWVudC5nZXRFbGVtZW50QnlJZChpZCk7CmNvbnN0IGxhbmdzPVsnZGEnLCdlbicsJ2RlJ107CmNvbnN0IGNvcHk9ewogc2VyaWVzOlsnTmlzc2VybmUgb2cgZGVuIHNpZHN0ZSBLYXJlbiBWb2xmLXNtw6VrYWdlJywnVGhlIEVsdmVzIGFuZCB0aGUgTGFzdCBLYXJlbiBWb2xmIENvb2tpZScsJ0RpZSBXaWNodGVsIHVuZCBkZXIgbGV0enRlIEthcmVuLVZvbGYtS2VrcyddLAogc2Vhc29uOlsnREogRk9MU09FIMK3IEpVTEVLQUxFTkRFUiAyMDI2JywnREogRk9MU09FIMK3IDIwMjYgQ0hSSVNUTUFTIENBTEVOREFSJywnREogRk9MU09FIMK3IEFEVkVOVFNLQUxFTkRFUiAyMDI2J10sCiBpbnRybzpbJ0tuYXMgb2cgQsO4amUgaGFyIMOpbiBvcGdhdmUuIEZpbmQgZGVuIHNpZHN0ZSBzbcOla2FnZSwgZsO4ciBqdWxlZ2zDpmRlbiBmb3JzdmluZGVyIGZyYSBUd2l0Y2guJywnS25hcyBhbmQgQsO4amUgaGF2ZSBvbmUgam9iLiBGaW5kIHRoZSBsYXN0IGNvb2tpZSBiZWZvcmUgQ2hyaXN0bWFzIGNoZWVyIGRpc2FwcGVhcnMgZnJvbSBUd2l0Y2guJywnS25hcyB1bmQgQsO4amUgaGFiZW4gZWluZSBBdWZnYWJlLiBTaWUgbcO8c3NlbiBkZW4gbGV0enRlbiBLZWtzIGZpbmRlbiwgYmV2b3IgZGllIFdlaWhuYWNodHNmcmV1ZGUgYXVmIFR3aXRjaCB2ZXJzY2h3aW5kZXQuJ10sCiB3YXRjaDpbJ0tvbSBtZWQgcMOlIFR3aXRjaCcsJ0pvaW4gdXMgb24gVHdpdGNoJywnQXVmIFR3aXRjaCBkYWJlaSBzZWluJ10sCiBsYWJlbDpbJ0hpc3RvcmllbicsJ1RoZSBzdG9yeScsJ0RpZSBHZXNjaGljaHRlJ10sCiBhcmNoaXZlOlsnVsOmbGcgYWZzbml0JywnQ2hvb3NlIGFuIGVwaXNvZGUnLCdGb2xnZSBhdXN3w6RobGVuJ10sCiB3YWl0OlsnRsO4cnN0ZSBhZnNuaXQgw6VibmVyIDI5LiBub3ZlbWJlci4nLCdUaGUgZmlyc3QgZXBpc29kZSBvcGVucyBvbiAyOSBOb3ZlbWJlci4nLCdEaWUgZXJzdGUgRm9sZ2Ugw7ZmZm5ldCBhbSAyOS4gTm92ZW1iZXIuJ10KfTsKbGV0IGNhbGVuZGFyPXdpbmRvdy5ESkZfSlVMX0VQSVNPREVTPy5jYWxlbmRhcj8/e307CmxldCBjaG9zZW49JycsbGFuZz1NYXRoLm1heCgwLGxhbmdzLmluZGV4T2YobmV3IFVSTChsb2NhdGlvbi5ocmVmKS5zZWFyY2hQYXJhbXMuZ2V0KCdsYW5nJyl8fGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5sYW5nKSk7CmNvbnN0IHByZXZpZXc9d2luZG93LkRKRl9KVUxfUFJFVklFVyA9PT0gdHJ1ZSB8fCBsb2NhdGlvbi5wcm90b2NvbD09PSdmaWxlOic7CmNvbnN0IGZvcm1hdHRlcj1uZXcgSW50bC5EYXRlVGltZUZvcm1hdCgnZW4tQ0EnLHt5ZWFyOidudW1lcmljJyxtb250aDonMi1kaWdpdCcsZGF5OicyLWRpZ2l0Jyx0aW1lWm9uZTonRXVyb3BlL0NvcGVuaGFnZW4nfSk7CmZ1bmN0aW9uIHRvZGF5KCl7CiBjb25zdCBmPU9iamVjdC5mcm9tRW50cmllcyhmb3JtYXR0ZXIuZm9ybWF0VG9QYXJ0cygpLm1hcChwPT5bcC50eXBlLHAudmFsdWVdKSk7CiByZXR1cm4gcHJldmlldz8nMjAyNi0xMi0yNCc6W2YueWVhcixmLm1vbnRoLGYuZGF5XS5qb2luKCctJyk7Cn0KZnVuY3Rpb24gcHV0KGlkLHRleHQpeyQoaWQpLnRleHRDb250ZW50PXRleHQ7fQpmdW5jdGlvbiByZW5kZXIoKXsKIGNvbnN0IGFsbG93ZWQ9T2JqZWN0LmtleXMoY2FsZW5kYXIpLnNvcnQoKS5maWx0ZXIoZGF0ZT0+ZGF0ZTw9dG9kYXkoKSk7CiBpZighYWxsb3dlZC5pbmNsdWRlcyhjaG9zZW4pKWNob3Nlbj1wcmV2aWV3P2FsbG93ZWRbMF06YWxsb3dlZC5hdCgtMSk7CiBjb25zdCByZWNvcmQ9Y2FsZW5kYXJbY2hvc2VuXTsKIGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5sYW5nPWxhbmdzW2xhbmddOwogZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnW2RhdGEtbGFuZ10nKS5mb3JFYWNoKGI9PmIuc2V0QXR0cmlidXRlKCdhcmlhLXByZXNzZWQnLFN0cmluZyhiLmRhdGFzZXQubGFuZz09PWxhbmdzW2xhbmddKSkpOwogZm9yKGNvbnN0IGlkIG9mIFsnc2VyaWVzJywnc2Vhc29uJywnaW50cm8nLCd3YXRjaCddKXB1dChpZCxjb3B5W2lkXVtsYW5nXSk7CiBwdXQoJ2FyY2hpdmUtbGFiZWwnLGNvcHkuYXJjaGl2ZVtsYW5nXSk7CiBwdXQoJ2VwaXNvZGUtbGFiZWwnLGNvcHkubGFiZWxbbGFuZ10pOwogJCgnYXJjaGl2ZScpLmhpZGRlbj0hcmVjb3JkOwogY29uc3QgY2hvaWNlPSQoJ2VwaXNvZGUtc2VsZWN0Jyk7CiBjaG9pY2UucmVwbGFjZUNoaWxkcmVuKC4uLmFsbG93ZWQubWFwKGRhdGU9Pm5ldyBPcHRpb24oZGF0ZS5zbGljZSg4KSsnLicrZGF0ZS5zbGljZSg1LDcpKycgwrcgJytjYWxlbmRhcltkYXRlXS50aXRsZVtsYW5nXSxkYXRlKSkpOwogaWYocmVjb3JkKWNob2ljZS52YWx1ZT1jaG9zZW47CiBwdXQoJ2VwaXNvZGUtaGVhZGluZycscmVjb3JkPy50aXRsZVtsYW5nXT8/Y29weS53YWl0W2xhbmddKTsKICQoJ2VwaXNvZGUtYm9keScpLnJlcGxhY2VDaGlsZHJlbiguLi4ocmVjb3JkPy5ib2R5W2xhbmddPz9bXSkubWFwKHRleHQ9Pntjb25zdCBwPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3AnKTtwLnRleHRDb250ZW50PXRleHQ7cmV0dXJuIHA7fSkpOwp9CmRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ1tkYXRhLWxhbmddJykuZm9yRWFjaChiPT5iLm9uY2xpY2s9KCk9PntsYW5nPWxhbmdzLmluZGV4T2YoYi5kYXRhc2V0LmxhbmcpO3JlbmRlcigpO30pOwokKCdlcGlzb2RlLXNlbGVjdCcpLm9uY2hhbmdlPWV2ZW50PT57Y2hvc2VuPWV2ZW50LmN1cnJlbnRUYXJnZXQudmFsdWU7cmVuZGVyKCk7fTsKcmVuZGVyKCk7Cn0pKCk7Cg==
+(() => {
+'use strict';
+const $=id=>document.getElementById(id);
+const langs=['da','en','de'];
+const copy={
+ series:['Nisserne og den sidste Karen Volf-småkage','The Elves and the Last Karen Volf Cookie','Die Wichtel und der letzte Karen-Volf-Keks'],
+ season:['DJ FOLSOE · JULEKALENDER 2026','DJ FOLSOE · 2026 CHRISTMAS CALENDAR','DJ FOLSOE · ADVENTSKALENDER 2026'],
+ intro:['Knas og Bøje har én opgave. Find den sidste småkage, før juleglæden forsvinder fra Twitch.','Knas and Bøje have one job. Find the last cookie before Christmas cheer disappears from Twitch.','Knas und Bøje haben eine Aufgabe. Sie müssen den letzten Keks finden, bevor die Weihnachtsfreude auf Twitch verschwindet.'],
+ watch:['Kom med på Twitch','Join us on Twitch','Auf Twitch dabei sein'],
+ label:['Historien','The story','Die Geschichte'],
+ archive:['Vælg afsnit','Choose an episode','Folge auswählen'],
+ wait:['Første afsnit åbner 29. november.','The first episode opens on 29 November.','Die erste Folge öffnet am 29. November.']
+};
+let calendar=window.DJF_JUL_EPISODES?.calendar??{};
+let chosen='',lang=Math.max(0,langs.indexOf(new URL(location.href).searchParams.get('lang')||document.documentElement.lang));
+const preview=window.DJF_JUL_PREVIEW === true || location.protocol==='file:';
+const formatter=new Intl.DateTimeFormat('en-CA',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Europe/Copenhagen'});
+function today(){
+ const f=Object.fromEntries(formatter.formatToParts().map(p=>[p.type,p.value]));
+ return preview?'2026-12-24':[f.year,f.month,f.day].join('-');
+}
+function put(id,text){$(id).textContent=text;}
+function render(){
+ const allowed=Object.keys(calendar).sort().filter(date=>date<=today());
+ if(!allowed.includes(chosen))chosen=preview?allowed[0]:allowed.at(-1);
+ const record=calendar[chosen];
+ document.documentElement.lang=langs[lang];
+ document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===langs[lang])));
+ for(const id of ['series','season','intro','watch'])put(id,copy[id][lang]);
+ put('archive-label',copy.archive[lang]);
+ put('episode-label',copy.label[lang]);
+ $('archive').hidden=!record;
+ const choice=$('episode-select');
+ choice.replaceChildren(...allowed.map(date=>new Option(date.slice(8)+'.'+date.slice(5,7)+' · '+calendar[date].title[lang],date)));
+ if(record)choice.value=chosen;
+ put('episode-heading',record?.title[lang]??copy.wait[lang]);
+ $('episode-body').replaceChildren(...(record?.body[lang]??[]).map(text=>{const p=document.createElement('p');p.textContent=text;return p;}));
+}
+document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=langs.indexOf(b.dataset.lang);render();});
+$('episode-select').onchange=event=>{chosen=event.currentTarget.value;render();};
+render();
+})();
