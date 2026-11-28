@@ -1,0 +1,85 @@
+html[data-station-network] #main .station-christmas-switch {
+  margin:0 0 clamp(1rem,3vw,2rem);
+  overflow:hidden;
+  border:1px solid #caa7ae;
+  border-radius:18px;
+  background:#fff6ee;
+}
+html[data-station-network] #main .station-christmas-switch [hidden],
+html[data-station-network] #main .station-christmas-switch[hidden] {display:none!important}
+html[data-djf-station][data-station-network] #main .station-christmas-switch #djf-jul-historie {
+  display:block!important;margin:0!important;padding:0!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  background:#f8e9df!important;
+}
+#djf-jul-historie::before,#djf-jul-historie::after {display:none!important}
+.station-christmas-viewport {display:grid}
+.station-christmas-viewport > section {grid-area:1/1;min-width:0}
+html[data-station-network] #main .station-christmas-viewport > :is(#djf-jul-historie,.station-christmas-available)[hidden] {
+  display:block!important;visibility:hidden;pointer-events:none;
+}
+.station-christmas-own-details {
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);
+  gap:clamp(.9rem,2vw,1.8rem);align-items:center;
+  padding:clamp(.85rem,2vw,1.5rem);
+}
+.station-christmas-own-banner {
+  aspect-ratio:1284 / 439;
+  position:relative;isolation:isolate;overflow:hidden;
+  display:grid;place-items:center;
+  container-type:inline-size;
+  background:
+    radial-gradient(ellipse at 50% 2%,#b46837 0%,transparent 47%),
+    radial-gradient(ellipse at 45% 105%,#6e293c 0%,transparent 68%),
+    linear-gradient(103deg,#1e1528,#482333 53%,#171727);
+}
+.station-christmas-own-banner::before {
+  content:"";position:absolute;inset:0 0 auto;height:3px;
+  background:linear-gradient(90deg,#c47958,#deb77f,#8cb5a0,#e6cb84,#b86e70);
+}
+.station-christmas-lockup {
+  z-index:2;width:56%;text-align:center;
+  padding:0 .25rem;
+}
+html[data-station-network] #main .station-christmas-own-banner .station-advent-promo-kicker {
+  color:#ffe1a9!important;font-size:clamp(.5rem,1.45cqw,1rem);margin:0 0 .45em;
+}
+html[data-station-network] #main #djf-jul-historie .station-christmas-own-banner .station-christmas-lockup h2 {
+  color:#fff5e4!important;font-size:clamp(.82rem,4.4cqw,4.1rem);
+  line-height:1.04;max-width:none;margin:0;text-wrap:balance;
+  text-shadow:0 3px 18px #260f18!important;
+}
+.station-christmas-elf {
+  position:absolute;bottom:-7%;width:29%;aspect-ratio:1;
+  background:url('/assets/img/jul-nissehold-10-v4.webp') var(--face) center / 1000% 100% no-repeat;
+  filter:drop-shadow(0 6px 8px #140c1866);
+}
+.station-christmas-elf-left {left:0}
+.station-christmas-elf-right {right:0}
+.station-christmas-elf-rear {left:-11%;bottom:-13%;opacity:.8;z-index:-1}
+.station-christmas-elf-edge {right:-10%;bottom:-13%;opacity:.8;z-index:-1}
+.station-christmas-controls {display:flex;flex-wrap:wrap;gap:.45rem;padding:.65rem;background:#f2dfe4}
+html[data-station-network] #main .station-christmas-controls button {
+  background:#fff6ee;color:#50273c;border:1px solid #c6a1ac;border-radius:8px;
+  min-height:42px;padding:.4rem .8rem;font:750 .88rem/1.2 var(--station-text);cursor:pointer;
+}
+html[data-station-network] #main .station-christmas-controls button[aria-pressed="true"] {
+  background:#702a42;color:white;border-color:#702a42;
+}
+.station-christmas-pause {margin-inline-start:auto}
+.station-christmas-pause:disabled {display:none}
+html[data-station-network] #main .station-christmas-cosmo {margin:0!important;padding:0!important}
+.station-christmas-cosmo > img {display:block;width:100%;height:auto}
+.station-christmas-cosmo-copy {display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;align-items:center;padding:clamp(.85rem,2vw,1.5rem)}
+.station-christmas-cosmo-copy h2,.station-christmas-cosmo-copy p {margin:0}
+.station-christmas-cosmo-copy p {grid-column:1}
+html[data-station-network] #main .station-christmas-cosmo-copy a {
+  grid-column:2;grid-row:1 / span 2;background:#542b81;color:#fff!important;
+  border-radius:8px;padding:.7rem .9rem;font-weight:750;
+}
+@media(max-width:760px) {
+  .station-christmas-own-details,
+  .station-christmas-cosmo-copy {grid-template-columns:1fr}
+  html[data-station-network] #main .station-christmas-cosmo-copy a {grid-column:1;grid-row:auto;justify-self:start}
+}
+
