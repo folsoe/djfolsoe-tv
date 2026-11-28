@@ -368,3 +368,24 @@ html[data-station-network] .station-week-photo figcaption {font-size:.85rem;colo
 
 html[data-station-network] .djf-playlist-motif {display:none!important}
 html[data-station-network] .djf-playlist-card > .station-picture {margin-bottom:1rem}
+
+.station-header-extra {display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+.station-clock {font-variant-numeric:tabular-nums;font-size:.87rem;font-weight:750;white-space:nowrap}
+html[data-station-network] body .station-calendar-open,
+html[data-station-network] body .station-advent-close {
+  color:#fff;background:#4d2b87;border:1px solid #4d2b87;border-radius:7px;
+  padding:.5rem .75rem;min-height:44px;font:inherit;font-weight:700;cursor:pointer;
+}
+.station-calendar-open[hidden] {display:none!important}
+html[data-station-network] body .station-advent {
+  width:min(34rem,calc(100% - 2rem));max-height:calc(100% - 2rem);
+  box-sizing:border-box;padding:clamp(1.2rem,4vw,2.4rem);border:1px solid #b89a8d;
+  border-top:6px solid #7d354f;border-radius:15px;background:#fff4e9;color:var(--station-ink);
+}
+.station-advent::backdrop {background:rgba(29,16,31,.68)}
+.station-advent .station-advent-close {position:absolute;top:.65rem;right:.65rem;min-width:44px;font-size:1.35rem}
+.station-advent-date {font-weight:750;margin-right:3rem}
+.station-advent h2 {margin:.5rem 0;font-size:clamp(1.5rem,5vw,2.5rem)}
+.station-advent-link {display:inline-block;font-weight:750;text-underline-offset:.2em}
+html[data-station-network] #shows .show-card:has(>.station-picture) {align-self:stretch}
+html[data-station-network] #shows .show-card:not(:has(>.station-picture)) {border-left:4px solid var(--station-accent)!important}
