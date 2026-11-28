@@ -1,24 +1,21 @@
 (() => {
   'use strict';
-  const artwork = {
-    'trance-tuesday':'trance', 'trance-music-explained':'trance', trance:'trance',
-    eurodance:'eurodance', '90s-eurodance-guide':'eurodance',
-    'retro-hits':'retro', 'retro-hits-dj-set-guide':'retro',
-    fredagsbar:'fredagsbar', 'good-morning-twitch':'morning', 'nu-disco':'nudisco',
-    weekend:'weekend', 'pop-up':'popup', charts:'top20', 'retro-top-10':'retro',
-    'dj-denmark':'danske', archive:'retro', music:'nudisco', shows:'weekend',
-    guides:'trance', editorial:'eurodance', community:'morning',
-    commands:'popup', 'watch-live':'portrait', 'about-dj-folsoe':'portrait',
-    press:'portrait', 'twitch-music-requests-guide':'morning'
+  // Each photo is assigned to one editorial context. Index cards and destination
+  // pages have separate assignments so a cover cannot repeat on a second route.
+  const photos = {"studio": ["Radio studio", 1000, 666], "tiesto": ["Tiësto", 420, 300], "morten": ["David Guetta & MORTEN · Hï Ibiza, 2022", 1000, 660], "anna": ["Anna Lunoe", 830, 700], "sasha": ["Sasha & John Digweed · Bristol, 2025", 1000, 663], "trance": ["Above & Beyond · Trance Energy, 2010", 800, 534], "club": ["Weekend Club · Berlin", 933, 700], "copenhagen": ["Nyhavn · København", 933, 700], "decks": ["DJ booth · Bob Beaman, München", 1000, 477], "vinyl": ["Jaume Pujagut · Vinyl collection", 933, 700], "wham": ["Wham! · 1984", 620, 700], "set": ["DJ booth · Bob Beaman, München", 1000, 463], "classic-booth": ["Deux Technics SL-1200", 1000, 275], "popup-booth": ["Pioneer CDJ-2000", 598, 506], "retro-deck": ["Technics SL-1200 · 1972", 933, 700], "disco-ball": ["ABC · Glasgow", 933, 700], "weekend-dj": ["DJ AnthonyB.", 848, 700], "record-shop": ["Disquaire · Lyon", 1000, 664], "club-crowd": ["Dance floor", 1000, 666], "sasha-solo": ["Sasha · Bucharest, 2006", 800, 533], "headphones": ["DJ headphones and mixer", 875, 700], "radio-history": ["Radio control room · Library of Congress", 950, 700], "live-club": ["DJ Lamberto · 2026", 933, 700], "gnags": ["Peter A.G. Nielsen · Gnags", 933, 700], "rave-1992": ["Fantazia Summertime · 1992", 800, 600], "dj-1994": ["DJ Dan · 1994", 557, 525]};
+  const showCovers = {
+    '/shows/fredagsbar/':'club-crowd',
+    '/shows/weekend/':'weekend-dj',
+    '/shows/nu-disco/':'disco-ball',
+    '/shows/pop-up/':'popup-booth'
   };
-
-  const photos = {"studio": ["Radio studio", 1000, 666], "tiesto": ["Tiësto", 420, 300], "morten": ["David Guetta & MORTEN · Hï Ibiza, 2022", 1000, 660], "anna": ["Anna Lunoe", 830, 700], "sasha": ["Sasha & John Digweed · Bristol, 2025", 1000, 663], "trance": ["Above & Beyond · Trance Energy, 2010", 800, 534], "club": ["Weekend Club · Berlin", 933, 700], "copenhagen": ["Nyhavn · København", 933, 700], "decks": ["DJ booth · Bob Beaman, München", 1000, 477], "vinyl": ["Jaume Pujagut · Vinyl collection", 933, 700], "wham": ["Wham! · 1984", 620, 700], "set": ["DJ booth · Bob Beaman, München", 1000, 463]};
-  const photoByTheme = {
-    trance:'trance', eurodance:'club', retro:'vinyl', fredagsbar:'club',
-    morning:'studio', nudisco:'decks', weekend:'set', popup:'decks',
-    top20:'vinyl', danske:'copenhagen'
+  const pageCovers = {
+    '/shows/good-morning-twitch/':'radio-history',
+    '/shows/nu-disco/':'live-club',
+    '/guides/90s-eurodance-guide/':'rave-1992'
   };
-  const picture = key => editorialPicture(photoByTheme[key] || key);
+  const selectorCovers = {trance:'trance', eurodance:'classic-booth', retro:'retro-deck'};
+  const playlistCovers = {retro:'vinyl'};
 
   function editorialPicture(key, img = document.createElement('img')) {
     img.classList.add('station-picture');
@@ -28,23 +25,18 @@
       img.classList.add('station-picture-portrait');
       img.src = '/assets/img/dj-folsoe-portrait.png';
     } else {
-      const [caption, width, height] = photos[key] || photos.decks;
+      const [caption, width, height] = photos[key];
       img.alt = caption;
       img.width = width;
       img.height = height;
-      img.src = '/assets/img/editorial/' + (photos[key] ? key : 'decks') + '.jpg';
+      img.src = '/assets/img/editorial/' + key + '.jpg';
     }
     return img;
   }
 
   window.djfEditorialPhoto = editorialPicture;
 
-  function pageArtwork(path) {
-    const segments = path.split('/').filter(Boolean);
-    return artwork[segments.at(-1)] || artwork[segments[0]];
-  }
-
-  const key = pageArtwork(location.pathname);
+  const key = pageCovers[location.pathname];
   const header = document.querySelector('body > header, body > nav.seo-nav, main > header');
   if (!header?.querySelector('img[src*="/brand/"]')) {
     const brand = header?.querySelector('a.brand[href="/"]') || document.createElement('a');
@@ -81,22 +73,21 @@
   if (hero && key) {
     const figure = document.createElement('figure');
     figure.className = 'station-page-picture';
-    figure.append(picture(key));
+    figure.append(editorialPicture(key));
     hero.append(figure);
-  }
-
-  for (const card of document.querySelectorAll('.show-card')) {
-    const link = card.matches('a[href]') ? card : card.querySelector('a[href^="/shows/"]');
-    const image = link && pageArtwork(link.pathname);
-    if (image && !card.querySelector('img')) card.prepend(picture(image));
   }
 
   const news = document.querySelector('#musiknyheder');
   if (!news) return;
 
+  for (const card of document.querySelectorAll('#shows .show-card[href]')) {
+    const image = showCovers[card.pathname];
+    if (image && !card.querySelector('img')) card.prepend(editorialPicture(image));
+  }
+
   const presenter = document.querySelector('#main > .person');
   if (presenter) {
-    const portrait = picture('portrait');
+    const portrait = editorialPicture('portrait');
     portrait.classList.add('station-person-photo');
     portrait.alt = 'Sune Folsø';
     presenter.append(portrait);
@@ -104,12 +95,12 @@
 
   const feature = document.querySelector('.sound-stage-feature');
   if (feature) {
-    const artwork = picture(feature.dataset.channel);
+    const artwork = editorialPicture(selectorCovers[feature.dataset.channel]);
     artwork.classList.add('station-listen-photo');
     feature.prepend(artwork);
     const updateArtwork = () => {
       const key = feature.dataset.channel;
-      editorialPicture(photoByTheme[key] || 'decks', artwork);
+      if (selectorCovers[key]) editorialPicture(selectorCovers[key], artwork);
     };
     new MutationObserver(updateArtwork).observe(feature, {attributes:true, attributeFilter:['data-channel']});
     updateArtwork();
@@ -120,13 +111,16 @@
       for (const article of card.querySelectorAll('article')) {
         if (article.querySelector('img')) continue;
         const track = article.querySelector('.djf-home-week-track')?.textContent || '';
-        const key = /^Sasha ·/i.test(track) ? 'sasha'
-          : /^Above & Beyond/i.test(track) ? 'trance'
+        const key = /^Sasha ·/i.test(track) ? 'sasha-solo'
           : /^Wham!/i.test(track) ? 'wham'
-          : ({trance:'decks',eurodance:'club',retro:'vinyl'}[card.dataset.show] || 'decks');
+          : /^GNAGS ·/i.test(track) ? 'gnags'
+          : /^Baby D ·/i.test(track) ? 'dj-1994'
+          : null;
+        if (!key || weekly.querySelector('[data-week-photo="' + key + '"]')) continue;
         const image = editorialPicture(key);
         const figure = document.createElement('figure');
         figure.className = 'station-week-photo';
+        figure.dataset.weekPhoto = key;
         const caption = document.createElement('figcaption');
         caption.textContent = image.alt;
         figure.append(image, caption);
@@ -142,7 +136,8 @@
   const playlists = document.getElementById('show-playlists');
   const addPlaylistPhotos = () => {
     for (const card of playlists.querySelectorAll('.djf-playlist-card[id^="playlist-"]')) {
-      if (!card.querySelector('.station-picture')) card.prepend(picture(card.id.slice(9)));
+      const key = playlistCovers[card.id.slice(9)];
+      if (key && !card.querySelector('.station-picture')) card.prepend(editorialPicture(key));
     }
   };
   if (playlists) {
@@ -152,17 +147,17 @@
 
   const paths = [
     {
-      href:'/guides/trance-music-explained/', image:'trance',
+      href:'/guides/trance-music-explained/',
       title:['Hvad er trance?', 'What is trance?', 'Was ist Trance?'],
       description:['Læs om opbygningen, breakdowns og den energi, der bærer et trance-sæt.', 'Explore the build-ups, breakdowns and energy that shape a trance set.', 'Erfahre, wie Spannungsaufbau, Breakdowns und Energie ein Trance-Set prägen.']
     },
     {
-      href:'/guides/90s-eurodance-guide/', image:'eurodance',
+      href:'/guides/90s-eurodance-guide/',
       title:['Tilbage til 90’ernes dansegulv', 'Back to the ’90s dance floor', 'Zurück auf die Tanzfläche der 90er'],
       description:['Genfind Eurodance og de klublyde, der præger Classic Dance #90 #00.', 'Rediscover Eurodance and the club sounds behind Classic Dance #90 #00.', 'Entdecke Eurodance und die Clubsounds hinter Classic Dance #90 #00 wieder.']
     },
     {
-      href:'/archive/retro-hits/', image:'retro',
+      href:'/archive/retro-hits/', image:'record-shop',
       title:['Gå på opdagelse i Retro Hits', 'Explore the Retro Hits archive', 'Entdecke das Retro-Hits-Archiv'],
       description:['Find tidligere udsendelser og musikken fra 70’erne, 80’erne og de tidlige 90’ere.', 'Find past shows and music from the ’70s, ’80s and early ’90s.', 'Finde frühere Sendungen und Musik aus den 70ern, 80ern und frühen 90ern.']
     }
@@ -194,7 +189,8 @@
     const description = document.createElement('p');
     const link = document.createElement('a');
     link.href = path.href;
-    card.append(picture(path.image), heading, description, link);
+    if (path.image) card.append(editorialPicture(path.image));
+    card.append(heading, description, link);
     grid.append(card);
     return {path, heading, description, link};
   });

@@ -51,7 +51,7 @@
   };
   const storyPhotos = {
     'tiesto-reflekt-2026':'tiesto', 'morten-london':'morten', 'group-therapy-compilation':'copenhagen',
-    'anna-lunoe-everything':'anna', washa:'club', 'sidney-bret':'set', 'andy-replica':'studio',
+    'anna-lunoe-everything':'anna', washa:'club', 'sidney-bret':'set', 'andy-replica':'headphones',
     'northern-exposure':'sasha'
   };
   let entries = [];
