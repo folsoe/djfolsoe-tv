@@ -35,7 +35,29 @@
   }
 
   const key = pageArtwork(location.pathname);
-  const hero = document.querySelector('main .page-hero, main .v26340SubHero');
+  const header = document.querySelector('body > header, body > nav.seo-nav, main > header');
+  if (!header?.querySelector('img[src*="/brand/"]')) {
+    const brand = header?.querySelector('a.brand[href="/"]') || document.createElement('a');
+    brand.href = '/';
+    brand.classList.add('station-brand-link');
+    const logo = document.createElement('img');
+    logo.src = '/assets/img/brand/station-logo.svg';
+    logo.className = 'station-brand';
+    logo.alt = 'DJ FOLSOE';
+    logo.width = 204;
+    logo.height = 48;
+    brand.replaceChildren(logo);
+    if (!brand.isConnected) {
+      if (header) header.prepend(brand);
+      else {
+        const bar = document.createElement('header');
+        bar.className = 'station-compact-header';
+        bar.append(brand);
+        document.body.prepend(bar);
+      }
+    }
+  }
+  const hero = document.querySelector('main .page-hero, main .v26340SubHero, main .v26400-chartHero, main .archive-hero, main .editorial-hero');
   if (hero && key) {
     const figure = document.createElement('figure');
     figure.className = 'station-page-picture';

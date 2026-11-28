@@ -170,3 +170,17 @@ html[data-station-network] body header :is(.brand img,.station-brand) {
   max-height:54px;
   object-fit:contain;
 }
+
+html[data-station-network] body main :is(.archive-card,.archive-hero,.archive-note,.editorial-card,.editorial-hero,.card,.v26400-retroFeature,.v26400-top10,.v26400-playlist,.v26430Ribbon,.v26410-archiveList) {
+  color:var(--station-ink)!important;
+  background:var(--station-surface)!important;
+  border-color:var(--station-line)!important;
+  box-shadow:none!important;
+}
+html[data-station-network] body > :is(.seo-nav,.station-compact-header) {
+  background:#fff!important;
+  border-bottom:1px solid var(--station-line);
+  padding:12px clamp(14px,4vw,56px);
+}
+html[data-station-network] .station-brand-link {display:inline-flex;align-items:center;margin-inline-end:1rem}
+html[data-station-network] .station-brand {display:block;width:clamp(142px,16vw,216px);height:auto}
