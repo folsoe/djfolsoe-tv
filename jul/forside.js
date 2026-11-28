@@ -99,7 +99,7 @@
   pause.addEventListener('click',() => { paused = !paused;show(); });
   setInterval(() => {
     if (wrapper.hidden || !available || document.hidden || paused ||
-        wrapper.matches(':hover,:focus-within')) return;
+        viewport.contains(document.activeElement)) return;
     active = active === 'own' ? 'cosmo' : 'own';
     show();
   },12000);
