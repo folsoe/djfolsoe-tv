@@ -28,7 +28,21 @@ function render(){
  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===langs[lang])));
  for(const id of ['series','season','intro','watch'])put(id,copy[id][lang]);
  put('archive-label',copy.archive[lang]);
- put('episode-label',copy.label[lang]);
+ const count=record?.advent??0;
+ const headline=count?[count+'. søndag i advent','Advent Sunday '+count,count+'. Advent'][lang]:copy.label[lang];
+ put('episode-label',headline);
+ let candleRow=$('advent-lys');
+ if(!candleRow){
+  candleRow=document.createElement('div');candleRow.id='advent-lys';
+  candleRow.className='advent-lys';candleRow.setAttribute('aria-hidden','true');
+  $('episode-label').after(candleRow);
+ }
+ candleRow.hidden=!count;
+ candleRow.replaceChildren(...Array.from({length:count?4:0},(_,index)=>{
+   const candle=document.createElement('i');
+   candle.className=index<count?'taendt':'';
+   return candle;
+ }));
  $('archive').hidden=!record;
  const choice=$('episode-select');
  choice.replaceChildren(...allowed.map(date=>new Option(date.slice(8)+'.'+date.slice(5,7)+' · '+calendar[date].title[lang],date)));
