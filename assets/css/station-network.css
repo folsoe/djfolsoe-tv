@@ -650,3 +650,33 @@ html[data-station-network] body button.station-header-pause {
   line-height:1;
 }
 html[data-station-network] body button.station-header-pause:hover {background:#e9dff1}
+
+/* Station filters keep text and controls readable from phone to widescreen. */
+html[data-station-network] body main .station-filter {
+  display:grid;
+  gap:.65rem;
+  margin:1.1rem 0;
+  padding:clamp(.75rem,1.8vw,1.2rem);
+  background:#f9f4fa;
+  border:1px solid var(--station-line);
+  border-left:3px solid #9275b1;
+  border-radius:12px;
+}
+.station-filter-options,.station-filter-search {display:flex;align-items:center;flex-wrap:wrap;gap:.45rem}
+html[data-station-network] body main .station-filter :is(input,button) {
+  box-sizing:border-box;border:1px solid #cbbbd8;border-radius:8px;
+  background:#fffaf6;color:#36244d;min-height:42px;padding:.55rem .78rem;
+  font:650 .88rem/1.2 var(--station-text);
+}
+html[data-station-network] body main .station-filter button[aria-pressed="true"] {
+  background:#4d2b87;color:#fff;border-color:#4d2b87;
+}
+html[data-station-network] body main .station-filter button:disabled {opacity:.6;cursor:default}
+.station-filter-search label {font-weight:700;font-size:.86rem}
+.station-filter-search input {flex:1;min-width:min(100%,12rem)}
+html[data-station-network] body main .station-filter-status {margin:0;font-size:.83rem}
+html[data-station-network] body main :is(#shows .show-card,#musiknyheder .djf-desk-story)[hidden] {display:none!important}
+@media(max-width:540px) {
+  .station-filter-search label {flex-basis:100%}
+  .station-filter-search input {min-width:0}
+}
