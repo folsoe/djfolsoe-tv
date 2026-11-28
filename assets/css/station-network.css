@@ -586,3 +586,67 @@ html[data-station-network] body > :is(footer,.seoFooter) {
   .station-directory li:first-child {grid-column:1/-1}
   html[data-station-network] body main .station-directory a {padding:.65rem}
 }
+
+/* Compact clock and channel cards in the homepage masthead. */
+html[data-djf-station][data-station-network] body > header .station-header-extra {
+  min-height:57px;
+  border-radius:15px;
+  border-color:#d8cbe3;
+  background:#fbf7f4;
+  box-shadow:0 5px 16px #30204517;
+}
+html[data-station-network] body .station-header-time {
+  min-width:94px;
+  padding:.44rem .65rem .45rem .8rem;
+  background:linear-gradient(135deg,#3c2858,#221830 82%);
+  box-shadow:inset 3px 0 #d8fa52;
+}
+html[data-station-network] body .station-header-time .station-clock {
+  color:#fffaf6!important;
+  font-size:1.35rem;
+  font-weight:800;
+  line-height:1.04;
+  letter-spacing:.02em;
+}
+html[data-station-network] body .station-header-date {
+  color:#eee1ff;
+  font-size:.68rem;
+  font-weight:650;
+  line-height:1.2;
+}
+html[data-station-network] body .station-header-card {
+  --card-signal:#9268ce;
+  background:linear-gradient(108deg,#fbf6f2,#f3edf8);
+}
+html[data-station-network] body .station-header-card[data-kind="tiktok"] {--card-signal:#337e80}
+html[data-station-network] body .station-header-card[data-kind="instagram"] {--card-signal:#a5476b}
+html[data-station-network] body .station-header-card[data-kind="facebook"] {--card-signal:#4a62a4}
+html[data-station-network] body .station-header-card[data-kind="vipps"] {
+  --card-signal:#af4b29;
+  background:linear-gradient(108deg,#fff4ec,#f9e5d9);
+}
+html[data-station-network] body .station-header-card > :is(a,div) {
+  position:relative;
+  padding:.45rem .56rem .45rem 1.15rem;
+}
+.station-header-card > :is(a,div)::before {
+  content:"";
+  position:absolute;
+  left:.52rem;top:.56rem;
+  width:4px;height:1.55rem;
+  border-radius:3px;
+  background:var(--card-signal);
+}
+html[data-station-network] body .station-header-card strong {letter-spacing:.07em}
+html[data-station-network] body .station-header-card a:is(:hover,:focus-visible) {background:#49316b0d}
+html[data-station-network] body button.station-header-pause {
+  align-self:center;
+  width:32px;height:32px;min-width:32px;
+  margin-inline:.26rem .34rem;
+  border:1px solid #d7c9e3;
+  border-radius:50%;
+  background:#faf6fc;
+  font-size:.78rem;
+  line-height:1;
+}
+html[data-station-network] body button.station-header-pause:hover {background:#e9dff1}
