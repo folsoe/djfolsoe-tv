@@ -1,2 +1,5 @@
 .djf-jul-forside{margin:1rem 0;padding:1.15rem 1.3rem 1.15rem clamp(1.2rem,4vw,2rem);border-left:3px solid #ffd08a;background:linear-gradient(110deg,#322026,#241820);color:#fff4e4}
 .djf-jul-forside h2{margin:0}.djf-jul-forside p{margin:.45rem 0}.djf-jul-forside a{color:#ffd08a;font-weight:700;text-decoration:underline}
+
+.djf-jul-forside{position:relative;isolation:isolate;overflow:hidden;border-left-color:#e7ad79;background:radial-gradient(ellipse at 100% 4%,#745133,#39232d 58%,#241820)}
+.djf-jul-forside::after{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 83% 22%,#ffe2bcaf 0 1px,transparent 2px),radial-gradient(circle at 89% 42%,#f6af7b91 0 1px,transparent 2px),radial-gradient(circle at 96% 12%,#ffdaa1be 0 1px,transparent 2px);pointer-events:none}
