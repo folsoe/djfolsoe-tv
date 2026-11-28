@@ -73,6 +73,27 @@
 
   const news = document.querySelector('#musiknyheder');
   if (!news) return;
+
+  const presenter = document.querySelector('#main > .person');
+  if (presenter) {
+    const portrait = picture('portrait');
+    portrait.classList.add('station-person-photo');
+    portrait.alt = 'Sune Folsø';
+    presenter.append(portrait);
+  }
+
+  const feature = document.querySelector('.sound-stage-feature');
+  if (feature) {
+    const artwork = picture(feature.dataset.channel);
+    artwork.classList.add('station-listen-photo');
+    feature.prepend(artwork);
+    const updateArtwork = () => {
+      const key = feature.dataset.channel;
+      if (['trance','eurodance','retro'].includes(key)) artwork.src = '/themes/' + key + '.jpg';
+    };
+    new MutationObserver(updateArtwork).observe(feature, {attributes:true, attributeFilter:['data-channel']});
+    updateArtwork();
+  }
   const paths = [
     {
       href:'/guides/trance-music-explained/', image:'trance',
@@ -98,7 +119,17 @@
   const grid = document.createElement('div');
   grid.className = 'station-explore-grid';
   section.append(title, grid);
-  news.after(section);
+  const stories = document.getElementById('musikfortaellinger');
+  (stories || news).after(section);
+
+  // Keep the station and schedule first, then present the seasonal stories together.
+  for (const id of ['djf-jul-historie','jul-teaser-2026','jul-2026']) {
+    const seasonal = document.getElementById(id);
+    if (seasonal) section.before(seasonal);
+  }
+
+  const welcome = document.querySelector('#main > .welcome');
+  if (welcome && presenter) presenter.before(welcome);
 
   const labels = paths.map(path => {
     const card = document.createElement('article');

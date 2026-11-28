@@ -184,3 +184,102 @@ html[data-station-network] body > :is(.seo-nav,.station-compact-header) {
 }
 html[data-station-network] .station-brand-link {display:inline-flex;align-items:center;margin-inline-end:1rem}
 html[data-station-network] .station-brand {display:block;width:clamp(142px,16vw,216px);height:auto}
+
+/* Soft station surfaces and readable accents across the public page templates. */
+html[data-station-network] {
+  --station-surface:#faf5ef;
+  --station-tint:#eee6f4;
+  --station-line:#d5c8dc;
+  --station-lilac:#eee5f5;
+  --station-sea:#e3efec;
+  --station-rose:#f3e4e7;
+  background:#eee8ee!important;
+}
+html[data-station-network] body {
+  background:linear-gradient(155deg,#e8deef,#f1ebe6 42rem,#ece8ef)!important;
+}
+html[data-station-network] body :is(.djfUnifiedMasthead,.djfMastNav,.djfMastTop,.broadcastHeader,.djfLanguageBar,.v26400-strip,.v26340BroadcastRail a) {
+  background:var(--station-lilac)!important;
+  color:var(--station-ink)!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body :is(.djfMastCell,.djfMastSupport,.v26340BroadcastRail a) :is(strong,b,small,span),
+html[data-station-network] body :is(h4,.djfLanguageMark,.v26340Kicker,.v26350Authority__eyebrow,.archive-kicker,.editorial-kicker,.v26351Story__eyebrow,.v26351Story__genres,.v26351Story__num,.v26400-k,.v26410-empty,.show-number,.cmd,.accent,.seoHero strong) {
+  color:var(--station-link)!important;
+}
+html[data-station-network] body :is(.djfLanguageBar,nav[aria-label="Sprog"]) button {
+  background:var(--station-surface)!important;
+  color:var(--station-ink)!important;
+  border:1px solid var(--station-line)!important;
+  min-height:36px;
+}
+html[data-station-network] body :is(.djfLanguageBar,nav[aria-label="Sprog"]) button[aria-pressed="true"] {
+  background:var(--station-link)!important;
+  color:#fff!important;
+}
+html[data-station-network] body main :is(.participation article,.request-box,.djf-weekly-note,.djf-home-week-columns article,.jul-medvirkende,.editorial-prose,.editorial-chapter,.editorial-conversation,.editorial-faq,.editorial-stories,.djfCrossLink,.v26351Story__links,.v26400-decade,.v26400-decades,.v26410-retroFeature) {
+  background:var(--station-surface)!important;
+  color:var(--station-ink)!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body main :is(.show-card,.v26400-chartBox,.v26400-chartHero,.v26400-playlist,.v26351Story__signature,.sound-stage-feature) :is(span,b,strong,em),
+html[data-station-network] body main :is(.djfMastNav,.sound-stage-actions) a {
+  color:var(--station-link)!important;
+}
+html[data-station-network] body main :is(.signal,.sound-stage-actions) :is(button,a):not(.primary) {
+  color:var(--station-link)!important;
+  background:var(--station-surface)!important;
+  border:1px solid #9d86ae!important;
+}
+html[data-station-network] body main .signal button span {color:inherit!important}
+html[data-station-network] body main :is(.show-editorial,.djf-playlists,.sound-stage,.participation) {
+  color:var(--station-ink)!important;
+}
+html[data-station-network] body main :is(.djfLanguageBar,.djfMastNav,.sound-stage-actions,.v26430Ribbon) a:hover {
+  text-decoration:underline;
+  text-underline-offset:.2em;
+}
+html[data-station-network] body :is(main,footer) a:not(.primary):not(.show-card):not(.home-editorial-card) {text-underline-offset:.18em}
+html[data-station-network] body main :is(.djf-home-week-card,.djf-home-week-columns article,.djf-desk-story) p {line-height:1.6}
+html[data-station-network] body main :is(.home-live-status,.home-live-note) {color:var(--station-ink)!important}
+html[data-station-network] body main .home-live-bar {background:var(--station-rose)!important;color:var(--station-ink)!important}
+
+html[data-djf-station][data-station-network] #main > :is(.hero,.sound-stage,.djf-music-desk,.station-explore,.home-editorial,#shows,#show-playlists,.person,#participate,.request-box,.welcome,#offline-visit) {
+  border:1px solid var(--station-line)!important;
+  border-radius:20px!important;
+  box-shadow:none!important;
+  background:var(--station-surface)!important;
+  margin-block:clamp(14px,2vw,27px)!important;
+}
+html[data-djf-station][data-station-network] #main > :is(.hero,.station-explore,#shows,#participate) {background:var(--station-lilac)!important}
+html[data-djf-station][data-station-network] #main > :is(.sound-stage,#show-playlists,.person) {background:var(--station-sea)!important}
+html[data-djf-station][data-station-network] #main > :is(.home-editorial,.request-box,#djf-jul-historie) {background:var(--station-rose)!important}
+html[data-djf-station][data-station-network] #main :is(.djf-desk-story,.djf-playlist-card,.home-editorial-card,.show-card,.station-explore-card) {background:var(--station-surface)!important}
+html[data-djf-station][data-station-network] #main .sound-stage-feature {background:var(--station-sea)!important}
+html[data-djf-station][data-station-network] #main .person:has(>.station-person-photo) {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,13rem);
+  align-items:center;
+  gap:clamp(12px,3vw,34px);
+}
+.station-person-photo {max-width:13rem;justify-self:end}
+.station-listen-photo {margin-bottom:.8rem;aspect-ratio:5/2}
+@media(max-width:700px) {
+  html[data-djf-station][data-station-network] #main .person:has(>.station-person-photo) {grid-template-columns:1fr}
+  .station-person-photo {justify-self:start}
+}
+
+html[data-station-network] body main :is(.muted,.seoEyebrow,.djfMastIcon,.show-card small) {color:var(--station-muted)!important}
+html[data-station-network] .djf-home-week-card[data-show]::before {
+  content:"";
+  display:block;
+  aspect-ratio:3 / 1;
+  border-radius:8px;
+  margin-bottom:.75rem;
+  background:var(--station-tint) var(--station-week-image) center / cover no-repeat;
+}
+html[data-station-network] .djf-home-week-card[data-show="trance"] {--station-week-image:url('/themes/trance.jpg')}
+html[data-station-network] .djf-home-week-card[data-show="eurodance"] {--station-week-image:url('/themes/eurodance.jpg')}
+html[data-station-network] .djf-home-week-card[data-show="retro"] {--station-week-image:url('/themes/retro.jpg')}
+html[data-station-network] body a[href*="facebook.com"] b {color:inherit!important}
+html[data-station-network] body .seoHero :is(.seoEyebrow,.seoLead) {color:var(--station-muted)!important}
