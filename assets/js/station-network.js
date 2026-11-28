@@ -59,6 +59,65 @@
       }
     }
   }
+  function mountStationDirectory(isHome) {
+    const main = document.querySelector('main');
+    if (!main) return;
+    const directory = document.createElement('nav');
+    directory.className = 'station-directory';
+    const title = document.createElement('h2');
+    title.className = 'station-directory-title';
+    title.id = 'station-directory-title';
+    directory.setAttribute('aria-labelledby', title.id);
+    const items = document.createElement('ul');
+    directory.append(title, items);
+
+    const publicSections = [
+      ['live','/watch-live/',['Se live','Watch live','Live ansehen'],['Twitch og næste sendetid','Twitch and what’s on next','Twitch und nächste Sendung']],
+      ['shows','/shows/',['Find dit show','Browse shows','Shows entdecken'],['Fra Trance Tuesday til Retro Hits','From Trance Tuesday to Retro Hits','Von Trance Tuesday bis Retro Hits']],
+      ['news','/music/',['Musikredaktionen','Music desk','Musikredaktion'],['Nyheder, genrer og lytteguider','News, genres and listening guides','News, Genres und Hörtipps']],
+      ['charts','/charts/',['Hitlister','Charts','Charts'],['Top 20 og Retro Top 10','Top 20 and Retro Top 10','Top 20 und Retro Top 10']],
+      ['community','/community/',['Vær med','Join in','Mitmachen'],['Chat, musikønsker og fællesskab','Chat, requests and community','Chat, Musikwünsche und Community']]
+    ];
+    const panels = publicSections.map(([key, url, names, descriptions]) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      const label = document.createElement('strong');
+      const description = document.createElement('span');
+      item.dataset.channel = key;
+      item.append(link);
+      link.append(label, description);
+      items.append(item);
+      if (location.pathname.startsWith(url)) link.setAttribute('aria-current','location');
+      return {key, url, names, descriptions, link, label, description};
+    });
+    if (isHome) {
+      const anchor = main.querySelector('.sound-stage') || main.querySelector('.signal');
+      if (anchor) anchor.before(directory); else main.append(directory);
+    } else {
+      main.append(directory);
+    }
+
+    const status = document.getElementById('live-state');
+    const nextShow = document.getElementById('next-show');
+    function update() {
+      const language = Math.max(0, ['da','en','de'].indexOf(document.documentElement.lang.slice(0,2)));
+      title.textContent = isHome ? ['På DJ FOLSOE','On DJ FOLSOE','Bei DJ FOLSOE'][language] : ['Se mere hos DJ FOLSOE','More from DJ FOLSOE','Mehr von DJ FOLSOE'][language];
+      for (const panel of panels) {
+        const isLive = panel.key === 'live' && status?.dataset.state === 'live';
+        panel.link.href = (panel.key === 'news' ? '/?lang=' + ['da','en','de'][language] + '#musiknyheder' : panel.url + '?lang=' + ['da','en','de'][language]);
+        panel.label.textContent = isLive ? ['Live nu','Live now','Jetzt live'][language] : panel.names[language];
+        const upcoming = panel.key === 'live' && status?.dataset.state === 'offline' ? nextShow?.textContent.trim() : '';
+        panel.description.textContent = upcoming || panel.descriptions[language];
+        panel.link.dataset.live = String(isLive);
+      }
+    }
+    update();
+    const watcher = new MutationObserver(update);
+    watcher.observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
+    if (status) watcher.observe(status, {attributes:true, attributeFilter:['data-state']});
+    if (nextShow) watcher.observe(nextShow, {childList:true});
+  }
+
   const credits = document.createElement('a');
   credits.className = 'station-photo-credits';
   credits.href = '/fotokreditering/';
@@ -78,6 +137,7 @@
   }
 
   const news = document.querySelector('#musiknyheder');
+  mountStationDirectory(Boolean(news));
   if (!news) return;
 
   for (const card of document.querySelectorAll('#shows .show-card[href]')) {

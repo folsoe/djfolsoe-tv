@@ -466,3 +466,115 @@ html[data-station-network] #djf-jul-historie .station-advent-cast {
 @media(max-width:760px) {
   html[data-djf-station][data-station-network] #main > #djf-jul-historie {grid-template-columns:1fr}
 }
+
+/* Shared editorial layout. Keep the seasonal feature and live player in their own visual treatments. */
+html[data-station-network] {
+  --station-surface:#fffbf6;
+  --station-tint:#f0ebf4;
+  --station-line:#d9cede;
+  --station-lilac:#ece4f4;
+  --station-sea:#e5efea;
+  --station-rose:#f2e4e6;
+  --station-accent:#b7d32f;
+  --station-radius:18px;
+  --station-shadow:0 12px 30px rgba(44,28,61,.065);
+}
+html[data-station-network] body {
+  background:linear-gradient(145deg,#ede7ee,#f5f0e9 50rem,#ede9f0)!important;
+}
+html[data-station-network] body > :is(header,nav.seo-nav) {
+  border-block-end:1px solid var(--station-line);
+  box-shadow:0 3px 14px #35244a0d!important;
+}
+html[data-station-network] body :is(.seoTopbar,.seoTop,.seo-nav,.djfUnifiedMasthead) {
+  border-radius:0 0 var(--station-radius) var(--station-radius);
+}
+html[data-station-network] body > main :is(h1,h2,h3,h4) {
+  text-wrap:balance;
+}
+html[data-station-network] body > main :is(p,li,dd) {
+  overflow-wrap:break-word;
+}
+html[data-station-network] body main :is(.page-hero,.v26340SubHero,.archive-hero,.editorial-hero,.v26400-chartHero) {
+  padding:clamp(1.25rem,4.6vw,4.2rem)!important;
+  background:linear-gradient(120deg,#fdf9f4,#ede5f2)!important;
+  border-inline-start:4px solid #67499a!important;
+  border-radius:var(--station-radius)!important;
+  box-shadow:var(--station-shadow)!important;
+}
+html[data-station-network] body main :is(.page-hero,.v26340SubHero,.v26400-chartHero) h1 {
+  font-size:clamp(2.25rem,5.8vw,5.5rem)!important;
+  line-height:1.02;letter-spacing:-.046em;
+}
+html[data-station-network] body main :is(.show-card,.archive-card,.topicCard,.station-explore-card,.djf-playlist-card,.guideArticle,.editorial-card,.v26400-chartBox,.participation article) {
+  border-radius:var(--station-radius)!important;
+  border-color:var(--station-line)!important;
+  box-shadow:var(--station-shadow)!important;
+}
+html[data-station-network] body main :is(.show-card,.archive-card,.topicCard,.station-explore-card,.editorial-card):is(:hover,:focus-within) {
+  border-color:#8b6bad!important;
+}
+html[data-station-network] body main :is(.guideArticle,.editorial-prose) {
+  padding:clamp(1.1rem,3vw,2.8rem);
+}
+html[data-station-network] body :is(main>section,main>article) {scroll-margin-top:1.4rem}
+.station-directory {
+  margin:clamp(1rem,3vw,2.4rem) 0;
+  padding:clamp(.95rem,2.2vw,1.65rem);
+  border:1px solid var(--station-line);
+  border-radius:var(--station-radius);
+  background:var(--station-surface);
+  box-shadow:var(--station-shadow);
+}
+html[data-station-network] body main .station-directory-title {
+  font:800 clamp(.82rem,1.4vw,1.05rem)/1.25 var(--station-display);
+  letter-spacing:.03em;
+  margin:0 0 .75rem;
+}
+.station-directory ul {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(10.5rem,100%),1fr));
+  padding:0;margin:0;gap:.55rem;list-style:none;
+}
+.station-directory li {min-width:0;margin:0}
+html[data-station-network] body main .station-directory a {
+  display:flex;flex-direction:column;gap:.38rem;height:100%;
+  box-sizing:border-box;padding:.85rem;border:1px solid var(--station-line);
+  border-top:3px solid #9074b1;border-radius:10px;
+  background:var(--station-tint);text-decoration:none;
+}
+html[data-station-network] body main .station-directory [data-channel="live"] a {border-top-color:#548273;background:#e5efea}
+html[data-station-network] body main .station-directory [data-channel="news"] a {border-top-color:#ab7486;background:#f5e9ea}
+html[data-station-network] body main .station-directory a:is(:hover,[aria-current]) {border-color:#694892;background:#eee3f5}
+html[data-station-network] body main .station-directory a[data-live="true"] {border-top-color:#0c794f}
+.station-directory a[data-live="true"] strong::before {
+  content:"";display:inline-block;width:.55rem;height:.55rem;margin-right:.4rem;border-radius:50%;background:#0c794f;
+}
+.station-directory strong {font-size:.91rem}
+.station-directory span {font-size:.8rem;line-height:1.35;color:var(--station-muted)}
+html[data-djf-station][data-station-network] #main > :is(.hero,.djf-music-desk,.home-editorial,#shows,#show-playlists) {
+  padding:clamp(1.1rem,3.1vw,2.9rem)!important;
+  box-shadow:var(--station-shadow)!important;
+}
+html[data-djf-station][data-station-network] #main > .hero {
+  background:linear-gradient(135deg,#f9f1ed,#e8dff2)!important;
+}
+html[data-djf-station][data-station-network] #main > .djf-music-desk {
+  border-top:4px solid #75569f!important;
+}
+html[data-djf-station][data-station-network] #main .djf-desk-story {
+  border-radius:14px!important;
+  padding:clamp(.85rem,1.45vw,1.4rem);
+}
+html[data-djf-station][data-station-network] #main .djf-desk-lead {
+  background:#f0e8f4!important;
+}
+html[data-djf-station][data-station-network] #main .station-news-photo img {border-radius:10px}
+html[data-station-network] body > :is(footer,.seoFooter) {
+  border-top:1px solid var(--station-line);
+  padding-block:clamp(1.2rem,3vw,2.4rem);
+}
+@media(max-width:520px) {
+  .station-directory ul {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .station-directory li:first-child {grid-column:1/-1}
+  html[data-station-network] body main .station-directory a {padding:.65rem}
+}
