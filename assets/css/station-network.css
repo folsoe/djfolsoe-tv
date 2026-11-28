@@ -283,3 +283,28 @@ html[data-station-network] .djf-home-week-card[data-show="eurodance"] {--station
 html[data-station-network] .djf-home-week-card[data-show="retro"] {--station-week-image:url('/themes/retro.jpg')}
 html[data-station-network] body a[href*="facebook.com"] b {color:inherit!important}
 html[data-station-network] body .seoHero :is(.seoEyebrow,.seoLead) {color:var(--station-muted)!important}
+
+/* Keep legacy labels and their individual button surfaces in the same palette. */
+html[data-station-network] body :is(#editorial-jump-label,.jul-medvirkende dd,main.page .summary span,main.page header.hero > span) {
+  color:var(--station-muted)!important;
+}
+html[data-station-network] body :is(.jul-medvirkende dt,.k,.command,.djf-unified-nav a) {
+  color:var(--station-link)!important;
+}
+html[data-station-network] body nav.djfMastNav a[aria-current],
+html[data-station-network] body nav.djfMastNav a {
+  color:var(--station-link)!important;
+}
+html[data-station-network] body :is(.v26430Ribbon,.v26351Story__links) a,
+html[data-station-network] body .playlist.muted {
+  background:var(--station-lilac)!important;
+  color:var(--station-link)!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body #djfFacebookDock .djfFbIcon {background:#1358b4}
+html[data-station-network] body #djfFacebookDock .djfFbIcon b {color:#fff!important}
+html[data-station-network] body #djfFacebookDock .djfFbText {
+  background:var(--station-surface)!important;
+  border-color:var(--station-line)!important;
+}
+html[data-station-network] body #djfFacebookDock .djfFbText :is(strong,small) {color:var(--station-ink)!important}
