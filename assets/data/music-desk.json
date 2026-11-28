@@ -3,40 +3,232 @@
   "updated": "2026-11-28",
   "stories": [
     {
+      "id": "tiesto-reflekt-2026",
+      "kind": "release",
+      "date": "2026-11-28",
+      "title": [
+        "Tiësto og Reflekt giver Need To Feel Loved nyt liv",
+        "Tiësto and Reflekt give Need To Feel Loved a new life",
+        "Tiësto und Reflekt lassen Need To Feel Loved neu aufleben"
+      ],
+      "intro": [
+        "Den nye udgave udkom 27. november med Delline Bass på vokal. Den genbesøger Reflekts tranceklassiker fra 2005.",
+        "The new version arrived on 27 November, featuring Delline Bass. It revisits Reflekt’s 2005 trance classic.",
+        "Die neue Version mit Delline Bass erschien am 27. November und greift Reflekts Trance-Klassiker aus dem Jahr 2005 auf."
+      ],
+      "story": [
+        "Ibiza Spotlight beskriver, hvordan Tiësto spillede versionen under sit ophold på klubben [UNVRS]. Sæt den nye udgave på efter originalen. Læg mærke til, hvor meget der sker omkring den samme vokal, især i pausen før beatet kommer tilbage.",
+        "Ibiza Spotlight reports that Tiësto played the version during his run at [UNVRS]. Play the new release after the original and listen to how much changes around the same voice, particularly in the break before the beat returns.",
+        "Ibiza Spotlight berichtet, dass Tiësto die Version bei seinen Auftritten im [UNVRS] spielte. Hör zuerst das Original und dann die neue Fassung. Besonders im Break vor der Rückkehr des Beats verändert sich vieles um die vertraute Stimme herum."
+      ],
+      "sources": [
+        {
+          "label": "Ibiza Spotlight",
+          "url": "https://www.ibiza-spotlight.it/magazine/2026/11/unvrs-monday-night-host-tiesto-remixes-trance-classic-need-feel-loved"
+        },
+        {
+          "label": "Amazon Music",
+          "url": "https://music.amazon.com/albums/B0HRTX9CZY"
+        }
+      ]
+    },
+    {
+      "id": "morten-london",
+      "kind": "release",
+      "date": "2026-11-28",
+      "title": [
+        "MORTEN og David Guetta giver Tinie Tempah plads på London",
+        "MORTEN and David Guetta bring Tinie Tempah in on London",
+        "MORTEN und David Guetta holen Tinie Tempah für London dazu"
+      ],
+      "intro": [
+        "London udkom 27. november i en kort og en længere version. Den danske producer MORTEN fortsætter sit Future Rave-samarbejde med David Guetta.",
+        "London arrived on 27 November in a short and an extended version. Danish producer MORTEN continues his Future Rave collaboration with David Guetta.",
+        "London erschien am 27. November in einer kurzen und einer längeren Fassung. Der dänische Produzent MORTEN setzt damit seine Future-Rave-Zusammenarbeit mit David Guetta fort."
+      ],
+      "story": [
+        "Tinie Tempah har vokalen. Sammenlign radioversionens hurtige vej ind i nummeret med den længere versions plads til opbygning. De to udgaver giver et godt eksempel på forskellen mellem et nummer til radioen og et mix, en DJ kan bruge i en overgang.",
+        "Tinie Tempah provides the vocals. Compare how quickly the radio edit gets into the track with the room the extended mix has to build. The two versions show how the same song can work in a radio sequence and in a DJ transition.",
+        "Tinie Tempah übernimmt die Vocals. Vergleiche den schnellen Einstieg des Radio-Edits mit dem zusätzlichen Raum für den Aufbau im Extended Mix. So lässt sich hören, wie derselbe Song im Radio und in einem DJ-Übergang funktionieren kann."
+      ],
+      "sources": [
+        {
+          "label": "Apple Music · MORTEN",
+          "url": "https://music.apple.com/us/artist/morten/155798079"
+        },
+        {
+          "label": "EDM House Network",
+          "url": "https://edmhousenetwork.com/new-edm-friday-nov-27-tiesto-david-guetta-more/"
+        }
+      ]
+    },
+    {
+      "id": "group-therapy-compilation",
+      "kind": "upcoming",
+      "date": "2026-11-28",
+      "title": [
+        "Group Therapy samler 22 numre i København",
+        "Copenhagen’s Group Therapy brings together 22 tracks",
+        "Kopenhagens Group Therapy versammelt 22 Tracks"
+      ],
+      "intro": [
+        "Det københavnske klubkollektivs første compilation er annonceret til 4. december. Shanti Celeste, Olof Dreijer og Sparkly Pony er blandt de medvirkende.",
+        "The Copenhagen club collective’s first compilation is scheduled for 4 December, with Shanti Celeste, Olof Dreijer and Sparkly Pony among the contributors.",
+        "Die erste Compilation des Kopenhagener Clubkollektivs ist für den 4. Dezember angekündigt. Zu den Beteiligten gehören Shanti Celeste, Olof Dreijer und Sparkly Pony."
+      ],
+      "story": [
+        "Ifølge Resident Advisor deles indtægterne mellem AIDS-Fondet i Danmark og The Dolls of Berlin. De 22 numre er en god anledning til at gå på opdagelse i en klubscene via et kollektivs valg af musikere. Udgivelsesdatoen ligger efter denne nyheds publicering.",
+        "Resident Advisor reports that proceeds are split between the Danish AIDS Foundation and The Dolls of Berlin. The 22 tracks offer a way into a club scene through the artists chosen by one of its collectives. The release date is still ahead as this story is published.",
+        "Laut Resident Advisor gehen die Erlöse an den dänischen AIDS-Fonds und The Dolls of Berlin. Die 22 Tracks bieten einen Einstieg in eine Clubszene über die Künstlerauswahl eines Kollektivs. Zum Zeitpunkt dieses Artikels steht der Veröffentlichungstermin noch bevor."
+      ],
+      "sources": [
+        {
+          "label": "Resident Advisor",
+          "url": "https://ra.co/news/86493"
+        }
+      ]
+    },
+    {
+      "id": "anna-lunoe-everything",
+      "kind": "release",
+      "date": "2026-11-28",
+      "title": [
+        "Anna Lunoe på ugens udgivelsesliste med Everything",
+        "Anna Lunoe appears on this week’s release list with Everything",
+        "Anna Lunoe steht mit Everything auf der Release-Liste der Woche"
+      ],
+      "intro": [
+        "Everything står blandt ugens nye singler i Official Charts’ oversigt for 27. november.",
+        "Everything appears among the new singles in Official Charts’ round-up for 27 November.",
+        "Everything gehört laut der Übersicht von Official Charts für den 27. November zu den neuen Singles."
+      ],
+      "story": [
+        "Det er et sted at begynde, hvis du vil prøve en ny udgivelse uden at kende nummeret på forhånd. Hør den én gang uden at tænke i genrer. Hvilket øjeblik ville få dig til at lægge nummeret i en kasse til et DJ-sæt?",
+        "It is a starting point if you want to try a new release without knowing the track first. Listen once without thinking in genres. Which moment would make you put it in a crate for a DJ set?",
+        "Ein Einstieg für alle, die eine Neuerscheinung unvoreingenommen hören möchten. Hör einmal, ohne an Genres zu denken. Welcher Moment würde dich dazu bringen, den Track für ein DJ-Set einzuplanen?"
+      ],
+      "sources": [
+        {
+          "label": "Official Charts",
+          "url": "https://www.officialcharts.com/chart-news/new-music-friday-november-27-songs-album-releases/"
+        }
+      ]
+    },
+    {
       "id": "washa",
       "kind": "release",
       "date": "2026-11-27",
-      "title": ["Enoo Napa, T-Man og SOMMERS mødes på Washa", "Enoo Napa, T-Man and SOMMERS meet on Washa", "Enoo Napa, T-Man und SOMMERS treffen sich auf Washa"],
-      "intro": ["Washa udkom 27. november på NO LAND RECORDS. Enoo Napa og SOMMERS (UK) har T-Man med på vokal på den nye house-single.", "Washa arrived on NO LAND RECORDS on 27 November. Enoo Napa and SOMMERS (UK) are joined by vocalist T-Man on the new house single.", "Washa erschien am 27. November auf NO LAND RECORDS. Auf der neuen House-Single treffen Enoo Napa und SOMMERS (UK) auf Sänger T-Man."],
-      "story": ["Enoo Napa kommer fra Umlazi ved Durban og har arbejdet med den mørkere, mere strippede ende af afro-tech. Her synger T-Man på isiZulu. Prøv at lytte til, hvordan stemmen skifter plads med rytmen. Den kan både trække dig tættere på teksten og fungere som en del af groovet.", "Enoo Napa comes from Umlazi near Durban and is associated with a darker, stripped-back side of Afro tech. T-Man sings in isiZulu here. Listen for how the voice changes places with the rhythm: it can draw you closer to the words and work as part of the groove.", "Enoo Napa stammt aus Umlazi bei Durban und steht für eine dunklere, reduzierte Seite des Afro Tech. T-Man singt hier auf isiZulu. Hör darauf, wie die Stimme mit dem Rhythmus zusammenspielt: Mal rückt der Text näher, mal wird die Stimme selbst Teil des Grooves."],
-      "sources": [{"label":"Apple Music","url":"https://music.apple.com/us/album/washa-single/6824756136"},{"label":"ElectroWow","url":"https://www.electrowow.net/enoo-napa-key-force-afro-tech-t-man-sommers-washa"}]
+      "title": [
+        "Enoo Napa, T-Man og SOMMERS mødes på Washa",
+        "Enoo Napa, T-Man and SOMMERS meet on Washa",
+        "Enoo Napa, T-Man und SOMMERS treffen sich auf Washa"
+      ],
+      "intro": [
+        "Washa udkom 27. november på NO LAND RECORDS. Enoo Napa og SOMMERS (UK) har T-Man med på vokal på den nye house-single.",
+        "Washa arrived on NO LAND RECORDS on 27 November. Enoo Napa and SOMMERS (UK) are joined by vocalist T-Man on the new house single.",
+        "Washa erschien am 27. November auf NO LAND RECORDS. Auf der neuen House-Single treffen Enoo Napa und SOMMERS (UK) auf Sänger T-Man."
+      ],
+      "story": [
+        "Enoo Napa kommer fra Umlazi ved Durban og har arbejdet med den mørkere, mere strippede ende af afro-tech. Her synger T-Man på isiZulu. Prøv at lytte til, hvordan stemmen skifter plads med rytmen. Den kan både trække dig tættere på teksten og fungere som en del af groovet.",
+        "Enoo Napa comes from Umlazi near Durban and is associated with a darker, stripped-back side of Afro tech. T-Man sings in isiZulu here. Listen for how the voice changes places with the rhythm: it can draw you closer to the words and work as part of the groove.",
+        "Enoo Napa stammt aus Umlazi bei Durban und steht für eine dunklere, reduzierte Seite des Afro Tech. T-Man singt hier auf isiZulu. Hör darauf, wie die Stimme mit dem Rhythmus zusammenspielt: Mal rückt der Text näher, mal wird die Stimme selbst Teil des Grooves."
+      ],
+      "sources": [
+        {
+          "label": "Apple Music",
+          "url": "https://music.apple.com/us/album/washa-single/6824756136"
+        },
+        {
+          "label": "ElectroWow",
+          "url": "https://www.electrowow.net/enoo-napa-key-force-afro-tech-t-man-sommers-washa"
+        }
+      ]
     },
     {
       "id": "sidney-bret",
       "kind": "set",
       "date": "2026-11-27",
-      "title": ["Fem timers house med Sidney Charles", "Five hours of house with Sidney Charles", "Fünf Stunden House mit Sidney Charles"],
-      "intro": ["PILOT Amsterdams Black Box Radio har udgivet et fem timers DJ-sæt med Sidney Charles, optaget på klubben BRET den 25. september.", "PILOT Amsterdam’s Black Box Radio has released a five-hour Sidney Charles set recorded at BRET on 25 September.", "PILOT Amsterdams Black Box Radio hat ein fünfstündiges Set von Sidney Charles veröffentlicht. Aufgenommen wurde es am 25. September im BRET."],
-      "story": ["Det er anden udsendelse i serien. Fem timer giver plads til at høre, hvordan en DJ arbejder med energien over tid. Et godt lyttespørgsmål er, hvornår du opdager en ændring i stemningen: allerede i basgangen, i overgangene eller først, når et helt nyt nummer står frem?", "This is the second edition in the series. Five hours gives you room to hear a DJ work with energy over time. Ask yourself when you notice a change in mood: in the bassline, in the transitions or only once the next track fully emerges?", "Das Set ist die zweite Ausgabe der Reihe. In fünf Stunden lässt sich gut hören, wie ein DJ mit der Energie im Raum arbeitet. Wann bemerkst du einen Stimmungswechsel: schon an der Basslinie, beim Übergang oder erst, wenn der nächste Track ganz im Vordergrund steht?"],
-      "sources":[{"label":"UFO Network","url":"https://ufo-network.com/sidney-charles-five-hour-set-amsterdam/"}]
+      "title": [
+        "Fem timers house med Sidney Charles",
+        "Five hours of house with Sidney Charles",
+        "Fünf Stunden House mit Sidney Charles"
+      ],
+      "intro": [
+        "PILOT Amsterdams Black Box Radio har udgivet et fem timers DJ-sæt med Sidney Charles, optaget på klubben BRET den 25. september.",
+        "PILOT Amsterdam’s Black Box Radio has released a five-hour Sidney Charles set recorded at BRET on 25 September.",
+        "PILOT Amsterdams Black Box Radio hat ein fünfstündiges Set von Sidney Charles veröffentlicht. Aufgenommen wurde es am 25. September im BRET."
+      ],
+      "story": [
+        "Det er anden udsendelse i serien. Fem timer giver plads til at høre, hvordan en DJ arbejder med energien over tid. Et godt lyttespørgsmål er, hvornår du opdager en ændring i stemningen: allerede i basgangen, i overgangene eller først, når et helt nyt nummer står frem?",
+        "This is the second edition in the series. Five hours gives you room to hear a DJ work with energy over time. Ask yourself when you notice a change in mood: in the bassline, in the transitions or only once the next track fully emerges?",
+        "Das Set ist die zweite Ausgabe der Reihe. In fünf Stunden lässt sich gut hören, wie ein DJ mit der Energie im Raum arbeitet. Wann bemerkst du einen Stimmungswechsel: schon an der Basslinie, beim Übergang oder erst, wenn der nächste Track ganz im Vordergrund steht?"
+      ],
+      "sources": [
+        {
+          "label": "UFO Network",
+          "url": "https://ufo-network.com/sidney-charles-five-hour-set-amsterdam/"
+        }
+      ]
     },
     {
       "id": "andy-replica",
       "kind": "ep",
       "date": "2026-11-27",
-      "title": ["Andy Replica bygger house af nære stemmer", "Andy Replica builds house from familiar voices", "Andy Replica baut House aus vertrauten Stimmen"],
-      "intro": ["På Spend Most Of My Time blander Andy Replica house med bedroom pop og elektroniske afstikkere. EP’en har fire numre.", "On Spend Most Of My Time, Andy Replica combines house with bedroom pop and electronic detours across four tracks.", "Auf Spend Most Of My Time verbindet Andy Replica House mit Bedroom-Pop und elektronischen Abzweigungen. Die EP umfasst vier Tracks."],
-      "story": ["Samples af venner og familie er en del af materialet. De små optagelser giver et personligt modspil til danserytmen. Lyt efter de øjeblikke, hvor en melodi glider væk fra beatet, eller hvor en stemme får dig til at høre et nyt mønster i det samme groove.", "Samples of friends and family are part of the material. These small recordings bring a personal counterpoint to the dance rhythm. Listen for moments when a melody drifts away from the beat, or a voice reveals a new pattern in the same groove.", "Samples von Freunden und Familie gehören zum Material. Die kleinen Aufnahmen setzen einen persönlichen Kontrapunkt zum Tanzrhythmus. Achte darauf, wann sich eine Melodie vom Beat löst oder eine Stimme im selben Groove ein neues Muster hörbar macht."],
-      "sources":[{"label":"Andy Replica · Bandcamp","url":"https://andyreplica.bandcamp.com/album/spend-most-of-my-time-ep"},{"label":"EDM Cave","url":"https://edmcave.com/andy-replica-returns-with-new-ep-of-hazy-off-kilter-house-music/"}]
+      "title": [
+        "Andy Replica bygger house af nære stemmer",
+        "Andy Replica builds house from familiar voices",
+        "Andy Replica baut House aus vertrauten Stimmen"
+      ],
+      "intro": [
+        "På Spend Most Of My Time blander Andy Replica house med bedroom pop og elektroniske afstikkere. EP’en har fire numre.",
+        "On Spend Most Of My Time, Andy Replica combines house with bedroom pop and electronic detours across four tracks.",
+        "Auf Spend Most Of My Time verbindet Andy Replica House mit Bedroom-Pop und elektronischen Abzweigungen. Die EP umfasst vier Tracks."
+      ],
+      "story": [
+        "Samples af venner og familie er en del af materialet. De små optagelser giver et personligt modspil til danserytmen. Lyt efter de øjeblikke, hvor en melodi glider væk fra beatet, eller hvor en stemme får dig til at høre et nyt mønster i det samme groove.",
+        "Samples of friends and family are part of the material. These small recordings bring a personal counterpoint to the dance rhythm. Listen for moments when a melody drifts away from the beat, or a voice reveals a new pattern in the same groove.",
+        "Samples von Freunden und Familie gehören zum Material. Die kleinen Aufnahmen setzen einen persönlichen Kontrapunkt zum Tanzrhythmus. Achte darauf, wann sich eine Melodie vom Beat löst oder eine Stimme im selben Groove ein neues Muster hörbar macht."
+      ],
+      "sources": [
+        {
+          "label": "Andy Replica · Bandcamp",
+          "url": "https://andyreplica.bandcamp.com/album/spend-most-of-my-time-ep"
+        },
+        {
+          "label": "EDM Cave",
+          "url": "https://edmcave.com/andy-replica-returns-with-new-ep-of-hazy-off-kilter-house-music/"
+        }
+      ]
     },
     {
       "id": "northern-exposure",
       "kind": "archive",
       "date": "2026-11-13",
-      "title": ["Sasha og John Digweed åbner Northern Exposure igen", "Sasha and John Digweed revisit Northern Exposure", "Sasha und John Digweed kehren zu Northern Exposure zurück"],
-      "intro": ["Northern Exposure Redux (Dub Mix) kom digitalt 13. november. De ti numre genbesøger duoens mixalbum fra 1996.", "Northern Exposure Redux (Dub Mix) arrived digitally on 13 November. Its ten tracks revisit the duo’s 1996 mix album.", "Northern Exposure Redux (Dub Mix) erschien am 13. November digital. Die zehn Tracks greifen das Mixalbum des Duos von 1996 wieder auf."],
-      "story": ["Jubilæumsprojektet omfatter nye dub- og ambientbearbejdelser. Hvis du kender originalen, er det værd at sætte et par passager op mod hinanden. Prøv at lægge mærke til, hvad der stadig føles genkendeligt, når et beat træder tilbage, og ekko eller klang får mere plads.", "The anniversary project includes new dub and ambient reworkings. If you know the original, compare a couple of passages side by side. Notice what still feels familiar when a beat recedes and echoes or textures get more room.", "Zum Jubiläumsprojekt gehören neue Dub- und Ambient-Bearbeitungen. Wenn du das Original kennst, vergleiche ein paar Passagen direkt. Achte darauf, was vertraut bleibt, wenn der Beat zurücktritt und Echo oder Klangflächen mehr Raum bekommen."],
-      "sources":[{"label":"Apple Music","url":"https://music.apple.com/us/album/northern-exposure-redux-dub-mix-dj-mix/6827087090"},{"label":"Resident Advisor","url":"https://ra.co/news/85631"}]
+      "title": [
+        "Sasha og John Digweed åbner Northern Exposure igen",
+        "Sasha and John Digweed revisit Northern Exposure",
+        "Sasha und John Digweed kehren zu Northern Exposure zurück"
+      ],
+      "intro": [
+        "Northern Exposure Redux (Dub Mix) kom digitalt 13. november. De ti numre genbesøger duoens mixalbum fra 1996.",
+        "Northern Exposure Redux (Dub Mix) arrived digitally on 13 November. Its ten tracks revisit the duo’s 1996 mix album.",
+        "Northern Exposure Redux (Dub Mix) erschien am 13. November digital. Die zehn Tracks greifen das Mixalbum des Duos von 1996 wieder auf."
+      ],
+      "story": [
+        "Jubilæumsprojektet omfatter nye dub- og ambientbearbejdelser. Hvis du kender originalen, er det værd at sætte et par passager op mod hinanden. Prøv at lægge mærke til, hvad der stadig føles genkendeligt, når et beat træder tilbage, og ekko eller klang får mere plads.",
+        "The anniversary project includes new dub and ambient reworkings. If you know the original, compare a couple of passages side by side. Notice what still feels familiar when a beat recedes and echoes or textures get more room.",
+        "Zum Jubiläumsprojekt gehören neue Dub- und Ambient-Bearbeitungen. Wenn du das Original kennst, vergleiche ein paar Passagen direkt. Achte darauf, was vertraut bleibt, wenn der Beat zurücktritt und Echo oder Klangflächen mehr Raum bekommen."
+      ],
+      "sources": [
+        {
+          "label": "Apple Music",
+          "url": "https://music.apple.com/us/album/northern-exposure-redux-dub-mix-dj-mix/6827087090"
+        },
+        {
+          "label": "Resident Advisor",
+          "url": "https://ra.co/news/85631"
+        }
+      ]
     }
   ]
 }
