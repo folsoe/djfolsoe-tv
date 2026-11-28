@@ -76,7 +76,6 @@
   wrapper.append(controls,viewport);
   hero.before(wrapper);
 
-  const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const promoEnds = Date.parse('2026-12-24T18:00:00+01:00');
   let available = false;
   let active = 'own';
@@ -91,17 +90,15 @@
     controls.hidden = !available;
     ownTab.setAttribute('aria-pressed',String(!showCosmo));
     cosmoTab.setAttribute('aria-pressed',String(showCosmo));
-    pause.textContent = (paused || motion.matches
+    pause.textContent = (paused
       ? ['Start automatisk skift','Start rotation','Wechsel starten']
       : ['Sæt skift på pause','Pause rotation','Wechsel pausieren'])[languageIndex];
-    pause.disabled = motion.matches;
   }
   ownTab.addEventListener('click',() => { active = 'own';show(); });
   cosmoTab.addEventListener('click',() => { active = 'cosmo';show(); });
   pause.addEventListener('click',() => { paused = !paused;show(); });
-  motion.addEventListener?.('change',show);
   setInterval(() => {
-    if (wrapper.hidden || !available || document.hidden || paused || motion.matches ||
+    if (wrapper.hidden || !available || document.hidden || paused ||
         wrapper.matches(':hover,:focus-within')) return;
     active = active === 'own' ? 'cosmo' : 'own';
     show();
